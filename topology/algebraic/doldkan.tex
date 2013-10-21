@@ -1,0 +1,56 @@
+\input{../../preamble}
+\input{preamble}
+
+\title{The Dold-Kan correspondence}
+\author{Arpon Raksit}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\C}{\mathcal{C}}
+
+\section{Introduction}
+
+\begin{definition}
+  A \textit{simplicial object} in a category $\C$ is a contravariant
+  functor $\Simplex \to \C$. We denote the category
+  $\Fun(\Simplex^\op, \C)$ of simplicial objects in $\C$ by
+  $\s\C$. E.g., $\s\Set$ is the category of \textit{simplicial sets}
+  and $\s\Ab$ is the category of \textit{simplicial abelian groups}.
+\end{definition}
+
+Recall we have a functor $\Sing : \Top \to \sSet$, sending $X \mapsto
+\Hom_\Top(|\Delta^\bullet|, X)$. Lately we've been talking about
+$\Sing$ for two reasons:
+\begin{enumerate}
+\item It's a right adjoint to geometric realisation $|-| : \sSet \to
+  \Top$.
+\item $\Sing(X)$ is a Kan complex for all $X \in \Top$. In this sense,
+  ``Kan complexes  are like spaces''.
+\end{enumerate}
+But this isn't the first place one sees $\Sing$, probably. Indeed, the
+singular homology functors are essentially defined by a composition
+\[
+\begin{tikzcd}[column sep = large]
+  \H_n(-;\Z) \coloneqq \Top \rar{\Sing} & \sSet \rar{\Z} & \sAb
+  \rar{\sum (-1)^i d_i} & \Ch \rar{\H_n} & \Ab.
+\end{tikzcd}
+\]
+Here $\Z$ denotes the functor which takes free abelian groups
+level-wise, from which we get the \textit{singular chain complex} by
+letting the boundary map be given by $\del \coloneqq \sum (-1)^i d_i$.
+
+This was just to remind us that we've seen a natural functor $\sAb \to
+\Ch$ relating simplicial abelian groups and chain complexes. We'll
+look at it a bit more carefully in a second, and develop this
+relationship much further.
+
+\nocite{goerssjardine, riehl-ssets, mathew-doldkan}
+\bibliographystyle{amsplain}
+\bibliography{refs}
+
+\end{document}
