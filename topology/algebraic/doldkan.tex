@@ -17,8 +17,8 @@
 
 \begin{definition}
   A \textit{simplicial object} in a category $\C$ is a contravariant
-  functor $\Simplex \to \C$. We denote the category
-  $\Fun(\Simplex^\op, \C)$ of simplicial objects in $\C$ by
+  functor from the simplex category $\Simplex$ to $\C$. We denote the
+  category $\Fun(\Simplex^\op, \C)$ of simplicial objects in $\C$ by
   $\s\C$. E.g., $\s\Set$ is the category of \textit{simplicial sets}
   and $\s\Ab$ is the category of \textit{simplicial abelian groups}.
 \end{definition}
@@ -29,8 +29,8 @@ $\Sing$ for two reasons:
 \begin{enumerate}
 \item It's a right adjoint to geometric realisation $|-| : \s\Set \to
   \Top$.
-\item $\Sing(X)$ is a Kan complex for all $X \in \Top$. In this sense,
-  ``Kan complexes  are like spaces''.
+\item $\Sing(X)$ is a Kan complex for all $X \in \Top$---this was the
+  start of the slogan ``Kan complexes are like spaces''.
 \end{enumerate}
 But this isn't the first place one sees $\Sing$, probably. Indeed, the
 singular homology functors are essentially defined by a composition
@@ -96,10 +96,44 @@ fact, we will want to use the following alternative.
   and we have a functor $N : \s\A \to \Ch_{\ge 0}(\A)$.
 \end{definition}
 
-What is this unmotivated nonsense? Have no fear, for $C$ and $N$ are
-intimately related! For instance we can note immediately from the
-definitions that the natural inclusion $N(A) \to C(A)$ is in
-fact a chain map for $A \in \s\A$. But there's more!
+What is this unmotivated nonsense? Well, let's at least see an example.
+
+\begin{example}
+  Recall there is a functor $B : \Ab \to \s\Ab$ which associates to an
+  abelian group $G$ it's ``classifying space'' $BG$, which is
+  constructed as the nerve of the groupoid with one object and
+  morphisms $G$. In particular, we have
+  \begin{itemize}
+  \item $BG_n \simeq G^n$ for $n \ge 0$;
+  \item the face map $d_i : BG_n \to BG_{n-1}$ sends
+    \[
+    (g_1,\ldots,g_n) \mapsto (g_1,\ldots,g_{i-1}, g_i + g_{i+1},
+    g_{i+2}, \ldots, g_n),
+    \]
+    where we have let $g_0 \coloneqq 0$ and $g_{n+1} \coloneqq 0$.
+  \end{itemize}
+  Let's compute the normalised chain complex $N(BG)$.
+  \begin{itemize}
+  \item Of course $N_0(BG) \simeq BG_0 \simeq 0$ is the trivial group.
+  \item Thus $N_1(BG) = \ker(d_0 : BG_1 \to BG_0) = BG_1 \simeq G$,
+    and $\del_1 = (-1)^n d_1 : BG_1 \to BG_0$ must be the zero
+    morphism.
+  \item Let $n \ge 2$. Let $g \coloneqq (g_1, \ldots, g_n) \in
+    BG_n$. Observe that by definition $g \in \ker(d_0) \implies g_2 =
+    \cdots = g_n = 0$ and thus $g \in \ker(d_1) \implies g_1 + g_2 = 0
+    \implies g_1 = 0$. So then $N_n(BG) \simeq 0$.
+  \end{itemize}
+  It follows also of course that the homology of $N(BG)$ is just $G$
+  concentrated in degree $1$. (Perhaps this reminds you of the
+  homotopy groups of $BG$! We will see why this is so in \textsection
+  4.)
+\end{example}
+
+Ok that's an example, but maybe the definition of $N$ still seems
+crazy. Have no fear, for $C$ and $N$ are intimately related! For
+instance we can note immediately from the definitions that the natural
+inclusion $N(A) \to C(A)$ is in fact a chain map for $A \in \s\A$. But
+there's more!
 
 \begin{definition}
   Let $A \in \s\A$. We define the \textit{degenerate subcomplex}
@@ -131,8 +165,10 @@ fact a chain map for $A \in \s\A$. But there's more!
 \end{proposition}
 
 \begin{proof}
-  Fix $n \ge 0$. For $0 \le i \le n - 1$, the simplicial identity
-  $d_is_i = \id$ implies that we have a canonical splitting $A_n
+  When $n=0$ we have by definition that $D_0(A) \simeq 0$ and $N_0(A)
+  \inj A_0$ an isomorphism, so the claim is tautological. So fix $n
+  \ge 1$. For $0 \le i \le n - 1$, the simplicial identity $d_is_i =
+  \id_{A_{n-1}}$ implies that we have a canonical splitting $A_n
   \simeq \ker(d_i) \oplus \im(s_i)$. It follows easily that $N_n(A)
   \cap D_n(A) \simeq 0$, so we're just left to show that $\phi$ is
   surjective. We prove by downward induction on $0 \le j \le n-1$ that
@@ -172,9 +208,9 @@ definitions in hand, we can now state our main goal, the
   \Gamma_n(C) \coloneqq \bigoplus_{[n] \surj [k]} C_k,
   \]
   where the direct sum is over all surjections $\sigma : [n] \surj
-  [k]$ in the category $\Delta$.
+  [k]$ in the category $\Simplex$.
 
-  Let $\nu : [m] \to [n]$ a morphism in $\Delta$. Let $\tau : [n]
+  Let $\nu : [m] \to [n]$ a morphism in $\Simplex$. Let $\tau : [n]
   \surj [k]$ an indexing surjection. We can factor $\tau\nu$ as a
   composition $[m] \surj [j] \inj [k]$ of a surjection $\sigma$ and an
   injection $\iota$. Then we define a map\footnote{This definition is
@@ -194,7 +230,7 @@ definitions in hand, we can now state our main goal, the
   induced morphism $\nu^* : \Gamma_n(C) \to \Gamma_m(C)$.
 
   Suppose $\mu : [l] \to [m]$ is another morphism in
-  $\Delta$. Factoring $\sigma\mu$ as $\rho\theta : [l] \surj [i]
+  $\Simplex$. Factoring $\sigma\mu$ as $\rho\theta : [l] \surj [i]
   \inj [j]$, we have a commutative diagram
   \[
   \begin{tikzcd}
@@ -248,8 +284,8 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
 \begin{proof}
   Fix $A \in \s\A$. We will prove by induction on $n \ge 0$ that
   $\Phi_n(A) : \Gamma_n(N(A)) \to A_n$ is an isomorphism, and then we
-  will be done. Since the only surjection $[0] \surj [k]$ in $\Delta$
-  is $\id_{[0]}$, and the inclusion $N_0(A) \inj A_0$ is an
+  will be done. Since the only surjection $[0] \surj [k]$ in
+  $\Simplex$ is $\id_{[0]}$, and the inclusion $N_0(A) \inj A_0$ is an
   isomorphism, the base case $n=0$ is tautological.
 
   First, surjectivity. Recall from Proposition \ref{splitting} that we
@@ -259,9 +295,12 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   definition we must have $\im(\Phi_n(A)) \supseteq D_n(A)$. Hence
   $\Phi_n(A)$ is surjective.
 
-  Next, injectivity. Assume we have $(x_\sigma) \in \ker(\Phi_n(A))$.
-  Fix $0 \le k < n$. Observe that to each surjection $\sigma : [n]
-  \surj [k]$ we can assign a section of $\sigma$,
+  Next, injectivity.\footnote{We won't be totally categorical and will
+    use elements here to clarify the argument, but it's easy to see
+    that one can get rid of them.} Assume we have $(x_\sigma) \in
+  \ker(\Phi_n(A))$.  Fix $0 \le k < n$. Observe that to each
+  surjection $\sigma : [n] \surj [k]$ we can assign a section of
+  $\sigma$,
   \[
   \nu_\sigma : [k] \inj [n], \quad \nu_\sigma(i) \coloneqq \max\{j \in
      [n] \mid \sigma(j) = i\}.
@@ -276,10 +315,10 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   \ne 0$, choose a \textit{maximal} such $\tau$ (with respect to the
   ordering just defined). By definition of the simplicial structure on
   $\Gamma(N(A))$, it follows that the component of
-  $v_\tau^*(x_\sigma)$ in the factor of $\Gamma_k(N(A))$ indexed by
+  $\nu_\tau^*(x_\sigma)$ in the factor of $\Gamma_k(N(A))$ indexed by
   $\id_{[k]}$ is precisely $x_\tau$. But then, by induction,
   \[
-  (x_\sigma) \in \ker(\Phi_n(A)) \implies v_\tau^*(x_\sigma) \in
+  (x_\sigma) \in \ker(\Phi_n(A)) \implies \nu_\tau^*(x_\sigma) \in
   \ker(\Phi_k(A)) \implies x_\tau = 0,
   \]
   contradiction.
@@ -337,6 +376,14 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
 \begin{proposition}
   The natural inclusion $N(A) \to C(A)$ for $A \in \s\A$ gives a
   natural chain homotopy equivalence.
+\end{proposition}
+
+\begin{proposition}
+  If $\A = R\text{-}\Mod$ and $A \in \s\A$ then for $n \ge 0$ we have
+  natural isomorphisms
+  \[
+  \pi_n(A,0) \simeq \H_n(N(A)) \simeq \H_n(C(A)).
+  \]
 \end{proposition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
