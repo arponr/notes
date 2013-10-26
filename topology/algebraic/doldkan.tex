@@ -11,7 +11,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\C}{\mathcal{C}}
+\renewcommand{\C}{\mathsf{C}}
 
 \section{Introduction}
 
@@ -51,12 +51,13 @@ relationship much further.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\A}{\mathcal{A}}
+\renewcommand{\A}{\mathsf{A}}
 
 \section{Stating the correspondence}
 
 We fix $\A$ any abelian category---but we'll probably be imagining $\A
-= \Ab$ or $\A = R\text{-}\Mod$ (for some commutative ring $R$).
+= \Ab$, or more generally $\A = R\text{-}\Mod$ for some commutative
+ring $R$.
 
 \begin{notation}
   We denote the category of nonnegatively graded chain complexes in
@@ -88,17 +89,20 @@ fact, we will want to use the following alternative.
   Again let $A \in \s\A$ a simplicial object in $\A$. We define the
   \textit{normalised chain complex} $N(A) \in \Ch_{\ge 0}(\A)$ by
   \[
-  \textstyle{N_n(A) \coloneqq \bigcap_{i=0}^{n-1} \ker(d_i) \subseteq
-    A_n \quad\text{and}\quad \del_n \coloneqq (-1)^n d_n : N_n(A) \to
-    N_{n-1}(A)}
+  N_0(A) \coloneqq A_0, \quad \textstyle{N_n(A) \coloneqq
+    \bigcap_{i=0}^{n-1} \ker(d_i) \subseteq A_n, \quad\text{and}\quad
+    \del_n \coloneqq (-1)^n d_n : N_n(A) \to N_{n-1}(A)}
   \]
-  for $n \ge 0$. Again the simplicial identities imply $\del^2 = 0$,
-  and we have a functor $N : \s\A \to \Ch_{\ge 0}(\A)$.
+  for $n \ge 1$. The simplicial identities imply both that
+  $d_n(N_n(A)) \subseteq N_{n-1}(A)$, assumed in the above definition
+  of $\del_n$, and that $\del^2 = 0$. Again this gives a functor $N :
+  \s\A \to \Ch_{\ge 0}(\A)$.
 \end{definition}
 
 What is this unmotivated nonsense? Well, let's at least see an example.
 
 \begin{example}
+  \label{BG}
   Recall there is a functor $B : \Ab \to \s\Ab$ which associates to an
   abelian group $G$ it's ``classifying space'' $BG$, which is
   constructed as the nerve of the groupoid with one object and
@@ -115,9 +119,7 @@ What is this unmotivated nonsense? Well, let's at least see an example.
   Let's compute the normalised chain complex $N(BG)$.
   \begin{itemize}
   \item Of course $N_0(BG) \simeq BG_0 \simeq 0$ is the trivial group.
-  \item Thus $N_1(BG) = \ker(d_0 : BG_1 \to BG_0) = BG_1 \simeq G$,
-    and $\del_1 = (-1)^n d_1 : BG_1 \to BG_0$ must be the zero
-    morphism.
+  \item Thus $N_1(BG) = \ker(d_0 : BG_1 \to BG_0) = BG_1 \simeq G$.
   \item Let $n \ge 2$. Let $g \coloneqq (g_1, \ldots, g_n) \in
     BG_n$. Observe that by definition $g \in \ker(d_0) \implies g_2 =
     \cdots = g_n = 0$ and thus $g \in \ker(d_1) \implies g_1 + g_2 = 0
@@ -158,10 +160,8 @@ there's more!
   \phi : N_n(A) \oplus D_n(A) \to A_n = C_n(A)
   \]
   induced by the inclusions is an isomorphism. Therefore we have a
-  natural isomorphism
-  \[
-  N(A) \simeq C(A)/D(A).
-  \]
+  natural isomorphism $N(A) \simeq C(A)/D(A)$. Furthermore, the
+  inclusion $N(A) \to C(A)$ is a natural chain homotopy equivalence.
 \end{proposition}
 
 \begin{proof}
@@ -177,8 +177,9 @@ there's more!
     \ker(d_i).}
   \]
   The base case $j = n-1$ is tautological and the final case $j = 0$
-  will finish the proof. Now consider the map $\psi \coloneqq \id -
-  s_jd_j : C_n \to C_n$. Observe by the simplicial identities that
+  will proved the desired splitting. Now consider the map $\psi
+  \coloneqq \id_{A_n} - s_jd_j : A_n \to A_n$. Observe by the
+  simplicial identities that
   \[
   d_j\psi = d_j - d_js_jd_j = d_j - d_j = 0 \quad\text{and}\quad
   d_i\psi = d_i - d_is_jd_j = d_i - s_{j-1}d_{j-1}d_i
@@ -186,11 +187,17 @@ there's more!
   for $i < j$, implying that $\psi(N_j) \subseteq N_{j+1}$. By
   induction $\im(\phi) \supseteq N_{j+1}$, and since $\im(s_jd_j)
   \supseteq D_n(A)$ it follows that $\im(\phi) \supseteq N_j$.
+
+  The proof of the last statement regarding the chain homotopy
+  equivalence is omitted here; see \cite{goerssjardine} or
+  \cite{weibel}.
 \end{proof}
 
-So there's the relationship between $C$ and $N$. With these
-definitions in hand, we can now state our main goal, the
-\textit{Dold-Kan correspondence}.
+So there's the relationship between $C$ and $N$: the normalised chain
+complex somehow tells us the nondegenerate information of the
+associated chain complex, and moreover loses no homological
+information. With these definitions in hand, we can now state our main
+goal, the \textit{Dold-Kan correspondence}.
 
 \begin{theorem}[Dold-Kan]
   \label{doldkan}
@@ -373,18 +380,110 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
 
 \section{Applying the correspondence}
 
-\begin{proposition}
-  The natural inclusion $N(A) \to C(A)$ for $A \in \s\A$ gives a
-  natural chain homotopy equivalence.
-\end{proposition}
+\begin{situation}
+  For the remainder we will fix some commutative ring $R$ and actually
+  set $\A \coloneqq R\text{-}\Mod$.
+\end{situation}
+
+Recall that if $X \in \s\Set$ is \textit{fibrant} (i.e., a \textit{Kan
+  complex}) with basepoint $v \in X_0$ then we can define its homotopy
+groups for $n \ge 0$,
+\[
+\pi_n(X,v) \coloneqq [(\Delta^n, \del\Delta^n), (X,v)],
+\]
+that is, homotopy classes $[\alpha]$ of maps $\alpha : \Delta^n \to X$
+which fit in the commutative diagram
+\[
+\begin{tikzcd}
+  \Delta^n \rar{\alpha} & X \\ \del\Delta^n \ar[hookrightarrow]{u} \rar
+    & \Delta^0 \uar{v},
+\end{tikzcd}
+\]
+We now state a couple of facts about the homotopy groups.
+
+\begin{lemma}
+  \label{null-homotopic}
+  Let $X \in \s\Set$ fibrant, $v \in X_0$, and $n \ge 0$. Denote all
+  degeneracies of $v$ also by $v$, so that $[v] \in \pi_n(X,v)$ is the
+  identity element. Let $[\alpha] \in \pi_n(X,v)$ represented by
+  $\alpha : \Delta^n \to X$. Then $[\alpha] = [v]$ if and only if
+  there exists $\omega \in X_{n+1}$ such that
+  \[
+  d_{n+1}\omega = \alpha \quad\text{and}\quad d_i\omega = v\text{ for
+  } 0 \le i \le n.
+  \]
+\end{lemma}
+
+\begin{proof}
+  Omitted.
+\end{proof}
+
+\begin{lemma}
+  \label{s-rmod-homotopy}
+  Let $G \in \s\Grp$ a simplical group and $v \in G_0$. Then the
+  following hold.
+  \begin{enumerate}
+  \item The simplicial set underlying $G$ is fibrant, so the homotopy
+    groups $\pi_n(G,v)$ are well-defined.
+  \item The group structure on $G_n$ induces a natural group structure
+    on $\pi_n(G,v)$ which agrees with the homotopy group structure.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  Omitted. See \cite{goerssjardine} for (1), and (2) can be proved by
+  an Eckmann-Hilton argument.
+\end{proof}
+
+We can now state a relationship between the homotopy theory of $\s\A$
+and that of $\Ch_{\ge 0}(\A)$.
 
 \begin{proposition}
-  If $\A = R\text{-}\Mod$ and $A \in \s\A$ then for $n \ge 0$ we have
-  natural isomorphisms
+  \label{homotopy-homology}
+  Let $A \in \s\A$ a simplicial $R$-module and $0 \in A_0$ the
+  identity element. Then for $n \ge 0$ we have natural isomorphisms
   \[
   \pi_n(A,0) \simeq \H_n(N(A)) \simeq \H_n(C(A)).
   \]
+  In particular, the functors $N$ and $\Gamma$ correspond weak
+  equivalences in $\s\A$ with chain homotopy equivalences in $\Ch_{\ge
+    0}(\A)$.
 \end{proposition}
+
+\begin{proof}
+  The second isomorphism is immediate from Proposition
+  \ref{splitting}, so we just prove the first. Let $x \in N_n(A)
+  \subseteq A_n$. For $n \ge 1$ we have by definition that
+  \[
+  \textstyle{x \in \ker(\del_n) \iff x \in \bigcap_{i=0}^n \ker(d_n)},
+  \]
+  which says precisely that $x$ represents an element $[x] \in
+  \pi_n(A,0)$. And by Lemma \ref{null-homotopic} we have for all $n
+  \ge 0$ that $[x] = 0 \in \pi_n(A,0)$ precisely when $x \in
+  \im(\del_{n+1})$. Finally by Lemma \ref{s-rmod-homotopy} we can take
+  the group structure on $\pi_n(A,0)$ to be the one induced by the
+  $R$-module structure of $A_n$, whence the above discussion
+  immediately gives us a (manifestly natural) isomorphism $\pi_n(A,0)
+  \simeq \H_n(N(A))$.
+\end{proof}
+
+\begin{remark}
+  Recall that in Example \ref{BG} we computed the homology of $N(BG)$
+  for an abelian group $G$ to be $G$ concentrated in degree $1$. Then
+  Proposition \ref{homotopy-homology} gives that
+  \[
+  \pi_n(BG,0) \simeq
+  \begin{cases}
+    G, & \text{if } n = 1; \\
+    0, & \text{otherwise},
+  \end{cases}
+  \]
+  as expected!
+\end{remark}
+
+We'll end with an interesting consequence of Proposition
+\ref{homotopy-homology}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
