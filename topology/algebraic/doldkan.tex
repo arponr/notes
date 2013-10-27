@@ -446,8 +446,7 @@ and that of $\Ch_{\ge 0}(\A)$.
   \pi_n(A,0) \simeq \H_n(N(A)) \simeq \H_n(C(A)).
   \]
   In particular, the functors $N$ and $\Gamma$ correspond weak
-  equivalences in $\s\A$ with chain homotopy equivalences in $\Ch_{\ge
-    0}(\A)$.
+  equivalences in $\s\A$ with quasi-isomorphisms in $\Ch_{\ge 0}(\A)$.
 \end{proposition}
 
 \begin{proof}
@@ -470,20 +469,84 @@ and that of $\Ch_{\ge 0}(\A)$.
 \begin{remark}
   Recall that in Example \ref{BG} we computed the homology of $N(BG)$
   for an abelian group $G$ to be $G$ concentrated in degree $1$. Then
-  Proposition \ref{homotopy-homology} gives that
+  Proposition \ref{homotopy-homology} gives, as expected,
   \[
   \pi_n(BG,0) \simeq
   \begin{cases}
     G, & \text{if } n = 1; \\
-    0, & \text{otherwise},
+    0, & \text{otherwise}.
   \end{cases}
   \]
-  as expected!
+  The same observation motivates more generally the following
+  definition.
+\end{remark}
+
+\begin{definition}
+  Let $A$ an $R$-module and $n \ge 0$. Define $A[n] \in \Ch_{\ge
+    0}(\A)$ the complex with $A$ concentrated in degree $n$. Define
+  the \textit{Eilenberg-Maclane space} $K(A,n) \coloneqq \Gamma(A[n])
+  \in \s\A$.
+\end{definition}
+
+\begin{remark}
+  If one remembers that geometric realisation preserves homotopy
+  groups, in the sense that $\pi_n(|X|,v) \simeq \pi_n(X,v)$ for
+  fibrant $X \in \s\Set$, then $|K(A,n)|$ with the definition above
+  really is an Eilenberg-Maclane space, in the ordinary topological
+  sense.
 \end{remark}
 
 We'll end with an interesting consequence of Proposition
-\ref{homotopy-homology}.
+\ref{homotopy-homology}. Assume that $R$ is a PID.
 
+\begin{lemma}
+  \label{quasi-homology}
+  Let $C \in \Ch_{\ge 0}(\A)$. Then there is a quasi-isomorphism
+  \[
+  C \simeq \prod_{n \ge 0} \H_n(C)[n].
+  \]
+\end{lemma}
+
+\begin{proof}
+  Let $n \ge 0$. Let $Z_n \coloneqq \ker(\del_n)$ and $B_n \coloneqq
+  \im(\del_{n+1})$ the cycles and boundaries, respectively, in
+  $C_n$. Let $F_n$ a free $R$-module with a surjection $F_n \surj
+  Z_n$. Let
+  \[
+  F'_n \coloneqq \ker(F_n \surj Z_n \surj \H_n(C)),
+  \]
+  which is free since it is a submodule of a free $R$-module and $R$
+  is a PID. There is then an induced map $F'_n \to B_n$, which lifts
+  to a map $F'_n \to C_{n+1}$ since $F'_n$ is free and $\del_{n+1} :
+  C_{n+1} \to B_n$ is surjective. Define $F_n(C) \in \Ch_{\ge 0}(\A)$
+  the complex with just $F_n$ in degree $n$ and $F'_n$ in degree
+  $n+1$. The maps $F_n \to Z_n \inj C_n$ and $F'_n \to C_{n+1}$ give a
+  chain map $F_n(C) \to C$ which induces an isomorphism $\H_n(F_n(C))
+  \simeq F_n/F'_n \simeq \H_n(C)$. And the map $F_n \to \H_n(C)$
+  induces a quasi-isomorphism $F_n(C) \simeq \H_n(C)[n]$.
+
+  Since homology commutes with products, it follows that there are
+  quasi-isomorphisms
+  \[
+  C \simeq \prod_{n \ge 0} \F_n(C) \simeq \prod_{n \ge 0}
+  \H_n(C)[n]. \qedhere
+  \]
+\end{proof}
+
+\begin{proposition}
+  Let $A \in \s\A$ a simplicial $R$-module. Then $A$ is weakly
+  equivalent to a product of Eilenberg-Maclane spaces:
+  \[
+  A \simeq \prod_{n \ge 0} K(\pi_n(A,0),n).
+  \]
+\end{proposition}
+
+\begin{proof}
+  In light of Proposition \ref{homotopy-homology} and the fact that
+  $\Gamma$ preserves products (as an equivalence of categories), this
+  is immediate from applying $\Gamma$ to Lemma \ref{quasi-homology}
+  with $C \coloneqq N(A)$.
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
