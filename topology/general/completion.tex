@@ -65,8 +65,8 @@ check that we always have one implication.
     $k \ge n$, whence $(x_k)$ can't converge to $x$.
   \item $\Q$ is not complete: I won't say this is as rigourously as
     the previous example, but rational approximations to irrational
-    numbers (e.g., $1, 1.4, 1.41, 1.414, \ldots \to \sqrt 2$) are
-    Cauchy but cannot be convergent in $\Q$.
+    numbers (e.g., $1.4, 1.41, 1.414, \ldots$ tending to $\sqrt 2$)
+    are Cauchy but cannot be convergent in $\Q$.
   \end{itemize}
   For another example of a complete metric space, look at the fourth
   problem set: we can take $X$ the space of bounded sequences in $\R$,
@@ -195,24 +195,28 @@ axioms of a metric.
 
 Let $\sigma, \tau \in X_c$ with representatives $(x_n),(y_n) \in C$,
 repspectively. Since $(x_n),(y_n)$ are Cauchy, there exists $n \in \N$
-such that $d_X(x_j,x_k) < \epsilon$ and $d_E(y_j,y_k) < \epsilon$ if
-$j,k \ge n$. By the triangle inequality we have
+such that
+\[
+d_X(x_j,x_k) < \epsilon \quad\text{and}\quad d_E(y_j,y_k) < \epsilon
+\quad\text{if } j,k \ge n.
+\]
+By the triangle inequality we have
 \[
   d_X(x_j,y_j) \le d_X(x_j,x_k) + d_X(x_k,y_k) + d_X(y_j,y_k) \implies
-  d_X(x_j,y_j) - d_X(x_k,y_k) < 2\epsilon
+  d_X(x_j,y_j) - d_X(x_k,y_k) < 2\epsilon,
 \]
-and similarly, $d_X(x_k,y_k) - d_X(x_j,y_j) < 2\epsilon$, for $j,k \ge
+and similarly $d_X(x_k,y_k) - d_X(x_j,y_j) < 2\epsilon$, for $j,k \ge
 n$.  It follows that the sequence $(d_E(x_n,y_n))$ in $\R$ is
 Cauchy. Since $\R$ is complete, $d_{X_c}(\sigma, \tau) = \lim_{n \to
   \infty} d_E(x_n,y_n)$ exists.
 
 Now suppose $(x_k) \sim (x'_k)$ and $(y_k) \sim (y'_k)$. Then by the
-triangle inequality we have
-\[
-\lim_{k \to \infty} d_X(x'_k, y'_k) \le \lim_{k \to \infty} d_X(x'_k,
+triangle inequality
+\begin{align*}
+\lim_{k \to \infty} d_X(x'_k, y'_k) &\le \lim_{k \to \infty} d_X(x'_k,
 x_k) + \lim_{k \to \infty} d_X(x_k, y_k) + \lim_{k \to \infty}
-d_X(y_k, y'_k) = \lim_{k \to \infty} d_X(x_k, y_k).
-\]
+d_X(y_k, y'_k) \\ &= \lim_{k \to \infty} d_X(x_k, y_k).
+\end{align*}
 By symmetry the reverse inequality holds as well, so $d_{X_c}$ is
 well-defined.
 
@@ -268,10 +272,10 @@ and choose $n \in \N$ such that $3/n < \epsilon$. Then for $k \ge j
 \ge n$ we have by the triangle ineqality and the fact that $\phi$ is
 an isometry that
 \begin{align*}
-  d_X(x_j,x_k) &= d_{X_c}(\phi(x_j),\phi(x_k)) \le d_{X_c}(\phi(x_j),
-  \sigma_{n_j}) + d_{X_c}(\sigma_{n_j}, \sigma_{n_k}) +
-  d_{X_c}(\sigma_{n_k}, \phi(x_k)) \\ &\le 1/j + 1/j + 1/k \le 3/n <
-  \epsilon,
+  d_X(x_j,x_k) &= d_{X_c}(\phi(x_j),\phi(x_k)) \\ &\le
+  d_{X_c}(\phi(x_j), \sigma_{n_j}) + d_{X_c}(\sigma_{n_j},
+  \sigma_{n_k}) + d_{X_c}(\sigma_{n_k}, \phi(x_k)) \\ &\le 1/j + 1/j +
+  1/k \le 3/n < \epsilon,
 \end{align*}
 so indeed $(x_r)$ is Cauchy.
 
@@ -299,8 +303,9 @@ of Proposition \ref{completion}.
 \subsection{The universal property}
 
 We now prove (3) and (4). These will follow from the following more
-general facts.\footnote{The presentation here is taken from Pete
-  Clark's notes, \url{math.uga.edu/~pete/8410Chapter2v2.pdf}}
+general facts.\footnote{The presentation here is essentially taken
+  from Pete Clark's notes,
+  \url{math.uga.edu/~pete/8410Chapter2v2.pdf}.}
 
 \begin{lemma}
   Let $A,B$ be topological spaces, and $A_0 \subseteq A$ a dense
