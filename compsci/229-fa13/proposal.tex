@@ -1,0 +1,138 @@
+\input{../../preamble}
+\input{preamble}
+
+\title{CS 229, Project Proposal}
+\author{Aleksandar Makelov \and Arpon Raksit}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+There are two problems we're interested in thinking about. We hope
+that's okay.
+
+\section{The log-rank conjecture}
+
+Earlier in the semester we talked about the \textit{deterministic
+  communication complexity} $\D(M)$ of a boolean function $M : X
+\times Y \to \{0,1\}$. Regarding this, there is the following
+interesting \textit{log-rank conjecture}.
+
+\begin{conjecture}[log-rank, \cite{lovasz-1988}]
+  Let $M \in \{0,1\}^{X \times Y}$. Then
+  \[
+  \D(M) \le \poly(\log(\rk(M))),
+  \]
+  where $\rk(M)$ denote the rank of $M$ viewed as a matrix over $\R$.
+\end{conjecture}
+
+\subsection{Previous work}
+
+The conjecture has evaded just about any progress until very
+recently. It's current state is given by the following bounds:
+\[
+\Omega(\log^{\log_3(6)}(\rk(M)) \le \D(M) \le
+O(\sqrt{\rk(M)}\log(\rk(M))),
+\]
+the lower bound given quite a while ago in \cite{nisan-1995} and the
+upper bound given a few months ago in \cite{lovett-2013}. The same
+upper bound is given in \cite{tsang-2013} in the case that $X = Y =
+\{0,1\}^n$ and $M(x,y) = f(x \oplus y)$ for some $f : \{0,1\}^n \to
+\{0,1\}$, however using seemingly fairly different techniques. There
+was a conditional upper bound
+\[
+\D(M) \le O(\rk(M) / \log(\rk(M)))
+\]
+given previously in \cite{ben-sasson-2012}, again using rather
+different techniques, in particular relying on a conjecture in
+additive combinatorics.
+
+Finally, several equivalent formulations of the conjecture are given
+in \cite{gavinsky-2013}. Interestingly, it is shown in particular that
+it is equivalent to consider other notions of communication
+complexity---\textit{randomised communication complexity},
+\textit{zero communication complexity}, and \textit{information
+  complexity}---to resolve the conjecture.
+
+\subsection{Proposal}
+
+Obviously we will resolve the conjecture. But here are some things we
+might think about along the way.
+
+Firstly, it is curious that the three upper bounds mentioned above
+were proved with rather different tools. A connection between
+communication complexity and the \textit{discrepanacy} of a boolean
+function is used in \cite{lovett-2013}; fourier analysis of boolean
+functions is used in \cite{tsang-2013}; and additive combinatorics is
+used in \cite{ben-sasson-2012}. It would be interesting, as noted in
+\cite{lovett-2013}, to see if there are significant connections
+between these techniques, and if so whether this gives some new
+insight into the problem.
+
+Secondly, in these papers it seems that only the deterministic
+communication complexity has been analysed. In light of the equivalent
+formulations above, we are interested to see if one can bound in some
+new way, say, randomised communication complexity in terms of rank.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Optimal derandomization of JL}
+
+\subsection{The problem}
+
+Following one of the project tips on the course website, we'd like to
+look at ways of derandomizing the Johnson-Lindenstrauss transform. The
+current state of the art is in \cite{kane2011almost}, where the
+authors use $k$-wise independence derandomization techniques
+iteratively to achieve explicit generators for a projection
+$\Pi:\R^d\to\R^s$ with target dimension $s=O(\log(1/\delta)/\eps^2)$
+that guarantees $|\|\Pi x\|^2-1|\leq\eps$ with probability at least
+$1-\delta$ over all $\|x\|=1$. A purely random seed of length
+\[
+O \l(\log d + \log(1/\delta)\log \l(\frac{\log(1/\delta)}{\eps}\r)\r)
+\]
+is used, whereas from the probabilistic method one can show existence
+of a seed of length $O \l(\log d + \log(1/\delta)\r)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Previous work}
+
+Apart from \cite{kane2011almost}, there have been other results on
+obliviously derandomizing JL: \cite{karnin2011explicit} achieves
+(using Euclidean sections, something we need to learn about more) a
+better seed length when we want to cluster asymptotically less than
+$\poly(d)$ points (more specifically, when
+$\delta,\eps=e^{-o(\sqrt{\log d})}$), but does worse than
+\cite{kane2011almost} in the other case. Apparently, the non-oblivious
+derandomizations of JL
+\cite{engebretsen2002derandomized,sivakumar2002algorithmic} are used
+for the latter result.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Proposal}
+
+We have no concrete plan of attack right now, only a boundless
+enthusiasm for exploiting the limits of randomness and using expander
+graphs. We plan to search for ways of using (random walks on) expander
+graphs to tackle the problem, as they're known to achieve
+almost-optimal derandomization, and to make the task easier we might
+assume we're explicitly given some expander that current theory has
+not yet exhibited. We also plan to look at other derandomization
+techniques---we're familiar with the discussions on derandomization in
+\cite{motwani2010randomized}, and will consult another useful source,
+Salil Vadhan's book on pseudorandomness,
+\url{people.seas.harvard.edu/~salil/pseudorandomness}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\nocite{*}
+\bibliographystyle{amsplain}
+\bibliography{refs}
+
+\end{document}
