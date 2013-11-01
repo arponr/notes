@@ -85,7 +85,7 @@ new way, say, randomised communication complexity in terms of rank.
 
 Following one of the project tips on the course website, we'd like to
 look at ways of derandomizing the Johnson-Lindenstrauss transform. The
-current state of the art is in \cite{kane2011almost}, where the
+current state of the art is in \cite{kane-2011}, where the
 authors use $k$-wise independence derandomization techniques
 iteratively to achieve explicit generators for a projection
 $\Pi:\R^d\to\R^s$ with target dimension $s=O(\log(1/\delta)/\eps^2)$
@@ -101,15 +101,14 @@ of a seed of length $O \l(\log d + \log(1/\delta)\r)$.
 
 \subsection{Previous work}
 
-Apart from \cite{kane2011almost}, there have been other results on
-obliviously derandomizing JL: \cite{karnin2011explicit} achieves
-(using Euclidean sections, something we need to learn about more) a
-better seed length when we want to cluster asymptotically less than
+Apart from \cite{kane-2011}, there have been other results on
+obliviously derandomizing JL: \cite{karnin-2011} achieves (using
+Euclidean sections, something we need to learn about more) a better
+seed length when we want to cluster asymptotically less than
 $\poly(d)$ points (more specifically, when
 $\delta,\eps=e^{-o(\sqrt{\log d})}$), but does worse than
-\cite{kane2011almost} in the other case. Apparently, the non-oblivious
-derandomizations of JL
-\cite{engebretsen2002derandomized,sivakumar2002algorithmic} are used
+\cite{kane-2011} in the other case. Apparently, the non-oblivious
+derandomizations of JL \cite{engebretsen-2002,sivakumar-2002} are used
 for the latter result.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -124,14 +123,12 @@ almost-optimal derandomization, and to make the task easier we might
 assume we're explicitly given some expander that current theory has
 not yet exhibited. We also plan to look at other derandomization
 techniques---we're familiar with the discussions on derandomization in
-\cite{motwani2010randomized}, and will consult another useful source,
-Salil Vadhan's book on pseudorandomness,
+\cite{motwani-2010}, and will consult another useful source, Salil
+Vadhan's book on pseudorandomness,
 \url{people.seas.harvard.edu/~salil/pseudorandomness}.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\nocite{*}
 \bibliographystyle{amsplain}
 \bibliography{refs}
 
