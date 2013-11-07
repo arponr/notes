@@ -11,20 +11,20 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\C}{\mathsf{C}}
+\renewcommand{\C}{\mathcal{C}}
 
 \section{Introduction}
 
 \begin{definition}
   A \textit{simplicial object} in a category $\C$ is a contravariant
   functor from the simplex category $\Simplex$ to $\C$. We denote the
-  category $\Fun(\Simplex^\op, \C)$ of simplicial objects in $\C$ by
+  category $\C^{\Simplex^\op}$ of simplicial objects in $\C$ by
   $\s\C$. E.g., $\s\Set$ is the category of \textit{simplicial sets}
   and $\s\Ab$ is the category of \textit{simplicial abelian groups}.
 \end{definition}
 
 Recall we have a functor $\Sing : \Top \to \s\Set$, sending $X \mapsto
-\Hom_\Top(|\Delta^\bullet|, X)$. Lately we've been talking about
+\hom_\Top(|\Delta^\bullet|, X)$. Lately we've been talking about
 $\Sing$ for two reasons:
 \begin{enumerate}
 \item It's a right adjoint to geometric realisation $|-| : \s\Set \to
@@ -51,7 +51,7 @@ relationship much further.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\A}{\mathsf{A}}
+\renewcommand{\A}{\mathcal{A}}
 
 \section{Stating the correspondence}
 
