@@ -11,8 +11,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\C}{\mathbf{C}}
-\renewcommand{\D}{\mathsf{D}}
+\renewcommand{\C}{\mathcal{C}}
 
 \section{Introduction}
 
@@ -22,46 +21,50 @@ so let me write something down. I'll record the statement and proof of
 the lemma here too, for completeness.
 
 \begin{notation}
-  We fix throughout a (locally small) category $\C$.
+  We fix throughout a (locally small) category $\C$. Denote by
+  $\PSh(\C)$ the category of (contravariant) functors $\C^\op \to
+  \Set$.
 \end{notation}
 
 \begin{definition}
-  For $X \in \Ob(\C)$ we define $h_X : \C^\op \to \Set$ a
-  (contravariant) functor by
+  For $X \in \ob(\C)$ we define the functor $h_X : \C^\op \to \Set$
+  as follows.
   \begin{itemize}
-  \item $h_X(T) \coloneqq \Hom_\C(T,X)$ for $T \in \Ob(\C)$, and
-  \item $h_X(f) : h_X(T) \to h_X(S)$ given by $g \in \Hom_\C(T,X)
-    \mapsto g \circ f \in \Hom_\C(S,X)$ for $f \in \Hom_\C(S,T)$.
+  \item On objects $T \in \ob(\C)$, let $h_X(T) \coloneqq
+    \hom_\C(T,X)$.
+  \item On morphisms $f \in \hom_\C(S,T)$, let $h_X(f) : h_X(T) \to
+    h_X(S)$ given by $g \in \hom_\C(T,X) \mapsto g \circ f \in
+    \hom_\C(S,X)$.
   \end{itemize}
-  Observe also that any $f \in \Hom_\C(X,Y)$ defines a natural
-  transformation $h_f : h_X \to h_Y$ by $g \in \Hom_\C(T,X) \mapsto f
-  \circ g \in \Hom_\C(T,Y)$. Thus we have defined a functor $h : \C
-  \to \Fun(\C^\op, \Set)$.
+  Observe also that any $f \in \hom_\C(X,Y)$ defines a natural
+  transformation $h_f : h_X \to h_Y$ by $g \in \hom_\C(T,X) \mapsto f
+  \circ g \in \hom_\C(T,Y)$. Thus we have defined a functor $h : \C
+  \to \PSh(\C)$.
 \end{definition}
 
 \begin{lemma}[Yoneda]
   Let $F : \C^\op \to \Set$ any (contravariant) functor. Let $X \in
-  \Ob(C)$. Then there is a natural bijection
+  \ob(C)$. Then there is a natural bijection
   \[
-  \Hom_{\Fun(\C^\op,\Set)}(h_X,F) \simeq F(X)
+  \hom_{\PSh(\C)}(h_X,F) \simeq F(X)
   \]
   between the natural transformations $h_X \to F$ and the set $F(X)$.
 \end{lemma}
 
 \begin{proof}
   Let $\alpha : h_X \to F$ a natural transformation. Then for each $T
-  \in \Ob(\C)$ and $f \in \Hom_\C(T,X)$, by definition of $h$ we have
+  \in \ob(\C)$ and $f \in \hom_\C(T,X)$, by definition of $h$ we have
   the commutative diagram
   \[
   \begin{tikzcd}[column sep = large]
-    \Hom_\C(X,X) \rar{g \mapsto g \circ f} \dar{\alpha_x} &
-    \Hom_\C(T,X) \dar{\alpha_T} \\ F(X) \rar{F(f)} & F(T).
+    \hom_\C(X,X) \rar{g \mapsto g \circ f} \dar{\alpha_x} &
+    \hom_\C(T,X) \dar{\alpha_T} \\ F(X) \rar{F(f)} & F(T).
   \end{tikzcd}
   \]
   Setting $g = \id_x$
   gives us that $\alpha_T(f) = F(f)(\alpha_X(\id_X))$. It follows that
   \[
-  \Hom_{\Fun(\C^\op,\Set)}(h_X, F) \to F(X), \quad \alpha \mapsto
+  \hom_{\PSh(\C)}(h_X, F) \to F(X), \quad \alpha \mapsto
   \alpha_X(\id_X)
   \]
   gives the necessary bijection.
@@ -69,16 +72,15 @@ the lemma here too, for completeness.
 
 \begin{corollary}
   \label{yoneda-embedding}
-  The functor $h : \C \to \Fun(\C^\op, \Set)$ is fully faithful. In
-  particular, $X \simeq Y$ if and only if $h_X \simeq h_Y$ for $X,Y
-  \in \Ob(\C)$.
+  The functor $h : \C \to \PSh(\C)$ is fully faithful. In particular, $X
+  \simeq Y$ if and only if $h_X \simeq h_Y$ for $X,Y \in \ob(\C)$.
 \end{corollary}
 
 \begin{proof}
   Setting $F \coloneqq h_Y$ in the Yoneda lemma above gives us
   precisely that the map
   \[
-  \Hom_\C(X,Y) \to \Hom_{\Fun(\C^\op,\Set)}(h_X,h_Y)
+  \hom_\C(X,Y) \to \hom_{\PSh(\C)}(h_X,h_Y)
   \]
   induced by $h$ is a bijection.
 \end{proof}
@@ -98,18 +100,18 @@ place.
 
 \begin{situation}
   \label{fibre}
-  Let $S \in \Ob(\C)$ and $u : X \to S$ and $v : Y \to S$ two morphisms
+  Let $S \in \ob(\C)$ and $u : X \to S$ and $v : Y \to S$ two morphisms
   in $\C$.
 \end{situation}
 
 \begin{definition}
 In Situation \ref{fibre}. The \textit{fibre product of $X$ and $Y$
-  over $S$} is an object $X \times_S Y \in \Ob(\C)$ equipped with
+  over $S$} is an object $X \times_S Y \in \ob(\C)$ equipped with
 \textit{projections} $p : X \times_S Y \to X$ and $q : X \times_S Y
 \to Y$ satisfying:
 \begin{enumerate}
 \item $u \circ p = v \circ q$, and
-\item for any $T \in \Ob(\C)$ and morphisms $a : T \to X$ and $b : T
+\item for any $T \in \ob(\C)$ and morphisms $a : T \to X$ and $b : T
   \to Y$ such that $u \circ a = v \circ b$, there exists a unique
   morphism $a \times b : T \to X \times_S Y$ such that $a = p \circ (a
   \times b)$ and $b = q \circ (a \times b)$.
@@ -146,28 +148,31 @@ is \textit{cartesian}, or a \textit{pullback diagram}.
   \]
   On the other hand, it can be much more difficult to understand fibre
   products in other categories in this concrete set-theoretic manner
-  (e.g., the category $\Sch$ of schemes, where fibre products are
-  incredibly prevalent). Indeed, as with other universal
-  constructions, it is often much easier to work with the fibre
-  product abstractly. But here's another way to work with it: the
-  Yoneda embedding magically lets us reduce things to the familiar
-  category $\Set$!  Let's see what I mean.
+  (e.g., the category of schemes, where fibre products are incredibly
+  prevalent). Indeed, as with other universal constructions, it is
+  often much easier to work with the fibre product abstractly. But
+  here's another way to work with it: the Yoneda embedding magically
+  lets us reduce things to the familiar category $\Set$!  Let's see
+  what I mean.
 \end{example}
 
 \begin{lemma}
   \label{magic}
-  In Situation \ref{fibre}. Then $Z \in \Ob(\C)$ equipped with $p : Z
+  In Situation \ref{fibre}. Then $Z \in \ob(\C)$ equipped with $p : Z
   \to X$ and $q : Z \to Y$ is a fibre product of $X$ and $Y$ over $S$
   if and only if the diagram (in the category $\Set$)
   \[
   \begin{tikzcd}
-    \Hom_\C(T, Z) \rar{h_q} \dar{h_p} & \Hom(T, Y) \dar{h_v}
-    \\ \Hom(T,X) \rar{h_u} & \Hom(T,S).
+    \hom_\C(T, Z) \rar{h_q} \dar{h_p} & \hom_\C(T, Y) \dar{h_v}
+    \\ \hom_\C(T,X) \rar{h_u} & \hom_\C(T,S).
   \end{tikzcd}
   \]
-  is commutative and cartesian---i.e., $\Hom_\C(T,Z) \simeq
-  \Hom_\C(T,X) \times_{\Hom_\C(T,S)} \Hom_\C(T,Y)$---for all $T \in
-  \Ob(\C)$.
+  is commutative and cartesian, i.e.,
+  \[
+  \hom_\C(T,Z) \simeq \hom_\C(T,X) \times_{\hom_\C(T,S)}
+  \hom_\C(T,Y),
+  \]
+  for all $T \in \ob(\C)$.
 \end{lemma}
 
 \begin{proof}
@@ -176,7 +181,7 @@ is \textit{cartesian}, or a \textit{pullback diagram}.
   fully faithful. And, just by staring at things for long enough, we
   see that saying
   \begin{align*}
-  \Hom_\C(T,Z) &\simeq \Hom_\C(T,X) \times_{\Hom_\C(T,S)} \Hom_\C(T,Y)
+  \hom_\C(T,Z) &\simeq \hom_\C(T,X) \times_{\hom_\C(T,S)} \hom_\C(T,Y)
   \\ &\simeq \{(a, b) \mid a : T \to X, b : T \to Y, u \circ a = v
   \circ b\}
   \end{align*}
@@ -223,7 +228,7 @@ exclamation point. I seriously feel like this Yoneda trick is magic
 here. Sure, one can argue completely abstractly using only the
 universal properties of all the fibre products written down---that's
 how I proved this the first time I saw it---but this is just so much
-cleaner I think!
+cleaner and intuitive, I think!
 
 \begin{remark}
   As an aside, this last lemma is actually pretty useful. It implies
