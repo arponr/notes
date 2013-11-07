@@ -28,13 +28,11 @@ the lemma here too, for completeness.
 
 \begin{definition}
   For $X \in \ob(\C)$ we define the functor $h_X : \C^\op \to \Set$
-  as follows.
+  by:
   \begin{itemize}
-  \item On objects $T \in \ob(\C)$, let $h_X(T) \coloneqq
-    \hom_\C(T,X)$.
-  \item On morphisms $f \in \hom_\C(S,T)$, let $h_X(f) : h_X(T) \to
-    h_X(S)$ given by $g \in \hom_\C(T,X) \mapsto g \circ f \in
-    \hom_\C(S,X)$.
+  \item $h_X(T) \coloneqq \hom_\C(T,X)$ for $T \in \ob(\C)$;
+  \item $h_X(f) : h_X(T) \to h_X(S)$ sends $g \in \hom_\C(T,X) \mapsto
+    g \circ f \in \hom_\C(S,X)$ for $f \in \hom_\C(S,T)$.
   \end{itemize}
   Observe also that any $f \in \hom_\C(X,Y)$ defines a natural
   transformation $h_f : h_X \to h_Y$ by $g \in \hom_\C(T,X) \mapsto f
@@ -100,12 +98,11 @@ place.
 
 \begin{situation}
   \label{fibre}
-  Let $S \in \ob(\C)$ and $u : X \to S$ and $v : Y \to S$ two morphisms
-  in $\C$.
+  Let $u : X \to S$ and $v : Y \to S$ two morphisms in $\C$.
 \end{situation}
 
 \begin{definition}
-In Situation \ref{fibre}. The \textit{fibre product of $X$ and $Y$
+In Situation \ref{fibre}, the \textit{fibre product of $X$ and $Y$
   over $S$} is an object $X \times_S Y \in \ob(\C)$ equipped with
 \textit{projections} $p : X \times_S Y \to X$ and $q : X \times_S Y
 \to Y$ satisfying:
@@ -158,9 +155,9 @@ is \textit{cartesian}, or a \textit{pullback diagram}.
 
 \begin{lemma}
   \label{magic}
-  In Situation \ref{fibre}. Then $Z \in \ob(\C)$ equipped with $p : Z
-  \to X$ and $q : Z \to Y$ is a fibre product of $X$ and $Y$ over $S$
-  if and only if the diagram (in the category $\Set$)
+  In Situation \ref{fibre}, $Z \in \ob(\C)$ equipped with $p : Z \to
+  X$ and $q : Z \to Y$ is a fibre product of $X$ and $Y$ over $S$ if
+  and only if the diagram (in the category $\Set$)
   \[
   \begin{tikzcd}
     \hom_\C(T, Z) \rar{h_q} \dar{h_p} & \hom_\C(T, Y) \dar{h_v}
@@ -202,7 +199,7 @@ Ok, so that's what I mean when I say the Yoneda embedding reduces us
 to talking about sets. Let's see it in action (briefly).
 
 \begin{lemma}
-  In Situation \ref{fibre}. For all morphisms $S \to T$, the diagram
+  In Situation \ref{fibre}, for all morphisms $S \to T$ the diagram
   \[
   \begin{tikzcd}
     X \times_S Y \rar{p \times q} \ar{d}[left]{u \circ p = v \circ q}
