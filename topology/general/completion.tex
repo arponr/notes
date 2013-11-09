@@ -3,7 +3,7 @@
 
 \title{Math 131 Section, IV:\\Completion of metric spaces}
 \author{Arpon Raksit}
-\date{\today}
+\date{October 3, 2013 (original); \today\ (last edit).}
 
 \begin{document}
 \maketitle
@@ -96,16 +96,10 @@ spaces can have.
   Let $(Y, d_Y)$ another metric space. A map $\phi : X \to Y$ is:
   \begin{enumerate}
   \item \textit{uniformly continuous} if for each $\epsilon > 0$ there
-    exists a $\delta > 0$ such that
-    \[
-    d_X(x,y) < \delta \implies d_Y(\phi(x),\phi(y)) < \epsilon
-    \]
-    for all $x,y \in X$;
-  \item an \textit{isometry} (or ``distance-preserving'') if
-    \[
-    d_X(x,y) = d_Y(\phi(x),\phi(y))
-    \]
-    for all $x,y \in X$;
+    exists a $\delta > 0$ such that $d_X(x,y) < \delta \implies
+    d_Y(\phi(x),\phi(y)) < \epsilon$ for all $x,y \in X$;
+  \item an \textit{isometry} (or ``distance-preserving'') if $d_X(x,y)
+    = d_Y(\phi(x),\phi(y))$ for all $x,y \in X$;
   \item an \textit{isomorphism (of metric spaces)} if $\phi$ is a
     bijective isometry. (Note the inverse of an isomorphism is clearly
     automatically an isometry.)
