@@ -1,9 +1,8 @@
 \documentclass[10pt]{amsart}
 
-\usepackage[tmargin=1.3in,bmargin=1.3in,lmargin=1.7in,rmargin=1.7in]
-           {geometry}
 \usepackage{fancyhdr}
 \usepackage[hyphens]{url}
+\usepackage{hyperref}
 
 \usepackage{amssymb}
 \usepackage{eucal}
@@ -11,6 +10,13 @@
 \usepackage{tikz-cd}
 
 \frenchspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
@@ -49,6 +55,8 @@
 
 \newcommand{\inj}{\hookrightarrow}
 \newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\longto}{\longrightarrow}
+\newcommand{\longfrom}{\longleftarrow}
 \newcommand{\oline}{\overline}
 \newcommand{\uline}{\underline}
 \newcommand{\del}{\partial}
@@ -75,6 +83,11 @@
 \newtheorem{remarks}[subsection]{Remarks}
 \newtheorem{example}[subsection]{Example}
 \newtheorem{examples}[subsection]{Examples}
+
+\makeatletter
+\let\c@equation\c@subsection
+\makeatother
+\numberwithin{equation}{section}
 
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{

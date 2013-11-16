@@ -1,0 +1,98 @@
+\input{../../preamble}
+\input{preamble}
+
+\title{Exactness of functors}
+\author{Arpon Raksit}
+\date{November 16, 2013 (original); \today\ (last edit)}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\A}{\mathcal{A}}
+\renewcommand{\B}{\mathcal{B}}
+\renewcommand{\C}{\mathcal{C}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Products and coproducts}
+
+\begin{definition}
+  \label{biproduct}
+  Let $\C$ a category and $\{A_i\}_{i \in I} \subseteq \ob(\C)$. A
+  \textit{biproduct} of the $A_i$ is an object $\bigoplus A_i \in
+  \ob(\C)$ and morphisms
+  \[
+  \textstyle{A_i \to \bigoplus A_i \quad\text{and}\quad \bigoplus A_i
+    \to A_i \quad \text{for }i \in I,}
+  \]
+  making $\bigoplus A_i$ simultaneously a product $\prod A_i$ and
+  coproduct $\coprod A_i$. By the usual abuse of notation, to say we
+  have such data attached to an object $B \in \ob(\C)$, we will simply
+  write $B \simeq \bigoplus A_i$.
+\end{definition}
+
+\begin{lemma}
+  \label{coproduct-biproduct}
+  Let $\A$ an additive category and $A,B \in \ob(\A)$. Then $A \amalg
+  B \simeq A \times B$, i.e., finite products and coproducts agree,
+  and thus are automatically biproducts.
+\end{lemma}
+
+\begin{proof}
+  Suppose we have a coproduct $A \overset{i}{\longto} A \amalg B
+  \overset{j}{\longfrom} B$. The identity and zero morphisms induce $p
+  : A \amalg B \to A$ and $q : A \amalg B \to B$ with
+  \begin{equation}
+    \label{coproduct-formulae}
+    pi = \id_A, \quad qj = \id_b, \quad pj = 0, \quad\text{and}\quad
+    qi = 0.
+  \end{equation}
+  Consider the morphism $ip + jq : C \to C$. From the identities above
+  we get that $(ip + jq)i = i$ and $(ip+jq)j = j$. By the universal
+  property of the coproduct it follows that $ip+jq = \id_C$.
+
+  Now suppose we are given morphisms $f : D \to A$ and $g : D \to
+  B$. By the above, we have a morphism $if + jg : D \to C$ with
+  $p(if+jg) = f$ and $q(if+jg) = g$. Conversely, for any morphism $h :
+  D \to C$ with $ph = f$ and $qh = g$ we must have
+  \[
+  h = (ip+jq)h = i(ph) + j(qh) = if + jg.
+  \]
+  So the induced morphism $h$ is indeed unique, implying $A \amalg B
+  \simeq A \times B$.
+
+  If we start with the product instead of the coproduct, we just
+  dualise the above argument (which I learned from
+  \cite{mo-additive-functor-direct-sum}).
+\end{proof}
+
+\begin{notation}
+  In light of (\ref{coproduct-biproduct}), in an additive category we
+  will denote finite products, coproducts, and biproducts all with the
+  symbol $\oplus$.
+\end{notation}
+
+\begin{lemma}
+  \label{additive-functor-preserves-products}
+  Let $\A$ and $\B$ additive categories. Let $F : \A \to \B$ an
+  additive functor.\ref{coproduct-formulae}
+\end{lemma}
+
+\section{Left- and right-exact functors}
+
+
+\end{situation}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\nocite{weibel}
+\bibliographystyle{amsplain}
+\bibliography{refs}
+
+\end{document}
