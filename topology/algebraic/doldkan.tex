@@ -44,6 +44,7 @@ Here $\Z$ denotes the functor which takes free abelian groups
 level-wise, from which we get the \textit{singular chain complex} by
 letting the boundary map be given by $\del \coloneqq \sum (-1)^i d_i$.
 
+\medskip
 This was just to remind us that we've seen a natural functor $\s\Ab
 \to \Ch$ relating simplicial abelian groups and chain complexes. We'll
 look at it a bit more carefully in a second, and develop this
@@ -293,13 +294,15 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   $\Simplex$ is $\id_{[0]}$, and the inclusion $N_0(A) \inj A_0$ is an
   isomorphism, the base case $n=0$ is tautological.
 
-  First, surjectivity. Recall from Proposition \ref{splitting} that we
-  have a splitting $A_n \simeq N_n(A) \oplus D_n(A)$. From the factor
+  \medskip
+  First, surjectivity. Recall from (\ref{splitting}) that we have a
+  splitting $A_n \simeq N_n(A) \oplus D_n(A)$. From the factor
   $\id_{[n]} : [n] \surj [n]$ of $\Gamma_n(N(A))$ we $\im(\Phi_n(A))
-  \supseteq N_n(A)$. By induction $\Phi_{n-1}(A)$ is surjective, so by
-  definition we must have $\im(\Phi_n(A)) \supseteq D_n(A)$. Hence
+  \supseteq N_n(A)$. By induction $\Phi_{n-1}(A)$ is surjective, so we
+  must have $\im(\Phi_n(A)) \supseteq D_n(A)$ by definition. Hence
   $\Phi_n(A)$ is surjective.
 
+  \medskip
   Next, injectivity.\footnote{We won't be totally categorical and will
     use elements here to clarify the argument, but it's easy to see
     that one can get rid of them.} Assume we have $(x_\sigma) \in
@@ -328,6 +331,7 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   \]
   contradiction.
 
+  \medskip
   So we must have $x_\sigma = 0$ for all $\sigma \ne \id_{[n]}$. But
   the restriction of $\Phi_n(A)$ to the factor indexed by $\id_{[n]}$
   is just the inclusion $N_n(A) \inj A_n$. So then $x_{\id_{[n]}} = 0$
@@ -350,8 +354,11 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
 
 \begin{proof}
   By definition of the simplicial structure on $\Gamma(C)$ we have
-  $C_n \subseteq \bigcap_{i=0}^{n-1} \ker(d_i) = \im(\Psi_n(C))$. Now
-  note for $\sigma : [n] \surj [k]$ with $k < n$, we must have a
+  \[
+  \textstyle{C_n \subseteq \bigcap_{i=0}^{n-1} \ker(d_i) =
+    \im(\Psi_n(C))}.
+  \]
+  Now note for $\sigma : [n] \surj [k]$ with $k < n$, we must have a
   factorisation of $\sigma$ as a composition
   \[
   \begin{tikzcd}
@@ -361,13 +368,13 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   \]
   so it follows that the factor of $\Gamma_n(C)$ indexed by $\sigma$
   lies in the image of the degeneracies $D_n(\Gamma(C))$. Then we're
-  done, since by Proposition \ref{splitting} we have a splitting
+  done, since by (\ref{splitting}) we have a splitting
   \[
   \Gamma_n(C) \simeq N_n(\Gamma(C)) \oplus D_n(\Gamma(C)). \qedhere
   \]
 \end{proof}
 
-\begin{proof}[Proof of Theorem \ref{doldkan}]
+\begin{proof}[Proof of (\ref{doldkan})]
   The natural isomorphisms $\Phi : \Gamma \circ N \to \id_{\s\A}$ and
   $\Psi : N \circ \Gamma \to \id_{\Ch_{\ge 0}(\A)}$ of Lemmas
   \ref{gamma-n} and \ref{n-gamma} exhibit $N$ (and $\Gamma$) as an
@@ -378,11 +385,10 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
 
 \section{Applying the correspondence}
 
-\begin{situation}
-  For the remainder we will fix some commutative ring $R$ and actually
-  set $\A \coloneqq R\text{-}\Mod$.
-\end{situation}
+For the remainder we will fix some commutative ring $R$ and actually
+set $\A \coloneqq R\text{-}\Mod$.
 
+\medskip
 Recall that if $X \in \s\Set$ is \textit{fibrant} (i.e., a \textit{Kan
   complex}) with basepoint $v \in X_0$ then we can define its homotopy
 groups for $n \ge 0$,
@@ -449,26 +455,26 @@ and that of $\Ch_{\ge 0}(\A)$.
 \end{proposition}
 
 \begin{proof}
-  The second isomorphism is immediate from Proposition
-  \ref{splitting}, so we just prove the first. Let $x \in N_n(A)
-  \subseteq A_n$. For $n \ge 1$ we have by definition that
+  The second isomorphism is immediate from (\ref{splitting}), so we
+  just prove the first. Let $x \in N_n(A) \subseteq A_n$. For $n \ge
+  1$ we have by definition that
   \[
   \textstyle{x \in \ker(\del_n) \iff x \in \bigcap_{i=0}^n \ker(d_n)},
   \]
   which says precisely that $x$ represents an element $[x] \in
-  \pi_n(A,0)$. And by Lemma \ref{null-homotopic} we have for all $n
-  \ge 0$ that $[x] = 0 \in \pi_n(A,0)$ precisely when $x \in
-  \im(\del_{n+1})$. Finally by Lemma \ref{s-rmod-homotopy} we can take
-  the group structure on $\pi_n(A,0)$ to be the one induced by the
+  \pi_n(A,0)$. And by (ref{null-homotopic}) we have for all $n \ge 0$
+  that $[x] = 0 \in \pi_n(A,0)$ precisely when $x \in
+  \im(\del_{n+1})$. Finally by (\ref{s-rmod-homotopy}) we can take the
+  group structure on $\pi_n(A,0)$ to be the one induced by the
   $R$-module structure of $A_n$, whence the above discussion
   immediately gives us a (manifestly natural) isomorphism $\pi_n(A,0)
   \simeq \H_n(N(A))$.
 \end{proof}
 
 \begin{remark}
-  Recall that in Example \ref{BG} we computed the homology of $N(BG)$
-  for an abelian group $G$ to be $G$ concentrated in degree $1$. Then
-  Proposition \ref{homotopy-homology} gives, as expected,
+  Recall that in (\ref{BG}) we computed the homology of $N(BG)$ for an
+  abelian group $G$ to be $G$ concentrated in degree $1$. Then
+  (\ref{homotopy-homology}) gives, as expected,
   \[
   \pi_n(BG,0) \simeq
   \begin{cases}
@@ -495,8 +501,8 @@ and that of $\Ch_{\ge 0}(\A)$.
   sense.
 \end{remark}
 
-We'll end with an interesting consequence of Proposition
-\ref{homotopy-homology}. Assume that $R$ is a PID.
+We'll end with an interesting consequence of
+(\ref{homotopy-homology}). Assume that $R$ is a PID.
 
 \begin{lemma}
   \label{quasi-homology}
@@ -541,10 +547,10 @@ We'll end with an interesting consequence of Proposition
 \end{proposition}
 
 \begin{proof}
-  In light of Proposition \ref{homotopy-homology} and the fact that
-  $\Gamma$ preserves products (as an equivalence of categories), this
-  is immediate from applying $\Gamma$ to Lemma \ref{quasi-homology}
-  with $C \coloneqq N(A)$.
+  In light of (\ref{homotopy-homology}) and the fact that $\Gamma$
+  preserves products (as an equivalence of categories), this is
+  immediate from applying $\Gamma$ to (\ref{quasi-homology}) with $C
+  \coloneqq N(A)$.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

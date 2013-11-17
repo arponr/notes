@@ -107,8 +107,8 @@ our trusty $\epsilon$ and $\delta$.
     there exists a $\delta > 0$ such that
     \[
     d_X(x,y) < \delta \implies d_Y(\phi(x),\phi(y)) < \epsilon
+    \quad\text{for } y \in X.
     \]
-    for $y \in X$;
   \item a \textit{continuous map} (or just \textit{map} if we're
     feeling lazy) if $\phi$ is continuous at each $x \in X$.
   \end{itemize}
@@ -146,6 +146,7 @@ Even the smallest of epsilons is a burden. So let's rephrase things.
   $\alpha \in A$ such that $x \in U_\alpha$. By definition there
   exists $r > 0$ such that $B(x,r) \subseteq U_\alpha \subseteq U$.
 
+  \medskip
   Next let $U_1,\ldots,U_n \in \mathcal{T}$, set $U \coloneqq
   \bigcap_{i=1}^n U_i$, and let $x \in U$. By definition there exists
   $r_i > 0$ such that $B(x,r_i) \subseteq U_i$ for $1 \le i \le
@@ -154,6 +155,7 @@ Even the smallest of epsilons is a burden. So let's rephrase things.
   $B(x,r) \subseteq U_i$ for $1 \le i \le n$, whence $B(x,r) \subseteq
   U$.
 
+  \medskip
   Since obviously $\emptyset, X \in \mathcal{T}$, $\mathcal{T}$ is
   indeed a topology on $X$.
 \end{proof}
@@ -183,6 +185,7 @@ Even the smallest of epsilons is a burden. So let's rephrase things.
   easily sees that this contradicts that $x_k \to x$ as $k \to
   \infty$.
 
+  \medskip
   Assume (2). Let $x \in X$. Assume $B(x,\epsilon) \cap A \ne
   \emptyset$ for each $\epsilon > 0$. In particular, for $k \in \N$ we
   have $x_k \in A$ such that $d(x_k,x) < 1/k$. Here one easily checks
@@ -209,6 +212,7 @@ the same thing as being closed in the topological sense.
   $\delta > 0$ such that $\phi(B(x, \delta)) \subseteq B(\phi(x),
   \epsilon)$, which says exactly that $\phi$ is continuous at $x$.
 
+  \medskip
   Assume (2). Let $U \subseteq Y$ an open set, $x \in \phi^{-1}(U)$,
   and $\epsilon > 0$ such that $B(\phi(x),\epsilon) \subseteq Y$. By
   continuity we can choose $\delta > 0$ such that

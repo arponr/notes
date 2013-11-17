@@ -171,6 +171,7 @@ d_X(x_k,y_k) + d_X(y_k,z_k) \\ &\le \lim_{k \to \infty} d_X(x_k,y_k) +
 \end{align*}
 which implies $(x_k) \sim (z_k)$.
 
+\medskip
 We then define $X_c \coloneqq C/{\sim}$ to be the set of equivalence
 classes of $C$ under this relation, and define a metric $d_{X_c}$ on
 $X_c$ as follows. For $\sigma, \tau \in X_c$, with equivalence class
@@ -236,6 +237,7 @@ d_X(\phi(x),\phi(y)) = \lim_{k \to \infty} d_X(x,y) = d_X(x,y),
 \]
 so $\phi$ is an isometry.
 
+\medskip
 Next we show that $\phi(X)$ is dense in $X_c$. Let $\sigma \in X_c$
 with representative $(x_n) \in C$. Let $\epsilon > 0$. Since $(x_n)$
 is Cauchy there exists $n \in \N$ such that $d_X(x_k,x_n) < \epsilon$
@@ -272,6 +274,7 @@ an isometry that
 \end{align*}
 so indeed $(x_r)$ is Cauchy.
 
+\medskip
 Then let $\sigma \in X_c$ be the equivalence class of $(x_r)$. We will
 show $\lim_{k \to \infty} \sigma_k = \sigma$, and since $(\sigma_k)$
 was arbitrary this will show that $X_c$ is indeed complete. So let
@@ -288,16 +291,16 @@ d_{X_c}(\phi(x_r), \sigma) = \lim_{k \to \infty} d_X(x_r,x_k) < 3/r.
 \]
 It follows that $d_{X_c}(\sigma_{n_r}, \sigma) < 4/r < \epsilon$. Then
 since $(\sigma_{n_r})$ is Cauchy, it is easy to see we must then have
-$\lim_{k \to \infty} \sigma_k = \sigma$. So we have proven (1) and (2)
-of Proposition \ref{completion}.
+$\lim_{k \to \infty} \sigma_k = \sigma$. So we have proven
+(\ref{completion}.1, \ref{completion}.2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{The universal property}
 
-We now prove (3) and (4). These will follow from the following more
-general facts.\footnote{The presentation here is essentially taken
-  from Pete Clark's notes,
+We now prove (\ref{completion}.3, \ref{completion}.4). These will
+follow from the following more general facts.\footnote{The
+  presentation here is essentially taken from Pete Clark's notes,
   \url{math.uga.edu/~pete/8410Chapter2v2.pdf}.}
 
 \begin{lemma}
@@ -328,13 +331,14 @@ general facts.\footnote{The presentation here is essentially taken
   \]
   contradicting the disjointness of $V_1$ and $V_2$.
 
+  \medskip
   (2) Uniqueness is immediate from (1), so it suffices to show
   existence. Define $g : A \to B$ as follows. Let $a \in A$. By
   density of $A_0$ there is a sequence $(a_k) \in A_0^\N$ such that
-  $a_k \to a$ as $k \to \infty$. By Exercise \ref{convergentcauchy}
-  $(a_k)$ is Cauchy, whence $(f(a_k)) \in B^\N$ is Cauchy by Exercise
-  \ref{maps}. Then $f(a_k) \to b$ as $k \to \infty$ for some $b \in B$
-  by completeness. We define $g(a) \coloneqq b$. We claim this is
+  $a_k \to a$ as $k \to \infty$. By (\ref{convergentcauchy}), $(a_k)$
+  is Cauchy, whence $(f(a_k)) \in B^\N$ is Cauchy by
+  (\ref{maps}). Then $f(a_k) \to b$ as $k \to \infty$ for some $b \in
+  B$ by completeness. We define $g(a) \coloneqq b$. We claim this is
   independent of the choice of sequence $(a_k)$. Indeed let $(a_k')
   \in A_0^\N$ another sequence converging to $a$. Then for any $\delta
   > 0$ there exists $n \in \N$ such that, by the triangle inequality,
@@ -353,6 +357,7 @@ general facts.\footnote{The presentation here is essentially taken
   from which we see $g(a) = \lim_{k \to \infty} f(a_0) = f(a_0)$, so
   $g$ in fact extends $f$.
 
+  \medskip
   We now show $g$ is uniformly continuous. Let $\epsilon > 0$. Since
   $f$ is uniformly continuous there exists $\delta > 0$ such that
   $d_B(f(a),f(a')) < \epsilon/2$ whenever $a_0,a_0' \in A_0$ are such
@@ -370,12 +375,13 @@ general facts.\footnote{The presentation here is essentially taken
     proof of the continuity of the metric.} of $d_Y$ and definition of
   $g$ we have
   \begin{equation}
-    \tag{$\dagger$} d_Y(g(a),g(a')) = \lim_{k \to \infty}
-    d_Y(f(a_k),f(a_k')) \le \epsilon/2 < \epsilon.
+    \label{dagger}
+    d_Y(g(a),g(a')) = \lim_{k \to \infty} d_Y(f(a_k),f(a_k')) \le
+    \epsilon/2 < \epsilon.
   \end{equation}
   Thus $g$ is uniformly continuous. If $f$ is moreover an isometry,
-  the first equality in $(\dagger)$ also clearly implies that $g$ is
-  an isometry.
+  the first equality in $(\ref{dagger})$ also clearly implies that $g$
+  is an isometry.
 \end{proof}
 
 We now apply the lemma to finish the proof of the proposition. Suppose
@@ -383,17 +389,19 @@ $Y$ is a complete metric space and $\psi : X \to Y$ uniformly
 continuous. Since $\phi : X \to X_c$ is an isometry with dense image,
 the lemma gives that there is a unique uniformly continuous map
 $\psi_c : X_c \to Y$ such that $\psi_c \circ \phi = \phi$, proving
-(3).
+(\ref{completion}.3).
 
-Finally, (4) is proven by the general argument giving uniqueness of
-objects satisfying a universal property like (3). Suppose $Y_c$ is a
-complete metric space and $\psi : X \to Y_c$ an isometry with dense
-image. Then by (3) there is a unique uniformly continuous map $\psi_c
-: X_c \to Y_c$ such that $\psi_c \circ \phi = \psi$, and the lemma
-tells us that $\psi_c$ is in fact an isometry. But our proof of (3)
-applies to $Y_c$ equipped with $\psi$ as well, so we symmetrically
-have a unique isometry $\phi_c : Y_c \to X_c$ such that $\phi_c \circ
-\psi = \phi$. I.e., we have the diagram
+\medskip
+Finally, (\ref{completion}.4) is proven by the general argument giving
+uniqueness of objects satisfying a universal property like
+(\ref{completion}.3). Suppose $Y_c$ is a complete metric space and
+$\psi : X \to Y_c$ an isometry with dense image. Then by
+(\ref{completion}.3) there is a unique uniformly continuous map
+$\psi_c : X_c \to Y_c$ such that $\psi_c \circ \phi = \psi$, and the
+lemma tells us that $\psi_c$ is in fact an isometry. But our proof of
+(\ref{completion}.3) applies to $Y_c$ equipped with $\psi$ as well, so
+we symmetrically have a unique isometry $\phi_c : Y_c \to X_c$ such
+that $\phi_c \circ \psi = \phi$. I.e., we have the diagram
 \[
 \begin{tikzcd}[column sep = large, row sep = large]
   X \rar{\phi} \dar{\psi} & X_c \ar[shift left = .7ex]{dl}{\psi_c}
@@ -406,10 +414,10 @@ Observe then that
 \quad\text{and}\quad \psi_c \circ \phi_c \circ \psi = \psi = \id_{Y_c}
 \circ\, \psi.
 \]
-Then the \textit{uniqueness} statement in (3) implies that we must
-have $\phi_c \circ \psi_c = \id_{X_c}$ and $\psi_c \circ \phi_c =
-\id_{Y_c}$.\footnote{This argument takes a couple of reads to absorb
-  and understand, I think (it certainly did for me!). But it's
+Then the \textit{uniqueness} statement in (\ref{completion}.3) implies
+that we must have $\phi_c \circ \psi_c = \id_{X_c}$ and $\psi_c \circ
+\phi_c = \id_{Y_c}$.\footnote{This argument takes a couple of reads to
+  absorb and understand, I think (it certainly did for me!). But it's
   extremely general and very useful so try to do so!} I.e.,
 $\phi_c,\psi_c$ are inverse isomorphisms of metric spaces. And thus we
 are done!
