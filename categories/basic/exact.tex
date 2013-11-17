@@ -13,7 +13,6 @@
 
 \renewcommand{\A}{\mathcal{A}}
 \renewcommand{\B}{\mathcal{B}}
-\renewcommand{\C}{\mathcal{C}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -21,42 +20,48 @@
 
 \begin{definition}
   \label{biproduct}
-  Let $\C$ a category and $\{A_i\}_{i \in I} \subseteq \ob(\C)$. A
+  Let $\A$ a category and $\{A_i\}_{i \in I} \subseteq \ob(\A)$. A
   \emph{biproduct} of the $A_i$ is an object $\bigoplus A_i \in
-  \ob(\C)$ and morphisms
+  \ob(\A)$ equipped with morphisms
   \[
   \textstyle{A_i \to \bigoplus A_i \quad\text{and}\quad \bigoplus A_i
     \to A_i \quad \text{for }i \in I,}
   \]
   making $\bigoplus A_i$ simultaneously a product $\prod A_i$ and
   coproduct $\coprod A_i$. By the usual abuse of notation, to say we
-  have such data attached to an object $B \in \ob(\C)$, we will simply
+  have such data attached to an object $B \in \ob(\A)$, we will simply
   write $B \simeq \bigoplus A_i$.
 \end{definition}
 
 \begin{lemma}
-  \label{coproduct-biproduct}
-  Let $\A$ an additive category and $A,B \in \ob(\A)$. Then $A \amalg
-  B \simeq A \times B$, i.e., finite products and coproducts agree,
-  and thus are automatically biproducts.
+  \label{biproduct-formulae}
+  Let $\A$ an additive category and $A,B,C \in \ob(\A)$. If $C$ is a
+  product or coproduct of $A$ and $B$, then there exist morphisms
+  \[
+  i : A \to C, \quad j : B \to C, \quad p : C \to A, \quad q : C \to B
+  \]
+  satisfying the following identities:
+  \[
+  pi = \id_A, \quad qj = \id_b, \quad pj = 0, \quad qi = 0, \quad
+  ip+jq = \id_C.
+  \]
+  In this case, $C$ equipped with $i,j,p,q$ is in fact a biproduct of
+  $A$ and $B$.
 \end{lemma}
 
 \begin{proof}
-  Suppose we have a coproduct $A \overset{i}{\longto} A \amalg B
+  Suppose we have a coproduct $A \overset{i}{\longto} C
   \overset{j}{\longfrom} B$. The identity and zero morphisms induce $p
-  : A \amalg B \to A$ and $q : A \amalg B \to B$ with
-  \begin{equation}
-    \label{coproduct-formulae}
-    pi = \id_A, \quad qj = \id_b, \quad pj = 0, \quad\text{and}\quad
-    qi = 0.
-  \end{equation}
+  : C \to A$ and $q : C \to B$ with
+  \[
+  pi = \id_A, \quad qj = \id_B, \quad pj = 0, \quad qi = 0.
+  \]
   Consider the morphism $ip + jq : C \to C$. From the identities above
   and the universal property of the coproduct we get that
-  \begin{equation}
-    \label{biproduct-formula}
-    (ip + jq)i = i \quad\text{and}\quad (ip+jq)j = j \implies ip+jq =
-    \id_C.
-  \end{equation}
+  \[
+  (ip + jq)i = i \quad\text{and}\quad (ip+jq)j = j \implies ip+jq =
+  \id_C.
+  \]
 
   \medskip
   Now suppose we are given morphisms $f : D \to A$ and $g : D \to
@@ -66,8 +71,9 @@
   \[
   h = (ip+jq)h = i(ph) + j(qh) = if + jg.
   \]
-  So the induced morphism $h$ is indeed unique, implying $A \amalg B
-  \simeq A \times B$.
+  So the induced morphism $h$ is indeed unique, implying $A
+  \overset{p}{\longfrom} C \overset{q}{\longto} B$ is a product, and
+  hence $C \simeq A \oplus B$.
 
   \medskip
   If we start with the product instead of the coproduct, we just
@@ -75,8 +81,9 @@
   \cite{mo-additive-functor-direct-sum}).
 \end{proof}
 
+
 \begin{notation}
-  In light of (\ref{coproduct-biproduct}), in an additive category we
+  In light of (\ref{biproduct-formulae}), in an additive category we
   will use finite products, coproducts, and biproducts
   interchangeably, and denote all of these with $\oplus$.
 \end{notation}
@@ -88,60 +95,117 @@
 \end{lemma}
 
 \begin{proof}
-  This is a consequence of the proof of
-  (\ref{coproduct-biproduct}). Let $A,B \in \ob(\A)$. Let $A \oplus B$
-  their biproduct, and the morphisms $i,j,p,q$ as in
-  (\ref{coproduct-formulae}, \ref{biproduct-formula}). Since $F$ is a
-  functor, (\ref{coproduct-formulae}) implies
-  \[
-  F(p)F(i) = \id_{F(A)}, \quad F(q)F(j) = \id_{F(b)}, \quad F(p)F(j) =
-  0, \quad F(q)F(i) = 0,
-  \]
-  and since $F$ is additive, (\ref{biproduct-formula}) implies
-  $F(i)F(p) + F(j)F(q) = \id_{F(A \oplus B)}$. But then the argument
-  from (\ref{coproduct-biproduct}) implies that $F(A \oplus B) \simeq
-  F(A) \oplus F(B)$.
+  Let $A,B \in \ob(\A)$. Let $A \oplus B$ their biproduct, and the
+  morphisms $i$, $j$, $p$, and $q$ as in
+  (\ref{biproduct-formulae}). Since $F$ is an additive functor we get
+  the same identities for $F(i)$, $F(j)$, $F(p)$, and $F(q)$.  But
+  then the argument from (\ref{biproduct-formulae}) implies that $F(A
+  \oplus B) \simeq F(A) \oplus F(B)$.
 \end{proof}
 
-\section{\{Left, right\} exact functors}
+\begin{lemma}
+  \label{sum-factor}
+  Let $\A$ an additive category and $A,B \in \ob(\A)$. Let $f,g : A
+  \to B$ two morphisms. Then $f + g : A \to B$ can be factored as
+  \[
+  \begin{tikzcd}[column sep = large]
+    A \rar{f \times g} & B \oplus B \rar{\id_B \amalg \id_B} & B,
+  \end{tikzcd}
+  \]
+  where $f \times g$ is the morphism induced to the product by $f$ and
+  $g$, and $\id_B \amalg \id_B$ is the morphism induced from the
+  coproduct by $\id_B$ and $\id_B$.
+\end{lemma}
+
+\begin{proof}
+  In the notation of (\ref{biproduct-formulae}), we have $f \times g =
+  if + jg$ and $\id_B \amalg \id_B = p + q$, so
+  \[
+  (\id_B \amalg \id_B)(f \times g) = (p+q)(if+jg) = f+g. \qedhere
+  \]
+\end{proof}
+
+%% dear arpon of sunday morning,
+
+%% your plan is use the above identities to show that
+%% f + g : A \to B can be factored as A \to B + B \to B.
+%% then you'll redefine left and right exact functors
+%% as those which preserve finite limits and show that
+%% in an additive category the previous factorisation
+%% in fact implies any left or right exact functor
+%% is additive, leading into the characterisation
+%% for left and right exact in abelian categories.
+
+%% best,
+%% arpon of saturday night
+
+\section{Left and right exact functors}
 
 \begin{definition}
   \label{exactness}
-  Let $\A$ and $\B$ abelian categories and $F : \A \to \B$ an
-  additive functor. If for every exact sequence $0 \to A \to B \to C
-  \to 0$ in $\A$, the induced sequence in $\B$
-  \begin{itemize}
-  \item $0 \to F(A) \to F(B) \to F(C)$ is exact, we say $F$ is
-    \emph{left exact};
-  \item $F(A) \to F(B) \to F(C) \to 0$ is exact, we say $F$ is
-    \emph{right exact};
-  \item $0 \to F(A) \to F(B) \to F(C) \to 0$ is exact, we say $F$ is
-    \emph{exact}.
-  \end{itemize}
-  Note $F$ is exact if and only if it is left exact and right exact.
+  Let $\A$ and $\B$ categories. We say a functor $F : \A \to \B$ is:
+  \begin{enumerate}
+  \item \emph{left exact} if $F$ preserves finite limits;
+  \item \emph{right exact} if $F$ preserves finite colimits;
+  \item \emph{exact} if $F$ is both left and right exact.
+  \end{enumerate}
 \end{definition}
+
+\begin{example}
+  Left (resp. right) adjoints will be left (resp. right) exact since
+  they preserve \emph{all} limits (resp. colimits). This will seem
+  nicer when we actually characterise exactness of functors in terms
+  of exactness of sequences below.
+\end{example}
+
+\begin{lemma}
+  \label{exact-additive}
+  Let $\A$ and $\B$ additive categories and $F : \A \to \B$ a
+  functor. If $F$ is left or right exact then $F$ is additive.
+\end{lemma}
+
+\begin{proof}
+  Let $A,B \in \ob(\A)$ and $f,g : A \to B$ two morphisms. Since if
+  $F$ preserves limits or colimits then $F$ preserves biproducts, we
+  have the commutative diagram
+  \[
+  \begin{tikzcd}[column sep = large]
+    F(A) \rar{F(f \times g)} \ar{dr}[swap]{F(f) \times F(g)} & F(B
+    \oplus B) \rar{F(\id_B \amalg \id_B)} & F(B), \\ & F(B) \oplus
+    F(B) \ar{u}[anchor=center,rotate=90,yshift=3pt]{\sim}
+    \ar{ur}[swap]{\id_{F(B)} \amalg \id_{F(B)}} &
+  \end{tikzcd}
+  \]
+  notation as in (\ref{sum-factor}). Then we're done by
+  (\ref{sum-factor}).
+\end{proof}
 
 \begin{lemma}
   \label{left-exact-equiv}
   Let $\A$ and $\B$ abelian categories and $F : \A \to \B$ an additive
   functor. The following are equivalent.
   \begin{enumerate}
-  \item $F$ is left exact.
-  \item $F$ preserves kernels.
-  \item $F$ preserves finite limits.
   \item For every exact sequence $0 \to A \to B \to C$ in $\A$ the
     induced sequence $0 \to F(A) \to F(B) \to F(C)$ in $\B$ is exact.
+  \item For every exact sequence $0 \to A \to B \to C \to 0$ in $\A$
+    the induced sequence $0 \to F(A) \to F(B) \to F(C)$ in $\B$ is
+    exact.
+  \item $F$ preserves kernels.
+  \item $F$ is left exact.
   \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-  $(1 \Rightarrow 2)$ Assume $F$ is left exact. Let $\phi : A \to B$ a
-  morphism in $\A$. Then we have short exact sequences
+  $(1 \Rightarrow 2)$ Tautology.
+
+  \medskip
+  $(2 \Rightarrow 3)$ Let $\phi : A \to B$ a morphism in $\A$. Then we
+  have short exact sequences
   \[
   0 \to \ker(\phi) \to A \to \im(\phi) \to 0, \quad 0 \to \im(\phi)
   \to B \to \coker(\phi) \to 0,
   \]
-  giving rise to exact sequences
+  which by assumption give rise to exact sequences
   \[
   0 \to F(\ker(\phi)) \to F(A) \to F(\im(\phi)), \quad 0 \to
   F(\im(\phi)) \to F(B) \to F(\coker(\phi)).
@@ -154,36 +218,20 @@
   \]
 
   \medskip
-  $(2 \Rightarrow 3)$ By (\ref{additive-functor-preserves-products}),
+  $(3 \Rightarrow 4)$ By (\ref{additive-functor-preserves-products}),
   $F$ preserves finite products. And equalisers can be expressed as
   kernels in additive categories. Thus this is immediate from the fact
   that all (finite) limits can be expressed in terms of (finite)
   products and equalisers.
 
   \medskip
-  $(3 \Rightarrow 4)$ To say $0 \to A \to B \to C$ is exact is just to
+  $(4 \Rightarrow 1)$ To say $0 \to A \to B \to C$ is exact is just to
   say that $A \simeq \ker(B \to C)$. Thus this follows from the fact
   that kernels are finite limits.
-
-  \medskip
-  $(4 \Rightarrow 1)$ Tautology.
 \end{proof}
 
 Of course we can dualise (\ref{left-exact-equiv}) to obtain the
 analogous charactersiations of right exact functors.
-
-\begin{lemma}
-  \label{adjoint-exact}
-  Let $\A$ and $\B$ abelian categories and $F : \A \to \B$ an additive
-  functor. If $F$ is a left (resp. right) adjoint then $F$ is left
-  (resp. right) exact.
-\end{lemma}
-
-\begin{proof}
-  Left (resp. right) adjoints preserve \emph{all} limits
-  (resp. colimits), so this follows from (\ref{left-exact-equiv}) and
-  its dual.
-\end{proof}
 
 \end{situation}
 
@@ -192,7 +240,7 @@ analogous charactersiations of right exact functors.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\nocite{weibel}
+\nocite{weibel, stacks}
 \bibliographystyle{amsplain}
 \bibliography{refs}
 
