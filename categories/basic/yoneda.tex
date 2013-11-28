@@ -22,12 +22,12 @@ the lemma here too, for completeness.
 
 \begin{notation}
   We fix throughout a (locally small) category $\C$. Denote by
-  $\PSh(\C)$ the category of (contravariant) functors $\C^\op \to
+  $\PSh(\C)$ the category of (contravariant) functors $\C^{\op} \to
   \Set$.
 \end{notation}
 
 \begin{definition}
-  For $X \in \ob(\C)$ we define the functor $h_X : \C^\op \to \Set$
+  For $X \in \ob(\C)$ we define the functor $h_X : \C^{\op} \to \Set$
   by:
   \begin{itemize}
   \item $h_X(T) \coloneqq \hom_\C(T,X)$ for $T \in \ob(\C)$;
@@ -41,7 +41,7 @@ the lemma here too, for completeness.
 \end{definition}
 
 \begin{lemma}[Yoneda]
-  Let $F : \C^\op \to \Set$ any (contravariant) functor. Let $X \in
+  Let $F : \C^{\op} \to \Set$ any (contravariant) functor. Let $X \in
   \ob(C)$. Then there is a natural bijection
   \[
   \hom_{\PSh(\C)}(h_X,F) \simeq F(X)
@@ -59,8 +59,8 @@ the lemma here too, for completeness.
     \hom_\C(T,X) \dar{\alpha_T} \\ F(X) \rar{F(f)} & F(T).
   \end{tikzcd}
   \]
-  Setting $g = \id_x$
-  gives us that $\alpha_T(f) = F(f)(\alpha_X(\id_X))$. It follows that
+  Setting $g = \id_X$ gives us that $\alpha_T(f) =
+  F(f)(\alpha_X(\id_X))$. It follows that
   \[
   \hom_{\PSh(\C)}(h_X, F) \to F(X), \quad \alpha \mapsto
   \alpha_X(\id_X)
