@@ -1,16 +1,11 @@
 \documentclass[10pt]{beamer}
 \usepackage{textcomp}
-\usepackage{url}
-\usepackage{tikz-cd}
-\usepackage{graphicx}
-\usepackage{subcaption}
 \usepackage{amsmath}
 
 \mode<presentation>
 
 \usetheme{Boadilla}
 \usecolortheme{whale}
-\usefonttheme{serif}
 \setbeamercovered{transparent}
 
 \newcommand{\R}{\mathbb{R}}
@@ -53,8 +48,8 @@
       d}$ is an $(d,s,\delta,\eps)$-JL generator if for all $w\in\R^d$
     with $\|w\|=1$, we have
     \[
-      \P_{y\inr\{0,1\}^r}\l[| \|(G(y))(w) \|^2 -
-        1|\geq\eps\r]\leq\delta
+    \P_{y\inr\{0,1\}^r}\l[| \|(G(y))(w) \|^2 -
+      1|\geq\eps\r]\leq\delta
     \]
   \end{definition}
 
@@ -72,16 +67,16 @@
 
 \begin{frame}{What is possible?}
 
-Using the probabilistic method, one can show:
-\begin{theorem}[\cite{kane2011almost, karnin2011explicit}]
-  There exists an $(d,O(\log(1/\delta)/\eps^2),\delta,\eps)$-JL
-  generator with seed length $r=O(\log d + \log(1/\delta))$
-\end{theorem}
+  Using the probabilistic method, one can show:
+  \begin{theorem}[\cite{kane2011almost, karnin2011explicit}]
+    There exists an $(d,O(\log(1/\delta)/\eps^2),\delta,\eps)$-JL
+    generator with seed length $r=O(\log d + \log(1/\delta))$
+  \end{theorem}
 
-\bigskip\bigskip
+  \bigskip\bigskip
 
-It'd be cool to give an explicit generator that achieves this seed
-length
+  It'd be cool to give an explicit generator that achieves this seed
+  length
 
 \end{frame}
 
@@ -109,7 +104,7 @@ length
   \pause\bigskip\bigskip
 
   This motivates us to try to somehow only have to deal with ``well
-  spread'' vectors.
+  spread'' vectors \cite{indyk2007uncertainty}.
 \end{frame}
 
 \begin{frame}{Step 1}
@@ -156,7 +151,7 @@ length
   $\log(1/\delta)/\eps^2$ with another approach, and we end up
   with a distribution needing
   \[
-  (1+o(1))d + O(\log^2(\delta^{-1}\eps^{-1}))
+  (1+o(1))\log(d) + O(\log^2(\delta^{-1}\eps^{-1}))
   \]
   random bits.
 \end{frame}
@@ -277,7 +272,8 @@ length
     $(d,C\log(1/\delta)/\eps^2,\delta,\eps)$-JL generator
     $G:\{0,1\}^r\to \R^{s\times d}$ with
     \[
-    r=O \l(\log d + \log(1/\delta)\log \l(\frac{\log(1/\delta)}{\eps}\r)\r)
+    r=O \l(\log d + \log(1/\delta)\log
+    \l(\frac{\log(1/\delta)}{\eps}\r)\r).
     \]
   \end{theorem}
 
@@ -287,8 +283,8 @@ length
     \item Let $m:=\d\log
       \l(\frac{\log(1/\delta)}{2\log\log(1/\delta)}\r)$,
       $\eps':=\d\frac{\eps}{e(m+2)}$, $\delta':=\d\frac{\delta}{m+2}$.
-    \item Let $s_i:=C/(\eps'^2\delta'^{1/2^i})$, $\ell_i:=\Theta(2^i)$
-      an even integer for $i\geq0$, $s_{-1}=d$.
+    \item Let $s_i:=\d\frac{C}{\eps'^2\delta'^{1/2^i}}$,
+      $\ell_i:=\Theta(2^i)$ an even integer for $i\geq0$, $s_{-1}=d$.
     \item Let $S_i$ be a random matrix drawn from a distribution with
       the $(s_{i-1},s_i,\ell_i,\delta',\eps')$-JL moment property for
       $i=0,1,\ldots,m$.
@@ -323,12 +319,12 @@ length
 
   \begin{proof}[Proof of seed length bound]
     \begin{enumerate}
-      \item Level $0$: $O(\log d)$ bits.
-      \item Level $1\leq i \leq m$: $O(l_i\log
-        \l(\frac{1}{\eps'^2\delta'^{-1/2^i}}\r))$ which is never
-        larger than the cost for the final level.
-      \item Final level: $O(\log(1/\delta')\log(\log(1/\delta')/\eps')
-        = O(\log(1/\delta)\log(\log(1/\delta)/\eps)$.
+    \item Level $0$: $O(\log d)$ bits.
+    \item Level $1\leq i \leq m$: $O(l_i\log
+      \l(\frac{1}{\eps'^2\delta'^{-1/2^i}}\r))$ which is never
+      larger than the cost for the final level.
+    \item Final level: $O(\log(1/\delta')\log(\log(1/\delta')/\eps')
+      = O(\log(1/\delta)\log(\log(1/\delta)/\eps)$.
     \end{enumerate}
 
     \bigskip
@@ -341,21 +337,21 @@ length
 
 \begin{frame}{Rough ideas about \cite{kane2011almost}}
 
-The union bound is kind of loose.
+  The union bound is kind of loose.
 
-\pause\bigskip\bigskip
+  \pause\bigskip\bigskip
 
-Maybe we can replace it with a better bound by making the random seeds
-`more' independent.
+  Maybe we can replace it with a better bound by making the random seeds
+  `more' independent.
 
-\pause\bigskip\bigskip
+  \pause\bigskip\bigskip
 
-In fact, there is a way to make the seeds almost fully independent
-without wasting too many random bits!
+  In fact, there is a way to make the seeds almost fully independent
+  without wasting too many random bits!
 
-\pause\bigskip\bigskip
+  \pause\bigskip\bigskip
 
-We now digress to the theme of expander graphs.
+  We now digress to the theme of expander graphs.
 
 \end{frame}
 
@@ -391,15 +387,15 @@ We now digress to the theme of expander graphs.
     \pause\bigskip\bigskip
   \item Probabilistically: $G$ is a good expander if a random walk on
     $G$ converges to the uniform distribution as fast as possible.
-  \pause\bigskip\bigskip
+    \pause\bigskip\bigskip
   \item Algebraically: $G$ is a good expander if the nontrivial
     eigenvalues (the ones different from $c$) of the adjacency matrix
     of $G$ are small.
-\end{enumerate}
+  \end{enumerate}
 
-\pause\bigskip\bigskip
+  \pause\bigskip\bigskip
 
-Most useful to us will be the algebraic definition.
+  Most useful to us will be the algebraic definition.
 
 \end{frame}
 
@@ -420,7 +416,7 @@ Most useful to us will be the algebraic definition.
 
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Random walks on expanders}
+\begin{frame}{Random walks on expanders I}
 
   Now comes a very cool theorem that shows a way one can use expander
   graphs to sufficiently reduce the number of random bits required for
@@ -467,26 +463,26 @@ Most useful to us will be the algebraic definition.
 
 \begin{frame}{How small can $\a$ be?}
 
-We want to be able to make $\a$ as small as possible.
+  We want to be able to make $\a$ as small as possible.
 
-\pause\bigskip\bigskip
+  \pause\bigskip\bigskip
 
-It's not hard to show that the limit is
-\begin{theorem}[Alon-Boppana]
-  For any $(n,c)$ graph,
-  \[
-  \lambda(G)\geq 2\sqrt{c-1}-o_n(1)
-  \]
-\end{theorem}
-(and in fact a bound of $\lambda(G)\geq O(\sqrt{c})$ is
-straightforward).
+  It's not hard to show that the limit is
+  \begin{theorem}[Alon-Boppana]
+    For any $(n,c)$ graph,
+    \[
+    \lambda(G)\geq 2\sqrt{c-1}-o_n(1)
+    \]
+  \end{theorem}
+  (and in fact a bound of $\lambda(G)\geq O(\sqrt{c})$ is
+  straightforward).
 
-\pause\bigskip\bigskip
+  \pause\bigskip\bigskip
 
-\begin{definition}
-  An $(n,c)$-graph $G$ is called \textbf{Ramanujan} if
-  $\lambda(G)\leq 2\sqrt{c-1}$.
-\end{definition}
+  \begin{definition}
+    An $(n,c)$-graph $G$ is called \textbf{Ramanujan} if
+    $\lambda(G)\leq 2\sqrt{c-1}$.
+  \end{definition}
 \end{frame}
 
 \begin{frame}{Ramanujan graphs exist!}
@@ -521,9 +517,9 @@ straightforward).
   \sectionpage
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Issues}
   Unfortunately, there are several problems with the approach we
-    outlined above.
+  outlined above.
 
   \pause\bigskip\bigskip
 
@@ -541,14 +537,29 @@ straightforward).
 \end{frame}
 
 
+\begin{frame}{The next six days}
+  \begin{block}{Question}
+    Given what expanders have done for mankind, there's got to be a way
+    to use them here. What's the right way?
+  \end{block}
+
+  \pause\bigskip\bigskip
+
+  \begin{block}{Question}
+    Can we combine the two general approaches? From the motivation, it
+    seems that once vectors are well spread you need even less
+    independence.
+  \end{block}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{References}
 
 \begin{frame}[allowframebreaks]{References}
-\nocite{*}
-\bibliographystyle{amsalpha}
-\bibliography{slides-refs}
+  \nocite{*}
+  \bibliographystyle{amsalpha}
+  \bibliography{slides-refs}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
