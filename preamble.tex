@@ -1,9 +1,10 @@
-\documentclass[10pt,reqno]{amsart}
+\documentclass[10pt]{amsart}
 
 \usepackage{fancyhdr}
 \usepackage[hyphens]{url}
 \usepackage{enumitem}
 \usepackage{hyperref}
+\usepackage{titlesec}
 
 \usepackage{amssymb}
 \usepackage{stmaryrd}
@@ -12,7 +13,6 @@
 \usepackage{tikz-cd}
 
 \frenchspacing
-\setlength{\parindent}{0pt}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
@@ -61,42 +61,38 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\titleformat{\section}{\centering}{\textsection\thesection.}
+            {4pt}{\scshape}
+\titleformat{\subsection}{}{\textsection\thesubsection.}
+            {4pt}{\itshape}
+
 \swapnumbers
 
 \theoremstyle{plain}
-\newtheorem{theorem}[subsection]{Theorem}
-\newtheorem{proposition}[subsection]{Proposition}
-\newtheorem{lemma}[subsection]{Lemma}
-\newtheorem{corollary}[subsection]{Corollary}
-\newtheorem{conjecture}[subsection]{Conjecture}
-\newtheorem{question}[subsection]{Question}
-\newtheorem{exercise}[subsection]{Exercise}
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{proposition}[equation]{Proposition}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{conjecture}[equation]{Conjecture}
+\newtheorem{question}[equation]{Question}
+\newtheorem{exercise}[equation]{Exercise}
 
 \theoremstyle{definition}
-\newtheorem{definition}[subsection]{Definition}
-\newtheorem{definitions}[subsection]{Definitions}
-\newtheorem{notation}[subsection]{Notation}
-\newtheorem{convention}[subsection]{Convention}
-\newtheorem{situation}[subsection]{Situation}
-\newtheorem{remark}[subsection]{Remark}
-\newtheorem{remarks}[subsection]{Remarks}
-\newtheorem{example}[subsection]{Example}
-\newtheorem{examples}[subsection]{Examples}
-\newtheorem{algorithm}[subsection]{Algorithm}
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{definitions}[equation]{Definitions}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{convention}[equation]{Convention}
+\newtheorem{situation}[equation]{Situation}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{remarks}[equation]{Remarks}
+\newtheorem{example}[equation]{Example}
+\newtheorem{examples}[equation]{Examples}
+\newtheorem{algorithm}[equation]{Algorithm}
+\newtheorem{construction}[equation]{Construction}
 
-\makeatletter
-\let\c@equation\c@subsection
-\makeatother
 \numberwithin{equation}{section}
-
-\makeatletter
-\renewenvironment{proof}[1][\proofname]{
-  \par\pushQED{\qed}
-  \normalfont
-  \topsep6\p@\@plus6\p@\relax
-  \trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces
-}{\popQED\endtrivlist\@endpefalse}
-\makeatother
 
 \renewcommand{\labelitemi}{---}
 \renewcommand{\labelitemii}{--}
+
+\setenumerate[1]{label=(\theequation.\arabic*), leftmargin=*, labelindent=1em}

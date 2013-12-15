@@ -1,0 +1,201 @@
+\input{../preamble}
+\input{preamble}
+
+\title{Defining the cotangent complex}
+\author{Arpon Raksit}
+\date{December 16, 2013 (original); \today\ (last edit)}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\numberwithin{equation}{subsection}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\C}{\mathcal{C}}
+
+\section*{Opening nonsense}
+
+I've recently learned a bit about the general framework of model
+categories. It's sort of amazing, in the sense that seemingly a lot of
+the basic homotopy theory of spaces which I've seen can be axiomatised
+in a totally formal and categorical way. This includes something like
+Whitehead's theorem (and its converse)---that a map of CW complexes is
+a homotopy equivalence if and only if it's a weak homotopy
+equivalence---which I never would have thought of as a categorical
+fact.
+
+Anyway, this axiomatisation and generalisation is beautiful and all,
+but of course one hopes that it leads to new homotopy theory, in
+addition to providing a nice framework for existing homotopy theory to
+live in. Obviously it did. My goal in writing these notes was to learn
+about one of the earliest examples of this, the development of a
+(co)homology theory of commutative algebras by Andr\'{e}
+\cite{andre-cotangent} and Quillen \cite{quillen-cotangent}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ab}{\operatorname{ab}}
+
+\section{Abelianisation and K\"ahler differentials}
+
+The goal of this section is to motivate---on the level of analogy at
+least, following \cite{goerss-modelsimplicial}---the content of
+\textsection 2 and the construction of the cotangent complex in
+\textsection 3.
+
+\subsection{Singular homology}
+
+We first ask: how can we view singular homology in a sort of
+homotopyish way? Perhaps the most immediate answer is the
+following. Suppose $X$ is a topological space. We can choose a CW
+approximation, that is, a CW complex $Y$ and a weak equivalence $Y \to
+X$. Let $\ab(Y)$ denote the free topological abelian group on
+$Y$. Then one version of the Dold-Thom theorem \cite{mccord-doldthom}
+states that
+\[
+\pi_*(\ab(Y)) \simeq \H_*(Y) \simeq \H_*(X).
+\]
+Thus we should view $\ab(Y)$ as the object which gives, via its
+homotopy, singular homology. Note that to apply Dold-Thom we had to
+choose a CW approximation to $X$ before applying $\ab$. From the point
+of view of model categories, this is precisely choosing a cofibrant
+replacement (in the standard model structure on topological
+spaces). So finally we should view singular homology as the derived
+functor of $\ab$.
+
+Another answer to the question goes through simplicial sets rather
+than topological spaces. Suppose $K \in \s\Set$, perhaps thinking $K =
+\Sing(X)$ for some topological space $X$. Let $\ab(K) \coloneqq \Z
+K\in \s\Mod(\Z)$ the free simplicial abelian group on $K$.  Then the
+Dold-Kan correspondence\footnote{Many thanks to Albrecht Dold in this
+  section!} tells us that
+\[
+\pi_*(\ab(K)) \simeq \H_*(K) \simeq \H_*(X).
+\]
+So again we view $\ab(K)$ as giving homology via its homotopy. Here we
+did not have to choose a cofibrant replacement, but this is simply
+because all $K \in \s\Set$ are cofibrant!
+
+These two homotopic points of view on singular homology motivate the
+following general philosophy due to Quillen.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Simplicial model categories}
+
+Our first step will be to give the category of simplicial commutative
+algebras over a ring $R$ the structure of a simplicial model
+category. (Technically, we will only need the model category structure
+to define the cotangent complex and Andr\'e-Quillen (co)homology, but
+let's just be thorough about things.) We will do this much more
+generally, following \cite[Ch. II]{goerssjardine}.
+
+\subsection{The simplicial structure}
+
+We first recall what we mean by a simplicial category in this context,
+and how to recognise that we have one.
+
+\begin{notation}
+  If $\C$ is a category then we will denote by $\s\C$ the category of
+  simplicial objects in $\C$, i.e., functors $\Delta^\op \to \C$ where
+  $\Delta$ is the ordinal number category.
+\end{notation}
+
+\begin{definition}
+  \label{simplcat}
+  A \emph{simplicial category} is a category $\C$ equipped with
+  functors
+  \[
+  -\otimes- : \C \times \s\Set \to \C, \quad \map_l : \C^\op \times \C
+  \to \s\Set, \quad \map_r : \s\Set^\op \times \C \to \C
+  \]
+  and the following isomorphisms, each of which is natural is all of
+  its variables:
+  \begin{enumerate}
+  \item \label{simplcat-twovaradj} $\hom_{\s\Set}(K, \map_l(A,B)) \simeq
+    \hom_\C(A \otimes K, B) \simeq \hom_\C(A, \map_r(K,B))$,
+  \item \label{simplcat-assoc} $A \otimes (K \times L) \simeq (A
+    \otimes K) \otimes L$,
+  \item \label{simplcat-agree} $\map_l(A,B)_0 \simeq \hom_\C(A,B)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+  Let $\C$ be a category equipped with a functor $-\otimes- : \C
+  \times \s\Set \to \C$ satisfying the following:
+  \begin{enumerate}
+  \item the functor $- \otimes K : \C \to \C$ has a right adjoint
+    $\map_r(K,-) : \C \to \C$ for each $K \in \s\Set$,
+  \item the functor $A \otimes - : \s\Set \to \C$ preserves colimits
+    for each $A \in \C$,
+  \item $A \otimes * \simeq A$ naturally in $A \in \C$,
+  \item the natural isomorphism \ref{simplcat-assoc}.
+  \end{enumerate}
+  Define $\map_l : \C^\op \times \C \to \s\Set$ by $\map_l(A,B)_n
+  \coloneqq \hom_\C(A \otimes \Delta^n, B)$ for $n \ge 0$. Then the
+  above data gives $\C$ the structure of a simplicial category.
+\end{lemma}
+
+\begin{proof}
+  Omitted---this is an exercise in adjunctions.
+\end{proof}
+
+\begin{construction}
+  \label{coprod-tensor}
+  Let $\C$ be a category with coproducts. We define a functor $-
+  \otimes - : \s\C \times \s\Set \to \s\C$ as follows. Let $A \in
+  \s\C$ and $K \in \s\Set$. For $n \ge 0$ define
+  \[
+  (A \otimes K)_n \coloneqq \coprod_{k \in K_n} A_n.
+  \]
+  For $\phi : [m] \to [n]$ a morphism in the category $\Delta$ define
+  the induced morphism $\phi^* : (A \otimes K)_n \to (A \otimes K)_m$
+  such that the following commutes for $k \in K_n$:
+  \[
+  \begin{tikzcd}
+    A_n \rar{\phi^*} \dar{\incl_k} & A_m \dar{\incl_{\phi^*(k)}}
+    \\ \coprod_{l \in K_n} A_n \rar{\phi^*} &\coprod_{l \in K_m} A_m.
+  \end{tikzcd}
+  \]
+\end{construction}
+
+\begin{examples}
+  If $\C = \Set$ then we simply recover $A \otimes K = A \times K$. If
+  $\C = \Set_*$ (pointed sets) then we get $A \otimes K = A \times K /
+  * \times K$, which is just the smash product $A \wedge K_+$ with
+  $K_+$, denoting $K$ with an added disjoint basepoint. Thus the
+  construction of (\ref{coprod-tensor}) is not so crazy. We state
+  things in such generality so that we can later apply the same
+  construction to algebraic categories, like modules or rings.
+\end{examples}
+
+\begin{proposition}
+  \label{coprod-simplcat}
+  Let $\C$ be a category which is complete and has coproducts. With $-
+  \otimes - : \s\C \times \s\Set \to \s\C$ defined as in
+  (\ref{coprod-tensor}), $\s\C$ is a simplicial category.
+\end{proposition}
+
+This gives us a simplicial category structure on simplicial groups,
+simplicial $R$-modules, simplicial $R$-algebras, etc., since all of
+the underlying algebraic categories are complete and cocomplete. Thus
+we can move on.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The model structure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The cotangent complex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}
