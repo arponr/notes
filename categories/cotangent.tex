@@ -1,6 +1,15 @@
 \input{../preamble}
 \input{preamble}
 
+\numberwithin{equation}{subsection}
+
+\renewcommand{\C}{\mathcal{C}}
+\renewcommand{\L}{\mathbb{L}}
+\newcommand{\ab}{\operatorname{ab}}
+\newcommand{\Der}{\operatorname{Der}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \title{Defining the cotangent complex}
 \author{Arpon Raksit}
 \date{December 16, 2013 (original); \today\ (last edit)}
@@ -9,11 +18,8 @@
 \maketitle
 \thispagestyle{fancy}
 
-\numberwithin{equation}{subsection}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\C}{\mathcal{C}}
 
 \section*{Opening nonsense}
 
@@ -34,9 +40,18 @@ about one of the earliest examples of this, the development of a
 (co)homology theory of commutative algebras by Andr\'{e}
 \cite{andre-cotangent} and Quillen \cite{quillen-cotangent}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{notation-nonum}
+  \begin{itemize}[leftmargin=*]
+  \item Denote by $\Set$ the category of sets.
+  \item All rings (and algebras) are commutative.
+  \item For a ring $R$ denote by $\Mod(R)$ the category of $R$-modules
+    and $\Alg(R)$ the category of $R$-algebras.
+  \item For a category $\C$ denote by $\s\C$ the category of
+    simplicial objects in $\C$.
+  \end{itemize}
+\end{notation-nonum}
 
-\newcommand{\ab}{\operatorname{ab}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Abelianisation and K\"ahler differentials}
 
@@ -46,62 +61,318 @@ least, following \cite{goerss-modelsimplicial}---the content of
 \textsection 3.
 
 \subsection{Singular homology}
+\label{singhom}
 
-We first ask: how can we view singular homology in a sort of
-homotopyish way? Perhaps the most immediate answer is the
-following. Suppose $X$ is a topological space. We can choose a CW
-approximation, that is, a CW complex $Y$ and a weak equivalence $Y \to
-X$. Let $\ab(Y)$ denote the free topological abelian group on
-$Y$. Then one version of the Dold-Thom theorem \cite{mccord-doldthom}
-states that
-\[
-\pi_*(\ab(Y)) \simeq \H_*(Y) \simeq \H_*(X).
-\]
-Thus we should view $\ab(Y)$ as the object which gives, via its
-homotopy, singular homology. Note that to apply Dold-Thom we had to
-choose a CW approximation to $X$ before applying $\ab$. From the point
-of view of model categories, this is precisely choosing a cofibrant
-replacement (in the standard model structure on topological
-spaces). So finally we should view singular homology as the derived
-functor of $\ab$.
+In hopes of generalising the notion of homology via the theory of
+model categories, we first ask the following.
 
-Another answer to the question goes through simplicial sets rather
-than topological spaces. Suppose $K \in \s\Set$, perhaps thinking $K =
-\Sing(X)$ for some topological space $X$. Let $\ab(K) \coloneqq \Z
-K\in \s\Mod(\Z)$ the free simplicial abelian group on $K$.  Then the
-Dold-Kan correspondence\footnote{Many thanks to Albrecht Dold in this
-  section!} tells us that
-\[
-\pi_*(\ab(K)) \simeq \H_*(K) \simeq \H_*(X).
-\]
-So again we view $\ab(K)$ as giving homology via its homotopy. Here we
-did not have to choose a cofibrant replacement, but this is simply
-because all $K \in \s\Set$ are cofibrant!
+\begin{question}
+  How can we view singular homology in a homotopyish way?
+\end{question}
 
-These two homotopic points of view on singular homology motivate the
-following general philosophy due to Quillen.
+\begin{nothing}
+  \label{sing-doldthom}
+  Perhaps the most immediate answer is the following. Suppose $X$ is a
+  topological space. We can choose a CW approximation, that is, a CW
+  complex $Y$ and a weak equivalence $Y \to X$. Let $\ab(Y)$ denote
+  the free topological abelian group on $Y$. Then one version of the
+  Dold-Thom theorem \cite{mccord-doldthom} states that
+  \[
+  \pi_*(\ab(Y)) \simeq \H_*(Y) \simeq \H_*(X).
+  \]
+  Thus we should view $\ab(Y)$ as the object which gives, via its
+  homotopy, singular homology. Note that to apply Dold-Thom we had to
+  choose a CW approximation to $X$ before applying $\ab$. From the
+  point of view of model categories, this is precisely choosing a
+  cofibrant replacement (in the standard model structure on
+  topological spaces). So finally we should view singular homology as
+  the derived functor of $\ab$.
+\end{nothing}
+
+\begin{nothing}
+  \label{sing-doldkan}
+  Another answer to the question goes through simplicial sets rather
+  than topological spaces. Suppose $K \in \s\Set$, perhaps thinking $K =
+  \Sing(X)$ for some topological space $X$. Let $\ab(K) \coloneqq \Z
+  K\in \s\Mod(\Z)$ the free simplicial abelian group on $K$.  Then the
+  Dold-Kan correspondence\footnote{Many thanks to Albrecht Dold in this
+    section!} tells us that
+  \[
+  \pi_*(\ab(K)) \simeq \H_*(K) \simeq \H_*(X).
+  \]
+  So again we view $\ab(K)$ as giving homology via its homotopy. Here
+  we did not have to choose a cofibrant replacement, but this is
+  simply because (in the standard model structure) all $K \in \s\Set$
+  are cofibrant!
+\end{nothing}
+
+\subsection{Quillen homology}
+\label{quillenhom}
+
+The two points of view on singular homology given in
+(\ref{sing-doldthom}) and (\ref{sing-doldkan}) motivate the following
+general philosophy, due to Quillen.
+
+\begin{definitions}
+  \begin{enumerate}[leftmargin=*]
+  \item An \emph{abelian group object} in a category $\C$ is an object $A
+    \in \C$ such that the functor $\hom_\C(-,A) : \C^\op \to \Set$
+    factors through the forgetful functor $\Mod(\Z) \to \Set$, i.e.,
+    $\hom_\C(B,A)$ is naturally an abelian group.
+  \item A \emph{morphism of abelian group objects} $A,A' \in \C$ is a
+    morphism $A \to A'$ in $\C$ for which the induced map $\hom_\C(B,A)
+    \to \hom_\C(B,A')$ is a group homomorphism for $B \in \C$.
+  \item Denote the resulting \emph{subcategory of abelian group
+    objects} in by $\C_{\ab}$.
+  \end{enumerate}
+\end{definitions}
+
+\begin{nothing}
+  \label{abgpob-mult}
+  One can check that if $\C$ has a terminal object $*$ and binary
+  products, then $A \in \C$ is an abelian group object if and only if
+  there exist morphisms
+  \begin{itemize}
+  \item $\mu : A \times A \to A$ (multiplication),
+  \item $\epsilon : * \to A$ (identity),
+  \item $\iota : A \to A$ (inverse),
+  \end{itemize}
+  such that the usual diagrams encoding abelian group structure
+  commute, and a morphism of abelian group objects is one which
+  respects multiplication.
+\end{nothing}
+
+\begin{nothing}
+  \label{simplab}
+  Let $\C$ be a category with a terminal object and binary
+  products. It is immediate from (\ref{abgpob-mult}) that
+  $(\s\C)_{\ab} \simeq \s(\C_{\ab})$ That is, the two subcategories of
+  $\s\C$ consisting of:
+  \begin{itemize}
+  \item abelian group objects
+  \item objects which are degree-wise abelian group objects and whose
+    face and degeneracy maps are morphisms of abelian group objects
+  \end{itemize}
+  can be identified in the natural manner. We won't distinguish
+  between the two, and will denote them by $\s\C_{\ab}$.
+
+  Suppose moreover that the inclusion $\C_{\ab} \to \C$ has a left
+  adjoint $\ab : \C \to \C_{\ab}$. It is easy to see then that the
+  inclusion $\s\C_{\ab} \to \s\C$ has left adjoint $\s\C \to
+  \s\C_{\ab}$ given by applying $\ab$ degree-wise.
+\end{nothing}
+
+\begin{definition}
+  \label{derivedab}
+  Let $\C$ be a model category. Suppose there is a model structure on
+  $\C_{\ab}$ such that the inclusion $\C_{\ab} \to \C$ is a right
+  Quillen functor, with left adjoint $\ab : \C \to \C_{\ab}$, called
+  \emph{abelianisation}. Then \emph{homology} is the total left
+  derived functor $\L \ab$, i.e., the homology of $X \in \C$ is the
+  object $\L \ab(X) \in \C_{\ab}$.
+\end{definition}
+
+\begin{examples}
+  This philosophy is of course a generalisation of the discussion in
+  \textsection\ref{singhom}. If $\C = \Top$ then $\C_{\ab}$ is the
+  subcategory of topological abelian groups and if $\C = \s\Set$ then
+  $\C_{\ab}$ is the subcategory of simplicial abelian groups. In both
+  cases the natural model structure on $\C_{\ab}$ is defined precisely
+  such that $\C_{\ab} \to \C$ is right Quillen, with left adjoints
+  $\ab : \Top \to \Top_{\ab}$ and $\ab : \s\Set \to \s\Set_{\ab}
+  \simeq \s\Mod(\Z)$ the free topological and simplicial abelian group
+  functors, respectively.
+\end{examples}
+
+\subsection{Abelianisation of algebras}
+\label{abelianalgebra}
+
+Of course we must then ask: to what other categories $\C$ can we
+fruitfully apply this notion of homology to? As stated earlier, the
+goal here is to describe what happens when we consider the category of
+commutative rings or algebras. So first we need to understand what
+abelianisation is in this context.
+
+\begin{notation}
+  We fix a ring $R$.
+\end{notation}
+
+\begin{proposition}
+  The only abelian group object in $\Alg(R)$ is the zero ring.
+\end{proposition}
+
+\begin{proof}
+  The terminal object in $\Alg(R)$ is the zero ring $0$, and the only
+  $A \in \Alg(R)$ for which there exists a morphism $0 \to A$ is $A =
+  0$ itself.
+\end{proof}
+
+\begin{nothing}
+  So we've already run into a subtlety in this category. We'll resolve
+  this issue by working in a slightly different category. Fix an
+  $R$-algebra $A$. Let
+  \[
+  \C \coloneqq \Alg(R)_{/A}
+  \]
+  be the overcategory of $R$-algebras over $A$. I.e., an object of
+  $\C$ is a sequence of ring morphisms $R \to B \to A$ (which we of
+  course abusively refer to as $B$) whose composition is the structure
+  morphism $R \to A$.
+\end{nothing}
+
+Before continuing the discussion on abelianisation, we review
+derivations and K\"ahler differentials.
+
+\begin{definitions}
+  \label{derivations}
+  Let $B$ be an $R$-algebra and $M$ a $B$-module.
+  \begin{enumerate}[leftmargin=*]
+  \item An \emph{$R$-derivation} $d : B \to M$ is a morphism of
+    $R$-modules satisfying the Leibniz rule, $d(xy) = x\,d(y) +
+    y\,d(x)$ for $x,y \in B$.
+  \item The set $\Der_R(B,M)$ of $R$-derivations has a natural
+    $B$-module (in particular abelian group) structure.
+  \item \label{kahdiff} The $B$-module $\Omega_{B/R}$ of
+    \emph{K\"ahler differentials} is defined by the universal property
+    \[
+    \hom_{\Mod(B)}(\Omega_{B/R}, M) \simeq \Der_R(B,M).
+    \]
+    In fact, if we let $\mu : B \otimes_R B \to B$ be the product map
+    and $I \coloneqq \ker(\mu)$, then there is an $R$-derivation $d :
+    B \to I/I^2$ sending $x \mapsto 1 \otimes x - x \otimes 1$ such
+    that the map
+    \[
+    \hom_{\Mod(B)}(I/I^2, M) \to \Der_R(B,M), \quad \phi \mapsto \phi
+    \circ d
+    \]
+    is an isomorphism, so $\Omega_{B/R} \simeq I/I^2$. We omit the
+    verification of this construction.
+  \end{enumerate}
+\end{definitions}
+
+\begin{nothing}
+  \label{square-zero}
+  We define a functor
+  \[
+  \Mod(A) \to \C, \quad M \mapsto A \oplus M,
+  \]
+  where the ring structure on $A \oplus M$ is given by $(a,x)(b,y) =
+  (ab,ay+bx)$. Then the structure morphism $R \to A$ and projection $A
+  \oplus M \to A$ determine $R \to A \oplus M \to A$ as an object in
+  $\C$. If we have a morphism $\phi : M \to N$ in $\Mod(A)$ then
+  $\id_A \oplus \phi : A \oplus M \to A \oplus N$ evidently gives a
+  morphism in $\C$.
+\end{nothing}
+
+\begin{proposition}
+  \label{modules-abelian}
+  The functor $\Mod(A) \to \C$ defined in (\ref{square-zero}) factors
+  through the inclusion $\C_{\ab} \to \C$, and furthermore induces an
+  equivalence of categories
+  \[
+  \Mod(A) \simeq \C_{\ab}.
+  \]
+\end{proposition}
+
+\begin{proof}
+  The first claim is that $A \oplus M$ is an abelian group object for
+  any $M \in \Mod(A)$. Let $B \in \C$. By definition of $\C$ and $A
+  \oplus M$, giving a morphism $B \to A \oplus M$ is equivalent to
+  giving an $R$-linear map $d : B \to M$ satisfying $d(xy) = x\,d(y) +
+  y\,d(x)$ for $x,y \in B$. (Here we have viewed $M$ as a module over
+  $R$ and $B$ via restriction of scalars.) I.e., we have a natural
+  isomorphism
+  \begin{equation}
+    \label{sqzero-der}
+    \hom_{\C}(B, A \oplus M) \simeq \Der_R(B,M),
+  \end{equation}
+  which is an abelian group, giving our claim.
+
+  We next show that if $B \in \C_{\ab}$ is an abelian group object
+  then it is isomorphic to $A \oplus M$ for some $M \in \Mod(A)$. Let
+  $\eta : B \to A$ be the map over $A$. Note the terminal object of
+  $\C$ is $A$ and the product is given by fibred product $B \times_A
+  B$. To have an abelian group object we in particular need morphisms
+  $\mu : B \times_A B \to B$ and $\epsilon : A \to B$.  Since
+  $\epsilon$ is a morphism over $A$, it must be a section of
+  $\eta$. Thus if we set $M \coloneqq \ker(\eta)$ we have a splitting
+  $B \simeq A \oplus M$ as $A$-modules. Next, $\epsilon$ being a
+  ``two-sided identity'' means
+  \[
+  \mu \circ (\epsilon \eta, \id_B) = \id_B = \mu \circ (\id_B,
+  \epsilon \eta),
+  \]
+  and hence $\mu(x,0) = x = \mu(0,x)$ for $x \in M$. This implies $xy
+  = \mu(x,0)\mu(0,y) = \mu(0,0) = 0$ for $x,y \in M$, and hence for
+  $a,b \in A$ we have
+  \[
+  (\epsilon(a)+x)(\epsilon(b)+y) = \epsilon(ab) + \epsilon(a)y +
+  \epsilon(b)x
+  \]
+  It follows that in fact $B \simeq A \oplus M$ as objects of $\C$.
+
+  Finally we must show the functor is fully faithful. Faithfulness is
+  clear. A morphism $\psi : A \oplus M \to A \oplus N$ over $A$ must
+  be of the form $\id_A \oplus \phi$. And since
+  \[
+  (1,x)(1,y) = (1,x+y), \quad (a,0)(1,x) = (1,ax)
+  \]
+  for $a \in A$ and $x,y \in M$ or $x,y \in N$, if $\psi$ is a
+  morphism of abelian group objects, then $\phi$ is $A$-linear.
+\end{proof}
+
+\begin{proposition}
+  \label{adjointkahler}
+  The assignment $B \mapsto \Omega_{B/R} \otimes_B A$ defines a
+  functor $\C \to \Mod(A)$ which is left adjoint to inclusion $\Mod(A)
+  \simeq \C_{\ab} \to \C$.
+\end{proposition}
+
+\begin{proof}
+  Functoriality is clear from the definition
+  (\ref{derivations}.\ref{kahdiff}) of $\Omega_{B/R}$ and the Yoneda
+  lemma, as one can pull back derivations. Then adjointness follows
+  from (\ref{sqzero-der}):
+  \begin{align*}
+  \hom_\C(B, A \oplus M) &\simeq \Der_R(B,M) \\ &\simeq
+  \hom_{\Mod(B)}(\Omega_{B/R}, M) \\ &\simeq
+  \hom_{\Mod(A)}(\Omega_{B/R} \otimes_B A, M). \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{nothing}
+  We now have a convenient (and pretty intruiging, actually) notion of
+  abelianisation for the category $\C = \Alg(R)_{/A}$. As per the
+  philosophy of \textsection \ref{quillenhom}, we should now take the
+  derived functor. But wait! We don't even have a model structure on
+  $\C$! And why would we expect to? Indeed, we should extend the above
+  discussion (\ref{square-zero})--(\ref{adjointkahler}) to
+  \emph{simplicial} objects via (\ref{simplab}) to get an adjunction
+  \[
+  \begin{tikzcd}
+    \Omega_{-/R} \otimes_- A \ : \ \s\Alg(R)_{/A} \rar[yshift=2pt] &
+    \s\Mod(A) \ :\ A \oplus -. \lar[yshift=-2pt]
+  \end{tikzcd}
+  \]
+  It seems much more natural to give model structures to these
+  categories, and in fact this is what we will do in the following
+  section.
+\end{nothing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Simplicial model categories}
 
-Our first step will be to give the category of simplicial commutative
-algebras over a ring $R$ the structure of a simplicial model
-category. (Technically, we will only need the model category structure
-to define the cotangent complex and Andr\'e-Quillen (co)homology, but
-let's just be thorough about things.) We will do this much more
-generally, following \cite[Ch. II]{goerssjardine}.
+Here we describe the simplicial model category structure on a variety
+of (simplicial) algebraic categories, including the relevant ones
+discussed above. (Technically, we will only need the model category
+structure to define the cotangent complex and Andr\'e-Quillen
+(co)homology, but let's just be thorough about things.)
 
 \subsection{The simplicial structure}
 
 We first recall what we mean by a simplicial category in this context,
 and how to recognise that we have one.
-
-\begin{notation}
-  If $\C$ is a category then we will denote by $\s\C$ the category of
-  simplicial objects in $\C$, i.e., functors $\Delta^\op \to \C$ where
-  $\Delta$ is the ordinal number category.
-\end{notation}
 
 \begin{definition}
   \label{simplcat}
@@ -114,24 +385,24 @@ and how to recognise that we have one.
   and the following isomorphisms, each of which is natural is all of
   its variables:
   \begin{enumerate}
-  \item \label{simplcat-twovaradj} $\hom_{\s\Set}(K, \map_l(A,B)) \simeq
+  \item \label{twovaradj} $\hom_{\s\Set}(K, \map_l(A,B)) \simeq
     \hom_\C(A \otimes K, B) \simeq \hom_\C(A, \map_r(K,B))$,
-  \item \label{simplcat-assoc} $A \otimes (K \times L) \simeq (A
+  \item \label{assoc} $A \otimes (K \times L) \simeq (A
     \otimes K) \otimes L$,
-  \item \label{simplcat-agree} $\map_l(A,B)_0 \simeq \hom_\C(A,B)$.
+  \item \label{agree} $\map_l(A,B)_0 \simeq \hom_\C(A,B)$.
   \end{enumerate}
 \end{definition}
 
 \begin{lemma}
-  Let $\C$ be a category equipped with a functor $-\otimes- : \C
-  \times \s\Set \to \C$ satisfying the following:
+  Suppose $\C$ is equipped with a functor $-\otimes- : \C \times
+  \s\Set \to \C$ satisfying the following:
   \begin{enumerate}
   \item the functor $- \otimes K : \C \to \C$ has a right adjoint
     $\map_r(K,-) : \C \to \C$ for each $K \in \s\Set$,
   \item the functor $A \otimes - : \s\Set \to \C$ preserves colimits
     for each $A \in \C$,
   \item $A \otimes * \simeq A$ naturally in $A \in \C$,
-  \item the natural isomorphism \ref{simplcat-assoc}.
+  \item the natural isomorphism (\ref{simplcat}.\ref{assoc}).
   \end{enumerate}
   Define $\map_l : \C^\op \times \C \to \s\Set$ by $\map_l(A,B)_n
   \coloneqq \hom_\C(A \otimes \Delta^n, B)$ for $n \ge 0$. Then the
@@ -142,7 +413,7 @@ and how to recognise that we have one.
   Omitted---this is an exercise in adjunctions.
 \end{proof}
 
-\begin{construction}
+\begin{nothing}
   \label{coprod-tensor}
   Let $\C$ be a category with coproducts. We define a functor $-
   \otimes - : \s\C \times \s\Set \to \s\C$ as follows. Let $A \in
@@ -159,7 +430,7 @@ and how to recognise that we have one.
     \\ \coprod_{l \in K_n} A_n \rar{\phi^*} &\coprod_{l \in K_m} A_m.
   \end{tikzcd}
   \]
-\end{construction}
+\end{nothing}
 
 \begin{examples}
   If $\C = \Set$ then we simply recover $A \otimes K = A \times K$. If
@@ -185,16 +456,47 @@ we can move on.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection*{The model structure}
+\subsection{The model structure}
 
-
+Yo dude.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The cotangent complex}
 
+We've now equipped a substantial number of interesting categories with
+simplicial model structures. As a happy coincidence (not really) we've
+managed to do this for the categories $\s\Alg(R)_{/A}$ and $\s\Mod(A)$
+we were discussing back in \textsection \ref{abelianalgebra}. (Recall
+$R$ is a ring and $A$ an $R$-algebra.)
+
+\subsection{The definition}
+
+The next step is to apply (\ref{derivedab}) to get our ``homology
+object''. We recall that in the current setting we have an adjunction
+\[
+\begin{tikzcd}
+  \Omega_{-/R} \otimes_- A \ : \ \s\Alg(R)_{/A} \rar[yshift=2pt] &
+  \s\Mod(A) \ :\ A \oplus -, \lar[yshift=-2pt]
+\end{tikzcd}
+\]
+where the functor $A \otimes -$ is the inclusion of abelian group
+objects and the K\"ahler differentials $\Omega_{-/R} \otimes_- A$ is
+the adjoint abelianisation functor. But to be able to derive
+abelianisation as in (\ref{derivedab}), we need to check something.
+
+\begin{lemma}
+  The inclusion functor $\s\Mod(A) \to \s\Alg(R)_{/A}$ is right
+  Quillen (and hence abelianisation is left Quillen).
+\end{lemma}
+
+\begin{proof}
+  
+\end{proof}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\nocite{iyengar-cotangent, goerssjardine}
 \bibliographystyle{amsalpha}
 \bibliography{refs}
 
