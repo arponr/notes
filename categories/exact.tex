@@ -60,7 +60,6 @@
   and the universal property of the coproduct we get that $(ip + jq)i
   = i$ and $(ip+jq)j = j$, implying $ip+jq = \id_C$.
 
-  \medskip
   Now suppose we are given morphisms $f : D \to A$ and $g : D \to
   B$. By the above, we have a morphism $if + jg : D \to C$ with
   $p(if+jg) = f$ and $q(if+jg) = g$. Conversely, for any morphism $h :
@@ -72,7 +71,6 @@
   \overset{p}{\longfrom} C \overset{q}{\longto} B$ is a product, and
   hence $C \simeq A \oplus B$.
 
-  \medskip
   If we start with the product instead of the coproduct, we just
   dualise the above argument (which I learned from
   \cite{mo-additive-functor-direct-sum}).
@@ -181,7 +179,7 @@
 \begin{proof}
   (1 $\Rightarrow$ 2) Tautology.
 
-  \medskip
+  \medskip\noindent
   (2 $\Rightarrow$ 3) Let $\phi : A \to B$ a morphism in $\A$. Then we
   have short exact sequences
   \[
@@ -189,10 +187,10 @@
   \to B \to \coker(\phi) \to 0,
   \]
   which by assumption give rise to exact sequences
-  \[
-  0 \to F(\ker(\phi)) \to F(A) \to F(\im(\phi)), \quad 0 \to
-  F(\im(\phi)) \to F(B) \to F(\coker(\phi)).
-  \]
+  \begin{align*}
+    &0 \to F(\ker(\phi)) \to F(A) \to F(\im(\phi)), \\ &0 \to
+    F(\im(\phi)) \to F(B) \to F(\coker(\phi)).
+  \end{align*}
   Since $F(\phi)$ factors as $F(A) \to F(\im(\phi)) \to F(B)$, the
   exactness above implies
   \[
@@ -200,14 +198,14 @@
   F(\ker(\phi)).
   \]
 
-  \medskip
+  \medskip\noindent
   (3 $\Rightarrow$ 4) By (\ref{additive-functor-preserves-products}),
   $F$ preserves finite products. And equalisers can be expressed as
   kernels in additive categories. Thus this is immediate from the fact
   that all (finite) limits can be expressed in terms of (finite)
   products and equalisers.
 
-  \medskip
+  \medskip\noindent
   (4 $\Rightarrow$ 1) To say $0 \to A \to B \to C$ is exact is just to
   say that $A \simeq \ker(B \to C)$. Thus this follows from the fact
   that kernels are finite limits.

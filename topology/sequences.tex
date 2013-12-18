@@ -21,7 +21,6 @@ about a way we can still talk about everything in terms of
 convergence---but convergence of something more general than
 sequences, called \textit{filters}.
 
-\medskip
 Unfortunately, I don't really know too much about filters right now,
 and I didn't get myself to learn them well enough before
 section. Sorry! So I'll (optimistically) leave that for another
@@ -46,30 +45,32 @@ be countable). Note that $\T$ is a topology because arbitrary
 intersections and finite unions of countable sets are countable.
 \end{definition}
 
-Ok, now fix an uncountable set $X$ and put it in the cocountable
-topology. (You can just take $X \coloneqq \R$ for concreteness; I'm just
-wrapping some notation around it since the topology we've put on $X$
-is far, far away from the intuitive topologies you know on $\R$.)  And
-suppose we have $A \subsetneq X$ a proper, uncountable subset. (Again,
-take $A \coloneqq [0, 1] \subset \R$ for concreteness.)
+\begin{nothing}
+  Ok, now fix an uncountable set $X$ and put it in the cocountable
+  topology. (You can just take $X \coloneqq \R$ for concreteness; I'm just
+  wrapping some notation around it since the topology we've put on $X$
+  is far, far away from the intuitive topologies you know on $\R$.)  And
+  suppose we have $A \subsetneq X$ a proper, uncountable subset. (Again,
+  take $A \coloneqq [0, 1] \subset \R$ for concreteness.)
+\end{nothing}
 
-\medskip
-I claim that $A$ is dense in $X$, but that any convergent sequence in
-$A$ necessarily converges (uniquely) to a point in $A$. What is this
-saying? Recall that $A$ being dense means that it's closure is all of
-$X$, that is $\oline A = X$. On the other hand, there is no sequence
-is $A$ converging to any point outside of $A$. (Keep in mind, $A \ne
-X$ so that this is nontrivial!) So basically, in this topology, being
-closed in the topological sense is rather far from being closed under
-the operation of taking limits of convergent sequences. Contrast this
-with the familiar setting of metric spaces, where these two concepts
-are the same!\footnote{See my notes from section I for a proof of
-  this.} Ok, let's prove it.
-
+\begin{nothing}
+  I claim that $A$ is dense in $X$, but that any convergent sequence in
+  $A$ necessarily converges (uniquely) to a point in $A$. What is this
+  saying? Recall that $A$ being dense means that it's closure is all of
+  $X$, that is $\oline A = X$. On the other hand, there is no sequence
+  is $A$ converging to any point outside of $A$. (Keep in mind, $A \ne
+  X$ so that this is nontrivial!) So basically, in this topology, being
+  closed in the topological sense is rather far from being closed under
+  the operation of taking limits of convergent sequences. Contrast this
+  with the familiar setting of metric spaces, where these two concepts
+  are the same!\footnote{See my notes from section I for a proof of
+    this.} Ok, let's prove it.
+\end{nothing}
 \begin{exercise}
   \label{dense}
   Show that $\oline A = X$ if and only if $U \cap A \ne \emptyset$ for
-  every $\emptyset \ne U \subseteq X$ open.
+  every nonempty open subset $U \subseteq X$.
 \end{exercise}
 
 \begin{lemma}

@@ -23,28 +23,31 @@
   and $\s\Ab$ is the category of \textit{simplicial abelian groups}.
 \end{definition}
 
-Recall we have a functor $\Sing : \Top \to \s\Set$, sending $X \mapsto
-\hom_\Top(|\Delta^\bullet|, X)$. Lately we've been talking about
-$\Sing$ for two reasons:
-\begin{enumerate}
-\item It's a right adjoint to geometric realisation $|{-}| : \s\Set
-  \to \Top$.
-\item $\Sing(X)$ is a Kan complex for all $X \in \Top$---this was the
-  start of the slogan ``Kan complexes are like spaces''.
-\end{enumerate}
-But this isn't the first place one sees $\Sing$, probably. Indeed, the
-singular homology functors are essentially defined by a composition
-\[
-\begin{tikzcd}[column sep = large]
-  \H_n(-;\Z) \coloneqq \Top \rar{\Sing} & \s\Set \rar{\Z} & \s\Ab
-  \rar{\sum (-1)^i d_i} & \Ch_{\ge 0} \rar{\H_n} & \Ab.
-\end{tikzcd}
-\]
-Here $\Z$ denotes the functor which takes free abelian groups
-level-wise, from which we get the \textit{singular chain complex} by
-letting the boundary map be given by $\del \coloneqq \sum (-1)^i d_i$.
+\begin{nothing}
+  Recall we have a functor $\Sing : \Top \to \s\Set$, sending $X
+  \mapsto \hom_\Top(|\Delta^\bullet|, X)$. Lately we've been talking
+  about $\Sing$ for two reasons:
+  \begin{enumerate}
+  \item It's a right adjoint to geometric realisation $|{-}| : \s\Set
+    \to \Top$.
+  \item $\Sing(X)$ is a Kan complex for all $X \in \Top$---this was
+    the start of the slogan ``Kan complexes are like spaces''.
+  \end{enumerate}
+  But this isn't the first place one sees $\Sing$, probably. Indeed,
+  the singular homology functors are essentially defined by a
+  composition
+  \[
+  \begin{tikzcd}[column sep = large]
+    \H_n(-;\Z) \coloneqq \Top \rar{\Sing} & \s\Set \rar{\Z} & \s\Ab
+    \rar{\sum (-1)^i d_i} & \Ch_{\ge 0} \rar{\H_n} & \Ab.
+  \end{tikzcd}
+  \]
+  Here $\Z$ denotes the functor which takes free abelian groups
+  level-wise, from which we get the \textit{singular chain complex} by
+  letting the boundary map be given by $\del \coloneqq \sum (-1)^i
+  d_i$.
+\end{nothing}
 
-\medskip
 This was just to remind us that we've seen a natural functor $\s\Ab
 \to \Ch$ relating simplicial abelian groups and chain complexes. We'll
 look at it a bit more carefully in a second, and develop this
@@ -294,7 +297,6 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   $\Simplex$ is $\id_{[0]}$, and the inclusion $N_0(A) \inj A_0$ is an
   isomorphism, the base case $n=0$ is tautological.
 
-  \medskip
   First, surjectivity. Recall from (\ref{splitting}) that we have a
   splitting $A_n \simeq N_n(A) \oplus D_n(A)$. From the factor
   $\id_{[n]} : [n] \surj [n]$ of $\Gamma_n(N(A))$ we $\im(\Phi_n(A))
@@ -302,7 +304,6 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   must have $\im(\Phi_n(A)) \supseteq D_n(A)$ by definition. Hence
   $\Phi_n(A)$ is surjective.
 
-  \medskip
   Next, injectivity.\footnote{We won't be totally categorical and will
     use elements here to clarify the argument, but it's easy to see
     that one can get rid of them.} Assume we have $(x_\sigma) \in
@@ -331,7 +332,6 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
   \]
   contradiction.
 
-  \medskip
   So we must have $x_\sigma = 0$ for all $\sigma \ne \id_{[n]}$. But
   the restriction of $\Phi_n(A)$ to the factor indexed by $\id_{[n]}$
   is just the inclusion $N_n(A) \inj A_n$. So then $x_{\id_{[n]}} = 0$
@@ -385,24 +385,28 @@ quasi-inverse to $N : \s\A \to \Ch_{\ge 0}(\A)$.
 
 \section{Applying the correspondence}
 
-For the remainder we will fix some commutative ring $R$ and actually
-set $\A \coloneqq R\text{-}\Mod$.
+\begin{notation}
+  For the remainder we will fix some commutative ring $R$ and actually
+  set $\A \coloneqq R\text{-}\Mod$.
+\end{notation}
 
-\medskip
-Recall that if $X \in \s\Set$ is \textit{fibrant} (i.e., a \textit{Kan
-  complex}) with basepoint $v \in X_0$ then we can define its homotopy
-groups for $n \ge 0$,
-\[
-\pi_n(X,v) \coloneqq [(\Delta^n, \del\Delta^n), (X,v)],
-\]
-that is, homotopy classes $[\alpha]$ of maps $\alpha : \Delta^n \to X$
-which fit in the commutative diagram
-\[
-\begin{tikzcd}
-  \Delta^n \rar{\alpha} & X \\ \del\Delta^n \ar[hookrightarrow]{u} \rar
-    & \Delta^0 \uar{v}.
-\end{tikzcd}
-\]
+\begin{nothing}
+  Recall that if $X \in \s\Set$ is \textit{fibrant} (i.e., a
+  \textit{Kan complex}) with basepoint $v \in X_0$ then we can define
+  its homotopy groups for $n \ge 0$,
+  \[
+  \pi_n(X,v) \coloneqq [(\Delta^n, \del\Delta^n), (X,v)],
+  \]
+  that is, homotopy classes $[\alpha]$ of maps $\alpha : \Delta^n \to
+  X$ which fit in the commutative diagram
+  \[
+  \begin{tikzcd}
+    \Delta^n \rar{\alpha} & X \\ \del\Delta^n \ar[hookrightarrow]{u}
+    \rar & \Delta^0 \uar{v}.
+  \end{tikzcd}
+  \]
+\end{nothing}
+
 We now state a couple of facts about the homotopy groups.
 
 \begin{lemma}

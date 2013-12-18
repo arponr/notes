@@ -11,7 +11,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \section{Preliminaries}
 
 Let's first remember what convergent and Cauchy sequences and
@@ -36,12 +35,14 @@ completeness are in metric spaces.
   < \epsilon$ for all $j,k \ge n$.
 \end{definition}
 
-You might have seen Cauchy sequences defined in the past for the case
-$X = \R$. And you might have learned that a sequence being Cauchy is
-\textit{equivalent} to the sequence being convergent. But this
-equivalence is something special to $\R$---it says that $\R$ is a
-complete metric space, which we will define in a second. But first
-check that we always have one implication.
+\begin{nothing}
+  You might have seen Cauchy sequences defined in the past for the
+  case $X = \R$. And you might have learned that a sequence being
+  Cauchy is \textit{equivalent} to the sequence being convergent. But
+  this equivalence is something special to $\R$---it says that $\R$ is
+  a complete metric space, which we will define in a second. But first
+  check that we always have one implication.
+\end{nothing}
 
 \begin{exercise}
   \label{convergentcauchy}
@@ -73,7 +74,7 @@ check that we always have one implication.
   equipped with the $\sup$ metric.
 \end{examples}
 
-\begin{remark}
+\begin{nothing}
   Perhaps you've noticed something a little subtle about the
   difference between convergent and Cauchy sequences. Namely, the
   notion of convergence depends on the space $X$ in a way that notion
@@ -83,13 +84,12 @@ check that we always have one implication.
   passing to a larger ambient space doesn't change anything about what
   it means to be a Cauchy sequence.
 
-  \medskip
   This is essentially because our definition of convergence requires
   us to actually produce a limit $x \in X$ (so of course it depends on
   $X$ in the way described above), whereas our definition of Cauchy is
   completely intrinsic, in that it only refers to the elements of our
   given sequence.
-\end{remark}
+\end{nothing}
 
 Finally let's recall a couple of properties that maps between metric
 spaces can have.
@@ -155,150 +155,139 @@ fundamental things about metric spaces.) Here we go.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Construction}
+\begin{nothing}[Construction]
+  First define $C \coloneqq \{(x_k) \in X^\N \mid (x_k)\text{ is
+    Cauchy}\}$ the set of all Cauchy sequences in $X$. We then define
+  an equivalence relation on $C$ by saying
+  \[
+  (x_k) \sim (y_k) \iff \lim_{k \to \infty} d_X(x_k,y_k) = 0.
+  \]
+  Reflexifity and symmetry of this relation are obvious. For
+  transitivity we just use nonnegativity of the metric and the
+  triangle inequality: if $(x_k) \sim (y_k)$ and $(y_k) \sim (z_k)$
+  then
+  \begin{align*}
+    0 \le \lim_{k \to \infty} d_X(x_k,z_k) &\le \lim_{k \to \infty}
+    d_X(x_k,y_k) + d_X(y_k,z_k) \\ &\le \lim_{k \to \infty} d_X(x_k,y_k) +
+    \lim_{k \to \infty} d_X(y_k,z_k) = 0,
+  \end{align*}
+  which implies $(x_k) \sim (z_k)$.
 
-First define $C \coloneqq \{(x_k) \in X^\N \mid (x_k)\text{ is
-  Cauchy}\}$ the set of all Cauchy sequences in $X$. We then define an
-equivalence relation on $C$ by saying
-\[
-(x_k) \sim (y_k) \iff \lim_{k \to \infty} d_X(x_k,y_k) = 0.
-\]
-Reflexifity and symmetry of this relation are obvious. For
-transitivity we just use nonnegativity of the metric and the triangle
-inequality: if $(x_k) \sim (y_k)$ and $(y_k) \sim (z_k)$ then
-\begin{align*}
-0 \le \lim_{k \to \infty} d_X(x_k,z_k) &\le \lim_{k \to \infty}
-d_X(x_k,y_k) + d_X(y_k,z_k) \\ &\le \lim_{k \to \infty} d_X(x_k,y_k) +
-\lim_{k \to \infty} d_X(y_k,z_k) = 0,
-\end{align*}
-which implies $(x_k) \sim (z_k)$.
+  We then define $X_c \coloneqq C/{\sim}$ to be the set of equivalence
+  classes of $C$ under this relation, and define a metric $d_{X_c}$ on
+  $X_c$ as follows. For $\sigma, \tau \in X_c$, with equivalence class
+  representatives $(x_k), (y_k) \in C$, respectively, we set
+  \[
+  d_{X_c}(\sigma, \tau) \coloneqq \lim_{k \to \infty} d_X(x_k, y_k).
+  \]
+  Before we define $\phi$ or prove properties (1) and (2) from the
+  proposition, we should $d_{X_c}$ is well-defined and satifies the
+  axioms of a metric.
+\end{nothing}
 
-\medskip
-We then define $X_c \coloneqq C/{\sim}$ to be the set of equivalence
-classes of $C$ under this relation, and define a metric $d_{X_c}$ on
-$X_c$ as follows. For $\sigma, \tau \in X_c$, with equivalence class
-representatives $(x_k), (y_k) \in C$, respectively, we set
-\[
-d_{X_c}(\sigma, \tau) \coloneqq \lim_{k \to \infty} d_X(x_k, y_k).
-\]
-Before we define $\phi$ or prove properties (1) and (2) from the
-proposition, we should $d_{X_c}$ is well-defined and satifies the
-axioms of a metric.
+\begin{nothing}[The metric is well-defined]
+  Let $\sigma, \tau \in X_c$ with representatives $(x_n),(y_n) \in C$,
+  repspectively. Since $(x_n),(y_n)$ are Cauchy, there exists $n \in
+  \N$ such that
+  \[
+  d_X(x_j,x_k) < \epsilon \quad\text{and}\quad d_E(y_j,y_k) < \epsilon
+  \quad\text{if } j,k \ge n.
+  \]
+  By the triangle inequality we have
+  \begin{align*}
+  &d_X(x_j,y_j) \le d_X(x_j,x_k) + d_X(x_k,y_k) + d_X(y_j,y_k)
+    \\ \implies &d_X(x_j,y_j) - d_X(x_k,y_k) < 2\epsilon,
+  \end{align*}
+  and similarly $d_X(x_k,y_k) - d_X(x_j,y_j) < 2\epsilon$, for $j,k
+  \ge n$.  It follows that the sequence $(d_E(x_n,y_n))$ in $\R$ is
+  Cauchy. Since $\R$ is complete,
+  \[
+  d_{X_c}(\sigma, \tau) = \lim_{n \to \infty} d_E(x_n,y_n)
+  \]
+  exists.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Now suppose $(x_k) \sim (x'_k)$ and $(y_k) \sim (y'_k)$. Then by the
+  triangle inequality
+  \begin{align*}
+    \lim_{k \to \infty} d_X(x'_k, y'_k) &\le \lim_{k \to \infty}
+    d_X(x'_k, x_k) + \lim_{k \to \infty} d_X(x_k, y_k) + \lim_{k \to
+      \infty} d_X(y_k, y'_k) \\ &= \lim_{k \to \infty} d_X(x_k, y_k).
+  \end{align*}
+  By symmetry the reverse inequality holds as well, so $d_{X_c}$ is
+  well-defined.
+\end{nothing}
 
-\subsection{The metric is well-defined}
+\begin{nothing}[The metric is a metric]
+  Next we show $d_{X_c}$ is in fact a metric on $X_c$. Let
+  $\sigma,\tau \in X_c$ with representatives $(x_n),(y_n) \in C$,
+  repspectively. Nonnegativity symmetry, and the triangle inequality
+  for $d_{X_c}$ follow immediately from these holding for $d_X$. And
+  that $d_{X_c}(\sigma, \tau) = 0$ if and only if $\sigma = \tau$
+  follows by definition of $d_{X_c}$ and the relation $\sim$.
+\end{nothing}
 
-Let $\sigma, \tau \in X_c$ with representatives $(x_n),(y_n) \in C$,
-repspectively. Since $(x_n),(y_n)$ are Cauchy, there exists $n \in \N$
-such that
-\[
-d_X(x_j,x_k) < \epsilon \quad\text{and}\quad d_E(y_j,y_k) < \epsilon
-\quad\text{if } j,k \ge n.
-\]
-By the triangle inequality we have
-\[
-  d_X(x_j,y_j) \le d_X(x_j,x_k) + d_X(x_k,y_k) + d_X(y_j,y_k) \implies
-  d_X(x_j,y_j) - d_X(x_k,y_k) < 2\epsilon,
-\]
-and similarly $d_X(x_k,y_k) - d_X(x_j,y_j) < 2\epsilon$, for $j,k \ge
-n$.  It follows that the sequence $(d_E(x_n,y_n))$ in $\R$ is
-Cauchy. Since $\R$ is complete, $d_{X_c}(\sigma, \tau) = \lim_{n \to
-  \infty} d_E(x_n,y_n)$ exists.
+\begin{nothing}[The isometric embedding]
+  Define $\phi : X \to X_c$ by letting $\phi(x)$ be the equivalence
+  class of the constant sequence given by $x_k \coloneqq x$ for $k \in
+  \N$. Then for $x,y \in X$ we have
+  \[
+  d_X(\phi(x),\phi(y)) = \lim_{k \to \infty} d_X(x,y) = d_X(x,y),
+  \]
+  so $\phi$ is an isometry.
 
-Now suppose $(x_k) \sim (x'_k)$ and $(y_k) \sim (y'_k)$. Then by the
-triangle inequality
-\begin{align*}
-\lim_{k \to \infty} d_X(x'_k, y'_k) &\le \lim_{k \to \infty} d_X(x'_k,
-x_k) + \lim_{k \to \infty} d_X(x_k, y_k) + \lim_{k \to \infty}
-d_X(y_k, y'_k) \\ &= \lim_{k \to \infty} d_X(x_k, y_k).
-\end{align*}
-By symmetry the reverse inequality holds as well, so $d_{X_c}$ is
-well-defined.
+  Next we show that $\phi(X)$ is dense in $X_c$. Let $\sigma \in X_c$
+  with representative $(x_n) \in C$. Let $\epsilon > 0$. Since $(x_n)$
+  is Cauchy there exists $n \in \N$ such that $d_X(x_k,x_n) <
+  \epsilon$ for all $k \ge N$. It follows that
+  \[
+  d_{X_c}(\sigma, \phi(x_n)) = \lim_{k \to \infty} d_E(x_k, x_n) <
+  \epsilon.
+  \]
+  I.e., $B_{d_{X_c}}(\sigma, \epsilon)$ intersects $\phi(X)$ for any
+  $\sigma \in X_c$ and $\epsilon > 0$. So indeed $\phi(X)$ is dense in
+  $X_c$.
+\end{nothing}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{nothing}[The completion is complete]
+  Finally we show that $X_c$ is complete. Let $(\sigma_k) \in
+  X_c^{\N}$ a Cauchy sequence in $X_c$. Then for each $r \in \N$ there
+  exists $n_r \in \N$ such that $d_{X_c} (\sigma_k, \sigma_{n_r}) <
+  1/r$ for $k \ge n_r$. Since $\phi(X)$ is dense in $X_c$, there
+  exists $x_r \in E$ such that $d_{X_c}(\sigma_{n_r}, \phi(x_r)) <
+  1/r$ for each $r \in \N$.\footnote{Observe (for intuition) that we
+    start with a sequence of sequences, which can visualise as a grid,
+    and are producing a new sequence by taking some type of rapidly
+    converging diagonal from this grid.} We claim $(x_r) \in X^\N$ is
+  Cauchy. Let $\epsilon > 0$, and choose $n \in \N$ such that $3/n <
+  \epsilon$. Then for $k \ge j \ge n$ we have by the triangle
+  ineqality and the fact that $\phi$ is an isometry that
+  \begin{align*}
+    d_X(x_j,x_k) &= d_{X_c}(\phi(x_j),\phi(x_k)) \\ &\le
+    d_{X_c}(\phi(x_j), \sigma_{n_j}) + d_{X_c}(\sigma_{n_j},
+    \sigma_{n_k}) + d_{X_c}(\sigma_{n_k}, \phi(x_k)) \\ &\le 1/j + 1/j
+    + 1/k \le 3/n < \epsilon,
+  \end{align*}
+  so indeed $(x_r)$ is Cauchy.
 
-\subsection{The metric is a metric}
-
-Next we show $d_{X_c}$ is in fact a metric on $X_c$. Let $\sigma,\tau
-\in X_c$ with representatives $(x_n),(y_n) \in C$,
-repspectively. Nonnegativity symmetry, and the triangle inequality for
-$d_{X_c}$ follow immediately from these holding for $d_X$. And that
-$d_{X_c}(\sigma, \tau) = 0$ if and only if $\sigma = \tau$ follows by
-definition of $d_{X_c}$ and the relation $\sim$.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{The isometric embedding}
-
-Define $\phi : X \to X_c$ by letting $\phi(x)$ be the equivalence
-class of the constant sequence given by $x_k \coloneqq x$ for $k \in
-\N$. Then for $x,y \in X$ we have
-\[
-d_X(\phi(x),\phi(y)) = \lim_{k \to \infty} d_X(x,y) = d_X(x,y),
-\]
-so $\phi$ is an isometry.
-
-\medskip
-Next we show that $\phi(X)$ is dense in $X_c$. Let $\sigma \in X_c$
-with representative $(x_n) \in C$. Let $\epsilon > 0$. Since $(x_n)$
-is Cauchy there exists $n \in \N$ such that $d_X(x_k,x_n) < \epsilon$
-for all $k \ge N$. It follows that
-\[
-d_{X_c}(\sigma, \phi(x_n)) = \lim_{k \to \infty} d_E(x_k, x_n) <
-\epsilon.
-\]
-I.e., $B_{d_{X_c}}(\sigma, \epsilon)$ intersects $\phi(X)$ for any
-$\sigma \in X_c$ and $\epsilon > 0$. So indeed $\phi(X)$ is dense in
-$X_c$.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{The completion is complete}
-
-Finally we show that $X_c$ is complete. Let $(\sigma_k) \in X_c^{\N}$
-a Cauchy sequence in $X_c$. Then for each $r \in \N$ there exists $n_r
-\in \N$ such that $d_{X_c} (\sigma_k, \sigma_{n_r}) < 1/r$ for $k \ge
-n_r$. Since $\phi(X)$ is dense in $X_c$, there exists $x_r \in E$ such
-that $d_{X_c}(\sigma_{n_r}, \phi(x_r)) < 1/r$ for each $r \in
-\N$.\footnote{Observe (for intuition) that we start with a sequence of
-  sequences, which can visualise as a grid, and are producing a new
-  sequence by taking some type of rapidly converging diagonal from
-  this grid.} We claim $(x_r) \in X^\N$ is Cauchy. Let $\epsilon > 0$,
-and choose $n \in \N$ such that $3/n < \epsilon$. Then for $k \ge j
-\ge n$ we have by the triangle ineqality and the fact that $\phi$ is
-an isometry that
-\begin{align*}
-  d_X(x_j,x_k) &= d_{X_c}(\phi(x_j),\phi(x_k)) \\ &\le
-  d_{X_c}(\phi(x_j), \sigma_{n_j}) + d_{X_c}(\sigma_{n_j},
-  \sigma_{n_k}) + d_{X_c}(\sigma_{n_k}, \phi(x_k)) \\ &\le 1/j + 1/j +
-  1/k \le 3/n < \epsilon,
-\end{align*}
-so indeed $(x_r)$ is Cauchy.
-
-\medskip
-Then let $\sigma \in X_c$ be the equivalence class of $(x_r)$. We will
-show $\lim_{k \to \infty} \sigma_k = \sigma$, and since $(\sigma_k)$
-was arbitrary this will show that $X_c$ is indeed complete. So let
-$\epsilon > 0$. Choose $r \in \N$ such that $4/r < \epsilon$. We have
-by the triangle inequality that
-\[
-d_{X_c}(\sigma_{n_r}, \sigma) \le d_{X_c}(\sigma_{n_r}, \phi(x_r)) +
-d_{X_c}(\phi(x_r), \sigma).
-\]
-We know $d_{X_c}(\sigma_{n_r}, \phi(x_r)) < 1/r$, and we showed above
-that $d_X(x_k,x_r) < 3/r$ for $k \ge r$, which implies
-\[
-d_{X_c}(\phi(x_r), \sigma) = \lim_{k \to \infty} d_X(x_r,x_k) < 3/r.
-\]
-It follows that $d_{X_c}(\sigma_{n_r}, \sigma) < 4/r < \epsilon$. Then
-since $(\sigma_{n_r})$ is Cauchy, it is easy to see we must then have
-$\lim_{k \to \infty} \sigma_k = \sigma$. So we have proven
-(\ref{completion}.1, \ref{completion}.2).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{The universal property}
+  Then let $\sigma \in X_c$ be the equivalence class of $(x_r)$. We
+  will show $\lim_{k \to \infty} \sigma_k = \sigma$, and since
+  $(\sigma_k)$ was arbitrary this will show that $X_c$ is indeed
+  complete. So let $\epsilon > 0$. Choose $r \in \N$ such that $4/r <
+  \epsilon$. We have by the triangle inequality that
+  \[
+  d_{X_c}(\sigma_{n_r}, \sigma) \le d_{X_c}(\sigma_{n_r}, \phi(x_r)) +
+  d_{X_c}(\phi(x_r), \sigma).
+  \]
+  We know $d_{X_c}(\sigma_{n_r}, \phi(x_r)) < 1/r$, and we showed
+  above that $d_X(x_k,x_r) < 3/r$ for $k \ge r$, which implies
+  \[
+  d_{X_c}(\phi(x_r), \sigma) = \lim_{k \to \infty} d_X(x_r,x_k) < 3/r.
+  \]
+  It follows that $d_{X_c}(\sigma_{n_r}, \sigma) < 4/r <
+  \epsilon$. Then since $(\sigma_{n_r})$ is Cauchy, it is easy to see
+  we must then have $\lim_{k \to \infty} \sigma_k = \sigma$. So we
+  have proven (\ref{completion}.1, \ref{completion}.2).
+\end{nothing}
 
 We now prove (\ref{completion}.3, \ref{completion}.4). These will
 follow from the following more general facts.\footnote{The
@@ -333,7 +322,6 @@ follow from the following more general facts.\footnote{The
   \]
   contradicting the disjointness of $V_1$ and $V_2$.
 
-  \medskip
   (2) Uniqueness is immediate from (1), so it suffices to show
   existence. Define $g : A \to B$ as follows. Let $a \in A$. By
   density of $A_0$ there is a sequence $(a_k) \in A_0^\N$ such that
@@ -359,7 +347,6 @@ follow from the following more general facts.\footnote{The
   from which we see $g(a) = \lim_{k \to \infty} f(a_0) = f(a_0)$, so
   $g$ in fact extends $f$.
 
-  \medskip
   We now show $g$ is uniformly continuous. Let $\epsilon > 0$. Since
   $f$ is uniformly continuous there exists $\delta > 0$ such that
   $d_B(f(a),f(a')) < \epsilon/2$ whenever $a_0,a_0' \in A_0$ are such
@@ -368,9 +355,9 @@ follow from the following more general facts.\footnote{The
   converging to $a$ and $a'$, respectively. Let $n \in \N$ such that,
   by the triangle inequality,
   \begin{align*}
-  d_X(a_k,a) < \delta/3\ \ \text{and}\ \ d_X(a_k',a') < \delta/3
-  &\implies d_X(a_k,a_k') < \delta \\ &\implies d_Y(f(a_k),f(a_k')) <
-  \epsilon/2
+    d_X(a_k,a) < \delta/3\ \ \text{and}\ \ d_X(a_k',a') < \delta/3
+    &\implies d_X(a_k,a_k') < \delta \\ &\implies d_Y(f(a_k),f(a_k'))
+    < \epsilon/2
   \end{align*}
   for all $k \ge n$. Then by continuity\footnote{One could also argue
     more directly, but see, e.g., my solutions to problem set 4 for a
@@ -386,43 +373,43 @@ follow from the following more general facts.\footnote{The
   is an isometry.
 \end{proof}
 
-We now apply the lemma to finish the proof of the proposition. Suppose
-$Y$ is a complete metric space and $\psi : X \to Y$ uniformly
-continuous. Since $\phi : X \to X_c$ is an isometry with dense image,
-the lemma gives that there is a unique uniformly continuous map
-$\psi_c : X_c \to Y$ such that $\psi_c \circ \phi = \phi$, proving
-(\ref{completion}.3).
+\begin{nothing}[The universal property]
+  We now apply the lemma to finish the proof of the proposition. Suppose
+  $Y$ is a complete metric space and $\psi : X \to Y$ uniformly
+  continuous. Since $\phi : X \to X_c$ is an isometry with dense image,
+  the lemma gives that there is a unique uniformly continuous map
+  $\psi_c : X_c \to Y$ such that $\psi_c \circ \phi = \phi$, proving
+  (\ref{completion}.3).
 
-\medskip
-Finally, (\ref{completion}.4) is proven by the general argument giving
-uniqueness of objects satisfying a universal property like
-(\ref{completion}.3). Suppose $Y_c$ is a complete metric space and
-$\psi : X \to Y_c$ an isometry with dense image. Then by
-(\ref{completion}.3) there is a unique uniformly continuous map
-$\psi_c : X_c \to Y_c$ such that $\psi_c \circ \phi = \psi$, and the
-lemma tells us that $\psi_c$ is in fact an isometry. But our proof of
-(\ref{completion}.3) applies to $Y_c$ equipped with $\psi$ as well, so
-we symmetrically have a unique isometry $\phi_c : Y_c \to X_c$ such
-that $\phi_c \circ \psi = \phi$. I.e., we have the diagram
-\[
-\begin{tikzcd}[column sep = large, row sep = large]
-  X \rar{\phi} \dar{\psi} & X_c \ar[shift left = .7ex]{dl}{\psi_c}
-  \\ Y_c \ar[shift left = .7ex]{ur}{\phi_c}.
-\end{tikzcd}
-\]
-Observe then that
-\[
-\phi_c \circ \psi_c \circ \phi = \phi = \id_{X_c} \circ\, \phi
-\quad\text{and}\quad \psi_c \circ \phi_c \circ \psi = \psi = \id_{Y_c}
-\circ\, \psi.
-\]
-Then the \textit{uniqueness} statement in (\ref{completion}.3) implies
-that we must have $\phi_c \circ \psi_c = \id_{X_c}$ and $\psi_c \circ
-\phi_c = \id_{Y_c}$.\footnote{This argument takes a couple of reads to
-  absorb and understand, I think (it certainly did for me!). But it's
-  extremely general and very useful so try to do so!} I.e.,
-$\phi_c,\psi_c$ are inverse isomorphisms of metric spaces. And thus we
-are done!
-
+  Finally, (\ref{completion}.4) is proven by the general argument giving
+  uniqueness of objects satisfying a universal property like
+  (\ref{completion}.3). Suppose $Y_c$ is a complete metric space and
+  $\psi : X \to Y_c$ an isometry with dense image. Then by
+  (\ref{completion}.3) there is a unique uniformly continuous map
+  $\psi_c : X_c \to Y_c$ such that $\psi_c \circ \phi = \psi$, and the
+  lemma tells us that $\psi_c$ is in fact an isometry. But our proof of
+  (\ref{completion}.3) applies to $Y_c$ equipped with $\psi$ as well, so
+  we symmetrically have a unique isometry $\phi_c : Y_c \to X_c$ such
+  that $\phi_c \circ \psi = \phi$. I.e., we have the diagram
+  \[
+  \begin{tikzcd}[column sep = large, row sep = large]
+    X \rar{\phi} \dar{\psi} & X_c \ar[shift left = .7ex]{dl}{\psi_c}
+    \\ Y_c \ar[shift left = .7ex]{ur}{\phi_c}.
+  \end{tikzcd}
+  \]
+  Observe then that
+  \[
+  \phi_c \circ \psi_c \circ \phi = \phi = \id_{X_c} \circ\, \phi
+  \quad\text{and}\quad \psi_c \circ \phi_c \circ \psi = \psi = \id_{Y_c}
+  \circ\, \psi.
+  \]
+  Then the \textit{uniqueness} statement in (\ref{completion}.3) implies
+  that we must have $\phi_c \circ \psi_c = \id_{X_c}$ and $\psi_c \circ
+  \phi_c = \id_{Y_c}$.\footnote{This argument takes a couple of reads to
+    absorb and understand, I think (it certainly did for me!). But it's
+    extremely general and very useful so try to do so!} I.e.,
+  $\phi_c,\psi_c$ are inverse isomorphisms of metric spaces. And thus we
+  are done!
+\end{nothing}
 
 \end{document}
