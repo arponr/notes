@@ -1,4 +1,4 @@
-\input{../../preamble}
+\input{../preamble}
 \input{preamble}
 
 \title{Covering spaces}
@@ -13,19 +13,18 @@
 
 \section{Setting up}
 
-\begin{notation}
+\begin{nothing}
   For the remainder we fix a nice pointed space $(X,x)$. Sometimes we
   won't use the basepoint, and sometimes we will. Here \emph{nice}
   means that $X$ is connected, locally path connected, and semilocally
   simply connected.
-\end{notation}
+\end{nothing}
 
 \begin{definition}
   \label{covering}
-  A map $p : E \to X$ of spaces (or $p : (E,e) \to (X,x)$ of pointed
-  spaces) is a \emph{covering} if each $x \in X$ has an open
-  neighbourhood $U$ such that $p^{-1}(U) = \coprod_{j \in J} V_j$,
-  where $J \ne \emptyset$ and for each $j \in J$:
+  A map $p : E \to X$ of spaces is a \emph{covering} if each $x \in X$
+  has an open neighbourhood $U$ such that $p^{-1}(U) = \coprod_{j \in
+    J} V_j$, where $J \ne \emptyset$ and for each $j \in J$:
   \begin{enumerate}
   \item $V_j \subseteq E$ is open,
   \item the restriction $p : V_j \to U$ is a homeomorphism.
@@ -56,15 +55,19 @@
     \end{tikzcd}
     \]
   \end{enumerate}
-  Note, if we have pointed coverings $p : (E,e) \to (X,x)$ and $p' :
-  (E',e') \to (X,x)$, we will call $f : (E,e) \to (E',e')$ a morphism
-  of coverings simply if the underlying $f : E \to E'$ is a morphism
-  of coverings as defined above.
 \end{definition}
 
+\begin{nothing}
+  As one might expect, we call a based map $p : (E,e) \to (X,x)$ a
+  covering if the underlying unbased map $p : E \to X$ is a
+  covering. Similarly if $p : (E,e) \to (X,x)$ and $p' : (E',e') \to
+  (X,x)$ are coverings, we will call $f : (E,e) \to (E',e')$ a
+  morphism of coverings simply if the underlying $f : E \to E'$ is a
+  morphism of coverings as defined above.
+\end{nothing}
+
 \begin{notation}
-  We fix the following for the remainder.
-  \begin{enumerate}
+  \begin{enumerate}[leftmargin=*]
   \item Denote the interval $[0,1]$ by $I$.
   \item Denote by $\pi_1(Y,y)$ the fundamental group of a pointed
     space $(Y,y)$.
@@ -84,19 +87,20 @@
 
 \begin{proposition}
   \label{general-lifting}
-  Let $p : (E,e) \to (X,x)$ a covering. Let $f : (Y,y) \to (X,x)$ a
-  map of pointed spaces.
+  Let $p : (E,e) \to (X,x)$ be a covering. Let $f : (Y,y) \to (X,x)$
+  be a map of pointed spaces.
   \begin{enumerate}
-  \item There is a lift $f; : (Y,y) \to (E,e)$,
-    making the diagram
+  \item There is a lift $\tilde f : (Y,y) \to (E,e)$ making the
+    diagram
     \[
     \begin{tikzcd}
-      \ & (E,e) \dar{p} \\ (Y,y) \rar{f} \ar[dashed]{ur}{f'} & (X,x)
+      \ & (E,e) \dar{p} \\ (Y,y) \rar{f} \ar[dashed]{ur}{\tilde f} &
+      (X,x)
     \end{tikzcd}
     \]
-    commute, if and only if $f_*\pi_1(Y,y) \subseteq p_*\pi_1(E,e)$.
-  \item If $Y$ is connected and the lift $f'$ does exist, then it is
-    unique.
+    commute if and only if $\im(f_*) \subseteq \im(p_*)$.
+  \item If $Y$ is connected and the lift $\tilde f$ does exist, then
+    it is unique.
   \end{enumerate}
 \end{proposition}
 
@@ -108,13 +112,14 @@ One of the mottos in this theory, which will surely become clear, is
 that everything is determined by the fibres.
 
 \begin{definition}
-  Let $p : E \to X$ a covering. We denote the \emph{fibre} $p^{-1}(x)$
-  by $F_x(E)$.
+  If $p : E \to X$ is a covering, we denote, somewhat abusively, the
+  \emph{fibre} $p^{-1}(x)$ by $F_x(E)$.
 \end{definition}
 
 \begin{lemma}
-  Let $p : E \to X$ a covering. There is a canonical $G$-action on
-  $F_x(E)$.
+  \label{pi1-action}
+  If $p : E \to X$ is a covering, there is a canonical $G$-action on
+  the fibre $F_x(E)$.
 \end{lemma}
 
 \begin{proof}
@@ -134,26 +139,32 @@ that everything is determined by the fibres.
   at $x$, which clearly lifts to $\tilde\gamma$ the constant loop at
   $e$. Thus $\id_G \cdot e = \tilde\gamma(1) = e$.
 
-  \medskip
-  Finally let $h = [\delta] \in G$. Then $\delta$ lifts uniquely to
-  $\tilde\delta : I \to E$ with $\tilde\delta(0) = g \cdot e$. By
-  definition, $h \cdot (g \cdot e) = \tilde\delta(1)$. But note that
-  the composition of $\tilde\delta \cdot \tilde\gamma$ is a lift of
+  Finally let $h = [\delta] \in G$. Then $\delta$ lifts to a unique
+  $\tilde\delta : I \to E$ satisfying $\tilde\delta(0) = g \cdot
+  e$. By definition, $h \cdot (g \cdot e) = \tilde\delta(1)$. But note
+  that the composition $\tilde\delta \cdot \tilde\gamma$ is a lift of
   the composition $\delta \cdot \gamma$. Since $hg = [\delta \cdot
     \gamma]$, it follows that also $hg \cdot e =
   \tilde\delta(1)$. Thus we indeed have a $G$-action.
 \end{proof}
 
-Now let $p : E' \to X$ another covering, and $f : E \to E'$ a
-morphism of coverings. By definition, $f$ restricts to a set map
-$F_x(f) : F_x(E) \to F_x(E')$. Let $e,g,\gamma,\gamma'$ as
-above. Then $f\gamma' : I \to E'$ is a lift of $\gamma$ at
-$f(e)$. So by uniqueness of lifting we must have $gf(e) =
-f(ge)$. I.e., $F_x(f)$ is a morphism of $G$-sets.
+\begin{nothing}
+  \label{fibre-map}
+  Let $p : E \to X$ and $p' : E' \to X$ be coverings, and $f : E \to
+  E'$ a morphism of coverings. By definition, $f$ restricts to a map
+  of sets $F_x(f) : F_x(E) \to F_x(E')$. Let $e,g,\gamma,\gamma'$ as
+  above. Then $f\gamma' : I \to E'$ is a lift of $\gamma$ at
+  $f(e)$. So by uniqueness of lifting we must have $gf(e) =
+  f(ge)$. I.e., $F_x(f)$ is a morphism of $G$-sets.
+\end{nothing}
 
-\medskip
-This gives us the \emph{fibre functor} $F_x : \Cov(X) \to
-G\text{-}\Set$.
+\begin{definition}
+  (\ref{pi1-action}) and (\ref{fibre-map}) define for us the
+  \emph{fibre functor}
+  \[
+  F_x : \Cov(X) \to G\text{-}\Set.
+  \]
+\end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

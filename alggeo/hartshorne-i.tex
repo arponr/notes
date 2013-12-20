@@ -1,0 +1,74 @@
+\input{../preamble}
+%\input{preamble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Solutions to Hartshorne:\\Chapter I, Varieties}
+\author{Arpon Raksit}
+\date{December 19, 2013 (original); \today\ (last edit)}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Affine varieties}
+
+%% 1.1
+\begin{nothing}
+  (a) We have $A(Y) \simeq k[x,y]/(y-x^2)$. The maps $k[x,y]/(y-x^2)
+  \to k[t]$ sending $(x,y) \mapsto (t,t^2)$ and $k[t] \to
+  k[x,y]/(y-x^2)$ sending $t \mapsto x$ are inverse isomorphisms.
+
+  \medskip\noindent
+  (b) We have $A(Y) \simeq k[x,y]/(xy-1)$. Any map of $k$-algebras
+  $k[x,y]/(xy-1) \to k[t]$ must send $x$ to a unit, hence to an
+  element of $k$, so cannot be injective.
+
+  \medskip\noindent
+  (c) Skipped.
+\end{nothing}
+
+%% 1.2
+\begin{nothing}
+  Let $I \coloneqq (z-x^3,y-x^2) \subseteq k[x,y,z]$. Then clearly
+  $V(I) = Y$. Similar to 1.1a, we have an isomorphism $k[x,y,z]/I \to
+  k[t]$ sending $(x,y,z) \mapsto (t,t^2,t^3)$. Since $k[t]$ is a
+  domain of Krull dimension 1, this implies that $Y$ is an affine
+  variety of dimension 1, with $A(Y) \simeq k[t]$.
+\end{nothing}
+
+%% 1.3
+\begin{nothing}
+  Factoring $xz-x = x(z-1)$, we have $(x,y,z) \in V(x^2-yz,xz-x)$ if
+  and only if one of the following holds:
+  \begin{enumerate}
+  \item $x = 0$ and $yz = 0$, i.e., $y = 0$ or $z = 0$;
+  \item $z = 1$ and $y = x^2$.
+  \end{enumerate}
+  Thus if we define $Y_1 \coloneqq V(x,y)$, $Y_2 \coloneqq V(x,z)$,
+  and $Y_3 \coloneqq V(z-1,y-x^2)$ we have $Y = Y_1 \cup Y_2 \cup
+  Y_3$. Now observe
+  \begin{align*}
+  A(Y_1) &\simeq k[x,y,z]/(x,y) \simeq k[t], \\
+  A(Y_2) &\simeq k[x,y,z]/(x,z) \simeq k[t], \\
+  A(Y_3) &\simeq k[x,y,z]/(z-1,y-x^2) \simeq k[x,y]/(y-x^2) \simeq
+  k[t],
+  \end{align*}
+  with the last isomorphism by 1.1a. This implies $Y_1,Y_2,Y_3$ are
+  irreducible. Finally, it's evident that none of them contains
+  another.
+\end{nothing}
+
+%% 1.4
+\begin{nothing}
+  
+\end{nothing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}
