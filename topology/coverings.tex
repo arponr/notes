@@ -11,160 +11,386 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Preliminaries}
+
+\begin{notation}
+  \begin{enumerate}[leftmargin=*]
+  \item Denote the interval $[0,1]$ by $I$.
+  \item Denote the fundamental group of a pointed space $(X,x)$ by
+    $\pi_1(X,x)$.
+  \item If we write an element $g \in \pi_1(X,x)$ as $[\gamma]$, we
+    mean that $g$ is the homotopy class of the loop $\gamma : I \to X$
+    based at $x$.
+  \item Denote the group homomorphism $\pi_1(X,x) \to \pi_1(X',x')$
+    induced by a map of pointed spaces $f : (X,x) \to (X',x')$ by
+    $f_*$.
+  \end{enumerate}
+\end{notation}
+
+We quickly remind ourselves of some basic general topology. This is
+not actually important, and really just to make sure we understand
+some restrictions we will be putting on the topological spaces we
+consider here.
+
+\begin{proposition}
+  \label{locpathconn}
+  Let $X$ be a locally path connected space. Then the connected
+  components and path components of $X$ agree and are open. In
+  particular, $X$ is homeomorphic to a disjoint union of spaces which
+  are path connected and locally path connected.
+\end{proposition}
+
+\begin{proof}
+  Omitted. Do it as an exericse, or see, e.g., \cite{munkres}.
+\end{proof}
+
+\begin{definition}
+  A space $X$ is \emph{semilocally simply connected} if each $x \in X$
+  has an open neighbourhood $U$ such that $i_* : \pi_1(U,x) \to
+  \pi_1(X,x)$ is the trivial (constant) group homomorphism, where $i :
+  U \to X$ is the inclusion.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Setting up}
 
 \begin{nothing}
-  For the remainder we fix a nice pointed space $(X,x)$. Sometimes we
+  \label{nice-space}
+  For the remainder we fix a nice pointed space $(B,b)$. Sometimes we
   won't use the basepoint, and sometimes we will. Here \emph{nice}
-  means that $X$ is connected, locally path connected, and semilocally
+  means that $B$ is connected, locally path connected, and semilocally
   simply connected.
 \end{nothing}
 
 \begin{definition}
   \label{covering}
-  A map $p : E \to X$ of spaces is a \emph{covering} if each $x \in X$
-  has an open neighbourhood $U$ such that $p^{-1}(U) = \coprod_{j \in
-    J} V_j$, where $J \ne \emptyset$ and for each $j \in J$:
+  Let $p : E \to B$ be a map of spaces. We say a subset $U \subseteq
+  B$ is \emph{evenly covered} if $p^{-1}(U) = \coprod_{j \in J} V_j$,
+  where $J \ne \emptyset$ and for each $j \in J$:
   \begin{enumerate}
   \item $V_j \subseteq E$ is open,
   \item the restriction $p : V_j \to U$ is a homeomorphism.
   \end{enumerate}
+  We say $p$ is a \emph{covering} if each $x \in B$ has an open
+  neighbourhood $U$ which is evenly covered. In this case we say $E$
+  is a \emph{covering space} over $B$. As usual we often abusively
+  denote a covering $p : E \to B$ just by the space $E$.
 \end{definition}
 
 \begin{remarks}
-  (\ref{covering}) is just how one formalises the idea that $E$
-  locally looks like a bunch of copies of $X$. Note we'll often be
-  abusive and refer to $E$ as a covering, leaving the map $p$
-  implicit.
+  \label{covering-rmk}
+  The definition (\ref{covering}) is just how one formalises the idea
+  that $E$ locally looks like a bunch---more precisely, a discrete
+  set---of copies of its projection to $B$. In particular, note
+  immediately from the definition that coverings are local
+  homeomorphisms. Hence, given the assumptions in (\ref{nice-space})
+  any covering space $E$ over $B$ is also locally path connected.
 \end{remarks}
 
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\Gal}{\operatorname{Gal}}
 
 \begin{definition}
-  We define $\Cov(X)$, the \emph{category of coverings of $X$}, as
+  \label{cover-category}
+  We define $\Cov(B)$, the \emph{category of coverings of $B$}, as
   follows.
   \begin{enumerate}
-  \item An object of $\Cov(X)$ is a covering $p : E \to X$.
-  \item A \emph{morphism of coverings} from $p : E \to X$ to $p' : E'
-    \to X$ is given by a map $f : E \to E'$ such that $p'f = p$, i.e.,
-    a commutative diagram
+  \item An object of $\Cov(B)$ is a covering $p : E \to B$.
+  \item \label{cover-morphism} A \emph{morphism of coverings} from $p
+    : E \to B$ to $p' : E' \to B$ is given by a map $f : E \to E'$
+    such that $p'f = p$, i.e., a commutative diagram
     \[
     \begin{tikzcd}
-      E \ar{rr}{f} \drar[swap]{p} & & E'. \dlar{p'} \\ & X &
+      E \ar{rr}{f} \drar[swap]{p} & & E'. \dlar{p'} \\ & B &
     \end{tikzcd}
     \]
   \end{enumerate}
 \end{definition}
 
 \begin{nothing}
-  As one might expect, we call a based map $p : (E,e) \to (X,x)$ a
-  covering if the underlying unbased map $p : E \to X$ is a
-  covering. Similarly if $p : (E,e) \to (X,x)$ and $p' : (E',e') \to
-  (X,x)$ are coverings, we will call $f : (E,e) \to (E',e')$ a
+  As one might expect, we call a pointed map $p : (E,e) \to (B,b)$ a
+  covering if the underlying unpointed map $p : E \to B$ is a
+  covering. Similarly if $p : (E,e) \to (B,b)$ and $p' : (E',e') \to
+  (B,b)$ are coverings, we will call $f : (E,e) \to (E',e')$ a
   morphism of coverings simply if the underlying $f : E \to E'$ is a
   morphism of coverings as defined above.
 \end{nothing}
 
-\begin{notation}
-  \begin{enumerate}[leftmargin=*]
-  \item Denote the interval $[0,1]$ by $I$.
-  \item Denote by $\pi_1(Y,y)$ the fundamental group of a pointed
-    space $(Y,y)$.
-  \item If we write an element $g \in \pi_1(Y,y)$ as $[\gamma]$, we
-    mean that $g$ is the homotopy class of the loop $\gamma : I \to Y$
-    based at $y$.
-  \item Denote by $f_* : \pi_1(Y,y) \to \pi_1(Y',y')$ the group
-    homomorphism induced by a map of pointed spaces $f : (Y,y) \to
-    (Y',y')$.
-  \item Denote $\pi_1(X,x)$ by $G$.
-  \end{enumerate}
-\end{notation}
+\begin{definition}
+  \label{fibre}
+  If $p : E \to B$ is a covering, for $x \in B$ we denote the
+  \emph{fibre} $p^{-1}(x)$ by $F_x(E)$. Note that if $p' : E' \to B$
+  is another covering, the condition
+  (\ref{cover-category}.\ref{cover-morphism}) defining a morphism $f :
+  E \to E'$ of coverings can be rephrased as the condition that
+  \[
+  f(F_x(E)) \subseteq F_x(E') \quad\text{for all } x \in B,
+  \]
+  i.e., that $f$ restricts to give maps on the fibres $F_x(E) \to
+  F_x(E')$.
+\end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Lifting things}
 
+\begin{nothing}
+  In this section we investigate the ``lifting properties'' of
+  coverings, and their consequences. Suppose we have a covering $p :
+  (E,e) \to (B,b)$ and a map of pointed spaces $f : (X,x) \to (B,b)$,
+  giving us the data of the solid arrows in the diagram
+  \begin{equation}
+    \label{lifting-problem}
+    \begin{tikzcd}
+      \ & (E,e) \dar{p} \\ (X,x) \rar{f} \ar[dashed]{ur}{F} & (B,b).
+    \end{tikzcd}
+  \end{equation}
+  The finding of the dashed arrow $F$ is called a \emph{lifting
+    problem}. Indeed, such a map $F : (X,x) \to (E,e)$ is called a
+  \emph{lift} of $f$ (along $p$), or alternatively, a \emph{solution}
+  to the lifting problem. The ultimate result is the following.
+\end{nothing}
+
 \begin{proposition}
   \label{general-lifting}
-  Let $p : (E,e) \to (X,x)$ be a covering. Let $f : (Y,y) \to (X,x)$
-  be a map of pointed spaces.
+  Let $p : (E,e) \to (B,b)$ be a covering and $f : (X,x) \to (B,b)$ a
+  map of pointed spaces with $X$ locally path connected.
   \begin{enumerate}
-  \item There is a lift $\tilde f : (Y,y) \to (E,e)$ making the
-    diagram
-    \[
-    \begin{tikzcd}
-      \ & (E,e) \dar{p} \\ (Y,y) \rar{f} \ar[dashed]{ur}{\tilde f} &
-      (X,x)
-    \end{tikzcd}
-    \]
-    commute if and only if $\im(f_*) \subseteq \im(p_*)$.
-  \item If $Y$ is connected and the lift $\tilde f$ does exist, then
-    it is unique.
+  \item There is a lift $F : (X,x) \to (E,e)$ of $f$ if and only if
+    $\im(f_*) \subseteq \im(p_*)$.
+  \item If $X$ is connected and the lift $F$ does exist, then it is
+    unique.
   \end{enumerate}
 \end{proposition}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{The fibre functor}
-
-One of the mottos in this theory, which will surely become clear, is
-that everything is determined by the fibres.
-
-\begin{definition}
-  If $p : E \to X$ is a covering, we denote, somewhat abusively, the
-  \emph{fibre} $p^{-1}(x)$ by $F_x(E)$.
-\end{definition}
+But in order to prove this we need some lemmas. In particular, we
+first prove two important special cases of this general result.
 
 \begin{lemma}
-  \label{pi1-action}
-  If $p : E \to X$ is a covering, there is a canonical $G$-action on
-  the fibre $F_x(E)$.
+  \label{path-lifting}
+  The statements of (\ref{general-lifting}) hold in the case $(X,x) =
+  (I,0)$. In particular, if $f$ is the constant path at $b$, then the
+  unique lift $F$ is the constant path at $e$.
+\end{lemma}
+
+\renewcommand{\U}{\mathfrak{U}}
+
+\begin{proof}
+  By definition of a covering there is a cover $\U$ of $B$ consisting
+  of evenly covered open sets. Then $\{f^{-1}(U) \mid U \in \U\}$ is
+  an open cover of $I$. Since $I$ is a compact metric space, we can
+  then find by the Lebesgue number lemma $0 = t_0 < \cdots < t_{n+1} =
+  1$ such that for $0 \le i \le n$,
+  \[
+  [t_i,t_{i+1}] \subseteq f^{-1}(U_i) \implies f([t_i,t_{i+1}])
+  \subseteq U_i
+  \]
+  for some $U_i \in \U$. We define the lift $F : (I,0) \to (E,e)$
+  inductively on the intervals $[t_i,t_{i+1}]$. Assume we have defined
+  $F(t_i)$. Since $U_i$ is evenly covered, there is an open
+  neighbourhood $V_i \subseteq E$ of $F(t_i)$ such that $p$ restricts
+  to a homeomorphism $V_i \to U_i$, with inverse $q_i : U_i \to
+  V_i$. Thus, given initial value $F(t_i)$, $f$ lifts uniquely on
+  $[t_i,t_{i+1}]$ by $F \coloneqq q_i \circ f$. Since we are required
+  to have $F(t_0) = F(0) = e$, this uniquely defines $F$.
+
+  The particular statement about constant paths follows from
+  uniqueness.
+\end{proof}
+
+\begin{lemma}
+  \label{homotopy-lifting}
+  The statements of (\ref{general-lifting}) hold in the case $(X,x) =
+  (I \times I, (0,0))$. Moreover, if
+  \begin{enumerate}
+  \item $f$ fixes endpoints, in the sense that $f(0,-), f(1,-) : (I,0)
+    \to (B,b)$ are constant, or
+  \item $f$ is a null-homotopy, in the sense that $f(-,1) : (I,0) \to
+    (B,b)$ is constant,
+  \end{enumerate}
+  then $F$ also has this property.
 \end{lemma}
 
 \begin{proof}
-  Let $e \in F_x(E)$ and $g = [\gamma] \in G$. Then by a lifting
-  lemma, $\gamma$ lifts uniquely to a path $\tilde\gamma : I \to E$
-  with $\gamma(0) = e$. Then $p\tilde\gamma(1) = \gamma(1) = x
-  \implies \tilde\gamma(1) \in F_x(E)$. We define the action by $g
-  \cdot e \coloneqq \tilde\gamma(1)$.
+  The proof of (\ref{path-lifting}) goes through if, instead of
+  partitioning $I$ into subintervals $[t_i,t_{i+1}]$, we partition $I
+  \times I$ into subsquares $[s_i,s_{i+1}] \times [t_j,t_{j+1}]$, and
+  proceed row by row.
 
-  \medskip
-  \textbf{Check that this is independent of the loop
-    representative. This should probably be a lemma in the Lifting
-    things section}.
+  The preservation of the properties (1) and (2) follows from the
+  statement about constant paths in (\ref{path-lifting}).
+\end{proof}
 
-  \medskip
-  Now if $g = \id_G$ then we can take $\gamma$ to be the constant loop
-  at $x$, which clearly lifts to $\tilde\gamma$ the constant loop at
-  $e$. Thus $\id_G \cdot e = \tilde\gamma(1) = e$.
+\begin{remark}
+  Let's summarise what (\ref{path-lifting}) and
+  (\ref{homotopy-lifting}) are saying. Given a path in $B$ beginning
+  at $b$, there is a unique lift of this path to $E$ beginning at any
+  $e \in F_b(E)$. Moreover, a homotopy of such paths in $B$ lifts to a
+  homotopy of the lifts in $E$, and if the original homotopy keeps the
+  endpoints fixed in $B$, the lift does so in $E$ as well.
+\end{remark}
 
-  Finally let $h = [\delta] \in G$. Then $\delta$ lifts to a unique
-  $\tilde\delta : I \to E$ satisfying $\tilde\delta(0) = g \cdot
-  e$. By definition, $h \cdot (g \cdot e) = \tilde\delta(1)$. But note
-  that the composition $\tilde\delta \cdot \tilde\gamma$ is a lift of
-  the composition $\delta \cdot \gamma$. Since $hg = [\delta \cdot
-    \gamma]$, it follows that also $hg \cdot e =
-  \tilde\delta(1)$. Thus we indeed have a $G$-action.
+We've ended up talking about paths and homotopies of paths. Of course
+you know where we're headed then! We now discuss what these lifting
+properties can tell us about the relationship between fundamental
+groups of coverings.
+
+\begin{notation}
+  For convenience we denote $\pi_1(B,b)$ by $G$, and if $p : (E,e) \to
+  (B,b)$ is a covering we denote $\im(p_*) \subseteq G$ by $H(E,e)$.
+\end{notation}
+
+\begin{proposition}
+  \label{cover-inj}
+  Let $p : (E,e) \to (B,b)$ be a covering. Then $p_*$ is injective,
+  and hence gives an isomorphism $\pi_1(E,e) \simeq H(E,e)$.
+\end{proposition}
+
+\begin{proof}
+  Let $g = [\gamma] \in \pi_1(E,e)$. To say $g \in \ker(p_*)$ is to
+  say there's a null-homotopy through loops (fixing endpoints) $h : I
+  \times I \to X$ of $p \circ \gamma$. Suppose this is the case. By
+  (\ref{homotopy-lifting}), this lifts to a null-homotopy through
+  loops $H : I \times I \to Y$ of $\gamma$. Hence $g =
+  \id_{\pi_1(E,e)}$. This implies $\ker(p_*)$ is trivial, as desired.
 \end{proof}
 
 \begin{nothing}
+  \label{pi1-action}
+  Let $p : E \to B$ be a covering. There is a canonical $G$-action on
+  the fibre $F_b(E)$, defined as follows. Let $e \in F_b(E)$ and $g =
+  [\gamma] \in G$. By (\ref{path-lifting}), $\gamma$ lifts uniquely to
+  a path $\tilde\gamma : I \to E$ with $\tilde\gamma(0) = e$. Then
+  $p(\tilde\gamma(1)) = \gamma(1) = b$, implying $\tilde\gamma(1) \in
+  F_b(E)$. We define the action by $ge \coloneqq
+  \tilde\gamma(1)$. Since a different representative loop for $g$
+  differs from $\gamma$ by a homotopy through loops, in particular
+  fixing endpoints, by (\ref{homotopy-lifting}) the definition of $ge$
+  does not depend on the choice of representative $\gamma$.
+
+  In particular, if $g = \id_G$ then we can take $\gamma$ to be the
+  constant loop at $b$, which clearly lifts (uniquely) to
+  $\tilde\gamma$ the constant loop at $e$. Thus $\id_G e =
+  \tilde\gamma(1) = e$.
+
+  Finally, consider another loop $h = [\eta] \in G$. Then $\eta$ lifts
+  to a unique $\tilde\eta : I \to E$ satisfying $\tilde\eta(0) =
+  ge$. By definition, $h(ge) = \tilde\eta(1)$. But note that the
+  composition of loops $\tilde\eta \cdot \tilde\gamma$ is a lift of
+  the composition $\eta \cdot \gamma$. Since $hg = [\eta \cdot
+    \gamma]$, it follows that also $(hg)e = \tilde\eta(1)$. So indeed
+  we have a well-defined $G$-action.
+\end{nothing}
+
+\begin{nothing}
   \label{fibre-map}
-  Let $p : E \to X$ and $p' : E' \to X$ be coverings, and $f : E \to
-  E'$ a morphism of coverings. By definition, $f$ restricts to a map
-  of sets $F_x(f) : F_x(E) \to F_x(E')$. Let $e,g,\gamma,\gamma'$ as
-  above. Then $f\gamma' : I \to E'$ is a lift of $\gamma$ at
-  $f(e)$. So by uniqueness of lifting we must have $gf(e) =
-  f(ge)$. I.e., $F_x(f)$ is a morphism of $G$-sets.
+  Let $p : E \to B$ and $p' : E' \to B$ be coverings, and $f : E \to
+  E'$ a morphism of coverings. Recall from (\ref{fibre}) that $f$
+  restricts to give a map of sets $F_b(E) \to F_b(E')$. We claim this
+  map is in fact $G$-equivariant. Let $e \in F_b(E)$ and $e' \coloneqq
+  f(e) \in F_b(E')$. Let $g,\gamma,\tilde\gamma$ as in
+  (\ref{pi1-action}) so that $ge = \tilde\gamma(1)$. Observe that $p'
+  \circ f \circ \tilde\gamma = p \circ \tilde \gamma = \gamma$ since
+  $f$ is a morphism of coverings, so that $f \circ \tilde\gamma$ is a
+  lift of $\gamma$ at $e'$. Thus, by definition,
+  \[
+  gf(e) = ge' = f(\tilde\gamma(1)) = f(ge),
+  \]
+  proving equivariance.
 \end{nothing}
 
 \begin{definition}
   (\ref{pi1-action}) and (\ref{fibre-map}) define for us the
   \emph{fibre functor}
   \[
-  F_x : \Cov(X) \to G\text{-}\Set.
+  F_b : \Cov(B) \to G\dash\Set.
   \]
 \end{definition}
+
+\begin{proposition}
+  \label{pi1-action-props}
+  Let $p : E \to B$ be a covering. The $G$-action on the fibre
+  $F_b(E)$ satisfies the following:
+  \begin{enumerate}
+  \item \label{orbit} Two points $e,e' \in F_b(E)$ are in the same
+    orbit if and only if they lie in the same connected component of
+    $E$.
+  \item \label{stab} The stabiliser subgroup of $e \in F_b(E)$ is
+    $H(E,e)$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1) By (\ref{covering-rmk}), $E$ is locally path connected, so by
+  (\ref{locpathconn}) it suffices to show that $e,e' \in F_b(E)$ are
+  in the same orbit if and only if there is a path between them. The
+  ``if'' direction is immediate from the definition of the
+  $G$-action. Conversely, suppose $\tilde\gamma : I \to E$ is path
+  from $e$ to $e'$. Then $\gamma \coloneqq p \circ \tilde \gamma : I
+  \to E$ is a loop at $b$ which lifts uniquely at $e$ to
+  $\tilde\gamma$. Thus if we set $g \coloneqq [\gamma] \in G$ we have
+  $ge = e'$, so $e,e'$ are in the same orbit.
+
+  (2) Consider any $g = [\gamma] \in G$. By definition, we have $ge =
+  e$ if and only if $\gamma$ lifts to a \emph{loop} $\tilde \gamma : I
+  \to E$ at $e$, which is of course equivalent to $g$ lying in the
+  image $H(E,e)$ of $p_*$.
+\end{proof}
+
+To end this section, we will finally prove the general lifting result
+stated at the beginning of the section.
+
+\begin{proof}[Proof of (\ref{general-lifting})]
+  We first observe that the condition is certainly necessary: if we
+  can find a lift $F$ then
+  \[
+  f = p \circ F \implies f_* = p_* \circ F_* \implies \im(f_*)
+  \subseteq \im(p_*).
+  \]
+  So the content is in showing that the condition is sufficient. By
+  (\ref{locpathconn}), $X$ is the disjoint union (topologically, not
+  just set-theoretically) of its connected components, so it suffices
+  to treat the case that $X$ is (path) connected.
+
+  Consider any point $x' \in X$, and let $\gamma : I \to X$ be a path
+  from the basepoint $x$ to $x'$. By (\ref{path-lifting}), there is a
+  unique lift $\tilde\gamma : I \to E$ of $f \circ \gamma$ with
+  $\tilde\gamma(0) = e$. If there is a lift $F : (X,x) \to (E,e)$ of
+  $f$, then $F \circ \gamma$ is a lift of $f \circ \gamma$ at $e$,
+  whence by uniqueness we have
+  \begin{equation}
+    \label{path-defn}
+    F(x') = F(\gamma(1)) = \tilde\gamma(1).
+  \end{equation}
+  This determines $F$ uniquely, proving claim (2). We just need to
+  show that this in fact gives a well-defined, continuous lift $F$.
+
+  We first verify well-definedness. Suppose $\eta : I \to X$ is
+  another choice of path from $x$ to $x'$. Write $\gamma^{-1}$ for the
+  reverse path of $\gamma$ from $x'$ to $x$, so the composition $\rho
+  \coloneqq \gamma^{-1} \cdot \eta$ is a loop at $x$. By our
+  assumption we have
+  \[
+  g \coloneqq [f \circ \rho] = f_*[\rho] \in \im(f_*) \subseteq
+  \im(p_*) = H(E,e).
+  \]
+  By (\ref{pi1-action-props}.\ref{stab}), this implies $ge = e$, i.e.,
+  $f \circ \rho$ lifts to a loop $\tilde\rho$ at $e$. Let $\tilde\eta$
+  and $\tilde\eta'$ denote the unique lifts of $f \circ \eta$ and $f
+  \circ (\gamma \cdot \rho)$, respectively. Since $\eta$ and $\gamma
+  \cdot \rho$ differ by a homotopy fixing endpoints, by
+  (\ref{homotopy-lifting}) we have $\tilde\eta(1) =
+  \tilde\eta'(1)$. Moreover since $\tilde\rho$ is a loop we have
+  \[
+  \tilde\eta' = \tilde\gamma \cdot \tilde\rho \implies \tilde\eta(1)=
+  \tilde\eta'(1) = \tilde\gamma(1),
+  \]
+  so the definition (\ref{path-defn}) is independent of the choice of
+  $\gamma$, as desired.
+
+  Next we prove continuity.
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -176,40 +402,6 @@ that everything is determined by the fibres.
 
 Now we're going to sit down and classify all of the coverings of
 $X$. This stuff is beautiful, I hope I can convey that.
-
-\begin{lemma}
-  \label{cover-injection}
-  Let $p : (E,e) \to (X,x)$ a covering. Then $p_* : \pi_1(E,e) \to
-  \pi_1(X,x)$ is injective.
-\end{lemma}
-
-\begin{proof}
-  Let $[\gamma] \in \pi_1(E,e)$ the homotopy class of a loop $\gamma :
-  I \to Y$ at $y$. By definition, $p_*[\gamma] = [p\gamma]$. Suppose
-  $[\gamma] \in \ker(p_*)$. Then there's a null-homotopy (through
-  loops) $h : I \times I \to X$ of $p\gamma$. But by a lifting lemma,
-  this lifts to $h' : I \times I \to Y$ with $h'(0,0) = y$ and, for $t
-  \in I$,
-  \begin{align*}
-    ph'(0,t) = h(0,t) = x, \quad &ph'(1,t) = h(1,t) = x, \\ ph'(t,0) =
-    h(t,0) = p\gamma(t), \quad &ph'(t,1) = h(t,1) = x.
-  \end{align*}
-  By uniqueness of lifting this implies $h'(0,t) = h'(1,t) = h'(t,1) =
-  y$ and $h'(t,0) = \gamma(t)$ for $t \in I$. I.e., $h'$ is a
-  null-homotopy of $\gamma$, and hence $[\gamma] =
-  \id_{\pi_1(Y,y)}$. Thus $\ker(p_*)$ is trivial, implying the claim.
-\end{proof}
-
-\begin{notation}
-  Let $p : (E,e) \to (X,x)$ is a covering. We will use the following
-  notation for the remainder:
-  \begin{enumerate}
-  \item
-  \item $H(E,e) \coloneqq p_*\pi_1(E,e) \subseteq G$.
-  \end{enumerate}
-  Note that (\ref{cover-injection}) says that $H(E,e) \simeq
-  \pi_1(E,e)$.
-\end{notation}
 
 \begin{lemma}
   Let $p : (E,e) \to (X,x)$ and $p' : (E',e') \to (X,x)$
@@ -226,11 +418,10 @@ $X$. This stuff is beautiful, I hope I can convey that.
   This is immediate from (\ref{general-lifting}).
 \end{proof}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{amsplain}
+\nocite{may-concise, munkres}
+\bibliographystyle{amsalpha}
 \bibliography{refs}
 
 \end{document}

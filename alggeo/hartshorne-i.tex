@@ -1,5 +1,5 @@
 \input{../preamble}
-%\input{preamble}
+\input{preamble}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -10,6 +10,17 @@
 \begin{document}
 \maketitle
 \thispagestyle{fancy}
+
+\section*{Introduction}
+
+As the title suggests, these are some (hopefully correct) solutions to
+exercises in the book \cite[Ch. I]{hartshorne}.
+
+\begin{convention}
+  References in parthentheses are to \emph{exercises} and references
+  in brackets are to \emph{results} in the text. E.g., ``(2.3)''
+  refers to Exercise 2.3, but ``[2.3]'' refers to Corollary 2.3.
+\end{convention}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -27,14 +38,15 @@
   element of $k$, so cannot be injective.
 
   \medskip\noindent
-  (c) Skipped.
+  (c) Skipped. (Pretty sure you just apply some coordinate changes to
+  reduce the general quadratic equation.)
 \end{nothing}
 
 %% 1.2
 \begin{nothing}
   Let $I \coloneqq (z-x^3,y-x^2) \subseteq k[x,y,z]$. Then clearly
-  $V(I) = Y$. Similar to 1.1a, we have an isomorphism $k[x,y,z]/I \to
-  k[t]$ sending $(x,y,z) \mapsto (t,t^2,t^3)$. Since $k[t]$ is a
+  $V(I) = Y$. Similar to (1.1a), we have an isomorphism $k[x,y,z]/I
+  \to k[t]$ sending $(x,y,z) \mapsto (t,t^2,t^3)$. Since $k[t]$ is a
   domain of Krull dimension 1, this implies that $Y$ is an affine
   variety of dimension 1, with $A(Y) \simeq k[t]$.
 \end{nothing}
@@ -56,14 +68,164 @@
   A(Y_3) &\simeq k[x,y,z]/(z-1,y-x^2) \simeq k[x,y]/(y-x^2) \simeq
   k[t],
   \end{align*}
-  with the last isomorphism by 1.1a. This implies $Y_1,Y_2,Y_3$ are
+  with the last isomorphism by (1.1a). This implies $Y_1,Y_2,Y_3$ are
   irreducible. Finally, it's evident that none of them contains
   another.
 \end{nothing}
 
 %% 1.4
 \begin{nothing}
-  
+  Closed sets in the product topology on $\A^1 \times \A^1$ are
+  intersections of sets of the form $X \times Y$ where $X,Y \subseteq
+  \A^1$ are closed, i.e., either the whole space or finite unions of
+  points and lines parallel to the axes. This of course does not
+  include all the Zariski closeds of $\A^2$, e.g., the diagonal $y=x$.
+
+  Note though that the Zariski topology is strictly finer than the
+  product topology. The intuition here is that the closeds of $\A^2$
+  which come from the product topology are those defined by
+  polynomials in which ``$x$ and $y$ are independent'', e.g., $y-1$
+  or $x(y-1)$ or $(x,y-1)$.
+\end{nothing}
+
+%% 1.5
+\begin{nothing}
+  The ``if'' direction is clear since $I(X)$ is reduced for any
+  algebraic set $X \subseteq \A^n$. Conversely if $B$ is a finitely
+  generated $k$-algebra without nilpotents then $B \simeq
+  k[x_1,\ldots,x_n]/I$ with $I$ reduced. By the Nullstellensatz,
+  $I(V(I)) = I$ so then $B \simeq A(V(I))$.
+\end{nothing}
+
+%% 1.6
+\begin{nothing}
+  Let $X$ be a topological space. By taking complements, the condition
+  that no two proper closeds in $X$ union to $X$ is equivalent to the
+  condition that the condition that no two nonempty opens in $X$ have
+  empty intersection. This implies that $X$ is irreducible if and only
+  if all nonempty open sets are dense.
+
+  If $X$ is irreducible and $U \subseteq X$ is open, then open subsets
+  of $U$ are also open subsets of $X$, so by the above
+  characterisation we see that $U$ is also irreducible.
+
+  \medskip\noindent
+  Now suppose $Y \subseteq X$. By definition of closure, if $Z$ is a
+  proper closed subset of $\oline Y$ then $Z \cap Y$ is a proper
+  closed subset of $Y$. It follows that if $\oline Y$ is reducible
+  then $Y$ is reducible.
+\end{nothing}
+
+\renewcommand{\Y}{\mathcal{Y}}
+
+%% 1.7
+\begin{nothing}
+  (a, i $\Rightarrow$ ii) Let $\Y$ be a family of closed subsets of
+  $X$. If $\Y$ is nonempty then we can choose some $Y_1 \in
+  \Y$. Inductively, if $Y_i$ is not minimal then we can choose
+  $Y_{i+1} \in \Y$ with $Y_{i+1} \subsetneq Y_i$. If $X$ is
+  noetherian, this cannot occur for all $i \ge 1$, whence $\Y$ has a
+  minimal element.
+
+  \medskip\noindent
+  (a, ii $\Rightarrow$ i) Let $Y_1 \supseteq Y_2 \supseteq \cdots$ be
+  a descending chain of closeds in $X$. The family $\{Y_i\}_{i \ge 1}$
+  must have a minimal element, whence the chain stabilises. Thus $X$
+  is noetherian.
+
+  \medskip\noindent
+  (a, i $\Leftrightarrow$ iii and ii $\Leftrightarrow$ iv) Take
+  complements.
+
+  \medskip\noindent
+  (b) Let $\{U_i\}_{i \in I}$ be an open cover of a noetherian space
+  $X$. The family $\{\bigcup_{j \in J} U_j \mid J \subseteq I \text{
+    finite}\}$ has a maximal element $U$ by (a, iv). If $U \ne X$ then
+  there exists $i \in I$ such that $U \cup U_i \supsetneq U$,
+  contradicting maximality. Thus $U = X$, giving a finite subcover.
+
+  \medskip\noindent
+  (c) Let $X$ be a noetherian space and $Y \subseteq X$. Let $Z_1
+  \supseteq Z_2\supseteq \cdots$ a chain of closeds in $Y$. Taking
+  closures in $X$ gives a chain $\oline{Z_1} \supseteq \oline{Z_2}
+  \supseteq \cdots$ of closeds in $X$, which must stabilise since $X$
+  is noetherian. But then since each $Z_i$ is closed in $Y$, we have
+  $Z_i = \oline{Z_i} \cap Y$, so this implies the chain in $Y$ also
+  stabilises. Hence $Y$ is noetherian as well.
+
+  \medskip\noindent
+  (d) Let $Y$ be a hausdorff space. Suppose $Y$ has two distinct
+  points $x,y$. Choose disjoint open neighbourhoods $U \ni x$ and $V
+  \ni y$. Then $Y-U$ and $Y-V$ are proper closeds which union to
+  $Y$, so $Y$ is reducible.
+
+  Now let $X$ be a noetherian hausdorff space. Let $X =
+  \bigcup_{i=1}^n X_1$ be the decomposition into irreducible
+  components. Each $X_i$ is hausdorff, so by the above has exactly one
+  point. Each of these points must be closed, and hence also open,
+  giving the claim.
+\end{nothing}
+
+%% 1.8
+\begin{nothing}
+  Let $A \coloneqq k[x_1,\ldots,x_n]$. Suppose $H = V(f)$ and $Y =
+  V(\p)$, where $\p \subseteq A$ is prime and $f \in A - \p$. Then $Y
+  \cap H = V(\p + (f))$, so an irreducible component $Z$ of $Y \cap H$
+  correponds to a minimal prime in $A$ containing $\p + (f)$, or
+  equivalently, to a minimal prime $\q$ in $A/\p$ containing $f$. By
+  the Hauptidealsatz, $\height(\q) = 1$, so then we have
+  \[
+  \height(\q) + \dim((A/\p)/\q) = \dim(A/\p) \implies \dim(Z) =
+  \dim(Y) - 1.
+  \]
+\end{nothing}
+
+%% 1.9
+\begin{nothing}
+  We proceed inductively. The base case $r=0$ is trivial. Now write
+  $\a = (f_1,\ldots,f_r)$, and let $\a' \coloneqq
+  (f_2,\ldots,f_r)$. By induction every irreducible component of
+  $V(\a')$ has dimension at least $n-r+1$. If $f_1 \in \a'$ then
+  $V(\a) = V(\a')$ so we're done. Else, we can apply (1.8) to finish.
+\end{nothing}
+
+%% 1.10
+\begin{nothing}
+  (a) Let $Z$ be a closed in $Y$ and $\oline Z$ its closure in $X$. As
+  noted in (1.7c) we have $Z = \oline Z \cap Y$. Any by (1.6), if $Z$
+  is irreducible then so is $\oline Z$. It follows that if $Z_0
+  \subsetneq Z_1 \subsetneq \cdots \subsetneq Z_n$ is a chain of
+  irreducible closeds in $Y$ of length $n$, then $\oline{Z_0}
+  \subsetneq \oline{Z_1} \subsetneq \cdots \subsetneq \oline{Z_n}$ is
+  a chain of irreducible closeds in $X$ of length $n$. Hence $\dim(X)
+  \ge \dim(Y)$.
+
+  \medskip\noindent
+  (b) By (a), $\dim(X) \ge \dim(U_i)$ for all $i$ so certainly
+  $\dim(X) \ge \sup \dim(U_i)$. Conversely, suppose $Z_0 \subsetneq
+  Z_1 \subsetneq \cdots \subsetneq Z_n$ is a chain of closed
+  irreducibles in $X$. Fix any $i$. Then for $0 \le j \le n$, define
+  $Z_{i,j} \coloneqq U_i$. Then $Z_{i,j}$ is an open subset of $Z_j$
+  and hence dense and irreducible by (1.6). It follows that $Z_{i,0}
+  \subsetneq Z_{i,1} \subsetneq \cdots \subsetneq Z_{i,n}$ is a chain
+  of irreducible closeds in $U_i$. Since each of these must stabilise
+  at length $\dim(U_i)$ and $\{U_i\}$ covers $X$, we get that $\dim(X)
+  \le \sup \dim(U_i)$.
+
+  \medskip\noindent
+  (c) Consider $X \coloneqq \A^1$ and $U \coloneqq \A^1 -
+  \{0\}$. Certainly $U$ is a dense open subset of $X$.
+
+  \medskip\noindent
+  (d) If $Y \ne X$ then for any chain $Z_0 \subsetneq Z_1 \subsetneq
+  \cdots \subsetneq Z_n$ of irreducible closeds in $Y$, since $Y$ is
+  closed in $X$ and $X$ is irreducible, $Z_0 \subsetneq Z_1 \subsetneq
+  \cdots \subsetneq Z_n \subsetneq X$ is a chain of irreducible
+  closeds in $X$. Since $X$ is finite-dimensional, so is $Y$ by (a),
+  so the above implies $\dim(X) \ge \dim(Y) + 1$.
+
+  \medskip\noindent
+  (e) 
 \end{nothing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
