@@ -1,8 +1,6 @@
 Numbers at Google
-======================================================================
-This is a post about some numbers that I saw at work one day during my
-internship at Google.
-======================================================================
+=================
+
 This is a post about some numbers that I saw at work one day during my
 internship at Google. I present them to you without further ado.
 

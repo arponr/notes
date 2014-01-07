@@ -389,7 +389,27 @@ stated at the beginning of the section.
   so the definition (\ref{path-defn}) is independent of the choice of
   $\gamma$, as desired.
 
-  Next we prove continuity.
+  To finish, we prove continuity. Let $V \subseteq E$ an open set and
+  $x' \in F^{-1}(V)$. It suffices to find an open neighbourhood $W
+  \subseteq X$ of $x'$ such that $F(W) \subseteq V$. We can replace
+  $V$ with a smaller open set such that $U \coloneqq p(V)$ is open and
+  evenly covered, so in particular $p : V \to U$ is a
+  homeomorphism. Note $f(x') \in U$, so since $X$ is locally path
+  connected, we can choose a path connected neighbourhood $W$ of $x'$
+  such that $W \subseteq f^{-1}(U)$. Let $x'' \in W$, and choose a
+  path $\eta : I \to X$ from $x'$ to $x''$. Let $\gamma : I \to X$ be
+  a path from the basepoint $x$ to $x'$. Then the composition $\eta
+  \cdot \gamma$ is a path from $x$ to $x''$. Let $\tilde\gamma,
+  \tilde\eta : I \to E$ be the unique lifts of $f \circ \gamma$ and $f
+  \circ \eta$ beginning at $e$ and $F(x')$, respectively. Since $f(W)
+  \subseteq U$ and $p : V \to U$ is a homeomorphism, $\im(\tilde\eta)
+  \subseteq V$. Now, $\tilde\eta \cdot \tilde\gamma$ is a lift of
+  $\eta \cdot \gamma$ at $e$, so by the well-definedness just proved,
+  we have
+  \[
+  F(x'') = (\tilde\eta \cdot \tilde\gamma)(1) = \tilde\eta(1) \in V,
+  \]
+  so $F(W) \subseteq V$, as desired.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
