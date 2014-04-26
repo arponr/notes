@@ -38,7 +38,7 @@
   Let $\A$ an additive category and $A,B,C \in \ob(\A)$. If $C$ is a
   product or coproduct of $A$ and $B$, then there exist morphisms
   \[
-  i : A \to C, \quad j : B \to C, \quad p : C \to A, \quad q : C \to B
+  i \c A \to C, \quad j \c B \to C, \quad p \c C \to A, \quad q \c C \to B
   \]
   satisfying the following identities:
   \[
@@ -49,20 +49,20 @@
   $A$ and $B$.
 \end{lemma}
 
-\begin{proof}
+\begin{proof}pp
   Suppose we have a coproduct $A \overset{i}{\longto} C
   \overset{j}{\longfrom} B$. The identity and zero morphisms induce $p
-  : C \to A$ and $q : C \to B$ with
+  \c C \to A$ and $q \c C \to B$ with
   \[
   pi = \id_A, \quad qj = \id_B, \quad pj = 0, \quad qi = 0.
   \]
-  Consider the morphism $ip + jq : C \to C$. From the identities above
+  Consider the morphism $ip + jq \c C \to C$. From the identities above
   and the universal property of the coproduct we get that $(ip + jq)i
   = i$ and $(ip+jq)j = j$, implying $ip+jq = \id_C$.
 
-  Now suppose we are given morphisms $f : D \to A$ and $g : D \to
-  B$. By the above, we have a morphism $if + jg : D \to C$ with
-  $p(if+jg) = f$ and $q(if+jg) = g$. Conversely, for any morphism $h :
+  Now suppose we are given morphisms $f \c D \to A$ and $g \c D \to
+  B$. By the above, we have a morphism $if + jg \c D \to C$ with
+  $p(if+jg) = f$ and $q(if+jg) = g$. Conversely, for any morphism $h \c
   D \to C$ with $ph = f$ and $qh = g$ we must have
   \[
   h = (ip+jq)h = i(ph) + j(qh) = if + jg.
@@ -85,7 +85,7 @@
 
 \begin{lemma}
   \label{additive-functor-preserves-products}
-  Let $\A$ and $\B$ additive categories and $F : \A \to \B$ an
+  Let $\A$ and $\B$ additive categories and $F \c \A \to \B$ an
   additive functor. Then $F$ preserves finite products.
 \end{lemma}
 
@@ -100,8 +100,8 @@
 
 \begin{lemma}
   \label{sum-factor}
-  Let $\A$ an additive category and $A,B \in \ob(\A)$. Let $f,g : A
-  \to B$ two morphisms. Then $f + g : A \to B$ can be factored as
+  Let $\A$ an additive category and $A,B \in \ob(\A)$. Let $f,g \c A
+  \to B$ two morphisms. Then $f + g \c A \to B$ can be factored as
   \[
   \begin{tikzcd}[column sep = large]
     A \rar{f \times g} & B \oplus B \rar{\id_B \amalg \id_B} & B,
@@ -124,7 +124,7 @@
 
 \begin{definition}
   \label{exactness}
-  Let $\A$ and $\B$ categories. We say a functor $F : \A \to \B$ is:
+  Let $\A$ and $\B$ categories. We say a functor $F \c \A \to \B$ is:
   \begin{enumerate}
   \item \emph{left exact} if $F$ preserves finite limits;
   \item \emph{right exact} if $F$ preserves finite colimits;
@@ -141,12 +141,12 @@
 
 \begin{lemma}
   \label{exact-additive}
-  Let $\A$ and $\B$ additive categories and $F : \A \to \B$ a
+  Let $\A$ and $\B$ additive categories and $F \c \A \to \B$ a
   functor. If $F$ is left or right exact then $F$ is additive.
 \end{lemma}
 
 \begin{proof}
-  Let $A,B \in \ob(\A)$ and $f,g : A \to B$ two morphisms. Since if
+  Let $A,B \in \ob(\A)$ and $f,g \c A \to B$ two morphisms. Since if
   $F$ preserves finite limits or colimits then $F$ preserves
   biproducts, we have the commutative diagram
   \[
@@ -163,7 +163,7 @@
 
 \begin{lemma}
   \label{left-exact-equiv}
-  Let $\A$ and $\B$ abelian categories and $F : \A \to \B$ an additive
+  Let $\A$ and $\B$ abelian categories and $F \c \A \to \B$ an additive
   functor. The following are equivalent.
   \begin{enumerate}
   \item For every exact sequence $0 \to A \to B \to C$ in $\A$ the
@@ -180,7 +180,7 @@
   (1 $\Rightarrow$ 2) Tautology.
 
   \medskip\noindent
-  (2 $\Rightarrow$ 3) Let $\phi : A \to B$ a morphism in $\A$. Then we
+  (2 $\Rightarrow$ 3) Let $\phi \c A \to B$ a morphism in $\A$. Then we
   have short exact sequences
   \[
   0 \to \ker(\phi) \to A \to \im(\phi) \to 0, \quad 0 \to \im(\phi)
