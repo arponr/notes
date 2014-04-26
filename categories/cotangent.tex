@@ -57,7 +57,7 @@ model categories, we first ask the following.
   How can we view singular homology in a homotopyish way?
 \end{question}
 
-\newcommand{\Ab}{\operatorname{Ab}}
+\renewcommand{\Ab}{\operatorname{Ab}}
 \newcommand{\ab}{\mathrm{ab}}
 
 \begin{nothing}
@@ -83,7 +83,7 @@ model categories, we first ask the following.
   \label{sing-doldkan}
   Another answer to the question goes through simplicial sets rather
   than topological spaces. Suppose $K \in \s\Set$, perhaps thinking $K =
-  \Sing(X)$ for some topological space $X$. Let $\Ab(K) \coloneqq \Z
+  \Sing(X)$ for some topological space $X$. Let $\Ab(K) \ce \Z
   K\in \s\Mod(\Z)$ the free simplicial abelian group on $K$.  Then the
   Dold-Kan correspondence\footnote{Many thanks to Albrecht Dold in this
     section!} tells us that
@@ -102,7 +102,7 @@ general philosophy, due to Quillen.
 \begin{definitions}
   \begin{enumerate}[leftmargin=*]
   \item An \emph{abelian group object} in a category $\C$ is an object $A
-    \in \C$ such that the functor $\hom_\C(-,A) : \C^\op \to \Set$
+    \in \C$ such that the functor $\hom_\C(-,A) \c \C^\op \to \Set$
     factors through the forgetful functor $\Mod(\Z) \to \Set$, i.e.,
     $\hom_\C(B,A)$ is naturally an abelian group.
   \item A \emph{morphism of abelian group objects} $A,A' \in \C$ is a
@@ -119,9 +119,9 @@ general philosophy, due to Quillen.
   products, then $A \in \C$ is an abelian group object if and only if
   there exist morphisms
   \begin{itemize}
-  \item $\mu : A \times A \to A$ (multiplication),
-  \item $\epsilon : * \to A$ (identity),
-  \item $\iota : A \to A$ (inverse),
+  \item $\mu \c A \times A \to A$ (multiplication),
+  \item $\epsilon \c * \to A$ (identity),
+  \item $\iota \c A \to A$ (inverse),
   \end{itemize}
   such that the usual diagrams encoding abelian group structure
   commute, and a morphism of abelian group objects is one which
@@ -143,7 +143,7 @@ general philosophy, due to Quillen.
   between the two, and will denote them by $\s\C_\ab$.
 
   Suppose moreover that the inclusion $\C_\ab \to \C$ has a left
-  adjoint $\Ab : \C \to \C_\ab$. It is easy to see then that the
+  adjoint $\Ab \c \C \to \C_\ab$. It is easy to see then that the
   inclusion $\s\C_\ab \to \s\C$ has left adjoint $\s\C \to
   \s\C_\ab$ given by applying $\Ab$ degree-wise.
 \end{nothing}
@@ -154,7 +154,7 @@ general philosophy, due to Quillen.
   \label{derivedab}
   Let $\C$ be a model category. Suppose there is a model structure on
   $\C_\ab$ such that the inclusion $\C_\ab \to \C$ is a right
-  Quillen functor, with left adjoint $\Ab : \C \to \C_\ab$, called
+  Quillen functor, with left adjoint $\Ab \c \C \to \C_\ab$, called
   \emph{abelianisation}. Then \emph{homology} is the total left
   derived functor $\L \Ab$, i.e., the homology of $X \in \C$ is the
   object $\L \Ab(X) \in \C_\ab$.
@@ -167,7 +167,7 @@ general philosophy, due to Quillen.
   = \s\Set$ then $\C_\ab$ is the subcategory of simplicial abelian
   groups. In both cases the natural model structure on $\C_\ab$ is
   defined precisely such that $\C_\ab \to \C$ is right Quillen, with
-  left adjoints $\Ab : \Top \to \Top_\ab$ and $\Ab : \s\Set \to
+  left adjoints $\Ab \c \Top \to \Top_\ab$ and $\Ab \c \s\Set \to
   \s\Set_\ab \simeq \s\Mod(\Z)$ the free topological and simplicial
   abelian group functors, respectively.
 \end{examples}
@@ -200,7 +200,7 @@ abelianisation is in this context.
   this issue by working in a slightly different category. Fix an
   $R$-algebra $A$. Let
   \[
-  \C \coloneqq \Alg(R)_{/A}
+  \C \ce \Alg(R)_{/A}
   \]
   be the overcategory of $R$-algebras over $A$. I.e., an object of
   $\C$ is a sequence of ring morphisms $R \to B \to A$ (which we of
@@ -217,7 +217,7 @@ derivations and K\"ahler differentials.
   \label{derivations}
   Let $B$ be an $R$-algebra and $M$ a $B$-module.
   \begin{enumerate}[leftmargin=*]
-  \item An \emph{$R$-derivation} $d : B \to M$ is a morphism of
+  \item An \emph{$R$-derivation} $d \c B \to M$ is a morphism of
     $R$-modules satisfying the Leibniz rule, $d(xy) = x\,d(y) +
     y\,d(x)$ for $x,y \in B$.
   \item The set $\Der_R(B,M)$ of $R$-derivations has a natural
@@ -227,8 +227,8 @@ derivations and K\"ahler differentials.
     \[
     \hom_{\Mod(B)}(\Omega_{B/R}, M) \simeq \Der_R(B,M).
     \]
-    In fact, if we let $\mu : B \otimes_R B \to B$ be the product map
-    and $I \coloneqq \ker(\mu)$, then there is an $R$-derivation $d :
+    In fact, if we let $\mu \c B \otimes_R B \to B$ be the product map
+    and $I \ce \ker(\mu)$, then there is an $R$-derivation $d \c
     B \to I/I^2$ sending $x \mapsto 1 \otimes x - x \otimes 1$ such
     that the map
     \[
@@ -249,8 +249,8 @@ derivations and K\"ahler differentials.
   where the ring structure on $A \oplus M$ is given by $(a,x)(b,y) =
   (ab,ay+bx)$. Then the structure morphism $R \to A$ and projection $A
   \oplus M \to A$ determine $R \to A \oplus M \to A$ as an object in
-  $\C$. If we have a morphism $\phi : M \to N$ in $\Mod(A)$ then
-  $\id_A \oplus \phi : A \oplus M \to A \oplus N$ evidently gives a
+  $\C$. If we have a morphism $\phi \c M \to N$ in $\Mod(A)$ then
+  $\id_A \oplus \phi \c A \oplus M \to A \oplus N$ evidently gives a
   morphism in $\C$.
 \end{nothing}
 
@@ -268,7 +268,7 @@ derivations and K\"ahler differentials.
   The first claim is that $A \oplus M$ is an abelian group object for
   any $M \in \Mod(A)$. Let $B \in \C$. By definition of $\C$ and $A
   \oplus M$, giving a morphism $B \to A \oplus M$ is equivalent to
-  giving an $R$-linear map $d : B \to M$ satisfying $d(xy) = x\,d(y) +
+  giving an $R$-linear map $d \c B \to M$ satisfying $d(xy) = x\,d(y) +
   y\,d(x)$ for $x,y \in B$. (Here we have viewed $M$ as a module over
   $R$ and $B$ via restriction of scalars.) I.e., we have a natural
   isomorphism
@@ -280,12 +280,12 @@ derivations and K\"ahler differentials.
 
   We next show that if $B \in \C_\ab$ is an abelian group object
   then it is isomorphic to $A \oplus M$ for some $M \in \Mod(A)$. Let
-  $\eta : B \to A$ be the map over $A$. Note the terminal object of
+  $\eta \c B \to A$ be the map over $A$. Note the terminal object of
   $\C$ is $A$ and the product is given by fibred product $B \times_A
   B$. To have an abelian group object we in particular need morphisms
-  $\mu : B \times_A B \to B$ and $\epsilon : A \to B$.  Since
+  $\mu \c B \times_A B \to B$ and $\epsilon \c A \to B$.  Since
   $\epsilon$ is a morphism over $A$, it must be a section of
-  $\eta$. Thus if we set $M \coloneqq \ker(\eta)$ we have a splitting
+  $\eta$. Thus if we set $M \ce \ker(\eta)$ we have a splitting
   $B \simeq A \oplus M$ as $A$-modules. Next, $\epsilon$ being a
   ``two-sided identity'' means
   \[
@@ -302,7 +302,7 @@ derivations and K\"ahler differentials.
   It follows that in fact $B \simeq A \oplus M$ as objects of $\C$.
 
   Finally we must show the functor is fully faithful. Faithfulness is
-  clear. A morphism $\psi : A \oplus M \to A \oplus N$ over $A$ must
+  clear. A morphism $\psi \c A \oplus M \to A \oplus N$ over $A$ must
   be of the form $\id_A \oplus \phi$. And since
   \[
   (1,x)(1,y) = (1,x+y), \quad (a,0)(1,x) = (1,ax)
@@ -410,8 +410,8 @@ $\s\Set$. This is precisely what we do here, following
   By (\ref{finitesset}), the standard model structure on $\s\Set$ is
   cofibrantly generated with
   \[
-  \I \coloneqq \{\del\Delta^n \inj \Delta^n \mid n \ge 0\}, \quad \J
-  \coloneqq \{\Lambda^n_k \inj \Delta^n \mid n \ge 1, 0 \le k \le n\},
+  \I \ce \{\del\Delta^n \inj \Delta^n \mid n \ge 0\}, \quad \J
+  \ce \{\Lambda^n_k \inj \Delta^n \mid n \ge 1, 0 \le k \le n\},
   \]
   the sphere and horn inclusions, respectively.
 \end{example}
@@ -421,7 +421,7 @@ $\s\Set$. This is precisely what we do here, following
 \begin{nothing}
   \label{promote-setup}
   Let $\C$ be a model category and $\D$ be any category. Assume we
-  have a functor $G : \D \to \C$ with a left adjoint $F : \C \to
+  have a functor $G \c \D \to \C$ with a left adjoint $F \c \C \to
   \D$. Define a morphism in $f$ in $\D$ to be a:
   \begin{enumerate}
   \item weak equivalence if $G(f)$ is a weak equivalence in $\C$;
@@ -454,7 +454,7 @@ For convenience, we isolate two steps of the proof.
 
 \begin{lemma}
   \label{factor1}
-  A morphism $f : X \to Y$ in $\D$ can be factored as
+  A morphism $f \c X \to Y$ in $\D$ can be factored as
   \[
   X \overset{i}{\longto} Z \overset{q}{\longto} Y,
   \]
@@ -463,8 +463,8 @@ For convenience, we isolate two steps of the proof.
 \end{lemma}
 
 \begin{proof}
-  Define $Z_0 \coloneqq X$ and $q_0 \coloneqq f$. Inductively define
-  $i_n : Z_{n-1} \to Z_n$ and $q_n : Z_n \to Y$ for $n \ge 1$ as
+  Define $Z_0 \ce X$ and $q_0 \ce f$. Inductively define
+  $i_n \c Z_{n-1} \to Z_n$ and $q_n \c Z_n \to Y$ for $n \ge 1$ as
   follows. Consider all diagrams $D$ of the form
   \[
   \begin{tikzcd}
@@ -480,8 +480,8 @@ For convenience, we isolate two steps of the proof.
     Y.
   \end{tikzcd}
   \]
-  Define $Z \coloneqq \colim Z_n$, $i : X = Z_0 \to Z$ the canonical
-  morphism, and $q : Z \to Y$ induced by the $q_n$. Then we have a
+  Define $Z \ce \colim Z_n$, $i \c X = Z_0 \to Z$ the canonical
+  morphism, and $q \c Z \to Y$ induced by the $q_n$. Then we have a
   factoring
   \[
   X \overset{i}{\longto} Z \overset{q}{\longto} Y
@@ -520,7 +520,7 @@ For convenience, we isolate two steps of the proof.
 
 \begin{lemma}
   \label{factor2}
-  A morphism $f : X \to Y$ in $\D$ can be factored as
+  A morphism $f \c X \to Y$ in $\D$ can be factored as
   \[
   X \overset{i}{\longto} Z \overset{q}{\longto} Y,
   \]
@@ -541,7 +541,7 @@ For convenience, we isolate two steps of the proof.
 
   The fourth axiom is the lifting axiom. One half is simply our
   definition of a cofibration, so let's prove the other half. Suppose
-  $f : X \to Y$ is an acyclic cofibration in $\D$. Let $q \circ i : X
+  $f \c X \to Y$ is an acyclic cofibration in $\D$. Let $q \circ i \c X
   \to Z \to Y$ the factorisation of $f$ given by (\ref{factor2}). Then
   assumption (\ref{accof}) gives that $i$ is a weak equivalence. By
   two-out-of-three then so is $q$. But then we know a lift exists in
@@ -575,7 +575,7 @@ For convenience, we isolate two steps of the proof.
   \label{over-model}
   We state one more result without proof to end this discussion of
   defining model structures. Suppose $\C$ is a model category and $X
-  \in \C$. If we define a morphism $f : X \to Y$ in the overcategory
+  \in \C$. If we define a morphism $f \c X \to Y$ in the overcategory
   $\C_{/X}$ to be a weak equivalence, fibration, or cofibration if it
   is such in $\C$, this defines a model structure on $\C_{/X}$
   \cite{nlab-modelover}.
@@ -622,8 +622,8 @@ that the adjunction is in fact a Quillen adjunction.
 \end{lemma}
 
 \begin{proof}
-  Let $\phi : M \to N$ be any morphism in $\s\Mod(A)$ and $\id_A
-  \oplus \phi: A \oplus M \to A \oplus N$ the morphism in
+  Let $\phi \c M \to N$ be any morphism in $\s\Mod(A)$ and $\id_A
+  \oplus \phi\c A \oplus M \to A \oplus N$ the morphism in
   $\s\Alg(R)_{/A}$ given by applying $\In$. Consider any lifting
   problems
   \[
@@ -636,8 +636,8 @@ that the adjunction is in fact a Quillen adjunction.
     \rar{(c,d)} & A \oplus N
   \end{tikzcd}
   \]
-  in $\s\Set$. If there is a lift $e : L \to M$ in the first problem,
-  then clearly $(c,e) : L \to A \oplus M$ is a lift in the second
+  in $\s\Set$. If there is a lift $e \c L \to M$ in the first problem,
+  then clearly $(c,e) \c L \to A \oplus M$ is a lift in the second
   problem. Since fibrations and acyclic fibrations in $\s\Mod(A)$ and
   $\s\Alg(R)_{/A}$ are defined by lifting properties in $\s\Set$, this
   shows that $\In$ is right Quillen.
@@ -649,7 +649,7 @@ Finally it makes sense to make the following definition.
 
 \begin{definition}
   The \emph{cotangent complex functor} is the total left derived
-  functor $\L\Ab : \ho(\s\Alg(R)_{/A}) \to \ho(\s\Mod(A))$.
+  functor $\L\Ab \c \ho(\s\Alg(R)_{/A}) \to \ho(\s\Mod(A))$.
 \end{definition}
 
 But hold on, why do we care about that? At the start, we wanted a
@@ -659,9 +659,9 @@ ok, don't worry, we just have a bit more work to do.
 
 \begin{nothing}
   \label{constant}
-  Recall for any category $\C$ we have an embedding $c : \C \to \s\C$
+  Recall for any category $\C$ we have an embedding $c \c \C \to \s\C$
   by taking the constant simplicial objects. That is, for $X \in \C$
-  we can define $c(X) \in \s\C$ by $c(X)_n \coloneqq X$ for $n \ge 0$
+  we can define $c(X) \in \s\C$ by $c(X)_n \ce X$ for $n \ge 0$
   with all face and degeneracy maps just the identity $\id_X$.
 \end{nothing}
 
@@ -674,7 +674,7 @@ Now we get to the definitions we've really been waiting for.
   \item The \emph{cotangent complex} of the $R$-algebra
     $A$ is
     \[
-    \Cot_{A/R} \coloneqq \L\Ab(c(A)),
+    \Cot_{A/R} \ce \L\Ab(c(A)),
     \]
     i.e., the cotangent complex functor evaluated on the constant
     simplicial object determined by $A$. Note $\Cot_{A/R} \in
@@ -685,8 +685,8 @@ Now we get to the definitions we've really been waiting for.
     the \emph{Andr\'e-Quillen homology and cohomology} of $R \to A$
     with coefficients in an $A$-module $M$ by
     \begin{align*}
-    \D_n(A,R;M) &\coloneqq \H_n(\Cot_{A/R} \otimes_A M),\\ \D^n(A,R;M)
-    &\coloneqq \H^n(\hom_{\Mod(A)}(\Cot_{A/R}, M)).
+      \D_n(A,R;M) &\ce \H_n(\Cot_{A/R} \otimes_A M),\\ \D^n(A,R;M)
+      &\ce \H^n(\hom_{\Mod(A)}(\Cot_{A/R}, M)).
     \end{align*}
     Note in particular that homology with coefficients in $A$ is given
     by $\pi_*(\Cot_{A/R})$.
@@ -704,7 +704,7 @@ simplicial objects needed to define the cotangent complex.
 \renewcommand{\B}{\mathcal{B}}
 
 Consider the theory of derived functors in abelian categories. Suppose
-$F : \A \to \B$ is a right exact functor between abelian
+$F \c \A \to \B$ is a right exact functor between abelian
 categories. To compute the total left derived functor of $F$ on $X \in
 \A$, we apply $F$ to a projective resolution of $X$, which we can then
 take homology of. In the standard model structure on categories of

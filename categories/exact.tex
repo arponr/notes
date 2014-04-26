@@ -133,7 +133,7 @@
 \end{definition}
 
 \begin{example}
-  Left (resp. right) adjoints will be left (resp. right) exact since
+  Left (resp. right) adjoints will be right (resp. left) exact since
   they preserve \emph{all} limits (resp. colimits). This will seem
   nicer when we actually characterise exactness of functors in terms
   of exactness of sequences below.
@@ -147,8 +147,8 @@
 
 \begin{proof}
   Let $A,B \in \ob(\A)$ and $f,g : A \to B$ two morphisms. Since if
-  $F$ preserves limits or colimits then $F$ preserves biproducts, we
-  have the commutative diagram
+  $F$ preserves finite limits or colimits then $F$ preserves
+  biproducts, we have the commutative diagram
   \[
   \begin{tikzcd}[column sep = large]
     F(A) \rar{F(f \times g)} \ar{dr}[swap]{F(f) \times F(g)} & F(B
