@@ -61,7 +61,7 @@ completeness are in metric spaces.
   to stray too far for some examples!
   \begin{itemize}
   \item $(0,1)$ is not complete: it's easy to check that the sequence
-    given by $x_k \coloneqq 1/k$ for $k \in \N$ is Cauchy, but for any
+    given by $x_k \ce 1/k$ for $k \in \N$ is Cauchy, but for any
     $x \in (0,1)$ there exists $n \in \N$ such that $1/k < x$ for all
     $k \ge n$, whence $(x_k)$ can't converge to $x$.
   \item $\Q$ is not complete: I won't say this is as rigourously as
@@ -95,7 +95,7 @@ Finally let's recall a couple of properties that maps between metric
 spaces can have.
 
 \begin{definition}
-  Let $(Y, d_Y)$ another metric space. A map $\phi : X \to Y$ is:
+  Let $(Y, d_Y)$ another metric space. A map $\phi \c X \to Y$ is:
   \begin{enumerate}
   \item \textit{uniformly continuous} if for each $\epsilon > 0$ there
     exists a $\delta > 0$ such that $d_X(x,y) < \delta \implies
@@ -110,7 +110,7 @@ spaces can have.
 
 \begin{exercise}
   \label{maps}
-  Let $\phi : X \to Y$ a map of metric spaces.
+  Let $\phi \c X \to Y$ a map of metric spaces.
   \begin{enumerate}
   \item If $\phi$ is uniformly continuous and $(x_k) \in X^\N$ is a
     Cauchy sequence, then $(f(x_k)) \in Y^\N$ is also Cauchy.
@@ -127,17 +127,17 @@ The goal for the rest of these notes is to prove the following.
 
 \begin{proposition}
   \label{completion}
-  There exist a metric space $X_c$ and an isometry $\phi : X \to X_c$
+  There exist a metric space $X_c$ and an isometry $\phi \c X \to X_c$
   such that:
   \begin{enumerate}
   \item $X_c$ is complete;
   \item $\phi(X)$ is dense in $X_c$;
   \item for any complete metric space $Y$ and uniformly continuous map
-    $\psi : X \to Y$, there exists a unique uniformly continuous map
-    $\psi_c : X_c \to Y$ such that $\psi_c \circ \phi = \psi$;
-  \item if $Y_c$ is a complete metric space and $\psi : X \to Y_c$ an
+    $\psi \c X \to Y$, there exists a unique uniformly continuous map
+    $\psi_c \c X_c \to Y$ such that $\psi_c \circ \phi = \psi$;
+  \item if $Y_c$ is a complete metric space and $\psi \c X \to Y_c$ an
     isometry such that $\psi(X)$ is dense in $Y_c$, then there exists
-    a unique isomorphism $\eta : X_c \to Y_c$ such that $\eta \circ
+    a unique isomorphism $\eta \c X_c \to Y_c$ such that $\eta \circ
     \phi = \psi$.
   \end{enumerate}
 \end{proposition}
@@ -156,7 +156,7 @@ fundamental things about metric spaces.) Here we go.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{nothing}[Construction]
-  First define $C \coloneqq \{(x_k) \in X^\N \mid (x_k)\text{ is
+  First define $C \ce \{(x_k) \in X^\N \mid (x_k)\text{ is
     Cauchy}\}$ the set of all Cauchy sequences in $X$. We then define
   an equivalence relation on $C$ by saying
   \[
@@ -173,12 +173,12 @@ fundamental things about metric spaces.) Here we go.
   \end{align*}
   which implies $(x_k) \sim (z_k)$.
 
-  We then define $X_c \coloneqq C/{\sim}$ to be the set of equivalence
+  We then define $X_c \ce C/{\sim}$ to be the set of equivalence
   classes of $C$ under this relation, and define a metric $d_{X_c}$ on
   $X_c$ as follows. For $\sigma, \tau \in X_c$, with equivalence class
   representatives $(x_k), (y_k) \in C$, respectively, we set
   \[
-  d_{X_c}(\sigma, \tau) \coloneqq \lim_{k \to \infty} d_X(x_k, y_k).
+  d_{X_c}(\sigma, \tau) \ce \lim_{k \to \infty} d_X(x_k, y_k).
   \]
   Before we define $\phi$ or prove properties (1) and (2) from the
   proposition, we should $d_{X_c}$ is well-defined and satifies the
@@ -227,8 +227,8 @@ fundamental things about metric spaces.) Here we go.
 \end{nothing}
 
 \begin{nothing}[The isometric embedding]
-  Define $\phi : X \to X_c$ by letting $\phi(x)$ be the equivalence
-  class of the constant sequence given by $x_k \coloneqq x$ for $k \in
+  Define $\phi \c X \to X_c$ by letting $\phi(x)$ be the equivalence
+  class of the constant sequence given by $x_k \ce x$ for $k \in
   \N$. Then for $x,y \in X$ we have
   \[
   d_X(\phi(x),\phi(y)) = \lim_{k \to \infty} d_X(x,y) = d_X(x,y),
@@ -296,23 +296,23 @@ follow from the following more general facts.\footnote{The
 
 \begin{lemma}
   Let $A,B$ be topological spaces, and $A_0 \subseteq A$ a dense
-  subspace. Let $f : A_0 \to B$ a continuous map.
+  subspace. Let $f \c A_0 \to B$ a continuous map.
   \begin{enumerate}
   \item If $B$ is Hausdorff, there exists at most one extension of $f$
-    to $A$, that is, there exists at most one continuous map $g : A
+    to $A$, that is, there exists at most one continuous map $g \c A
     \to B$ such that $g|_{A_0} = f$.
   \item If $A$ and $B$ are metric spaces, $B$ is complete, and $f$ is
     uniformly continuous, then there exists a unique uniformly
-    continuous extension $g : A \to B$ of $f$. If $f$ is an isometry,
+    continuous extension $g \c A \to B$ of $f$. If $f$ is an isometry,
     then so is $g$.
   \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-  (1) Let $g_1,g_2 : A \to B$ two extensions of $f$. Suppose $g_1(a)
+  (1) Let $g_1,g_2 \c A \to B$ two extensions of $f$. Suppose $g_1(a)
   \ne g_2(a)$ for some $a \in A$. Then we can choose $V_1$ and $V_2$
   disjoint neighbourhoods of $g_1(a)$ and $g_2(a)$, respectively, by
-  the Hausdorff hypothesis. Let $U_i \coloneqq g_i^{-1}(V_i)$, open by
+  the Hausdorff hypothesis. Let $U_i \ce g_i^{-1}(V_i)$, open by
   continuity of $g_i$, for $i \in \{1,2\}$. Then $a \in U_1 \in U_2$,
   so $U_1 \cap U_2$ is a nonempty open set in $X$, and hence there
   exists $a_0 \in U_1 \cap U_2 \cap A_0$ by density of $A_0$. Now
@@ -323,12 +323,12 @@ follow from the following more general facts.\footnote{The
   contradicting the disjointness of $V_1$ and $V_2$.
 
   (2) Uniqueness is immediate from (1), so it suffices to show
-  existence. Define $g : A \to B$ as follows. Let $a \in A$. By
+  existence. Define $g \c A \to B$ as follows. Let $a \in A$. By
   density of $A_0$ there is a sequence $(a_k) \in A_0^\N$ such that
   $a_k \to a$ as $k \to \infty$. By (\ref{convergentcauchy}), $(a_k)$
   is Cauchy, whence $(f(a_k)) \in B^\N$ is Cauchy by
   (\ref{maps}). Then $f(a_k) \to b$ as $k \to \infty$ for some $b \in
-  B$ by completeness. We define $g(a) \coloneqq b$. We claim this is
+  B$ by completeness. We define $g(a) \ce b$. We claim this is
   independent of the choice of sequence $(a_k)$. Indeed let $(a_k')
   \in A_0^\N$ another sequence converging to $a$. Then for any $\delta
   > 0$ there exists $n \in \N$ such that, by the triangle inequality,
@@ -343,7 +343,7 @@ follow from the following more general facts.\footnote{The
   \]
   It follows that $\lim_{k \to \infty} f(a_k) = \lim_{k \to \infty}
   f(a_k')$, proving our claim. In particular, if $a \in A_0$ then we
-  can choose the constant sequence $a_k \coloneqq a_0$ for $k \in \N$,
+  can choose the constant sequence $a_k \ce a_0$ for $k \in \N$,
   from which we see $g(a) = \lim_{k \to \infty} f(a_0) = f(a_0)$, so
   $g$ in fact extends $f$.
 
@@ -375,21 +375,21 @@ follow from the following more general facts.\footnote{The
 
 \begin{nothing}[The universal property]
   We now apply the lemma to finish the proof of the proposition. Suppose
-  $Y$ is a complete metric space and $\psi : X \to Y$ uniformly
-  continuous. Since $\phi : X \to X_c$ is an isometry with dense image,
+  $Y$ is a complete metric space and $\psi \c X \to Y$ uniformly
+  continuous. Since $\phi \c X \to X_c$ is an isometry with dense image,
   the lemma gives that there is a unique uniformly continuous map
-  $\psi_c : X_c \to Y$ such that $\psi_c \circ \phi = \phi$, proving
+  $\psi_c \c X_c \to Y$ such that $\psi_c \circ \phi = \phi$, proving
   (\ref{completion}.3).
 
   Finally, (\ref{completion}.4) is proven by the general argument giving
   uniqueness of objects satisfying a universal property like
   (\ref{completion}.3). Suppose $Y_c$ is a complete metric space and
-  $\psi : X \to Y_c$ an isometry with dense image. Then by
+  $\psi \c X \to Y_c$ an isometry with dense image. Then by
   (\ref{completion}.3) there is a unique uniformly continuous map
-  $\psi_c : X_c \to Y_c$ such that $\psi_c \circ \phi = \psi$, and the
+  $\psi_c \c X_c \to Y_c$ such that $\psi_c \circ \phi = \psi$, and the
   lemma tells us that $\psi_c$ is in fact an isometry. But our proof of
   (\ref{completion}.3) applies to $Y_c$ equipped with $\psi$ as well, so
-  we symmetrically have a unique isometry $\phi_c : Y_c \to X_c$ such
+  we symmetrically have a unique isometry $\phi_c \c Y_c \to X_c$ such
   that $\phi_c \circ \psi = \phi$. I.e., we have the diagram
   \[
   \begin{tikzcd}[column sep = large, row sep = large]
