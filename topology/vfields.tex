@@ -1,0 +1,148 @@
+\input{../preamble}
+\input{preamble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Vector fields and the J-homomorphism}
+\author{Arpon Raksit}
+\date{original: May 7, 2014; last edit: \today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The problem}
+
+For the sake of completeness, we state the basic definitions.
+
+\begin{notation}
+  Throughout we have $k,n \in \N$ with $n \ge 2$.
+\end{notation}
+
+\begin{definitions}
+  \label{vfield-dfn}
+  Let $M$ be a differentiable manifold. Let $\pi \c T \to M$ be the
+  tangent bundle on $M$.
+  \begin{enumerate}
+  \item A \emph{vector field} on $M$ is a continuous section $v \c M
+    \to T$ of $\pi$.
+  \item A set of vector fields $\{v_1,\ldots,v_k\}$ on $M$ is
+    \emph{linearly independent} if for each $p \in M$ the vectors
+    $v_1(p),\ldots,v_k(p)$ are linearly independent in the tangent
+    space $T_p$. In particular a single vector field $v$ forms a
+    linearly independent set if and only if it is nowhere vanishing.
+  \end{enumerate}
+\end{definitions}
+
+Now the actual story: we are taught to love spheres from our very
+first days in the land of topology. But perhaps it is the following
+result---or perhaps really its title---which first truly beguiles us.
+
+\begin{theorem}[Hairy ball]
+  \label{hairy-ball}
+  The sphere $\S^{n-1}$ admits a nowhere vanishing vector field if and
+  only if $n$ is even.
+\end{theorem}
+
+Of course, so enticed, we cannot just leave it there. We must ask the
+following.
+
+\begin{question}
+  \label{vfield-prob}
+  Then how many vector fields does $\S^{n-1}$ admit? Or more
+  precisely, what is the maximum size of a set of linearly independent
+  vector fields on $\S^{n-1}$?
+\end{question}
+
+This is one of those problems that occupied people for a while. To get
+a lower bound on the problem is not so hard (especially with
+hindsight). The theory of Clifford algebras gives the following result
+(see, e.g., \cite{hopkins-256y, miller-vfields}).
+
+\begin{definition}
+  \label{radon-hurwitz}
+  Write $n = 2^ab$ with $b$ odd, and write $a = 4c + d$ with $0 \le d
+  \le 3$. Then we define the \emph{Radon-Hurwitz number} $\rho(n) \ce
+  2^d + 8c$. Note in particular that $\rho(n) = 1$ if $n$ is odd.
+\end{definition}
+
+\begin{theorem}
+  \label{vfield-lower-bound}
+  There exists a set of $\rho(n)-1$ linearly independent vector fields
+  on $\S^{n-1}$.
+\end{theorem}
+
+Getting an upper bound is where the real difficulty is. Well we know
+one upper bound: $\S^{n-1}$ certainly can't admit $n$ linearly
+independent vector fields since $\dim \S^{n-1} = n - 1$. And to say
+$\S^{n-1}$ admits $n-1$ linearly independent vector fields is to say
+$\S^{n-1}$ is parallelisable, which famously is true if and only if $n
+\in \{2,4,8\}$. An optimal upper bound would at least tell us this
+parallelisability result. So let's think about it for a second and
+reduce the problem to one more attackable by algebra.
+
+\begin{nothing}
+  \label{gram-schmidt}
+  First of all, we have our very nice embedding $\S^{n-1} \inj \R^n$,
+  which gives the tangent spaces of $\S^{n-1}$ a very concrete
+  description. In particular, a vector field on $\S^{n-1}$ is just a
+  map $v \c \S^{n-1} \to \R^n$ such that $v(x) \perp x$ (in $\R^n$)
+  for all $x \in \S^{n-1}$. Now, by Gram-Schmidt, giving $k$ linearly
+  independent vector fields $v_1,\ldots,v_k \c \S^{n-1} \to \R^n$ is
+  equivalent to giving $k$ (pointwise) orthonormal vector fields. This
+  leads us to recall the following definition.
+\end{nothing}
+
+\begin{definition}
+  \label{stiefel}
+  Let $1 \le l \le n$. The \emph{Stiefel manifold} $\V_{l,n}$ is the
+  space
+  \[
+  \{(v_1,\ldots,v_l) \mid v_i \in \S^{n-1}, \langle v_i, v_j \rangle =
+  \delta_{i,j}\}
+  \]
+  of orthonormal $l$-frames on $\R^n$.
+\end{definition}
+
+\begin{lemma}
+  Let $\pi_k \c \V_{k+1,n} \to \S^{n-1}$ be the projection
+  $(v_1,\ldots,v_{k+1}) \mapsto v_{k+1}$. Then $\S^{n-1}$ admits a set
+  of $k$ linearly independent vector fields if and only if there is a
+  section $\S^{n-1} \to \V_{k+1,n}$ of $\pi_k$.
+\end{lemma}
+
+\begin{proof}
+  This is immediate from the discussion in (\ref{gram-schmidt}).
+\end{proof}
+
+So we've reduced our problem to the existence of some map. Already one
+can imagine using algebra to get at the problem now. E.g., for what
+$k$ can this map exist in singular homology or cohomology?  This was
+the strategy of Steenrod and Whitehead \cite{steenrod-vfields}, who
+achieve an upperbound of $2^a$, in the notation of
+(\ref{radon-hurwitz}). Of course this result doesn't tell us that
+$\S^{15}$ is not parallelisable, and leaves a large gap from the lower
+bound (\ref{vfield-lower-bound}). This gap was closed by Adams, who
+employed $\K$-theory instead to show the lower bound
+(\ref{vfield-lower-bound}) is in fact optimal.
+
+\begin{theorem}[\cite{adams-vfields}]
+  \label{vfield-upper-bound}
+  There does not exist a set of $\rho(n)$ linearly independent vector
+  fields on $\S^{n-1}$.
+\end{theorem}
+
+Our goal for the remainder is to prove this theorem, and hence solve
+our problem. Following \cite{miller-vfields}, the argument we give is
+not in the original form presented in \cite{adams-vfields}, but rather
+a consequence of Adams's later work on bounding the image of the
+$J$-homomorphism \cite{adams-J-II}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}
