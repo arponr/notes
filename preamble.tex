@@ -1,4 +1,4 @@
-\documentclass[10pt]{amsart}
+\documentclass[10pt,reqno]{amsart}
 
 \usepackage[lmargin=1.7in,rmargin=1.7in,
             tmargin=1.3in,bmargin=1.3in]{geometry}
@@ -6,11 +6,12 @@
 \usepackage[hyphens]{url}
 \usepackage{enumitem}
 \usepackage{hyperref}
-
 \usepackage{amssymb}
 \usepackage{stmaryrd}
-\usepackage{tikz-cd}
 \usepackage{eucal}
+
+\usepackage{tikz-cd}
+\usepackage{sseq}
 
 \frenchspacing
 
@@ -57,6 +58,7 @@
 \newcommand{\longfrom}{\longleftarrow}
 \newcommand{\oline}{\overline}
 \newcommand{\uline}{\underline}
+\newcommand{\wt}{\widetilde}
 \newcommand{\del}{\partial}
 \newcommand{\dash}{\text{-}}
 \renewcommand{\c}{\colon}
@@ -104,3 +106,4 @@
 \renewcommand{\labelitemi}{---}
 \renewcommand{\labelitemii}{--}
 
+\newcommand{\pref}[1]{(\ref{#1})}
