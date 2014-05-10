@@ -124,7 +124,7 @@ numerology we see in the upper bound. One can see, e.g.,
       \hline
     \end{tabular}
   \]
-  For large values of $l$ we have a periodicity $\Cl_{l+8} \simeq
+  For larger values of $l$ we have a periodicity $\Cl_{l+8} \simeq
   \Cl_l \otimes_\R \Cl_8$.
 
   What does this have to do with vector fields? Well, suppose $V$ is
@@ -133,7 +133,7 @@ numerology we see in the upper bound. One can see, e.g.,
   group genereated by $\{\pm q_i\}$; it's easy to see $|G_l| =
   2^{l+1}$. We can construct a $G_l$-invariant inner product on $V$
   (e.g., by averaging any inner product over $G_l$), and then we see
-  that (with this inner product) we get $l$ orthonormal vector fields
+  that (under this inner product) we get $l$ orthonormal vector fields
   on the unit sphere $S(V) \simeq \S^{n-1}$ via $x \mapsto q_ix$ for
   $1 \le i \le l$.
 
@@ -194,15 +194,15 @@ reduce the question to one more attackable by algebra.
 \end{proof}
 
 So we've reduced our problem to the existence of some map. Already one
-can imagine using algebra to get at the problem now. E.g., for what
-$k$ can this map exist in singular homology or cohomology?  This was
-the strategy of Steenrod and Whitehead \cite{steenrod-vfields}, who
-achieve an upper bound $k \le 2^a$, in the notation of
-\pref{radon-hurwitz}. Of course this result doesn't tell us that
-$\S^{15}$ is not parallelisable, and leaves a large gap from the lower
-bound \pref{vfield-lower-bound}. This gap was finally closed by Adams,
-who ingeniously employed K-theory instead to show the lower bound
-\pref{vfield-lower-bound} is in fact optimal.
+can imagine using algebra to get at the problem now. E.g., we can ask
+for what $k$ this map can exist in singular homology or
+cohomology. This was the strategy of Steenrod and Whitehead
+\cite{steenrod-vfields}, who achieve an upper bound $k \le 2^a$, in
+the notation of \pref{radon-hurwitz}. Of course this result doesn't
+tell us that $\S^{15}$ is not parallelisable, and leaves a large gap
+from the lower bound \pref{vfield-lower-bound}. This gap was finally
+closed by Adams, who ingeniously employed K-theory instead to show the
+lower bound \pref{vfield-lower-bound} is in fact optimal.
 
 \begin{theorem}[\cite{adams-vfields}]
   \label{vfield-upper-bound}
@@ -303,6 +303,10 @@ J-homomorphism.
   map $Y \to Y'$ over $X$ inducing a homotopy equivalence on all
   fibres is in fact a fibre homotopy equivalence.
 \end{lemma}
+
+\begin{proof}
+  Omitted.
+\end{proof}
 
 \begin{notation}
   \label{bundle-notation}
@@ -486,8 +490,8 @@ we will work with $\Lambda = \C$. We first address the former.
   $\nu \ne 0$, or equivalently $\kappa(\gamma) \ne 1$. One can prove
   this with the Stiefel-Whitney class: it suffices to show $1 \ne
   \iota(\kappa(\gamma)) = 2\gamma \in \K_\R(\RP^2)$, which is
-  witnessed by $w(\gamma\oplus\gamma) = w(\gamma)^2 = 1+x^2$ where $x
-  \in \H^1(\RP^2;\Z/2)$ is a generator.
+  witnessed by $w(\gamma\oplus\gamma) = w(\gamma)^2 = 1+x^2 \ne 1$,
+  where $x \in \H^1(\RP^2;\Z/2)$ is a generator.
 
   Now we can determine the extensions needed to compute $\K_\C(\RP^k)$
   from the associated graded $\Gr_*\K_\C(\RP^k)$. Let $F_p$ be the
@@ -520,45 +524,98 @@ we will work with $\Lambda = \C$. We first address the former.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Thom classes in K-theory}
+\section{The Thom isomorphism}
 
-Before moving on to studying $\J_\C(\RP^{k-1})$ we need to discuss the
-Thom isomorphism in K-theory, in particular the perspective given by
-the \emph{difference bundle} construction of \cite{abs-clifford}.
+Before moving on to studying $\J_\C(\RP^{k-1})$ we briefly review the
+basic theory of the Thom isomorphism.
+
+\begin{definition}
+  \label{thom-space}
+  Let $\xi \to X$ be a vector bundle of real dimension $r$. The
+  \emph{Thom space} $\Th(\xi)$ of $\xi$ is obtained by fibre-wise
+  one-point compactifying $\xi$ and then identifying all the points at
+  infinity. More precisely we have $\Th(\xi) \simeq \P(\xi \oplus
+  \epsilon_\R)/\P(\xi)$, or if we equip $\xi$ with a metric then we
+  have $\Th(\xi) \simeq D(\xi)/S(\xi)$ the unit disk bundle quotiented
+  by the unit sphere bundle.
+\end{definition}
+
+\begin{remark}
+  \label{thom-fibre}
+  For any $p \in X$ the fibre $\R^r \simeq \xi_p \inj \xi$ determines
+  a ``fibre'' $\S^r \simeq \Th(\xi_p) \inj \Th(\xi)$.
+\end{remark}
 
 \begin{nothing}
   \label{thom-iso}
-  We first recall the basic theory of the Thom isomorphism. Let $\pi
-  \c V \to X$ be a vector bundle of (real) rank $r$. Let $E$ be a
-  multiplicative cohomology theory.
-  \begin{itemize}[leftmargin=*]
-  \item An \emph{$E$-orientation}, or \emph{Thom class}, of $V$ is a
-    choice of $u \in E^r(V,V-0)$ such that for any fibre $i \c
-    (\R^r,\R^r-0) \to (V,V-0)$ the restriction
+  Let $\xi \to X$ be an oriented vector bundle of real dimension
+  $r$. Let $E$ be a multiplicative cohomology theory. Then we have
+  \[
+  \wt E^*(\Th(\xi)) \simeq E^*(D(\xi),S(\xi)) \simeq E^*(\xi, \xi-0),
+  \]
+  and in this way $\wt E^*(\Th(\xi))$ is a module over $E^*(X) \simeq
+  E^*(\xi)$.
+  
+  A \emph{Thom class} in $E$ of $\xi$ is an element $u \in \wt
+  E^r(\Th(\xi))$ such that for any fibre $i \c \S^r \simeq \Th(\xi_p)
+  \to \Th(\xi)$, where the identification $\S^r \simeq \Th(\xi_p)$ is
+  determined by the orientation of $\xi$, the restriction
+  \[
+  \begin{tikzcd}
+    \wt E^r(\Th(\xi)) \rar{i^*} & \wt E^r(\S^r) \rar{\sim} & E^0(*)
+  \end{tikzcd}
+  \]
+  sends $u$ to the canonical unit $1 \in E^0(*)$.
+  
+  The \emph{Thom isomorphism theorem} states that if $\xi$ has a Thom
+  class $u$ then the map
+  \[
+  \phi \c E^*(X) \to \wt E^{*+r}(\Th(\xi)), \quad x \mapsto x \cdot u
+  \]
+  is an isomorphism of $E^*(X)$-modules.
+\end{nothing}
+
+\begin{proposition}
+  \label{thom-K}
+  There exist Thom classes $u_\xi$ in $\K_\C$ for all complex vector
+  bundles $\xi \to X$. These can be chosen to satisfy the following
+  pleasant properties.
+  \begin{enumerate}
+  \item Naturality: for any pullback square
     \[
     \begin{tikzcd}
-      E^r(V,V-0) \rar{i^*} & E^r(\R^r, \R^r-0) \rar{\sim} & E^0(*)
+      f^*\xi \rar{g} \dar & \xi \dar \\ Y \rar{f} & X
     \end{tikzcd}
     \]
-    sends $u$ to a multiplicative unit.
-  \item The \emph{Thom isomorphism theorem} states that if $V$ is
-    $E$-oriented with Thom class $u$ then the map
+    of complex vector bundles, $u_{f^*\xi} = g^*(u_\xi)$.
+  \item Multiplicativity: let $\xi \to X$ and $\eta \to Y$ be complex
+    vector bundles. Consider the product bundle $\xi \times \eta \to X
+    \times Y$, and let $\pi_\xi \c \xi \times \eta \to \xi$ and
+    $\pi_\eta \c \xi \times \eta \to \eta$ be the projections. Then
     \[
-    \phi_{E,V} \c E^*(X) \to E^{*+r}(V,V-0), \quad x \mapsto \pi^*(x)
-    \cdot u
+    u_{\xi \times \eta} = \pi_\xi^*(u_\xi) \cdot \pi_\eta^*(u_\eta).
     \]
-    is an isomorphism.
-  \end{itemize}
-\end{nothing}
+    By naturality this implies the same multiplicativity when $X=Y$
+    and we replace $\xi \times \eta$ with $\xi \oplus \eta$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  This is achieved by the ``difference bundle'' construction of
+  \cite{abs-clifford}, but this topic is omitted here, unfortunately.
+\end{proof}
 
 \begin{example}
   \label{taut-thom}
-  Let $\gamma \to \CP^\infty$ be the tautological line bundle. We
-  claim that $\Th(\gamma) \simeq \CP^\infty$ and, after composing with
-  the periodicity map, the Thom isomorphism is 
-  \[
-  \K_\C(\CP^\infty) 
-  \]
+  Let $\xi \to \CP^\infty$ be the tautological line bundle. We claim
+  that in fact $\Th(\xi) \simeq \CP^\infty$. Indeed since $S(\xi)
+  \simeq S^\infty$ is contractible, we have $\Th(\xi) \simeq
+  D(\xi)/S(\xi) \simeq D(\xi) \simeq \CP^\infty$.\footnote{I learned
+    this argument from \cite{may-mu1}.} It is easy to see then that
+  the $\K_\C^*(\CP^{\infty})$-module structure on $\K^*_\C(\Th(\xi))$
+  is just given by multiplication in $\K_\C^*(\CP^{\infty})$, and
+  hence the Thom class $u_\xi \in \wt\K_\C^2(\Th(\xi)) \simeq
+  \wt\K_\C(\CP^\infty)$ must be a generator $\pm(\xi-1)$.
 \end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -569,8 +626,8 @@ We now begin our quest to understand $\J_\C(\RP^k)$. This will fall
 out of Adams's more general results on the J-homomorphism, namely, the
 construction of a certain quotient $\J_\Lambda(X) \surj
 \J'_\Lambda(X)$, a ``lower bound'' on $\J_\Lambda(X)$. We begin with a
-general discussion of characteristic classes, which will be used to
-define the group $\J'_\Lambda(X)$.
+general discussion of characteristic classes, which are used to define
+the group $\J'_\Lambda(X)$.
 
 \renewcommand{\V}{\mathcal{V}}
 \newcommand{\cl}{\mathrm{cl}}
@@ -579,18 +636,10 @@ define the group $\J'_\Lambda(X)$.
   Let $E$ and $F$ be multiplicative cohomology theories. Consider the
   following data.
   \begin{enumerate}
-  \item Let $\V$ be some class of vector bundles equipped with natural
-    $E$-orientations and $F$-orientations, and assume $\V$ is closed
-    under pullback. I.e., for each bundle $\xi \to X$ in $\V$, say of
-    dimension $r$, we have Thom classes $u_\xi \in E^r(\xi,\xi-0)$ and
-    $t_\xi \in F^r(\xi,\xi-0)$, and for any pullback square
-    \[
-    \begin{tikzcd}
-      f^*\xi \rar{g} \dar & \xi \dar \\ Y \rar{f} & X,
-    \end{tikzcd}
-    \]
-    $f^*\xi \to Y$ is also in $\V$ and is equipped with Thom classes
-    $u_{f^*\xi} = g^*(u_\xi)$ and $t_{f^*\xi} = g^*(t_\xi)$.
+  \item Let $\V$ be some class of vector bundles $\xi \to X$ equipped
+    with natural\footnote{Here ``natural'' is used in the same sense
+      as \pref{thom-K}.} Thom classes $u_\xi$ in $E$ and $t_\xi$ in
+    $F$.
   \item Let $T \c E \to F$ be a natural transformation of cohomology
     theories.
   \end{enumerate}
@@ -614,33 +663,23 @@ define the group $\J'_\Lambda(X)$.
   class $w_i$.
 \end{example}
 
-\begin{definitions}
-  Take $E = F = \K_\C^*$ and $T \ce \psi^l$ the Adams operation for $l
+\begin{definition}
+  Take $E = F = \K_\C^*$ and $T = \psi^l$ the Adams operation for $l
   \in \N$ in \pref{chclass-general}. The resulting classes $\rho^l \ce
   \cl(\psi^l,-)$ are called the \emph{cannibalistic
     classes}.\footnote{Because they live in K-theory and also eat
-    things in K-theory.}
-  Recall that all complex vector bundles are naturally
-  $\H^*(-;\Q)$-oriented and $\K_\C$-oriented, and hence bh and
-  $\rho^l$ are defined on all complex bundles.\footnote{The
-    orientation issue is one of the subtleties mentioned above in
-    working with $\K_\R$. In \cite{abs-clifford}, natural Thom classes
-    in $\K_\R$ are constructed for $\Spin(8n)$ bundles, and this is
-    what Adams begins with in the context of $\K_\R$.} Indeed, in
-  \cite{abs-clifford}, natural Thom classes in $\K_\C$ for complex
-  vector bundles are constructed with the following nice property. If
-  $V_i \to X_i$, $i \in \{1,2\}$, are two complex vector bundles with
-  Thom classes $u_i \in \K_\C^*(X_i)$, then the bundle $V_1 \times V_2
-  \to X_1 \times X_2$ has Thom class $u_1u_2$ (after pulling back). We
-  will use these classes of \cite{abs-clifford} so that, by definition
-  of the direct sum and naturality, $\rho^l$ is \emph{exponential} in
-  the sense that
+    things in K-theory, and because Adams was awesome.}
+\end{definition}
+
+\begin{remark}
+  By \pref{thom-K} the cannibalistic classes $\rho^l$ are defined on
+  all complex vector bundles, and moreover satisfy the exponential
+  property
   \begin{equation}
     \label{exponential}
-    \rho^l(V_1 \oplus V_2) = \rho^l(V_1)\rho^l(V_2)
+    \rho^l(\xi \oplus \eta) = \rho^l(\xi)\rho^l(\eta).
   \end{equation}
-  when $X_1 = X_2$.
-\end{definitions}
+\end{remark}
 
 \begin{convention}
   \label{complex-convention}
@@ -658,8 +697,8 @@ define the group $\J'_\Lambda(X)$.
   By naturality it suffices to prove this for the universal line
   bundle $\xi \to \CP^{\infty}$. By \pref{taut-thom}, $\Th(\xi) \simeq
   \CP^\infty$ with Thom class $\pm(\xi - 1) \in
-  \tilde\K_\C(\CP^\infty)$. Then by definition of $\rho^l$ and
-  $\psi^l$ we have
+  \wt\K_\C(\CP^\infty)$. Then by definition of $\rho^l$ and $\psi^l$
+  we have
   \[
   \rho^l(\xi) = \frac{\psi^l(\pm(\xi-1))}{\pm(\xi-1)} = \frac{\xi^l -
     1}{\xi - 1} = 1 + \xi + \cdots + \xi^{l-1}. \qedhere
@@ -668,17 +707,18 @@ define the group $\J'_\Lambda(X)$.
 
 \begin{remark}
   \label{cannibal-dim}
-  By the splitting principle and the exponential property of $\rho^l$,
-  \pref{cannibal-line} implies that for any bundle $\xi \to X$,
-  $\dim \rho^l(\xi) = l^{\dim \xi}$.
+  By the splitting principle, \pref{exponential} and
+  \pref{cannibal-line} imply that $\dim \rho^l(\xi) = l^{\dim \xi}$
+  for any bundle $\xi \to X$.
 \end{remark}
 
 \begin{nothing}
+  \label{cannibal-extend}
   Combining \pref{exponential} and \pref{cannibal-line} gives
   $\rho^l(\epsilon_\C^{\oplus r}) = l^r$. This tells us that, after
   inverting $l$, we can extend the definition of $\rho^l$ from bundles
   to all of $\K_\C(X)$. Namely, since any element of $\K_\C(X)$ can be
-  written in the form $\xi - r$ for some bundle $V$, we can define
+  written in the form $\xi - r$ for some bundle $\xi$, we can define
   \[
   \rho^l \c \K_\C(X) \to \K_\C(X)_l, \quad \xi - r \mapsto
   \rho^l(\xi)/l^r,
@@ -734,10 +774,10 @@ $\J_\C(X)$.
   invertible.
 
   Finally let $l \in \N$. By naturality of the Adams operation
-  $\psi^l$ we have.
+  $\psi^l$ we have
   \[
-  ((\phi_\xi^{-1}g^*\phi_eta)(\phi_\eta^{-1}\psi^l\phi_\eta))(1) =
-  ((\phi_\xi^{-1}\psi^l\phi_\xi)(\phi_\xi^{-1}g^*\phi_\eta))(1)
+  ((\phi_\xi^{-1}g^*\phi_\eta)(\phi_\eta^{-1}\psi^l\phi_\eta))(1) =
+  ((\phi_\xi^{-1}\psi^l\phi_\xi)(\phi_\xi^{-1}g^*\phi_\eta))(1).
   \]
   Then by definition of $\rho^l$, multplicativity of $\psi_l$, and the
   fact that $\phi_\xi$ is an isomorphism of $\K_\C(X)$-modules, we get
@@ -806,17 +846,16 @@ $\J_\C(X)$.
 
 \section{Finishing}
 
-We finally specialise to the case $X = \RP^k$. Computing
-$\J_\C'(\RP^k)$ will give us enough information about $\J_\C(\RP^k)$
-to give an upper bound to our question \pref{vfield-prob} on vector
-fields.
+We now specialise to the case $X = \RP^k$. Computing $\J_\C'(\RP^k)$
+will give us enough information about $\J_\C(\RP^k)$ to finally give
+an upper bound to our question \pref{vfield-prob} on vector fields.
 
 \begin{lemma}
   \label{RP-cannibal}
   Let $\nu$ be the generator of $\wt\K_\C(\RP^k)$ as in
   \pref{RP-kthy}. For $l \in \N$ odd we have
   \[
-  \rho^l(a\nu) = 1 + \frac{l^a-1}{2l^a}\nu \quad\text{for }0 \le a <
+  \rho^l(t\nu) = 1 + \frac{l^t-1}{2l^t}\nu \quad\text{for }0 \le t <
   2^{f_k}.
   \]
 \end{lemma}
@@ -828,9 +867,9 @@ fields.
   \rho^l(\xi) = 1 + \xi + \cdots + \xi^{l-1} = \frac{l+1}2 +
   \frac{l-1}2\xi = l + \frac{l-1}{2}\nu.
   \]
-  The desired identity for $a=1$ then follows from $\nu = \xi - 1
-  \implies \rho^l(\nu) = \rho^l(\xi)/l$. Then $a > 1$ follows by
-  induction using the relation $\nu^2 = -2\nu$ (and $a=0$ is trivial).
+  The desired identity for $t=1$ then follows from $\nu = \xi - 1
+  \implies \rho^l(\nu) = \rho^l(\xi)/l$. Then $t > 1$ follows by
+  induction using the relation $\nu^2 = -2\nu$ (and $t=0$ is trivial).
 \end{proof}
 
 \begin{lemma}
@@ -840,34 +879,35 @@ fields.
 
 \begin{proof}
   Let $x \in V_\C(\RP^k)$, and let $y \in \wt\K_\C(\RP^k)$ be such
-  that \pref{jprime-y} holds By \pref{RP-kthy} we have $\psi^l(1+y) =
+  that \pref{jprime-y} holds. By \pref{RP-kthy} we have $\psi^l(1+y) =
   1+y$ for $l$ odd, so we in fact have $\rho^l(x) = 1$ for $l$ odd.
 
   Next, $x \in \wt\K_\C(X)$ by \pref{jprime-dim}, so by \pref{RP-kthy}
-  we can write $x = a\nu$ for some $0 \le a < 2^{f_k}$. Then from
+  we can write $x = t\nu$ for some $0 \le t < 2^{f_k}$. Then from
   \pref{RP-cannibal} we know that
   \[
-  \rho^l(x) = \rho^l(a\nu) = 1 + \frac{l^a-1}{2l^a}\nu.
+  \rho^l(x) = \rho^l(t\nu) = 1 + \frac{l^t-1}{2l^t}\nu.
   \]
   Recall the ring morphism $\alpha \c \wt\K_\C(\RP^k) \to
   \Z/2^{f_k+1}$ defined in \pref{RP-ringhom} by $\alpha(\nu) \ce
-  -2$. This gives a morphism of multiplicative groups $\beta \c 1 +
-  \wt\K_\C(\RP^k) \to (\Z/2^{f_k+1})^\times$ via $\beta(1+z) \ce
-  1+\alpha(z)$.
+  -2$. Observe this gives a morphism of multiplicative groups $\beta
+  \c 1 + \wt\K_\C(\RP^k) \to (\Z/2^{f_k+1})^\times$ via $\beta(1+z)
+  \ce 1+\alpha(z)$.
 
   So finally let $l$ be odd. Note $\wt\K_\C(\RP^k) \simeq \Z/2^{f_k}
   \implies \wt\K_\C(\RP^k)_l \simeq \wt\K_\C(\RP^k)$. Thus from the
   above we get
   \[
-  1 = \rho^l(x) \implies 1 = \beta\l(1 + \frac{l^a-1}{2l^a}\nu\r) =
-  1/l^a.
+  1 = \rho^l(x) \implies 1 = \beta\l(1 + \frac{l^t-1}{2l^t}\nu\r) =
+  1/l^t.
   \]
   We now use the fact that $(\Z/2^{f_k+1})^\times \simeq \Z/2 \times
   \Z/2^{f_k-1}$ has an element of order $2^{f_k-1}$ to see that
-  choosing $l$ appropriately implies $2^{f_k-1} \mid a$, as desired.
+  choosing $l$ appropriately implies $2^{f_k-1} \mid t$, as desired.
 \end{proof}
 
 \begin{theorem}
+  \label{complex-upper}
   There does not exist a set of $\rho(n) + 4$ linearly independent
   vector fields on $\S^{n-1}$.
 \end{theorem}
@@ -882,12 +922,43 @@ fields.
   \implies k \le \rho(n) + 3$.
 \end{proof}
 
+So ends our journey.
+
 \begin{remark}
-  In addition to computing ${\J_\R}'(\RP^k)$, Adams computes
-  ${\J_\R}'$ for spheres as well, by using another characteristic
-  class coming from the formalism of \pref{chclass-general}. This
-  gives bounds on the image of the J-homomorphism for spheres, where
-  the study of the J-homomorphism originated.
+  Our final upper bound in \pref{complex-upper} is off by $4$ from the
+  right answer \pref{vfield-upper-bound}. If we were computer
+  scientists, that would be good enough. As remarked above, that $4$
+  goes away if one translates our work from complex K-theory into real
+  K-theory. Indeed one can define $\rho^l$ using the Adams operations
+  in $\K_\R$ rather than $\K_\C$, and then define analogous groups
+  $V_\R(X)$ and $\J'_\R(X)$. But there is a bit of nastiness:
+  \begin{itemize}
+  \item Thom classes don't exist for all real vector bundles, so the
+    analogue of \pref{thom-K} is more subtle. However, in
+    \cite{abs-clifford} natural Thom clases are also constructed for
+    certain $\Spin$ bundles, and this is where one must begin.
+  \item This means our proof of \pref{cannibal-line} won't go through
+    in the real case, and indeed this implies that extending $\rho^l$
+    to $\K_\R(X)$ is much more technical than the simple discussion of
+    \pref{cannibal-extend}.
+  \end{itemize}
+  These subtleties are handled in \cite{adams-J-II}, and the reward is
+  the correct bound. The argument is essentially the same: one uses
+  $\J_\R(n\lambda) = 0$ from \pref{j-reduction}, and this time
+  computes $V_\R(\RP^k) \simeq 0$, so $\K_\R(\RP^k) \simeq
+  \J_\R(\RP^k) \simeq \J_\R'(\RP^k)$. The crucial difference is that
+  $\wt\K_\R(\RP^k) \simeq \Z/2^{e_k}$, so now we get $2^{e_k} \mid n$
+  rather than $2^{f_k} \mid n$ when proving the upper bound
+  \pref{complex-upper}. Getting precisely $e_k$ instead of the
+  approximation $f_k$ means that no pesky $4$ will show up.
+\end{remark}
+
+\begin{remark}
+  In addition to computing $\J_\R'(\RP^k)$, Adams computes $\J_\R'$
+  for spheres as well, by using another characteristic class coming
+  from the formalism of \pref{chclass-general}. This gives bounds on
+  the image of the J-homomorphism for spheres, where the study of the
+  J-homomorphism originated.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
