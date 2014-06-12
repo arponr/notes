@@ -38,8 +38,8 @@
   composition
   \[
   \begin{tikzcd}[column sep = large]
-    \H_n(-;\Z) \ce \Top \rar{\Sing} & \s\Set \rar{\Z} & \s\Ab
-    \rar{\sum (-1)^i d_i} & \Ch_{\ge 0} \rar{\H_n} & \Ab.
+    H_n(-;\Z) \ce \Top \rar{\Sing} & \s\Set \rar{\Z} & \s\Ab
+    \rar{\sum (-1)^i d_i} & \Ch_{\ge 0} \rar{H_n} & \Ab.
   \end{tikzcd}
   \]
   Here $\Z$ denotes the functor which takes free abelian groups
@@ -60,7 +60,7 @@ relationship much further.
 \section{Stating the correspondence}
 
 We fix $\A$ any abelian category---but we'll probably be imagining $\A
-= \Ab$, or more generally $\A = R\text{-}\Mod$ for some commutative
+= \Ab$, or more generally $\A = \Mod(R)$ for some commutative
 ring $R$.\footnote{In a couple of arguments, we won't be totally
   categorical and will use elements here to make things clearer. But
   it's not all that hard to see how one would get rid of them, and in
@@ -409,7 +409,7 @@ quasi-inverse to $N \c \s\A \to \Ch_{\ge 0}(\A)$.
 
 \begin{notation}
   For the remainder we will fix some commutative ring $R$ and actually
-  set $\A \ce R\text{-}\Mod$.
+  set $\A \ce \Mod(R)$.
 \end{notation}
 
 \begin{nothing}
@@ -473,7 +473,7 @@ and that of $\Ch_{\ge 0}(\A)$.
   Let $A \in \s\A$ a simplicial $R$-module and $0 \in A_0$ the
   identity element. Then for $n \ge 0$ we have natural isomorphisms
   \[
-  \pi_n(A,0) \simeq \H_n(N(A)) \simeq \H_n(C(A)).
+  \pi_n(A,0) \simeq H_n(N(A)) \simeq H_n(C(A)).
   \]
   In particular, the functors $N$ and $\Gamma$ correspond
   quasi-isomorphisms in $\Ch_{\ge 0}(\A)$ with weak equivalences in
@@ -494,7 +494,7 @@ and that of $\Ch_{\ge 0}(\A)$.
   group structure on $\pi_n(A,0)$ to be the one induced by the
   $R$-module structure of $A_n$, whence the above discussion
   immediately gives us a (manifestly natural) isomorphism $\pi_n(A,0)
-  \simeq \H_n(N(A))$.
+  \simeq H_n(N(A))$.
 \end{proof}
 
 \begin{remark}
@@ -534,7 +534,7 @@ We'll end with an interesting consequence of
   \label{quasi-homology}
   Let $C \in \Ch_{\ge 0}(\A)$. Then there is a quasi-isomorphism
   \[
-  C \simeq \prod_{n \ge 0} \H_n(C)[n].
+  C \simeq \prod_{n \ge 0} H_n(C)[n].
   \]
 \end{lemma}
 
@@ -544,7 +544,7 @@ We'll end with an interesting consequence of
   $C_n$. Let $F_n$ a free $R$-module with a surjection $F_n \surj
   Z_n$. Let
   \[
-  F'_n \ce \ker(F_n \surj Z_n \surj \H_n(C)),
+  F'_n \ce \ker(F_n \surj Z_n \surj H_n(C)),
   \]
   which is free since it is a submodule of a free $R$-module and $R$
   is a PID. There is then an induced map $F'_n \to B_n$, which lifts
@@ -552,15 +552,15 @@ We'll end with an interesting consequence of
   C_{n+1} \to B_n$ is surjective. Define $F_n(C) \in \Ch_{\ge 0}(\A)$
   the complex with just $F_n$ in degree $n$ and $F'_n$ in degree
   $n+1$. The maps $F_n \to Z_n \inj C_n$ and $F'_n \to C_{n+1}$ give a
-  chain map $F_n(C) \to C$ which induces an isomorphism $\H_n(F_n(C))
-  \simeq F_n/F'_n \simeq \H_n(C)$. And the map $F_n \to \H_n(C)$
-  induces a quasi-isomorphism $F_n(C) \simeq \H_n(C)[n]$.
+  chain map $F_n(C) \to C$ which induces an isomorphism $H_n(F_n(C))
+  \simeq F_n/F'_n \simeq H_n(C)$. And the map $F_n \to H_n(C)$
+  induces a quasi-isomorphism $F_n(C) \simeq H_n(C)[n]$.
 
   Since homology commutes with products, there are then
   quasi-isomorphisms
   \[
   C \simeq \prod_{n \ge 0} \F_n(C) \simeq \prod_{n \ge 0}
-  \H_n(C)[n]. \qedhere
+  H_n(C)[n]. \qedhere
   \]
 \end{proof}
 

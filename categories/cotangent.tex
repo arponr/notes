@@ -68,7 +68,7 @@ model categories, we first ask the following.
   the free topological abelian group on $Y$. Then one version of the
   Dold-Thom theorem \cite{mccord-doldthom} states that
   \[
-  \pi_*(\Ab(Y)) \simeq \H_*(Y) \simeq \H_*(X).
+  \pi_*(\Ab(Y)) \simeq H_*(Y) \simeq H_*(X).
   \]
   Thus we should view $\Ab(Y)$ as the object which gives, via its
   homotopy, singular homology. Note that to apply Dold-Thom we had to
@@ -88,7 +88,7 @@ model categories, we first ask the following.
   Dold-Kan correspondence\footnote{Many thanks to Albrecht Dold in this
     section!} tells us that
   \[
-  \pi_*(\Ab(K)) \simeq \H_*(K) \simeq \H_*(X).
+  \pi_*(\Ab(K)) \simeq H_*(K) \simeq H_*(X).
   \]
   So again we view $\Ab(K)$ as giving homology via its homotopy. Here
   we did not have to choose a cofibrant replacement, but this is
@@ -645,11 +645,12 @@ that the adjunction is in fact a Quillen adjunction.
 
 Finally it makes sense to make the following definition.
 
-\newcommand{\Cot}{\mathrm{L}}
-
 \begin{definition}
   The \emph{cotangent complex functor} is the total left derived
-  functor $\L\Ab \c \ho(\s\Alg(R)_{/A}) \to \ho(\s\Mod(A))$.
+  functor
+  \[
+  \L\Ab \c \ho(\s\Alg(R)_{/A}) \to \ho(\s\Mod(A)).
+  \]
 \end{definition}
 
 But hold on, why do we care about that? At the start, we wanted a
@@ -667,29 +668,27 @@ ok, don't worry, we just have a bit more work to do.
 
 Now we get to the definitions we've really been waiting for.
 
-\renewcommand{\D}{\mathrm{D}}
-
 \begin{definitions}
   \begin{enumerate}[leftmargin=*]
   \item The \emph{cotangent complex} of the $R$-algebra
     $A$ is
     \[
-    \Cot_{A/R} \ce \L\Ab(c(A)),
+    L_{A/R} \ce \L\Ab(c(A)),
     \]
     i.e., the cotangent complex functor evaluated on the constant
-    simplicial object determined by $A$. Note $\Cot_{A/R} \in
+    simplicial object determined by $A$. Note $L_{A/R} \in
     \s\Mod(A)$, but we will identify it via the Dold-Kan
     correspondence with the associated chain complex of $A$-modules.
-  \item As (the value of) a total left derived functor, $\Cot_{A/R}$
+  \item As (the value of) a total left derived functor, $L_{A/R}$
     is well-defined up to weak equivalence, and hence we can define
     the \emph{Andr\'e-Quillen homology and cohomology} of $R \to A$
     with coefficients in an $A$-module $M$ by
     \begin{align*}
-      \D_n(A,R;M) &\ce \H_n(\Cot_{A/R} \otimes_A M),\\ \D^n(A,R;M)
-      &\ce \H^n(\hom_{\Mod(A)}(\Cot_{A/R}, M)).
+      D_n(A,R;M) &\ce H_n(L_{A/R} \otimes_A M),\\ D^n(A,R;M)
+      &\ce H^n(\hom_{\Mod(A)}(L_{A/R}, M)).
     \end{align*}
     Note in particular that homology with coefficients in $A$ is given
-    by $\pi_*(\Cot_{A/R})$.
+    by $\pi_*(L_{A/R})$.
   \end{enumerate}
 \end{definitions}
 
@@ -718,7 +717,7 @@ non-abelian category. The above tells us that instead of taking
 projective resolutions, the correct analogue is to take a
 \emph{simplicial resolution}, that is, a cofibrant replacement of the
 constant simplicial object. Indeed, this is exactly how we defined
-$\Cot_{A/R}$.
+$L_{A/R}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
