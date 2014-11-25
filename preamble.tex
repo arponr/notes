@@ -1,7 +1,7 @@
 \documentclass[10pt,reqno]{amsart}
 
 \usepackage[tmargin=1.3in,bmargin=1.3in,
-            lmargin=1.7in,rmargin=1.7in]{geometry}
+            lmargin=1.9in,rmargin=1.9in]{geometry}
 \usepackage{marginnote}
 \usepackage{fancyhdr}
 \usepackage{microtype}
@@ -17,7 +17,6 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{eucal}
-
 
 \frenchspacing
 
@@ -55,11 +54,11 @@
 
 \newcommand{\A}{\mathrm{A}}
 \newcommand{\B}{\mathrm{B}}
-\newcommand{\C}{\mathbb{C}}
+\renewcommand{\C}{\mathbb{C}}
 \newcommand{\D}{\mathrm{D}}
 \newcommand{\E}{\mathrm{E}}
 \newcommand{\F}{\mathbb{F}}
-\newcommand{\G}{\mathrm{G}}
+\renewcommand{\G}{\mathrm{G}}
 \renewcommand{\H}{\mathrm{H}}
 \newcommand{\I}{\mathrm{I}}
 \newcommand{\J}{\mathrm{J}}
@@ -73,7 +72,7 @@
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\S}{\mathrm{S}}
 \newcommand{\T}{\mathrm{T}}
-\newcommand{\U}{\mathrm{U}}
+\renewcommand{\U}{\mathrm{U}}
 \newcommand{\V}{\mathrm{V}}
 \newcommand{\W}{\mathrm{W}}
 \newcommand{\X}{\mathrm{X}}
@@ -86,7 +85,7 @@
   diagrams={>={stealth}},
 }
 
-\newcommand{\arrlen}{0.5}
+\newcommand{\arrlen}{0.4}
 \renewcommand{\to}{\mathrel{\tikz[baseline]%
     \draw[>=stealth,->](0,0.5ex)--(\arrlen,0.5ex);}}
 \newcommand{\lblto}[1]{\mathrel{\tikz[baseline]%

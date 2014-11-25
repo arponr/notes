@@ -5,7 +5,7 @@
 
 \title{Defining the cotangent complex}
 \author{Arpon Raksit}
-\date{December 17, 2013 (original); \today\ (last edit)}
+\date{December 17, 2013}
 
 \begin{document}
 \maketitle
@@ -34,7 +34,7 @@ about one of the earliest examples of this, the development of a
 
 \renewcommand{\C}{\mathcal{C}}
 
-\begin{notation-nonum}
+\begin{notation*}
   \begin{itemize}[leftmargin=*]
   \item Denote by $\Set$ the category of sets.
   \item All rings (and algebras) are commutative.
@@ -43,7 +43,7 @@ about one of the earliest examples of this, the development of a
   \item For a category $\C$ denote by $\s\C$ the category of
     simplicial objects in $\C$.
   \end{itemize}
-\end{notation-nonum}
+\end{notation*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -456,7 +456,7 @@ For convenience, we isolate two steps of the proof.
   \label{factor1}
   A morphism $f \c X \to Y$ in $\D$ can be factored as
   \[
-  X \overset{i}{\longto} Z \overset{q}{\longto} Y,
+  X \lblto{i} Z \lblto{q} Y,
   \]
   where $q$ is an acyclic fibration and $i$ has the left lifting
   property against all acyclic fibrations.
@@ -484,7 +484,7 @@ For convenience, we isolate two steps of the proof.
   morphism, and $q \c Z \to Y$ induced by the $q_n$. Then we have a
   factoring
   \[
-  X \overset{i}{\longto} Z \overset{q}{\longto} Y
+  X \lblto{i} Z \lblto{q} Y
   \]
   of $f$. Each $j \in \I$ has the left lifting property against
   acyclic fibrations in $\C$, implying via the adjunction and the
@@ -522,7 +522,7 @@ For convenience, we isolate two steps of the proof.
   \label{factor2}
   A morphism $f \c X \to Y$ in $\D$ can be factored as
   \[
-  X \overset{i}{\longto} Z \overset{q}{\longto} Y,
+  X \lblto{i} Z \lblto{q} Y,
   \]
   where $q$ is a fibration and $i$ has the left lifting property
   against all fibrations.
@@ -702,15 +702,15 @@ simplicial objects needed to define the cotangent complex.
 \renewcommand{\A}{\mathcal{A}}
 \renewcommand{\B}{\mathcal{B}}
 
-Consider the theory of derived functors in abelian categories. Suppose
-$F \c \A \to \B$ is a right exact functor between abelian
-categories. To compute the total left derived functor of $F$ on $X \in
-\A$, we apply $F$ to a projective resolution of $X$, which we can then
-take homology of. In the standard model structure on categories of
-chain complexes, a projective resolution of $X$ is precisely a
-cofibrant replacement of the chain complex with $X$ concentrated in
-degree $0$. Finally via the Dold-Kan correspondence, this is
-equivalent to picking a cofibrant replacement of $c(X) \in \s\A$.
+Consider the theory of derived functors in abelian categories. If $F
+\c \A \to \B$ is a right exact functor between abelian categories, to
+compute the total left derived functor of $F$ on $X \in \A$, we apply
+$F$ to a projective resolution of $X$, which we can then take homology
+of. In the standard model structure on categories of chain complexes,
+a projective resolution of $X$ is precisely a cofibrant replacement of
+the chain complex with $X$ concentrated in degree $0$. Finally via the
+Dold-Kan correspondence, this is equivalent to picking a cofibrant
+replacement of $c(X) \in \s\A$.
 
 To define the cotangent complex, we wanted to derive a functor from a
 non-abelian category. The above tells us that instead of taking

@@ -3,7 +3,7 @@
 
 \title{The Dold-Kan correspondence}
 \author{Arpon Raksit}
-\date{October 26, 2013 (original); \today\ (last edit).}
+\date{October 26, 2013}
 
 \begin{document}
 \maketitle
@@ -38,8 +38,8 @@
   composition
   \[
   \begin{tikzcd}[column sep = large]
-    H_n(-;\Z) \ce \Top \rar{\Sing} & \s\Set \rar{\Z} & \s\Ab
-    \rar{\sum (-1)^i d_i} & \Ch_{\ge 0} \rar{H_n} & \Ab.
+    H_n(-;\Z) \c \Top \rar{\Sing} & \s\Set \rar{\Z} & \s\Ab \rar{\sum
+      (-1)^i d_i} & \Ch_{\ge 0} \rar{H_n} & \Ab.
   \end{tikzcd}
   \]
   Here $\Z$ denotes the functor which takes free abelian groups
@@ -316,10 +316,13 @@ quasi-inverse to $N \c \s\A \to \Ch_{\ge 0}(\A)$.
 
 \begin{proof}
   Fix $A \in \s\A$. We will prove by induction on $n \ge 0$ that
-  $\Phi_n(A) \c \Gamma_n(N(A)) \to A_n$ is an isomorphism, and then we
-  will be done. Since the only surjection $[0] \surj [k]$ in
-  $\Simplex$ is $\id_{[0]}$, and the inclusion $N_0(A) \inj A_0$ is an
-  isomorphism, the base case $n=0$ is tautological.
+  \[
+  \Phi_n(A) \c \Gamma_n(N(A)) \to A_n
+  \]
+  is an isomorphism, and then we will be done. Since the only
+  surjection $[0] \surj [k]$ in $\Simplex$ is $\id_{[0]}$, and the
+  inclusion $N_0(A) \inj A_0$ is an isomorphism, the base case $n=0$
+  is tautological.
 
   First, surjectivity. Recall from (\ref{splitting}) that we have a
   splitting $A_n \simeq N_n(A) \oplus D_n(A)$. From the factor
