@@ -1,0 +1,155 @@
+\section{Inverse functions}
+
+\subsection{Notes}
+
+\begin{definition}
+If $f$ is a function comprised of pairs $(a, b)$, then $f^{-1}$, the inverse function of $f$, is the function comprised of pairs $(b, a)$.
+\end{definition}
+
+\begin{definition}
+The function $f$ is one-one if $f(a) \ne f(b)$ whenever $a \ne b$.
+\end{definition}
+
+\begin{theorem}
+For any function $f$, $f^{-1}$ is a function if and only if $f$ is one-one.
+
+\begin{proof}
+Suppose $f$ is one-one. Then for any two pairs in $f$ of the form $(a, c)$ and $(b, c)$, $a = b$. Thus, for the analagous pairs in $f^{-1}$ of the form $(c, a)$ and $(c, b)$, we must have that $a = b$. This, by definition, means that $f^{-1}$ is a function.
+
+Now suppose $f^{-1}$ is a function. Then for any two pairs in $f^{-1}$ of the form $(c, a)$ and $(c, b)$, $a = b$. Thus, for the analagous pairs in $f$ of the form $(a, c)$ and $(b, c)$, we must have that $a = b$. This, by definition, means that $f$ is one-one.
+\end{proof}
+\end{theorem}
+
+\begin{proposition} \label{incdecone}
+Increasing and decreasing functions are one-one.
+\end{proposition}
+
+\begin{theorem} \label{fincmeansfinvinc}
+If $f$ is increasing or decreasing, then $f^{-1}$ is increasing or decreasing, respectively.
+
+\begin{proof}
+If $f$ is increasing, then $f(b) > f(a)$ if and only if $b > a$. This is equivalent to saying that if $f(b) > f(a)$ that $f^{-1}(f(b)) > f^{-1}(f(a))$. This implies that $f^{-1}$ is increasing. The analagous argument for $f$ decreasing follows.
+\end{proof}
+\end{theorem}
+
+The converse of Proposition \ref{incdecone} is not necessarily true, since increasing and decreasing functions may not be continuous. But if we strengthen our conditions on $f$, then we can prove somewhat of a converse. 
+
+\begin{theorem} \label{contoneonemeansincdec}
+If $f$ is continuous and one-one on an interval $I$, then $f$ is either increasing or decreasing on $I$.
+
+\begin{proof}
+Let $a_0 < b_0$, $a_0, b_0 \in I$. Since $f$ is one-one, either
+\[ f(a_0) < f(b_0)\ \rmor\ f(a_0) > f(b_0). \]
+We show that whichever inequality holds for $a_0$ and $b_0$ holds for all other points $a_1, b_1 \in I$ such that $a_1 < b_1$. (Thus, $f$ is either increasing or decreasing on $I$.) 
+
+Define, for $t \in [0, 1]$,
+\[ x_t = (1-t)a_0 + ta_1, \]
+\[ y_t = (1-t)b_0 + tb_1. \]
+Since $a_0 < b_0$ and $a_1 < b_1$, $x_t < y_t$ for any $t$. 
+
+Now consider
+\[ g(t) = f(y_t) - f(x_t). \]
+We note two things: that $g(0) = f(b_0) - f(a_0)$, and that $g(t)$ is never equal to 0 because $f$ is one-one. Thus $g(1)$ must have the same sign as $g(0)$---otherwise the Intermediate Value Theorem says that there is some $t \in (0, 1)$ such that $g(t) = 0$---and thus $f(b_1) - f(a_1)$ must have the same sign as $f(b_0) - f(a_0)$, completing the proof.
+\end{proof}
+\end{theorem}
+
+Let $f$ be a continuous and increasing function defined on an interval; we can say something about the domain of $f^{-1}$, then. (Analagous arguments can be made for decreasing functions, but this is just too redundant to write out.)
+
+If $f$ is defined on a closed interval $[a, b]$, then by the Intermediate Value Theorem, $f$ must take on every value between $f(a)$ and $f(b)$ in addition to those values. I.e., the domain of $f^{-1}$ is $[f(a), f(b)]$.
+
+Now say $f$ is defined instead on an open interval $(a, b)$. Choose some point $c \in (a, b)$. Consider then the sets 
+\[ A = \{f(x): x \in (a, c)\}\ \rmand\ B = \{f(x): x \in (c, b)\}. \]
+Since $f$ is increasing, $A$ is bounded above by $f(c)$. Then, either $A$ is unbounded below, or the set has some infimum $\alpha$. If $A$ is unbounded below, then, by the Intermediate Value Theorem, $f$ takes on all values less than $f(c)$ on the interval. If $A$ is bounded below with $\inf A = \alpha$, then we can say that for any $\alpha < y < f(c)$, there must be some $x \in (a, c)$ such that $f(x) < y$ (otherwise $y$ would be the greatest lower bound of $A$); by the Intermediate Value Theorem, $f$ takes on the value $y$ somewhere. Similarly, $B$ is bounded below by $f(c)$. Then, either $B$ is unbounded above or has some supremum $\beta$. By an analagous argument, $f$ takes on all values in either the range $(f(c), \infty)$ or $(f(c), \beta)$.
+
+Now we discuss properties of $f$ inherited by $f^{-1}$.
+
+\begin{theorem} \label{fcontmeansfinvcont}
+If $f$ is continuous and one-one on an interval, then $f^{-1}$ is continuous.
+
+\begin{proof}
+By Theorem \ref{contoneonemeansincdec} we can say $f$ is either increasing or decreasing. The following argument is for increasing $f$, and for decreasing $f$ one can just show continuity for $-f$, an increasing function.
+
+We want to show that for every $\epsilon > 0$ there is a $\delta > 0$ such that 
+\[ \rmif\ |x - b| < \delta\ \rmthen\ |f^{-1}(x) - f^{-1}(b)| < \epsilon. \]
+Or, keeping in mind that the inputs to $f^{-1}$, $b$, are outputs of $f$, $f(a)$, 
+\[ \rmif\ |x - f(a)| < \delta\ \rmthen\ |f^{-1}(x) - a| < \epsilon. \]
+We choose $\delta$ such that 
+\[ \delta < \rmmin\,(f(a + \epsilon) - f(a), f(a) - f(a - \epsilon)). \]
+(Remember that, since $f$ is increasing, $f(a - \epsilon) < f(a) < f(a + \epsilon)$.)
+It follows that
+\[ f(a - \epsilon) - f(a) < x - f(a) < f(a + \epsilon) - f(a), \]
+or
+\[ f(a - \epsilon) < x < f(a + \epsilon). \]
+Since $f^{-1}$ is also an increasing function, by Theorem \ref{fincmeansfinvinc}, we can then say that
+\[ f^{-1}(f(a - \epsilon)) < f^{-1}(x) < f^{-1}(f(a + \epsilon)). \]
+or 
+\[ a - \epsilon < f^{-1}(x) < a + \epsilon. \]
+The theorem follows.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+If $f$ is continuous and one-one on an interval, and $f'(f^{-1}(a)) = 0$, then $f^{-1}$ is not differentiable at $a$.
+
+\begin{proof}
+Suppose $f^{-1}$ were differentiable at $a$. Then, since $f(f^{-1}(x)) = x$, applying the chain rule would give us that
+\[ f'(f^{-1}(a) \cdot (f^{-1})'(a) = 1. \]
+But then, by the hypothesis, we have that $0 = 1$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{fdiffmeansfinvdiff}
+If $f$ is continuous and one-one on an interval, and $f$ is differentiable at $f^{-1}(b)$ and $f'(f^{-1}(b)) \ne 0$, then $f^{-1}$ is differentiable at $b$. Namely,
+\[ (f^{-1})'(b) = \frac{1}{f'(f^{-1}(b))}. \]
+
+\begin{proof}
+Let $b = f(a)$. We want to show that the limit,
+\[ (f^{-1})'(b) = \lim_{h \to 0} \frac{f^{-1}(b + h) - f^{-1}(b)}h, \]
+exists. For any $b + h$ in the domain of $f^{-1}$, we have that
+\[ b + h = f(a + k) \]
+for some $k$. So we can rewrite the limit as
+\[ \lim_{h \to 0} \frac{k}{f(a+k)-f(a)}. \]
+
+We also have that $f^{-1}(b + h) = a + k$ and $f^{-1}(b) = a$. By Theorem \ref{fcontmeansfinvcont}, $f^{-1}$ is continuous, so
+\[ \lim_{h \to 0} f^{-1}(b + h) = f^{-1}(b) = a. \]
+I.e., as $h \to 0$, $k \to 0$. So we can rewrite the above limit again as
+\[ \lim_{h \to 0} \frac{h}{f(f^{-1}(b+h))-f(f^{-1}(b))} = \frac{1}{f'(f^{-1}(b))}. \]
+(The derivative term is defined because we are given that $f'(f^{-1}(b)) \ne 0$.) Thus, 
+\[ (f^{-1})'(b) = \frac{1}{f'(f^{-1}(b))}. \]
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+
+\begin{problem}[12-11]
+We can write the given equation in terms of $f^{-1}(y)$,
+\[ f^{-1}(y) = -y^5 - y. \]
+If we can show that $f^{-1}(y)$ is one-one, differentiable and has a non-vanishing derivative, then we can conclude that $f(x)$ exists and is differentiable. 
+
+Say that $f^{-1}(y)$ were not one-one. This would mean for some pair of distinct values $a$ and $b$, that
+\[ -a^5 - a = -b^5 - b, \]
+or that
+\[ b^5 - a^5 = a - b. \]
+Factoring the left side gives us that
+\[ (b-a)(b^4 + b^3a + b^2a^2 + ba^3 + a^4) = a-b. \]
+Dividing by $b-a$ (which is allowed because $a \ne b)$ gives us that
+\[ b^4 + b^3a + b^2a^2 + ba^3 + a^4 = -1. \]
+Now, without loss of generality, say that $b > a$. There are three cases: $a < b \le 0$, $a < 0 < b$ and $0 \le a < b$. In the first and the third cases, it is clear that every term in the l.h.s. of the equation is non-negative, and thus there are no solutions $a$ and $b$. In the second case, the first, third and fifth terms of the l.h.s. are positive while the second and fourth are negative. If $|b| > |a|$, then $|b^4| > |b^3a|$ and $|b^2a^2| > |ba^3|$, so the l.h.s. is positive. If $|a| > |b|$, then $|a^4| > |ba^3|$ and $|b^2a^2| > |b^3a|$, so the l.h.s. is positive. Thus, we have reached a contradiction so $f^{-1}$ must be one-one. 
+
+We can also say that $f^{-1}$ is differentiable, as it is a polynomial in $y$. Namely, 
+\[ (f^{-1})'(y) = -5y^4 - 1. \]
+Moreover, we know that for all $y$, $(f^{-1})'(y) < 0$, since $y^4 > 0$ for all $y$. Finally, by Theorem \ref{fdiffmeansfinvdiff}, we know that $f$ is a differentiable function. 
+
+\begin{remark}
+On a second look-through, I realise that the always-negative derivative implies that $f^{-1}$ is always decreasing, and thus one-one, removing the need for the silly $a$ and $b$ work above. Nevertheless, I thought it was pretty clever, so I'm keeping it there.
+\end{remark}
+\end{problem}
+
+\begin{problem}[12-26] \ 
+\begin{itemize}
+\item[(a)] We define the function, for some $k \in \mathbb{Z}^+$,
+\[ g(x) = f(\lfloor x \rfloor + k) + [f(\lfloor x \rfloor + 2k) - f(\lfloor x \rfloor + k)](x - \lfloor x \rfloor). \]
+We know that $g$ is continuous in every range $(n, n + k)$ for $n \in \mathbb{Z}$ because in that range the function is linear. So, we must only show that $g$ is continuous at every $x = ak$ for $a \in \mathbb{Z}$. It is easy to see this is true, because the limit of $g$ at any $x = ak$ from both the left and the right is $f((a+1)k)$ and $g$ actually takes on this value at this point. Finally, $g$ must be decreasing and less than or equal to $f$ because $f$ is decreasing and we are considering values of $f$ shifted to the right, which will be less.
+\end{itemize}
+\end{problem}
+

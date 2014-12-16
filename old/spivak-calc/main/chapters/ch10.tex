@@ -1,0 +1,141 @@
+\section{Differentiation}
+
+\subsection{Notes}
+\begin{theorem}
+For any constant function $f$, $f(x) = c$, $f'(a) = 0$ for all $a$.
+
+\begin{proof}
+\[ f'(a) = \lim_{h \to 0} \frac{f(a+h)-f(a)}{h} = \lim_{h \to 0} \frac{c-c}{h} = 0. \]
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+For the identity function $f$, $f(x) = x$, $f'(a) = 1$ for all $a$. 
+
+\begin{proof}
+\[ f'(a) = \lim_{h \to 0} \frac{f(a+h)-f(a)}{h} = \lim_{h \to 0} \frac{a+h-a}{h} = 1. \]
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{confun}
+If we have a function $f$ differentiable at $a$ and a function $g$, $g(x) = cf(x)$, then $g$ is differentiable at $a$, namely
+\[ g'(a) = cf'(a). \]
+
+\begin{proof}
+\[ g'(a) = \lim_{h \to 0} \frac{g(a+h)-g(a)}{h} = \lim_{h \to 0} \frac{cf(a+h)-cf(a)}{h} = \lim_{h \to 0} c\left(\frac{f(a+h)-f(a)}{h}\right) \]
+\[ = cf'(a). \]
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+If the functions $f$ and $g$ are both differentiable at $a$ then the function $f + g$ is differentiable at $a$, namely
+\[ (f + g)'(a) = f'(a) + g'(a). \]
+
+\begin{proof}
+\[ \lim_{h \to 0} \frac{(f+g)(a+h)-(f+g)(a)}{h} = \lim_{h \to 0} \frac{f(a+h)+g(a+h)-f(a)-g(a)}{h} \]
+\[ = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} + \lim_{h \to 0} \frac{g(a+h)-g(a)}{h} = f'(a) + g'(a). \]
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+By Theorem \ref{confun}, we can extend this to subtraction as well. Given the same assumptions, 
+\[ (f - g)'(a) = f'(a) - g'(a). \]
+\end{remark}
+
+\begin{theorem} \label{prodrule}
+If the functions $f$ and $g$ are both differentiable at $a$, then the function $fg$ is differentiable at $a$, namely
+\[ (fg)'(a) = f'(a)g(a) + g'(a)f(a). \]
+
+\begin{proof}
+\[ \lim_{h \to 0} \frac{(fg)(a+h)-(fg)(a)}{h} = \lim_{h \to 0} \frac{f(a+h)g(a+h)-f(a)g(a)}{h} \]
+\[ = = \lim_{h \to 0} \frac{f(a+h)g(a+h)-f(a)g(a+h)+f(a)g(a+h)-f(a)g(a)}{h} = \] 
+\[ \lim_{h \to 0} \frac{g(a+h)(f(a+h) - f(a))}{h} + \lim_{h \to 0} \frac{f(a)(g(a+h)-g(a))}{h} = f'(a)g(a) + g'(a)f(a). \]
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{recipderiv}
+If the functions $g$ is differentiable at $a$ and $g(a) \ne 0$, then the function $\frac 1g$ is differentiable at $a$, namely
+\[ \left(\frac 1g\right)'(a) = \frac{-g'(a)}{(g(a))^2}. \]
+
+\begin{proof}
+Firstly, by Theorem \ref{difimplcon}, differentiability of $g$ at $a$ implies continuity of $g$ at $a$, and so we know where must be some $\delta > 0$ such that if $|h| < \delta$ then $g(a+h) \ne 0$ (by Theorem \ref{contposneg}), i.e. $\frac 1{g(a+h)}$ is defined for sufficiently small $h$. So we can safely say the following without worrying about undefined terms.
+\[ \lim_{h \to 0} \frac{\left(\dfrac 1g\right)(a + h) - \left(\dfrac 1g\right)(a)}{h} = \lim_{h \to 0} \frac{g(a) - g(a+h)}{h(g(a)g(a+h))} \]
+\[ = \lim_{h \to 0} \frac{-(g(a+h)-g(a))}{h} \lim_{h \to 0}\frac 1{g(a)g(a+h)} = \frac{-g'(a)}{(g(a))^2}. \]
+\end{proof} 
+\end{theorem}
+
+\begin{theorem}
+If the functions $f$ and $g$ are both differentiable at $a$ and $g(a) \ne 0$, then the function $\frac fg$ is differentiable at $a$, namely
+\[ \left(\frac fg\right)'(a) = \frac{f'(a)g(a)-g'(a)f(a)}{(g(a))^2}. \]
+
+\begin{proof}
+Apply Theorem \ref{prodrule} to the functions $f$ and $\frac{1}{g}$, using Theorem \ref{recipderiv} as well.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+If we have a function $f$ given by $f(x) = x^n, n \in \mathbb{N}$ then
+\[ f'(a) = na^{n-1}. \]
+
+\begin{proof}
+\[ f'(a) = \lim_{h \to 0} \frac{(a+h)^n - a^n}{h} = \lim_{h \to 0} \frac{a^n + nha^{n-1} + O(h^2) - a^n}{h} \]
+\[ = \lim_{h \to 0} \frac{nha^{n-1}}{h} + \lim_{h \to 0} O(h) = na^{n-1}, \]
+where ``$O$'' is used to represent terms of a certain order, e.g. $O(h^2)$ means that all terms in this expansion have a $h^k, k \ge 2$.
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+We can extend this to the negatives of the natural numbers by applying Theorem \ref{recipderiv}.
+\end{remark}
+
+\begin{theorem}
+If the function $g$ is differentiable at $a$ and the function $f$ is differentiable at $g(a)$, then the function $f \circ g$ is differentiable at $a$, namely
+\[ (f \circ g)'(a) = f'(g(a))g'(a). \]
+
+\begin{proof}
+Define the function $\phi$:
+\[ \phi (h) = \begin{cases} \dfrac{f(g(a+h))-f(g(a))}{g(a+h)-g(a)}, & \textrm{if } g(a+h)-g(a) \ne 0 \\ f'(g(a)), & \textrm{if } g(a+h)-g(a) = 0 \end{cases}. \]
+We first show that $\phi$ is continuous at 0. 
+
+Since $f$ is differentiable at $g(a)$, we know that
+\[ \lim_{k \to 0} \frac{f(g(a)+k)-f(g(a))}k = f'(g(a)). \]
+I.e., for any $\epsilon > 0$ there exists a $\delta' > 0$ such that, for all $k$,
+\[ \textrm{if } 0 < |k| < \delta' \textrm{, then } \left|\frac{f(g(a)+k)-f(g(a))}k - f'(g(a))\right| < \epsilon. \]
+Now, $g$ is differentiable, and thus continuous, at $a$, so there exists a $\delta > 0$ such that, for all $k$,
+\[ \textrm{if } |h| < \delta \textrm{, then } |g(a+h) - g(a)| < \delta'. \]
+Say $k = g(a+h)-g(a) \ne 0$; then
+\[ \phi(h) = \frac{f(g(a+h)) - f(g(a))}{g(a+h)-g(a)} = \frac{f(g(a)+k)-f(g(a))}{k}. \]
+If we have $h$ such that $|h| < \delta$, then $0 < |k| < \delta'$, and thus
+\[ |\phi(h)-f'(g(a))| < \epsilon. \]
+If $g(a+h) - g(a) = 0$, then we have that
+\[ \phi(h) = f'(g(a)), \]
+so we trivially have that
+\[ |\phi(h)-f'(g(a))| < \epsilon. \]
+Thus, 
+\[ \lim_{h \to 0} \phi(h) = f'(g(a)), \]
+or $\phi$ is continuous at 0. 
+
+Next, we notice that for $h \ne 0$,
+\[ \frac{f(g(a+h))-f(g(a))}{h} = \phi(h)\left(\frac{g(a+h)-g(a)}{h}\right) \]
+(even when $g(a+h)-g(a) = 0$, as both sides of the equation are then 0). So
+\[ (f \circ g)'(a) = \lim_{h \to 0} \frac{f(g(a+h))-f(g(a))}{h} = \lim_{h\to0}\phi(h) \lim_{h\to0}\frac{g(a+h)-g(a)}{h} \]
+\[ = f'(g(a))g'(a). \]
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+\begin{problem}[10-27]
+$f$ being differentiable at 0 tells us that
+\[ \lim_{x \to 0} \frac{f(0 + x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{f(x)}{x} \]
+exists. Now, if we define the function $g$
+\[ g(x) = \begin{cases} \dfrac{f(x)}{x}, & \textrm{if } x \ne 0 \\ \lim_{x \to 0} \dfrac{f(x)}{x}, & \textrm{if } x = 0 \end{cases}, \]
+it is obvious that $g$ is continuous. Furthermore, we can say that 
+\[ f(x) = xg(x) \]
+(by definition when $x \ne 0$ and because both sides are equal to 0 when $x = 0$).
+\end{problem}
+
+\begin{problem}[10-29]
+Differentiating at $x = 0$ gives us that
+\[ 1 = f'(0)g(0) + g'(0)f(0) = 0. \]
+This is impossible.
+\end{problem}

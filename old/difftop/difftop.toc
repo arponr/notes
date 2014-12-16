@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Basic notions}{1}
+\contentsline {section}{\numberline {2}Partitions of unity}{7}
+\contentsline {section}{\numberline {3}Tangents and differentials}{10}
+\contentsline {section}{\numberline {4}Submanifolds and diffeomorphisms}{17}
+\contentsline {section}{\numberline {5}Implicit function theorems}{24}
+\contentsfinish 

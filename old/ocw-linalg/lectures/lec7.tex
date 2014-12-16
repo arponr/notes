@@ -1,0 +1,38 @@
+
+Let's look at the algorithm for computing the null space with an example.
+\bex
+Consider the matrix
+\[ \mA = \mat{1&2&2&2\\2&4&6&8\\3&6&8&10}. \]
+We can see immediately that the first two columns are not independent (meaning it gives us no new information, they are multiples of each other) and the same can be said about the rows because the third row can be seen to just be the sum of the first two rows. So how is this highlighted through elimination? (In the following we will disregard the right hand side because it will remain the zero vector throughout the algorithm.)
+
+It is important to note that the elimination process is not changing the nullspace but it is changing the column space. Elmination looks like
+\[ \mat{1&2&2&2\\2&4&6&8\\3&6&8&10} \rightarrow \mat{1&2&2&2\\0&0&2&4\\0&0&2&4} \rightarrow \mat{1&2&2&2\\0&0&2&4\\0&0&0&0}, \]
+this final matrix being $\mU$ in \textbf{echelon form}. In this case we just ignored the zeroes in the pivot positions, and in fact we only had two pivots to deal with. This number of pivots is what we call the \textbf{rank of} $\mA$. The columns with pivots we will call pivot columns and the others we will call free columns. 
+
+Now we can find the solutions to $\mU\vx = 0$. We do this by assigning anything we like to the variables in the free columns and then solve for the variables in the pivot columns. In this case, the second column varies freely as a parameter $x_2 = s$ and the fourth does the same as a second parameter $x_4 = t$. Then we get the equation from the second row that
+\[ 2x_3 + 4x_4 = 0 \Rightarrow x_3 = -2 t. \]
+Then the first row gives us that
+\[ x_1 + 2x_2 + 2x_3 + 2x_4 = 0 \Rightarrow x_1 = -2s + 2t. \]
+And thus we have characterised the null space as given by vectors of the form
+\[ \vx = \mat{t - 2s\\s\\-2 t\\t}. \]
+Often, we separate the free variables to the top and the pivot variables to the bottom (exchanging the order of the rows does nothing to the solutions set, and thus neither to the nullspace):
+\[ \vx = \mat{2t - 2s\\-2 t\\s\\t}. \]
+
+Alternatively we can take two specific solutions (plug in anything for $s$ and $t$) and then say the null space is given by linear combinations of the specific solutions. Two special solutions that we'll consider are $s=1,t=0$ and $s=0,t=1$. In this case this gives the vectors $\rvec{-2,0,1,0} $ and $\rvec{2,-2,0, 1}$. Then our nullspace can be characterised as vectors of the form
+\[ \vx = c\mat{-2\\0\\1\\0} + d\mat{2\\-2\\0\\1}, \]
+noting that we switched the rows here, so the nullspace of our original equation is given by a reordering of these vectors.
+
+But we can take elimination a bit further, to \textbf{row reduced echelon form} to see something else. So now we get 0s above \textit{and} below the pivot variables, and make sure our pivots are equal to 1 by dividing out rows by the pivot number. This would change our matrix to the following:
+\[ \mat{1&2&2&2\\0&0&2&4\\0&0&0&0} \rightarrow \mat{1&2&0&-2\\0&0&1&2\\0&0&0&0}. \]
+And in this row-reduced echelon form, one can see the special solutions right in there, just negated. In the pivot columns we have an identity matrix, and in the free columns we have the negative of our pivot variable coefficients in the special solutions. So if we reorder the columns, we can write this row reduced matrix, $\mR$, as a block matrix
+\[ \mR = \mat{\mI & \mF \\ 0&0}. \]
+Then clearly, if we want to solve $\mR\vx = 0$, we want 
+\[ \vx = \mN = \mat{-\mF\\ \mI}, \]
+where $\mN$ is called the \textbf{nullspace matrix}. And this is exactly the pattern we noticed: this matrix of special solutions consists of negative the free columns and identity in the pivot columns. 
+\eex
+
+So now we know how to compute the nullspace of a matrix using elimination.
+
+\brm
+Notice that we had $r = \mathrm{rank}\,(\mA)$ pivot variables and thus $n - r$ free variables. And this value $n-r$ characterises exactly what our null space looks like as a subspace of $\RR^n$, namely it is some figure in $n-r$ dimensions (or with that many degrees of freedom, we should say). So in the example, it was 2, meaning the null space was a plane in four dimensional space.
+\erm

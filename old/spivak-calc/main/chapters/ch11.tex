@@ -1,0 +1,320 @@
+\section{Significance of the derivative}
+
+\subsection{Notes}
+\begin{definition}
+Let $f$ be a function and $A$ a set of numbers contained in the domain of $f$. Then $x \in A$ is a local maximum or local minimum point for $f$ on $A$ if there is some $\delta > 0$ such that $x$ is a maximum or minimum point for $f$ on some interval $A \cap (x - \delta, x + \delta)$.
+\end{definition}
+
+\begin{theorem} \label{localmaxderiv}
+If $f$ is defined on $(a, b)$, $x$ is a local maximum or local minimum of $f$ and $f$ is differentiable at $x$, then $f'(x) = 0$.
+
+\begin{proof}
+Let $x \in (a, b)$ be a local maximum of $f$; then $x$ is a maximum for $f$ on $(a, b) \cap (x - \delta, x + \delta)$ for some $\delta > 0$. Take any $h$ such that $0 < |h| < \delta$ and $x + h \in (a, b)$. Then
+\[ f(x+h) - f(x) \le 0. \]
+Thus if $h > 0$,
+\[ \frac{f(x+h)-f(x)}{h} \le 0, \]
+and therefore
+\[ \lim_{h \to 0^+} \frac{f(x+h)-f(x)}{h} \le 0. \]
+Similarly, if $h < 0$,
+\[ \frac{f(x+h)-f(x)}{h} \ge 0, \]
+so
+\[ \lim_{h \to 0^-} \frac{f(x+h)-f(x)}{h} \ge 0. \]
+Since $f$ is differentiable at $x$, the two limits must both be equal to $f'(x)$. So $f'(x) \le 0$ and $f'(x) \ge 0$. Hence, $f'(x) = 0$.
+\end{proof}
+\end{theorem}
+
+\begin{definition}
+$x$ is a critical point on a function $f$ if $f'(x) = 0$. 
+\end{definition}
+
+To find the maximum and minimum of a function $f$ on a closed interval $[a, b]$, we check the values at all critical points in the interval, the endpoints ($a$ and $b$) and any points at which $f$ is not differentiable.
+
+\begin{theorem}[Rolle's Theorem] \label{rolle}
+If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$ and $f(a)=f(b)$, then there is an $x \in (a, b)$ such that $f'(x) = 0$.
+
+\begin{proof}
+Since $f$ is continuous on $[a, b]$, $f$ has a maximum (Theorem \ref{contmax}) and a minimum (Theorem \ref{contmin}) on $[a, b]$. If there exists a maximum or minimum point $x \in (a, b)$ then $f'(x) = 0$ by Theorem \ref{localmaxderiv}. The only other case is that the maximum and minimum are both located at the endpoints. Since $f(a)=f(b)$ the maximum and minimum are equal and $f$ is a constant function. So $f'(x)=0$ for any $x \in (a, b)$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Mean Value Theorem] \label{deriv_mvt}
+If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there is an $x \in (a, b)$ such that 
+\[ f'(x) = \frac{f(b)-f(a)}{b-a}. \]
+
+\begin{proof}
+Consider the function $h$:
+\[ h(x) = f(x) - \left(\frac{f(b)-f(a)}{b-a}\right)(x-a); \]
+$h$ is continuous on $[a, b]$ and differentiable on $(a, b)$. Furthermore 
+\[ h(a) = f(a) = h(b), \]
+so Rolle's Theorem (\ref{rolle}) applies: there exists a point $x \in (a, b)$ such that
+\[ h'(x) = f'(x) - \frac{f(b)-f(a)}{b-a} = 0. \]
+It follows that 
+\[ f'(x) = \frac{f(b)-f(a)}{b-a}. \]
+\end{proof}
+\end{theorem}
+
+\begin{corollary}
+Let $f$ be a function defined on a certain interval. 
+\begin{enumerate}
+\item if $f'(x) > 0$ for any $x$ in the interval then $f$ is increasing on the interval
+\item if $f'(x) < 0$ for any $x$ in the interval then $f$ is decreasing on the interval
+\item if $f'(x) = 0$ for any $x$ in the interval then $f$ is constant   on the interval.
+\end{enumerate}
+
+\begin{proof}
+Take any two points in the interval, $a$ and $b$. Then there is some $x$ in $(a, b)$ such that 
+\[ \frac{f(b)-f(a)}{b-a} = f'(x). \]
+If $f'(x)$ is always greater than 0, then $f(b) > f(a)$ whenever $b > a$, so $f$ is increasing. If $f'(x)$ is always less than 0, then $f(b) < f(a)$ whenever $b > a$, so $f$ is decreasing. If $f'(x)$ is always equal 0, then $f(b) = f(a)$ for any two points, so $f$ is constant.
+\end{proof}
+\end{corollary}
+
+\begin{theorem} \label{twoderivminmax}
+Suppose $f'(a) = 0$. If $f''(a) > 0$ then $f$ has a local minimum at $a$; if $f''(a) < 0$ then $f$ has a local maximum at $a$.
+
+\begin{proof}
+By definition,
+\[ f''(a) = \lim_{h \to 0} \frac{f'(a+h)-f'(a)}{h} = \lim_{h \to 0} \frac{f'(a+h)}{h}. \]
+
+If $f''(a) > 0$, then (given $h$ is sufficiently small) when $h > 0$, $f'(a+h) > 0$, and when $h < 0$, $f'(a+h) < 0$. So, locally, $f$ decreases to the left of $a$ and increases to the right of $a$, i.e. $a$ is a local minimum. 
+
+If $f''(a) < 0$, then (given $h$ is sufficiently small) when $h > 0$, $f'(a+h) < 0$, and when $h < 0$, $f'(a+h) > 0$. So, locally, $f$ increases to the left of $a$ and decreases to the right of $a$, i.e. $a$ is a local maximum. 
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{minmaxtwoderiv}
+Suppose $f''(a)$ exists. If $f$ has a local minimum at $a$, then $f''(a) \ge 0$; if $f$ has a local maximum at $a$, then $f''(a) \le 0$.
+
+\begin{proof}
+Suppose $f$ has a local minimum at $a$. If $f''(a) < 0$ then $f$ also has a local maximum at $a$ by the previous theorem. This means that $f$ is constant on some interval containing $a$, and consequently that $f''(a) = 0$, a contradiction.
+
+Suppose $f$ has a local maximum at $a$. If $f''(a) > 0$ then $f$ also has a local minimum at $a$ by the previous theorem. This means that $f$ is constant on some interval containing $a$, and consequently that $f''(a) = 0$, a contradiction.
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{limderiv}
+Suppose that $f$ is continuous at $a$ and differentiable at all $x \ne a$ in some interval containing $a$, and that $\lim_{x \to a} f'(x)$ exists. Then $f'(a)$ exists:
+\[ f'(a) = \lim_{x \to a} f'(x). \]
+
+\begin{proof}
+Because $f$ is differentiable on some interval containing $a$, we can say that $f$ is continuous on $[a, a+h]$ and differentiable on $(a, a+h)$ for sufficiently small $h > 0$. By the Mean Value Theorem (\ref{deriv_mvt}), then, there is some $\alpha_h 
+\in (a, a+h)$ such that
+\[ f'(\alpha_h) = \frac{f(a+h)-f(a)}h. \]
+Since $\alpha_h$ is bounded above by $a+h$, 
+\[ \rmif\ 0 < h < \epsilon\ \rmthen\ |\alpha_h - a| < |a + h - a| < |h| < \epsilon. \]
+This means that as $h$ approaches 0, $\alpha_h$ approaches $a$, and thus that
+\[ \lim_{h \to 0} f'(\alpha_h) = \lim_{x \to a} f'(x). \]
+By definition, 
+\[ f'(a) = \lim_{h \to 0} \frac{f(a+h)-f(a)}{h} = \lim_{h \to 0} f'(\alpha_h) = \lim_{x \to a} f'(x). \]
+\end{proof}
+\end{theorem}
+
+The following is a sort of generalisation of the Mean Value Theorem.
+
+\begin{theorem}[Cauchy's Mean Value Theorem] \label{cauchy_mvt}
+If $f$ and $g$ are both continuous on $[a, b]$ and differentiable on $(a, b)$, then there is an $x \in (a, b)$ such that
+\[ f'(x)(g(a)-g(b)) = g'(x)(f(a)-f(b)). \]
+
+\begin{proof}
+Define the function $h$:
+\[ h(x) = f(x)(g(b)-g(a)) - g(x)(f(b)-f(a)); \]
+$h$ is continuous on $[a, b]$ and differentiable on $(a, b)$. We notice that
+\[ h(a) = h(b) = f(a)g(b) - g(a)f(b), \]
+so Rolle's Theorem (\ref{rolle}) applies, and we can say there exists a $x \in (a, b)$ such that 
+\[ h'(x) = f'(x)(g(b)-g(a)) - g'(x)(f(b)-f(a)) = 0. \]
+The theorem follows.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[L'H\^{o}pital's Rule]
+If 
+\[ \lim_{x \to a} f(x) = \lim_{x \to a} g(x) = 0, \]
+and $lim_{x \to a} f'(x)/g'(x)$ exists, then $\lim_{x \to a} f(x)/g(x)$ exists:
+\[ \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}. \]
+
+\begin{proof}
+The hypotheses allow us to say that there is some interval $I = (a - \delta, a) \cup (a, a + \delta)$ that $f$ and $g$ are differentiable on $I$, and that $g'(x) \ne 0$ for any $x \in I$. 
+
+Say we define $f(a) = g(a) = 0$ (if they are not already defined so) so that $f$ and $g$ are continuous at $a$. This means that Rolle's Theorem (\ref{rolle}) and Cauchy's Mean Value Theorem (\ref{cauchy_mvt}) apply to any interval $[a, x]$ for $x \in I$. Rolle's Theorem tells us that $g(x) \ne 0$, since if $g(a) = g(x) = 0$, there would be some $y \in (a, x)$ such that $g'(y) = 0$, contradicting one of our hypotheses. Cauchy's Mean Value Theorem gives us that, for some $y \in (a, x)$,
+\[ f'(y)(g(x) - 0) = g'(y)(f(x) - 0), \]
+or that
+\[ \frac{f(x)}{g(x)} = \frac{f'(y)}{g'(y)}. \]
+In the proof of the Theorem \ref{limderiv}, we showed that since $y \in (a, x)$, as $x$ approaches $a$, $y$ approaches $a$. Furthermore, since $\lim_{z \to a} f'(z)/g'(z)$ exists, we can say
+\[ \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(y)}{g'(y)} = \lim_{z \to a} \frac{f'(z)}{g'(z)}. \]
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+
+\begin{problem}[11-25] \ 
+\begin{enumerate}
+\item[(a)] By the Mean Value Theorem, there is an $x$ in $(a, b)$ such that 
+\[ f'(x) = \frac{f(b)-f(a)}{b-a}. \]
+Since $f'(x) \ge M$, it follows that
+\[ \frac{f(b)-f(a)}{b-a} \ge M. \]
+And thus, $f(b) \ge f(a) + M(b-a)$.
+
+\item[(b)] By the Mean Value Theorem, there is an $x$ in $(a, b)$ such that 
+\[ f'(x) = \frac{f(b)-f(a)}{b-a}. \]
+Since $f'(x) \le m$, it follows that
+\[ \frac{f(b)-f(a)}{b-a} \le m. \]
+And thus, $f(b) \le f(a) + m(b-a)$.
+
+\item[(c)] (I think that the problem means that $|f'(x)| \le M$.) By the Mean Value Theorem, there is an $x$ in $(a, b)$ such that 
+\[ f'(x) = \frac{f(b)-f(a)}{b-a}. \]
+Since $|f'(x)| \le M$, it follows that
+\[ \left|\frac{f(b)-f(a)}{b-a}\right| \le M \]
+Since $b > a$, it follows that 
+\[ |f(b) - f(a)| \le M(b-a), \]
+or that
+\[ f(b) - f(a) \le M(b-a)\ \and\ f(a) - f(b) \le M(b-a). \]
+Thus,
+\[ f(a) - M(b-a) \le f(b) \le f(a) + M(b-a). \]
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[11-26]
+Since $f'(x) > 0$ for all $x \in [0, 1]$, $f$ is strictly increasing on $[0, 1]$. There are three cases then: there is exactly one $x \in [0, 1]$ such that $f(x) = 0$, $f(x) > 0$ for all $x \in [0, 1]$ or $f(x) < 0$ for all $x \in [0, 1]$. 
+
+Say $f$ has one zero, $x = a$ for some $a \in (0, 1)$, so $f(a) = 0$. Say $a \ge 1/2$. By our work in Problem 11-25, 
+\[ f(a) - f(0) \ge Ma \ge \frac M2\ \rmand\ f(a) - f\left(\frac 14\right) \ge M\left(a-\frac 14\right) \ge \frac M4. \]
+Since $f(a) = 0$, it follows that 
+\[ f(0) \le -\frac M2\ \rmand\ f\left(\frac 14\right) \le -\frac M4. \]
+Since $f$ is strictly increasing and continuous (because of differentiability) on $[0, 1]$, for any $x \in [0, 1/4]$,
+\[ -\frac M2 \le f(x) \le -\frac M4. \]
+So, $|f| \ge M/4$ on $[0, 1/4]$.
+
+Now say there is a zero $x = a$ such that $x \le 1/2$. Similarly 
+\[ f(1) - f(a) \ge M(1-a) \ge \frac M2\ \rmand\ f\left(\frac 34\right) - f(a) \ge M\left(\frac 34 - a\right) \ge \frac M4. \]
+Since $f(a) = 0$, it follows that 
+\[ f(0) \ge \frac M2\ \rmand\ f\left(\frac 34\right) \ge \frac M4. \]
+Since $f$ is strictly increasing and continuous (because of differentiability) on $[0, 1]$, for any $x \in [3/4, 1]$,
+\[ \frac M4 \le f(x) \le \frac M2. \]
+So, $|f| \ge M/4$ on $[3/4, 1]$.
+
+The next case we must examine is that $f$ is positive on $[0, 1]$. Since $f(0) > 0$, 
+\[ f\left(\frac 14\right) \ge \frac M4. \]
+So any interval of length 1/4 beginning at or after 1/4 suffices. 
+
+If $f$ is negative on $[0, 1]$, $f(1) < 0$, so 
+\[ f\left(\frac 34\right) \le -\frac M4. \]
+So any interval of length 1/4 ending at or before 3/4 suffices. 
+\end{problem}
+
+\begin{problem}[11-39]
+(The following is not very rigourous---but it makes sense to me intuitively and I cannot do any better---so it must suffice for now.)
+
+We know that the average of $f'$ on $[0, 1]$ is 1. (This is the non-rigourous part:) To minimise acceleration, the particle should move symmetrically (sort of) over the intervals $[0, 1/2]$ and $[1/2, 1]$. In particular, the particle should accelerate from $v = 0$ at $x = 0$ to a velocity $v = 2$ at $x = 1/2$ and then decelerate to $v = 0$ at $x = 1$. In any other case, the acceleration will be greater on one half of the interval than calculated in the specific case examined here. So, if $f'(1/2) = 2$ and $f'(0) = f'(1) = 0$, we know there must be $x_1 \in (0, 1/2)$ with $f''(x_1) = 4$ and some $x_2 \in (1/2, 1)$ with $f''(x_2) = 4$. 
+\end{problem}
+
+\begin{problem}[11-41]
+Let $f(a) = f(b) = 0$. Then there is some $x \in (a, b)$ such that $f'(x) = 0$, and thus we have that 
+\[ f''(x) = f(x). \]
+If $f(x) > 0$ and $f''(x) > 0$, then by Theorem \ref{twoderivminmax} $f(x)$ is a local minimum of $f$. But this is not possible---well, it is not possible for \textit{every} $x$ such that $f'(x) = 0$---since $f(x) > f(a) = f(b)$. A similar argument can be made if $f(x) < 0$ and $f''(x) < 0$, since not every such $x$ can be a local maximum because $f(x) < f(a) = f(b)$. 
+
+Thus, there is some $x \in (a, b)$ such that $f(x) = 0$. We can then repeat this argument for $[a, x]$ and $[x, b]$, and then again and again. So $f$ is zero on the interval $[a, b]$. 
+\end{problem}
+
+\begin{problem}[11-54] \ 
+\begin{enumerate}
+\item[(a)] If $f(a)$ is the minimum of $f$ on $[a, b]$, then for any $0 < h \le b - a$, $f(a) \le f(a+h)$. That is (since $h > 0$),
+\[ \frac{f(a+h)-f(a)}h \ge 0. \]
+So, 
+\[ f'(a) = \lim_{h \to 0^+} \frac{f(a+h)-f(a)}h \ge 0. \]
+
+If $f(b)$ is the minimum of $f$ on $[a, b]$, then for any $a-b \le h < 0$, $f(b) \le f(a+h)$. That is (since $h < 0$),
+\[ \frac{f(a+h)-f(b)}h \le 0. \]
+So, 
+\[ f'(b) = \lim_{h \to 0^-} \frac{f(a+h)-f(b)}h \le 0. \]
+
+\item[(b)] Since $f'(a) < 0$ and $f'(b) > 0$, $f$ has a minimum at neither $a$ nor $b$ (refer to (a)). Thus $f$ must attain its minimum on $[a, b]$ for some $x \in (a, b)$. By Theorem \ref{localmaxderiv}, $f'(x) = 0$. 
+
+\item[(c)] Consider $g(x) = f(x) - cx$, so $g'(x) = f'(x) - c$. Thus, $g'(a) < 0 < g'(b)$ and by (b), there is some $x \in (a, b)$ such that $g'(x) = 0$. It follows that $f'(x) = c$.
+\end{enumerate}
+\end{problem}
+
+\subsection{Appendix: Convexity and concavity}
+
+\begin{definition}
+$f$ is \textbf{convex} on an interval $I$ if for $a < x < b$ ($a, x, b \in I$),
+\[ \frac{f(x)-f(a)}{x-a} < \frac{f(b)-f(a)}{b-a}. \]
+\end{definition}
+
+\begin{definition}
+$f$ is \textbf{concave} on an interval $I$ if for $a < x < b$ ($a, x, b \in I$),
+\[ \frac{f(x)-f(a)}{x-a} > \frac{f(b)-f(a)}{b-a}. \]
+\end{definition}
+
+\begin{remark}
+It is clear that if $f$ is convex on an interval, then $-f$ is concave on that interval, and vice-versa. Thus, the following discussion is in terms of only convexity, with the analagous concepts for concavity easily inferred. 
+\end{remark}
+
+\begin{theorem}
+Let $f$ be convex. If $f$ is differentiable at $a$, then the graph of $f$ lies above the line tangent to the graph at $(a, f(a))$, except at $(a, f(a))$ itself. If $f$ is differentiable at $a$ and $b$, $a < b$, then $f'(a) < f'(b)$. 
+
+\begin{proof}
+If $0 < h_1 < h_2$, by the definition of convexity, 
+\[ \frac{f(a+h_1)-f(a)}{h_1} < \frac{f(a+h_2)-f(a)}{h_2}. \]
+Similarly, if $h_2 < h_1 < 0$,
+\[ \frac{f(a+h_1)-f(a)}{h_1} > \frac{f(a+h_2)-f(a)}{h_2}. \]
+So, if $h^- < 0$ and $h^+ > 0$, by the definition of the derivative, 
+\begin{equation} \label{convextanbelow}
+  \frac{f(a+h^-)-f(a)}{h^-} < f'(a) < \frac{f(a+h^+)-f(a)}{h^+}.
+\end{equation}
+In general, we have that $f'(a)h < f(a+h) - f(a)$, or that
+\[ f(a) + f'(a)h < f(a+h). \]
+Thus, the graph of $f$ at $x = a + h$ lies above the tangent line at $x = a + h$, for $h \ne 0$.
+
+For the second part of the theorem, we can use Equation \ref{convextanbelow} again. Namely, we can say that, for any $b > a$ in the domain of $f$,
+\[ f'(a) < \frac{f(a+(b-a))-f(a)}{b-a} = \frac{f(b)-f(a)}{b-a}, \]
+\[ f'(b) > \frac{f(b+(a-b))-f(a)}{a-b} = \frac{f(a)-f(b)}{a-b} = \frac{f(b)-f(a)}{b-a}. \]
+So,
+\[ f'(a) < \frac{f(b)-f(a)}{b-a} < f'(b), \]
+finishing the proof.
+\end{proof}
+\end{theorem}
+
+We now look at the converses of the previous theorem, which requires a preliminary result (just as the Mean Value Theorem built upon Rolle's Theorem). 
+
+\begin{lemma} \label{convexlem}
+Suppose $f$ is differentiable and $f'$ is increasing. If $a < b$ and $f(a) = f(b)$, then $f(x) < f(a)=f(b)$ for $x \in (a, b)$. 
+
+\begin{proof}
+Suppose there were some $x \in (a, b)$ such that $f(x) > f(a)=f(b)$. Then there must be some $x_0 \in (a, b)$ at which $f$ attains a local maximum, and by Theorem \ref{localmaxderiv} $f'(x_0) = 0$. In addition, by the Mean Value Theorem, there must be some $x_1 \in (a, x_0)$ such that 
+\[ f'(x_1) = \frac{f(x_0)-f(a)}{x_0-a} > 0. \]
+This contradicts that $f'$ is increasing, so there can be no $x \in (a, b)$ such that $f(x)>f(a)=f(b)$.
+
+The other case we must discount is that there is some $x \in (a, b)$ such that $f(x)=f(a)=f(b)$. $f'$ is increasing, so $f$ cannot be constant, and we have just shown that there can be no $f(x') > f(a) = f(b)$ on the interval. So there must be some $x_0 \in (a, b)$ such that $f(x_0) < f(a) = f(b)$ and $f(x)=f(a)=f(b)$ must be the maximum of $f$ on $[a, b]$. Thus, $f$ attains a local maximum at $x$ and $f'(x) = 0$. Again, by the Mean Value Theorem, there must be some $x_1 \in (x_0, x)$ such that
+\[ f'(x_1) = \frac{f(x)-f(x_0)}{x-x_0} > 0. \]
+This contradicts that $f'$ is increasing, concluding the proof.
+\end{proof}
+\end{lemma}
+
+\begin{theorem} \label{derivincconvex}
+If $f$ is differentiable and $f'$ is increasing, then $f$ is convex.
+
+\begin{proof}
+Let $a < b$. Consider the function
+\[ g(x) = f(x) - \left(\frac{f(b)-f(a)}{b-a}\right)(x-a). \]
+It is clear that $g'$ is increasing and that $g(a)=g(b)=f(a)$. So we can apply Lemma \ref{convexlem}: for all $x \in (a, b)$,
+\[ g(x) = f(x) - \left(\frac{f(b)-f(a)}{b-a}\right)(x-a) < f(a). \]
+It follows that
+\[ \frac{f(x)-f(a)}{x-a} < \frac{f(b)-f(a)}{b-a}, \]
+which, by definition, implies that $f$ is convex.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+If $f$ is differentiable and the graph of $f$ lies above all tangent lines to $f$ (except at the point of contact), then $f$ is convex.
+
+\begin{proof}
+Algebraically, the hypothesis means that at two points, $a < b$,
+\[ f(a) > f'(b)(a-b) + f(b)\ \rmand\ f(b) > f'(a)(b-a) + f(a). \]
+Combining the two gives us that
+\[ f(b) > f'(a)(b-a) + f'(b)(a-b) + f(b), \]
+or that $f'(a) < f'(b)$. Thus, $f'$ is increasing, and by Theorem \ref{derivincconvex}, $f$ is convex.
+\end{proof}
+\end{theorem}
+
+
+
+

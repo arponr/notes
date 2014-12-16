@@ -1,0 +1,80 @@
+\section{Differential equations and exponentials}
+
+Let us now consider linear systems of differential equations, so equations of the form
+\[ \drv \vu t = \mA\vu. \]
+
+\bex
+Take the example
+\[ \drv {u_1}t = -u_1 + 2u_2, \]
+\[ \drv {u_2}t = u_1 - 2u_2, \]
+so
+\[ \mA = \mat{-1&2&1&-2}. \]
+And say we're given the initial condition $u(0) = \rvec{1,0}$. So everything is starting in the $u_1$ component, and things are moving into $u_2$ over time. And we can see this also by looking at the eigenvalues and vectors.
+
+Since $\mA$ is obviously singular (the columns are not independent), there must be than eigenvalue $\lambda_1 = 0$. And then the other must then equal the trace, so $\lambda_2 = -3$. And we could have gotten these also by solving $|\mA-\lambda \mI = 0$. If we consider these eigenvalues, we can expect that in the function there will be some $e^0$ term, which will be constant, and some $e^{-3t}$ term, which will tend to zero with time. So as time goes on to infinity, it seems that things will reach some sort of constant, steady-state.
+
+Now for the eigenvectors. If we take $\lambda_1 = 0$, the eigenvector will just be in the nullspace of $\mA$, and we can then see that $\vx_1=\rvec{2,1}$. And if we take $\lambda_2 = -3$, then eigenvector will be in the nullspace of
+\[ \mA + 3\mI = \mat{2&2\\1&1}. \]
+And we can see that one eigenvector would be $\vx_2=\rvec{1,-1}$. 
+
+Then the solution is given by
+\[ u(t) = c_1e^{\lambda_1t}\vx_1 + c_2e^{\lambda_2t}\vx_2, \]
+where eachs separate pure exponential term are two special solutions to the differential equation, and linear combinations of them give the general so lution. And we can check these special solutions solve our original differential equations:
+\[ \drv \vu t = \lambda_i e^{\lambda_it}\vx_i = \lambda_i \vu = \mA \vu, \]
+where the last equality holds because $\lambda_i$ and $\vx_i$ are eigenvalues and eigenvectors. And then the derivative of linear combinations of these pure solutions will of course be linear combinations of the derivative, so they are the general solution. 
+
+Plugging in our initial condition would give us:
+\[ c_1 \mat{2\\1} + c_2\mat{1\\-1} = \mat{1\\0}. \]
+It follows that the particular solution is given by $c_1 = c_2 = 1/3$ (in general we could just solve this system, $\mS\vc = \vu(0)$, by elimination!), which gives us finally that
+\[ \vu(t) = \mat{2/3\\1/3} + e^{-3t}\mat{1/3\\-1/3}. \]
+So then the steady-state of the system, as $t \to \infty$, would be $\rvec{2/3,1/3}$. 
+\eex
+
+Now in this case, we got a steady-state system. But there are more possibilities.
+\ben
+\item Stability: $\vu(t) \to 0$. We need $e^{\lambda t} \to 0$, so it seems that we should want $\lambda < 0$. But remember that $\lambda$ can be complex. Notice, though, that
+\[ |e^{(a+bi)t}| = |e^{at}|, \]
+because $|e^{bit}| = |\cos bt + i \sin bt| =1$. So the imaginary part doesn't matter here, and our true condition should be
+\[ \cRe \lambda < 0. \] 
+\item Steady-state: like in the case above, so we want $\lambda_1 = 0$ and for all other $\lambda$, $\cRe \lambda < 0$.
+\item Blow up: if any $\cRe \lambda > 0$.   
+\een
+
+And for a $2 \by 2$ matrix,
+\[ \mA = \mat{a&b\\c&d}, \]
+ we can pin down these cases a bit further too. For example, for stability, we want $\cRe \lambda_1 < 0$ and $\cRe \lambda_2 < 0$. This would imply that $\Tr \mA < 0$, and for the $2 \by 2$ case, this happens when
+\[ a + d < 0. \]
+But is this enough? Well it's not: just consider the matrix
+\[ \mat{-2&0\\0&1}. \]
+The trace is negative but the eigenvalues (which are just the diagonal entries here) include a positive value. So we need one more condition. If both $\lambda < 0$ then their product must be positive, and since their product is the determinant, then our second condition is just
+\[ \Det \mA = ad-bc > 0. \]
+
+Now let's consider again the differential equations we were solving, but more generally. So we're solving
+\[ \drv \vu t = \mA \vu. \]
+We can notice that $\mA$ is ``coupling'' the system, and we used the eigenvectors, contained in the matrix $\mS$ to ``decouple'' them. To see this more generally let's set $\vu = \mS\vv$. Then
+\[ \mS\drv \vv t = \mA\mS\vv, \]
+and then we get that
+\[ \drv \vv t = \mS^{-1} \mA \mS \vv. \]
+But we saw that $\mS^{-1} \mA \mS = \mLa$, so then
+\[ \drv \vv t = \mLa \vv. \]
+And since $\mLa$ is a diagonal matrix, our equations are completely decoupled.
+
+Now it turns out the natural way to then write the solution is
+\[ \vv(t) = e^{\mLa t}\vv(0) \Rightarrow \vu(t) = \mS e^{\mLa t} \mS^{-1} \vu(0) = e^{\mA t} \vu (0). \]
+Where we then have that $e^{\mA t} = \mS e^{\mLa t} \mS^{-1}$. But what the hell does this mean, with a matrix up in the exponent? The idea we use to define the matrix exponential is the power series for the exponential.
+\bdf
+\[ e^{\mA t} = \mI + \mA t + \frac{(\mA t)^2}2 + \frac{(\mA t)^3}6 + \cdots = \sum_{k = 0}^\infty \frac{(\mA t)^n}{n!}. \]
+\edf
+So why is it that $e^{\mA t} = \mS e^{\mLa t} \mS^{-1}$? Well this follows from the power series and the diagonalisation formula (along with the fact that raising the diagonalisation formula to a power leaves the eigenvector matrix and its inverse alone and only raises the eigenvalue matrix to that power)
+\[ e^{\mA t} = \sum_{k = 0}^\infty \frac{(\mA t)^n}{n!} = \sum_{k = 0}^\infty \frac{(\mS\mLa\mS^{-1} t)^n}{n!} = \sum_{k = 0}^\infty \frac{\mS(\mLa t)^n\mS^{-1}}{n!} = \mS \left(\sum_{k = 0}^\infty \frac{(\mLa t)^n}{n!} \right)\mS^{-1} = \mS e^{\mLa t} \mS^{-1}. \]
+Note that this manipulation requires the assumption that $\mA$ is diagonalisable, meaning it has $n$ independent eigenvectors. 
+
+Now what does $e^{\mLa t}$ look like? Well since it's a diagonal matrix, the power series of the matrix just has the power series of the entires in the diagonal spots, and thus
+\[ e^{\mLa t} = \mat{e^{\lambda_1t}&0&\cdots\\0&\ddots&0\\0&\cdots&e^\lambda_nt}. \]
+So then it's clear that this general matrix formula is exactly what we did in that example earlier. 
+
+Now let's look at one more type of differential equation:
+\[ y'' + by' + ky = 0. \]
+This is one second order equation. But just like Fibonaccy, we can turn this into two first-order equations, by letting $\vu = \rvec{y',y}$. Then
+\[ \vu' = \mat{y''\\y'} = \mat{-b&-k\\1&0}\mat{y'\\y} = \mat{-b&-k\\1&0}\vu. \]
+And if we had an $n$-th order equation, we'd just put the negative coefficients in the first row, and the trival identity rows in the rest, turning it into an $n \by n$ first-order equation.

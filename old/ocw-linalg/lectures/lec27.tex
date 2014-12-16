@@ -1,0 +1,54 @@
+\section{Positive-definite matrices and minima}
+
+(We're heading back to real matrices now.)
+
+We briefly looked already at positive-definite matrices, but let's go back to the topic. Our first goal will be to find a test for positive-definiteness, and our next goal will be to explain why positive-definiteness is so important. 
+
+Let's begin with $2 \by 2$ matrices. Of course we're only dealing with symmetric matrices: 
+\[ \mat{a&b\\b&c}. \]
+The last time around we already decided that the following three conditions imply positive-definiteness.
+\ben
+\item $\lambda_1 > 0, \lambda_2 > 0$ (eigenvalues)
+\item $a > 0, ac-b^2 > 0$ (determinants, and sub-determinants)
+\item $a > 0, (ac-b^2)/a > 0$ (pivots)
+\een
+\brm
+If we replace all the $>$ with $\ge$, then we have what are called \textbf{positive semidefinite}
+\erm
+
+Now we're going to come up with one more, having to do with the quantity 
+\[ \T\vx \mA \vx. \]
+In many places this condition is how positive-definitness is defined, and the above three properties then follow. So $\vx$ is any vector $\rvec{x, y}$. So if
+\[ \mA = \mat{a&b\\b&c} \]
+again, then
+\[ \T\vx \mA \vx = ax^2 + 2bxy + cy^2. \]
+Then we define a positive definite matrix to be one such that this quantity is positive for all $\vx \ne 0$.
+
+In the $2 \by 2$, case, we can imagine that a matrix is positive when the graph of
+\[ z(x,y) = ax^2 + 2bxy + cy^2, \]
+is positive everywhere except the origin. So we want a global minimum at the origin. Firstly, then, we want the only critical point to be at the origin, so the partial derivatives:
+\[ z_x = 2ax +2by, \]
+\[ z_y = 2bx + 2cy, \]
+should only be zero at the origin. If we solve the above system of equations so that both partials equal zero, we end up with
+\[ (ac - b^2)x = (ac-b^2)y = 0. \]
+So if $(0,0)$ is the only critical point, we know that $b^2-ac \ne 0$. Secondly, we want this to be a minimum, so we look at the second partial derivatives:
+\[ z_{xx} = 2a, \]
+\[ z_{xy} = 2b, \]
+\[ z_{yy} = 2c. \]
+For $(0,0)$ to be a minimum, we want $z_{xx}z_{yy} - z_{xy}^2 > 0$ and $z_{xx} > 0$ (refer to my notes on multivariable calculus for a proof of this). This directly implies that
+\[ ac - b^2 > 0, a > 0, \]
+which is exactly one of our conditions above (the subdeterminant one)! 
+
+And so this generalises to $n$ dimensions by saying that the subdeterminants of the second derivatives are positive. And the converse is true too. For an $n$-variable function, a critical point is a minimum if the matrix of second derivatives at the critical point is positive-definite. Pretty cool!
+
+We could have also seen this in the $2 \by 2$ case by completing the square:
+\[ ax^2 + 2bxy + cy^2 = a\left(x+\frac ba y\right)^2 + \left(c-\frac{b^2}a\right)y^2. \]
+In order for this to be a minimum, the coefficients in front of the squared quantities must both be positive, which implies the same,
+\[ ac-b^2 > 0, a > 0. \]
+Notice then that if we took a level curve of this function:
+\[ a\left(x+\frac ba y\right)^2 + \left(c-\frac{b^2}a\right)y^2 = k, \]
+for some $k > 0$, then we would have an ellipse if the original matrix was positive definite, and if it wasn't even positive semidefinite, we would have a hyperbola. 
+
+Notice that when we're completing the square, the coefficients of each square are actually the pivots when do elimination on 
+\[ \mA = \mat{a&b\\c&d}. \]
+And so this leads to the $n \by n$ condition for positive definiteness that all the pivots must be positive!

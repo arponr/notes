@@ -1,0 +1,97 @@
+\section{Line integrals in space}
+
+We'll now switch gears to look at line integrals (and work) in three dimensions. We'll see that computing these are very similar to what we did in the plane---just with a $z$ coordinate---whereas testing whether a field is a gradient field becomes much more complicated.
+
+Let $\vF = P\vi +Q\vj + R\vk$ be a vector field and $C$ a curve in space. Then work is still given by
+\[ \int_C \vF\cdot\dr, \]
+and we compute it in the same way, just with a $z$ involved. So $\dr = <dx,dy,dz>$, and thus the integral is
+\[ \int_C P\,dx + Q\,dy +R\,dz. \]
+This is still line integral that we will parameterise in terms of one variable to get a single variable integral that we can compute. 
+\bex
+Take the vector field $\vF = <yz,xz,xy>$ and the curve $C: x = t^3,y=t^2,z=t, 0\le t\le1$. Then the line integral is
+\[ \int_C yz \,dx + xz\,dy + xy\,dx = \int_C t^3\cdot3t^2\,dt + t^4\cdot 2t\,dt + t^5 \,dt = \int_0^1 6t^5\,dt = 1. \]
+
+Take the same vector field, but the curve $C'$ starting at the origin, then along the $x$-axis to $(1,0,0)$ ($C_1$), then parallel to the $y$-axis to $(1,1,0)$ ($C_2$), and finally parallel to the $z$-axis to $(1,1,1)$ ($C_3$). This time we break it into a sum of three terms. And in $C_1$ and $C_2$, we are in the $xy$-plane, so $z=dz=0$, and so the line integral will be 0 for both. Then for $C_3$, $x=y=1$,$dx=dy=0$, and $z$ varies from 0 to 1. So the line integral is
+\[ \int_C \vF \cdot \dr = \int_0^1 dz = 1. \]
+
+Notice that we took two paths from the origin to $(1,1,1)$ and got the same value for the integral. And this is because our chosen $\vF$ is conservative (i.e. a gradient field); it's fairly apparent that $\vF = \nabla f$ for $f(x,y,z) =xyz$. So we could have just used the fundamental theorem of calculus for line integrals:
+\[ \int_C \nabla f \cdot \dr = f(p_1)-f(p_0) = 1 - 0 = 1. \]
+\eex
+
+So far, everything has been the same as in the plane. Let's see where things are diffetent: firstly, testing whether a vector field is a gradient field. In the plane, we had to just check one condition, $N_x = M_y$. Now we'll have \textit{three} conditions to check (i.e., more work)!
+
+\subsection{Test for gradient fields}
+
+We want to know for our vector field $\vF = <P,Q,R>$ if we can write it, for some potential function $f$, as $<f_x,f_y,f_z>$. We'll use the same principle as we did in two dimensions, namely that the mixed partial derivatives are the same no matter what order we take them. So we have, if $\vF$ is indeed a gradient field, that
+\[ P_y = f_{xy} = f_{yx} = Q_x, \]
+\[ P_z = f_{xz} = f_{zx}  = R_x, \]
+\[ Q_z = f_{yz} = f_{zy} = R_y, \]
+these being our three conditions (in addition to $\vF$ being defined and differentiable in a simply connected region).
+
+We can equivalently say that the differential 
+\[ P\,dx + Q\,dy + R\,dz \]
+is an exact differential (for some function $f$, it is exactly $df$) for the same criterion. This is the same statement in a different language.
+\bex
+For which $a,b$ is 
+\[ axy\,dx + (x^2+z^3)\,dy + (byz^2 - 4z^3)\,dz \]
+an exact differential?
+
+We have $P_y = Q_x$:
+\[ ax = 2x, \]
+so $a=2$. Then $P_z=R_x$:
+\[ 0=0, \]
+so that isn't a problem. Then $Q_z=R_y$:
+\[ 3z^2=bz^2, \]
+so $b=3$. Thus this is an exact differential when $a=2$ and $b=3$.
+
+In the case that we have the vector field
+\[ \vF = <2xy,x^2+z^3,3yz^2-4z^3>, \]
+then, we can find a potential function. There are again two methods to do this.
+\ben
+\item Set the value, 
+\[ f(x_1,y_1,z_1) = \int_C \vF \cdot \dr + k, \]
+for a constant $k$ and any curve $C$ (most convenient would be comprised of three lines parallel to each axis. (This is the really same as in the plane, whereas the next way to do it changes more.)
+\item We can also use antiderivatives. We want to solve the system
+\[ f_x = 2xy,\ f_y = x^2+z^3,\ f_z = 3yz^2-4z^3. \]
+We do one at a time and then compare with the others. If we integrate the first with respect to $x$, we have
+\[ f = x^2y + g(y,z). \]
+To get information about $g$, we look at the other partials. If we differentiate our interim $f$ expression with respect to $y$, then
+\[ f_y = x^2 + g_y. \]
+This tell us that $g_y = z^3$. Then we integrate this we respect to $y$ to get
+\[ g = yz^3 + h(z). \]
+So we have now that
+\[ f = x^2y + yz^3 + h(z). \]
+Differentiating this with respect to $z$ gives us that
+\[ f_z = 3yz^2 + h'. \]
+This tell us that $h' = -4z^3$. So we finally integrate this with respect to $z$ to get
+\[ h = -z^4 + k. \]
+So in the end, we have found the potential function to be
+\[ f(x,y,z) = x^2y + yz^3 -z^4 + k. \]
+\een
+\eex
+
+\subsection{Curl in space}
+
+Let's now talk about curl in space, and what is going to replace Green's function for three dimensional things. We'll start with curl. 
+
+\bdf
+If $\vF = P\vi+Q\vj+R\vk$, then
+\[ \curl \vF = (R_y-Q_z)\vi + (P_z-R_x)\vj +(Q_x-P_y)\vk. \]
+Now of course it is very difficult to remember this formula, so let's look more carefully at the structure of it. Well each of the coefficients is what has to be 0 for our vector field to be conservative. So, by construction, we keep the condition that if $\vF$ is defined in a simply connected region $\vF$ is conservative if and only if $\curl F = 0$.
+
+But the formula is really only easy to remember using del notation. We've seen that scalar multiplication with del gives the gradient and the dot product with a vector field gives the divergence. Now we'll use the cross product with a vector field to get curl. Namely:
+\[ \curl \vF = \del \times \vF = \dat{\vi & \vj & \vk \\ \pd{ }{x} & \pd{ }{y} & \pd{ }{z} \\ P & Q & R} = (R_y-Q_z)\vi - (R_x-P_z)\vj +(Q_x-P_y)\vk, \]
+which is the same as the formula stated above! (Note that this use of the determinant notation is quite strange, since the top two rows aren't even numbers, so this is purely a notational concept.)
+\edf
+
+\brm
+This is quite different than in the plane because now the curl of a vector field is a vector field, rather than a scalar function.
+\erm
+
+Geometrically, curl still measures the rotation component of motion (in a velocity field), and also provides the direction of the axis of rotation. For example, a velocity field rotating around the $z$-axis at angular velocity $\omega$ is given by 
+\[ \vv = <-\omega y, \omega z,0>, \]
+which leads to
+\[ \curl \vv = 2\omega \vk. \] 
+
+
+

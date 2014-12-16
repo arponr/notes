@@ -1,0 +1,81 @@
+\section{Fundamental theorem for line integrals}
+
+We've defined line integrals for curves, $C$, along a vector field, $\vct{F}$ = $<M,N>$:
+\[ \int_C \vF \cdot \dr = \int_C \vF \cdot \vT\,ds = \int_C M\,dx + N\,dy. \]
+Let's first look at one example of this, again.
+
+\bex
+Take the vector field
+\[ \vF = y\vi + x\vj. \]
+We want to find 
+\[ \int_C \vF \cdot \dr. \]
+where $C$ is encloses the sector of the unit disk for angles $0 \le \theta \le \pi/4$ (so $C$ is composed of a two line segments and an arc on the unit circle). We break up the integral into these three sections.
+\ben
+\item The first segment is along the $x$-axis, from $(0,0)$ to $(1,0)$. We know on this curve that $y=dy=0$, so our parameter can just be $x$. So the line integral is
+\[ \int_{c_1} y\,dx+x\,dy = 0. \]
+This makes sense becaue the vector field is perpendicular to the axis on the $x$-axis. 
+\item The second segment is the portion of the unit circle.  In this case, we will use the parameter $0\le\theta\le\pi/4$, with $x=\cos\theta,dx=-\sin\theta\,d\theta,y=\sin\theta,dy=\cos\theta\,d\theta$. Then the line integral is
+\[ \int_0^{\pi/4} -\sin^2 \theta\,d\theta + \cos^2\theta\,d\theta = \int_0^{\pi/4} \cos 2\theta \,d\theta = \frac12 \sin 2 \theta \bigg|_0^{\pi/4}=\frac12. \]
+\item The third line segment is along the line $y=x$ from $(\frac1{\sqrt{2}}, \frac1{\sqrt{2}})$ to $(0,0)$. To simplify this, we look at the work done in the opposite direction and negate it in the end. So, we parameterise the line as $x=t,y=t$ for $0\le t\le \frac1{\sqrt{2}}$ and compute
+\[ -\int_0^{\frac1{\sqrt{2}}} 2t\,dt = -\frac 12. \]
+\een
+Thus the total work done along this curve is
+\[ \int_C \vF \cdot \dr = 0 + \frac 12 -\frac 12 = 0. \] 
+\eex
+
+Now how do we \textit{avoid} computing line integrals? One vector field that we've already encountered (that we didn't use this name for) is the \textbf{gradient field}, $\vF = \nabla f$, where $f(x,y)$ is called the \textbf{potential} (motivated by physics, of course). The claim is that we can simpligy the evaluation of the line integral, by the following theorem.
+ 
+\btm[The fundamental theorem of calculus for line integrals]
+For a curve $C$ starting at point $p_0$ and ending at point $p_1$, we have
+\[ \int_C \nabla f \cdot \dr = f(p_1) - f(p_0). \]
+\bpf
+We know that
+\[ \int_C \nabla f\cdot \dr = \int_C f_x\,dx +f_y\,dy. \]
+We can then parameterise $C$ such that $x=x(t),y=y(t)$ for $t_0 \le t \le t_1$. It follows that the integral is
+\[ \int_C \left(f_x \drv{x}{t} + f_y \drv{y}{t}\right)\,dt = \int_{t_0}^{t_1} \drv{f}{t}\,dt. \]
+Then by the usual fundamental theorem of calculus, we have that
+\[ \int_C \nabla f \cdot \dr = f((x(t),y(t))\bigg|_{t_0}^{t_1} = f(p_1) - f(p_0). \]
+\epf
+\etm
+Later on we'll see how exactly to decide whether a given vector field is a gradient field or not, and if it is, how to compute its potential function.
+
+\bex
+Let's take the previous example again. Was that vector field a gradient field? Well yes, since $\nabla f = <y,x>$ when $f(x,y) = xy$. Thus the line integral can be calculated using the values of the potential function at the endpoints of the curve. We have that
+\[ \int_{c_1} \vF \cdot \dr = f(1,0) - f(0,0) = 0, \]
+\[ \int_{c_2} \vF \cdot \dr = f(\frac1{\sqrt{2}},\frac1{\sqrt{2}}) - f(1,0) = \frac 12, \]
+\[ \int_{c_3} \vF \cdot \dr = f(0,0) - f(\frac1{\sqrt{2}},\frac1{\sqrt{2}}) = -\frac 12, \]
+and this is the same as before, but much, much simpler. And we can notice: since we start and end at the same place, the work in fact must be zero!
+\eex
+
+\bdb
+Though this is very nice, this only applies to gradient fields, which is not true for every vector field.
+\edb
+
+\subsection{Consequences}
+Now, what are the consequences of this nice theorem. If $\vF$ is a gradient field, then...
+\ben
+\item Path independence: as long as we start at point $a$ and end at point $b$, the line integral is the same no matter what path we take through $\vF$; i.e.
+\[ \int_{C_1} \vF \cdot \dr =  \int_{C_2} \vF \cdot \dr \]
+if $C_1$ and $C_2$ start and end at the same places. This follows immediately from the fundamental theorem we just proved above.
+\item $\vF$ is \textbf{conservative}. This means that if we have a closed curve $C$, then
+\[ \int_C \vF \cdot \dr = 0. \]
+This, again, immediately follows from the fundamental theorem. This also means that we can't create any perpetual motion in a conservative field (you can in a non-conservative field, e.g. magnetic fields). 
+\een 
+
+\brm
+Let's look at the vector field $\vF = <-y,x>$ and the curve $C$ as the unit circle. We showed earlier that
+\[ \int_C \vF \cdot \dr = \int_C \vF \cdot \vT \,ds = \int_C ds = 2\pi. \]
+Thus, this field is not conservative, and is thus not a gradient field! The above consqueneces (such as path independence, e.g. going along the top semicircle and the bottom circle) are thus false for this particular vector field.
+\erm
+
+\bex
+In physics, if a force $\vF$ is the gradient of a potential: $\vF = \nabla f$, then work of $\vF$ is the change in value of potential (e.g. in gravitational and electrical fields vs. their potentials). Then conservativeness means no energy can be extracted for free from the field, and total energy is conserved.
+\eex
+
+Now let's look at the equivalence of properties we've just discussed. Let $\vF$ be a gradient field. It is conservative, so
+\[ \int_C \vF \cdot \dr = 0 \]
+for all closed curves $C$. The claim is that this is equivalent to saying that the line integral is path independent in $\vF$. It is easy to see that path independence implies conservativeness (since one possible path for a closed curve is not moving at all). Now what about the converse? How does conservativeness imply path independence? Say we have two paths $C_1$ and $C_2$ that begin and end at the same two points. Notice then that the curve $C_1 - C_2$ is closed and, since the field is conservative, must have work 0. But then this implies that the work done on $C_1$ and $C_2$ are the same; thus we have path independence. 
+
+We can also show that these two properties are equivalent to our saying that $\vF$ is a gradient field. We know that gradient fields have these properties (as shown through the fundamental theorem) but how can we show that these properties imply that $\vF$ is a gradient field? The answer to this question will be how we find the potential. We can set the potential at our starting point. Then we can determine the potential at any other point, since we can calculate the work done between the points (and we can choose any path to get there). 
+
+The last property that this is equivalent to is that $M\,dx + N\,dy$ is an exact differential, meaning that it can be expressed $df$ for some $f$ (which is the same statement as the gradient field property, really). 

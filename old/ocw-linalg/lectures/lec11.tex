@@ -1,0 +1,55 @@
+Let's start by thinking about the natural basis for $M$. It's pretty clear that,
+\[ \Dim M = 9, \]
+and that a basis can be formed by taking all nine matrices with a 1 in one of the entries and 0s in the rest. 
+
+What about the subspace of symmetric matrices, $S$. Well since there are 6 entries that we can arbitrarily decide (the other three must then match to achieve symmetry), we must have that
+\[ \Dim S = 6. \]
+The basis for $S$ is not immediate, though, from our basis of $M$, and this is usually the case: we have to completely rethink to find a basis for subspaces of a vector space.
+
+And for the subspace of upper triangular matrices, $U$, there are also 6 entries that we can arbitrarily decide, so
+\[ \Dim U = 6, \]
+as well. In this case, we can actually form a basis by taking the 6 upper triangular matrices in the basis for $M$, which is nice.
+
+And how about the subspace $S \cap U$, all symmetric, upper triangular matrices (diagonal matrices). Clearly all but the diagonal must be zeros, so there are three free choices, or
+\[ \Dim (S \cap U) = 3. \]
+And the basis for this subspace could be the the three diagonal matrices in the basis for $M$. 
+
+Now we talked earlier about unions of subspaces not necessarily being vector spaces themselves, e.g. $S \cup U$ is not a vector space. And that was because the sum of something in, say, $S$ and something in $U$ maybe be somewhere in between the two spaces. So we need to fill it in to make a vector space. And we call this ``filled-in vector space'' the sum of the subspaces: 
+$S + U$. This takes all of the vectors $\vx$ that can be expressed as a sum $\vx_1+\vx_2$ for $\vx_1 \in S, \vx_2 \in U$. And in fact, in this case, any $3 \times 3$ matrix can be represented as a sum of a symmetric matrix and an uppertriangular matrix. So,
+\[ S+U = M, \]
+so the dimension of the sum is 9! This fact leads to a more general idea. 
+
+\btm
+For any two vector spaces $V$ and $W$,
+\[ \Dim V + \Dim W = \Dim (V \cap W) + \Dim (V + W). \]
+\etm
+
+\subsection{Differential equations}
+
+Let's look quickly at one other type of a vector space. Consider the solutions to the differential equation
+\[ \drvn yx2 + y = 0. \]
+We can consider the set of all solutions,
+\[ y = c_1 \cos x + c_2 \sin x, \]
+to be a vector space (in fact this we can call the nullspace of the differential expression). One basis to this vector space could be the two ``vectors'' $y = \cos x$ and $y = \sin x$. And thus the dimension of this space is 2. 
+
+This example illustrates again that the ``vectors'' of a vector space need not be vectors in the traditional sense; in this case we have functions as ``vectors'', because we can take linear combinations of them. 
+
+\subsection{Rank 1 matrices}
+
+Now let's go back to matrices. Let's consider matrices of rank 1; they should be quite simple really. For example if we take a $2 \times 3$ matrix of rank 1, there can only be one pivot entry and 
+\[ \Dim C(\mA) = \Dim C(\T\mA) = 1. \]
+So these matrices really are quite simple. One way to illustrate this is that we can represent any rank 1 matrix by the multiplication of one of its columns and one of its rows. I.e., we can factor any rank 1 matrix $\mA$ into
+\[ \mA = \vu \T\vv, \]
+for some column vectors $\vu,\vv$.
+
+So rank 1 matrices are pretty simple and nice, and look like sort of building blocks for other matrices. And it's true in fact that we can write any $m \times n$ matrix of rank $r$ as a combination of $r$ rank 1 matrices.
+
+However we should note that if we take the subset of matrices of rank $\le r$ from the vector space of $m \times n$ matrices, note that it isn't a subspace. Because adding two matrices of rank $r$ might produce a matrix of rank $> r$. 
+
+\section{Graphs and networks}
+
+Now let's talk a little bit about graphs.
+\bdf
+A graph is given by the pair $(V,E)$ where $V$ is a set of nodes and $E$ is a set of edges connecting those nodes. 
+\edf
+One question we can ask about a graph is the maximum over the whole graph of the (shortest) distance between two nodes. This can be applied to the ideas of degrees of separation between people in a country or the world. 

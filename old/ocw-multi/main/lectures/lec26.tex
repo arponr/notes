@@ -1,0 +1,42 @@
+\section{Maxwell's equations}
+
+Let's now discuss a bit how these things relate to physics. We'll first discuss what curl says about force fields (and a nice consequqence about gravitational attraction).
+
+We've already discussed how in a velocity field, the curl measures the rotation component of motion, specifically twice the angular velocity (and the axis of rotation). But what does curl in a force field mean (the other type of physical vector field we've talked about)?
+
+If we have a piece of solid of mass $\Delta m$ in a force field $\vF$. Then there is a force $\vF \Delta m$ exerted on the mass. Now let's say the position vector of the mass is $\vr$ and along this vector is some type of arm or something that is trying to swing the mass around the origin. Then we define the torque:
+\[ \vtau = \vr \times \vF \Delta m, \]
+and this measures how much effort we need to exert in rotating the mass.
+\brm
+Remember the analogy that for translational motion, acceleration (the derivative of velocity) is given by force per unit mass, and for rotational motion, torque divided by moment of inertia gives angular acceleration (the derivative of angular velocity).
+\erm
+Now if we think of curl as an operation which from velocity gives angular velocity, then it follows that it takes us from acceleration to angular acceleration, and it follows again that it takes us from force to torque.
+
+So the curl of a force field measures how much torque is exerted on a small test mass at any point. Thus it measures how much the force causes a test mass to spin at any point. 
+
+A cool consequence of this: if our force field $\vF$ derives from a potential, then $\curl \vF = 0$, which implies that the field does not induce any rotation motion. And an even cooler step: since gravity is a conservative field, it cannot cause rotational motion in and of itself, and thus the Earth is not spinning purely because of gravity (it is spinning because it was formed spinning). And this is a rather deep consequence that arose from just abstract mathematical thinking. (This is under the assumption that the body is completely rigid and solid, which the Earth is not, but it still can be applied to a degree.) So the question of why the Earth is spinning is still left open...
+
+Now let's move on to electric and magnetic fields, namely Maxwell's equations, which govern how electric magnetic fields behave, how they're caused by electric charges and their motion, and how electromagnetic waves propagate. 
+
+So, the electric field $\vE$ tells us the force exerted on a charge,
+\[ \vF = q\vE\]. 
+And the field is the gradient of electric potential/voltage, so it tells us in what direction charges will go in a potential. The magnetic field $\vB$ causes a deflection in the trajectory of a moving charged particle and causes it to rotate within the field; its force is given by
+\[ \vF = q\vv \times \vB. \]
+We need to understand how these fields are caused by the charged particles in the first place, though.
+
+Let's focus on the electric field. Maxwell's equations tells us about the div and curl of these fields. The first equation (Gauss-Coulomb law) says
+\[ \del \cdot \vE = \frac \rho{\epsilon_0}, \]
+where $\epsilon_0$ is a constant, and $\rho$ is the electric charge density. So the divergence of electric field is caused by the presence of electric charge. This partial differential equation is not very intuitive though. It becomes more intuitive if we apply the divergence theorem. Take any closed surface $S$ (enclosing a region $D$), and consider the flux of $\vE$ out of the surface: so we want to find the surface integral using the divergence theorem, which gives us that
+\[ \oiint_S \vE \cdot \vdS = \iiint_D \divg \vE \,dV = \frac 1{\epsilon_0} \iiint_D \rho \,dV = \frac Q{\epsilon_0}.\]
+where $Q$ is the total electric charge in $D$. And this tells us about the relation between voltage and charge in a region. 
+
+The next equation is known as Faraday's law, which tells us about curlof $\vE$. We may jump to the fact that the curl must be 0 since the electric field is a gradient of the electric potential, but this doesn't account for the possible presence of a magnetic field, which can cause rotation. So this law says
+\[ \del \times \vE = -\pd{\vB}t. \]
+So a changing magnetic field can cause a curl in the electric field. Again, we can change this differential equation of vector fields using Stokes' theorem in this case. Consider the voltage generated in a closed loop, or the line integral (which can be evaluated using Stokes' theorem)
+\[ \oint_C \vE \cdot \dr = \iint_S (\del \times \vE)\cdot \vdS = \iint_S -\pd{\vB}t\cdot \vdS. \]
+This shows again that a changing magnetic field creates a voltage out of nowhere.
+
+Just for completeness, the last two equations:
+\[ \del \cdot \vB = 0, \]
+\[ \del \times \vB = \mu_0 \vJ + \epsilon_0 \mu_0 \pd{\vE}t, \]
+where $\vJ$ is the vector current density (how the charges are moving).

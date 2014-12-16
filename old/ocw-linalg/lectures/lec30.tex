@@ -1,0 +1,68 @@
+\section{Linear transformations}
+
+In many courses, the idea of linear transformations precedes the idea of a matrix. Basically without coordinates, linear transformations are objects by themselves, and with coordinates these linear transformations turn into matrices. 
+\begin{example}
+  Let's look at a projection onto a line in the plane. We can actually decscribe a projection without using any matrices. We notate this mapping, this linear transformation, $T: \RR^2 \to \RR^2$. Then we need some sort of rule, like a function. Say we want to project any vector $\vv$ to a vector on our line: our input is $\vv$ and our output is $T(\vv)$.
+\end{example}
+
+Now we could think of many transformations, but in linear algebra we want to consider linear transformations $T$ such that $T(c\vv+d\vw) = cT(\vv)+dT(\vw)$. It's not really hard to decide whether a transformation is linear.
+
+\begin{example}
+  Say we want to shift the whole plane by some vector $\vv_0$. Then our transformation is given by $T(\vv)=\vv+\vv_0$. This seems like a reasonable transformation, but is it linear? No. If we take a multiple of $\vv$, we don't add on that same multiple of $\vv_0$ in $T$, so it doesn't satisfy linearity. We could also notice that for any linear transformation, $T(0)=0$, which is not the case for this transformation. 
+\end{example}
+
+So things like shifting in the plane, transformations involving squares, etc. aren't linear transformations. Another non-example would be $T: \RR^3\to\RR$ such that $T(\vv) = ||v||$. One can see that this isn't linear because multiplying an input by a negative number does not negate it's length.
+
+\begin{example}
+  One more real example would be rotation by $\pi/4$ in the plane, another $T:\RR^2\to\RR^2$. Clearly rotating vectors respects linearity. 
+\end{example}
+
+So just notice that we can describe all of these transformations without any coordinates or matrices. And this allows us to consider what happens to all vectors rather than what happens on a coordinate-dependent single vector. 
+
+\begin{example}
+  Now let's consider an example that actually involves a matrix $\mA$: $T(\vv)=\mA\vv$. Clearly this is linear. But in the context of linear transformations, we don't want to consider just what happens with one vector's coordinates: we want to describe how all input vectors are transformed, in general, by $\mA$.
+
+Take
+\[ \mA = \mat{1&0\\0&-1}. \]
+It's evident that this transformation reflects all vectors over the $x$-axis (or whatever we want to call the first component, again, this transformation business does not depend on our coordinates).
+\end{example}
+
+So linear transformations are basically abstract ways of describing matric multiplication. And we can understand them by choosing a basis, coordinates and finding the matrix behind the transformation.
+
+Start with a linear transformatin $T:\RR^3\to\RR^2$. What type of matrices $\mA$ would give this type of transformation for $T(\vv) = \mA\vv$? Well it's clear that $\mA$ must be $2 \by 3$. It multiplies with three-component vectors as inputs and outputs two-component vectors. Now this gives us a lot of examples of these types of linear transformations. What we want to show is that these represent all of this type of linear transformations, or that any linear transformation can be represented as a matrix. 
+
+Let's first discuss how much information we need to know $T(\vv)$ for all $\vv$. Well consider this: if we know $T(\vv_1)$, we know what the transformation does to the whole line in the direction of $\vv_1$; if we know also $T(\vv_2)$, where $\vv_2 \ne k\vv_1$, then we know know what the transformation does to the whole plane containing $\vv_1$ and $\vv_2$. This is implied by linearity. So then this idea leads to the fact that if we know what $T$ does to a basis for the input space, say $\vv_1, \vv_2, \ldots, \vv_n$, we know what the trasnformation does to the whole input space. This is because every vector in the input space can be written as
+\[ \vv = \sum_{i=1}^n c_i \vv_i, \]
+since the basis, by definition, spans the vector space.
+
+So then how do we get from a linear transformation, free of coordinates, to a matrix that's been created with coordinates. Well, what coordinates mean is that we've decided on a basis $\{\vv_i\}$, and then the coordinates are just the constants $\{c_i\}$. So coordinates come from a basis, and if we change the basis we change the coordinates. Up until this point, we've just been assuming that our basis has been the standard basis, meaning
+\[ \mat{3\\2\\4} = 3\vi + 2\vj + 4\vk. \]
+This is a reasonable assumption, but it's not necessarily true. We could have been taking the components as multiples of any arbitrary basis, say the eigenvectors of a matrix. 
+
+Then to contruct the matrix $\mA$ that represents a linear transformation $T:\RR^n\to\RR^m$, we have to start really with the transformation. And then we have to choose two bases: $\vv_1, \ldots, \vv_n$ and $\vw_1, \ldots, \vw_m$ for our input and output spaces. And once we've chosen bases, we then have coordinates, and our matrix has been settled. What we want is simply a matrix $\mA$ that does what $T$ does, but with respect to our bases. 
+
+\begin{example}
+  Take for example our original transformation of a projection onto a line in $\RR^2$. Since our input and output spaces are the same, we can choose the same basis for both. And let's choose a nice one: say, the first vector $\vv_1 = \vw_1$ in the the direction of the line, and $\vv_2=\vw_2$ orthogonal to the line.
+
+Then any vector $\vv \in \RR^2$ can be written as 
+\[ \vv = c_1\vv_1 + c_2 \vv_2. \]
+We know that if $\vv=\vv_1$, the projection leaves it alone, and if $\vv=\vv_2$, the projections outputs the zero vector. It follows by linearity that 
+\[ T(v) = c_1\vv_1. \]
+So we want a matrix that takes in the coordinates $(c_1,c_2)$ and outputs the coordinates $(c_1, 0)$. And that's obviously the matrix
+\[ \mA = \mat{1&0\\0&0}. \]
+
+Note that what we really chose as our basis as our set of eigenvectors. And then our matrix came out as the diagonal eigenvalue matrix, $\mLa$! And it came out really nice.
+
+But let's say we wanted to choose the standard basis for the input and output spaces. Then actually our matrix would come out as the projection matrix formula we saw earlier on:
+\[ \mP = \frac{\vv_1\T{\vv_1}}{\T{\vv_1}\vv_1}. \]
+But our projection matrix didn't turn out so nice and diagonal. 
+\end{example}
+
+So here we see that if we have some coordinate-free linear transformation $T$, then when we choose bases for the input and output space ($\vv_i$ and $\vw_i$), there's going to exist some matrix $\mA$ that correctly transforms the coordinates. And to find the $i$-th column of $\mA$, we write $T(\vv_i)$ as a linear combination of the basis vectors $\vw_1, \ldots, \vw_m$, and then just take the coefficients of the basis vectors as the column of the matrix. And this will give us the right matrix to take the input coordinates and give us the transformed output coordinates.
+
+\begin{example}
+  One cool example of a linear transformation (of functions) is the derivative! Take the input as vectors of the form $c_1 + c_2x + c_3x^2$, so then the outputs are of the form $c_2 + 2c_3x$. And just take the obvious bases as the functions $1,x,x^2$ for the input and $1,x$ for the output. So then we can find a matrix to represent the derivative:
+\[ \mat{0&1&0\\0&0&2}\mat{c_1\\c_2\\c_3} = \mat{c_2\\2c_3}. \]
+\end{example}
+
+So we see that the matrix and linear transformation fit really nicely together. And it turns out so the inverse matrix gives the inverse transformation, the multiplication of matrices represents the multiplication of transformations. 

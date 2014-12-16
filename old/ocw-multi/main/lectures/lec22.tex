@@ -1,0 +1,59 @@
+\brm
+The $\nabla$ symbol is pronounced ``del'' and represents an operator,
+\[ \nabla = <\pd{\ }{x},\pd{\ }{y},\pd{\ }{z}>. \]
+Then if we ``multiply'' this operator by a scalar function, $f$, then we get the gradient,
+\[ \nabla f = <\pd{f}{x},\pd{f}{y},\pd{f}{z}>. \]
+Then, an interesting observation is that we can think of the divergence as a dot product with the del operator,
+\[ \nabla \cdot \vF = <\pd{ }{x},\pd{ }{y},\pd{ }{z}> \cdot <P,Q,R> = P_x + Q_y + R_z. \]
+This type of notation becomes especially useful when we look at the curl later on.
+\erm
+
+So now let's move on to the proof of the divergence theorem. The proof is very similar to our two dimensional proof of Green's theorem.
+
+\bpf[Proof of the divergence theorem]
+Again, we'll reduce the case that we have to prove. First we observe that if we prove the theorem for a vector field which only has a $z$ component, then the same can be done for fields which only have one of the other two components and then summing these three cases proves the general theorem. So we simply have to prove that
+\[ \oiint_S <0,0,R>\cdot \vn\,dS = \iiint_D R_z \, dV. \]
+A second simplification is that we will prove this for a vertically simple region, $D$ (one that has a top, $z_2(x,y)$, a bottom $z_1(x,y)$, and vertical sides, and which lives over a region $U$ in the $xy$-plane). In this case, the triple integral can be computed as
+\[ \iiint_D R_z \, dV = \iint_U \int_{z_1(x,y)}^{z_2(x,y)} R_z\,dz\,dx\,dy = \iint_U \left[ R(x,y,z_2(x,y)) - R(x,y,z_1(x,y)) \right]\,dx\,dy. \]
+Now let's look at the flux integral of our vertically simple region:
+\[ \oiint_{S=\mathrm{top+bottom+sides}} <0,0,R> \cdot \vn \, dS = \iint_{\mathrm{top}} + \iint_{\mathrm{bottom}} + \iint_{\mathrm{sides}}.\]
+We can then use our formula for $\vn\,dS$ for a surface parameterised by $x$ any $y$ to get:
+\[ \iint_{\mathrm{top}} <0,0,R> \cdot \vn \, dS = \iint_{\mathrm{top}} <0,0,R> \cdot <-\pd{z_2}x,-\pd{z_2}y,1> \,dx\,dy = \iint_U R(x,y,z_2(x,y))\,dx\,dy, \]
+and
+\[ \iint_{\mathrm{bottom}} <0,0,R> \cdot \vn \, dS = \iint_{\mathrm{bottom}} <0,0,R> \cdot <\pd{z_1}x,\pd{z_1}y,-1> \,dx\,dy = \iint_U -R(x,y,z_1(x,y))\,dx\,dy. \]
+(We use the negative normal direction for the bottom face because the convention we used in the theorem is that the normal is pointing outwards of the region.) Now we are still missing the sides, but consider that the vector field is only vertical, and is thus tangent to the sides, making the flux integral 0 for the sides. (This is the reason we simplified in the way we did.) Then we can see that the triple integral and flux integral are indeed the same:
+\[ \oiint_S \vF \cdot \vdS = \iint_U \left[ R(x,y,z_2(x,y)) - R(x,y,z_1(x,y)) \right]\,dx\,dy = \iiint_D R_z \, dV, \]
+completing the proof \textit{for vertically simple regions}.
+
+If $D$ is not vertically simple, then we decompose it into vertically simple pieces (the faces that get added to the surface from the cuts are cancelled out because the normals are in opposite directions when we do the regions to each side of the cut face). Then we sum over these simple pieces and this completes the general proof.
+\epf
+
+\section{Applications}
+It is clear that this theorem is significant in and of itself, for computing flux integrals, but let's look at a physical application---namely, the diffusion equation.
+
+The diffusion equation governs how a substance ``diffuses'' (or spreads out) in an immobile fluid (e.g., smoke in air, dye in solution) over time. This turns out to be a partial differential equation.
+
+Let $u(x,y,z,t)$ be the concentration at a given point, our unknown. The equation relates the partial derivative of $u$ with respect to time to its partial derivatives with respect to space:
+\[ \pd ut = k\nabla^2u ,\]
+where $\nabla^2 u = \nabla \cdot \nabla u = \divg(\nabla u) = \pdn ux2 + \pdn uy2 + \pdn uz2$ is known as the Laplacian.
+
+(Note that this is exactly the heat equation with looked at earlier, and this is because the two phenomena are in fact governed by the same relation.)
+
+So what's the explanation for this equation? Well, we're going to think of the flow of the substance in the fluid as a vector field $\vF$. We have to understand two things:
+\ben
+\item Physics (and common sense) tell us that the substance will flow from regions of high concentration towards regions of low concentration. So we'll go in the direction where $u$ decreases the fastest; this means that $\vF$ is directed along $-\nabla u$. We also know that the magnitude of the flow is proportional to the difference in concentration, i.e.,
+\[ \vF = -k\nabla u. \]
+\item Now that we know where the flow is going, how does this tell us how the concentration is changing. Or, how do we relate $\vF$ and $u_t$. This is actually the divergence theorem! Take a small region in space $D$ bounded by a surface $S$. Then the flux out of $D$ through $S$ is given by
+\[ \oiint_S \vF \cdot \vn \, dS, \]
+and represents in this case how much substance flows out of $S$ per unit time, i.e. the change in concentration in $D$ per unit time, which can be represented as
+\[ -\drv{ }t \left(\iiint_D u\,dV\right), \]
+which is negative because we're counting what's leaving the region in the flux integral. Then the divergence theorem tells us that
+\[ \oiint_S \vF \cdot \vn \, dS = -\drv{ }t \left(\iiint_D u\,dV\right) = \iiint_D \divg \vF \,dV. \]
+We can think of the term with the time derivative slightly differently: rather than differentiating the sum of the concentration, we can sum the derivative of the concentration (derivative of a sum is the sum of the derivatives). This gives us that
+\[ \iiint_D \divg \vF \,dV = -\iiint_D \pd ut \, dV. \]
+It follows, since $D$ can be any region, that the integrands are equal:
+\[ \divg \vF = -\pd ut. \]
+The diffusion equation is immediate from this and step 1.
+\een
+
+

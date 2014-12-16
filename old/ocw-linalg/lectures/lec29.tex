@@ -1,0 +1,74 @@
+\section{Singular value decomposition (SVD)}
+
+The Singular Value Decomposition (SVD) is the single best factorisation of any matrix $\mA$, and it's going to be of the form
+\[ \mA = \mU \mSg \T\mV, \]
+where $\mU,\mV$ are orthogonal, and $\mSg$ diagonal. This factorisation brings together nearly everything we've studied so far.
+
+One thing that it brings in is the that for symmetric positive definite matrix $\mA$, we have seen that we can write
+\[ \mA = \mQ \mLa \T\mQ, \]
+for the orthogonal matrix of eigenvectors $\mQ$ and the positive diagonal matrix $\mLa$. So this is a special case of the SVD, where $\mU = \mV$.
+
+Anyways, what does this decomposition mean? Well what we we're looking for in SVD is a way to transform an orthonormal basis of the row space with $\mA$ and turn it into an orthogonal basis of the column space. Obviously we can find an orthonormal basis for the row space: just take any basis for it and apply Gram-Schmidt, then normalise. But not just any orthonormal basis in the row space is going to transform under $\mA$ into an orthogonal basis in the column space.
+
+Let's say we do find such a basis. Since the dimension of the row space is $r = \Rank \mA$, this basis can be written as a set of vectors $\vv_1, \vv_2, \ldots, \vv_r$. Then what we've said in the above paragraph is that multiplying $\mA$ by the matrix whose columns are $\vv_i$ will be an orthogonal basis for the column space of $\mA$, which we can write as $\sigma_1 \vu_1, \sigma_2 \vu_2, \ldots, \sigma_r \vu_r$. (So $\{\vu_i\}$ is an \textit{orthonormal} basis for the column space, but $\mA$ might map $\{\vv_i\}$ onto some \textit{orthogonal} basis comprised of multiples of the orthonormal basis.) How do we right this in matrix language? One ``problem'' is that if we don't have full column rank, i.e. if $r < n$, then we don't have a big enough matrix to multiply with $\mA$. But this isn't really a problem. If we call $\mV$ is matrix with the first $r$ columns $\vv_i$, then we just fill in the last columns with $n-r$ basis vectors of the null space (turning $\mV$ into an orthonormal basis for all of $\RR^n$). These columns will get mapped to 0 columns in $\mU$, the matrix with first $r$ columns as $\sigma_i\vu_i$. So then, we can just fill in $\mU$ with $m-r$ basis vectors for the left nullspace, so that it's a orthogonal basis for all of $\RR^m$ (instead of just the column space) and then define $\sigma_i = 0$ for $i > r$. So then $\mV\mSg$ (where $\mSg$ is the diagonal matrix with $\sigma_i$ as the diagonal entries) will have an orthogonal basis for the column space in the first $r$ columns and zero vectors in the other columns, as desired. So finally we have that
+\[ \mA\mV = \mU\mSg. \]
+And then just multiplying by $\T\mV = \mV^{-1}$ (since $\mV$ is orthogonal) on both sides gives us our SVD:
+\[ \mA = \mU \mSg \T\mV, \]
+So then to get an SVD, our goal is to find an orthonormal basis in the row space that we can map onto an orthonormal basis in the column space.
+
+The problem is that we don't want to find two separate orthogonal matrices at the same time. So we want to find a way to get rid of the $\mU$ and just find $\mV$. And the way we do this is using the same special expression that we use everytime we run into (possibly) rectangular matrices: $\T\mA \mA$. If we use the SVD, then we get
+\[ \T\mA\mA = \mV\T\mSg\T\mU\mU\mSg\T\mV. \]
+But $\T\mU\mU = \mI$ (because $\mU$ is orthogonal) and $\T\mSg\mSg = \mSg^2$ (because $\mSg$ is diagonal)! So then
+\[ \T\mA\mA = \mV \mSg^2 \T\mV. \]
+But this expression looks really similar. And that's because this is the diagonalisation of $\T\mA\mA$ (which is symmetric, right)! So $\mV$ is just the eigenvectors of $\T\mA\mA$ and each $\sigma_i^2$ is an eigenvalue! And then to find $\mU$, we just do the same thing with $\mA\T\mA$ to get
+\[ \mA\T\mA = \mU \mSg^2 \T\mU. \]
+
+\bex
+Take
+\[ \mA = \mat{4&4\\-3&3}. \]
+Clearly the matrix has full rank, so we want to find $\vv_1, \vv_2, \vu_1, \vu_2 \in \RR^2$ and then some scaling factors $\sigma_1 > 0, \sigma_2 > 0$.
+
+So first we compute 
+\[ \T\mA\mA = \mat{25&7\\7&25}. \]
+It's clear that the eigenvectors are $\rvec{1,\pm 1}$, and the eigenvalues 32 and 18. (Note we'll take the square roots of those eigenvalues to get our $\sigma$s.) But we really need to normalise the eigenvectors, so we'll take
+\[ \vv_1 = \mat{1/\sqrt{2}\\1/\sqrt{2}}, \]
+\[ \vv_2 = \mat{1/\sqrt{2}\\-1/\sqrt{2}}. \]
+So we've got $\mV$ and $\mLa$ then.
+
+Now we need to compute $\mU$, so we compute the eigenvectors of
+\[ \mA\T\mA = \mat{32&0\\0&18}. \]
+This is a really nice diagonal matrix, so we know the eigenvectors to be
+\[ \vu_1 = \mat{1\\0}, \]
+\[ \vu_2 = \mat{0\\1}, \]
+with $\lambda_1 = 32$ and $\lambda_2 = 18$. (It's a good thing we got the same eigenvalues!) So then $\mU = \mI$.
+
+And our SVD, finally, is
+\[ \mat{4&4\\-3&3} = \mat{1&0\\0&1}\mat{\sqrt{32}&0\\\sqrt{18}&0}\mat{1/\sqrt{2}&1/\sqrt{2}\\1/\sqrt{2}&-1/\sqrt{2}}. \]
+\eex
+
+\bex
+Let's look at a singular, rank 1 case:
+\[ \mA = \mat{4&3\\8&6}. \]
+Then the row space is just the line made up of multiples of $\rvec{4,3}$ and the null space is the line perpendicular. And the column space is just the line multiples of $\rvec{4,8}$, and the left nullspace is the line perpendicular to that.
+
+So then 
+\[ \vv_1 = \mat{4/5\\3/5}. \]
+And 
+\[ \vu_1 = \mat{1/\sqrt{5}\\2/\sqrt{5}}. \]
+Then to get our $\sigma$s, we take the square roots of the eigenvalues of
+\[ \T\mA\mA = \mat{80&60\\60&45}. \]
+Since this matrix is also singular, it has a null space and thus one eigenvalue is 0. And by the trace, the other eigenvalue is 125. So our two sigma values are $5\sqrt5$ and $0$. 
+
+So then
+\[ \mat{4&3\\8&6} = \mat{1\sqrt5&-2/\sqrt5\\2/\sqrt5&1/\sqrt5}\mat{5\sqrt5&0\\0&0}\mat{4/5&3/5\\-3/5&4/5}. \]
+\eex
+
+To summarise, what SVD really is, is choosing the ``right bases'' for the four fundamental subspaces:
+\bit
+\item $\vv_1, \ldots \vv_r$ are an orthonormal basis for $C(\T\mA)$
+\item $\vv_{r+1}, \ldots \vv_n$ are an orthonormal basis for $N(\mA)$
+\item $\vu_1, \ldots \vu_r$ are an orthonormal basis for $C(\mA)$
+\item $\vv_{r+1}, \ldots \vv_n$ are an orthonormal basis for $N(\T\mA)$
+\eit
+And these bases are chosen just right so that
+\[ \mA\vv_i = \sigma_i\vu_i. \]

@@ -1,0 +1,51 @@
+\section{Determinants}
+
+\subsection{Properties}
+
+We're now going to shift focus from rectangular matrices to square matrices. For any square matrix $\mA$, there is a number associated with it called the determinant, notated $\Det \mA$ or $|\mA|$. One important property of the determinant is that $\mA$ is invertible iff $|\mA|\ne 0$. 
+
+Let's begin by listing some properties of the determinant which actually define the determinant:
+\bit
+\item $\Det \mI = 1$ 
+\item Exchanging two rows of a matrix reverses the sign of the determinant
+\brm 
+At this point, we know that $\Det \mP = \pm 1$ for any permutation matrix $\mP$, depending on whether there are an odd or even number of row exchanges. We'll also keep in mind that the formula for $2\times 2$ matrices is 
+\[ \dat{a&b\\c&d} = ad-bc. \]
+So when we develop a formula for $n \times n$ matrices, we can check it with this.
+\erm
+\item The determinant is a linear function of each row (the other rows constant):
+\bit
+\item If we multiply one row by a factor $t$ and leave the other rows the same, the determinant is multiplied by the same factor $t$ 
+\item If we add a row vector to one of the rows, then the determinant is the sum of the determinants of the matrix with the original row and the matrix with that row replaced with the row vector being added
+\eit
+\brm
+From these first three properties, we can learn a lot more about the determinant. 
+\erm
+\item If a matrix has two equal rows, then the determinant is 0. (This definitely checks out in the two dimensional case.) We can see this in general by noticing that if we exchange two rows, the sign of the determinant should be flipped. But we exchange the two equal rows, we get the same matrix, and so the determinant is the same. So minus the determinant is equal to the determinant, and thus the determinant is 0. And this makes sense, because a square matrix with two equal rows should not be invertible. 
+\item Subtracting a multiple $l$ of row $i$ from another row $k$ (as in the elimination process) does not change the determinant. This is because, by property three the determinant of the new matrix is the determinant of the original matrix added to the determinant of a matrix with row $k$ with $-l$(row $i$). Then by property three again, the second determinant is $-l$ times the determinant of the matrix with only row $i$ replacing row $k$. But then by property four, this determinant is zero. So the total determinant is just the determinant of the original matrix. This implies that elimination does not change the determinant. 
+\item If a matrix contains a row of zeros, its determinant is 0 (as we should expect based on the notion of invertibility). By the previous property, we can add any other row to this without changing the determinant. But then the matrix has two equal rows, implying that the determinant is zero. Another way to see it is that if we consider the same matrix with a non-zero row replacing the zero row, and multiply that row by $t=0$ (to get our original matrix), the determinant must be zero times the determinant of the new matrix, which is 0.
+\item Suppose we have an upper triangular matrix $\mU$ with $n$ diagonal (pivot) entries $d_1, \ldots, d_n$. Then 
+\[ \Det \mU = \pm \prod_{i=1}^n d_i. \]
+(The $\pm$ comes in when we have to do row exchanges from any old square matrix.) Suppose $d_i \ne 0$ for all $i$. Then we can turn $\mU$ into a diagonal matrix. Then by property 3, we can factor the product of the diagonal entries, leaving us with the identity matrix, which has determinant 1. So finally the determinant of the original matrix is the product of the diagonal entries. If there is some $i$ for which $d_i = 0$, then we can use elimination to get a row of zeros, so the determinant is 0, so the property still holds.
+\item $\Det \mA = 0$ iff $\mA$ is singular. By elimination, we can get from $\mA$ to $\mU$ without changing the determinant. If $\mA$ is singular, then we know elimination will get us a row of zeros, implying zero determinant. And the converse: if the determinant is zero, then by the previous property one of the pivots is zero, so we can get a row of zeros, implying that $\mA$ is singular. 
+\brm
+So now with the above two properties, we have a practical formula for the determinant: elimination, then multiply the diagonals. And this formula holds exactly with our know formula for two by two matrices. And all this just came from three properties we required of the determinant!
+\erm
+\item $\Det \mA\mB = \Det \mA \cdot \Det \mB$ (so the determinant is not linear, but it has this nice multiplying property); as a corollary, 
+\[ \Det \mA^{-1} = \frac 1{\Det \mA}, \]
+which shows us again that $\Det \mA = 0$ means that $\mA$ is not invertible. 
+This property shows us that
+\[ \Det (\mA^2) = (\Det \mA)^2. \]
+However, 
+\[ \Det (2\mA) = 2^n \Det \mA, \]
+for an $n \times n$ matrix, by applying property 3 $n$ times (again, showing that the determinant is not linear in the whole matrix). This last fact shows a connection of matrices with volume: if we multiply the sides of an $n$-dimensional box by 2, the volume is multiplied by $2^n$. 
+\item $\Det \T\mA = \Det \mA$. This clearly works out for $2 \times 2$ matrix. This allows us to now extend all our rules about rows to the same rules about columns.
+
+How do we prove this (sort of)? Well (in almost all cases) the matrix $\mA$ can be decomposed into $\mL\mU$. So then $\T\mA = \T\mU\T\mL$. So then we want to prove that
+\[ |\T\mU||\T\mL| = |\mL||\mU|. \]
+Well since we have triangular matrices, the determinants are just the products of the diagonals, which don't change when we transpose, so the above is true. This proof is only informal, but still. 
+\eit
+
+\brm
+Property 2 implies that we cannot do an odd number of exchanges and get the same matrix with an even number of exchanges.
+\erm

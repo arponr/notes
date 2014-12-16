@@ -1,0 +1,43 @@
+\subsection{Formulae}
+
+We've seen one practical way to compute the determinant, but now we'll see a couple of more explicit formulae that work in general, but are pretty messy.
+
+Recall the three defining properties we decided on for the determinant:
+\bit
+\item $\Det \mI = 1$
+\item Row exchanges reverse the sign of the determinant
+\item Linear in each row separately
+\eit
+
+From this, for example, we can derive the formula for $2\times 2$ matrices:
+\[ \dat{a&b\\c&d} =\dat{a&0\\c&d} + \dat{0&b\\c&d} = \dat{a&0\\c&0} + \dat{a&0\\0&d} + \dat{0&b\\c&0} + \dat{0&b\\0&d}. \]
+Two of these determinants have zero columns, so they are zero. The other two are diagonal matrices (in one we need a row exchange, so we do a sign flip), which gives us a determinant of
+\[ ad - bc. \]
+
+This method in fact works in general for $n \times n$ determinants. We split up the first row, then the second, all the way to $n$. But many of the terms that arise would be zero. Which terms would not be zero? Well in the ending expression, there can only be one term in each row. So the non-zero terms come when there is also exactly one term in each column. And there exactly $n!$ ways of arranging these terms, so that is the size of this formula for our determinant. And all the possible permutations give us the explicit terms for the formula, and we only have to decide on a plus or minus based on how many row exchanges were done to get from the diagonal matrix. We can write the formula, then, as
+\[ \Det \mA = \sum_{n! \mathrm{terms}} \pm a_{1\alpha} a_{2\beta} a_{3\gamma} \cdots a_{n\omega}, \]
+such that $(\alpha,\beta,\gamma,\ldots,\omega)$ is a permutation of $(1,2,3,\ldots,n)$. 
+
+And this formula came only from our three properties. And we could have derived all those properties from this formula, but that would not be nice. 
+
+\subsubsection{Cofactors}
+
+The next way to look at determinants breaks up an $n \times n$ determinant into $n-1 \times n-1$ determinants. It involves something called cofactors. 
+
+When writing out our big formula, if we take all the terms that have $a_{ij}$ in them, then the remaining entries in the matrix that can be used are all entries not in the $i$-th row or $j$-th column. 
+
+So we can consider a matrix of minors $\mM$, in which $\mM_{ij}$ is the determinant of the matrix when we remove the $i$-th row and $j$-th column from the original matrix. Then the matrix of \textbf{cofactors} is given by $\mC_{ij} = (-1)^{i+j} \mM_{ij}$ (so the minus sign alternates along the rows and columns). 
+
+Then the cofactor formula (along row $i$) for the determinant is
+\[ \Det \mA = \sum_{j=1}^n a_{ij}C_{ij}. \]
+
+So one way we could have introduced determinants is by building up $n \times n$ determinants from just scalars using this cofactor formula. 
+
+\bex
+Consider a $n \times n$ \textbf{tridiagonal matrix} (nothing but the main diagonal and the two diagonals above and below it are non-zero) of 1s; call it $\mA_n$. So
+\[ \mA_1 = 1, \]
+\[ \mA_2 = \mat{1&1\\1&1}, \]
+\[ \mA_3 = \mat{1&1&0\\1&1&1\\0&1&1}, \]
+\[ \mA_4 = \mat{1&1&0&0\\1&1&1&0\\0&1&1&1\\0&0&1&1}\ldots. \]
+We can see that $|\mA_1| = 1, |\mA_2| = 0, |\mA_3| = -1$. Then for any $n \ge 4$, we get the formula $|\mA_n| = |\mA_{n-1}| - |\mA_{n-2}|$. And in fact the sequence of determinants has period 6. 
+\eex

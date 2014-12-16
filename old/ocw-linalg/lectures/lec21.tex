@@ -1,0 +1,91 @@
+\section{Eigenvalues and eigenvectors}
+
+We're now going to start looking at special numbers and vectors having to do with square matrices.
+
+The matrix $\mA$ can be seen as a function acting on vectors. And there are certain special vectors whose output is parallel to the input of this function. These we call eigenvectors:
+
+\bdf
+Given the matrix $\mA$, $\vx$ is an \textbf{eigenvector} of $\mA$ if
+\[ \mA\vx = \lambda \vx. \]
+The multiplying factor $\lambda$ is called the \textbf{eigenvalue}.
+\edf
+
+Consider the eigenvalue $\lambda = 0$. The corresponding vectors are exactly the vectors in the nullspace. And if $\mA$ is singular, then there is a non-zero eigenvector for this eigenvalue.
+
+But how do we find this eigenstuff in general? We can't use elimination anymore. And we have two unknowns! So we need a good idea of how to find them. But before we do that, examples.
+
+\bex
+Consider a projection matrix $\mP$. Well if the output ends up parallel to the input, then the input must have started in the space that the matrix is projecting onto. Thus the eigenvectors are given by everything in the space that the projection matrix brings everything to. And for all these eigenvectors, the eigenvalue must be 1, because the projection will not do anything to vectors already in the space. 
+
+We also could have the case that the input is in the nullspace of the matrix that generates the space, because then the vector is ``perpendicular'' to the space and then gets projected to the zero vector. So the eigenvalue for these eigenvectors is 0.
+\eex
+
+\bex
+What about the permutation matrix
+\[ \mA = \mat{0&1\\1&0}? \]
+This switches the two components of a two-components. So any vector of the form $\rvec{a, a}$ will be an eigenvector with eigenvalue 1; and any vector of the form $\rvec{a, -a}$ will be an eigen vector with eigen value -1.
+\eex
+
+\brm
+Notice that the $2 \times 2$ matrix had two eigenvalues. In fact, $n \times n$ matrices in general do have $n$ eigenvalues. And finding them can be difficult. But one nice fact that we'll see is that the sum of the eigenvalues is the sum of the diagonal entries of the matrix. And this sum of the diagonal entries is known as the trace:
+\bdf
+The \textbf{trace} of an $n \times n$ matrix is
+\[ \Tr \mA = \sum_{i=1}^n a_{ii} (= \sum_{i=1}^n \lambda_i). \]
+\edf
+\erm
+
+Now do how do we find eigenvalues and eigenvalues in general? I.e., how do we solve
+\[ \mA \vx = \lambda \vx? \]
+Here's the trick, a simple idea. Rewrite the equation as
+\[ (\mA - \lambda \mI)\vx = 0. \]
+Now if there is a solution $\vx$ besides the useless zero vector, then we know that the matrix on the left side, $\mA - \lambda \mI$, has to be singular. So this implies, using what we've just learned, that
+\[ \Det (\mA - \lambda \mI) = 0. \]
+And now we've only got one variable. And this is called the characteristic equation, with which we can use (all of the) lambda(s) first. After we find $\lambda$, we can just find the $\vx$ using elimination---it's just finding the nullspace for $\mA - \lambda \mI$. 
+
+So the new part will really be the first part of finding $\lambda$.
+\bex
+Take for instance
+\[ \mA = \mat{3&1\\1&3}. \]
+So we want to solve
+\[ \Det (\mA - \lambda \mI) = \dat{3-\lambda&1\\1&3-\lambda} = (3-\lambda)^2 - 1 = \lambda^2 - 6\lambda + 8 = (\lambda - 4)(\lambda - 2) = 0. \]
+So then the eigenvalues are $\lambda_1 = 4, \lambda_2 = 2$.
+
+And then we could go for the eigenvectors. For the first eigenvalue we solve for the nullspace of
+\[ \mA - 4\mI = \mat{-1&1\\1&-1}. \]
+And of course this is just $\vx_1 = \rvec{1,1}$.
+
+For the second eigenvector we solve for the nullspace of
+\[ \mA - 2\mI = \mat{1&1\\1&1}. \]
+And of course this is just $\vx_2 = \rvec{-1,1}$.
+
+(Note that there are many eigenvectors we could have chosen for each eigen value.)
+\eex
+
+\brm
+We've already stated that the sum of the eigenvalues is the trace. Another property is that the product of the eigenvalues gives the determinant! One can check that it works in the previous example.
+\erm 
+
+\bex
+Take the matrix that rotates vectors by 90 degrees:
+\[ \mQ =  \mat{0&-1\\1&0}. \]
+Consider that there should be no vector that stays parallel to itself after a 90 degree rotation. So there should be some trouble finding eigenvalues or eigenvectors. We can see this by considering the fact that the trace and determinant rules tell us that the sum of the two eigenvalues should be zero but its product 1. How is that possible?
+
+Anyways, let's go through the normal procedure and see what happens:
+\[ \Det (\mQ - \lambda \mI) = \dat{\lambda&-1\\1&-\lambda} = \lambda^2 + 1 = 0. \]
+So then the eigen values are $\lambda_1 = i, \lambda_2 = -i$! Imaginary eigenvalues from a matrix of reals!? Well this can happen, and complex numbers come up all the time in eigenvalues. But we know that if the matrix is real and the eigenvalues are complex, then they must come in pairs of complex conjugates (like in real coefficient polynomials).  
+\eex
+
+Here's an even worse thing that could hapen . . .
+\bex
+Consider the matrix
+\[ \mA = \mat{3&1\\0&3}. \]
+What are the eigenvalues? Well since we have an upper triangular matrix, the determinant is just the product of the diagonal entries. So the sum of the eigenvalues is the sum of the diagonal entries and the product of the eigenvalues is the product of the diagonal entries. Well . . . that just means that the eigenvalues of an upper triangular matrix are just the diagonal entries!
+
+But, uh oh: we have two of the same eigenvalues in this case, both are 3. Let's see that happen systematically:
+\[ \Det (\mA - \lambda \mI) = \dat{3-\lambda&1\\0&3-\lambda} = (3-\lambda)^2 = 0. \]
+So $\lambda_1 = \lambda_2 = 3$. Why is this bad? Well the problem comes with the eigenvectors. 
+
+To find the eigenvectors we solve
+\[ (\mA - 3\mI)\vx = \mat{0&1\\0&0}\vx = 0. \]
+Then there's only one (set of) eigenvectors, with basis $\vx = \rvec{1,0}$. So this is a degenerate case, with only one set of eigenvectors/eigenvalue. In these cases, the eigenstuff don't give the whole story of the matrix.
+\eex

@@ -1,0 +1,335 @@
+\input{preamble}
+
+\title{Review of basic concepts in topology}
+\author{Arpon Raksit}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+  These are (at least partial) solutions to a review exercise given in the section ``*Supplementary Exercises: Review of the Basics'' at the end of Chapter 4 of \emph{Topology}, by Munkres. Any references in the solutions are references within this text.
+\end{abstract}
+\maketitle
+\thispagestyle{fancy}
+
+\subsection*{a}
+  $S_\Omega$ (in the order topology) is
+  \begin{enumerate}
+  \item not connected, not locally connected (hence not path connected, not locally path connected),
+  \item not Lindel\"of (hence not compact),
+  \item limit point compact,
+  \item locally compact,
+  \item normal (hence completely regular, regular, Hausdorff),
+  \item first countable,
+  \item not separable (hence not second countable),
+  \item not metrisable, and
+  \item locally metrisable.
+  \end{enumerate}
+
+\begin{proof}
+  Let $a_0$ denote the minimum element of $S_\Omega$ throughout.
+  \begin{enumerate}[leftmargin=*]
+  \item Let $b \in S_{\Omega}$ an element without an immediate predecessor. (Note, there are uncountably many such elements. Suppose not: then the set of such elements is bounded above by some $d_1 \in S_{\Omega}$. Then define $d_n$ the immediate successor of $d_{n-1}$ for $n \in \N - \{1\}$. Since $\{d_n\}$ is countable it is bounded above and hence has a least upper bound $d \in S_{\Omega}$. But then clearly $d$ cannot have an immediate predecesor, a contradiction since $d_1 < d$.) Any neighbourhood $U$ of $b$ must contain some basis element $(a,c) \ni b$. Since $b$ has no immediate predecessor, there exists $x \in (a,b)$, and moreover if $x'$ is the immediate successor of $x$ then we must have $x' \in (a,b)$. Then we have the separation $U = A \cup B$ where $A := \{y \in U \mid y < x'\}$ and $B := \{y \in U \mid y > x\}$. Thus no neighbourhood of $b$ is connected, so $S_\Omega$ cannot be locally connected or connected.
+  \item For $a \in S_{\Omega}$ let $S_a := \{x \in S_\Omega \mid x < a\}$. Since $S_\Omega$ has no maximum element, $\{S_a\}$ is an open cover of $S_{\Omega}$. However since $S_a$ is countable for each $a \in S_\Omega$, any countable subcover can cover only countably many elements of $S_\Omega$.
+  \item Let $A$ an infinite subset of $S_\Omega$. Let $B$ a countable subset of $A$. $B$ must have an upper bound $b$, whence $B \subset [a_0,b]$. Since $S_\Omega$ is well ordered and hence has the least upper bound property, $[a_0,b]$ is a compact, hence limit point compact, subset of $S_\Omega$. Then $B \subset A$ has a limit point in $[a_0,b] \subset S_\Omega$. So $A$ is limit point compact.
+  \item Let $a \in S_\Omega$. Since $S_\Omega$ has no maximum element, there exists $b \in S_\Omega$ such that $a < b$. Then $[a_0,b]$ is compact in $S_\Omega$ and $a \in [a_0,b) \subset [a_0,b]$.
+  \item Every well ordered set is normal in the order topology.
+  \item Let $a_1$ the immediate successor of $a_0$. Then $\{a_0\} = [a_0,a_1)$ is open, and hence $S_\Omega$ trivially has a countable basis at $a_0$. Now take any $b \in S_\Omega$ different from $a_0$. Let $b'$ its immediate sucessor. Take the countable collection $\mathcal B_b := \{(a, b') \mid a < b\}$ of neighbourhoods of $b$. Any neigbourhood $U$ of $a$ must contain some basis element $(a, c) \ni b$. Then since $\mathcal B_b \ni (a,b') \subset (a,c)$, $\mathcal B_b$ is a countable basis for $S_\Omega$ at $b$.
+  \item Let $A$ any countable subset of $S_\Omega$. $A$ has an upper bound $b$. Then the open set $(b, \Omega)$ is nonempty and disjoint from $A$, so we cannot have $\bar A = S_\Omega$.
+  \item If $S_\Omega$ were metrisable then limit point compactness would imply compactness.
+  \item We have $\{a_0\}$ a trivially metrisable neighbourhood of $a_0$. For $a \in S_\Omega$ different from $a_0$, we have the neighbourhood $[a_0,a]$ of $a$ which is compact and countable. Since $S_\Omega$ is Hausdorff and first countable, it follows that $[a_0,a]$ is normal and second countable, hence metrisable by the Urysohn metrisation theorem. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{b}
+  $\bar S_\Omega$ (in the order topology) is
+  \begin{enumerate}
+  \item not connected, not locally connected (hence not path connected, not locally path connected),
+  \item compact (hence Lindel\"of, limit point compact, locally compact),
+  \item normal (hence completely regular, regular, Hausdorff),
+  \item not first countable (hence not second countable),
+  \item not separable, and
+  \item not metrisable (hence not locally metrisable).
+  \end{enumerate}
+
+\begin{proof}
+  \begin{enumerate}[leftmargin=*]
+  \item See the argument for $S_\Omega$ above.
+  \item $\bar S_\Omega$ is equal to the closed interval $[a_0, \Omega]$ ($a_0$ as defined above) and is hence compact.
+  \item Every well ordered set is normal in the order topology.
+  \item Clearly $\Omega$ is a limit point of $S_\Omega \subset \bar S_\Omega$. But any sequence in $\bar S_\Omega$ forms a countable set and is thus bounded above in $S_\Omega$, so no sequence in $\bar S_\Omega$ converges to $\Omega$. So $\bar S_\Omega$ cannot be first countable.
+  \item See the argument for $S_\Omega$ above.
+  \item If $\bar S_\Omega$ were metrisable then $S_\Omega \subset \bar S_\Omega$ would be metrisable, which is not the case (as proved above). Since a locally metrisable regular Lindel\"of space is metrisable, $\bar S_\Omega$ thus cannot be locally metrisable either. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{c}
+  $S_\Omega \times \bar S_\Omega$ (in the product topology) is
+  \begin{enumerate}
+  \item not connected, not locally connected (hence not path connected, not locally path connected),
+  \item not Lindel\"of (hence not compact),
+  \item limit point compact,
+  \item locally compact,
+  \item not normal,
+  \item completely regular (hence regular, Hausdorff),
+  \item not first countable (hence not second countable),
+  \item not separable, and
+  \item not locally metrisable (hence not metrisable).
+  \end{enumerate}
+
+\begin{proof}
+  Let $\pi_1 : S_\Omega \times \bar S_\Omega \to S_\Omega$ the projection onto the first coordinate and $\pi_2 : S_\Omega \times \bar S_\Omega \to \bar S_\Omega$ the projection onto the second coordinate. Recall that these are both continuous open maps.
+  \begin{enumerate}[leftmargin=*]
+  \item Since $\pi_1$ is continuous and open, if $S_\Omega \times \bar S_\Omega$ were locally connected (resp. connected) then $\im \pi_1 = S_\Omega$ would be locally connected (resp. connected), which is not the case (as proved above).
+  \item Since $\pi_1$ is continuous, if $S_\Omega \times \bar S_\Omega$ were Lindel\"of then $\im \pi_1 = S_\Omega$ would be Lindel\"of, which is not the case (as proved above).
+  \item Let $A$ an infinite subset of $S_\Omega \times \bar S_\Omega$. Let $B$ any countable subset of $A$. Then $\pi_1(B)$ is countable and hence bounded above by some $b \in S_\Omega$. Then $B \subset [a_0,b] \times \bar S_\Omega$. Since both $[a_0,b]$ and $\bar S_\Omega$ are compact, so is $[a_0,b] \times \bar S_\Omega$. It follows that $[a_0,b] \times \bar S_\Omega$ is limit point compact, and thus $B$ has a limit point in $[a_0,b] \times \bar S_\Omega \subset S_\Omega \times \bar S_\Omega$. So $A$ has a limit point, whence $S_\Omega \times \bar S_\Omega$ is limit point compact.
+  \item Let $(x,y) \in S_\Omega \times \bar S_\Omega$. Take $a > x$; then $[a_0,a] \times \bar S_\Omega \supset [a_0,a) \times \bar S_\Omega \ni (x,y)$ is compact.
+  \item See example 2 in \S 32.
+  \item Since $S_\Omega, \bar S_\Omega$ are completely regular, so is $S_\Omega \times \bar S_\Omega$.
+  \item Since $\pi_2$ is continuous and open, if $S_\Omega \times \bar S_\Omega$ were first countable then so would $\im \pi_2 = \bar S_\Omega$, which is not the case (as proved above).
+  \item Since $\pi_2$ is continuous, if $S_\Omega \times \bar S_\Omega$ were separable then so would $\im \pi_2 = \bar S_\Omega$, which is not the case (as proved above).
+  \item Assume $S_\Omega \times \bar S_\Omega$ is locally metrisable. Let $(x,y) \in S_\Omega \times \bar S_\Omega$ and $U \ni (x,y)$ a metrisable neighbourhood. Then $U$ is first countable. Since $\pi_2$ is continuous and open, $\pi_2(U) \ni y$ is first countable, implying that $\bar S_\Omega$ has a countable basis at $y$. Since $y$ was arbitrary, this implies $\bar S_\Omega$ is first countable, a contradiction since this is shown not to be the case above.  \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{d}
+  $I_o^2$ ($[0,1]^2$ in the dictionary order topology) is
+  \begin{enumerate}
+  \item connected,
+  \item locally connected,
+  \item not path connected,
+  \item not locally path connected,
+  \item compact (hence Lindel\"of, limit point compact, locally compact),
+  \item normal (hence completely regular, regular, Hausdorff),
+  \item first countable,
+  \item not separable (hence not second countable), and
+  \item not metrisable (hence not locally metrisable).
+  \end{enumerate}
+
+\begin{proof}
+  \begin{enumerate}[leftmargin=*]
+  \item $I_o^2$ is a linear continuum in the order topology and is hence connected.
+  \item Let $x \in I_o^2$. Any neighbourhood of $x$ in $I_o^2$ must contain an interval containing $x$, which is connected.
+  \item Let $0 \le a < c \le 1$ and $0 \le b, d \le 1$. We claim there is no path in $I_o^2$ from $(a,b)$ to $(c,d)$. Suppose there were such a path $\gamma$; then for each $x \in (a,c)$, let $q_x$ a rational in $\gamma^{-1}(\{x\} \times (0,1))$ (which is open by continuity of $\gamma$ and hence intersects the rationals, which are dense in the reals). Then the mapping $x \mapsto q_x$ is an injection since each $\gamma^{-1}(\{x\} \times (0,1))$ is disjoint from the others. This contradicts the uncountability of $(a,c)$.
+  \item Any neighbourhood of $(0,1) \in I_o^2$ must contain an interval containing $(0,1)$ and hence must contain a point $(0,b)$ as well as a point $(c,d)$, where $0 < b,c,d < 1$. By the argument in (3), it follows that no neighbourhood of $(0,1)$ is path connected, so $I_o^2$ is not locally path connected.
+  \item Since $I_o^2$ is a closed interval in its order topology, it is compact.
+  \item We clearly have that $I_o^2$ is Hausdorff. Then we know a compact Hausdorff space is normal.
+  \item Clear (don't want to write all of the cases right now).
+  \item Let $\pi_1 : I_o^2 \to [0,1]$ the projection onto the first coordinate. Let $A$ any countable subset of $I_o^2$. Then $\pi_1(A)$ is countable, so $[0,1] - \pi_1(A)$ is uncountable, and in particular nonempty. Let $x \in [0,1] - \pi_1(A)$. Then the open interval $((x,1/3), (x, 2/3))$ is nonempty and disjoint from $A$, so $A$ is not dense in $I_o^2$.
+  \item A compact metrisable space is second countable, so since $I_o^2$ is compact but not second countable, it is not metrisable. A locally metrisable compact Hausdorff space is metrisable, so $I_o^2$ cannot be locally metrisable either. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{e}
+  $\R_\ell$ (the reals in the lower limit topology) is
+  \begin{enumerate}
+  \item totally disconnected (hence not connected, not path connected, not locally connected, not locally path connected),
+  \item not limit point compact (hence not compact),
+  \item Lindel\"of,
+  \item not locally compact,
+  \item normal (hence completely regular, regular, Hausdorff),
+  \item first countable,
+  \item separable,
+  \item not second countable
+  \item not metrisable (hence not locally metrisable).
+  \end{enumerate}
+
+\begin{proof}
+  \begin{enumerate}[leftmargin=*]
+  \item Let $A$ any subset of $\R_\ell$ with more than one point, let $a \in A$ such that there exists $b \in A$ with $b < a$. Then $(-\infty, a) \cap A, [a, \infty) \cap A$ form a separation of $A$.
+  \item The infinite set $\Z$ of integers clearly has no limit points in $\R_\ell$.
+  \item See example 3 in \S 30.
+  \item Suppose $\R_\ell$ is locally compact at, say, $0$. Then we have a compact set $K \subset \R_\ell$ containing a neighbourhood $[0, a)$ of $0$. Since $[0, a)$ is closed in $\R_\ell$, it is closed in $K$, and hence must be compact. But there is clearly no finite subcover of the open cover $\{[0, a-1/n) \mid n \in \N, a > 1/n\}$, so contradiction.
+  \item Clearly $\R_\ell$ is Hausdorff. Now let $A,B$ disjoint closed sets in $\R_\ell$. For each $a \in A$, since $a \notin B$ and $B$ is closed, $a$ is not a limit point of $B$, so there exists $x_a \in \R_\ell$ such that $[a,x_a)$ is disjoint from $B$. Similarly for each $b \in B$ there exists $y_b \in R_\ell$ such that $[b,y_b)$ is disjoint from $A$. Then $\bigcup_{a \in A} [a, x_a)$ and $\bigcup_{b \in B} [b, y_b)$ are disjoint opens containing $A$ and $B$, respectively.
+  \item For any $x \in \R_\ell$ we have the countable basis $\{[x, x + 1/n) \mid n \in \N\}$ at $x$.
+  \item The countable set $\Q$ of rationals are clearly dense in $\R_\ell$.
+  \item Let $\mathcal B$ a basis for $\R_\ell$. For each $x \in \R_\ell$ let $U_x \in \mathcal B$ such that $x \in U_x \subset [x, x+1)$. Then the mapping $x \mapsto U_x$ is an injection since $x = \inf U_x$ for all $x \in \R_\ell$. Thus $\{U_x\} \subset \mathcal B$ must be uncountable, so no basis for $\R_\ell$ is countable.
+  \item A Lindel\"of metrisable space is second countable, so since $\R_\ell$ is Lindel\"of but not second countable, it is not metrisable. A locally metrisable regular Lindel\"of space is metrisable, so $\R_\ell$ cannot be locally metrisable either. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{f}
+  $\R_\ell^2$ (in the product topology) is
+  \begin{enumerate}
+  \item totally disconnected (hence not connected, not path connected, not locally connected, not locally path connected),
+  \item not limit point compact (hence not compact),
+  \item not Lindel\"of (hence not second countable),
+  \item not locally compact,
+  \item not normal (hence not metrisable),
+  \item completely regular (hence regular, Hausdorff),
+  \item first countable, and
+  \item separable.
+  \end{enumerate}
+
+\begin{proof}
+   Let $\pi_1,\pi_2 : \R_\ell^2 \to \R_\ell$ the projections onto the first and second coordinates, respectively.
+  \begin{enumerate}[leftmargin=*]
+  \item Let $A$ any subset of $\R_\ell^2$ with more than one point. Then either $\pi_1(A)$ or $\pi_2(A)$ must contain more than one point, implying (as proved above) that either $\pi_1(A)$ or $\pi_2(A)$ is not connected. Since $\pi_1,\pi_2$ are both continuous, this implies $A$ is not connected.
+  \item The infinite set $\Z \times \Z$ of lattice points clearly has no limit points in $\R_\ell^2$.
+  \item See example 4 in \S 30.
+  \item Suppose there were a compact set $K \subset \R_\ell^2$ containing a neighbourhood $[0, a) \times [0, b)$ of $0$. Then $\pi_1(K)$ would be a compact set containing a neighbourhood $[0, a)$ of $0 \in \R_\ell$, a contradiction to what we showed above.
+  \item See example 3 in \S 31.
+  \item This follows from the fact that $\R_\ell$ is completely regular.
+  \item This follows from the fact that $\R_\ell$ is first countable.
+  \item This follows from the fact that $\R_\ell$ is separable. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{g}
+  $\R^\omega$ (in the product topology) is
+  \begin{enumerate}
+  \item path connected (hence connected), 
+  \item locally path connected (hence locally connected),
+  \item metrisable (hence normal (hence completely regular, regular, Hausdorff), first countable, locally metrisable),
+  \item not locally compact (hence not compact, not limit point compact),
+  \item separable (hence second countable, Lindel\"of).
+  \end{enumerate}
+
+\begin{proof}
+  \begin{enumerate}[leftmargin=*]
+  \item This follows from the fact that $\R$ is path connected.
+  \item This follows from the fact that $\R$ is locally path connected.
+  \item It is shown in \S 20 that the metric defined for $\b x = (x_1,x_2,\ldots), \b y = (y_1,y_2,\ldots) \in \R^\omega$ as
+\[ d(\b x, \b y) := \sup_{n \in \N} \frac{\min(|x_n - y_n|, 1)}n \]
+gives the product topology on $\R^\omega$.
+  \item For a collection $\{X_\alpha\}$ of topological spaces, we have (proved in an exercise) that $\prod_\alpha X_\alpha$ is locally compact if and only if $X_\alpha$ is locally compact for all $\alpha$ and compact for all but finitely many $\alpha$. Since $\R$ is not compact, $\R^\omega$ is not locally compact. (And note, for metrisable spaces, compactness and limit point compactness are equivalent.)
+  \item This follows from the fact that $\R$ is separable (a countable product of separable spaces is separable). And separability, the Lindel\"of property, and second countability are equivalent for metrisable spaces. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{h}
+  $\R^\omega$ (in the uniform topology) is
+  \begin{enumerate}
+  \item not connected (hence not path connected),
+  \item locally path connected (hence locally connected),
+  \item metrisable (hence normal (hence completely regular, regular, Hausdorff), first countable, locally metrisable),
+  \item not locally compact (hence not compact, not limit point compact),
+  \item not second countable (hence not separable, not Lindel\"of). 
+  \end{enumerate}
+
+\begin{proof}
+  Let $\rho$ be the metric which defines the uniform topology on $\R^\omega$, which is defined for $\b x = (x_1,x_2,\ldots), \b y = (y_1,y_2,\ldots) \in \R^\omega$ as
+\[ \rho(\b x, \b y) := \sup_{n \in \N} \min(|x_n - y_n|, 1). \]
+  \begin{enumerate}[leftmargin=*]
+  \item View elements of $\R^\omega$ as $\R$-valued sequences. Then let $A \subset \R^\omega$ the set of unbounded sequences and $B = \R^\omega - A$ the set of bounded sequences. We claim $A,B$ are both open in, and hence constitute a separation of, $\R^\omega$ in the uniform topology. Suppose $\b x = (x_1,x_2,\ldots) \in B$, such that $|x_n| \le M$ for all $n \in \N$. Let $\b y = (y_1, y_2, \ldots) \in B_\rho(\b x, 1)$. Since $\rho(\b x, \b y) < 1$ we must have $|x_n - y_n| < 1$ for all $n \in \N$. Then it follows that $|y_n| \le M+1$ for all $n \in \N$, so that $\b y$ is bounded and hence an element of $B$. So indeed $B$ is open, and in fact this by symmetry shows that $A$ is open as well.
+  \item For $\b x = (x_1, x_2, \ldots), \b y = (y_1,y_2,\ldots) \in \R^\omega$, we have (proved in an exercise) that $\b x$ and $\b y$ are in the same component in the uniform topology if and only if $\b x - \b y$ is bounded. So take any neighbourhood $U$ of $\b x$. A basis element $B_\rho(\b x, \epsilon)$ is contained in $U$. Without loss of generality $\epsilon < 1/2$. It is clear then that for all $\b y, \b z \in B_\rho(\b x, \epsilon)$ that $\rho(\b y, \b z) < 1$ and hence $\b y - \b z$ is bounded. Thus $B_\rho(\b x, \epsilon)$ is a path connected neighbourhood of $\b x$ contained in $U$.
+  \item By definition.
+  \item Let $U$ any neighbourhood of $\b 0 = (0, 0, \ldots) \in \R^\omega$. There exists $\epsilon > 0$ such that $B_\rho(\b 0, \epsilon) \subset U$. Consider the $\R^\omega$-valued sequence $\{\b x_n\}$ defined for $n \in \N$ by
+\[ \b x_n := (\overbrace{0, 0, \ldots, 0}^{n-1\ \text{zeros}}, \epsilon/2, 0, 0, \ldots) \in  B_\rho(\b 0, \epsilon) \subset U. \]
+Then for any $n, m \in \N$ distinct we have $\rho(\b x_n, \b x_m) = \epsilon/2$, so no subsequence of $\{\b x_n\}$ can converge in $\R^\omega$. It follows that any set containing $U$ is not sequentially compact, and by the equivalence of sequential compactness and compactness for metrisable spaces, there is no compact set in $\R^\omega$ containing a neighbourhood of $\b 0$. 
+  \item If $\R^\omega$ were second countable then (as proved in an exercise) every uncountable set would contain uncountable many limit points. However the uncountable set $\{0,1\}^\omega$ clearly has no limit points. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{i}
+  $\R^\omega$ (in the box topology) is
+  \begin{enumerate}
+  \item not connected (hence not path connected),
+  \item not locally connected (hence not locally path connected),
+  \item completely regular (hence regular, Hausdorff),
+  \item not locally compact (hence not compact),
+  \item not limit point compact,
+  \item not first countable (hence not locally metrisable, not metrisable, not second countable),
+  \item not separable, and not Lindel\"of.
+  \end{enumerate}
+Note, it is not known whether or not $\R^\omega$ is normal in the box topology (although it has been shown that the continuum hypothesis implies that indeed it is normal).
+
+\begin{proof}
+  \begin{enumerate}[leftmargin=*]
+  \item The box topology is finer than the uniform topology and $\R^\omega$ isn't connected in the uniform topology, as shown above. 
+  \item It was shown in an exercise that $\b x = (x_1, x_2, \ldots), \b y = (y_1, y_2, \ldots) \in \R^\omega$ are in the same component in the box topology if and only if $\b x - \b y$ is eventually zero, i.e. if $x_n = y_n$ for all but finitely many $n \in \N$. But, e.g., any neighbourhood of $\b 0 = (0,0,\ldots) \in \R^\omega$ contains a point $\b x = (x_1, x_2, \ldots)$ such that $x_n \ne 0$ for infinitely many $n \in \N$. Hence no neighbourhood of $\b 0$ is connected. 
+  \item A product of completely regular spaces is completely regular in the box topology (proof omitted).
+  \item Suppose there exists a compact set $K \subset \R^\omega$ which contains a neighbourhood $\prod_{n=1}^\infty (a_n,b_n)$ of some $\b x = (x_1,x_2, \ldots) \in \R^\omega$. Then the closure $\prod_{n=1}^\infty [a_n,b_n]$ would be a closed subset of $K$ and hence compact. For $n \in \N$ let 
+    \[ U_n := \left[a_n, a_n + \frac{2(b_n-a_n)}3\right)\quad\text{and}\quad V_n := \left(a_n + \frac{b_n-a_n}3, b_n\right]. \]
+    Then $\{U_n, V_n \mid n \in \N\}$ is an open cover of $\prod_{n=1}^\infty [a_n,b_n]$ which clearly has no finite subcover, contradiction.
+  \item $\Z^\omega$ is infinite but has no limit points in $\R^\omega$ with the box topology.
+  \item Suppose $\{U_n\}$ is a countable basis at $\b x \in \R^\omega$. For each $n \in \N$ we can choose $a_{n,i},b_{n,i} \in \R$ for $i \in \N$ such that $U_n \supset \prod_{i=1}^\infty (a_{n,i}, b_{n,i})$. It follows that  $\{\prod_{i=1}^\infty (a_{n,i}, b_{n,i})\}$ is also a countable basis at $\b x$. But clearly $\prod_{n=1}^\infty (a_{n,n}/2, b_{n,n}/2)$ does not contain $\prod_{i=1}^\infty (a_{n,i}, b_{n,i})$ for any $n \in \N$, so contradiction. 
+  \item Since the box topology is finer than the uniform topology, if $\R^\omega$ were separable (resp. Lindel\"of) in the box topology, it would be separable (resp. Lindel\"of) in the uniform topology, which is proved not to be the case above. \qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{j}
+  $\R^I$ where $I := [0, 1]$ (in the product topology) is
+  \begin{enumerate}
+  \item path connected (hence connected),
+  \item locally path connected (hence locally connected),
+  \item not normal,
+  \item completely regular (hence regular, Hausdorff),
+  \item not locally compact,
+  \item not limit point compact (hence not compact),
+  \item not first countable (hence not locally metrisable, not metrisable, not second countable)
+  \item separable, and 
+  \item not Lindel\"of.
+  \end{enumerate}
+
+\begin{proof}
+  \begin{enumerate}[leftmargin=*]
+  \item This follows from $\R$ being path connected.
+  \item This follows from $\R$ being locally path connected.
+  \item Proof omitted (outlined in exercises).
+  \item This follows from $\R$ being completely regular.
+  \item Same argument as $\R^\omega$ in the product topology.
+  \item The infinite set $\Z^I$ has no limit points in $\R^I$.
+  \item Suppose $\{B_n\}$ is a countable basis at $\b x = (x_i)_{i \in I} \in \R^I$. For each $n \in \N$, $B_n$ must contain some open set $U_n := \prod_{i \in I} U_{i,n}$, where $U_{i,n}$ is open in $\R$ for all $i \in I$ and $U_{i,n} = \R$ for all $i \in I - J_n$, $J_n$ a finite subset of $I$. Then $\{U_n\}$ is also a countable basis at $\b x$. Since $J_n$ is finite for all $n \in \N$, we have $J := \bigcup_{n=1}^\infty J_n \subset I$ is countable, and hence $I -  J$ is uncountable. So let $\alpha \in I -  J$, and let $V := \prod_{i \in I} V_i$, where $V_i := \R$ if $i \ne \alpha$ and $V_i := (x_\alpha - 1,x _\alpha + 1)$ if $i = \alpha$. Clearly then $V$ is a neighbourhood of $\b x$ which does not contain $U_n$ for any $n \in \N$, contradiction.
+  \item Let $Q := \Q \cap I$. For $n \in \N$ let 
+    \begin{align*}
+      A_n := \{&(i_0, i_1,\ldots,i_{n+1},x_0,x_1,\ldots,x_n) \in Q^{n+2} \times \Q^{n+1} \\ &\mid 0 = i_0, i_1 < i_2 < \cdots < i_n < i_{n+1} = 1\}. \end{align*}
+Now for each $n \in \N$ define $f_n : A_n \to \R^I$ by 
+\[ f (i_0, i_1,i_2,\ldots,i_n,i_{n+1},x_0,x_1,\ldots,x_n) := \b x, \]
+where for $0 \le k \le n$, $\b x(i) := x_k$ for $i \in [i_k,i_{k+1}]$. Since $A_n$ is clearly countable for $n \in \N$, so is $f_n(A_n)$, and hence $A := \bigcup_{n=0}^\infty f_n(A_n)$ is a countable subset of $\R^I$. We claim $A$ is dense in $\R^I$. Let $U := \prod_{i \in I} U_i$ a basis element in $\R^I$, so each $U_i$ is open in $\R$ and $U_i = \R$ for all $i \in I - J$, $J$ a finite set $\{j_1,j_2,\ldots j_n\} \subset I$. For $1 \le k \le n - 1$, since $\Q$ is dense in $\R$ we can choose $i_k \in \Q \cap [j_k, j_{k+1})$ and $x_{k-1} \in \Q \cap U_{j_k}$; similarly we can choose $i_n \in \Q \cap [j_n, 1]$, $x_{n-1} \in \Q \cap U_{j_{n-1}}$, and $x_n \in \Q \cap U_{j_n}$. Then we clearly have
+\[ f_n(0, i_1,i_2,\ldots,i_n,1,x_0,x_1,\ldots,x_n) \in A \cap U, \]
+so indeed $A$ is dense in $\R^I$.
+  \item Let 
+\[ B := \{(x_i)_{i \in I} \in \R^I \mid (\exists \alpha \in I)\ (x_\alpha = 1\ \text{and}\ (\forall i \in I - \{\alpha\})\,x_i = 0)\}. \]
+Clearly $B$ is closed in $\R^I$. Hence if $\R^I$ were Lindel\"of then so would $B$ (in the subspace topology). But $B$ is uncountable and discrete, so contradiction.  
+\qedhere
+  \end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{k}
+  $\R_K$  (the reals in the $K$-topology) is
+  \begin{enumerate}
+  \item connected,
+  \item not path connected,
+  \item not locally connected (hence not locally path connected),
+  \item Hausdorff,
+  \item not regular (hence not completely regular, not normal, not metrisable, not locally metrisable),
+  \item not locally compact,
+  \item not limit point compact (hence not compact), and
+  \item second countable (hence first countable, separable, Lindel\"of)
+  \end{enumerate}
+
+\begin{proof}
+  \begin{enumerate}[leftmargin=*]
+  \item Let $A := (-\infty, 0) \subset \R_K, B := (0, \infty) \subset \R_K$ in the subspace topologies. The topology on $A$ is definitionally equivalent to the standard subspace topology on $(-\infty, 0)$ and hence $A$ is connected. We also claim the topology on $B$ is equivalent to the standard subspace topology on $(0, \infty)$. This is because a basis element of the form $(a, b) - K$ (with $a \ge 0$) in the $K$-topology is equal to a union of open intervals (hence open) in the standard topology. Thus $B$ is connected as well. Then $\bar A := (\infty, 0]$ and $\bar B := [0, \infty)$ are connected, and since $\bar A \cap \bar B \ne \emptyset$ we then have $\bar A \cup \bar B = \R_K$ is connected. 
+  \item Suppose there exists a path $f : [a, b] \to \R_K$ from $0$ to $1$. We know $\im f$ is compact. By the intermediate value theorem we have $[0,1] \subset \im f$; since $[0,1]$ is closed, this implies $[0,1]$ is compact in the $K$-topology. But consider the open cover $\{[0,1] - K\} \cup \{(1/n, 1] \mid n \in \N\}$. There is clearly no finite subcover, contradiction. 
+  \item We claim $\R_K$ is not locally connected at $0$. Consider the neighbourhood $U := (-1, 1) - K$ of $0$. Let $V$ any neighbourhood of $0$ contained in $U$. There exists $a,b \in \R$ such that $0 \in (a, b) - K \subset V$. Let $n \in \N$ such that $1/n < b$. Then since $1/n \notin U \implies 1/n \notin V$, we have $V = (V \cap (-\infty, 1/n)) \cup (V \cap (1/n, \infty))$ is a separation of $V$. Hence $V$ is not connected. 
+  \item This follows from the fact that $\R$ is Hausdorff in the standard topology, which is coarser than the $K$-topology. 
+  \item We know the set $K := \{1/n \mid n \in \N\}$ is closed in $\R_K$, but it is easy to check that any neighbourhood of $0$ intersects any open set containing $K$. This argument also gives that there is no metrisable neighbourhood of $0$, so $\R_K$ is not locally metrisable.
+  \item Any neighbourhood of $0$ contains infinitely many points of $K$ which have no limit point. Hence no set containing a neighbourhood of $0$ can be limit point compact.
+  \item The infinite set $K$ has no limit point in $\R_K$. 
+  \item We have the countable basis $\{(a,b), (a,b) - K \mid a,b \in \Q, a < b\}$. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\end{document}

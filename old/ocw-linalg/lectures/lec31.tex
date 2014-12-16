@@ -1,0 +1,15 @@
+\subsection{Change of basis}
+
+Now, sometimes it is necessary to change our basis, i.e. convert the coordinates of a vector from one basis to another. So say we're working in $\RR^n$, we know the coordinates a vector $\vx$ in terms of the basis $\vv_1,\vv_2, \ldots, \vv_n$, and we want to find the coordinates of that vector in terms of another basis $\vw_1,\vw_2, \ldots, \vw_n$. And call that new output vector $\vc$. If we create a matrix with columns equal to our second basis, let it be $\mW$, then this means we just have to solve the equation:
+\[ \mW\vc = \vx \Rightarrow \vc = \mW^{-1}\vx. \]
+So in this context, a ``good basis'' $\vw_1,\vw_2, \ldots, \vw_n$ is one for which we can find the inverse matrix quickly. Because that allows us to switch to that basis easily.
+
+Now suppose we have a linear transformation $T:\RR^n\to\RR^n$. With respect to our first basis $\vv_1,\vv_2, \ldots, \vv_n$, let its matrix representation be $\mA$. And with respect to our second basis $\vw_1,\vw_2, \ldots, \vw_n$, let its matrix representation be $\mB$. (That is, let the input and outputs be with respect to the same basis in both cases.) Then the claim is that $\mA$ and $\mB$ are similar:
+\[ \mB = \mM^{-1} \mA \mM, \]
+where $\mM$ is some change of basis matrix. Moreover, $\mM = \mW$, as defined above. We can see this by writing
+\[ T(\vv) = \mA \vv, \]
+with $\vv$ written w.r.t. the first basis. Then, to change the basis of both sides, we multiply by $\mW^{-1}$ (see above), so we have then that
+\[ \mW^{-1} T(\vv) = \mW^{-1} (\mA \vv). \]
+Then let $\vw$ be $\vv$ with its basis changed to the second basis. Then $\mW^{-1} T(\vv)= T(\vw)$ and $\vv = \mW \vw$. So we have that
+\[ T(\vw) = \mW^{-1} \mA \mW \vw. \]
+And this implies that $\mB = \mW^{-1} \mA \mW$.

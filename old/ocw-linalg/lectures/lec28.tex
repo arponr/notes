@@ -1,0 +1,90 @@
+
+What questions can we ask about (symmetric) positive definite matrices? Well, one would be, given a positive definite matrix $\mA$, is its inverse positive definite as well? One thing we know about the inverse is that its eigenvalues are the (multiplicative) inverses of the eigenvalues of $\mA$. And the inverses of positive numbers are positive, so, indeed, the inverse of a positive definite matrix is positive definite.
+
+How about the sum of two positive definite matrices? If $\mA$ and $\mB$ are positive definite, is $\mA + \mB$? Yes, because 
+\[ \T\vx (\mA + \mB) \vx = \T\vx\mA\vx + \T\vx\mB\vx > 0. \]
+
+Finally, one place where positive definiteness always comes up is in the all important matrix
+\[ \T\mA \mA. \]
+for $m \by n$ rectangular matrices $\mA$. We know that $\T\mA\mA$ is square and symmetric, but is it positive definite? Notice that
+\[ \T\vx \T\mA \mA \vx = \T{(\mA \vx)}(\mA\vx). \]
+So this is just the length squared of the vector $\mA\vx$! Of course that length is non-negative. So for any $\vx \in N(\mA)$, the length would be zero. If we require, however, that $\Rank \mA =n$, then the nullspace is only the zero vector, which implies that
+\[ \T\mA\mA, \]
+is positive definite.
+
+\section{Similar matrices and jordan form}
+
+Let's start with a definition. (Note that we are no longer only talking about symmetric matrices, as we required for our discussion of positive definiteness.)
+
+\bdf
+Two $n \by n$ matrices $\mA, \mB$ are \textbf{similar} if for some invertible matrix $\mM$,
+\[ \mB = \mM^{-1} \mA \mM. \]
+\edf
+
+\bex
+Suppose $\mA$ has a full set of independent eigenvectors. Then we have seen that
+\[ \mS^{-1} \mA \mS = \mLa. \]
+In our new language, this means that $\mA$ is similar to $\mLa$.
+\eex
+
+What this concept of similarity does is put matrices into these ``families''. And the best member of each family is the diagonal matrix, for example $\mLa$ in the example above. 
+
+\bex
+Take 
+\[ \mA = \mat{2&1\\1&2}. \]
+Then it's clear that
+\[ \mLa = \mat{3&0\\0&1}. \]
+And those two matrices are similar.
+
+But we could also invent some $\mM$ and just multiply $\mA$ by it and its inverse. Take 
+\[\mM = \mat{1&4\\0&1}. \]
+So then
+\[ \mM^{-1} \mA \mM = \mat{1&-4\\0&1}\mat{2&1\\1&2}\mat{1&4\\0&1} = \mat{-2&-15\\1&6} = \mB. \]
+And this last $\mB$ is similar to $\mA$ and to $\mLa$. 
+
+But since both $\mB$ and $\mA$ are similar $\mLa$, they must have the same eigenvalues! And we can check that easily in this example.
+\eex
+
+So that's the main fact about similar matrices: they have the \textbf{same eigenvalues}. So if we take any two matrices, $\mA$ and $\mB$, with the same eigenvalues, then we can find a matrix $\mM$ to connect them (as in our definitiono of similarity). We can see this more carefully. Let $\mB = \mM^{-1} \mA \mM$ (similar to $\mA$), and $\lambda$ be an eigenvalue of $\mA$, with eigenvector $\vx$. Then
+\[ \mA \vx = \lambda \vx. \]
+We can manipulate this to say
+\[ \mM^{-1} \mA \mM \mM^{-1} \vx = \lambda \mM^{-1} \vx \Rightarrow \mB \mM^{-1} \vx = \lambda \mM^{-1} \vx. \]
+The above directly implies that $\lambda$ is an eigenvalue of $\mB$, with eigenvector $\mM^{-1} \vx$. So this shows again that similar matrices have the same eigenvalues, and it also shows that the eigenvectors are just transformed by some matrix.
+
+Now this is all happy and nice when we have a full set of eigenvectors. But what happens in the bad case that a matrix has an eigenvalue has $>1$ multiplicity. Then there's a possibility that the matrix isn't diagonalisable.
+\bex
+Take the family of $2 \by 2$ matrices with $\lambda_1 = \lambda_2 = 4$. Of course, this family includes
+\[ \mat{4&0\\0&4}. \]
+But it also includes something like
+\[ \mat{4&1\\0&4}. \]
+So this ``family'' really has two ``families'' in it. The identity-looking one is in its own family:
+\[ \mM^{-1} (4\mI) \mM = 4 \mM^{-1} \mI \mM = 4 \mI, \]
+so that matrix is only similar to itself. But the other family is much bigger, and is similar to all other matrices with eigenvalues four and four. However, that family is non-diagonalisable, and thus only has one eigenvector. But that one we chose, with the 1 in the top left, is really the best one in the family. And that matrix is in what we call \textbf{Jordan form}, which describes the closest we can to a diagonal similar matrix. 
+
+So what are some more members of that bigger family? Well it's any $2 \by 2$ matrix with trace 8 and determinant 16, so of the form
+\[ \mat{a&b\\c&8-a}, \]
+such that the determinant is 16. And any matrix of this form are similar, with the same eigenvalues, and all have only one eigenvector.
+\eex
+
+So this brings up a new fact that all similar matrices have the \textbf{same number of independent eigenvectors}. But this is not really enough. 
+
+\bex
+Take the horrible matrix
+\[ \mat{0&1&0&0\\0&0&1&0\\0&0&0&0\\0&0&0&0}. \]
+All four of its eigenvalues are zero, so the eigenvectors are just the vectors in the nullspace. And since the rank is 2 (there are two independent column vectors), the dimension of the nullspace is $4 - 2 = 2$, so there are two independent eigenvectors, and two are ``missing''.
+
+The same can be said if we move one of the 1s, to get the matrix 
+\[ \mat{0&1&0&0\\0&0&0&0\\0&0&0&1\\0&0&0&0}. \]
+But these two matrices aren't similar! And it's sort of because the 1s in the first matrix were contained in a $3\by 3$ block in the upper left, separating out a $1\by 1$ block in the lower right. And in the second matrix we had two $2 \by 2$ blocks.
+\eex
+
+These ``blocks'' are called \textbf{Jordan blocks}, and the $i$-th block, $\mJ_i$, has the $i$-th repeated $\lambda$ value, $\lambda_i$ on the diagonals, 1s right above the diagonal and 0s everywhere else. And each Jordan block has only one eigenvector. And so the above two matrices were not similar, because the blocks were of different sizes; if they were the same sizes, then they'd be similar. And that can be stated as the following theorem.
+
+\btm
+Every square matrix $\mA$ is similar to a Jordan matrix $\mJ$, which has Jordan blocks going diagonally down and to the right across the matrix (so it has these eigenvalues on the diagonal and some 1s above them). Then the number of blocks is the number of eigenvectors.
+\etm
+
+Notice, in the good case ($\mA$ is diagonalisable), the Jordan blocks are just the eigenvalues and then $\mJ = \mLa$. But the above theorem also covers the bad cases.
+
+
+

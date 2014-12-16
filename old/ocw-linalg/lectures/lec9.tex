@@ -1,0 +1,55 @@
+\section{Independence, basis and dimension}
+
+Suppose $\mA$ is $m \times n$ with $m < n$. Then there are solutions to $\mA\vx = 0$ other than the zero vector. This follows from the fact that with fewer rows than columns, there must be at least $n-m$ free columns and free variables, which means there is something in the nullspace besides the zero vector. 
+
+
+Now, we've mentioned the idea of ``independence'' of vectors in some previous discussions. What exactly does it mean?
+\bdf
+Vectors $\vx_1,\vx_2,\ldots,\vx_n$ are \textbf{linearly independent} if 
+\[ c_1\vx_1 + c_2\vx_2 + \cdots + c_n\vx_n \ne 0\]
+for all $c_1,c_2,\ldots,c_n$ except for $c_1=c_2=\cdots=c_n=0$.
+\edf
+I.e., vectors are independent as long as no non-trivial linear combination of them gives the zero vector. So two vectors that are multiples of each other or three vectors where one vector is given by the sum of the other two are dependent. Note also that any set of vectors containing the zero vector must be dependent. 
+
+What about any three vectors in the plane. Well if we take the matrix where the three vectors are the columns, then we'll have a $2 \times 3$ matrix, so we have the case where $m < n$. We said just above that this implies that the nullspace has something other than the zero vector. Thus there is some non-trivial linear combination of the vectors that gives the zero vector, and this means the vectors must be independent. This holds for \textit{any} three vectors in the plane. 
+
+So this leads to another definition of linear independence. 
+\bdf
+Let $\vx_1,\vx_2,\ldots,\vx_n$ be the columns of a matrix $\mA$. Then they are independent if $N(\mA)$ contains only the zero vector, and dependent if there's is anything else in the nullspace. So the vectors are only independent if $\mathrm{rank} = n$, and for any less rank, they are dependent. 
+\edf
+
+Now let's talk about span quickly. What does it mean for a set of vectors to span a space. Well we've seen this already in terms of the column space. 
+\bdf
+Vectors $\vx_1,\vx_2,\ldots,\vx_n$ \textbf{span} a vector space if the space consists only of the linear combinations of those vectors.
+\edf
+So the columns of a matrix span their column space. And the span of a set of a vectors is the smallest vector space that contains those vectors. This idea just compresses language really. 
+
+We're most interested in the span of independent vectors, because that uses the minimal number of vectors to generate that vector space. If we had more vectors generating the same vector space, then necessarily they would have had to be dependent. So we come up with this next idea.
+\bdf
+The \textbf{basis} of a vector space is a set of vectors $\vx_1,\vx_2,\ldots,\vx_n$ that are independent and span the vector space.
+\edf
+(So I have enough vectors to generate the space, but not too many---it's just right!) Really, the basis tells us everything we need to know about a space. 
+
+\bex
+Take the space $\RR^3$. We can form a basis using any three non-coplanar vectors, for example the unit vectors along the three axes. This illustrates that the basis of a vector space is not necessarily unique. 
+
+If we take any $n$ vectors in $\RR^n$, in fact, then we can test if it is a basis if the matrix with the columns is invertible (i.e. the nullspace is only the zero vector, or $\mA\vx = \vb$ has a solution for all $\vb \in \RR^n$). 
+\eex
+
+Notice however, even if there are many, many bases for a given vector space, all of these bases have the same number of vectors. In fact, we call this unique number for a vector space, the \textbf{dimension} of that space. 
+\bex
+Take the vector space given by the column space of
+\[ \mA = \mat{1&2&3&1\\1&1&2&1\\1&2&3&1}, \]
+$C(\mA)$. By definition, the column vectors span the space. However, the whole set is not a basis. For example, the vector $\vx = \rvec{1,0,0,-1}$ is in the nullspace $N(\mA)$, which implies that these vectors are not independent, and thus cannot be a basis. This is evident simply because the third column is the sum of the first two and the fourth column is equivalent to the first column. From this one can notice that the most natural basis for $C(\mA)$ is given by the first two columns. And this would arise also through elimination, because there would be two pivot columns. I.e., the rank of $\mA$ is 2. And this number of pivots is also the number of vectors in the basis.
+\eex
+This leads to the following interest idea:
+\btm
+The rank of a matrix is equal to the dimension of its column space:
+\[ \Rank \mA = \Dim C(\mA). \] 
+\etm 
+
+Now what about the nullspace? (I made an observation about ``dimension'' about the nullspace relating to rank without knowing it's ``proper definition'' earlier in these notes as a remark!) Since there are $n - \Rank \mA$ free variables, there are the same number of special solutions in our algorithm for describing the nullspace. Thus:
+\btm
+For an $m \times n$ matrix $\mA$,
+\[ n - \Rank \mA = \Dim N(\mA). \]
+\etm

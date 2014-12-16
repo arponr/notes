@@ -1,0 +1,56 @@
+\section{Derivatives}
+
+\subsection{Notes}
+\begin{definition}
+We define the derivative of a function $f$ at $x = a$ as
+\[ \frac{df}{dx} \Big |_{x=a} = f'(a) = \lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}. \]
+We say that $f$ is differentiable at $a$ if this limit exists, and that $f$ is differentiable in general if $f$ is differentiable at all points in its domain.
+\end{definition}
+
+Differentiability gives us yet another condition for ``reasonable'' or ``nice'' functions, being even more restrictive than the set of continuous functions. For example, the function defined by $f(x) = |x|$ is continuous everywhere but is not differentiable at $x = 0$ (because the left- and right-hand limits of the difference quotient are not equal at 0). In fact, we can create a function later on that is continuous everywhere and differentiable nowhere! 
+
+This idea that differentiability augments continuity, in a way, is supported by the following.
+
+\begin{theorem} \label{difimplcon}
+If a function $f$ is differentiable at $a$ then $f$ is continuous at $a$. 
+
+\begin{proof}
+\[ \lim_{h \rightarrow 0} f(a + h) - f(a) = \lim_{h \rightarrow 0} h\left(\frac{f(a + h) - f(a)}{h}\right) = f'(a) \, \lim_{h \rightarrow 0} h = 0 \]
+$\lim_{h \rightarrow 0} f(a + h) - f(a) = 0 \Rightarrow \lim_{x \to a} f(x) = f(a)$, and thus $f$ is continuous.
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+The converse is not true!
+\end{remark}
+
+We can create even more ``reasonable'' functions by considering higher order derivatives. Since the derivative of a function is a function itself, we can construct the $n$-th derivative as taking the derivative of a function, in iteration, $n$ times. We notate the $n$-th derivative as 
+\[ \frac{d^nf}{dx^n} \Big |_{x=a} = f^{(n)}(a). \]
+Functions whose 2nd and 3rd---and higher---derivatives exist behave \textit{very} reasonably.
+
+This chapter is truly just review, and so I will stop here and proceed to problems.
+
+\subsection{Exercises}
+\begin{problem}[9-22] \ 
+\begin{enumerate}
+\item[(b)]
+\[ \lim_{h,k \to 0^+} \frac{f(x+h) - f(x-k)}{h+k} = \lim_{h,k \to 0^+} \frac{f(x+h) - f(x)}{h + k} + \frac{f(x) - f(x-k)}{h + k} \]
+\[ = \lim_{h,k \to 0^+} \left(\frac h{h+k}\right) \left(\frac{f(x+h) - f(x)}{h}\right) + \lim_{h,k \to 0^+} \left(\frac k{h+k}\right) \left(\frac{f(x) - f(x-k)}{k}\right) \]
+\[ = f'(x) \lim_{h,k \to 0^+} \frac{h}{h + k} + f'(x) \lim_{h,k \to 0^+} \frac{k}{h + k} = f'(x) \lim_{h,k \to 0^+} \frac{h + k}{h + k} = f'(x). \]
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[9-23]
+\[ -f'(-x) = -\lim_{h \to 0} \frac{f(-x+h) - f(-x)}{h} = -\lim_{h \to 0} \frac{f(-x-h) - f(-x)}{-h} \]
+\[ = \lim_{h \to 0} -\frac{f(x+h) - f(x)}{-h} = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = f'(x). \]
+So the derivative of an even function is odd!
+\end{problem}
+
+\begin{problem}[9-24]
+\[ f'(-x) = \lim_{h \to 0} \frac{f(-x+h) - f(-x)}{h} = \lim_{h \to 0} \frac{f(-x-h) - f(-x)}{-h} \]
+\[ = \lim_{h \to 0} -\frac{f(x+h) + f(x)}{-h} = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = f'(x). \]
+So the derivative of an odd function is even!
+\end{problem}
+
+
+

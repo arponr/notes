@@ -1,0 +1,78 @@
+\section{Change of variables}
+
+We've already seen double integrals in cartesian and polar coordinates but we can really choose any set of coordinates using change of variables, and we will now see how to do this in double integrals.
+
+\bex
+Say we want to find the areas of an ellipse with semiaxes $a,b$. The equation of this ellipse is
+\[ \left(\frac xa\right)^2 + \left(\frac yb\right)^2 = 1. \]
+The area can be formulated as a double integral as 
+\[ \iint_{\left(\frac xa\right)^2 + \left(\frac yb\right)^2 < 1} \,dx\,dy. \]
+We can set up bounds using regular cartesian coordinates, but it looks pretty inconvenient. We were able to use polar coordinates very nicely when the region was circular, so we should try to scale our coordinates such that this region becomes a circle. To do this, we create a new coordinate system $(u,v)$ such that $u = x/a, v = y/b$, and do the integral in terms of these new coordinates. In terms of $u$ and $v$, the integral becomes
+\[ \iint_{u^2+v^2<1} ab\,du\,dv. \]
+because $du = 1/a\,dx$ and $dv=1/b\,dy$, and it follows that $dx\,dy=ab\,du\,dv$. This integral is just
+\[ ab \iint_{u^2+v^2<1} \,du\,dv, \]
+which is simply $ab$ multiplied by the area of the unit circle, which gives us a final area of the ellipse as 
+\[ \pi a b. \]
+\eex
+
+This example was pretty simple, and when the subsitution is more complicated we must be more careful. 
+
+\bex
+Say for some reason (usually to simlify the integrand or the bounds) we want to do the change of variables $u=3x-2y,v=x+y$. How do we convert $dx\,dy$ to $du\,dv$? To determine this we look at the area of a rectangle in $x,y$ coordinates and how much this area is scaled when we put it in $u,v$ coordinates (it turns into a parallelogram actually). In this case, the area scaling factor does not depend on which rectangle we choose, so we can calculate the scaling by examining a simple case: the unit square (in $x,y$ coordinates). The $(0,0)$ point remains at the same place; $(0,1)$ moves to $(-2,1)$; $(1,0)$ moves to $(3,1)$; and $(1,1)$ moves to $(1,2)$. These four new points form a parallelogram, so we can calculate its area by taking the cross poduct of two of the vectors forming the parallelogram:
+\[ \dat{3  & 1       \\
+        -2 & 1        } = 5 \]
+This tells us that the scale between the areas in $x,y$ coordinates and $u,v$ coordinates is 5, meaning that $dx\,dy=1/5\,du\,dv$.
+
+Thus in our integral, we must change
+\[ \iint_R f(x,y)\,dx\,dy = \iint_{R'} f(u,v)\,\frac 15\,du\,dv. \]
+\eex
+
+In this case we had a scaling factor independent of position, but this is not true in general. the scaling factor may actually be variable, and thus in terms of $x,y$ or $u,v$. However, if we take the linear approximation then the substitution reduces to the case just examined. In general, we will have
+\[ u = u(x,y) \]
+\[ v = v(x,y). \]
+We can then take the linear approximation:
+\[ \mat{\Delta u \\ \Delta v} \approx \mat{u_x & u_y \\ v_x & v_y}\mat{\Delta x \\ \Delta y} \]
+This tells us that a small rectangle in $xy$ coordinates will correspond to a small parallelogram in $uv$ coordinates. Then we can see that the scaling factor is actually the determinant of the matrix of partials (because the determinant of a linear transformation represents how the transformation scales areas). And if one takes the example just completed, we see that this fact does hold.
+
+This leads to the following definition:
+\bdf
+The \textbf{Jacobian} of a change of variables is defined as
+\[ J = \pd{(u,v)}{(x,y)} = \dat{u_x & u_y \\ v_x & v_y}. \]
+where the partial notation doesn't have anything to do with partial derivatives. 
+\edf
+Then we have that 
+\[ du\,dv = |J|\,dx\,dy. \]
+The absolute value is necessary because determinants are in fact signed depending on the orientation of things, and we must only take positive area. 
+
+\bex
+We can check using this formula our change of coordinates for polar. We have that $x = r \cos \theta, y = r \sin \theta$. Thus the Jacobian is given by
+\[ J = \dat{\cos \theta & -r \sin \theta \\ \sin \theta & r \cos \theta} = r. \]
+Thus we have that 
+\[ dx\,dy = |r|\,dr\,d\theta = r\,dr\,d\theta, \]
+since $r$ is always positive.
+\eex
+
+\brm
+The relation
+\[ \pd{(u,v)}{(x,y)} \cdot \pd{(x,y)}{(u,v)} = 1 \]
+always holds because the two transformation matrices are inverses of each other, so we can compute whichever is easier. 
+\erm
+
+\bex
+Let's say we want to compute
+\[ \int_0^1 \int_0^1 x^2y\,dx\,dy \]
+by changing variables to $u=x,v=xy$ (for the sake of practise...). First we compute the Jacobian:
+\[ J = \dat{1 & 0 \\ y & x} = x. \]
+This means that
+\[ du\,dv = x\,dx\,dy, \]
+since $x$ is positive in our region. 
+
+Next, we change the integrand into $uv$ coordinates:
+\[ x^2y\,dx\,dy = x^2y\,\frac 1x\,du\,dv = v\,du\,dv. \]
+So what we'll be computing is
+\[ \iint_{???} v\,du\,dv \]
+(or perhaps $dv\,du$ if that happens to be easier.)
+
+Lastly, we need to find the bounds for $u$ and $v$ in this new integral. Let's decide on doing $du\,dv$ rather than $dv\,du$. So first we keep $v$ constant as $u$ is changing. So $xy$ is constant (a set of hyperbolas). Say we have a given $v=xy$. What range does $u$ take for this hyperbola? It enters the region when $y=1$, so $x=u=v$. It exits the region when $x=u=1$. What about the outer integral? The smallest value of $v=xy$ we want to consider is 0 and the largest is 1. This gives a final integral of
+\[ \int_0^1 \int_v^1 v\,du\,dv .\]
+\eex

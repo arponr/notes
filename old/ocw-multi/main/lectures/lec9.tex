@@ -1,0 +1,74 @@
+\section{Double integrals}
+
+Remember that when we have a function of one variable, $f(x)$, then the integral:
+\[ \int_a^b f(x)\,dx \]
+represents the (signed) area between the graph of $f$ and the $x$-axisover the interval $[a,b]$. When we have a function of two variables, we can consider instead the volume below the surface instead of the area below the curve.
+
+So say we have a function $f(x,y)$, then we look at the volume below the graph $z=f(x,y)$ as the double integral. Rather than integrating between two points on the $x$-axis (in one variable), we can integrate over a region, $R$ of the $x$-$y$ plane, and compute the volume between the surface and the $x$-$y$ plane. We notate this
+\[ \iint_R f(x,y)\,dA \]
+where $A$ represents a unit of area in some sense. Now how can we define this notion? In one variable we limit of the sum the areas of rectangular slices underneath the curve, and we can do a similar thing here: we cut $R$ into small pieces of area $\Delta A_i$ for the $i$-th slice (given by the points $x_i,y_i$) and consider the sum
+\[ \sum_i f(x_i,y_i)\Delta A_i. \]
+In the three dimensional picture this just represents th  sum of the volume of little columns underneath the graph. To compute the exact double integral, we take the limit of this sum as $\Delta A_i \to 0$. This provides a definition, but of course we will need to learn methods to compute the integrals without actually plugging in values to this definition.
+
+A trick to computing these integrals is by scanning through the region by parallel planes. Namely, if I set $x$ to be a constant $x_0$, then I can look at the graph in the plane $x = x_0$, which looks like a single variable function; then I can do this for all values of $x_0$ in the region, and add them together to get the volume. I.e., to compute 
+\[ \iint_R f(x,y)\,dA \]
+we take slices parallel to the $yz$-plane with area $S(x)$ and then integrate $S(x)$ with respect to $x$:
+\[ \int_{x_\rmmin}^{x_\rmmax} S(x) \,dx \]
+with the bounds being the minimum $x$ in $R$ to the maximum $x$ in $R$. Now how do we find $S(x)$? Well it's an integral in the $y$ variable: 
+\[ S(x) = \int_{y_\rmmin(x)}^{y_\rmmax(x)} f(x,y)\, dy \]
+with $x$ being a constant in the integral, and the bounds being the minimum and maximum $y$ in the plane (\textit{which depend on $x$ since the plane depends on $x$!}).
+
+So then the double integral formula becomes an ``iterated integral'':
+\[ \iint_R f(x,y)\,dA = \int_{x_\rmmin}^{x_\rmmax} \left[\int_{y_\rmmin(x)}^{y_\rmmax(x)} f(x,y)\, dy \right]\,dx. \]
+We must note the following again, for it is very important: the bounds of the first integral are simply numbers, but the bounds of the second integral are variable, depending on $x$.
+
+\brm
+We can also switch the order, and integrate in $y$ and then $x$. This is sometimes important in setting up the bounds of integration in a convenient way. I.e. sometimes one order is much easier to compute than the other.
+\erm
+
+\bex
+Say we want to integrate
+\[ z = 1-x^2-y^2 \]
+over the region $0 \le x,y \le 1$. This volume is the ``rotated parabola'' over the 1x1 square in the $x,y$ plane. In this case, the region is nice because the bounds on $y$ are independent of the $x$ value (and vice-versa). Then the integral is
+\[ \int_0^1 \int_0^1 1 - x^2 - y^2 \,dy\,dx. \]
+First, we must do the inner integral:
+\[ \int_0^1 1-x^2-y^2 \,dy = y - x^2y - \frac{y^3}3 \bigg|_0^1 = \frac23 - x^2, \]
+giving us an expression only in terms of $x$. 
+
+So we can then to the outer integral
+\[ \int_0^1 \frac23-x^2\,dx = \frac23x - \frac13x^3 \bigg|_0^1 =\frac13. \]
+And that is the final answer.
+\eex
+
+\brm
+In the beginning we had a notation $dA$, but we ended with the notation in the formula as $dy\,dx$. This is because, when cutting up the region we have $\Delta A = \Delta y \Delta x$, so it follows then as we take the limit that $dA = dy\,dx.$
+\erm
+
+\bex
+Let's take a similar example, the same function
+\[ z = 1-x^2-y^2 \]
+but only in the region (quarter- circle) where the parabaloid is nonnegative ($x^2+y^2\le1$) and $x,y\ge0$. In this case the bounds of $y$ actually do depend on the $x$ value. Namely, for a given $x$, $y$ varies between 0 and $\sqrt{1-x^2}$.
+
+The integral is then
+\[ \iint_R 1 - x^2-y^2 \,dA = \int_0^1 \int_0^{\sqrt{1-x^2}} 1-x^2-y^2\,dy\,dx. \]
+The inner integral is:
+\[ \int_0^{\sqrt{1-x^2}} 1-x^2-y^2\,dy = y - x^2y - \frac{y^3}3 \bigg|_0^{\sqrt{1-x^2}} = \frac23(1-x^2)^{\frac32}. \]
+THen the outer integral is
+\[ \int_0^1 \frac23(1-x^2)^{\frac32} \]
+which by using a trig substitution gives us the integral to be $\pi/8$. This substitution actually becomes slighltly complicated and the integral is much easier when done in polar coordinates, which is discussed a little bit later. 
+\eex
+
+As noted earlier, we can always exchange the order of integration. However, when we do this, we must carefully consider what happens to the bounds of integration. In the case of a rectangluar region of integration, we don't need to worry about anything since the bounds are independent of each other e.g., 
+\[ \int_0^1 \int_0^2 \,dy\,dx = \int_0^2 \int_0^1\,dx\,dy. \]
+In a more interesting case however, this changes.
+
+\bex
+Take the integral
+\[ \int_0^1 \int_x^{\sqrt{x}} \frac{e^y}y\,dy\,dx \]
+The inner integral makes us stuck, so we can try to switch the order. Since $y$ varies from $x$ to $\sqrt{x}$ for a given $x$, I can equivalently say that at a given $y$ (in the range $[0,1]$), $x$ varies from $y^2$ to $y$. Then we can change the integral to
+\[ \int_0^1 \int_{y^2}^y \frac{e^y}{y}\,dx\,dy. \]
+The inner integral is then
+\[ \frac{e^y}yx\bigg|_{y^2}^y = e^y - e^yy. \]
+Then the outer integral is 
+\[ \int_0^1 e^y - ye^y = 2e^y - ye^y \bigg|_0^1 = e-2. \]
+\eex

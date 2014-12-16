@@ -1,0 +1,35 @@
+\section{Simply connected regions}
+
+Let's revisit the fact that we needed this assumption that a gradient field with zero curl need be defined and differentiable everywhere for it to be a vector field.
+
+We've seen two forms of Green's theorem:
+\[ \oint_C \vF \cdot \vT \, ds = \iint_R \curl \vF \, dA, \]
+\[ \oint_C \vF \cdot \vn \, ds = \iint_R \divg \vF \, dA. \]
+For the right hand side of each to make sense, the vector field needs to be defined nicely (namely be differentiable) throughout $R$. Otherwise the double integral is trouble. 
+
+\bex
+The vector field
+\[ \vF = \frac{-y\vi + x \vj}{x^2+y^2}, \]
+is defined everywhere but at the origin, and satisfies $\curl \vF = 0$ everywhere it is defined. So if we have a closed curve in the plane, there are two situations: if it does not enclose the origin, then Green's theorem is satisfied; if it does enclose the origin, then Green's theorem does not work, because of the hole in the region, and weird things happen (e.g. the work around the unit circle is non-zero, and is actually $2\pi$). 
+
+However, there is an extended version of Green's theorem that helps us in situations like this. Let's say we have a curve $C'$ enclosing a hole and another curve $C''$ within the region enclosed by $C'$ that also encloses the hole. (Both curves are counter clockwise.) Then the claim is that green's theorem still applies, in that we have
+\[ \oint_{C'} \vF \cdot \dr - \oint_{C''} \vF \cdot \dr = \iint_R \curl{\vF}\,dA, \]
+which in our case is 0, because we have a zero $\curl$. So this tells us that the two line integrals are equal, and thus for this vector field, the line integral for every curve enclosing the origin is equal to $2 \pi$.
+\eex
+
+How do we arrive at this ``extension'' to Green's theorem though? It's because we can just create a kind of infinitely thin slit connecting $C'$ and $C''$, such that we can create just one counterclockwise path that contains both curves (counterclockwise around $C'$, across the slit, clockwise around $C''$, then back across the slit), and which doe not enclose the origin. The total line integral along this path is then
+\[ \oint_{C'} - \oint_{C''}, \]
+since the line integral from the ``slit'' cancels out when going in opposite directions along it.
+
+\brm
+A similar argument can be applied for the divergence version of Green's theorem.
+\erm
+
+As a last cultural note:
+\bdf
+A connected region $R$ in the plane (one that consists of a single piece) is \textbf{simply connected} if the interior of any closed curve in $R$ is also contained in $R$. (This basically means there are no holes in the region.)
+\edf
+This is relevant, because Green's theorem is good for vector fields which are defined (and differentiable) within a simply connected region. Thus in simply connected regions, Green's theorem can be used to prove that when $\curl \vF = 0$, $\vF$ is a gradient field.
+
+Then the optimal statement then for deciding whether a vector field is conservative or not is: if $\curl \vF = 0$ and the domain where $\vF$ is defined is simply connected, then $\vF$ is conservative (or a gradient field). 
+

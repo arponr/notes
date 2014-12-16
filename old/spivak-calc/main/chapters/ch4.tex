@@ -1,0 +1,68 @@
+\section{Graphs}
+
+\subsection{Notes}
+This chapter mainly focuses on how the algebraic notions of real numbers and functions are expressed in a geometric sense. Firstly, the fact that a line represents the real numbers is discussed. Each point on the line represents a real number, and the distance between two points, $a$ and $b$, is a geometric representation of $|a - b|$. The notation for intervals is explained, with $(a, b)$ being the open interval between $a$ and $b$, where $a < b$, and $[a, b]$ is the closed interval. The obvious combinations in between these two follow.
+
+Next, we discuss visualising pairs of numbers using two perpendicular lines to form a plane of coordinates. This plane can be then used to draw functions, with points drawn on the coordinate-system representing the collection of pairs that form a function. This drawing is what is called a graph.
+
+We first discuss some basic functions, starting with linear functions of the form $f(x) = ax + b$, and then power functions of the form $f(x) = x^n$. We then generalise the notion of a power function to the notion of polynomial functions, of the form $f(x) = \sum_{i = 0}^n a_i x^i$. Some simple facts about these functions are mentioned, e.g. that linear functions of the form mentioned here have slope $a$ and y-intercept $(0, b)$, or that polynomial functions of degree $n$ have at most $n - 1$ ``peaks'' and ``valleys''.
+
+Some more interesting graphs are then examined, for example those that oscillate infinitely often near $x = 0$. A simple function that does so is $f(x) = \sin \frac{1}{x}$. Its close relatives $f(x) = x \sin \frac{1}{x}$ and $f(x) = x^2 \sin \frac{1}{x}$ are even more interesting: if one fits a curve through the peaks of the oscillations, the fitted graphs are linear and parabolic, respectively, reflecting the terms of the functions themselves. The notion of a graph infinitely oscillating near a fixed point leads to a discussion of how accurate a drawn graph can truly be, and another great example of this ``undrawability'' is given with
+\[ f(x) = \begin{cases} 0, & x \textrm{ irrational} \\ 1, & x \textrm{ rational} \end{cases} \]
+There are infinitely many points on the lines $y = 0$ and $y = 1$, but neither lines are completely drawn, which is quite confounding to draw.
+
+Next examined are some of the conic sections. A circle, defined as the locus of points that are a fixed distance $r$ away from some centre point $(a, b)$ is easily shown to be
+\[ (x - a)^2 + (y - b)^2 = r^2. \]
+Similarly, we show that an ellipse (for sake of simplicity, centred at the origin), which is the locus of points whose sum of distances from two fixed points is a constant, is given by the equation
+\[ \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1 \]
+where $a$ and $b$ are determined by the fixed distance and a chosen pair of extremeties for one of the ellipse's axes. A hyperbola is very similar, with the difference of distances from two fixed points being constant:
+\[ \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1 \]
+
+In the end, it is said that one of our main goals regarding graphs is to carefully define when a function's graph is reasonable. This definition is developed in later chapters.
+
+\subsection{Exercises}
+\begin{problem}[4-22] \ 
+\begin{enumerate}
+
+\item[(a)]
+The square of the distance between the two points is
+\[ (x - c)^2 + (mx - d)^2 = (x^2 - 2xc + c^2) + (m^2x^2 - 2mxd + d^2) \]
+\[ = x^2(m^2 + 1) + x(-2md - 2c) + c^2 + d^2. \]
+The minimum value of this function must be at 
+\[ x = \frac{-b}{2a} = \frac{md + c}{m^2 + 1}. \]
+Plugging this into our function gives us the actual minimum value of the distance squared:
+\[ \left(\frac{md + c}{m^2 + 1}\right)^2(m^2 + 1) + \left(\frac{md + c}{m^2 + 1}\right)(-2md - 2c) + c^2 + d^2 \]
+\[ = \frac{(md + c)^2}{m^2 + 1} -2\frac{(md + c)^2}{m^2 + 1} + c^2 + d^2 \]
+\[ = \frac{-(m^2d^2 -2mdc + c^2) + (c^2 + d^2)(m^2 + 1)}{m^2 + 1} \]
+\[ = \frac{c^2(m^2 + 1 - 1) - 2mdc + d^2(m^2 + 1 - 1)}{m^2 + 1}\]
+\[ = \frac{(cm - d)^2}{m^2 + 1}. \]
+Taking the square root of this value gives us the final minimum distance between the point and the line:
+\[ = \frac{|cm - d|}{\sqrt{m^2 + 1}}. \]
+
+\item[(b)]
+To make this question a bit easier, we can shift both the point and the line down $b$ units, as this will not affect the distance between them. This then reduces to the problem in part (a), with our point being $(c, d - b)$ and our line being $f(x) = mx$. Plugging this into our formula that resulted from (a) gives us that the distance is
+\[ = \frac{|cm + b - d|}{\sqrt{m^2 + 1}}. \]
+
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[4-23] \ 
+\begin{enumerate}
+
+\item[(a)]
+We notice that $x'$ is the minimum distance from the point $(x, y)$ to the line $f(x) = -x$ and that $y'$ is the minimum distance from the point $(x, y)$ to the line $f(x) = x$ (since the minimum distance between a point and a line is given by the length of the perpendicular line between the two, and the opposite sides of a rectangle are congruent). So we use the formula from problem 22, giving us that:
+\[ x' = \frac{|-x - y|}{\sqrt{2}} = \frac{x + y}{\sqrt{2}} \]
+\[ y' = \frac{|x - y|}{\sqrt{2}} = \frac{y - x}{\sqrt{2}} \]
+Note that we used the facts that $y > x > 0$, based on the graph, to simplify the absolute value terms.
+
+\item[(b)]
+We simply use the expressions we found for $x'$ and $y'$ in part (a):
+\[ \left(\frac{x'}{\sqrt{2}}\right)^2 - \left(\frac{y'}{\sqrt{2}}\right)^2 = 1 \]
+\[ \left(\frac{x + y}{2}\right)^2 - \left(\frac{y - x}{2}\right)^2 = 1 \]
+\[ (x^2 + 2xy + y^2) - (y^2 - 2xy + x^2) = 4 \]
+\[ 4xy = 4 \]
+\[ xy = 1 \]
+
+\end{enumerate}
+\end{problem}
+

@@ -1,0 +1,59 @@
+\section{Numbers of various sorts}
+
+\subsection{Notes}
+This chapter is devoted to formalising the notion of a ``number'', referred to loosely in the first chapter. The first collection of numbers discussed is the set of natural numbers,
+\[ \mathbb{N} = \{1, 2, 3, \ldots\}. \]
+It is easy to see that not all of the properties of numbers discussed in Chapter 1 hold for $\mathbb{N}$, e.g. the existence of an additive or multiplicative inverse. It is for this reason that we must study larger sets of numbers. However, one interesting property of $\mathbb{N}$ is the principle of mathematical induction, which formally states that if $A \subseteq \mathbb{N}$ and
+\begin{eqnarray}
+1 \in A \\
+k \in A \Rightarrow k + 1 \in A
+\end{eqnarray}
+then $A = \mathbb{N}$. This principle of induction is useful in proving certain properties of the natural numbers, for instance that
+\[ \sum_{i=1}^n i = \frac{n(n+1)}{2}. \]
+
+A closely related property of $\mathbb{N}$ is the well-ordering principle, which states that the only $A$, $A \subseteq \mathbb{N}$, that does not have a least member is the null set, $\emptyset$.
+
+We study sets larger than the natural numbers so that they satisfy the basic properties discussed in chapter 1. The set of integers,
+\[ \mathbb{Z} = \{\ldots, -2, -1, 0, 1, 2, \ldots\} \]
+comes close in satisfying all of the properties discussed earlier, but fail in one, particularly in the existence of multiplicative inverses. So, we extend this set to an even larger set of numbers, the rational numbers,
+\[ \mathbb{Q} = \left\{ \frac{p}{q}: p,q \in \mathbb{Z}, q \ne 0 \right\}. \]
+The rational numbers do in fact satisfy all of the properties examined in the previous chapter. However, we cannot say, by this fact alone, that we have found the \textit{one} set of numbers that satisfy these properties. In fact, there is an even larger set, the set of all real numbers, $\mathbb{R}$, that satisfies these properties. The real numbers include both the rational numbers and the irrational numbers. Proving the existence of irrational numbers requires a deeper study, but it is rather easy to show in some cases the the rationals cannot form every thinkable number. For example,
+
+\begin{theorem}
+There is no rational number, $r$, such that $r^2 = 2$.
+\begin{proof}
+We first say that $r = \frac{p}{q}$, as we did in our definition of $\mathbb{Q}$, such that $(p, q) = 1$. If we did have some
+\[ \left(\frac{p}{q}\right)^2 = 2 \]
+then we have that $p^2 = 2q^2$, which implies that $p$ is even. This is equivalent to saying that $p = 2k$. Replacing this in our equation gives us that $q^2 = 2k^2$, which implies that $q$ is even. This fact, that both $p$ and $q$ are even, contradicts the fact that $(p, q) = 1$, completing the proof.
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+\begin{problem}[2-10]
+The well-ordering principle states that for a collection of natural numbers there is a least member, e.g. 1 in $\mathbb{N}$. This means that for $n \in \mathbb{N}$, either $n = 1$ or $n = m + 1$ for some $m \in \mathbb{N}$. From this, it follows that if a property $P$ holds for 1, and holds for $k + 1$ given that it holds for $k$, then it holds for all members of $\mathbb{N}$. This is because every member of $\mathbb{N}$ can be expressed by one of the two cases covered, by the well-ordering principle.
+\end{problem}
+
+\begin{problem}[2-20]
+This (really amazing) explicit formula for the Fibonacci sequence can be proved using induction. We first define the Fibonacci sequence in a slightly altered way that makes the base cases of the induction a bit simpler:
+\begin{eqnarray*}
+ && F_0 = 0 \\
+ && F_1 = 1 \\
+ && F_n = F_{n-2} + F_{n-1}, \textrm{   for } n \ge 2
+\end{eqnarray*}
+
+We must first show that the forumla holds for $F_0$ and $F_1$, since the formula for all greater $F_n$ depends on the previous \textit{two} terms:
+\[ F_0 = \frac{(\frac{1 + \sqrt{5}}{2})^0 - (\frac{1 - \sqrt{5}}{2})^0}{\sqrt{5}} = \frac{1 - 1}{\sqrt{5}} = 0 \]
+\[ F_1 = \frac{(\frac{1 + \sqrt{5}}{2})^1 - (\frac{1 - \sqrt{5}}{2})^1}{\sqrt{5}} = \frac{\frac{2\sqrt{5}}{2}}{\sqrt{5}} = 1 \]
+With these cases covered, we can now proceed with the main step of the induction, showing that if the formula holds for $F_{n - 1}$ and $F_n$, then it holds for $F_{n+1}$.
+
+For convenience, I will use the notation $\phi_+ = \frac{1 + \sqrt{5}}{2}$ and $\phi_- = \frac{1 - \sqrt{5}}{2}$. Using our formula in the definition of $F_{n+1}$, $F_{n+1} = F_{n-1} + F_n$, gives us that 
+\[ F_{n+1} =  \frac{\phi_+^{n-1} - \phi_-^{n-1}}{\sqrt{5}} + \frac{\phi_+^n - \phi_-^n}{\sqrt{5}}.\]
+Combining the fraction results in
+\[ F_{n+1} =  \frac{(\phi_+^{n-1} + \phi_+^n) - (\phi_-^{n-1} + \phi_-^n)}{\sqrt{5}}.\]
+Factoring both terms in the numerator gives us that
+\[ F_{n+1} =  \frac{\phi_+^n(\phi_+^{-1} + 1) - \phi_-^n(\phi_-^{-1} + 1)}{\sqrt{5}}.\]
+It is a well known fact, and easy to show, that $\phi_\pm^{-1} = \phi_\pm - 1$. Inserting this into our equation gives us that
+\[ F_{n+1} =  \frac{\phi_+^n(\phi_+ - 1 + 1) - \phi_-^n(\phi_- - 1 + 1)}{\sqrt{5}}.\]
+Our formula, and the completion of the proof, follows:
+\[ F_{n+1} =  \frac{\phi_+^{n+1} - \phi_-^{n+1}}{\sqrt{5}}.\]
+\end{problem}

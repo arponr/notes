@@ -1,0 +1,39 @@
+\section{Optimisation (max/min)}
+
+The partial derivatives gives us an approximation formula for a function of two variables: if we change $x$ by $\Delta x$ and $y$ by $\Delta y$, and have $z=f(x,y)$ then 
+\[ \Delta z \approx f_x\Delta x + f_y \Delta y. \]
+If we take the two tangent lines formed for $f$ (with slopes $f_x$ and $f_y$) this forms a tangent plane to the function. This plane is given by
+\[ z = z_0 + f_x(x-x_0) + f_y(y-y_0). \]
+One can notice that the plane and approximation formula are incredibly similar, indicating, as expected, that the tangent plane provides (locally) an approximation to the actual surface of the function.
+
+Finding minima and maxima for functions of two (or more) variables is similar to finding the same for single-variable functions, involving a vanishing derivative. However, we have several derivatives to consider now. For a function of two variables $f(x,y)$, a local max or min is at a place such that $f_x = 0$ and $f_y=0$. If we look back at the approximation formula, when this is true, $\Delta z$ is 0 in its linear terms, meaning we are at some sort of local min or max. And if we look at the equation of the tangent plane, this condition means that the tangent plane will be horizontal ($z$ is constant), similar to the idea of a horizontal tangent line for a function of one variable. 
+
+\bdf
+We say that $(x_0,y_0)$ is a critical point of $f(x,y)$ if $f_x(x_0,y_0) = 0$ and $f_y(x_0,y_0)=0$.
+\edf
+
+\bex
+Take the function 
+\[ f(x,y) = x^2-2xy+3y^2+2x-2y. \]
+To find mins and maxes, we set the partial derivatives to 0, giving us the following system of equations:
+\[\begin{cases} f_x = 2x-2y+2 = 0 \\
+ f_y = -2x + 6y -2 = 0 
+\end{cases}\]
+This is a system of two equations with two variables; adding the two equations gives that $4y = 0$, or that $y=0$. It follows from the first (or second) equation that $x=-1$. So the single critical point of the function is $(-1, 0)$. But is this a maximum or a minimum? (One thing we need to consider is that it meight be neither. In addition to local minima and maxima, critical points can be saddle points (neither minimum nor maximum, like in the graph of $f(x,y) = 1-x^2+y^2$)). To decide which this is, we can rewrite the function as
+\[ f(x,y) = (x-y)^2 + 2y^2 + 2x-2y = ((x-y)+1)^2 + 2y^2 - 1. \]
+When we see it like this, we can clearly see that $f(x,y) \ge 1$ for all $(x,y)$, so the critical point must be a local minimum. 
+\eex
+
+\subsection{Least squares (an application)}
+
+One application of finding minima for a two variable function is finding the least squares regression line for a plot of experimental data. So given data $(x_1,y_1), (x_2,y_2),$ $\ldots, (x_n,y_n)$, the problem is to find the best fit line, $ax+b$, with $a$ and $b$ unknown, that describes a trend in the data. We have to decide what best fit actually means; what turns out to be relevant is minimising the squares of the distance between the predicted value for an $x$ value and the experimentally measured value for an $x$ value. That is, we want to minimise
+\[ D(a,b) = \sum_{i=1}^n (y_i - (ax_i + b))^2. \]
+We can find the minimum by setting 
+\[ \pd{D}{a} = \sum_{i=1}^n 2(y_i -(ax_i +b))(-x_i) = 0 \]
+and
+\[ \pd{D}{b} = \sum_{i=1}^n 2(y_i -(ax_i +b))(-1) = 0 \]
+We then get the following system:
+\[\begin{cases} \left(\sum_{i=1}^n x_i^2\right)a + \left(\sum_{i=1}^n x_i\right)b = \sum_{i=1}^n x_iy_i \\
+\left(\sum_{i=1}^n x_i \right)a + nb = \sum_{i=1}^n y_i 
+\end{cases}\]
+This is a 2x2 linear system in $a$ and $b$, which one can solve given the actual data points ($x_i, y_i$). And we can show that that is a minimum for the function $D(a,b)$. 

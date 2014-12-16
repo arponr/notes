@@ -1,0 +1,66 @@
+\subsection{Projections}
+
+Consider a vector $\vb$ and a line $a$ in the direction of the vector $\va$ in $\RR^2$. What point $\vp$ on $a$ is closest to $\vb$? Well if we take the ``error'' or difference vector, $\ve = \vb - \vp$, then it surely must be orthogonal to $\va$ for the distance to be minimised. (This vector $\vp$ is called the \textbf{projection} of $\vb$ onto $\va$.)
+
+We know that $\vp = x\va$ for some $x$---so we want to find $x$. Since we want orthogonality, we want to solve
+\[ \T\va (b - x\va) = 0. \]
+It follows that
+\[ x = \frac{\T\va \vb}{\T\va \va}. \]
+Then we get that,
+\[ \vp = \va x = \va \frac{\T\va \vb}{\T\va \va}. \]
+
+We can notice a few things about this projection. If we multiply $\vb$ by some $k$, then the projection is multiplied by the same factor. If we multiply $\va$ by some $k$, then the projection is unchanged, because we have two terms involving $\va$ in both the numerator and denominator---and this we expect, because we're projecting onto the same line.
+
+We can also write projection in terms of a matrix. I.e., there exists some matrix $\mP$ such that
+\[ \vp = \mP \vb. \]
+It follows straight from our formula above that 
+\[ \mP = \frac{\va \T\va}{\T\va \va}; \]
+the numerator is a matrix and the denominator a scalar. What are the properties of this matrix? 
+
+We can see that $C(\mP) = a$, meaning the line defined earlier; this is because multiplying by any $\vb$ lands us onto that line. And thus $\Rank \mP = 1$, because that's the dimension of $C(\mP)$. We can also notice that $\T\mP=\mP$, so $\mP$ is symmetric. Lastly, what happens when we project twice (what about $\mP^2$)? Well after we project once, the next projection should keep us in the same space. And this implies that $\mP^2 = \mP$. So these last two properties define what we mean by a \textbf{projection matrix}. It's symmetric, and its square is itself. And we have a formula for projection matrices onto a line when we know the line $a$. 
+
+\brm
+Before moving on to higher dimensions, let's just state why we want to talk about projections? Well we're dealing with the equation $\mA\vx = \vb$ when it may have no solutions. To get around this, we solve the closest equation we can. So if we want to solve for some $\vb$ but it's not in $C(\mA)$, what we do is project $\vb$ onto $\vp \in C(\mA)$, the closest vector that we can solve for. And then we solve $\mA \hat{\vx} = \vp$. 
+\erm 
+
+So now let's consider ourselves in $\RR^3$, with a plane and a vector $\vb$ that lies outside of the plane. How do we project $\vb$ to a vector $\vp$ in the plane? We will define our plane by a basis for it: two vectors $\va_1, \va_2$. In fact, to connect this to our motivation, we can consider this plane the column space for the matrix $\mA = [\va_1\ \va_2]$. And once we solve this for a two-column vector, we can easily extend this to any $n$-column $\mA$. So again we have an error vector $\ve=\vb-vp$, and again it must be perpendicular to the plane (to minimise error). We know that 
+\[ \vp = \hat{x}_1\va_1 + \hat{x^2}\va_2, \]
+and we can just generalise this to
+\[ \vp = \mA \hat{\vx}. \]
+So our error, $\vb - \mA\vx$, must be perpendicular to the plane, and thus must be perpendicular to both our basis vectors:
+\[ \T{\va_1}(\vb - \mA\hat{\vx}) = 0, \]
+\[ \T{\va_2}(\vb - \mA\hat{\vx}) = 0. \]
+But we can easily generalise and but this in matrix form:
+\[ \T\mA(\vb - \mA\hat{\vx}) = 0. \]
+(Notice that our first case in two dimensions falls within this general matrix equation, with $\mA = \va$.)
+
+Now we want to connect this equation with the four fundamental subspaces we know about. Which subspace is $\ve = \vb \mA \hat{\vx}$ in? Well since $\T\mA \ve = 0$, then $\ve \in N(\T\mA)$. And this makes perfect sense, because as we have just learned, vectors in the left nullspace are orthogonal to vectors int the column space, which is exactly what we wanted! 
+
+So now we can solve the equation, which we can rewrite as
+\[ \T\mA\mA\hat{\vx} = \T\mA\vb. \]
+(Instead of just numbers in the two dimensional case, we now have matrices.) 
+We just get that
+\[ \hat{\vx} = (\T\mA\mA)^{-1}\T\mA\vb. \]
+So then
+\[ \vp = \mA\vx = \mA (\T\mA\mA)^{-1}\T\mA\vb. \]
+So then our projection matrix has generalised to
+\[ \mP = \mA (\T\mA\mA)^{-1}\T\mA. \]
+\bdb
+We absolutely do not (in general) want to use $(\T\mA\mA)^{-1} = \mA^{-1}(\T\mA)^{-1}$. This would imply that $\mP = \mI$, and this is wrong, because $\mA$ is not square so the inverse doesn't exist! (If $\mA$ was invertible square, then $\vb$ would be in the column space, because the column space is all of $\RR^n$, and thus the projection would do nothing.)
+\edb
+
+And we can check that the properties of projection matrices that we expected hold for this $\mP$: $\T\mP = \mP$ and $\mP^2 = \mP$.
+
+\subsection{Least squares}
+
+So now let's go back to the problem of having more equations than variables, and wanting to solve $\mA\vx = \vb$. The most important application of this is the least squares (fitting by a line). 
+
+Say we're given a bunch of (i.e. more than 2) data points, and we want to fit the points with a line. E.g., take the three points: $(1,1), (2,2), (3,2)$. Of course there isn't a line that goes through all of them, but we want to find the ``best one''. So we want find the line $b = C+Dt$ that minimises the errors from the data points. (The least squares line minimises $||\ve||^2 = ||\mA\vx - \vb||^2$.) We get three equations from our three points:
+\[ C+D = 1, \]
+\[ C+2D = 2, \]
+\[ C+3D = 2. \]
+We'd like to solve all three, but we can't (in this case). Rewritten, we want to ``solve''
+\[ \mat{1&1\\1&2\\1&3}\mat{C\\D} = \mat{1\\2\\2}. \] 
+The best solution is then going to be to project the right hand side onto the column space, by solving (instead of $\mA\vx = \vb$),
+\[ \T\mA\mA\hat{\vx} = \T\mA \vb. \]
+So multiplying by the transpose magically gives us a good answer. 

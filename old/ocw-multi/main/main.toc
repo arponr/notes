@@ -1,0 +1,42 @@
+\contentsline {section}{\numberline {1}Functions of more than one variable}{3}
+\contentsline {section}{\numberline {2}Partial derivatives}{3}
+\contentsline {section}{\numberline {3}Optimisation (max/min)}{4}
+\contentsline {subsection}{\numberline {3.1}Least squares (an application)}{5}
+\contentsline {section}{\numberline {4}Second derivative test}{6}
+\contentsline {section}{\numberline {5}Differentials and the chain rule}{8}
+\contentsline {subsection}{\numberline {5.1}Generalising a bit}{10}
+\contentsline {section}{\numberline {6}Gradient}{10}
+\contentsline {subsection}{\numberline {6.1}Directional derivatives}{12}
+\contentsline {section}{\numberline {7}Lagrange multipliers}{13}
+\contentsline {section}{\numberline {8}Non-independent variables}{14}
+\contentsline {subsection}{\numberline {8.1}Clarifying notation}{15}
+\contentsline {section}{\numberline {9}Partial differential equations}{17}
+\contentsline {section}{\numberline {10}Double integrals}{17}
+\contentsline {subsection}{\numberline {10.1}Polar coordinates}{20}
+\contentsline {subsection}{\numberline {10.2}Applications}{21}
+\contentsline {section}{\numberline {11}Change of variables}{22}
+\contentsline {section}{\numberline {12}Vector fields and line integrals}{25}
+\contentsline {section}{\numberline {13}Fundamental theorem for line integrals}{27}
+\contentsline {subsection}{\numberline {13.1}Consequences}{29}
+\contentsline {section}{\numberline {14}Gradient fields}{30}
+\contentsline {section}{\numberline {15}Green's theorem}{32}
+\contentsline {section}{\numberline {16}Flux}{35}
+\contentsline {section}{\numberline {17}Simply connected regions}{37}
+\contentsline {section}{\numberline {18}Triple integrals}{38}
+\contentsline {subsection}{\numberline {18.1}Applications}{40}
+\contentsline {subsection}{\numberline {18.2}Spherical coordinates}{41}
+\contentsline {subsubsection}{\numberline {18.2.1}Applications}{43}
+\contentsline {section}{\numberline {19}Vector fields in 3D}{44}
+\contentsline {subsection}{\numberline {19.1}Specific formulae}{45}
+\contentsline {subsection}{\numberline {19.2}More general formulae}{46}
+\contentsline {section}{\numberline {20}Divergence theorem}{49}
+\contentsline {section}{\numberline {21}Applications}{50}
+\contentsline {section}{\numberline {22}Line integrals in space}{51}
+\contentsline {subsection}{\numberline {22.1}Test for gradient fields}{52}
+\contentsline {subsection}{\numberline {22.2}Curl in space}{54}
+\contentsline {section}{\numberline {23}Stokes' theorem}{55}
+\contentsline {subsection}{\numberline {23.1}Stokes and path-independence}{56}
+\contentsline {subsection}{\numberline {23.2}A bit about topology}{57}
+\contentsline {subsection}{\numberline {23.3}Orientability}{57}
+\contentsline {subsection}{\numberline {23.4}Surface independence}{58}
+\contentsline {section}{\numberline {24}Maxwell's equations}{58}

@@ -1,0 +1,56 @@
+So if we have a set of $n$ orthonormal vectors, $\vq_1,\ldots,\vq_n$. By definition, this means that $\T{\vq_i}\vq_j = 0$ for $i\ne j$ and $\T{\vq_i}\vq_i = 1$. 
+
+Consider the matrix
+\[ \mQ = [\vq_1 \cdots \vq_n]. \]
+Then by the identity we discussed just now, 
+\[ \T\mQ\mQ = \mI. \]
+This gives us a new type of special, nice matrix. Now it doesn't necessarily have to be square, but when $\mQ$ \textit{is} square, then we call it an \textbf{orthogonal matrix}. And for square $\mQ$, we get an extra nice property:
+\[ \T\mQ \mQ = \mI \Rightarrow \T\mQ = \mQ^{-1}. \]
+\bex
+Notice that any permutation matrix must be orthogonal, because the columns are of unit length, and have only one non-zero component, so the columns must be orthogonal to each other. And the property that the transpose is the inverse is something we noticed about permutation matrices earlier.
+
+A more complicated example would be the rotation matrix
+\[ \mQ = \mat{\cos \theta & -\sin \theta \\ \sin \theta & \cos \theta}. \]
+Another would be
+\[ \mQ = \frac 1{\sqrt{2}} \mat{1&1\\1&-1}. \]
+
+One rectangular example would be
+\[ \mQ = \frac 13 \mat{1&-2\\2&-1\\2&2}. \]
+
+And one final, bigger example, would be
+\[ \mQ = \frac 12 \mat{1&1&1&1\\1&-1&1&-1\\1&1&-1&-1\\1&-1&-1&1}. \]
+This is called an Hadamard matrix: orthogonal and composed only of 1s and -1s.
+\eex
+
+What good is a matrix $\mQ$ with orthonormal columns? Well if we want to project onto $C(\mQ)$, then the projection matrix is given by
+\[ \mP = \mQ(\T\mQ\mQ)^{-1}\T\mQ, \]
+which simplifies to
+\[ \mP = \mQ\T\mQ \]
+in this orthonormal case. And if $\mQ$ is square, then we expect $C(\mQ)$ to fill the whole space, and thus $\mP = \mI$, which does hold with the above formula. If $\mQ$ is not square, it is still a projection matrix so we should have that $\T\mP = \mP$ and $\mP^2 = \mP$ which do hold. And we can see that all of our equations, e.g.
+\[ \T\mA \mA \hat{\vx} = \T\mA \vb, \]
+become much simpler with orthonormal bases, e.g.
+\[ \T\mQ\mQ \hat{\vx} = \T\mQ\vb \Rightarrow \hat{\vx} = \T\mQ \vb. \]
+So, component wise,
+\[ \hat{\vx}_i = \T{\vq_i}\vb. \] 
+
+\subsection{Gram-Schmidt}
+
+Now let's say we start with a matrix of---not necessarily orthonormal---independent column vectors, and we want to \textit{make} them orthonormal.
+
+Start with two columns, vectors $\va$ and $\vb$, that are independent. We want to produce from these vectors $\vq_1$ and $\vq_2$ that span the same space. (Well, we'll find two orthogonal vectors $\mA$ and $\mB$, and then we just divide by their norms to get orthonormal vectors.)
+
+To begin, we keep $\mA=\va$. We then need to fix the second vector, make it orthogonal to $\va$. Well when we first did projections, we found the component of a vector along some other space, and the error was perpendicular. So now, we just want to find that error vector and name that $mB$! So
+\[ \mB = \ve = \vb - \frac{\T\mA\vb}{\T\mA\mA}\mA. \]
+
+Now what if we add a third independent vector $\vc$. Howe do we find a third orthonormal vector $\mC$? Well it's just the same thing, except now we subtract off its components in both the $\mA$ and $\mB$ directions. So we get that
+\[ \mC = c - \frac{\T\mA\vc}{\T\mA\mA}\mA - \frac{\T\mB\vc}{\T\mB\mB}\mB. \]
+And we can check that this vector is perpendicular to $\mA$ and $\mB$. (And again we'd have to divide by its length.)
+
+And we can repeat the process for any number of vectors. And since each new vector is just a combination of the previous vectors, we stay spanning the same space.
+
+But remember with elimination, that we wrote the algorithm, which we first thought of as a sequence of row reductions, in matrix language:
+\[ \mA = \mL\mU. \]
+So how can we do the same for Gram-Schmidt? What's the relationship between $\mA$ and $\mQ$. Well it turns out to look like
+\[ \mA = \mQ\mR. \]
+This is because $C(\mA) = C(\mQ)$ so the matrix $\mR$ just represents the combinations of $\mQ$. Specifically, $\mR$ is an upper triangular matrix whose non-zero components (when $j \ge i$) are given by $\T\vq_i
+va_j$. (Here $\vq_i$ are the orthonormal basis and $\va_i$ the original basis.) This happens because each orthonormal vector is defined to be perpendicular to the orthonormal vectors constructed before it. This implies that they are orthonormal to the original vectors that came before it (so lower entries are zero dot products), but not necessarily the ones that come after it.

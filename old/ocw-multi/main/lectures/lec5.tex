@@ -1,0 +1,74 @@
+\section{Gradient}
+
+Recall the chain rule for a function $f(x,y,z)$ with $x,y,z$ all being functions of $t$:
+\[ \drv{f}{t} = f_x \drv{x}{t} + f_y \drv{y}{t} + f_z \drv{z}{t} \] 
+
+\bdf
+Define the gradient vector for a function $f$, $\nabla f$, as the vector of its partial derivatives. For example, for a function $f(x,y,z)$,
+\[ \nabla f = <f_x,f_y,f_z> \]
+And of course, this vector depends on the point $(x,y,z)$. 
+\edf
+
+We can rewrite the chain rule then as
+\[ \drv{f}{t} = \nabla f \cdot \drv{\vct{r}}{t} \]
+where
+\[ \drv{\vct{r}}{t} = <\drv{x}{t},\drv{y}{t},\drv{z}{t}>. \]
+
+This gradient can be used in many other ways, for example in the approximation formula, but we will try to understand it better now.
+
+\btm
+$\nabla f$ is perpendicular to the level surface (with $f$ constant).
+
+\bpf
+Take any curve, $\vct{r}(t)$, on the level surface of a function, $f = c$. We then have that the velocity,
+\[ \vct{v} = \drv{\vct{r}}{t}, \]
+is always tangent to the curve, and thus tangent to the level surface. Then, by the chain rule
+\[ \drv{f}{t} = \nabla f \cdot \drv{\vct{r}}{t}, \] 
+and since $f$ is constant on the level curve, we have that
+\[ 0 = \nabla f \cdot \vct{v}. \]
+This shows that any velocity vector on the path $\vct{r}(t)$ is tangent to the gradient vector. What we can then say is that any vector tangent to the level surface can be said to be a velocity vector for a given path along the level surface. Thus, at any point, all vectors tangent to the level surface at that point are perpendicular to the gradient vector at that point. Then by definition, the gradient vector is the normal vector to the tangent plane to that point on the level surface. 
+\epf
+\etm
+
+\bex
+Take a linear function
+\[ f = a_1x+a_2y+a_3z \].
+Then 
+\[ \nabla f = <a_1,a_2,a_3>. \]
+If we set $f$ constant, then the level surface is the plane with normal vector equal to the gradient. 
+\eex
+
+\bex
+Find the tangent plane to the surface with the equation
+\[ x^2 + y^2 -z^2 = 4 \]
+at the point (2,1,1). (This is the level set for when $f(x,y,z)=x^2+y^2-z^2=4$). Now that we have the gradient vector, we know the normal vector to the plane. We have that 
+\[ \nabla f = <2x,2y,-2z> \]
+So at the given point, the gradient vector is <4,2,-2>, and this is going to be the vector normal to the surface (meaning normal to its tangent plane). So the equation for the plane is 
+\[ 4x+2y-2z = D \]
+where we can find $D$ by just plugging in the point we know is on the plane giving, 
+\[ 4x+2y-2z = 8. \]
+
+Another way to do this (similarly) is to start with the differential:
+\[ df = 2x dx + 2ydy -2z dz \]
+and at our specific point,
+\[ df = 4 dx + 2dy - 2dz .\]
+Thus the tangent plane approximation
+\[ \Delta w \approx 4 \Delta x + 2\Delta y -2\Delta z \]
+Then we can just plug in the point as before, with $\Delta w = 0$ since we are on the level curve, to get this plane equation.
+\eex
+
+\subsection{Directional derivatives}
+We know for a function $w(x,y)$ how to compute $w_x$ and $w_y$, how moving in the $x$ and $y$ directions changes $w$. These are derivatives in the direction of $\vct{i}$ or $\vct{j}$, respectives. But what if we move in the direction of any arbitrary unit vector, $\vct{u}$, how does $w$ change as we move along that vector? So say there is some straight line trajectory $\vct{r}(s)$, that we are moving along, with $d\vct{r}/ds = \vct{u}$ (the convention $s$ is for arc-length, so that we have unit speed). So we now ask: what is $dw/ds$? Let $\vct{u} = <a, b>$. Then
+\[ \begin{cases} x(s) = x_0 +  as \\
+y(s) = y_0 + bs \end{cases} \]
+So then we define the direction derivative (which geometrically means we are looking at the slope of the curve in the vertical plane extended upwards from $\vct{u}$):
+\bdf
+The directional derivative of a function $f$ in the direction of the vector $\vct{u}$
+\[ \drv{f}{s}_{|\vct{u}} = \nabla f \cdot \vct{u}. \]
+\edf
+So, this implies that a function changes most quickly when moving along its gradient vector (increasing in the positive direction of the gradient and decreasing in the negative direction of the gradient). And when $\vct{u}$ is perpendicular to the gradient vector, then the directional derivative must be 0, and this makes sense since we are moving along the tangent plane. 
+
+
+
+
+

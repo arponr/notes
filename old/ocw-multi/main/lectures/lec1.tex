@@ -1,0 +1,55 @@
+\section{Functions of more than one variable}
+
+Functions of one variable, $f(x)$, depend on one parameter and can be represented on on a plane as a collection of points $(x,f(x))$. Functions of two variables, $f(x,y)$, depend on two parameters and can be represented as surfaces in space formed by the points $(x,y,f(x,y))$. Just like functions of one variable have certain domains, functions of multiple variables can also have certain domains. 
+\bex
+The function
+\[ f(x,y) = \frac{x}{x+y} \]
+has the domain $x+y \ne 0$. 
+\eex
+
+Many real-world functions depend on many variables; e.g. temperature can depend on the position in space, $(x,y,z)$, and time, $t$. 
+
+Functions depending on many parameters are hard to represent visually, so we focus mostly on functions depending on two and sometimes three variables. 
+
+\bex
+Take the function
+\[ f(x,y)=-y. \]
+Visually, this will be a plane, looking like a line with slope -1 in the $yz$-plane and constant in the $xz$-plane. 
+\eex
+
+\bex
+Take the function 
+\[ f(x,y) = 1 - x^2 - y^2. \]
+In the $yz$-plane (take $x=0$) we have a downwards parabola starting at 1. In the $xz$-plane (take $y=0$) we also have a downwards parabola starting at 1. In the $xy$-plane (take $z=0$) we have a circle of radius 1 centred at the origin. It thus looks like an upside down cup (sort of).
+\eex
+
+One can also represent the graph of a function of two variables using a contour plot. On the $xy$-plane one draws a sequence of ``level curves'', each showing all the points where $f(x,y)$ takes on a certain constant value. Imagine slicing the graph of the function by horizontal planes, and then placing all of these slices onto the $xy$-plane. (This is the same as the contour plots of a topographical map.) Based on the contour plot one can tell qualitatively what happens to $f$ as $x$ increases and $y$ remains constant, or vice-versa. To do this quantitatively, we turn to partial derivatives. 
+
+\section{Partial derivatives}
+
+So, for a function of one variable, $f(x)$, then
+\[ f'(x) = \drv{f}{x} = \lim_{\Delta x \to 0} \frac{f(x+\Delta x)-f(x)}{\Delta x}. \]
+Now how do we do the same for functions of two variables, $f(x,y)$. The difficulty is that we can change $x$ or change $y$ or change both. Thus, we have several notions of the derivative for a function of multiple variables. We define the notation for a partial derivative, where we consider the change of $f$ with respect to only one variable at a time. E.g., 
+\[ \pd{f}{x}(x_0,y_0)= \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x,y_0)-f(x_0,y_0)}{\Delta x} \]
+\[ \pd{f}{y}(x_0,y_0)= \lim_{\Delta y \to 0} \frac{f(x_0,y_0+\Delta y)-f(x_0,y_0)}{\Delta y} \]
+
+We can turn this into a more general definition for functions of any number of variables.
+\bdf
+For a function of $n\ge 1$ variables, $f(x_1,x_2,\ldots,x_n)$, the partial derivative of $f$ with respect to one of its variables, $x_i$, at a point $(a_1,\ldots,a_n)$ is defined (and noted) as
+\[ \pd{f}{x_i}(a_1,\ldots,a_n) = f_{x_i}(a_1,\ldots,a_n) = \lim_{h\to 0} \frac{f(a_1,\ldots,a_i+h,\ldots,a_n) - f (a_1,\ldots,a_n)}{h}. \]
+\edf
+
+Geometrically, the partial derivative means that we take a slice of the surface in the relevant plane ($xz$ plane for respect to $x$, $yz$ plane for respect to $y$, etc.) and look at the slope of the curve in that plane (or slice). 
+
+To compute the partial derivative, we just imagine the variables not being considered as constant. For example, when computing 
+\[ \pd{f}{x} = f_x\]
+for a function $f(x,y)$, we treat $y$ as constant. 
+
+\bex
+Take the function
+\[ f(x,y) = x^3y + y^2. \]
+Then 
+\[\pd{f}{x} =3x^2 \]
+and 
+\[\pd{f}{y}=x^3 + 2y. \]
+\eex

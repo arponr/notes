@@ -1,0 +1,52 @@
+\section{Functions}
+
+\subsection{Notes}
+This chapter is largely just basic review, so I will state here only the two definitions that result from the discussion of functions.
+
+\begin{definition}
+A \textbf{function} is a collection of pairs of numbers with the following property: if ($a$, $b$) and ($a$, $c$) are both in the collection, then $b = c$.
+\end {definition}
+
+\begin{definition}
+If $f$ is a function, the \textbf{domain} of $f$ is the set of all $a$ for which there is some $b$ such that ($a$, $b$) is in $f$. If $a$ is in the domain of $f$, there is a \textit{unique} number $f(a)$ such that ($a$, $f(a)$) is in $f$.
+\end{definition}
+
+\subsection{Exercises}
+\begin{problem}[3-9] \ 
+\begin{enumerate}
+
+\item[(a)] 
+\begin{eqnarray*}
+C_{A \cap B}(x)     & = & C_A(x) C_B(x) \\
+C_{A \cup B}(x)     & = & \textrm{min}(1, C_A(x) + C_b(x)) \\
+C_{\mathbb{R} - A}(x) & = & 1 - C_A(x)
+\end{eqnarray*}
+
+\item[(b)]
+Define the set $A$ such that $A = \{x: f(x) = 1\}$. It follows that if $f(x) = 1$, then $x \in A$ and thus $C_A = 1$. If $f(x) = 0$, then $x \not\in A$ and thus $C_A = 0$. For this defined set $A$, then, we have that $f = C_A$.
+
+\item[(c)]
+If $f = f^2$ for all $x$ in the domain of $f$, then we know that for all $x$, $f(x) = 0$ or $f(x) = 1$. By the argument in (b), it follows that $f = C_A$ for some set $A$, decsribed in (b).  
+
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[3-13]
+We can first express $f$ in the following clever way:
+\[ f(x) = \frac{1}{2}[(f(x) + f(-x)) + (f(x) - f(-x))]. \]
+Next we notice that $E(x) = \frac{1}{2}(f(x) + f(-x))$ is even, since $E(-x) = E(x)$, and that $O(x) = \frac{1}{2}(f(x) - f(-x))$ is odd, since $E(-x) = -E(x)$. Finally, we have that $f = E + O$, as defined, proving both parts of the problem.
+\end{problem}
+
+\begin{problem}[3-19] \ 
+\begin{enumerate}
+
+\item[(a)]
+In both cases, we know that $f(x)$ can only be an expression in terms of $x$ and $g(y)$ can only be an expression in terms of $y$. In (i) we only have a sum of some expression of $x$ and some expression of $y$, and this cannot result in a product of $x$ and $y$. The opposite argument can be made for (ii). 
+
+\item[(b)]
+Let us examine the case in which $y = 0$. Then we have that $f(x) = g(0)$ for all $x$. This means that $f$ is a constant function, which means that $g$ must be a constant function. So $f = g = k$, where $k$ is some constant value.
+\end{enumerate}
+\end{problem}
+
+
+

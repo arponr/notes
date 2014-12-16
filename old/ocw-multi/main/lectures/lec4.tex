@@ -1,0 +1,67 @@
+\section{Differentials and the chain rule}
+
+Now we will discuss differentials. We can motivate this by a topic from single variable calculus: implicit differentiation. If we have a function $y = f(x)$, then we have the differential $dy = f'(x)dx$, which relates infitessimal changes in $x$ to infitessimal changes in $y$. This idea often helps us deal with derivatives of inverse functions. 
+
+These notations of $dx$ and $dy$ can also be used with functions of several variables, but we need to learn the rules for using them. What we develop is the notion of a \textbf{total differential}, which represents all the contributions that can cause a function $f$ to change. Say we have a function $f(x,y,z)$. Then we say that 
+\[ df = f_x dx + f_y dy + f_z dz. \]
+\bdb
+Firstly, $df$ is not the same at all as $\Delta f$. $df$ is not something we can give a particular value, for differentials are mathematical objects distinct from scalars, vectors, matrices, etc., and so we have to develop a notion for how to use and manipulate them. 
+\edb
+We can think of these differentials (e.g. $df, dx, dy, dz$) as placeholders, representing infitessimal changes that we can replace with small values to calculate tangent approximations to a function. So what is a differential useful for?
+\bit
+\item Encoding how changes in $x,y,z$ affect $f$
+\item Acting as a placeholder for small variations $\Delta x, \Delta y, \Delta z$ and their \textit{approximate} effect on $\Delta f$
+\item Say for example $x,y,z$ depend on another parameter $t$, then we can calculate $df/dt$ by dividing everything in the total differential equation by $dt$:
+\[ \drv{f}{t} = f_x \drv{x}{t} + f_y \drv{y}{t} + f_z \drv{z}{t} \]
+\eit
+This last fact known as the chain rule for a function of several variables, and gives the total derivative of a function with respect to one variable, but we must justify this claim, unlike the first two (one a general principle, and the second following from the approximation formula we have already derived). So why is this valid? 
+
+Here's out first attempt to justify. We have that 
+\[ df = f_x dx + f_y dy + d_z f_z dz. \]
+We have also that $dx = x'(t)dt$, and the same for $dy$ and $dz$. If we plug these in to the formula above, we get
+\[ df = f_x x'(t)dt + f_y y'(t)dt + d_z z'(t)dt . \]
+Dividing by $dt$ then we get the result we want, the chain rule. That kind of works, but maybe using this idea that $dx = x'(t)dt$ is bad, because we are just trusting in the validity of this idea of the differentials. In deriving this formula, we should actually gain a better trust in these strange differential objects.
+
+A better way is to consider the approximation formula:
+\[ \Delta f \approx f_x \Delta x + f_y \Delta y + f_z \Delta z. \]
+Now let's see what happens to $f$ in a small change in $t$, $\Delta t$:
+\[ \frac{\Delta f}{\Delta t} \approx \frac{f_x \Delta x + f_y \Delta y + f_z \Delta z}{\Delta t}. \]
+If we then take the limit as $\Delta t \to 0$, then $\Delta f / \Delta t \to df/dt$, and similarly with the variables $x,y,z$. So if we take this limit (and as the approximation becomes better and better, approaching equality), the above formula turns exactly into the chain rule formula shown above.
+
+\bex
+Say we have the function 
+\[ w = x^2y + z \]
+and the relations: $x=t,y=e^t,z=\sin t$. Then the chain rules gives that 
+\[ \drv{w}{t} = 2xy \drv{x}{t} + x^2 \drv{y}{dt} + \drv{z}{t} \]
+or , plugging in,
+\[ \drv{w}{t} = 2te^t  + t^2 e^t + \cos t. \]
+We can get the same result by rewriting the function in terms of $t$ and then differentiating. We have
+\[ w = t^2e^t + \sin t, \]
+so 
+\[ \drv{w}{t} = 2te^t + t^2e^t + \cos t. \]
+\eex
+
+An application of the total differential and the chain rule is to justify the product and quotient rules from single variable calculus. Say we have that
+\[ f = u(t)v(t). \]
+Instead of considering $f$ as a function of $t$, we can consider it a function of $u$ and $v$. So the chain rule gives that 
+\[ \drv{f}{t} = f_u \drv{u}{t} + f_v \drv{v}{t} \]
+which just turns into
+\[ \drv{(uv)}{t} = v \drv{u}{t} + u \drv{v}{t} \]
+which is the product rule! The quotient rule can be derived similarly.
+
+\subsection{Generalising a bit}
+Now lets look at the chain rule with even more variables! Take the function $f(x,y)$ where $x = x(u,v),y=y(u,v)$, so now $x$ and $y$ depend on more than one parameter (e.g. when we turn cartesian coorinates to polar coordinates, and $x$ and $y$ depend on both $r$ and $\theta$). One way to deal with this is writing the function explicitly,
+\[ f(x(u,v),y(u,v)), \]
+and then using the partial derivatives of $f$ with respect to $u$ and $v$. But this might be difficult, since the explicit formulae for $x$ and $y$ may be complicated (e.g., when converting from polar to cartesian coordinates, formulae often involve inverse trig functions). So the question becomes: how do we find $w_u$ and $w_v$ in terms of $w_x,\ w_y,\ x_u,\ x_v,\ y_u,\ y_v$? We know that the total differential
+\[ df = f_x dx + f_y dy. \]
+What we want to do is get rid of $dx$ and $dy$ and replace them with expressions of $u$ and $v$. We simply use the total differentials of $x$ and $y$ to do this:
+\[ df = f_x(x_u du + x_v dv) + f_y(y_u du + y_v dv). \]
+This gives us how changes in $u$ and $v$ affect changes in $w$. Collecting terms gives us that
+\[ df = (f_x  x_u + f_y y_u)du + (f_x x_v + f_y y_v) dv. \]
+This means that we must have (since the above is the total differential of $w$ in terms of $u$ and $v$) that 
+\[ \pd{f}{u} = (f_x  x_u + f_y y_u) \]
+and 
+\[ \pd{f}{v} =  (f_x x_v + f_y y_v). \]
+This process generalises the chain rule a bit and provides a way of calculating partial derivatives with respect to implicit parameters.
+
+

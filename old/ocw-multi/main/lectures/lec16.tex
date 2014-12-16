@@ -1,0 +1,83 @@
+\section{Flux}
+
+We are now going to talk about the flux of vector field through a curve in the plane. Flux is actually another kind of line integral. 
+
+\bdf 
+Say we have a curve $C$ and vector field $\vF$ in the plane. Then the flux of $\vF$ across $c$ is defined to be 
+\[ \int_C \vF \cdot \vn\, ds, \]
+where $\vn$ is the unit vector normal to $C$ (at each point), pointing $90^\circ$ clockwise from $\vT$ (the unit vector tangent to $C$ (at each point)). 
+\edf
+
+So if we break $C$ into small pieces of length $\Delta s$, then 
+\[ \mathrm{Flux} = \lim_{\Delta s \to 0} \sum \vF \cdot \vn\, \Delta s. \]
+
+Of course this is similar to the line integral of work,
+\[ W = \lint{\vF} = \int_C \vF \cdot \vT\, ds. \]
+So work sums the component of the vector field tangent to, or along, the curve, while the flux sums the component of the vector field normal to, or across, the curve. So their computations are very similar, though their physical interpretations differ greatly. 
+
+While the interpretation for the work line integral made most sense when thinking of a force field (the integral then being the work done by the force along the curve), the flux line integral is best interpreted for a velocity field. For $\vF$ a velocity field (of a fluid), the flux measures how much fluid passes through the curve $C$ per unit time. This is because, for a small portion of $C$, the amount of fluid that passes through per unit time can be represented by the area of a parallelogram with one pair of sides (the bases) determined by $\Delta s$ and the other by $\vF$. Then the height of this parallelogram is $\vF \cdot \vn$, so the area of the parallelogram is $\vF \cdot \vn \, \Delta s$; then summing these together for all portions of $C$ gives us the flux integral. 
+\brm
+Implicit in the interpretation is the fact that things flowing through $C$ in the direction of $\vn$ (left to right) is counted positively, while flow in the opposite direction is counted negatively. So the flux is like a net flow in this sense.
+\erm
+
+So how do we compute this guy? Let's start with a couple of easy examples.
+
+\bex
+Say that $C$ is the circle of radius $a$ centred at the origin, going counter-clockwise. And say that our vector field is 
+\[ \vF = x\vi + y\vj, \]
+the field pointing radially away from the origin. Since we're going counter-clockwise, the normal is pointing outwards, so we're measuring flow out of the region. We can observe that, in fact, the normal to the curve is parallel to the field, since the radial direction is perpendicular to the circle. This implies that
+\[ \vF \cdot \vn = |\vF| = a, \]
+since $\vn$ is a unit vector. Since the integrand is constant, the integral will be easy:
+\[ \int_C \vF \cdot \vn \, ds = a\int_C ds = 2\pi a^2, \]
+which is positive as expected. 
+
+Out of curiosity, say we took our other favourite vector field, 
+\[ \vF = -y\vi + x\vj, \]
+on the same curve. This field is tangent to the circle along the path, so the normal component of it is 0. Things aren't flowing in our out of the region, so then the flux will be 0.
+\eex 
+
+But how do we compute these things when the geometry doesn't simplify things so easily? We use coordinates and components, of course! Remember when we were doing this for work, we said that $\dr = \vT\,ds = <dx,dy>$. Well, $\vn\,ds$ is just $\vT\,ds$ rotated ninety degrees clockwise (this might sound outrageous, since these are differentials we're dealing with, but it works...and can be justified by rotating in non-infitessimal values and then taking limits)! So it follows that 
+\[ \vn \,ds = <dy, -dx>. \]
+
+So if $\vF = <P,Q>$, then 
+\[ \int_C \vF \cdot \vn \,ds = \int_C -Q\,dx + P\,dy. \]
+Then we can do this integral like we did earlier line integrals in components (express everything in terms of one parameter, then do a single variable integral). 
+
+What if I have to compute flux along a closed curve, and I don't want to compute it? With work, we had Green's theorem, which replaces a line integral witha  double integral. We should be able to do the same with flux, and in fact there is a version of Green's theorem for flux.
+
+\btm[Green's theorem for flux (or in normal form)]
+If $C$ is a curve that encloses the region $R$ (counterclockwise), and if the vector field $\vF = <P,Q>$ is defined and differentiable everywehere in $R$ (including on $C$), then
+\[ \oint_C \vF \cdot \vn \, ds = \iint_R \div \vF\, dA, \]
+where the \textbf{divergence} of a a vector field is defined as
+\[ \divg \vF = P_x + Q_y. \]
+
+\bpf
+In components, this means that
+\[ \oint_C -Q\,dx + P\,dy = \iint_R (P_x+Q_y)\,dA. \]
+Take then the vector field defined by 
+\[ \vG = -Q\vi + P\vj. \]
+Green's theorem (for work), which we've already proved, says for this new field that
+\[ \olint{\vG} = \iint_R \curl \vG\,dA, \]
+or in components,
+\[ \oint_C -Q\,dx + P\,dy = \iint_R P_x - (-Q_y)\,dA. \]
+The theorem follows.
+\epf
+\etm
+
+\bex
+Let's do again the example for the curve $C$ being the circle of radius $a$ centred at the origin going counterclockwise, and the vector field being $\vF = <x,y>$. To use Green's theorem, we first find the divergence
+\[ \divg \vF = 2. \]
+Then Green's theorem tells us that
+\[ \oint_C \vF \cdot \vn \, ds = \iint_R 2\,dA, \]
+which is twice the area of the circle, or
+\[ 2\pi a^2, \]
+the same answer as before!
+
+But we can do better! Say the circle is no longer centred at the origin. Then the geometry becomes more complicated, so calculating directly the line integral isn't so fun. But Green's theorem is so simple, because we never used the fact that the circle is centred at the origin. So the flux is the same regardless of the circle's position in the plane, as shown by Green's theorem.  
+\eex
+
+To finish, we must note what exactly what the divergence measures. Curl measures how much things are rotating, so what does the divergence mean? In fact, it measures how much things are diverging...but let's be more explicit. The interpretation of $\divg \vF$ is then:
+\ben
+\item measures how much the flow is ``expanding'' (for, say, a gas)
+\item the ``source rate'', or how much fluid is being input into the system per unit time per unit area (for, say, a liquid)
+\een

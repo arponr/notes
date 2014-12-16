@@ -1,0 +1,116 @@
+\section{Continuous functions}
+
+\subsection{Notes}
+\begin{definition}
+The function $f$ is continuous at $a$ if
+\[ \lim_{x \to a} f(x) = f(a). \]
+More precisely, this means that for every $\epsilon > 0$, there is some $\delta$ such that if $|x - a| < \delta$, then $|f(x) - f(a)| < \epsilon$.
+
+\begin{remark}
+Firstly, it is implied in this definition that both the limit and the function exist at $x = a$. Also note that in our precise definition, we no longer need that $|x - a| > 0$, simply because it is trivially true that $|f(a) - f(a)| < \epsilon$.
+\end{remark}
+\end{definition}
+
+\begin{theorem}
+If $f$ and $g$ are continuous at $a$, then
+\begin{enumerate}
+\item
+$f + g$ is continuous at $a$,
+\item
+$fg$ is continuous at $a$.
+\end{enumerate}
+Moreover, if $g(a) \ne 0$, then
+\begin{enumerate}
+\item[(3)]
+$\frac{1}{g}$ is continuous at $a$.
+\end{enumerate}
+
+\begin{proof}
+Given that $f$ and $g$ are continuous at $a$ allows us to say that
+\[ lim_{x \to a} f(x) = f(a) \textrm{ and } \lim_{x \to a} g(x) = g(a). \]
+By part (1) of Theorem \ref{limthm}, we can say
+\[ \lim_{x \to a} (f + g)(x) = f(a) + g(a) = (f + g)(a), \]
+which proves (1).
+
+By part (2) of Theorem \ref{limthm}, we can say
+\[ \lim_{x \to a} (fg)(x) = f(a)g(a) = (fg)(a), \]
+which proves (2).
+
+By part (3) of Theorem \ref{limthm}, we can say
+\[ \lim_{x \to a} \left(\frac{1}{g}\right)(x) = \frac{1}{g(a)} = \left(\frac{1}{g}\right)(a), \]
+which proves (3).
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label {contcomp}
+If $g$ is continuous at $a$, and $f$ is continuous at $g(a)$, then $f \circ g$ is continuous at $a$.
+
+\begin{proof}
+By the continuity of $f$ at $g(a)$, we can say that for all $\epsilon > 0$, there is some $\delta ' > 0$ such that when
+\[ |g(x) - g(a)| < \delta ' \textrm{, } |f(g(x)) - f(g(a))| < \epsilon. \]
+Similarly, by the continuity of $g$ at $a$, we can say that for all $\delta '$ there is some $\delta$ such that when
+\[ |x - a| < \delta ' \textrm{, } |g(x) - g(a)| < \delta '. \]
+Combining this two proves that for every $\epsilon > 0$ there is some $\delta > 0$ such that when $|x - a| < \delta$, $|(f \circ g)(x) - (f \circ g)(a)| < \epsilon$, which is exactly the statement of continuity for $f \circ g$.
+\end{proof}
+\end{theorem}
+
+The definition of continuity at a point can be generalised to continuity on intervals.
+
+\begin{definition}
+A function $f$ is continuous on the interval $(a, b)$ if $f$ is continuous at every $x$ in $(a, b)$. A function $f$ is continuous on the interval $[a, b]$ if
+\begin{enumerate}
+\item
+$f$ is continuous on (a, b),
+\item
+$\lim_{x \to a^+} f(x) = f(a)$ and $\lim_{x \to b^-} f(x) = f(b)$.
+\end{enumerate}
+
+\begin{remark}
+Functions that are coninuous on an interval gives us a starting point for rigourously stating what exactly we like to see in a ``resonable'' or ``well-behaved'' function.
+\end{remark}
+\end{definition}
+
+The following theorem connects the results of continuity at a point, a few of which we have shown already to be easy, and continuity on an interval, which are apparently more difficult.
+
+\begin{theorem} \label{contposneg}
+Suppose $f$ is continuous at $a$, and $f(a) > 0$. Then there is a number $\delta > 0$ such that $f(x) > 0$ for all $x$ satisfying $|x - a| < \delta$. Similarly, if $f(a) < 0$, then there is a number $\delta > 0$ such that $f(x) < 0$ for all $x$ satisfying $|x - a| < \delta$.
+
+\begin{proof}
+We first consider the case when $f(a) > 0$. By the continuity of $f$ at $a$, we can say that for all $\epsilon > 0$, there is some $\delta > 0$ such that if
+\[ |x - a| < \delta \textrm{, then } |f(x) - f(a)| < \epsilon. \]
+Since $f(a) > 0$, we can use $f(a)$ as one such $\epsilon$, giving us that if
+\[ |x - a| < \delta \textrm{, then } |f(x) - f(a)| < f(a). \]
+The fact that $|f(x) - f(a)| < f(a)$ implies that $f(x) > 0$.
+
+An identical argument can be made for $f(a) < 0$. Instead, we can say that
+\[ |x - a| < \delta \textrm{, then } |f(x) - f(a)| < -f(a). \]
+The fact that $|f(x) - f(a)| < -f(a)$ implies that $f(x) < 0$.
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+\begin{problem}[6-7]
+Firstly, we can say that $f(0) = 0$, since $f(0 + 0)$ must equal $f(0) + f(0) = 2f(0)$, which can only occur if $f(0) = 0$. The definition of continuity at 0, then, gives us that for every $\epsilon > 0$, there is some $\delta > 0$ such that
+\[ \textrm{if } |x| < \delta \textrm{, then } |f(x)| < \epsilon. \]
+
+Now, consider the continuity at any point $a$. This can be expressed by saying fore every $\epsilon > 0$, there is some $\delta > 0$ such that
+\[ \textrm{if } |h| < \delta \textrm{, then } |f(a + h) - f(a)| < \epsilon. \]
+It follows, since $f(a + h) = f(a) + f(h)$, that
+\[ \textrm{if } |h| < \delta \textrm{, then } |f(h)| < \epsilon. \]
+This has already been shown to be true, using the continuity of $f$ at 0, and so we have shown that $f$ must be continuous as all $a$.
+\end{problem}
+
+\begin{problem}[6-12] \ 
+\begin{enumerate}
+\item[(a)]
+As defined in the hint, it is clear that the function $G$ is continuous at $a$, with
+\[ \lim_{x \to a} G(x) = \lim_{x \to a} g(x) = l = G(a). \]
+And, since $f$ is continuous at $l$, or equivalently at $G(a)$, by Theorem \ref{contcomp}, $(f \circ G)$ is continuous at $a$. This means that 
+\[ \lim_{x \to a} f(G(x)) = f(G(a)) = f(l). \]
+
+\item[(b)]
+With $\lim_{x \to a} g(x) = l$, we can rewrite the statement as
+\[ \lim_{x \to l} f(x) = f(l). \]
+Now, this is the definition of continuity of $f$ at $l$; if $f$ is not continuous, then this statement is not necessarily true, and thus the claim in the problem is not necessarily true.
+\end{enumerate}
+\end{problem}

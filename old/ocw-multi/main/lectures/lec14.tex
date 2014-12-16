@@ -1,0 +1,70 @@
+\section{Gradient fields}
+
+We've seen then that in a gradient field $\vF = \nabla f$ then $\lint{\vF} = f(p_1) - f(p_0)$ where $p_0$ and $p_1$ are the starting and ending points of our curve $C$; i.e. the line integral in a gradient field is path-independent and conservative (in fact these properties are equivalent to a vector field being a gradient field).
+
+Now we will discuss how to determine whether a given vector field, $\vF = <M,N>$, is a gradient field or not, and if it is, how to find the potential function, $f(x,y)$.
+
+Let's start with an observation. If $\vF = \nabla f$, then $M=f_x,N=f_y$. We have seen earlier that $f_{xy}=f_{yx}$. Or in this case, if $\vF$ is a gradient field, then it should satisfy
+\[ M_y = N_x. \] 
+The claim then is that there a sort of converse to this idea (i.e. this is actually all we need to check):
+
+\btm
+If $\vF = <M,N>$ is defined and differentiable everywhere in the plane, and $M_y = N_x$, then $\vF$ is a gradient field.
+\etm
+
+\bex
+Take the vector field
+\[ \vF = -y\vi + x\vj. \]
+We have already seen that this should not be a gradient field (since it is not conservative). This is confirmed by our new criterion:
+\[ M_y = -1 \ne 1 = N_x. \]
+\eex
+
+\bex
+Take the vector field
+\[ \vF = (4x^2+axy)\vi + (3y^2 +4x^2)\vj. \]
+For what values of $a$ is this a gradient field? Well we have that
+\[ M_y = ax \]
+and
+\[ N_x = 8x \]
+so we can conclude that $a$ must be equal to 8.
+
+Now we know that
+\[ \vF = (4x^2+8xy)\vi + (3y^2 +4x^2)\vj \]
+is a gradient field. Now how do we find its potential function, $f(x,y)$. (Guessing doesn't always work!) There are two methods:
+\ben 
+\item The first method involves computing line integrals. Say we take some path that starts at the origin and go to a point $(x1,y1)$ along the curve $C$. By the fundamental theorem, we have that 
+\[ \lint{\vF} = f(x_1,y_1) - f(0,0) \]
+or that
+\[ f(x_1,y_1) = f(0,0) + \lint{\vF} .\]
+Then we can just choose any $f(0,0)$ (since this does not affect the gradient of the potential) and compute the line integral using its definition (and an easy path, e.g. going along the $x$-axis to $(x_1,0)$ and then vertically to $(x_1,y_1)$).
+
+Let's apply this to our example. So we compute
+\[ f(x_1,y_1) = \lint{\vF} = \int_C (4x^2+8xy)\,dx + (3y^2 +4x^2)\,dy = \int_0^{x_1} 4x^2 \, dx + \int_0^{y_1} 3y^2 + 4x_1^2\, dy \]
+\[ = \frac 43x_1^3 + y_1^3 + 4x_1^2y_1 + c. \]
+where $c$ is the $f(0,0)$ constant term.
+
+\item The second method utilises anti-derivatives. We want to solve the equations
+\[ f_x = 4x^2 + 8xy, \]
+\[ f_y = 3y^2 + 4x^2. \]
+We first integrate the first equation with respect to $x$:
+\[ f = \frac 43 x^3 + 4x^2y + g(y). \]
+If I then differentiate the above with respect to $y$, we get
+\[ f_y = 4x^2 + g'(y). \]
+It follows easily from our second condition then, that $g'(y) = 3y^2$, so $g(y) = y^3 + c$. Then we have a final answer that
+\[ f(x,y) = \frac 43x^3 + y^3 + 4x^2y + c, \]
+the same as the first method.
+\een
+\eex
+
+Let's recap a bit. Let $\vF=<M,N>$ be a gradient field in a region of the plane. It is then conservative, meaning
+\[ \olint{\vF} = 0 \]
+where this new integral notation means for a closed curve $C$. These two properties are quivalent. We have now said that for a gradient field, $N_x = M_y$. And the converse is true, \textit{in suitable regions} (if $\vF$ is defined in the entire plane or in what is called a \textbf{simply connected region}). 
+
+We now introduce a new quantity, called the \textbf{curl} of a vector field. 
+\bdf
+\[ \curl(\vF) = N_x - M_y. \]
+\edf
+With this new definition, our condition for a vector field being a gradient field is 
+\[ \curl \vF = 0. \]
+
+But what does this curl actually measure? For a velocity field, the curl measures the rotation component of motion (the vorticity, or how much twisting is occuring at a place). If $\vF=<a,b>$ is a constant vector field, then $\curl \vF = 0$ and indeed there is no twisting. Similarly, if we take $\vF = <x,y>$, then the same observation can be made. On the other hand, if we take $\vF <-y,x>$, then $\curl \vF = 2$. So curl measures twice the angular velocity of rotation component of the velocity field. The curl of a force field, on the other hand, measures the torque exerted on a test object that you put at any point in the field. Similar to what we examined earlier on: torque/moment of inertia is the derivative of angular velocity; force/mass is the derivative of velocity.  

@@ -1,0 +1,46 @@
+\subsection{Inverse formula}
+
+Let's look at a formula we probably already know, for $2 \times 2$ matrices:
+\[ \mat{a&b\\c&d}^{-1} = \frac 1{ad-bc}\mat{d&-b\\-c&a}. \]
+Clearly the factor on the left of teh formula is the inverse of the determinant. And then we can see that the matrix on the right looks to have something to do with cofactors. The entry in first row, first column is $\mC_{11}$; the entry in the first row, second columns is $\mC_{21}$. And this pattern continues to give us a general formula for $n \times n$ inverses:
+\[ \mA^{-1} = \frac 1{\Det \mA} \T\mC. \]
+
+This works out nicely for the $2 \times 2$ matrix, but why is this true in general? Well, we want just to check that
+\[ \mA\T\mC = (\Det \mA)\mI. \]
+The multiplication looks like
+\[ \mat{a_{11}&\cdots&a_{1n}\\\vdots&\ddots&\vdots\\a_{n1}&\cdots&a_{nn}}\mat{C_{11}&\cdots&C_{n1}\\\vdots&\ddots&\vdots\\C_{1n}&\cdots&a_{nn}}. \]
+Why does that product turn out so nicely? Notice that the 1,1 entry in the product is exactly the cofactor formula for the determinant. And the same can be said about the $i$,$i$ entry for any $1 \le i \le n$. So that clearly shows us where the diagonal entries come from on the right-hand side. But why are all the other entries 0? Why should multiplying the entries and cofactors of different rows give 0? Well consider multiplying the entries of row $i$ with the cofactors for row $j$, with $i\ne j$. This is equivalent to calculating the determinant of the matrix after replacing row $j$ with row $i$. This determinant must be 0 because the matrix has two equal rows (a property we determined earlier), and this finally justifies our formula for the inverse. 
+
+\subsection{Cramer's rule}
+
+Now let's consider $\mA \vx = \vb$ again for an invertible square matrix $\mA$. Then
+\[ \vx = \mA^{-1}\vb = \frac 1{\Det \mA} \T\mC\vb. \]
+Then we can see that there are cofactors being multiplied by vectors, so the solution's components are given by
+\[ vx_i = \frac{\Det \mB_i}{\det \mA}, \]
+for some matrices $\mB_i$. Then Cramer's rule tells us that this matrix $\mB_i$ is just $\mA$ with column $i$ replaced by $\vb$. This is because the determinant of this matrix, when determined using the cofactor formula going down column $i$, is exactly the dot product of the $i$-th row of $\T\mC$ and $\vb$. 
+
+While this is quite a nice formula, note that in practice computing $n+1$ determinants is hopelessly less efficient than elimination.
+
+\subsection{Volume}
+
+Our final connection, which we've touched on lightly already, is that the determinant actually represents the volume of something. 
+
+The claim is that $|\Det \mA|$ is the volume of a parallelopiped with the $n$ independent corners located at the points given by the row vectors of $\mA$. And the sign of the determinant tells us whether we have a right-handed or left-handed box. 
+
+And actually we can show this to be true by just checking that this volume function has the same three properties that the determinant is defined by. 
+
+Take the special case $\mA=\mI$. Then the edges are just given by orthonormal vectors along the axes, so the volume is 1, which is $\Det \mI$. This is the first property. And in fact, we can generalise this to say that any orthogonal matrix, whose columns are orthonormal, has volume $\pm$1, because they are just rotated unit cubes. And we can check this by noticing that we have already seen that for orthogonal matrices $\mQ$,
+\[ \T\mQ\mQ = \mI. \]
+If we then take the determinant of both sides, we get that
+\[ \Det (\T\mQ\mQ) = \Det \T\mQ\cdot \Det \mQ = (\Det \mQ)^2 = 1. \]
+And this implies what we were looking for. 
+
+Now how do we push the idea to non-cubes? What if we take rectangular boxes now. This amounts to multiplying one or more of the edges of a cube by some factor. And multiplying an edge by a factor multiplies the volume by this factor. And we know a property of the determinant is that multiplying one row by a factor multiplies the determinant by that factor. So this allows us to extend the connection from all cubes to all rectangular prisms. And this gives us property 3a. 
+
+Then what if we allow the possibility of non-right angles? Well this amounts to us adding row vectors to the edges of our cube. Meaning, we want to show that volume has property 3b. (We do not show this here.)
+
+\bex
+In the two dimensional case, we can see that the formula of a parallelogram with adjacent sides given by vectors $\rvec{a,b}$ and $\rvec{c,d}$, the area of the parallelogram is just, by this idea,
+\[ \dat{a&b\\c&d} = ad-bc. \]
+And half of this gives us the area of a triangle, which gives us a great formula. 
+\eex

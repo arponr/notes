@@ -1,0 +1,60 @@
+\subsection{Stokes and path-independence}
+
+\bdf
+A region is simply connected if any closed loop in the region bounds a surface in the region. 
+\edf
+
+\brm
+Note that each closed loop need only bound \textit{one} surface in the region, not all possible surfaces. So the space with the origin removed is still simply connected because we can always find a surface that avoids passing through the origin. On the other hand, if we take space with the entire $z$-axis removed, then it is not simply connected (take for example the unit circle in the $xy$-plane). 
+\erm
+
+So we know that if $\vF = \del f$ is a gradient field, then $\del \times f = 0$. (This has to do with the mixed partials.) The coverse of this statement is the following:
+\btm
+If $\vF$ is defined in a simply connected region and $\del \times \vF = 0$ then $\vF$ is a gradient field and $\lint{\vF}$ is path independent (etc.).
+\bpf
+We will prove only that the line integral is path independent (the other properties follow from this). So assume $\curl \vF = 0$. Then consider two curves $C_1$ and $C_2$ that both start and end at $P_0$ and $P_1$, respectively. We want to show that
+\[ \int_{C_1} \vF \cdot \dr - \int_{C_2} \vF \cdot \dr = 0. \]
+To compute this, notice that the curve $C = C_1 - C_2$ is a closed curve, so the expression is equivalent to
+\[ \oint_C \vF \cdot \dr. \]
+Then, since the region is simply connected, we can find a surface $S$ bounded by $C$. So we can apply Stokes' theorem :
+\[ \oint_C \vF \cdot \dr = \iint_S (\del \times \vF)\cdot \vdS = 0. \]
+This proves the theorem.
+\epf
+\etm
+
+The above proof shows why the condition of simply connected regions is needed. 
+
+\subsection{A bit about topology}
+
+There's a lot of interesting topology you can do in space. For example, topology classifies surfaces in space by trying to look at loops on them. 
+
+If we take the surface of a sphere, we can see that it is simply connected. This is because if we take a closed curve on the sphere, a portion of the sphere must be bounded by the curve. On the other hand, if we take a torus (the surface of a doughnut), that is not simply connected (look at the loop on top of the torus or one that sort of sits inside, looking like a vertical circle). So for the torus, there are two ``independent'' loops, or loops that bound no surface on the torus. 
+
+So we can start to classify surfaces by looking at the number of ``independent'' loops they contain.
+
+\subsection{Orientability}
+
+Take for example as a surface the Mobius strip, which is in fact bounded by a curve. There's a problem in that as we go along the curve, at one point the normal is pointed up but later the normal is pointed down. This is what we call a non-orientable surface, meaning it has only one side. And this means we can't consider flux for it since there's no notion of sides. But in fact, there is an orientable surface that is bounded by the same curve (sort of a twisty part of a hemisphere), so we can still use Stokes' theorem for the curve.
+
+\subsection{Surface independence}
+Now it seems to work, but why exactly can we choose \textit{any} surface in Stokes' theorem. 
+
+So say we have a curve $C$ and any two surfaces bounded by it, $S_1$ and $S_2$. Then Stokes' theorem says that
+\[ \oint_C \vF \cdot \dr = \iint_{S_1} (\del \times \vF) \cdot \vn \, dS = \iint_{S_2} (\del \times \vF) \cdot \vn \, dS.\]
+This seems to suggest that curl has some sort of surface independence property. Why is that? Let's compare the two flux integrals by taking
+\[ \iint_{S} (\del \times \vF) \cdot \vn \,dS= \iint_{S_1} (\del \times \vF) \cdot \vn \, dS - \iint_{S_2} (\del \times \vF) \cdot \vn \, dS, \]
+where $S = S_1 - S_2$ is given by $S_1$ with normal orientation and $S_2$ with opposite orientation, resulting in a closed surface with outwards pointing normal. We can then use the divergence theorem to compute this flux integral, since $S$ is closed (enclosing a region $D$),
+\[  \iint_{S} (\del \times \vF) \cdot \vn \, dS = \iiint_D \divg(\del \times \vF) \, dV. \]
+And we can actually check that
+\[ \divg(\del \times \vF) = 0, \]
+which would imply the flux through $S_1$ is equal to the flux through $S_2$.
+
+So let's check that identity. If $\vF = <P,Q,R>$, then
+\[ \del \times \vF = \dat{\vi & \vj & \vk \\ \pd{ }{x} & \pd{ }{y} & \pd{ }{z} \\ P & Q & R} = (R_y-Q_z)\vi + (R_z-R_x)\vj +(Q_x-P_y)\vk. \]
+So 
+\[ \divg(\del \times \vF) = (R_y-Q_z)_x + (P_z-R_x)_y + (Q_x - P_y)_z = R_{yx} - Q_{zx} + P_{zy} - R_{xy} + Q_{xz} - P_{yz} = 0, \]
+since all the mixed partials cancel out. This proves that
+\[ \del \cdot (\del \times \vF) = 0. \]
+And in fact, if we had ``real'' vectors, $\vu$ and $\vv$, we always have that
+\[ \vu \cdot (\vu \times \vv) = 0, \]
+because the cross product is perpendicular to its inputs. So $\del$ really does behave like a ``real'' vector in some cases. 

@@ -1,0 +1,45 @@
+\contentsline {section}{\tocsection {}{}{Introduction}}{3}{section*.2}
+\contentsline {section}{\tocsection {}{1}{Basic properties of numbers}}{4}{section.1}
+\contentsline {subsection}{\tocsubsection {}{1.1}{Notes}}{4}{subsection.1.1}
+\contentsline {subsection}{\tocsubsection {}{1.2}{Exercises}}{4}{subsection.1.2}
+\contentsline {section}{\tocsection {}{2}{Numbers of various sorts}}{5}{section.2}
+\contentsline {subsection}{\tocsubsection {}{2.1}{Notes}}{5}{subsection.2.1}
+\contentsline {subsection}{\tocsubsection {}{2.2}{Exercises}}{6}{subsection.2.2}
+\contentsline {section}{\tocsection {}{3}{Functions}}{7}{section.3}
+\contentsline {subsection}{\tocsubsection {}{3.1}{Notes}}{7}{subsection.3.1}
+\contentsline {subsection}{\tocsubsection {}{3.2}{Exercises}}{7}{subsection.3.2}
+\contentsline {section}{\tocsection {}{4}{Graphs}}{7}{section.4}
+\contentsline {subsection}{\tocsubsection {}{4.1}{Notes}}{7}{subsection.4.1}
+\contentsline {subsection}{\tocsubsection {}{4.2}{Exercises}}{8}{subsection.4.2}
+\contentsline {section}{\tocsection {}{5}{Limits}}{9}{section.5}
+\contentsline {subsection}{\tocsubsection {}{5.1}{Notes}}{9}{subsection.5.1}
+\contentsline {subsection}{\tocsubsection {}{5.2}{Exercises}}{12}{subsection.5.2}
+\contentsline {section}{\tocsection {}{6}{Continuous functions}}{14}{section.6}
+\contentsline {subsection}{\tocsubsection {}{6.1}{Notes}}{14}{subsection.6.1}
+\contentsline {subsection}{\tocsubsection {}{6.2}{Exercises}}{15}{subsection.6.2}
+\contentsline {section}{\tocsection {}{7}{Three hard theorems}}{16}{section.7}
+\contentsline {subsection}{\tocsubsection {}{7.1}{Notes}}{16}{subsection.7.1}
+\contentsline {subsection}{\tocsubsection {}{7.2}{Exercises}}{19}{subsection.7.2}
+\contentsline {section}{\tocsection {}{8}{Least upper bounds}}{19}{section.8}
+\contentsline {subsection}{\tocsubsection {}{8.1}{Notes}}{19}{subsection.8.1}
+\contentsline {subsection}{\tocsubsection {}{8.2}{Exercises}}{21}{subsection.8.2}
+\contentsline {subsection}{\tocsubsection {}{8.3}{Appendix: Uniform continuity}}{23}{subsection.8.3}
+\contentsline {section}{\tocsection {}{9}{Derivatives}}{24}{section.9}
+\contentsline {subsection}{\tocsubsection {}{9.1}{Notes}}{24}{subsection.9.1}
+\contentsline {subsection}{\tocsubsection {}{9.2}{Exercises}}{24}{subsection.9.2}
+\contentsline {section}{\tocsection {}{10}{Differentiation}}{25}{section.10}
+\contentsline {subsection}{\tocsubsection {}{10.1}{Notes}}{25}{subsection.10.1}
+\contentsline {subsection}{\tocsubsection {}{10.2}{Exercises}}{27}{subsection.10.2}
+\contentsline {section}{\tocsection {}{11}{Significance of the derivative}}{28}{section.11}
+\contentsline {subsection}{\tocsubsection {}{11.1}{Notes}}{28}{subsection.11.1}
+\contentsline {subsection}{\tocsubsection {}{11.2}{Exercises}}{31}{subsection.11.2}
+\contentsline {subsection}{\tocsubsection {}{11.3}{Appendix: Convexity and concavity}}{33}{subsection.11.3}
+\contentsline {section}{\tocsection {}{12}{Inverse functions}}{35}{section.12}
+\contentsline {subsection}{\tocsubsection {}{12.1}{Notes}}{35}{subsection.12.1}
+\contentsline {subsection}{\tocsubsection {}{12.2}{Exercises}}{37}{subsection.12.2}
+\contentsline {section}{\tocsection {}{13}{Integrals}}{38}{section.13}
+\contentsline {subsection}{\tocsubsection {}{13.1}{Notes}}{38}{subsection.13.1}
+\contentsline {subsection}{\tocsubsection {}{13.2}{Exercises}}{40}{subsection.13.2}
+\contentsline {section}{\tocsection {}{14}{The Fundamental Theorem of Calculus}}{41}{section.14}
+\contentsline {subsection}{\tocsubsection {}{14.1}{Notes}}{41}{subsection.14.1}
+\contentsline {subsection}{\tocsubsection {}{14.2}{Exercises}}{42}{subsection.14.2}

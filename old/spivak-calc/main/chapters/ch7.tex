@@ -1,0 +1,153 @@
+\section{Three hard theorems}
+
+\subsection{Notes}
+We first present three theorems regarding continuous functions on intervals, the proofs of which are left for the next chapter.
+
+\begin{theorem} \label{contzero}
+If $f$ is continuous on $[a, b]$ and $f(a) < 0 < f(b)$ then there is some $x$ in $[a, b]$ such that $f(x) = 0$.
+\end{theorem}
+
+\begin{theorem} \label{contabove}
+If $f$ is continuous on $[a, b]$, the $f$ is bounded above on $[a, b]$, that is, there is some number $N$ such that $f(x) \le N$ for all $x$ in $[a, b]$.
+\end{theorem}
+
+\begin{theorem} \label{contmax}
+If $f$ is continuous on $[a, b]$, then there is some number $y$ in $[a, b]$ such that $f(y) \ge f(x)$ for all $x$ in $[a, b]$.
+
+\begin{remark}
+While they are somewhat similar, Theorem \ref{contmax} is actually much stronger that Theorem \ref{contabove}, saying that $f$ is cont only bounded by some maximum value, but that it achieves some maximum value on the interval.
+\end{remark}
+\end{theorem}
+
+Now, accepting these to be true until their proofs in the next chapter, we examine some of these three theorems' generalisations and consequences.
+
+\begin{theorem}[Intermediate Value Theorem] \label{ivt}
+If $f$ is continuous on $[a, b]$ and either $f(a) < c < f(b)$ or $f(a) > c > f(b)$, then there is some $x$ in $[a, b]$ such that $f(x) = c$.
+
+\begin{proof}
+We first consider $f(a) < c < f(b)$. Define $g = f - c$; so $g$ is continuous and $g(a) < 0 < g(b)$. By Theorem \ref{contzero}, there is some $x$ in $[a, b]$ for which $g(x) = 0$. It follows that $f(x) = c$.
+
+If $f(a) > c > f(b)$, on the other hand, then we can consider $-f$, and say that $-f(a) < -c < -f(b)$. By our first argument, we know there is some $x$ in $[a, b]$ such that $-f(x) = -c$, which implies that $f(x) = c$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{contbelow}
+If $f$ is continuous on $[a, b]$, the $f$ is bounded below on $[a, b]$, that is, there is some number $N$ such that $f(x) \ge N$ for all $x$ in $[a, b]$.
+
+\begin{proof}
+We know that $-f$ is continuous on $[a, b]$, and by Theorem \ref{contabove}, $-f$ is bounded above on $[a, b]$ by $M$ such that $-f(x) \le M$ for all $x$ in $[a, b]$. It follows that $f(x) \ge -M$ for all $x$ in $[a, b]$ and is thus bounded below on $[a, b]$ by $N = -M$.
+\end{proof}
+
+\begin{remark}
+Theorems \ref{contabove} and \ref{contbelow} together prove that if $f$ is continuous on $[a, b]$, it is bounded on $[a, b]$. I.e., for all $x$ in $[a, b]$, $|f(x)| \le N$ for some $N$ (namely, the maximum of the absolute values of the lower and upper bounds on $f$).
+\end{remark}
+\end{theorem}
+
+\begin{theorem} \label{contmin}
+If $f$ is continuous on $[a, b]$, then there is some number $y$ in $[a, b]$ such that $f(y) \le f(x)$ for all $x$ in $[a, b]$. ($f$ achieves a minimum on $[a, b]$.)
+
+\begin{proof}
+We know that $-f$ is continuous on $[a, b]$, and by Theorem \ref{contmax}, there is some number $y$ in $[a, b]$ such that $-f(y) \ge -f(x)$ for all $x$ in $[a, b]$. It follows that there exists some $y$ in $[a, b]$ such that $f(y) \le f(x)$ for all $x$ in $[a, b]$.
+\end{proof}
+\end{theorem}
+
+These last few theorems have been rather trivial consequences of the three main theorems presented at the beginning of this chapter; the following are more interesting.
+
+\begin{theorem} \label{sqrroot}
+Every positive number has a square root. In other words, if $a > 0$, there there is some number $x$ such that $x^2 = a$.
+
+\begin{proof}
+We consider the function $f(x) = x^2$, which we know is continuous. We then choose an interval $[a, b]$ of the function with $a = 0$ and $b = \textrm{max}(1, a)$. This choice of interval allows us to say that $f(a) < a < f(b)$. By Theorem \ref{ivt}, $a$ must be $x^2$ for some $x$ in $[a, b]$.
+\end{proof}
+\end{theorem}
+
+We can think about generalising this sort of result to prove some even more interesting things. It is clear that, since $f(x) = x^n$ is continuous for all natural numbers $n$, so we can prove that every positive number $a$ has an $n$th root. We can make this a bit stronger, however, for odd $n$, in that \textit{all} $a$ have an $n$th root---not just positive $a$. (Since we know that, for all $a > 0$ that $a = x^n$, we can say that $-a = -x^n$ and thus $-a = (-x)^n$.) We can reformulate this statement as: the equation
+\[ x^n - a = 0 \]
+has a root if $n$ is odd. This leads to an interesting result.
+
+\begin{theorem} \label{oddroot}
+If $n$ is odd, then any equation
+\[ x^n + a_{n-1}x^{n-1} + \cdots + a_0 = 0 \]
+has a root.
+
+\begin{proof}
+We rewrite the equation as 
+\[ x^n(1 + \frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n}) = 0. \]
+We then examine the equation for $x$ such that 
+\[ |x| > M = \textrm{max}(1, 2n|a_{n-1}|, \ldots, 2n|a_0|). \]
+This condition on $x$ allows us to say that
+\[ \frac{|a_{n-k}|}{|x^k|} < \frac{|a_{n-k}|}{|x|} < \frac{|a_{n-k}|}{2n|a_{n-k}} < \frac{1}{2n}. \]
+It follows that 
+\[ |\frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n}| \le n\frac{1}{2n} \]
+or that
+\[ \frac{-1}{2} \le \frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n} \le \frac{1}{2}. \]
+We can then say that
+\[ 1 + \frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n} \ge \frac{1}{2} .\]
+
+Now, if we choose some $x_1 < 0$ which satisfies our condition, multiplying by $x_1^n$ on both sides gives us
+\[ x_1^n(1 + \frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n}) \le \frac{x_1^n}{2}, \]
+which implies that $f(x_1) < 0$.
+
+If we choose some $x_2 > 0$ which satisfies our condition, multiplying by $x_2^n$ on both sides gives us
+\[ x_2^n(1 + \frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n}) \ge \frac{x_2^n}{2}, \]
+which implies that $f(x_2) > 0$.
+
+By Theorem \ref{contzero}, $f$ must have a root in the interval $[x_1, x_2]$.
+\end{proof}
+\end{theorem}
+
+With the functions of odd degree taken care of so neatly in this case, we next look to the function of even degree. We clearly can't show the same result, as an equation like $x^2 - 1 = 0$ has roots, but $x^2 + 1 = 0$ does not. We can however, show something that is still very interesting about these functions.
+
+\begin{theorem} \label{absmin}
+If $n$ is even and $f(x) = x^n + a_{n-1}x^{n-1} + \cdots + a_0$, then there is a number $y$ such that $f(y) \le f(x)$ for all $x$.
+
+\begin{proof}
+We begin again by saying that if
+\[ |x| > M = \textrm{max}(1, 2n|a_{n-1}|, \ldots, 2n|a_0|), \]
+then
+\[ 1 + \frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n} \ge \frac{1}{2} .\]
+So, if we multiply by any $x^n$, where $|x| > M$, then
+\[ f(x) \ge \frac{x^n}{2}. \]
+
+Now, we define $b$ such that $b > M$ and $b^n \ge 2f(0)$. This way we have that if $|x| \ge b$, then
+\[ f(x) \ge \frac{x^n}{2} \ge \frac{b^n}{2} \ge f(0) .\]
+So, if $-b \le x \le b$, then $f(x) \ge f(0)$.
+
+By Theorem \ref{contbelow}, we can say that there exists some $y$ in $[-b, b]$ such that $f(y) \le f(x)$ for all $x$ in $[-b, b]$. This completes the proof, as we have that
+\[ f(x) \ge f(0) \ge f(y) \]
+for all $x$.
+\end{proof}
+
+\begin{remark}
+This theorem helps us prove our main result about functions with even $n$, and is basically saying that the function has an absolute minimum value (for all $x$ values) at $y$.
+\end{remark}
+\end{theorem}
+
+\begin{theorem}
+Consider the equation 
+\[ x^n + a_{n-1}x^{n-1} + \cdots + a_0 = c, \]
+and suppose $n$ is even. Then there is  a number $m$ such that the equation has a solution for $c \ge m$ and has no solution for $c < m$.
+
+\begin{proof}
+Let $f(x)$ equal the l.h.s. of the equation. By Theorem \ref{absmin}, there exists some $y$ such that $f(y) \le f(x)$ for all $x$. We let $m = f(y)$. It is obvious then that when $c < m$, there is no solution, and when $c = m$ there must be a solution (at $y$). For the case of $c > m$, we can say that there is some $b > y$ such that $f(b) > c$. By Theorem \ref{ivt} there must exist, since $m = f(y) < c < f(b)$ some $x$ in $[y, b]$ such that $f(x) = c$, so $x$ is a solution.
+\end{proof}
+\end{theorem}
+
+Now, we only have left to prove the first three theorems in this chapter. It is impossible, however, to do this, with only the propreties of the reals (and rationals) discussed in Chapter 1. Namely, we need some missing property of the reals which is not a property of the rationals; this is discussed in the next chapter.
+
+\subsection{Exercises}
+\begin{problem}[7-5]
+The function $f$ must be constant, i.e. $f(x) = \frac{p}{q}$. If it were not, by Theorem \ref{ivt} it would have to attain some irrational values in between rational values.
+\end{problem}
+
+\begin{problem}[7-10]
+Consider the function $f - g$: $(f - g)(a) = f(a) - g(a) < 0$; $(f - g)(b) = f(b) - g(b) > 0$. By Theorem \ref{contzero}, there must be some $x$ in $[a, b]$, then, for which $(f - g)(x) = 0$, or equivalently, such that $f(x) - g(x) = 0$, and thus $f(x) = g(x)$.
+\end{problem}
+
+\begin{problem}[7-11]
+There are two cases: $f(x) = x$ and $f(x) \ne x$. If $f(x) = x$, then it's obvious that the statement is true for all $x$ in $[0, 1]$. If not, then we know that in order for the range of $f$ to be $[0, 1]$, at some $a$ that $f(a) < a$ and at some $b$, $f(b) > b$. We apply the argument in the previous problem to the function $f - I$, completing the proof.
+\end{problem}
+
+\begin{problem}[7-16]
+We consider a polynomial function $f$ of degree $n$. If $n$ is odd, Theorem \ref{oddroot} says that there exists a solution $y$ such that $f(y) = 0$. Since $0 \le |a|$ for any $a$, $|f(y)| \le |f(x)|$ for all $x$. If $n$ is even, we are assured by Theorem \ref{absmin} that $f$ attains some absolute minimum value $m$ at some $y$. If $m \le 0$, the argument made for odd functions applies. If $m > 0$, then $f(x) > 0$, and thus $|f(x)| = f(x)$, for all $x$. Thus $|f|$ has the same minimum $m$ at $y$, and we can say $|f(y)| \le |f(x)|$ for all $x$.
+\end{problem}

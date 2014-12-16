@@ -1,0 +1,59 @@
+\section{Orthogonal vectors and subspaces}
+
+We've looked quite a bit at the four fundamental subspaces that arise from a matrix: the row space, the nullspace, the column space and the left nullspace. Now we're going to look at them even more closely, by examining the orthogonality between the row space and nullspace and between the column space and left nullspace.
+
+Firstly, what does it mean for two vectors $\vx$ and $\vy$ to be orthogonal? Well it just means that the two vectors are perpendicular in space. And the test for orthogonality if their dot product is zero:
+\[ \vx \cdot \vy = \T\vx \vy = 0. \]
+This condition can be shown to be equivalent to the condition that the pythagorean theorem is satisfied (which is true only for orthogonal vectors):
+\[ ||\vx||^2 + ||\vy||^2 = ||x+y||^2. \]
+The above can be written as
+\[ \T\vx \vx + \T\vy \vy = \T{(\vx+\vy)}(\vx + \vy), \]
+and since the transpose distributes over the sum, this is equivalent to
+\[ \T\vx \vx + \T\vy \vy = \T\vx \vx + \T\vy \vy + \T\vx \vy + \T\vy \vx, \]
+which is true if and only if $\T\vx \vy = 0$ (because the dot product is commutative for real vectors). It follows that the zero vector is orthogonal to every vector. 
+
+Now how do we extend orthogonality to entire subspaces?
+\bdf
+A subspace $S$ is \textbf{orthogonal} to a subspace $T$ if for every $\vs \in S, \vt \in T$, $s$ is orthogonal to $t$.
+\edf
+\brm
+For any two orthogonal subspaces $S$ and $T$, $S \cap T = \{0\}$
+\erm
+
+\bex
+The row space is orthogonal to the nullspace! Why?
+
+For any $\vx$ in the nullspace, $\mA\vx = 0$. It follows straight from this definition! Each component of the right hand said is the dot product of $\vx$ with the corresponding row of $\mA$. And since these dot products are 0, $\vx$ is orthogonal to all the rows of $\mA$. Then it is obvious that $\vx$ is orthogonal to any linear combination of the rows, because for row vectors $\vr_i$ for $1 \le i \le m$,
+\[ \left(\sum_{i=1}^m c_i \T{\vr_i}\right)\vx = \sum_{i=1}^m c_i \T{\vr_i} \vx = 0. \]
+\eex
+
+Then it follows that the column space is orthogonal to the left nullspace (just consider the above example for the matrix $\T\mA$).
+
+But we also know that the dimensions of the row and null spaces (or column and left null spaces) add to the dimension of the vector space that they are subspaces of. Thus, we call them \textbf{orthogonal complements}. And this means that the null space contains \textit{all} vectors that are orthogonal to the vectors of the row space. 
+
+Thus, for example, if we have a matrix with three columns and rank 1, then the row space is the line normal to the plane given by the nullspace.
+\brm
+What we've talked about represents the second part of the ``fundamental theorem of linear algebra'', which deals with the relationship between the four fundamental subspaces. (The first was the relationships between their dimensions, and the third, which will look at a bit later, has to do with their bases.)
+\erm
+
+\section{$\mA\vx = \vb$ when no solutions exist}
+
+Now let's talk about the matrix $\T\mA \mA$: it's square and symmetric, and it's going to start coming up a lot. This is because we are going to start talking about how to ``solve'' $\mA \vx = \vb$ when there is no exact solution---so coming up with the best approximation to a solution (this is often what has to be done in real applications). It turns out that what we're going to want to look at is 
+\[ \T \mA \mA \vy = \T\mA \vb. \]
+This is because if there is a solution $\vy$ to the second equation, it'll somehow be the best solution to our first equation. So this motivates us to think hard about the matrix $\T\mA\mA$. Specifically, when is it invertible? 
+
+\bex
+Take 
+\[ \mA = \mat{1&1\\1&2\\1&5}. \]
+It is $3 \times 2$ and has rank 2. So there are going to be a many vectors $\vb$ for which no solution exists to $\mA \vx = \vb$.
+
+So let's look at $\T\mA\mA$, which is
+\[ \mat{1&1&1\\1&2&5}\mat{1&1\\1&2\\1&5} = \mat{3&8\\8&30}. \]
+This matrix is indeed invertible (the columns are independent). 
+\eex
+
+Now $\T\mA\mA$ isn't always invertible. And actually, the following relationships exist:
+\[ N(\T\mA\mA) = N(\mA), \]
+\[ \Rank \T\mA\mA = \Rank \mA. \]
+And what this tells us is that $\T\mA\mA$ is invertible exactly when the nullspace of $\mA$ is just the zero vector, i.e. it has independent columns.
+

@@ -1,0 +1,253 @@
+\section{Least upper bounds}
+
+\subsection{Notes}
+\begin{definition}
+A set $A$ of real numbers is bounded above if there is a number $x$ such that $x \ge a$ for every $a$ in $A$. Such a number $x$ is called an upper bound for $A$.
+
+\begin{remark}
+This is analagous to our discussion of bounding functions in the previous chapter. They are inherently related in that an upper bound for the set 
+\[ \{f(x): x \in [a, b]\} \]
+is an upper bound for $f$ on the interval $[a, b]$.
+\end{remark}
+\end{definition}
+
+It is clear that some sets have upped bounds while others do not. For example, $\mathbb{R}$ has no upper bound, but the set
+\[ A = \{x: x \in [0, 1)\} \]
+does. In fact, $A$ has \textit{many} upper bounds. We do, however, like to consider one particular upper bound, the least upper bound (which is 1 for $A$).
+
+\begin{definition}
+A number $x$ is a least upper bound of $A$ if
+\begin{enumerate}
+\item 
+$x$ is an upper bound of $A$,
+\item
+if $y$ is an upper bound of $A$, then $x \le y$.
+\end{enumerate}
+\end{definition}
+
+In fact, if the least upper bound for a set $A$ exists, it must be unique, since if we have two least upper bounds $x$ and $y$, then $x \le y$ and $y \le x$, which implies that $x = y$. We call this unique value the supremum of $A$, denoted
+\[ \sup A. \] 
+Similarly, there exists an analagous concept for lower bounds.
+\begin{definition}
+A set $A$ of real numbers is bounded below if there is a number $x$ such that $x \le a$ for every $a$ in $A$. Such a number $x$ is called an lower bound for $A$.
+\end{definition} 
+\begin{definition}
+A number $x$ is a greatest lower bound of $A$ if
+\begin{enumerate}
+\item 
+$x$ is an lower bound of $A$,
+\item
+if $y$ is an upper bound of $A$, then $x \ge y$.
+\end{enumerate}
+\end{definition}
+The unique greatest lower bound of a set $A$, if it exists, is known as the infimum, denoted
+\[ \inf A. \]
+
+This leads to our last, and most important, property of the real numbers, the least upper bound property: \textbf{If $A$ is a set of real numbers, $A \ne \emptyset$, and $A$ is bounded above, then $A$ has a least upper bound.} Notice that this property separates the set of reals from the set of rationals. For example, there is no rational least upper bound for the set 
+\[ A = \{x: x^2 < 2, x \in \mathbb{Q} \}. \]
+Another consequence of the introduction of this concept is our ability to prove the three unproved theorems of the previous chapter!
+
+\begin{proof}[Proof of Theorem \ref{contzero}]
+We show that there must exist an $x$ in $[a, b]$ such that $f(x) = 0$ by locating the least such $x$ on the interval. Define the set
+\[ A = \{x: x \in [a, b], f \textrm{ is negative on } [a, x]\}. \]
+Clearly $A \ne \emptyset$ because $a$ must be in $A$, and $A$ must be bounded by $b$. So, we can say that $A$ has a lowest upper bound. Let us call this lowest upper bound $\alpha$; we would like to prove that $f(\alpha) = 0$ by showing that it is impossible that $f(\alpha) < 0$ or $f(\alpha) > 0$.
+
+If $f(\alpha) < 0$, then we can say that there is some $\delta > 0$ such that for all $x$, $\alpha - \delta < x < \alpha + \delta$, $f(x) < 0$. Since $\alpha$ is the least upper bound of $A$, there is some $x_0$, $\alpha - \delta < x_0 < \alpha$ in $A$, i.e. $f$ is negative on $[a, x_0]$. But then there is also some $x_1$, $\alpha < x_1 < \alpha + \delta$ such that $f$ is negative on $[x_0, x_1]$. So $f$ is negative on $[a, x_1]$, and thus $x_1$ is in $A$. This contradicts that $\alpha$ is an upper bound of $A$. So we can't have $f(\alpha) < 0$.
+
+If $f(\alpha) > 0$, then we can say that there is some $\delta > 0$ such that for all $x$, $\alpha - \delta < x < \alpha + \delta$, $f(x) > 0$. Again, since $\alpha$ is the lowest upper bound of $A$, we know that there exists some $x_0$, $\alpha - \delta < x_0 < \alpha$, in $A$. This contradicts that $f(x_0) > 0$, so we can't have $f(\alpha) > 0$.
+
+So, $f(\alpha) = 0$, completing the proof.
+\end{proof}
+
+In order to prove the next two theorems, we first need some (related) preliminary results.
+
+\begin{theorem}
+If $f$ is continuous at $a$ then there is a number $\delta > 0$ such that $f$ is bounded on the interval $(a - \delta, a + \delta)$.
+
+\begin{proof}
+The continuity of $f$ at $a$ allows us to say that for every $\epsilon > 0$, there exists a $\delta > 0$ such that
+\[ \textrm{if } |x - a| < \delta \textrm{, then } |f(x) - f(a)| < \epsilon. \]
+We may choose any such $\epsilon$, e.g. for some $\delta$, $\epsilon = 1$. So
+\[ \textrm{if } |x - a| < \delta \textrm{, then } |f(x) - f(a)| < 1. \]
+It follows that $f(x) - f(a) < 1$ and $f(x) - f(a) > -1$. This gives us our lower and upper bounds: $f(a) - 1 < f(x) < f(a) + 1$.
+\end{proof}
+\end{theorem}
+
+It is clear that we can extend this result to left- and right-hand continuity. Namely, if $f$ is right-hand continuous at $a$, then $f$ is bounded on the set $\{x: a \le x < a + \delta\}$, and if $f$ is left-hand continuous at $b$, then $f$ is bounded on the set $\{x: b - \delta < x \le b\}$. Now we can proceed.
+
+\begin{proof}[Proof of Theorem \ref{contabove}]
+Let
+\[ A = \{x: x \in [a, b], f \textrm{ is bounded on } [a, x]\}. \]
+We know that $A \ne \emptyset$ (since $a$ is in $A$) and is bounded (by $b$), so $A$ must have a least upper bound $\alpha$. What we'd like to show first is that $\alpha = b$.
+
+We know that $\alpha > a$, because right-hand continuity at $a$ allows us to say that there is some $\delta$ for which $f$ is bounded on $[a, a + \delta)$. So there is some $x_0$, $a < x_0 < a + \delta$ such that $f$ is bounded on $[a, x_0]$, and thus $x_0 \in A$. We can show that it cannot be that $\alpha < b$ as well. 
+
+Since $\alpha$ is the least upper bound of $A$, there is some $x_0$, $\alpha - \delta < x_0 < \alpha$, in $A$, so $f$ is bounded on $[a, x_0]$. We can also say that $f$ would be bounded on $(\alpha - \delta, \alpha + \delta)$; i.e. there is some $x_1$, $\alpha < x_1 < \alpha + \delta$, such that $f$ is bounded on $[x_0, x_1]$. Then $f$ is bounded on $[a, x_1]$, and thus $x_1 \in A$. This is a contradiction.
+
+So $\alpha = b$, proving that $f$ is bounded on $[a, b)$. We finish by saying that since $f$ is left-hand continuous at $b$, $f$ is bounded on $(b - \delta, b]$. So there is some $x_0$, $b - \delta < x_0 < b$ such that $f$ is bounded on $[a, x_0]$ and on $[x_0, b]$. So $f$ is bounded on $[a, b]$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{contmax}]
+We have just shown that $f$ is bounded on $[a, b]$, or equivalently, that the set
+\[ A = \{f(x): x \in [a, b]\} \]
+is bounded. Clearly, $A \ne \emptyset$, so we can say that $A$ has a least upper bound $\alpha$. Since $\alpha \ge x$ for all $x$ in $[a, b]$, we would like to show that there exists $y$ such that $f(y) = \alpha$.
+
+If there were no such $y$, then the function
+\[ g(x) = \frac{1}{\alpha - f(x)} \]
+would be continuous---since the denominator would never be equal to 0---and therefore bounded. Now, since $\alpha$ is the least upper bound of $A$, we know that for every $\epsilon > 0$, there exists an $x$ in $[a, b]$ such that 
+\[ \alpha - f(x) < \epsilon. \]
+But this implies that for for every $\epsilon > 0$, there exists an $x$ in $[a, b]$ such that 
+\[ g(x) > \frac{1}{\epsilon}, \]
+or that $g$ is unbounded. This is a contradiction, and thus there must be some $y$ such that $f(y) = \alpha \ge f(x)$ for all $x$ in $[a, b]$.
+\end{proof}
+
+Next, we provide a rigourous formulation of a couple of intuitively obvious facts about the natural numbers.
+
+\begin{theorem}
+$\mathbb{N}$ is not bounded above.
+
+\begin{proof}
+Suppose $\mathbb{N}$ is bounded above; clearly, $\mathbb{N} \ne \emptyset$, so $\mathbb{N}$ has a least upper bound $\alpha$. This means that for every $n \in \mathbb{N}$,
+\[ \alpha \ge n. \]
+It follows, since $n \in \mathbb{N} \Rightarrow n + 1 \in \mathbb{N}$, that for all $n \in \mathbb{N}$,
+\[ \alpha \ge n + 1 \textrm{ or } \alpha - 1 \ge n. \]
+But this contradicts that $\alpha$ is the least upper bound of $\mathbb{N}$. So $\mathbb{N}$ cannot be bounded above.
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{recip}
+For every $\epsilon > 0$, there exists an $n \in \mathbb{N}$ such that $\frac{1}{n} < \epsilon$.
+
+\begin{proof}
+Suppose not; then for some $\epsilon$ and all $n \in \mathbb{N}$, $\frac{1}{n} \ge \epsilon$. But this means that for all $n \in \mathbb{N}$, $n \le \frac{1}{\epsilon}$. This implies that $\mathbb{N}$ is bounded above, which we have shown to be false.
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+\begin{problem}[8-2]
+\begin{theorem}
+If the set $A \ne \emptyset$ is bounded below, $A$ has a greatest lower bound.
+
+\begin{proof}[Proof 1]
+Since $A \ne \emptyset$, we know that there is some $x \in A$; thus there is some $-x \in -A$ and $-A \ne \emptyset$. We can also say that since $A$ is bounded below, that there is some $a$ such that for all $x \in A$,
+\[ a \le x. \]
+It follows that 
+\[ -a \ge -x. \]
+Since $-a \in -A$ and $-A = \{-x: x \in A\}$, this means that $-A$ is bounded above. Since $-A \ne \emptyset$ and $-A$ is bounded above, $-A$ must have a least upper bound $\alpha$, such that for all $x$ in $-A$ and all upper bounds $\beta$ of $-A$,
+\[ \alpha \ge x \textrm{ and } \alpha \le \beta. \]
+It follows that
+\[ -\alpha \le -x \textrm{ and } -\alpha \ge -\beta. \]
+So, $-\alpha$ is a lower bound on $A$. It is easy to then see that all $-\beta$ are lower bounds on $A$ (by the same argument used to show that $a$ is an upper bound on $-A$). So we can say that $-\alpha$ is the greatest lower bound of $A$. I.e.,
+\[ \inf A = - \sup (-A). \]
+\end{proof}
+
+\begin{proof}[Proof 2]
+Let $B$ be the set of all lower bounds on $A$. Since $A$ is bounded below, there is some $b$ such that for all $a \in A$,
+\[ b \le a. \]
+So, $b \in B$ and $B \ne \emptyset$. We also know that $B$ must be bounded above, namely by any $a \in A$. So $B$ has a least upper bound $\beta$, such that for all $b \in B$,
+\[ \beta \ge b. \]
+We also know that, since every $a \in A$ is an upper bound on $B$, that
+\[ \beta \le a. \]
+It follows, by definition, that $\beta$ is the greatest lower bound of $A$.
+\end{proof}
+
+\end{theorem}
+\end{problem}
+
+\begin{problem}[8-5] \ 
+\begin{enumerate}
+\item[(a)]
+We have that $y > x + 1$. Consider the largest integer $l$ such that $l \le x$ (we now know this exists, since the set of $l$ has a least upper bound). Then $x < l + 1 \le x + 1 < y$---if not, then $l$ would not be the largest integer satisfying the the condition. Thus $x < l + 1 < y$.
+
+\item[(b)]
+We know for some $\epsilon > 0$, $y - x = \epsilon$. By Theorem \ref{recip}, we can then say that there is some $n \in \mathbb{N}$ such that $y - x > \frac{1}{n}$, or such that $ny - nx > 1$. It follows from (a) that there is an integet $k$ such that $nx < k < ny$. We can then finish by saying $x < \frac{k}{n} < y$.
+
+\item[(c)]
+Consider $r + \frac{\sqrt{2}}{2}(r - s)$.
+
+\item[(d)]
+We know by (b) that there must be some $x < r < y$, and therefore some $x < r < s < y$. By, (c), there is an irrational between $r$ and $s$, and therefore between $x$ and $y$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[8-6] \ 
+\begin{enumerate}
+\item[(a)]
+Suppose there were some $a$ for which $f(a) \ne 0$. By Theorem \ref{contposneg}, there is some $\delta > 0$ such that 
+\[ \textrm{if } |x - a| < \delta \textrm{, then } f(x) \ne 0. \]
+But this means that in the open interval $(a - \delta, a + \delta)$, there is no $x$ for which $f(x) = 0$. This contradicts that the set $A$ is dense.
+
+\item[(b)]
+Apply (a) to the funtion $f - g$.
+
+\item[(c)]
+Suppose there were some $a$ for which $f(a) < g(a)$, or $f(a) - g(a) < 0$. By Theorem \ref{contposneg}, there is some $\delta > 0$ such that 
+\[ \textrm{if } |x - a| < \delta \textrm{, then } f(x) - g(x) < 0. \]
+But this means that in the open interval $(a - \delta, a + \delta)$, there is no $x$ for which $f(x) - g(x) \ge 0$, or that $f(x) \ge g(x)$. This contradicts that the set $A$ is dense.
+
+We cannot make the same argument when $\ge$ is replaced with $>$. This is because Theorem \ref{contposneg} says nothing about $f - g$ near $a$ when $f(a) - g(a) \le 0$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[8-11] \ 
+\begin{enumerate}
+\item[(a)]
+Consider the set
+\[ A = \{a_n: n \in \mathbb{N}\}. \]
+It is clear that $\inf A = 0$. So for any $\epsilon > 0$, there is an $a_n$ such that 
+\[ \inf A <  a_n < \inf A + \epsilon. \]
+It follows that there exists an $a_n$ such that
+\[ a_n < \epsilon. \]
+
+\item[(b)]
+Laziness prevents me from typing out fully my solution. I showed that the ratio of the area of the circle segment created by the side of $P$ to the area of the two triangles within the segment formed by the two sides of $P'$ is always less than two. This suffices.
+
+\item[(c)]
+We can form a sequence that fits the conditions of (a) by considering each element to be the difference between the area of the circle and the areas of inscribed polygons $P, P', P'', \ldots$ as described in (b). Then, we can make the difference between the two areas less than any $\epsilon > 0$, by (a), showing that the area of the inscribed polygon can be made as close to the area of the circle as we would like.
+
+\end{enumerate}
+\end{problem}
+
+\subsection{Appendix: Uniform continuity}
+
+\begin{definition}
+A function $f$ is \textbf{uniformly continuous} on an interval $I$ if for all $\epsilon > 0$ there exists some $\delta > 0$ such that for all $x, y \in I$,
+\[ \textrm{if } |x - y| < \delta \textrm{, then } |f(x) - f(y)| < \epsilon. \]
+\end{definition}
+
+\begin{definition}
+Just to make exposition a bit shorter in this section, we will say that a function $f$, for some $\epsilon > 0$, is $\boldsymbol{\epsilon}$\textbf{-good} on an interval $[a, b]$ if there is some $\delta > 0$ such that for all $x, y \in [a, b]$,
+\[ \textrm{if } |x - y| < \delta \textrm{, then } |f(x) - f(y)| < \epsilon. \]
+\end{definition}
+
+\begin{lemma} \label{uniconlem}
+Say $a < b < c$ and $f$ is continuous on $[a, c]$. For some $\epsilon > 0$, if $f$ is $\epsilon$-good on $[a, b]$ (for some $\delta_1$) and on $[b, c]$ (for some $\delta_2$), then $f$ is $\epsilon$-good on $[a, c]$ (for some $\delta$). 
+
+\begin{proof}
+By continuity of $f$ at $b$, we can say that there exists a $\delta_3 > 0$ such that
+\[ \textrm{if } |x - b| < \delta_3 \textrm{, then } |f(x) - f(b)| < \frac\epsilon2. \]
+It follows that if we also have a $y$, $|y - b| < \delta_3$, then
+\[ |f(x) - f(y)| < \epsilon. \]
+
+We then choose
+\[ \delta = \textrm{min}\,(\delta_1, \delta_2, \delta_3). \]
+
+We want to show that $f$ is $\epsilon$-good on $[a, c]$. We have $x, y \in [a, c]$ such that $|x - y| < \delta$. If we choose $x, y \in [a, b]$ or $x, y \in [b, c]$, the condition for $\epsilon$-goodness is satisfied because we are given that $f$ is $\epsilon$-good on $[a, b]$ and $[b, c]$. The only other cases are 
+\[ x < b < y \textrm{ or } y < b < x. \]
+In either, we have that $|x - b| < \delta$ and $|y - b| < \delta$, since $|x - y| < \delta$. It follows from above that the condition for $\epsilon$-goodness is satisfied. So, $f$ is $\epsilon$-good on $[a, c]$.
+\end{proof}
+\end{lemma}
+
+\begin{theorem}
+If a function $f$ is continuous on $[a, b]$, then $f$ is uniformly continuous on $[a, b]$.
+
+\begin{proof}
+We want to show that for every $\epsilon > 0$, $f$ is $\epsilon$-good on $[a, b]$. Consider the set
+\[ A = \{x: a \le x \le b, f \textrm{ is } \epsilon\textrm{-good on } [a, x]\}. \]
+$A \ne \emptyset$ because $a \in A$ and $A$ is bounded above, namely by $b$, so it must have some least upper bound $\alpha$. It suffices to show that $\alpha = b$, and that $\alpha \in A$.
+
+We first show that $\alpha = b$ by showing that it cannot be less than $b$. (It cannot be greater than $b$ because $b$ is an upper bound on $A$.) If $\alpha < b$, then $f$ is continuous at $\alpha$, so there exists some $\delta$ such that if $|x - \alpha| < \delta$, then $|f(x) - f(\alpha)| < \frac \epsilon 2.$ It follows that for any other $y$, $|y - \alpha| < \delta$, that $|f(x) - f(y)| < \epsilon$. So, by definition, $f$ is $\epsilon$-good on $[\alpha - \delta, \alpha + \delta]$. And because $\alpha$ is the least upper bound of $A$, $f$ is $\epsilon$-good on $[a, \alpha - \delta]$. Applying Lemma \ref{uniconlem} gives us that $f$ is $\epsilon$-good on $[a, \alpha + \delta]$, i.e. $\alpha + \delta \in A$. But this contradicts that $\alpha = \sup A$. 
+
+We now show that $\alpha = b \in A$. Left-hand continuity at $b$ implies that for some $\delta$, if $b - x < \delta$, then $|f(x) - f(b)| < \frac \epsilon 2$. By a similar argument as above, $f$ is $\epsilon$-good on $[b - \delta, b]$. Since $f$ is $\epsilon$-good on $[a, b - \delta]$, it follows from Lemma \ref{uniconlem} that $f$ is $\epsilon$-good on $[a, b]$. Since $\epsilon$ was chosen arbitrarily, $f$ is uniformly continuous on $[a, b]$.
+\end{proof}
+\end{theorem}

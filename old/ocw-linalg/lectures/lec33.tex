@@ -1,0 +1,28 @@
+\section{Left and right inverses, pseudoinverse}
+
+When we usually speak about the inverse of an $m \by n$ matrix $\mA$, we mean a two-side inverse, meaning:
+\[ \mA^{-1}\mA = \mA\mA^{-1} = \mI. \]
+And this is the case that $\Rank \mA = n = m$, i.e. a full-rank square matrix.
+
+Now, we can also speak about $\mA$ just having a left-inverse. And this happens when we have full column rank: $\Rank \mA = n$. This means that the nullspace is just the zero vector. And that implies  that the $n \by n$ matrix $\T\mA\mA$ has full rank, and is thus invertible. So then we can write
+\[ (\T\mA\mA)^{-1}\T\mA\mA = \mI. \]
+from which it is immediate that $(\T\mA\mA)^{-1}\T\mA$ is the \emph{left inverse} of $\mA$. (Notice however that this matrix on the right does us no good---in fact, one could notice that it would give the projection matrix onto $C(\mA)$.)
+
+A similar thing can be show for right-inverses, given a matrix with full row rank: $\Rank \mA = m$. That means the nullspace of $\T\mA$ is just the zero vector, implying that the $m \by m$ matrix $\mA\T\mA$ has full rank, and is thus invertible. So we can write
+\[ \mA\T\mA(\mA\T\mA)^{-1} = \mI, \]
+from which it is immediate that $\T\mA(\mA\T\mA)^{-1}$ is the \emph{right inverse} of $\mA$.  (Again, this matrix on the left does us no good---and this would be a projection matrix onto $C(\T\mA)$.)
+
+\begin{remark}
+There may be other left- and right-inverses for a given matrix, but these formulae are our favourite.
+\end{remark}
+
+Now we've covered two limited cases then, but what can we say about inverses in general, when $\Rank \mA < m, \Rank \mA < n$. Well, since there are non-trivial vectors in both the nullspace and left nullspace, there are some vectors that we can't really "bring back to life" with any inverse matrix. But what's the best we can do? Take a vector $\vx$ in the rowspace; then $\mA\vx$ is in the column space. The claim is that every vector in the column space can be written as $\mA\vx$ for $\vx$ in the row space, and that there is a bijection between the column space and row space. And it's clear that we've got a chance at this, because both spaces have the same dimension: $\Rank \mA$. So if this is true, then if we limit our inputs to vectors in the row space (and our outputs only in the column space) then we can treat $\mA$ as a perfectly invertible matrix. And we denote this \emph{pseudoinverse} as $\mA^+$. So $\vx = \mA^+\mA\vx$.
+
+Now how do we prove that in fact there is a bijection? Well we want to show that if $\vx \ne \vy$ for $\vx,\vy \in C(\T\mA)$, then $\mA\vx \ne \mA\vy$. We can prove the contrapositive. Suppose that $\mA\vx = \mA\vy$. Then
+\[ \mA(\vx-\vy) = 0, \]
+meaning $\vx - \vy \in N(\mA)$. But $\vx - \vy$ is just a linear combination of two vectors in the row space, so it must be in the row space as well. Since the row space and null space are orthogonal complements, this implies that $\vx - \vy = 0$, or $\vx = \vy$. This completes the proof.
+
+We now know what the pseudoinverse should do. But how do we find the matrix, $\mA^+$? One way would be to start from the SVD:
+\[ \mA = \mU\mSg\T\mV. \]
+Just like $\mA$, $\mSg$ is $m \by n$ and has the same rank. And the pseudoinverse of this diagonal matrix is just given by the $n \by m$ matrix with the reciprocals of the non-zero entries on the diagonal (and leaving the zeros where they are). And then $\mSg\mSg^+ $ and $\mSg^+\mSg$ are both square matrices with $\Rank \mA$ 1s on the diagonal followed by 0s. And then
+\[ \mA^+ = \mV\mSg^+\T\mU. \]

@@ -1,0 +1,56 @@
+\section{Second derivative test}
+
+Recall that critical points exist for a function when all its partial derivatives are equal to 0, and that critical points indicate a local minimum, local maximum or saddle point in the graph of the function. While determining which case it is is possible just by looking at the graph or contour plot, we still don't know a way to do this purely quantitatively and systematically. 
+
+\brm
+We must note one property of higher order partial derivatives, namely that the order in which that one differentiates a function with respect to its variables does not matter. For example, $f_{xy} = f_{yx}$. The statement follows simply by applying the definition of the partial derivative in each case and noticing that the same value is the result. At the point $(x_0,y_0)$:
+\begin{eqnarray*}
+ f_{xy}&=&\lim_{k \to 0} \frac 1k \left(\pd{f}{x}(x_0,y_0+k)-\pd{f}{x}(x_0,y_0)\right) \\
+                                &=&\lim_{k \to 0} \frac 1k \lim_{h \to 0} \frac{f(x_0+h,y_0+k)-f(x_0,y_0+k)}h - \frac{f(x_0+h,y_0)-f(x_0,y_0)}h \\
+                                &=&\lim_{h,k \to 0} \frac {f(x_0+h,y_0+k)-f(x_0,y_0+k) - f(x_0+h,y_0)+f(x_0,y_0)}{hk} \\  
+f_{yx} &=&\lim_{h \to 0} \frac 1h \left(\pd{f}{y}(x_0+h,y_0)-\pd{f}{x}(x_0,y_0)\right) \\
+                                &=&\lim_{h \to 0} \frac 1h\lim_{k \to 0} \frac{f(x_0+h,y_0+k)-f(x_0+h,y_0)}k -  \frac{f(x_0,y_0+h)-f(x_0,y_0)}k \\
+                                &=&\lim_{h,k \to 0} \frac {f(x_0+h,y_0+k)-f(x_0,y_0+k) - f(x_0+h,y_0)+f(x_0,y_0)}{hk} \qed
+\end{eqnarray*} 
+\erm
+
+To answer the problem posed above, we first appeal to a specific type of function, one that is purely quadratic:
+\[ f(x,y) = ax^2 + bxy + cy^2. \]
+Say $(x_0,y_0)$ is a critical point of $f$. Let $A = f_{xx}(x_0,y_0),\ B=f_{xy}(x_0,y_0),\ C=f_{yy}(x_0,y_0)$. Notice that $A=2a$, $B=b$ and $C=2c$. Thus we can rewrite the function as
+\[ f(x,y)= \frac A2 x^2 + Bxy + \frac C2 y^2. \]
+Now let $\Delta f = f(x,y)-f(x_0,y_0), \Delta x = x-x_0, \Delta y = y-y_0$. Then
+\[ \Delta f = \frac A2 \Delta x^2 + B\Delta x \Delta y + \frac C2 \Delta y^2. \]
+We can rewrite this equation as 
+\[ \Delta f = \Delta y^2 \left[\frac A2 \left(\frac{\Delta x}{\Delta y}\right)^2 + B\left(\frac{\Delta x}{\Delta y}\right) + \frac C2 \right]. \]
+Now consider points around $(x_0,y_0)$ (with $\Delta y \ne 0$). Since $\Delta y^2 > 0$, the sign of $\Delta f$ will be the same as the sign of the other factor (quadratic in $\Delta x / \Delta y$). Specifically, if we look at the discriminant of the quadratic: 
+\bit
+\item If $B^2 - AC > 0$, then the quadratic has two distinct (real) roots, and thus must take on both negative and positive values.
+\item If $B^2 - AC < 0$, then the quadratic has no (real) roots, and thus takes on only negative values (if $A < 0$) or only positive values (if $A > 0$).
+\item If $B^2 - AC = 0$, then the quadratic has one distinct (real) root, meaning there are either only non-negative values or only non-positive values. 
+\eit
+
+\brm
+To also account for the case where $\Delta y = 0$, factor out $\Delta x ^2$ instead and set $\Delta x \ne 0$, and the same conclusions can be made. We do not need to consider $\Delta x = \Delta y = 0$ since this is at the critical point itself and we are examining the behaviour of the function around the critical point.
+\erm
+
+Now, what does this mean geometrically about $f$ around the critical point $(x_0,y_0)$?
+\bit
+\item If $B^2 - AC > 0$, then moving in some directions causes an increase in $f$ while moving in other directions causes a decrease in $f$, so $(x_0,y_0)$ is a saddle point.
+\item If $B^2 - AC < 0$ and $A < 0$ then moving in any direction causes a decrease in $f$, so $(x_0,y_0)$ is a local maximum. 
+\item If $B^2 - AC < 0$ and $A > 0$ then moving in any direction causes an increase in $f$, so $(x_0,y_0)$ is a local minimum.
+\item If $B^2 - AC = 0$, then there is a critical line of points (at a specific value of $\Delta x / \Delta y$) that take on a  minimum or maximum value. 
+\eit
+
+In general however, to show that this test is valid, we look at the quadratic approximation of any function of two variables:
+\[ \Delta f \approx f_x\Delta x + f_y \Delta y + \frac 12 f_{xx}\Delta x ^2 + f_{xy}\Delta x \Delta y + \frac 12 f_{yy}\Delta y^2. \]
+If we are at a critical point, the first two (linear terms) drop out. So then, the general case reduces to the quadratic case, except in the degenerate case for quadratics ($B^2 - 4AC = 0$) for in that case the higher order terms of the approximation are influential on the shape of the function and the second derivative test is inconclusive. 
+
+We also still have not answered the question of how to find \textit{global} minima and maxima. These global extrema may not be at critical points, but at the boundaries of the domain or some limiting value (e.g. infinity). 
+\bex
+Find the maximum and minimum the function 
+\[ f(x,y)=x+y+\frac 1{xy} \]
+for $x,y>0$. The critical points are when
+\[ f_x = 1 - \frac{1}{x^2y} = 0 \]
+\[ f_y = 1 - \frac{1}{xy^2} = 0. \]
+It follows that $x = y = 1$. So the only critical point is at the point $(1,1)$. Taking the second partial derivatives, we can see that $B^2 - AC < 0$ and $A >0$ so this is a local (and actualy we can check that this is the global) minimum. The maximum is found when $x,y\to0$ or $x,y\to\infty$, in which case $f\to\infty$.
+\eex

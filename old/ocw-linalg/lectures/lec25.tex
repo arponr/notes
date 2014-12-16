@@ -1,0 +1,70 @@
+\section{Symmetric matrices and positive definiteness}
+
+The most important class of matrices are symmetric matrices, $\mA$, thos with the property
+\[ \T\mA = \mA. \]
+And of course we're going to look at its eigenvalues and eigenvectors. The main facts are going to be that the eigenvalues of a real symmetric matrices will be real, and that the eigenvectors can be chosen to be orthonormal.
+
+In the usual (not necessarily symmetric) case, we have
+\[ \mA = \mS \mLa \mS^{-1}. \]
+However, if $\mA$ is symmetric, then we now know then that $\mS$ is an orthogonal matrix $\mQ$. And we know for an orthogonal matrix $\mQ^{-1} = \T\mQ$. So then for symmetric matrices, we have
+\[ \mA = \mQ\mLa\T\mQ. \]
+And the right-hand side of that is clearly symmetric, if one looks at the transpose of it. This is known as the spectral theorem in linear algebra.
+
+Let's go back to the fact that symmetric matrices have real eigenvalues. Why is this true? Well let's start at
+\[ \mA \vx = \lambda \vx. \]
+Then we could take the complex conjugate of everything, giving
+\[ \mA \bar{\vx} = \bar{\lambda} \bar{\vx}, \]
+since the conjugate behaves nicely with products, and we're considering only real matrices $\mA$. If we then transpose that equation, we get
+\[ \T{\bar{\vx}} \T\mA = \T{\bar{\vx}} \bar{\lambda}. \]
+But since $\mA$ is symmetric $\T\mA = \mA$, so we have
+\[ \T{\bar{\vx}} \mA = \T{\bar{\vx}} \bar{\lambda}. \]
+Now if we take the inner product with $\T{\bar{\vx}}$ of each side of our original equation
+\[ \T{\bar\vx} \mA \vx = \lambda\T{\bar\vx}\vx. \]
+Then if we take the inner product with $\vx$ of the second to last equation here, then we get
+\[ \T{\bar\vx} \mA \vx = \bar\lambda\T{\bar\vx}\vx. \]
+But then the previous two equations imply that
+\[ \lambda = \bar\lambda, \]
+(because the value $\T{\bar\vx}\vx$ represents the sum of the squared magnitudes of each complex entry of $\vx$, and eigenvectors are non-zero) meaning $\lambda$ is real!
+\brm
+Note that if $\mA$ was a complex matrix, the same conclusion could be made only if $\mA = \T{\bar\mA}$.
+\erm
+
+Now, how do we prove that we can choose an orthonormal set of eigenvectors? Well, this wasn't covered in the lecture, and I can only give a proof when all the eigenvalues are distinct. Take two distinct eigenvalues $\lambda_i, \lambda_j$ with eigenvectors $\vx_i, \vx_j$. Then we have that
+\[ \mA\vx_i = \lambda_i\vx_i, \]
+\[ \mA\vx_j = \lambda_j\vx_j. \]
+If we transpose the first equation, we get
+\[ \T{\vx_i}\mA = \lambda_i \T{\vx_i}, \]
+since $\T\mA = \mA$ by symmetry. Then multiply the second equation on the left by $\T{\vx_i}$:
+\[ \T{\vx_i}\mA \vx_j = \lambda_j \T{\vx_i} \vx_j. \]
+But by the transposed equation, this means that 
+\[ \lambda_i \T{\vx_i} \vx_j = \lambda_j \T{\vx_i} \vx_j. \]
+And since $\lambda_i \ne \lambda_j$, this implies that
+\[ \T{\vx_i} \vx_j = 0, \]
+so the eigenvectors are orthogonal. And then we can of course normalise their lengths so that the are orthonormal.
+
+Let's go back to that nice decomposition
+\[ \mA = \mQ\mLa\T\mQ. \]
+If we write out the multiplication, it turns out to be
+\[ \mA = \sum_{i=1}^n \lambda_i \vq_i\T{\vq_i}. \]
+And since all $\vq_i$ are unit vectors, 
+\[ \vq_i\T{\vq_i} = \frac{\vq_i\T{\vq_i}}{\T{\vq_i}\vq_i}, \]
+so that term is a projection matrix. So we can interpret the decomposition as the fact that any symmetric matrix is a linear combination of perpendicular projection matrices.
+
+\brm
+One other nice property of symmetric matrices is that the number of positive eigenvalues is equal to the number of positive pivots, and the same for negative.
+\erm
+
+Now let's move on to a subclass of REALLY NICE symmetric matrices.
+\bdf
+A \textbf{(symmetric) positive definite} matrix has all positive eigenvalues (and thus all positive pivots).
+\edf
+
+\bex
+One example of a symmetric positive definite matrix would be
+\[ \mA = \mat{5&2\\2&3}. \]
+The pivots are $5, 11/5$, both positive. And the eigenvalues are the solutions to 
+\[ \lambda^2 - 8\lambda + 11 = 0: \]
+$\lambda = 4 \pm \sqrt 5$, also both positive.
+\eex
+
+Of course the determinant of positive definite matrices must be positive (since the determinant is the product of the eigenvalues). But not any matrix with positive determinant is positive definite. A sufficient test is to see if all ``sub-determinants'' ($i \by i$ determinants starting at top left for $1 \le i \le n$) are positive. 

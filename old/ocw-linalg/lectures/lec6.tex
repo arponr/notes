@@ -1,0 +1,16 @@
+
+We can connect this idea of column space to the question: for which does $\vb$ $\mA\vx=\vb$ have a solution? Well it's any $\vb \in C(\mA)$ (because $\mA\vx$ represents all linear combinations of the columns of $\mA$)! So, for example, if we decide that $C(\mA)$ fills the whole space, then it's clear that any $\vb$ provides a solution. 
+
+\subsection{Nullspace}
+
+Let's talk about a totally new subspace that comes also from a matrix $\mA$. Well the \textbf{nullspace} of $\mA$, $N(\mA)$, contains all vectors $\vx$ such that
+\[ \mA\vx = 0. \]
+If $\mA$ is of size $m \times n$ then the nullspace is (unlike the column space) a subspace of $\RR^n$ (because there must be $n$ components in $\vx$). This must be a vector space because we can see for any two vectors $\vv$ and $\vw$ in the nullspace, we also have that
+\[ \mA(c\vv + d\vw) = c\mA\vv + d\mA\vw = 0, \]
+so the space is closed under linear combinations. 
+
+Let's consider for a moment the solutions $\vx$ of the equation
+\[ \mA\vx = \vb. \]
+We can notice that for any $\vb \ne \vct{0}$ does not form a vector space because the zero vector is not in the solution set! 
+
+So the column space and the null space are two natural ways that we can sort of construct a vector space. The column space gives a set of vectors and then we fill out a vector space using linear combinations, where as the null space is a vector space itself and we have to look for a way to describe it. So how can we find a description for the null space? 

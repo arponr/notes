@@ -1,0 +1,71 @@
+\section{Vector fields and line integrals}
+
+We will now discuss vector fields and line integrals, completely different ideas from double integrals.
+
+A vector field is of the form
+\[ \vct{F} = M\vct{i}+N\vct{j} \]
+where $M$ and $N$ are functions of $x,y$. So at every point in the plane $(x,y)$, we have a vector $\vct{F}$ that depends on $(x,y)$. Examples of this in reality would be velocity fields in a fluid, or force fields (e.g. of a graviational attraction). We are going to try to study these vector fields mathematically.
+
+\bex
+The field $x\vct{i}+y\vct{j}$ points radially outwards from the origin with magnitude increasing with increasing distance from the origin. The field $-y\vct{i}+x\vct{j}$ is a uniformly rotating (counter-clockwise) velocity field with unit angular velocity.
+\eex
+
+One thing we might want to do with a vector field (motivated by the situation where we have a force field) is to compute the ``work'' done by a vector field, called a line integral. Physically, $W = \vct{F}\cdot\Delta \vct{r}$. If the position of the particle is changing in a complicated way and the force varies with position, then we have to cut the trajectory in little pieces and calculate the work at each point. We then take the limit as we cut smaller and smaller pieces and sum the work: so it is an integral. So, along some trajectory $C$, the work adds up up to an integral 
+\[ W = \int_C \vct{F}\cdot\, d\vct{r}. \]
+One way to decode this is to formulate it as a limit:
+\[ \lim_{\Delta \vct{r}_i \to 0} \sum_i \vct{F} \cdot \Delta \vct{r}_i. \]
+But this is not how we compute it. We can instead cut the trajectory into small time intervals, and then the change in position is the velocity vector multiplied by the change in the time: so the limit becomes 
+\[ \lim_{\Delta t_i \to 0} \sum_i \vct{F} \cdot \left( \frac{\Delta \vct{r}_i}{\Delta t_i}\Delta t_i\right). \]
+Then the integral can be formulated as a normal integral:
+\[ W = \int_{t_1}^{t_2} \vct{F} \cdot \drv{\vct{r}}{t}\,dt. \]
+
+\bex
+Say we want to find the work of the force
+\[ \vct{F} = -y\vct{i}+x\vct{j} \]
+and the particle is moving along the parametric curve
+\[ x = t,\ y = t^2, \]
+for $0 \le t \le 1$. So our curve $C$ is a parabola, and our particle is moving in a ``rotating field''. Then
+\[ \int_C \vct{F} \cdot d\vct{r} = \int_0^1 \vct{F} \cdot \drv{\vct{r}}{t}\, dt =\ ?\]
+Then we can say that $\vct{F} = <-y,-x>=<-t^2,t>$ and $d\vct{r}/dt=<dx/dt,dy/dt>=<1,2t>$. So the integral is
+\[ W = \int_0^1 t^2\,dt = \frac 13. \]
+\eex
+
+But what can we do directly with this thing $d\vct{r}$? Say our force is given by $\vct{F} = <M,N>$. The claim is that the differential ``vector'' is given by $d\vct{r} = <dx,dy>$. This tell us that 
+\[ \vct{F}\cdot d\vct{r} = M\,dx + N\,dy. \]
+We can then rewrite the line integral as 
+\[ \int_C \vct{F}\cdot d\vct{r} = \int_C M\,dx + N\,dy. \]
+But how do we compute this type of integral? The catch is that we have to express everything in terms of one variable, the parameter of $C$, and then formulate the integral as a normal single-variable integral. 
+
+\bex
+The same example done above, with new notation. 
+\[ \int_C \vct{F}\cdot d\vct{r} = \int_C -y\,dx + x\,dy = \textrm{something in terms of only } t. \]
+We know that $x=y,y=t^2$; then $dx = dt,dy=2t\,dt$. Then the integral becomes
+\[ \int_C -t^2\,dt + t\,2t\,dt = \int_0^1 t^2\,dt = \frac 13, \]
+the same as above. We just used a new language, but did basically the same procedure.
+\eex 
+
+And the above example illustrates a general method do calculate line integrals. We parameterise the curve $C$ in any way we want and use this parameter to turn the integral into a normal single variable integral. 
+
+\brm
+It follows, then, that the line integral depends on the trajectory but not on the parameterisation.
+\erm
+
+Let's talk a bit more about the geometry. We can sometimes save a lot of work by thinking about the integral geometrically. First, what is this vector $d\vct{r}$. Well $\Delta \vct{r}$ is a vector tangent to the curve (in the same direction as the unit vector $\vct{T}$) and with length the same as the the length along the arc, $\Delta s$. This gves us that 
+\[ d\vct{r} = <dx,dy> = \vct{T}\,ds. \]
+So the line integral can be thought of geometrically as 
+\[ \int_C \vct{F}\cdot d\vct{r} = \int_C \vct{F} \cdot \vct{T}\,ds. \]
+
+\bex
+Say we have the a circular trajectory of radius $a$, centred at the origin and counter-clockwise. Let the vector field be 
+\[ \vct{F} = x\vct{i}+y\vct{j}. \]
+Since the force is always perpendicular to the motion (the motion is tangent to the radius, and the force is in the radial direction), the work should be 0.
+
+Now take the same curve $C$, but a new field
+\[ \vct{F} = -y\vct{i}+x\vct{j}. \]
+Now the force moves exactly along the tangent to the motion. This means that 
+\[ \vct{F}\cdot\vct{T} = |\vct{F}| = a. \]
+We can integrate then quite quickly
+\[ \int_C \vct{F} \cdot \vct{T}\,ds = \int_C a \,ds = a\int_C ds = 2\pi a^2. \]
+
+This geometry saves us quite a bit of trigonometry in these two examples. 
+\eex

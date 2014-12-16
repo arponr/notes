@@ -1,0 +1,47 @@
+\section{Complex matrices}
+
+So we've seen that even real matrices can have complex eigenvalues. So it's probably important to consider complex matrices and vectors as well. 
+
+Firstly, given an $n$-component complex vector $\vz$, what is a notion for its length in $\CC^n$. Well $\T\vz\vz$ is no good with complex entries, because we expect the length squared to be non-negative and real, but the value of $\T\vz\vz$ might be complex. What is correct (as we saw briefly in the previous section) is to take $\T{\bar\vz}\vz$ (that's the complex conjugate of $\vz$). Because if the entries are $z_k = a_k+b_ki$,
+\[ \T{\bar\vz}\vz = \sum_{i=1}^n\bar{z_k}z_k = \sum_{i=1}^n(a_k-b_ki)(a_k+b_ki) = \sum_{i=1}^n a_k^2 + b_k^2 = \sum_{i=1}^n|z_k|^2, \]
+which is what we want, the sum of the squared lengths (which are non-negative reals) of the components. Since this is an important concept, we notate the transposed complex conjugate of $\vz$ as 
+\[ \T{\bar\vz}\vz = \Hm\vz, \]
+and it's called the \textbf{Hermitian}.
+
+And this idea extends to our general inner product. So the inner product of complex vectors $\vx$ and $\vy$ is 
+\[ \Hm\vy\vz. \]
+
+A similar change must be applied to matrices. With real matrices, we called $\mA$ symmetric if $\T\mA = \mA$. But this is no good if $\mA$ is complex (again we saw this briefly last section). With complex numbers, symmetry means
+\[ \T{\bar\mA} = \Hm\mA = \mA. \]
+and these matrices are also called \textbf{Hermitian matrices}. Of course this implies that the diagonal entries are real. Just like real symmetric matrices, Hermitian complex matrices have real eigenvalues and orthogonal eigenvectors (orthogonal still meaning that the inner product of any two different eigenvectors being zero, but with the new definition of the inner product, so if $\mQ$ is the matrix of the eigenvectors, then
+\[ \Hm\mQ\mQ = \mI.) \]. 
+We sometimes call these orthogonal things \textbf{unitary} when we're complexified.
+
+\subsection{Fast fourier transform}
+
+The most important application of complex matrices is the use of the Fourier matrix, $\mF_n$, in the Fast Fourier transform (FFT). This involves a fast multiplication of matrices that reduces the usual $n^2$ calculations that have to be made to $n \log_2 n$ calculations for the Fourier matrix. 
+
+The $n\by n$ Fourier matrix is given by
+\[ \mF_n = \mat{1&1&1&\cdots&1\\1&w&w^2&\cdots&w^{n-1}\\1&w^2&w^4&\cdots&w^{2(n-1)}\\\vdots&\vdots&\vdots&\cdots&\vdots\\1&w^{n-1}&w^{2(n-1)}&\cdots&w^{(n-1)^2}}. \]
+So if $0 \le i,j < n$, then $(\mF_n)_{ij} = w^{ij}$. (Let's count from 0 to $n-1$, instead of $1$ to $n$ for now, because it's convenient.) And $w$ is one of the $n$-th roots of unity, namely,
+\[ w = e^{i\frac{2\pi}n}. \]
+
+OK, now let's consider $n=4$. So 
+\[ w = e^{i\pi / 2} = i. \]
+And of course $w^2 = -1, w^3 = -i$ and $w^4 = 1$. So then
+\[ \mF_4 = \mat{1&1&1&1\\1&i&-1&-i\\1&-1&1&-1\\1&-i&-1&i}. \]
+Why is this matrix so remarkable? Well it's the matrix that comes into play when we do a ``four-point Fourier transform'', on a four-component vector. We either multiply by the matrix, for the transform, or by the inverse matrix, for the inverse transform.
+
+One neat fact is that the Fourier matrix has orthogonal columns. It's easy to check all the pairs of columns have inner product zero (taking care to take the complex conjugate when we need to). The columns are not orthonormal, but we can fix this by just dividing by 2, the length of all these column vectors. So then finding the inverse of the matrix is easy, because we know
+\[ \Hm{\mF_4}\mF_4 = \mI, \]
+so the Hermitian of the Fourier matrix is its inverse. 
+
+So the inverse is easy because the matrix is orthogonal. But what property leads to the FFT? The idea is that $\mF_n$ has a connection with $\mF_{n/2}$. $\mF_n$ is $n\by n$ and its $w$ is one sixty-fourth away around the unit circle (in the complex plane, that is); $\mF_{n/2}$ is $n/2 \by n/2$, and its $w$ is twice as far, one thirty-second around the unit circle. So we can immediately see the connection with the two $w$ values:
+\[ w_n^2 = w_{n/2}. \]
+So we see some hope for a connection.
+
+Let's just give the connection now:
+\[ \mF_n = \mat{\mI&\mD\\\mI&-\mD}\mat{\mF_{n/2}&0\\0&\mF_{n/2}}\mP. \]
+where $\mD$ is a diagonal matrix with $w^k$ in the $k$-th row (starting numbering at 0 again) and $\mP$ is a permutation matrix that first takes the even rows and then the odd rows. Since there are so many zeros, we've turned $n^2$ multiplications into $2(n/2)^2 + n/2$ multiplications, the first term coming from the two half-size fourier transforms, and the second from the diagonal matrix multiplication.
+
+And then of course we can break up teh two $n/2$ terms into four $n/4$ terms, and so on . . . recursively. So then in our number of operations, the Fourier matrices in the middle disappear and we just have the fix-up diagonal computations left, which is $\frac 12 n \log_2 n$.

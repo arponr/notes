@@ -1,0 +1,33 @@
+
+\bex
+Say we have a graph of four nodes, numbered 1,2,3 and 4, and we have directed edges connecting 1 to 2, 2 to 3, 1 to 3, 1 to 4, and 3 to 4 (and number these edges from 1 through 5 in that same order). 
+
+We can represent this as a matrix with $n=4$ columns (one for each node) and $m=5$ rows (one for each edge):
+\[ \mA = \mat{-1&1&0&0\\0&-1&1&0\\-1&0&1&0\\-1&0&0&1\\0&0&-1&1} .\]
+which we call the \textbf{incidence matrix}. It puts a -1 at the node it leaves and a 1 at the node it ends at. One thing we can notice is that the first three edges form a ``loop'', which can be seen in the matrix in the fact that the first three row vectors are not independent (the sum of the first two gives the third). 
+
+Given this incidence matrix, we ask the normal questions we always ask about matrices. Firstly, what's its nullspace? We can just solve explcitly $\mA\vx = 0$:
+\[ \mat{-1&1&0&0\\0&-1&1&0\\-1&0&1&0\\-1&0&0&1\\0&0&-1&1}\mat{x_1\\x_2\\x_3\\x_4} = \mat{x_2-x_1\\x_3-x_2\\x_3-x_1\\x_4-x_1\\x_4-x_3} = \mat{0\\0\\0\\0\\0}. \]
+So this term $\mA\vx$ expressed the difference in some value along each of the edges. It helps to think of $\vx$ as \textbf{potentials} at the nodes, so the vector $\mA\vx$ gives the potential differences along each edge. Then the nullspace gives us when all the potential differences are 0. In fact, in this example, we can see that the potentials must be the same for each node in this graph, so the nullspace is given by vectors of the form
+\[ \vx = c\mat{1\\1\\1\\1}. \]
+So a basis is just the vector without the constant, and the dimension is 1. 
+\brm
+This implies that potentials can only be determined up to a constant, and the potential differences are really all that matters in the behaviour of the graph (e.g. the current). So often times we fix the potential somewhere, for example ground one node (setting the potential to 0), and thus we reduce the matrix by one column. And after we get rid of one potential the three columns should be independent. And we can see this by noticing the rank of the matrix in this example is three ($\Dim N(\mA) = n - \Rank \mA$). 
+\erm
+
+Now let's talk about the left nullspace of the matrix, solving the equation $\T\mA\vy = 0$:
+\[ \mat{-1&0&-1&-1&0\\1&-1&0&0&0\\0&1&1&0&-1\\0&0&0&1&1}\mat{y_1\\y_2\\y_3\\y_4\\y_5} = \mat{0\\0\\0\\0} \]
+We know that $\Dim N(\T\mA) = m - \Rank \mA = 2$ in this example.
+
+Before we compute a basis for it (and thus completely describe the space), what it the significant of this equation? Let's say that there is a current going across each edge, caused by the potential difference. Then the equation $\T\mA\vy = 0$ is actually the statement of Kirchoff's current law. This states that the net flow out of a node is 0 (conservation of charge), and that's exactly what our equation is tells us. Namely, the vectors in the left nullspace of $\mA$ give the possible currents on a graph. 
+
+Now to compute a basis for the left nullspace, we need to find two sets of currents that conserve charge, and we can do this by just looking at the graph, and ensuring that net flow is zero at each node as we go along assigning currents. If we do this, we get two possible vectors to form our basis: $\rvec{1,1,-1,0,0}$ and $\rvec{0,0,1,-1,1}$ (each one sends current around one loop in the graph).
+
+From this we can get a pretty cool formula. We have now see that the dimension of the left nullspace can be given by the number of loops, because the basis for it is given by all the loops in the graph. So the dimension formula gives that
+\[ \Dim N(\T\mA) = m - \Rank \mA = 2 \Rightarrow v - e + l = 1, \]
+where $v$ is the number of nodes, $e$ the number of edges and $l$ the number of loops (this follows from $m = e$ and $\Rank \mA = v - 1$). And this is a very cool fact from topology, proved by linear algebra. 
+
+Now let's talk about the row space of $\mA$, or $C(\T\mA)$. We know that
+\[ \Dim C(\T\mA) = \Rank \mA = 3. \]
+The basis for the row space can be given the pivot columns of the $\T\mA$ (which are the pivot rows of $\mA$), which are the first, second and fourth columns in the transpose. If we look at the corresponding edges in the graph, this forms a subgraph that contains all four nodes, but no loops---called a tree. (This is because the basis must have independent vectors, and dependencies come from loops in a graph.)
+\eex

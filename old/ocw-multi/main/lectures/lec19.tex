@@ -1,0 +1,69 @@
+\subsection{Spherical coordinates}
+
+We've seen how to do triple integrals in rectangular and cylindrical coordinates. Now we'll look at spherical coordinates, which you'll see are a lot of fun. 
+
+The idea is that we represent a point in space using the distance to the origin and two angles (so a space analogue of polar). So if we have a point $(x,y,z)$, we represent it by $\rho \in [0,\infty]$, the distance to the origin, the angle $\phi \in [0,\pi]$ downwards from the positive $z$-axis, and finally the angle $\theta \in [0,2\pi]$ counterclockwise from the $x$-axis. 
+
+These are called spherical coordinates because when we fix $\rho = a$, we get a sphere. On this sphere, $\phi$ is like latitude (but starting at the north pole), and $\theta$ is like longitude (starting at the positive $x$-axis). Or we can think of spherical coordinates as the following: fix a value of $\theta$ in cylindrical coordinates, so that one obtains an $rz$-plane. Then changing from cylindrical to spherical coordinates is equivalent from changing from rectangular to polar coordinates in two dimensions (except $\phi$ is measured from the positive vertical axis instead of the horizontal). 
+
+And this relationship is the key to changing between spherical and cylindrical coordinates, and then to rectangular coordinates afterwards if one wants. It is clear that 
+\[ z = \rho \cos \phi,\ \ r = \rho \sin \phi, \]
+and then it follows that
+\[ x = r\cos \theta = \rho \sin\phi \cos \theta,\ \ y \ r \sin\theta = \rho \sin \phi \sin \theta. \]
+Additionally we have that 
+\[ \rho = \sqrt{r^2+z^2}=\sqrt{x^2+y^2+z^2}. \]
+
+Of course we'll use spherical coordinates when we have a lot of symmetry and things are centred around the $z$-axis. 
+
+In spherical coordinates, we have the following special-case-formulae that should be covered:
+\bit
+\item $\rho=a$: a sphere of radius $a$ centred at the origin
+\item $\phi=a$: a cone whose ``sides'' form an angle $a$ with the $z$ axis. (except for $a=\pi/2$, in which case the formula gives the $xy$-plane).
+\eit
+
+With this new coordinate system, we can do triple integrals. But what is $dV$ in spherical coordinates? It will be of the form, of course,
+\[ dV = ??? d\rho\, d\phi\, d\theta. \]
+This boils down to asking: what is the volume of an infitessimaly small section of the space between two concentric spheres (the space between two concentric spheres comes from $d\rho$, and then we multiply this by the surface area of a small section on the sphere given by $d\theta$ and $d\phi$). 
+
+To see this we first look at a sphere of radius $a$. The limit of a section on the surface of sphere as the section becomes smaller and smaller is a rectangle, so we just need to figure out the sides of this rectangle. The top and bottom are sections of a horizontal circle on the surface of sphere. The radius of this circle must be $r$ because $r$ is simply the distance from the $z$-axis, and we know that $r = a \sin \phi$. It follows that the length of of the side of the rectangle is $a \sin \phi \Delta \theta$. Now what about the vertical sides? These sides are pieces of circles of radius $a$, so their length is going to be $a \Delta \phi$. Thus, for a small section of a sphere, the surface area is given by
+\[ \Delta s = a^2 \sin \phi \Delta \phi \Delta \theta. \]
+This means that if we want to integrate just on the surface of the sphere, we would use $\theta$ and $\phi$ as our coordinates, and then use
+\[ dS a^2 \sin \phi \,d\phi \,d\theta. \]
+But now we want to go back into the third dimension, and add depth to this. Namely, we can get the volume element by multiplying this surface area element by our thickness $d\rho$ (this follows from $\Delta V = \Delta \rho \Delta s$). So then we finally get
+\[ dV = \rho^2 \sin \phi \,d\rho\,d\phi\,d\theta, \]
+noticing that the radius $a$ is exactly given by $\rho$.
+
+Now let's see how this works.
+\bex
+Let's try to find the volume of a portion of the unit sphere that lies above the horizontal plane $z = 1/\sqrt{2}$, using spherical coordinates. We have to figure out how to set up our triple integral in spherical coordinates:
+\[ \int \int \int \rho^2 \sin \phi \,d\rho\,d\phi\,d\theta. \]
+The first set of bounds is given by fixing $\theta$ and $\phi$. We know that we exit the sphere when $\rho = 1$, and we enter when we enter the plane $z = 1\sqrt2$. It follows that $z = \rho \cos \phi = 1/\sqrt2$, and so we enter the plane when 
+\[ \rho = \frac 1{\sqrt2 \cos \phi}. \]
+Then the bounds become 
+\[ \int \int \int_{\frac 1{\sqrt2 \cos \phi}}^1 \rho^2 \sin \phi \,d\rho\,d\phi\,d\theta. \]
+The bounds for $\phi$: it obviously begins at the north pole, $\phi=0$, and it ends at $\pi/4$, since we know that at the intersection of the plane and the sphere, we have $\rho = 1$ and $\rho \cos \phi = 1\sqrt2$. So then the integral becomes 
+\[ \int_0^{2\pi} \int_0^{\pi/4} \int_{\frac 1{\sqrt2} \sec \phi}^1 \rho^2 \sin \phi \,d\rho\,d\phi\,d\theta. \]
+This evaluates to
+\[ \frac{2\pi}3 - \frac{5\pi}{6\sqrt2}. \]
+\eex
+
+\subsubsection{Applications}
+Of course we have the same applications of normal triple integrals (centre of mass, moments of intertia, average value...), only spherical coordinates are especially useful when things are centred around the $z$-axis and things.
+
+There is also a new application however. Physics tells us that two masses attract each other with a gravitational force proportional to mass and inversely proportional to the square distance between them. So if we have a given solid with a certain mass distriution and we want to know how it attracts something nearby, we either find the equivalent point mass, or in the case that a shape of the gravitating object complicated, we just have to sum the effects over all the parts of the object.  
+
+So say that we have a point of mass $m$ located at the origin gravitating towards an object in space. Then a piece of the object at point $(x,y,z)$ with mass $\Delta M$ will result in a gravitational force on the point mass of magnitude:
+\[ |\vF| = \frac{G\Delta m m}{\rho^2}, \]
+$\rho$ conveniently representing the distance between the two points and $G$ being a fundamnetal constant. The direction of that force will be given by unit vector
+\[ \mathrm{dir}\,\vF = \frac 1 \rho <x,y,z>. \]
+So then we have the actual force given by
+\[ \frac{G\Delta m m}{\rho^3} <x,y,z>. \]
+So then for the entire solid, we have to sum all of the forces to get the total force vector. This is actually three calculations, for each of the components of the force. Namely, we integrate (noticing that $\Delta M = \delta \Delta V$) to get
+\[ \vF \iiint \frac{Gm}{\rho^3} <x,y,z> \delta dV, \]
+and we do this component by component. 
+
+The way we set things up is to place the solid so that the $z$-axis is an axis of symmetry. We are assuming here that the object has an axis of symmetry, otherwise we would just have to do this in rectangular coordinates and deal with a denominator of $(x^2+y^2+z^2)^{3/2}$; but with this assumption, we notice that all we have to calculate is the $z$ component of the force, because if $z$ is an acis of symmetry, then $\vF = <0,0,F>$. Then we just have to compute
+\[ Gm = \iiint \frac z{\rho^3} \delta dV. \]
+Using spherical coordinates turns out to be th best choice here, as it becomes
+\[ Gm \iiint \frac {\rho \cos \phi}{\rho^3} \delta \rho^2 \sin \phi \,d\rho\,d\phi\,d\theta = Gm \iiint \cos \phi\, \delta \sin \phi \,d\rho\,d\phi\,d\theta. \]
+This is much, much simpler. And in fact using this formula, one can prove Newton's theorem that the graviatational attraction of a spherical planet with uniform density is equal to that of a point mass with the same total mass at its centre. So if the Earth collapsed into a black hole at its centre of mass, we wouldn't notice it (at least in our weight...).

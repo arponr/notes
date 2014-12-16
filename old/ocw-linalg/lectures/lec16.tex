@@ -1,0 +1,24 @@
+
+So we're connecting a picture in which we minimise the error in the points to a picture in which we minimise the error between a vector and the column space of a matrix. 
+
+Now let's finally compute the answer, i.e. solve $\T\mA\mA\hat{\vx}=\T\mA\vb$:
+\[ \mat{3&6\\6&14}\mat{C\\D} = \mat{5\\11}. \]
+So this tells us that
+\[ 3C + 6D = 5, \]
+\[ 6C + 14D = 11. \]
+(These are called the \textbf{normal equations}.) We can solve these using elimination. And subtracting two of the first equation from the second equation we get that $2D = 1$. So it follows that $C = 2/3, D = 1/2$. And now we have the best fit line:
+\[ \frac 23 + \frac 12t. \]
+
+\brm
+We could also minimise this error using calculus, finding a critical point with the partials with respect to $C$ and $D$. And this is actually in my Multivariable Calculus notes! Pretty chill.
+\erm
+
+Earlier we said that if $\mA$ had independent columns, then $\T\mA\mA$ would be invertible. And that's why we can solve for one particular $\hat{\vx}$. But why is this true?
+
+Well, suppose $\T\mA\mA\vx = 0$. To prove the above statement, we need to show that this this hypothesis implies that $\vx = 0$. One idea that gets us there is taking the dot product of each side with $\vx$:
+\[ \T\vx \T\mA\mA\vx = 0 \Rightarrow \T{(\mA\vx)}(\mA\vx) = 0 \Rightarrow \mA\vx = 0. \]
+(The last step is because $\T\vy\vy$ for some vector $\vy$ is its length squared; so if the length squared is zero, it must be the zero vector.) Now we know that $\mA$ has independent columns. So that implies that $\vx = 0$ (because the $\Dim N(\mA) = n - \Rank \mA = 0$, because $\mA$ has full column rank). So this completes the proof, and shows us why we must get a solution to our problem when $\mA$ has independent columns.
+
+\section{Orthogonal bases and matrices}
+
+One case where things work out especially nicely is when our columns are perpendicular unit vectors, which must be independent. We call these vectors \textbf{orthonormal vectors}. 

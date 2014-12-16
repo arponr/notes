@@ -1,0 +1,31 @@
+\section{Lagrange multipliers}
+
+We are going to look again min/max problems, but when the variables considered are not independent. The problems is to minimise to maximise a function, $f(x,y,z)$, where $x,y,z$ are not independent (i.e. there exists a function $g(x,y,z)=c$). If this condition of dependence is too complicated (and we cannot solve for one variable and subsitute), then we need a new method to do optimisation problems.
+
+We cannot use the usual method of finding critical points because, these critical points will most likely not satisfy the constraint of the variables. 
+
+\bex
+Find the point closest to the origin on the hyperbola $xy=3$. Or, minimise the function
+\[ f(x,y)=x^2+y^2 \]
+subject to the constraint that $xy=3$ (i.e. $g(x,y)=xy$, as stated above). We can think about the circle (formed by the contour plot of the $f$) with the smallest radius that still intersects $g$. This minimum radius circle will in fact be tangent to the hyperbola $g=3$.
+
+So the problem becomes finding where the level curves of $f$ and $g$ are tangent to each other. And this would imply that the normal vectors to each level curve (meaning, the gradients), must be parallel (but not necessarily of the same magnitude). I.e., we must find where 
+\[ \nabla f = \lambda \nabla g. \]
+So, in two variables, we get the system of equations
+\[ \begin{cases} f_x = \lambda g_x \\ f_y = \lambda g_y \end{cases} \]
+along with the constraint that $g = c$. 
+
+In this case, we have
+\[ \begin{cases} 2x = \lambda y \\ 2y = \lambda x \\ xy = 3 \end{cases}. \]
+There is no general way to solving these equations, but one can see here that the solution is at the points $(\sqrt{3},\sqrt{3})$ and $(-\sqrt{3}, -\sqrt{3})$.
+\eex
+
+Now why is this method valid? Well at an unconstrained max/min, the partial derivatives are zero (the derivatives are zero in the $x$ and $y$ directions). But in a constrained max/min, the the rate of change of $f$ along the level set $g=c$ must be 0. We can say this in terms of directional derivatives: for any $\vct{u}$ tangent to $g=c$, we must have that
+\[ \drv{f}{s}_{|\vct{u}} = 0. \]
+Using the directional derivative formula, we then get that 
+\[ \nabla f \cdot \vct{u} = 0 \]
+or that the gradient is perpendicular to the level set of $g$, and since $\nabla g$ is also perpendicular to the level set of $g$, the two gradients must be parallel. 
+
+\bdb
+The method does not tell whether a solution is a minimum or a maximum! We cannot use a second derivative test, for we don't both (and it won't work) to define a ``second directional derivative''. So we usually use intuition to decide what's going on. For example in this case, the distance has no maximum, so this should be a minimum. Or, we can just compare the various values of $f$ at the solutions of the Lagrange equations, and the lowest will most likely be a minimum. 
+\edb

@@ -1,0 +1,77 @@
+\section{Four fundamental subspaces}
+
+We've talked about two subspaces related to a matrix $\mA$: the column space $C(\mA)$ and the nullspace $N(\mA)$. We can also look at two others:
+\bit
+\item The row space, $C(\T\mA)$: the vector space spanned by the columns of $\T\mA$ (i.e. linear combinations of the rows of $\mA$, but we like working with column vectors)
+\item The nullspace of the transpose, $N(\T\mA)$---often called the left nullspace of $\mA$
+\eit
+
+If $\mA$ is $m \times n$, then $C(\mA) \subset \RR^m$, $N(\mA) \subset \RR^n$, $C(\T\mA) \subset \RR^n$ and $N(\T\mA) \subset \RR^m$. What we want to do is fully understand these vector spaces, namely find their dimensions and bases.
+
+\subsection{Column space}
+As we have seen earlier, 
+\[ \Dim C(\mA) = \Rank \mA. \]
+We can convince ourselves of this by noticing that the basis of the column space is given exactly by the pivot columns in $\mA$ after elimination. And of course there are, by our definition, $\Rank \mA$ pivot columns.
+
+\subsection{Row space}
+The dimension of the row space is the same as that of the column space:
+\[ \Dim C(\T\mA) = \Rank \mA! \]
+
+\brm
+In fact this follows from
+\[ \Rank \T\mA = \Rank \mA, \]
+for any matrix $\mA$. This is because the rank of the transpose is given by the number of vectors in the basis for $C(\T\mA)$, which is the number of pivot columns in the reduced form of $\T\mA$, which is the same as the number of pivot rows in the reduced form of $\mA$. But the number of pivot rows is the same as the number of pivot columns (because both are just the number of pivot entries) in $\mA$. And this is defined to be $\Rank \mA$.
+\erm
+
+To find a basis, we could do elimination \textit{again} on $\T\mA$ to find its pivot columns. But notice that the rows of $\mA$ must be linear combinations of the pivot rows in the reduced form of $\mA$ (because elimination just takes linear combinations of the rows) and so the pivot rows of $\mA$ must span the rowspace. Then, since the number of pivot rows is the same as the number of pivot columns, there are $\Rank \mA$ pivot rows. Thus, we have a basis, because $\Rank \mA$ is what we know to be the dimension for the row space. 
+
+\subsection{Nullspace}
+The dimension of the nullspace we have also seen earlier to be
+\[ \Dim  N(\mA) = n - \Rank \mA, \]
+and the basis can just be the special solutions. 
+
+\subsection{Left nullspace}
+It follows from the remark about the rank of transposes and the dimension of the regular nullspace that
+\[ \Dim  N(\T\mA) = m - \Rank \mA. \]
+
+\brm
+Notice that the sum of the dimensions of the null space and column space for both $\mA$ and $\T\mA$ is equal to its number of columns, which makes sense because one dimension gives the number pivot variables and the other the number of free variables---the sum of which must be the number of columns.
+\erm
+
+(Observe that the left nullspace is composed of vectors $\vy$ such that
+\[ \T\mA \vy = 0. \]
+If we transpose the entire equation, we get that
+\[ \T\vy \mA = \T 0. \]
+And this is why we call it the left nullspace: because the row vector is multiplied on the left of the matrix.)
+
+So how do we get a basis for the left nullspace? Let's do an example.
+\bex
+Take the matrix  
+\[ \mA = \mat{1&2&3&1\\1&1&2&1\\1&2&3&1}. \]
+In reduced form (something we would compute if we wanted to find the bases for the column, row or null spaces), we would have the matrix
+\[ \mR = \mat{1&0&1&1\\0&1&1&0\\0&0&0&0}. \]
+So since this reduced matrix gives us all the other bases, how does it give us the basis for the left nullspace. It has to right? Well it does, but it isn't as immediate.
+
+Remember the Gauss-Jordan method? We used it to find the inverse of invertible quare matrices. Now let's do it on our matrices, so we do:
+\[ \mE \mat{\mA_{m \times n}\ \mI_{m \times m}} \rightarrow \mat{\mR_{m \times n}\ \mE_{m \times m}}. \]
+And we just end up with the total elimination matrix on the right side, because it's just multiplied by the identity. (In the invertible square case, then $\mR = \mI$. This is a sort of generalisation of the algorithm.) 
+
+So we do the same elimination steps that we did to $\mA$ to get to $\mR$ on the identity to get $\mE$:
+\[ \mI = \mat{1&0&0\\0&1&0\\0&0&1} \rightarrow \mat{-1&2&0\\1&-1&0\\-1&0&1} = \mE. \]
+And we can check that this is in fact $\mE$ by checking $\mE\mA = \mR$. Anyways, the claim is that the last $m-\Rank\mA$ rows of $\mE$ to get the basis of left nullspace. And that's because these rows map the rows of $\mA$ to zero rows in $\mR$.
+\eex
+
+\section{Other vector spaces}
+
+\subsection{Matrix spaces}
+
+Now we've looked at a lot of vector spaces that lived inside of $\RR^n$, but let's look at a new kind of vector space: say, all $n \times n$ matrices ($\RR^{3\times 3}$?), and call it $M$! So the matrices are the ``vectors'' in this vector space (we're allowed to do this because all they have to satisfy is that linear combinations of them keep them within the space). And in this ``matrix space'' we don't care about matrix multiplication, just about their linear combinations!
+
+What subspaces can we find in $M$?
+\bit
+\item Upper triangular matrices
+\item Symmetric matrices
+\item (The intersection of the above two:) diagonal matrices
+\eit
+And we can compute the dimensions and bases of these subspaces too. 
+

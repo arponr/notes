@@ -1,0 +1,52 @@
+\contentsline {section}{\numberline {1}The geometry of linear equations}{3}
+\contentsline {section}{\numberline {2}Elimination}{4}
+\contentsline {section}{\numberline {3}Multiplication}{6}
+\contentsline {section}{\numberline {4}Inverses}{7}
+\contentsline {subsection}{\numberline {4.1}Transpose}{8}
+\contentsline {section}{\numberline {5}Factorisation into $\boldsymbol {\mathbf {A}}=\boldsymbol {\mathbf {L}}\boldsymbol {\mathbf {U}}$}{9}
+\contentsline {subsection}{\numberline {5.1}Permutations}{10}
+\contentsline {subsection}{\numberline {5.2}Transposes and symmetry}{10}
+\contentsline {section}{\numberline {6}Vector spaces}{11}
+\contentsline {subsection}{\numberline {6.1}Column space}{12}
+\contentsline {subsection}{\numberline {6.2}Nullspace}{12}
+\contentsline {section}{\numberline {7}Solving $\boldsymbol {\mathbf {A}}\boldsymbol {\mathbf {x}}= \boldsymbol {\mathbf {b}}$ (row reduced form)}{14}
+\contentsline {subsection}{\numberline {7.1}In more generality}{16}
+\contentsline {section}{\numberline {8}Independence, basis and dimension}{17}
+\contentsline {section}{\numberline {9}Four fundamental subspaces}{18}
+\contentsline {subsection}{\numberline {9.1}Column space}{19}
+\contentsline {subsection}{\numberline {9.2}Row space}{19}
+\contentsline {subsection}{\numberline {9.3}Nullspace}{19}
+\contentsline {subsection}{\numberline {9.4}Left nullspace}{19}
+\contentsline {section}{\numberline {10}Other vector spaces}{20}
+\contentsline {subsection}{\numberline {10.1}Matrix spaces}{20}
+\contentsline {subsection}{\numberline {10.2}Differential equations}{22}
+\contentsline {subsection}{\numberline {10.3}Rank 1 matrices}{22}
+\contentsline {section}{\numberline {11}Graphs and networks}{22}
+\contentsline {section}{\numberline {12}Orthogonal vectors and subspaces}{24}
+\contentsline {section}{\numberline {13}$\boldsymbol {\mathbf {A}}\boldsymbol {\mathbf {x}}= \boldsymbol {\mathbf {b}}$ when no solutions exist}{25}
+\contentsline {subsection}{\numberline {13.1}Projections}{26}
+\contentsline {subsection}{\numberline {13.2}Least squares}{28}
+\contentsline {section}{\numberline {14}Orthogonal bases and matrices}{29}
+\contentsline {subsection}{\numberline {14.1}Gram-Schmidt}{30}
+\contentsline {section}{\numberline {15}Determinants}{31}
+\contentsline {subsection}{\numberline {15.1}Properties}{31}
+\contentsline {subsection}{\numberline {15.2}Formulae}{33}
+\contentsline {subsubsection}{\numberline {15.2.1}Cofactors}{34}
+\contentsline {subsection}{\numberline {15.3}Inverse formula}{35}
+\contentsline {subsection}{\numberline {15.4}Cramer's rule}{35}
+\contentsline {subsection}{\numberline {15.5}Volume}{36}
+\contentsline {section}{\numberline {16}Eigenvalues and eigenvectors}{37}
+\contentsline {section}{\numberline {17}Diagonalisation and powers of $\boldsymbol {\mathbf {A}}$}{39}
+\contentsline {section}{\numberline {18}Differential equations and exponentials}{42}
+\contentsline {section}{\numberline {19}Applications}{45}
+\contentsline {subsection}{\numberline {19.1}Markov matrices}{45}
+\contentsline {subsection}{\numberline {19.2}Projections and Fourier series}{47}
+\contentsline {section}{\numberline {20}Symmetric matrices and positive definiteness}{48}
+\contentsline {section}{\numberline {21}Complex matrices}{51}
+\contentsline {subsection}{\numberline {21.1}Fast fourier transform}{51}
+\contentsline {section}{\numberline {22}Positive-definite matrices and minima}{53}
+\contentsline {section}{\numberline {23}Similar matrices and jordan form}{55}
+\contentsline {section}{\numberline {24}Singular value decomposition (SVD)}{57}
+\contentsline {section}{\numberline {25}Linear transformations}{60}
+\contentsline {subsection}{\numberline {25.1}Change of basis}{62}
+\contentsline {section}{\numberline {26}Left and right inverses, pseudoinverse}{63}

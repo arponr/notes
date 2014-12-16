@@ -1,0 +1,72 @@
+\section{Vector fields in 3D}
+
+So we've been working with triple integrals and how to set them up in all sorts of coordinate systems, and now we'll move on to looking at vector fields \textit{in space}. We'll look at flux and work again, like we did in the plane, but this time around we'll look at flux first.
+
+Firstly, a vector field is the same in space as it is in the plane: at every point, we have a vector $\vF(x,y,z) = <P(x,y,z),Q(x,y,z),R(x,y,z)>$. Some examples would be
+\bit
+\item force fields (e.g., gravitational attraction of a solid mass at the origin on another mass at the point $(x,y,z)$---this field would be directed towards the origin, and the magnitude would be proportional to the inverse squared distance to the origin, and could be given by the formula
+\[\vF = \frac{-c<x,y,z>}{\rho^3}; \]
+other fields in physics, like electric and magnetic fields, are also examples)
+\item velocity fields (e.g., wind velocity)
+\item gradient fields 
+\eit
+
+So let's look at flux in three dimensions now. Recall the flux of a vector field $\vF$ through a curve $C$ in two dimensions,
+\[ \int_C \vF \cdot \vn\,ds, \]
+which measured how much the vector field was going across the curve. This time we can't really use a line integral for a curve, because in three dimensions we can't ask how much is going across the line in only one direction. So, in three dimensions we need to consider how much the vector field is going across a \textit{surface}, motivating the notion of a \textbf{surface integral}. In a surface integral, we will sum over all the little pieces of the surface. Of course, this means that the integral will be a double integral, since we're working with a flat surface, but since we're working with the three variables of space we will have to find a way to get rid of one variable when integrating (just like we reduced two variables of the plane to one variable in the line integral). 
+
+\bdf
+So we define \textbf{flux in three dimensions} for a vector field $\vF$ across a surface $S$ in space:
+\[ \iint_S \vF \cdot \vn\,dS \]
+where $\vn$ is the unit normal vector to the surface at each point (note that at each point we have two normal vectors to choose from---in opposite directions---and we must make a choice depending on which direction we want to count positively in the flux calculation; this is called orienting the surface) and $dS$ is the surface area element.
+
+We'll sometimes see the notation
+\[ \vdS = \vn\,dS. \]
+This is not only out of laziness, but because this infitessimal vector is often easier to compute than $\vn$ and $dS$ separately (analagous to the way we defined $\vn\,ds = <dy,-dx>$ directly in two dimensions).
+\edf
+
+\subsection{Specific formulae}
+So how do we compute these things? 
+\bex
+Let's look at the flux of $\vF = <x,y,z>$ through $S$, the sphere of radius $a$ centred at the origin. Notice that the field points radially away from the origin, and is thus parallel to the normal vector (pointing outwards) to the sphere. Namely, the (unit) normal vector is given by
+\[ \vn = \frac 1a <x,y,z>. \]
+Then we can see that $\vF \cdot \vn = |\vF| = a$. So then the flux is
+\[ \iint_S \vF \cdot \vn\,dS = \iint_S a\,dS = a \iint_S dS. \]
+And eventually we'll have to learn how to tackle that beast (the double integral) but we can just notice that it represents the surface area of the sphere of radius $a$, $4\pi a^2$, giving us a final answer of 
+\[ 4\pi a^3. \]
+\eex
+But that was too easy, huh?
+\bex
+Let's look at the same surface $S$, but a different vector field $vG = z\vk$. In this case we can't resort to simple geometry. We'll actually have to compute the integral directly. We still have the same normal vector, so we get that
+\[ \vG \cdot \vn = <0,0,z> \cdot \frac{<x,y,z>}a = \frac{z^2}a. \]
+So the flux is given by
+\[ \iint_S \vG \cdot \vn \, dS = \iint_S \frac{z^2}a \, dS. \]
+To compute this integral, we have to figure out $dS$ in our favourite set of coordinates, and in fact we'll use $\theta$ and $\phi$. And actually we've already seen earlier that
+\[ dS = a^2 \sin \phi d\phi\,d\theta. \]
+But instead of thinking of this as ``using spherical coordinates'' we should think of this as parameterising our surface in terms of two variables, namely $\phi$ and $\theta$. And for this reason we have no $\rho$ in this integral. Next we translate
+$z = a \cos \phi$, turning our integral into
+\[ \int_0^{2\pi} \int_0^\pi \frac{a^2 \cos^2 \phi}a a^2 \sin \phi d\phi\,d\theta. \]
+And this integral evaluates to $\frac 43 \pi a^3$. This happens to be the volume of the sphere, but we won't see why until later. 
+\eex
+
+As a conclusion, sometimes we can use geometry, but mostly we need to set up the double integarl over the surface. And now we'll learn how to the latter in general. Let's do this with some examples.
+\bex
+Say our surface $S$ is a (piece of a) horizontal plane $z = a$. Then the normal vector will be $\pm \vk$. And $dS$ will just be $dx\,dy$. So then we'll have to integrate the $z$-component of the vector field (we can keep $x$ and $y$ terms since they are our two variables of integration, but we get rid of $z$ terms by noticing $z=a$).
+\eex
+\bex
+Say $S$ is a (piece of a) sphere of radius $a$. We've already seen this: the normal vector will be $\pm\frac 1a <x,y,z>$ and $dS = a^2 \sin \phi d\phi\,d\theta$. So we paramaterise by $\phi$ and $\theta$. 
+\eex
+\bex
+Say $S$ is a (piece of a) cylinder of radius $a$, centred on the $z$-axis. Well the normal is sticking straight out in the horizontal directions (there is no $z$ component), so it can be written as 
+\[ \vn = \pm \frac 1a <x,y,0>. \]  
+And the surface area element? Well we'll probably want to use the coordinates $\theta$ and $z$. If we look at a small piece of the cylinder corresponding to $\Delta z$ and $\delta \theta$, then the surface area will be given by
+\[ \Delta S = a\Delta \theta \Delta z, \]
+so
+\[ dS = a \,d \theta\,dz. \]
+\eex
+\subsection{More general formulae}
+Now what about more general surfaces? So let our surface $S$ be a function $z = f(x,y)$. Finding $\vn$ and $dS$ separately will be pretty hard, but we can find a formula of $\vdS$. Notice that we probably want to parameterise in $x$ and $y$ because we can rid ourselves of any $z$ terms with the condition $z=f(x,y)$. So the formula we'll use is
+\[ \vn\,dS = \vdS = \pm <-f_x, -f_y, 1>\,dx\,dy. \]
+Then we can set up an integral in $x$ and $y$, and then bound the integrals by looking at the shadow of $S$ in the $xy$-plane. 
+
+

@@ -1,0 +1,47 @@
+\section{Stokes' theorem}
+
+In the plane, curl came up when we talked about Green's theorem: turning line integrals into double integrals. A similar thing can be done in space, using Stokes' theorem.
+
+\btm[Stokes' theorem]
+Let $C$ be a closed curve $C$ in space and $S$ any surface bounded by $C$ such that $\vF$ is defined and differentiable everywhere on $S$. Then
+\[ \oint_C \vF \cdot \dr = \iint_S(\del \times \vF)\cdot n\,dS. \]
+\etm
+
+\bex
+Say we have to compute a line integral on the unit circle in the $xy$-plane. We could compute it directly, by parameterising the curve. Or, we could turn this into a surface integral, by taking the surface integral for any surface bounded by the circle (a half sphere, a pointy thing, or just the plain old disk within the circle). 
+\eex
+
+There's a catch though. We need to figure out how the orientation of $C$ and $S$ can be made compatible for the theorem to work out. The rule is: say we traverse $C$ with $S$ to our left; then $\vn$ will be pointing up. 
+
+\bex
+Let's do a comparison of Stokes' theorem with Greens' theorem. In fact, Green's theorem is just a special case of Stokes' theorem when $C$ is in the $xy$-plane and oriented counter-clockwise. Then take the surface $S$ that is enclosed in the $xy$-plane by $C$. Then for a vector field $\vF = <P,Q,R>$ we have that
+\[ \olint{\vF} = P\,dx + Q\,dy, \]
+(since $z = dz = 0$). Stokes' theorem says this is equivalent to
+\[ \iint_S (\del \times \vF) \cdot \vn \, dS. \]
+In our case, we can see that $\vn = \vk$. So we are integrating the $z$ component of curl, which is $Q_x - P_y$. And $dS$ is just a part of the $xy$-plane, so it just becomes $dx\,dy$. So the double integral becomes
+\[ \iint_S (Q_x - P_y)\,dx\,dy. \]
+And this is exactly the result of Green's theorem (so that must be a special case of Stokes' theorem, when we are in the $xy$-plane).
+\eex
+
+Now why is Stokes' theorem true?
+\bpf[Proof of Stokes' theorem]
+Well we all ready know one case in which the theorem is true: for $C$ and $S$ in the $xy$-plane (Green's theorem was proved). The same can be said about any plane, actually (we can rotate our coordinate system to make any plane the horizontal plane, and reduce to Green's theorem; this uses the fact that work, flux and curl make sense independent of coordinates (this can be justified by the fact that they have geometric interpretations that should not depend on coordinates)). Then we can decompose any surface $S$ into tiny pieces, and in fact the limit of each piece as it becomes smaller and smaller is a flat surface. Then Stokes' theorem works on each flat piece, and we add all of these terms together. Adding all the flux gives the total flux. And adding all the line integrals will sum to the line integral of the boundary, because all the line integrated over in the interior of $S$ will be traversed twice, but in opposite directions, so they are cancelled out. 
+\epf
+
+\bex
+Let's try to find the work of $\vF = z\vi+ x\vk +y\vk$ around the unit circle in the $xy$-plane (counterclockwise). 
+
+If we wanted to do this directly, we'd compute
+\[ \oint_C z\,dx + x\,dy + y\,dz = \int_0^{2\pi} cos^2 t\,dt = \pi. \]
+since $z=dz=0$.
+
+Let's instead try to use Stokes' theorem. The smart choice for $S$ would be the unit disk, but that would be boring, and would just be using Green's theorme really, which we already trust. Instead, let's choose a piece of the parabaloid $z = 1-x^2-y^2$ (normal vector pointing up). Then we have to compute
+\[ \iint_S (\del \times \vF) \cdot \vn \, dS. \]
+Let's first fine the curl:
+\[ \del \times \vF = \dat{\vi&\vj&\vk//\pd{ }x&\pd{ }y&\pd{ }z\\z&x&y} = \vi + \vj + \vk = <1,1,1>. \]
+Now to find $\vn \,dS$, we notice that we have the case $z = f(x,y)$, so we can use the formula
+\[ \vn\,dS = <-f_x,-f_y,1>\,dx\,dy = <2x,2y,1>\,dx\,dy. \]
+So the flux is
+\[ \iint_S <1,1,1>\cdot<2x,2y,1>\,dx\,dy = \iint_{\mathrm{unit disk}} 2x+2y+1\,dx\,dy. \]
+To evaluate this we could switch to polar, or more cleverly, we notice that since the region of the double integral is symmetric in $x$ and $y$, the negative half of the disk will cancel out the positive half of the disk for the $2x$ and $2y$ terms leaving us with the integral representing the area of the unit disk, which is, again, $\pi$.
+\eex

@@ -1,0 +1,75 @@
+\section{Green's theorem}
+
+We've now defined for a vector field $\vF = <M,N>$, $\curl(\vF) = N_x - M_y$, which measures how far away the field is from being conservative. 
+
+Say we have a closed curve $C$, and we want to find
+\[ \olint{\vF}. \]
+In general, we could either calculate this directly or we can use Green's theorem.
+
+\btm[Green's theorem]
+If $C$ is a closed curve going counter-clockwise, enclosing a region $R$, and I have a vector field $\vF$ defined and differentiable everywhere in $R$, then
+\[ \olint{\vF} = \iint_R \curl{\vF}\,dA. \]
+Or in coordinates
+\[ \oint_C M\,dx + N\,dy = \iint_R (N_x - M_y)\,dA. \]
+\etm
+
+This theorem appears to be quite strange, since the line integral is only dependent on the curve while the double integral depends on the whole region. 
+
+\brm
+The counterclockwise requirement has to do with our convention for the definition of curl (namely the order of the expression). If we have a clockwise curve, we can just negate the integral for the analgaous counter clockwise curve).
+\erm
+
+\bdb
+This is only for closed curves!
+\edb
+
+\bex
+Say we have $C$ is the circle of radius 1 centred at $(2,0)$ (moving counterclockwise). Now say we want to compute
+\[ \oint_C ye^{-x}\,dx + (\frac12x^2-e^{-x})\,dy. \]
+To do this directly, we would have to parameterise this curve (e.g. $x = 2 + \cos \theta,y=\sin\theta$) and then substitute and integrate. But the expressions would be quite complicated and, in fact, doomed. Instead, we use Green's Theorem. So we will compute
+\[ \iint_R (N_x - M_y)\,dA = \iint_R(x + e^{-x}) - e^{-x}\,dA = \iint_R x\,dA. \]
+So this hard line integral turns into an easy double integral. We can observe that that this double integral and be simplified geomtrically to
+\[ \iint_R x \,dA = \mathrm{Area}\,(R) \cdot \bar{x}. \]
+Just by thinking about a circle, the area is $\pi$ and by symmetry, $\bar{x}=2$, so we have a final answer of 
+\[ 2\pi. \]
+\eex
+
+So now that we've seen an example, let's try to convince ourselves that this theorem makes sense. Let's first begin with an easy case where we know an answer to both sides of the equation in the theorem.
+
+\bex
+Take the case where $\curl\vF = 0$, implying that $\vF$ is conservative (or at least that's what we argued earlier). The theorem says that
+\[ \olint{\vF} = \iint_R \curl \vF \,dA = 0. \]
+So this reinforces the idea (and actually is another proof, assuming Green's Theorem to be true) that a vanishing curl in a region means a conservative vector field in the region.
+
+So, a consequence of Green's theorem is: if $\vF$ is defined everywhere in the plane and $\curl \vF = 0$ everywhere, then $\vF$ is conservative. And this sort of explains why it is necessary for our condition of check conservativeness that the vector field be defined everywhere in the region. 
+\eex
+
+So now we'll give a full proof of Green's theorem.
+
+\bpf[Proof of Green's theorem]
+We want to show that
+\[ \oint_C M\,dx + N\,dy = \iint_R (N_x - M_y)\,dA. \]
+
+We actually only have to prove something easier (namely the case where $N=0$):
+\[ \oint_C M\,dx = \iint_R -M_y\,dA. \]
+If we can do this, we can prove the same with the case that $M=0$, and then adding these two special cases proves the general case. 
+
+We have a problem though, in that the curve might be quite complicated, and so the double integral will be hard to set up. So we observe another simplification: we can decompose $R$ into simpler regions! So if we can prove the statement for all the subregions that comprise $C$ (or $R$) then adding them together proves the statement for the entire region. (Although we go over boundaries between the subregions twice, we do so in opposite directions, so they cancel out in the line integrals). So if we cut up $R$ into vertically simple regions (a region is vertically simple if for $a < x < b$, $f_1(x) < y < f_2(x)$; i.e. there is a well-defined upper and lower boundary to each subregion.) 
+
+So now we have simplified to proving
+\[ \oint_C M\,dx = \iint_R -M_y \,dA \]
+where $R$ is vertically simple and $C$ is the boundary of $R$ going counterclockwise. So then we can ``compute'' each side of the equation. The line integral is given by four pieces: $C_1$ being the side along $y=f_1(x)$; $C_2$ given by the vertical line on the right of $R$; $C_3$ being the side along $y=f_2(x)$; and $C_4$ given by the vertical line on the left of $R$. We have then, (noticing $dx=0$ on the vertical lines)
+\bea
+\oint_C M\,dx &=& \oint_{C_1} M(x,y)\,dx = \int_a^b M(x,f_1(x))\,dx \\
+              &+& \oint_{C_2} M(x,y)\,dx = 0 \\
+              &+& \oint_{C_3} M(x,y)\,dx = \int_b^a M(x,f_2(x))\,dx \\
+              &+& \oint_{C_4} M(x,y)\,dx = 0 \\
+              &=& \int_a^b M(x,f_1(x)) - M(x,f_2(x))\,dx 
+\eea
+So that's the left-hand side.
+
+Can we show that the double integral is equal to this simplified expression? We have that 
+\[ \iint_R -M_y\,dA = \int_a^b \int_{f_1(x)}^{f_2(x)} M_y \,dy\,dx = \int_a^b M(x,f_1(x)) - M(x,f_2(x))\,dx \]
+completing the proof.
+\epf
+

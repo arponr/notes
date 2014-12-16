@@ -1,0 +1,67 @@
+Now let's prove the correctness of the above formula. We have a surface $S$ given by the graph of $z=f(x,y)$, and let $R$ be the region in the $xy$-plane given by the shadow of $S$ (or the domain of $z$, if you will). Well we need to figure out for a small piece of our surface, given by the region in $R$ of size $\Delta x$ by $\Delta y$, what is $\vn \Delta s$. Observe that the corresponding piece on $S$, when $\Delta x,\Delta y\to 0$, looks like a parallelogram in space. So we have to find the area of this parallelogram using the cross product. Moreover, this cross product gives the normal vector as well, which is why we have a formula for $\vn\,dS$ together. 
+
+So in the $xy$-plane, we start at a point $(x,y)$ and take a rectangle in the plane with sides $\Delta x$ and $\Delta y$. We then look at the corresponding parallelogram on $S$, the point $(x,y)$ mapping to the point $(x,y,f(x,y))$. So then we want to find the vectors $\vu,\vv$ that form the sides of the parallelogram. Given these vectors, we'll have
+\[ \pm \vu \times \vv = \vn \Delta s. \]
+So the vector $\vu$ starts at $(x,y,f(x,y))$ and ends at $(x+\Delta x,y,f(x+\Delta x,y))$. We can then say that the ending $z$ coordinate of $vu$ is approximated by $f(x,y)+f_x\Delta x$. Similarly, $\vv$ starts at $(x,y,f(x,y))$ and ends at $(x+,y+\Delta y,f(x,y + \Delta y))$. Again, we can then say that the ending $z$ coordinate of $\vv$ is approximated by $f(x,y)+f_y\Delta y$. It follows that 
+\[ \vu \approx <\Delta x, 0, f_x\Delta x = \Delta x <1,0,f_x>, \]
+\[ \vv \approx <0,\Delta y,f_y \Delta y = \Delta y <0,1,f_y>. \]
+Now we can take the  cross product,
+\[ \vn \Delta s = \pm \vu \times \vv = \pm \dat{\vi & \vj & vk \\ 1 & 0 & f_x \\ 0 & 1 & f_y}\Delta x \Delta y = \pm<-f_x,-f_y,1>\Delta x \Delta y. \] 
+Then the limit of this is the formula we stated earlier. 
+\bex
+Say we want to find the flux of $\vF = z\vk$ (vectors pointing directly upwards) through the portion of the parabaloid $z = x^2 + y^2$ that lives above the unit disk (this means that we only care about the portion where $z = x^2+y^2 \le 1$. (Let's choose the upwards pointing normal vector. It looks then as if the flux should be positive.) So we have to compute the integral (using our new formula)
+\[ \iint_S \vF \cdot \vn\,dS = \iint_S <0,0,z> \cdot <-2x,-2y,1> \,dx\,dy = \iint_S z\,dx\,dy. \]
+We have to get rid of $z$, so this turns into (because we are only dealing with the surface, we can replace $z$ with $f(x,y)$ as opposed, in, say, a triple integral, where $x,y,z$ are independent and we cannot do something like this)
+\[ \iint_S x^2+y^2\,dx\,dy = \iint_{\mathrm{unit disk}} x^2+y^2\,dx\,dy = \int_0^{2\pi} \int_0^1 r^2 \,r\,dr\,d\theta. \]
+This evaluates to $\pi/2$.
+\eex 
+
+Let's look at an even more general situation now. Say our surface $S$ is so complicated that it cannot even be expressed as a function of $x$ and $y$, but we do know that we can parameterise the surface by two variables. (The previous case was that the surface can be parameterised in $x$ and $y$.) 
+
+This means that $S$ can be given by
+\[ S: \begin{cases} x = x(u,v) \\ y = y(u,v) \\ z = z(u,v). \end{cases} \]
+(I.e., $\vct{r} = \vct{r}(u,v)$.) So in this case, how do we set up the flux integral? We know we'll end up with an integral in terms of $du\,dv$. So how can we express $\vn\,dS$ interms of these two differentials. The method of doing this is the same as what we did in proving the formula for $x$ and $y$, only we look at small changes $\Delta u$ and $\Delta v$. Then the sides of the parallelogram we looked at will be 
+\[ \pd{\vct{r}}{u}\Delta u\ \rmand\ \pd{\vct{r}}{v}\Delta v. \]
+The we do the cross product again to get
+\[ \vn \, \Delta S = \pm\left(\pd{\vct{r}}{u} \times \pd{\vct{r}}{v}\right)\Delta u \Delta v. \]
+Then the infitessimal limit follows easily. 
+
+But what if we know is not a parameterisation but the general normal vector $\vN$ to the surface (this doesn't need to be a unit vector). This is useful in cases like any general plane $ax+by+cz=d$, in which case the normal is $<a,b,c>$. Another case is if our curve is given by some equation $g(x,y,z)=0$, then the normal is $\nabla g$. 
+
+So to develop this formula, we'll think geometrically about $\vn \, dS$. Let's start by thinking about a slanted plane, and trying to set up an integral in $x$ and $y$. Then let's project this plane onto the $xy$-plane. What we need to do is find the ``conversion rate'' between an area of a section on the $xy$-plane, $\Delta A$ and the corresponding area on the slanted plane, $\Delta S$. And this conversion rate depends on how slanted things are, so we need to look at the angle the plane makes with the horizontal direction, $\alpha$ (this is the same angle as the one between the normal vectors between the slanted plane and the $xy$-plane). It is easy to see then that the areas are related by
+\[ \Delta A = \Delta S \cos \alpha. \]
+We can then observe that $\cos \alpha = \frac{\vN \cdot \vk}{|\vN|}$. It follows that
+\[ \Delta S = \frac{|\vN|}{\vN \cdot \vk} \Delta A. \]
+So then
+\[ \vn \, dS = \frac{|\vN|\vn}{\vN \cdot \vk} dA = \pm\frac{\vN}{\vN \cdot \vk} dx\,dy. \]
+(This also extends to projecting things onto other planes.)
+\bex
+Say our surface is again given by $z=f(x,y)$, but now we write the equation as 
+\[ g(x,y,z) = z-f(x,y) = 0. \]
+Then 
+\[ \vN = \nabla g = <-f_x,-f_y,1>. \]
+Then
+\[ \vn \, dS = \frac{\vN}{\vN \cdot \vk} dx\,dy = <-f_x,-f_y,1> dx\,dy, \]
+giving us that first general formula we had!
+\eex
+\section{Divergence theorem}
+
+So that's enough formulae for $\vn \, dS$. Now that we know how to compute surface integrals, let's look at how to avoid computing them. Specifically, we will use the divergence theorem, a 3D analogue of Green's theorem for flux. We'll state the theorem and do an example first, then see a proof and applications of the theorem afterwards.
+
+\btm[Divergence theorem (or Gauss-Green theorem)]
+Let $S$ be a closed surface, enclosing a region in space $D$, oriented with $\vN$ outwards. Let $\vF$ be a vector field defined and differentiable everywhere in $D$. Then
+\[ \oiint_S \vF \cdot \vdS = \iiint_D \divg \vF\,dV, \]
+where divergence in three dimensions is given by
+\[ \divg <P,Q,R> = P_x + Q_y + R_z. \]
+\etm
+
+\bex
+We have seen that the flux of $\vF = z\vk$ through a sphere of radius $a$ was $4/3 \pi a^3$. We can redo this with the divergence theorem:
+\[ \iint_S \vF \cdot \vdS = \iiint_D \divg \vF\,dV = \iiint_D dV, \] 
+which is just the volume of the sphere, the same expression.
+\eex
+
+\brm
+Now what does the divergence theorem mean physically? The guy on the left is the total stuff that leaves the region per unit time. The divergence measures how much the field is expanding. So then the relation becomes sort of intuitive. 
+\erm
+

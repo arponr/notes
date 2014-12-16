@@ -1,0 +1,618 @@
+\input{preamble}
+
+\title{Tensor products and exterior powers \\ of vector spaces}
+\author{Arpon Raksit}
+
+\begin{document}
+\thispagestyle{fancy}
+\maketitle
+
+\section{Preliminaries}
+
+  Throughout these notes, let $k$ be a field, and let $V_i$ (for $i
+  \in \N$), $V$, $W$ and $Z$ denote $k$-vector spaces. When we talk
+  about dimension of vector spaces, we mean dimension over $k$; when
+  we talk about linear maps, we mean linear over $k$. The rest of this
+  section is comprised of definitions and easy facts that we'll need
+  later on.
+
+\begin{dfn}
+  For $m \in \N$, a map $f: \prod_{i=1}^m V_i \to W$ is
+  $m$-\textit{linear} (or \textit{bilinear} for $m=2$) if for all $1
+  \le i \le m$, when we fix any $v_j \in V_j$ for $1 \le j \le m,j \ne
+  i$, the map $v_i \mapsto f(v_1, \ldots, v_{i-1}, v_i , v_{i+1},
+  \ldots, v_m)$ is a linear map from $V_i$ to $W$.
+\end{dfn}
+
+\begin{dfn}
+  For $m \in \N$, an $m$-linear map $f: V^m \to W$ is
+  \textit{alternating} if $f(v_1,v_2,\ldots,v_m) = 0$ for all
+  $(v_1,v_2,\ldots,v_m) \in V^m$ where $v_i = v_j$ for some $1 \le i <
+  j \le m$
+\end{dfn}
+
+\begin{lem}
+  \label{altskew}
+  Let $m \in \N$ and $f: V^m \to W$ an alternating $m$-linear
+  map. Then for $\sigma \in S_m$,
+  $f(v_{\sigma(1)},v_{\sigma(2)},\ldots,v_{\sigma(m)}) = \sgn\sigma\,f
+  (v_1,v_2,\ldots,v_m)$ for all $(v_1,v_2,\ldots,v_m) \in V^m$.
+  \begin{proof}
+    It suffices to show this for a transposition $\sigma = (i\ j)$ for
+    some $1 \le i < j \le m$, since any permutation in $S_m$ is a
+    product of transpositions and $\sgn : S_n \to \left\{-1,1\right\}$
+    is a group homomorphism. Fix $(v_1,v_2,\ldots,v_m) \in V^m$. For
+    convenience, define $g: V^2 \to W$ by
+    \[
+    g(\xi,\eta) := f(v_1,\ldots,v_{i-1}, \xi, v_{i+1}, \ldots,v_{j-1},
+    \eta,v_{j+1},\ldots,v_m)\quad \text{for all}\ \ (\xi,\eta) \in
+    V^2.
+    \]
+    Since $f$ is $m$-linear and alternating, we have that
+    \[
+    0 = g(v_i+v_j,v_i+v_j) = g(v_i,v_i) + g(v_i,v_j) + g(v_j,v_i) +
+    g(v_j,v_j) = g(v_i,v_j) + g(v_j,v_i).
+    \]
+    It follows that $g(v_i,v_j) = -g(v_j,v_i)$, and since $\sgn\sigma
+    = -1$, we are done.
+  \end{proof}
+\end{lem}
+
+\begin{dfn}
+  The \textit{Kronecker delta} $\delta_{\xi,\eta}$ is (just a symbol)
+  defined as
+  \[
+  \delta_{\xi,\eta} := \begin{cases} 1 & \text{if}\ \xi = \eta, \\
+    0 & \text{if}\ \xi \ne \eta. \end{cases}
+  \]
+\end{dfn}
+
+\begin{lem}
+  \label{surjbij}
+  Suppose $V$ and $W$ are finite dimensional and $\dim V = \dim
+  W$. Then a surjective linear map $T: V \to W$ is an isomorphism.
+  \begin{proof}
+    We just need to show that $T$ is injective. By rank-nullity, $\dim
+    W = \dim \im T + \dim \ker T$. Since $T$ is surjective, $\dim \im
+    T= \dim W = \dim V$. Thus $\dim \ker T = 0$. So $\ker T =
+    \left\{0\right\}$, which implies that $T$ is injective.
+  \end{proof}
+\end{lem}
+
+\begin{dfn}
+  The \textit{dual space} of $V$, denoted $V^*$, is the $k$-vector
+  space of linear functionals $\alpha: V \to k$.
+\end{dfn}
+
+\begin{lem}
+  \label{dimdual}
+  If $V$ is finite dimensional, then $\dim V^* = \dim V$.
+  \begin{proof}
+    Let $n := \dim V$ and let $\left\{v_1, v_2, \ldots, v_n\right\}$
+    be a basis of $V$. For $1 \le i \le n$, define $\alpha_i \in V^*$
+    by $\alpha_i(v_j) := \delta_{i,j}$ for $1 \le j \le n$. We claim
+    that $\left\{\alpha_1, \alpha_2, \ldots, \alpha_n\right\}$ is a
+    basis of $V^*$. Let $\beta \in V^*$ and let $\alpha :=
+    \sum_{i=1}^n \beta(v_i) \alpha_i \in V^*$. For $1 \le j \le n$ we
+    have $\alpha(v_j) = \sum_{i=1}^n \beta(v_i) \alpha_i(v_j) =
+    \beta(v_j)$, so by linearity $\alpha(v) = \beta(v)$ for all $v \in
+    V$; \emph{i.e.}, $\beta = \alpha$. Hence $\alpha_1, \alpha_2,
+    \ldots, \alpha_n$ span. Now assume we have $c_1, c_2, \ldots, c_n
+    \in k$ such that $\gamma := \sum_{i=1}^n c_i \alpha_i = 0 \in
+    V^*$. Then $0 = \gamma(v_j) = \sum_{i=1}^n c_i \alpha_i(v_j) =
+    c_j$ for each $1 \le j \le n$. Thus $\alpha_1, \alpha_2, \ldots,
+    \alpha_n$ are linearly independent. So $\left\{\alpha_1, \alpha_2,
+      \ldots, \alpha_n\right\}$ is indeed a basis of $V^*$.
+  \end{proof}
+\end{lem}
+
+\begin{dfn}
+  An \textit{endomorphism} of $V$ is a linear map $T: V \to V$. The
+  $k$-vector space of endomorphisms of $V$ is denoted $\End V$.
+\end{dfn}
+
+\begin{lem}
+  \label{dimend}
+  If $V$ is finite dimensional, then $\dim \End V = (\dim V\sm)^2$.
+  \begin{proof}
+    Let $n := \dim V$ and let $\left\{v_1,v_2,\ldots,v_n\right\}$ be a
+    basis of $V$. For $1 \le \mu,\nu \le n$, define $T_{\mu,\nu}
+    \in \End V$ by $T_{\mu,\nu}(v_i) := \delta_{i,\mu}v_\nu$ for $1
+    \le i \le n$. We caim that $\left\{T_{\mu,\nu}\right\}_{1 \le
+      \mu,\nu \le n}$ is a basis of $\End V$. Let $S \in \End
+    V$. Since $v_1,v_2,\ldots,v_n$ are a basis, for $1 \le \mu \le n$
+    we can write $S(v_\mu) = \sum_{\nu=1}^n a_{\mu,\nu} v_\nu$, where
+    $a_{\mu,\nu} \in k$ for $1 \le \mu,\nu \le n$. Let $T :=
+    \sum_{\mu,\nu=1}^n a_{\mu,\nu} T_{\mu,\nu} \in \End V$. For $1 \le
+    i \le n$ we have $T(v_i) = \sum_{\mu,\nu=1}^n a_{\mu,\nu}
+    T_{\mu,\nu}(v_i) = \sum_{\nu=1}^n a_{i,\nu}v_\nu = S(v_i)$, so by
+    linearity, $T(v) = S(v)$ for all $v \in V$; \emph{i.e.}, $S =
+    T$. Hence $\left\{T_{\mu,\nu}\right\}_{1\le \mu,\nu \le n}$ is a
+    spanning set. Now assume we have $c_{\mu,\nu} \in k$ for $1 \le
+    \mu,\nu \le n$ such that $T = \sum_{\mu,\nu=1}^n c_{\mu,\nu}
+    T_{\mu,\nu} = 0$. Then $T(v_i) = \sum_{\mu,\nu=1}^n c_{\mu,\nu}
+    T_{\mu,\nu}(v_i) = \sum_{\nu=0}^n c_{i,\nu} v_{\nu} = 0$ for $1
+    \le i \le n$. But since $v_1,v_2,\ldots,v_n$ are linearly
+    independent, this implies that $c_{\mu,\nu} = 0$ for all $1 \le
+    \mu, \nu \le n$. Thus $\left\{T_{\mu,\nu}\right\}_{1 \le \mu,\nu
+      \le n}$ is a linearly independent set. So
+    $\left\{T_{\mu,\nu}\right\}_{1 \le \mu,\nu \le n}$ is indeed a
+    basis, which implies $\dim \End V = n^2$.
+  \end{proof}
+\end{lem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tensor product}
+
+\begin{dfn}
+  For $m \in \N$, the \textit{$m$-fold tensor product} of
+  $V_1,V_2,\ldots,V_m$---denoted $V_1 \otimes_k V_2 \otimes_k \cdots
+  \otimes_k V_m$, or (for convenience, and when there is no confusion
+  about which field we are working over) $V_1 \otimes V_2 \otimes
+  \cdots \otimes V_m = \bigotimes_{i=1}^m V_i$---is the universal
+  $k$-vector space equipped with an $m$-linear map $\otimes:
+  \prod_{i=1}^m V_i \to \bigotimes_{i=1}^m V_i$ such that, for any
+  $m$-linear map $f: \prod_{i=1}^m V_i \to Z$, there exists a unique
+  linear map $\tilde f: \bigotimes_{i=1}^m V_i \to Z$ for which the
+  diagram
+  \[
+  \xymatrix{ \prod_{i=1}^m V_i \ar[r]^-f \ar[d]_-{\otimes} & Z \\
+    \bigotimes_{i=1}^m V_i \ar[ur]_-{\tilde f} }
+  \]
+  commutes. \emph{I.e.}, $f$ factors uniquely through $\otimes$.
+\end{dfn}
+
+\begin{ntn}
+  For $(v_1, v_2, \ldots, v_m) \in \prod_{i=1}^m V_i$, we write
+  \[ v_1 \otimes v_2 \otimes \cdots \otimes v_m :=
+  \otimes(v_1,v_2,\ldots,v_m).
+  \]
+  We call these elements of $\bigotimes_{i=1}^m V_i$ \textit{pure
+    tensors}.
+\end{ntn}
+
+\begin{rem}
+  It's fairly clear that the pure tensors generate the tensor
+  product. For, suppose there exists some $x \in \bigotimes_{i=1}^m
+  V_i$ not in the span of (equivalently, linearly independent of) the
+  pure tensors. Then take any $m$-linear map $f : \prod_{i=1}^m v_i
+  \to Z$ and let $\tilde f : \bigotimes_{i=1}^m V_i \to Z$ be the
+  unique map such that the above diagram commutes. Since $x$ is
+  linearly independent of the pure tensors, $\tilde f(x)$ can be
+  chosen independently of $\tilde f(v_1 \otimes v_2 \otimes \cdots
+  \otimes v_m)$ for $(v_1,v_2,\ldots,v_m) \in \prod_{i=1}^m V_i$. But
+  since the image $\tilde f(x)$ does not affect the commuting of the
+  diagram above, this means $\tilde f$ is not unique (assuming $Z$ is
+  nontrivial), a contradiction.
+
+  Note, however, that not every element of the tensor product is a
+  pure tensor. For example, consider $V \otimes W$ where $\dim V =
+  \dim W = 2$; let $\left\{v_1,v_2\right\}$ be a basis of $V$ and
+  $\left\{w_1,w_2\right\}$ a basis of $W$. Suppose we could write $v_1
+  \otimes w_1 + v_2 \otimes w_2 = v \otimes w$ for some $v = av_1+bv_2
+  \in V, w = cw_1+dw_2 \in W$, where $a,b,c,d \in k$. By the
+  bilinearity of $\otimes$, it would follow that
+  \begin{align*}
+    &v_1 \otimes w_1 + v_2 \otimes w_2 = ac(v_1 \otimes w_1) + ad(v_1
+    \otimes w_2) + bc(v_2 \otimes w_1) + bd(v_2 \otimes w_2) \\
+    \implies & (1-ac)(v_1 \otimes w_1) + (1-bd)(v_2 \otimes w_2) =
+    ad(v_1 \otimes w_2) + bc(v_2 \otimes w_1)
+  \end{align*}
+  But this would imply by the definition of the tensor product that,
+  for any bilinear map $f: V \times W \to Z$, we must have
+  \[
+  (1-ac)f(v_1,w_1) + (1-bd)f(v_2,w_2) = (ad)f(v_1,w_2) +
+  (bc)f(v_2,w_1).
+  \]
+  This is clearly not necessarily true, so we have a contradiction.
+\end{rem}
+
+\subsection{Uniqueness}
+
+We have defined the tensor product by a \emph{universal property}
+(which is why the term ``universal $k$-vector space'' used in the
+definition). A consequence of this is that the tensor product is
+\emph{unique up to unique isomorphism}. Let's verify this.
+
+\begin{pro} \label{tenunique} Suppose $U_1$ and $U_2$ are $k$-vector
+  spaces equipped with $m$-linear maps $\otimes_1: \prod_{i=1}^m V_i
+  \to U_1$ and $\otimes_2: \prod_{i=1}^m V_i \to U_2$, respectively,
+  which both satisfy the definition of the tensor product
+  $\bigotimes_{i=1}^m V_i$. Then there is a unique isomorphism $f: U_1
+  \to U_2$.
+  \begin{proof}
+    By definition there must exist unique linear maps $T_1$ and $T_2$
+    such that the diagrams
+    \begin{equation} \tag{$*$} \xymatrix{ \prod_{i=1}^m V_i
+        \ar[r]^-{\otimes_1} \ar[d]_-{\otimes_1} & U_1 & \prod_{i=1}^m
+        V_i \ar[r]^-{\otimes_2} \ar[d]_-{\otimes_2} & U_2 \\ U_1
+        \ar[ur]_-{T_1} & & U_2 \ar[ur]_-{T_2} } \end{equation}
+    commute. But obviously the identity maps $T_1 = \id_{U_1}$ and
+    $T_2 = \id_{U_2}$ fit these diagrams, so these must be the unique
+    maps.
+
+    Now, by hypothesis we have that there exist unique linear maps $f:
+    U_1 \to U_2$ and $g: U_2 \to U_1$ such that the diagrams
+    \[ \xymatrix{ \prod_{i=1}^m V_i \ar[r]^-{\otimes_2}
+      \ar[d]_-{\otimes_1} & U_2 & \prod_{i=1}^m V_i
+      \ar[r]^-{\otimes_2} \ar[d]_-{\otimes_1} & U_2 \ar[dl]^-{g} \\
+      U_1 \ar[ur]_-{f} & & U_1 } \] commute. But then $T_1 := f \circ
+    g$ and $T_2 := g \circ f$ fit the diagrams in $(*)$, so we must
+    have $f \circ g = \id_{U_1}$ and $g \circ f = \id_{U_2}$. It
+    follows that $f$ and $g$ are mutually inverse isomorphisms.
+  \end{proof}
+\end{pro}
+
+\subsection{Existence}
+
+So we have this wonderful universal property that we can prove things
+with. And we know we have unique isomorphisms among all the objects
+which satisfy the universal property. But is there any meaning in our
+definition? Is the uniqueness vacuous? That is, we have yet to show
+there actually exists an object which indeed satisfies the universal
+property. We construct such an object now to allieviate these
+concerns, but before we do so we introduce the notion of the free
+vector space on a set, which will be useful in the construction.
+
+
+\begin{dfn}
+  Let $S$ be a set. The \emph{free vector space on $S$ over $k$},
+  denoted $F^k(S)$, or (for convenience, and when there is no
+  confusion about which field we are working over) $F(S)$, is the
+  $k$-vector space which has a basis $\left\{e_s\right\}_{s \in
+    S}$. \emph{I.e.}, any element $x \in F(S)$ can be uniquely written
+  for some $n \in \N$ as a formal linear combination $x = \sum_{i=1}^n
+  a_ie_{s_i}$, where $a_i \in k$ and $s_i \in S$ for $1 \le i \le n$.
+\end{dfn}
+
+It turns out that the free vector space on a set also satisfies a
+universal property, which we will prove now. Here we did not
+\emph{define} the object by its universal property simply because the
+specific construction in the above definition will be utilised when we
+talk about free vector spaces in our construction of the tensor
+product.
+
+\begin{pro} \label{freeuniv} Let $S$ be a set, and let $\theta : S \to
+  F(S)$ be the map $s \mapsto e_s$ for $s \in S$. For any map $f : S
+  \to Z$, there exists a unique linear map $\tilde f : F(S) \to Z$ for
+  which the diagram
+  \[ \xymatrix{ S \ar[r]^-f \ar[d]_-{\theta} & Z \\ F(S)
+    \ar[ur]_-{\tilde f} } \] commutes.
+  \begin{proof}
+    The commuting condition can be stated as $\tilde f(\theta(s)) =
+    f(s)$ for all $s \in S$. But since $\left\{\theta(s)\right\}_{s
+      \in S} = \left\{e_s\right\}_{s \in S}$ is by definition a basis
+    for $F(S)$, we know there exists a unique linear map $\tilde f$
+    such that $\tilde f(e_s) = f(s)$ for $s \in S$.
+  \end{proof}
+\end{pro}
+
+Now we are ready to give a construction of the tensor product.
+
+\begin{pro}
+  For $m \in \N$ the $m$-fold tensor product $\bigotimes_{i=1}^m V_i$
+  exists.
+  \begin{proof}
+    We proceed by induction on $m$. The case $m = 1$ is silly: a
+    $1$-linear map is just a linear map, so it is clear that we can
+    take $\bigotimes_{i=1}^1 V_i$ (how silly does that look?) to be
+    $V_1$. Now take the case $m = 2$. Let $V:=V_1$ and $W:=V_2$ to
+    save some subscripts. Let $F(V \times W)$ the free $k$-vector
+    space on $V \times W$ and $\theta : V \times W \to F(V \times W)$
+    be the map $(v,w) \mapsto e_{(v,w)}$, as defined in
+    \ref{freeuniv}. Let $I$ be the subspace of $F(V \times W)$
+    generated by elements of the form
+    \begin{align*}
+      &ae_{(v,w)} - e_{(av,w)},\quad ae_{(v,w)} - e_{(v,aw)},\quad
+      e_{(v,w)} + e_{(v',w)} - e_{(v+v',w)},\quad \text{and}\\
+      &e_{(v,w)} + e_{(v,w')} - e_{(v,w+w')},
+    \end{align*}
+    where $a \in k$, $v,v' \in V$ and $w,w' \in W$. Let $X := F(V
+    \times W)\big/I$ and $\pi : F(V \times W) \to X$ the natural
+    projection map which sends $x \in F(V \times W)$ to its
+    equivalence class $\bar x \in X$. Let $\varphi := \pi \circ \theta
+    : V \times W \to X$. We claim that $X$ equipped with the map
+    $\varphi$ satisfies the universal property of the tensor product.
+
+    We first show that $\varphi$ is bilinear. Fix $w \in W$. For any
+    $a \in k$ and $v \in V$, we have that $\varphi(av,w) =
+    \pi(e_{(av,w)})$. Since $ae_{(v,w)} - e_{(av,w)} \in I$, we know
+    $\pi(ae_{(v,w)} - e_{(av,w)}) = \bar 0$. Hence,
+    \begin{align*}
+      \pi(e_{(av,w)}) &= \pi(e_{(av,w)})+\pi(ae_{(v,w)} - e_{(av,w)})
+      = \pi(e_{(av,w)} + ae_{(v,w)} - e_{(av,w)}) \\ &=
+      \pi(ae_{(v,w)}) = a\pi(e_{(v,w)}),
+    \end{align*}
+    which gives that $\varphi(av,w) = a\varphi(v,w)$. For any $v,v'
+    \in V$, we have that $\varphi(v+v',w) = \pi(e_{(v+v',w)})$. Since
+    $e_{(v,w)} + e_{(v',w)} - e_{(v+v',w)} \in I$, we know
+    $\pi(e_{(v,w)} + e_{(v',w)} - e_{(v+v',w)}) = \bar 0$. Hence,
+    \begin{align*}
+      \pi(e_{(v+v',w)}) &= \pi(e_{(v+v',w)}) + \pi(e_{(v,w)} +
+      e_{(v',w)} - e_{(v+v',w)}) \\ &= \pi(e_{(v+v',w)} + e_{(v,w)} +
+      e_{(v',w)} - e_{(v+v',w)}) \\ &= \pi(e_{(v,w)} + e_{(v',w)}) =
+      \pi(e_{(v,w)}) + \pi(e_{(v',w)}),
+    \end{align*}
+    which gives that $\varphi(v+v',w) = \varphi(v,w) +
+    \varphi(v',w)$. Thus for any fixed $w \in W$, the map $v \mapsto
+    \varphi(v,w)$ from $V$ to $X$ is linear. Using the other two types
+    of generators of $I$, we can analogously show that for any fixed
+    $v \in V$, the map $w \mapsto \varphi(v,w)$ from $W$ to $X$ is
+    linear. Hence, $\varphi$ is indeed a bilinear map.
+
+    Now let $Z$ be any $k$-vector space and $f: V \times W \to Z$ a
+    bilinear map. We must show that $f$ factors uniquely through
+    $\varphi$. By \ref{freeuniv} there is a unique linear map $\bar f:
+    F(V \times W) \to Z$ such that $\bar f \circ \theta = f$. Then by
+    definition of $\varphi$, it suffices to show that there is a
+    unique linear map $\tilde f : X \to Z$ such that the diagram
+    \[ \xymatrix{ V \times W \ar[r]^-f \ar[d]_-{\theta} & Z \\ F(V
+      \times W) \ar[ur]_-{\bar f} \ar[r]_-\pi & X \ar[u]_-{\tilde f}
+    }\] commutes, or equivalently that $\tilde f(\pi(x)) = \bar f(x)$
+    for all $x \in F(V \times W)$. But since $\pi$ is a projection and
+    hence surjective, this uniquely defines $\tilde f$ on $X$. Hence
+    we just need to check that \emph{defining} $\tilde f$ by $\tilde
+    f(\pi(x)) := \bar f(x)$ for $x \in F(V \times W)$ gives us a
+    well-defined linear map. Let $x,y \in F(V \times W)$ such that
+    $\pi(x) = \pi(y)$. Then we must have that $y = x + \xi$ for some
+    $\xi \in I$. Since $f$ is bilinear, it is clear that that the
+    generators of $I$ vanish under $\bar f$, which implies $I \subset
+    \ker \bar f$. It follows that $\bar f(y) = \bar f(x + \xi) = \bar
+    f(x) + \bar f(\xi) = \bar f(x)$. Thus $\tilde f$ is indeed well
+    defined. And we have that
+    \[ \tilde f(\pi(x) + \pi(y)) = \tilde f(\pi(x+y)) = \bar f(x+y) =
+    \bar f(x) + \bar f(y) = \tilde f(\pi(x)) + \tilde f(\pi(y)), \] so
+    $\tilde f$ is linear. Thus $X$ equipped with $\varphi$ indeed
+    satisfies the universal property for $V \otimes W$, finishing the
+    base case $m = 2$.
+
+    Now, it's fairly clear that the above construction can be
+    generalised to construct the $m$-fold tensor product for any $m
+    \in \N$. Instead, though, we will give an inductive construction
+    which highlights another property of the tensor product. So let $m
+    \ge 3$, and assume that the $(m-1)$-fold tensor product exists. In
+    particular, $\bigotimes_{i=2}^m V_i$ exists, equipped with an
+    $(m-1)$-linear map $\otimes_1 : \prod_{i=2}^m V_i \to
+    \bigotimes_{i=2}^m V_i$. Then by the base case, $V_1 \otimes
+    \bigotimes_{i=2}^m V_i$ exists, equipped with a map $\otimes_2 :
+    V_1 \times \bigotimes_{i=2}^m V_i \to V_1 \otimes
+    \bigotimes_{i=2}^m V_i$. We claim that $V_1 \otimes
+    \bigotimes_{i=2}^m V_i$, equipped with the map $\varphi :
+    \prod_{i=1}^m V_i \to V_1 \otimes \bigotimes_{i=2}^m V_i$ defined
+    as
+    \[ \varphi(v_1,v_2,\ldots,v_m) := v_1 \otimes_2 (v_3 \otimes_1 v_3
+    \otimes_1 \cdots \otimes_1 v_m) \] for all $(v_1,v_2,\ldots,v_m)
+    \in \prod_{i=1}^m V_i$, satisfies the universal property for
+    $\bigotimes_{i=1}^m V_i$. That $\varphi$ is $m$-linear follows
+    immediately from the fact that $\otimes_1$ is $(m-1)$-linear and
+    $\otimes_2$ bilinear. So we just need to show that any $m$-linear
+    map $f: \prod_{i=1}^m V_i \to Z$ factors uniquely through
+    $\varphi$.
+
+    For fixed $v_1 \in V_1$, clearly the map $(v_2,v_3,\ldots,v_m)
+    \mapsto f(v_1,v_2,v_3,\ldots,v_m)$ from $\prod_{i=2}^m V_i \to Z$
+    is $(m-1)$-linear, and hence factors uniquely through
+    $\otimes_1$. Moreover, since $f$ is also linear in $v_1$ and
+    $\bigotimes_{i=2}^m V_i$ is generated by the pure tensors, we must
+    also have that this factoring through is linear in $v_1$. That is,
+    we have a unique \emph{bilinear} map $\hat f : V_1 \times
+    \bigotimes_{i=2}^m V_i$ such that the diagram
+    \[ \xymatrix{ \prod_{i=1}^m V_i \ar[r]^-{f} \ar[d]_{\psi} & Z \\
+      V_1 \times \bigotimes_{i=2}^m V_i \ar[ur]_-{\hat f} } \]
+    commutes, where $\psi(v_1,v_2,\ldots,v_m) := v_1 \times (v_2
+    \otimes_1 \cdots \otimes_2 v_m)$ for all $(v_1,v_2,\ldots,v_m) \in
+    \prod_{i=1}^m V_i$. Then we must have a unique \emph{linear} map
+    $\tilde f : V_1 \otimes \bigotimes_{i=2}^m V_i \to Z$ such that
+    the diagram
+    \[ \xymatrix{ \prod_{i=1}^m V_i \ar[r]^-{f} \ar[d]_{\psi} & Z \\
+      V_1 \times \bigotimes_{i=2}^m V_i \ar[ur]_-{\hat f}
+      \ar[r]_-{\otimes_2} & V_1 \otimes \bigotimes_{i=2}^m V_i
+      \ar[u]_-{\tilde f} } \] commutes. Since $\varphi = \otimes_2
+    \circ \psi$ we indeed have then that $f$ factors uniquely through
+    $\varphi$, and $V_1 \otimes \bigotimes_{i=2}^m V_i$ indeed
+    satisfies the universal property of the $m$-fold tensor
+    product. Then by induction the $m$-fold tensor product exists for
+    all $m \in \N$.
+  \end{proof}
+\end{pro}
+
+\subsection{Properties}
+
+First off, we get an easy consequence of the proof of existence just
+given.
+\begin{cor}
+  The tensor product is associative (up to isomorphism).
+  \begin{proof}
+    From the way we formulated the inductive step in the above proof
+    of existence, we have shown that $V_1 \otimes (\cdots(V_{m-2}
+    \otimes (V_{m-1} \otimes V_m))\cdots)$ equipped with the
+    appropriate map satisfies the universal property of the $m$-fold
+    tensor product. But note that our choice of association was
+    arbitrary: in our inductive step, we isolated $V_1$ for
+    convenience of notation, but we could have isolated $V_i$ for any
+    $1 \le i \le m$. Thus any association of the tensor product
+    satisfies the universal property, and hence by \ref{tenunique},
+    there exist unique isomorphisms between each pair of associations.
+  \end{proof}
+\end{cor}
+
+Next, we compute the dimension of the tensor product (in the finite
+dimensional case). We know the dimension of the direct sum of vector
+spaces is the sum of the dimensions of the vector spaces. So we might
+expect that, as a product, the dimension of the tensor product might
+be the product of the dimensions of the vector spaces. Well, then we
+would be correct!
+
+\begin{pro} \label{dimten} If $V_i$ is finite dimensional for $1 \le i
+  \le m$, then $\dim \bigotimes_{i=1}^m V_i = \prod_{i=1}^m \dim V_i$.
+  \begin{proof}
+    The result is a tautology for $m = 1$. Then if we show it for $m =
+    2$, by induction it will hold for $m \in \N$. So let $V,W$ be our
+    two vector spaces. Let $p := \dim V$ and $q := \dim W$, and
+    suppose $v_1,v_2,\ldots,v_p$ and $w_1,w_2,\ldots,w_q$ are bases of
+    $V$ and $W$, respectively. We have shown above that the pure
+    tensors $\left\{v \otimes w\right\}_{(v,w) \in V \times W}$
+    generate $V \otimes W$. Then for each $v \in V$ and $w \in W$ we
+    can write $v = \sum_{i=1}^p a_i v_i$ and $w = \sum_{j=1}^q b_j
+    w_j$, where $a_i,b_j\in k$ for $1 \le i \le p, 1 \le j \le
+    q$. Then since $\otimes : V \times W \to V \otimes W$ is bilinear,
+    we have that
+    \[ v \otimes w = \left(\sum_{i=1}^p a_i v_i\right) \otimes
+    \left(\sum_{j=1}^q b_j w_j\right) =\sum_{i,j=1}^{p,q} a_ib_j (v_i
+    \otimes w_j). \] Hence $\left\{v_i \otimes w_j\right\}_{1 \le i
+      \le p, 1 \le j \le q}$ generates $V \otimes W$.
+
+    Now assume we have $c_{i,j} \in k$ for $1 \le i \le p, 1 \le j \le
+    q$ such that $\sum_{i,j=1}^{p,q} c_{i,j} (v_i \otimes w_j) =
+    0$. Let $1 \le \mu \le p$ and define $\alpha_\mu \in V^*$ by
+    $\alpha_\mu(v_i) := \delta_{i,\mu}$ for $1 \le i \le
+    p$. Similarly, let $1 \le \nu \le q$ and define $\beta_\nu \in
+    W^*$ by $\beta_\nu(w_j) := \delta_{j,\nu}$ for $1 \le j \le
+    q$. Then let $f_{\mu,\nu} : V \times W \to k$ the map $(v,w)
+    \mapsto \alpha_\mu(v)\beta_\nu(w)$. Since $\alpha_\mu,\beta_\nu$
+    are linear, clearly $f_{\mu,\nu}$ is bilinear. Thus there exists a
+    unique linear map $\tilde f_{\mu,\nu} : V \otimes W \to k$ such
+    that $\tilde f_{\mu,\nu} \circ \otimes = f_{\mu,\nu}$. Then we
+    have
+    \begin{align*}
+      0 &= \tilde f_{\mu,\nu}\left(\sum_{i,j=1}^{p,q} c_{i,j} (v_i
+        \otimes w_j)\right) = \sum_{i,j=1}^{p,q} c_{i,j} \tilde
+      f_{\mu,\nu}(v_i \otimes w_j) =\sum_{i,j=1}^{p,q} c_{i,j}
+      f_{\mu,\nu}(v_i,w_j) \\ &=\sum_{i,j=1}^{p,q} c_{i,j}
+      \delta_{i,\mu}\delta_{j,\nu} = c_{\mu,\nu}.
+    \end{align*}
+    Since this holds for all $1 \le \mu \le p, 1 \le \nu \le q$, we
+    have that $\left\{v_i \otimes w_j\right\}_{1 \le i \le p, 1 \le j
+      \le q}$ is a linearly independent set, and thus a basis.
+  \end{proof}
+\end{pro}
+
+\subsection{Trace}
+
+Let $V$ be finite dimensional. We can use the tensor product to give a
+\emph{basis-independent} characterisation of the trace of a map $T
+\in \End V$. We should expect that such a characterisation exists,
+since we know that trace is indeed invariant under change of basis.
+
+\begin{pro} \label{endiso} There exists an isomorphism $\iota: V^*
+  \otimes V \to \End V$.
+  \begin{proof}
+    Let $n := \dim V $ and $v_1,v_2,\ldots,v_n$ a basis of $V$. By \ref{dimten}, \ref{dimdual} and \ref{dimend}, $\dim V^* \otimes V = \dim \End V = n^2$. Then by \ref{surjbij} it suffices to find a surjective linear map $\iota$. We claim that such a map is given by defining $\iota(\alpha \otimes v) := T_{\alpha,v}$ for all $\alpha \in V^*$ and $v \in V$, where $T_{\alpha,v}(w) = \alpha(w)v$ for all $w \in V$. That this map is well-defined is clear enough. To prove that this map is surjective it suffices to show that the image of $\iota$ contains the basis $\left\{T_{\mu,\nu}\right\}_{1 \le \mu,\nu \le n}$ given in the proof of \ref{dimend}. Recall that we defined $T_{\mu,\nu}(v_i) := \delta_{i,\mu}v_\nu$ for $1 \le \mu,\nu,i \le n$. So then we simply have $T_{\mu,\nu} = \iota(\alpha_\mu \otimes v_\nu)$ for $1 \le \mu,\nu \le n$, where $\left\{\alpha_1,\alpha_2,\ldots,\alpha_n\right\}$ is the basis of $V^*$ dual to the basis $\left\{v_1,v_2,\ldots,v_n\right\}$ of $V$, as defined in the proof of \ref{dimdual}.
+  \end{proof}
+\end{pro}
+
+\begin{rem} \label{trdiag}
+  Now consider the map $\ev: V^* \times V \to k$ defined $\ev(\alpha,v) := \alpha(v)$ for all $\alpha \in V^*$ and $v \in V$. Clearly $\ev$ is bilinear, so there exists a unique linear map $f: V^* \otimes V \to k$ such that the diagram
+\[ \xymatrix{ V^* \times V \ar[r]^-{\ev} \ar[d]_-{\otimes} & k \\ V^* \otimes V \ar[ur]_-{f} } \] 
+commutes. Then from the isomorphism $\iota : V^* \otimes V \to \End V$ given in \ref{endiso}, this defines a unique linear map $\tr : \End V \to k$, namely by $\tr(T) := f(\iota^{-1}(T))$ for all $T \in \End V$.
+\end{rem}
+
+\begin{dfn}
+  The \textit{trace} of $T \in \End V$ is $\tr(T)$.
+\end{dfn}
+
+\begin{rem}
+  See, while we used bases in the steps leading up to this definition, the definition itself is not basis-\emph{dependent}, since $\iota$, and thus $\iota^{-1}$, are basis-independent maps. We can now show that this basis-independent definition of the trace is the same as the basis-dependent trace of a matrix we are familiar with.
+\end{rem}
+
+\begin{pro}
+  Let $n := \dim V$ and $v_1,v_2,\ldots,v_n$ a basis of $V$. Let $T \in \End V$ and let $(a_{\mu,\nu})_{1 \le \mu,\nu \le n}$ be its matrix representation with respect to this basis. Then $\tr(T) = \sum_{\mu=1}^n a_{\mu,\mu}$.
+  \begin{proof}
+    By definition of ``matrix representation'' we know that $T(v_{\nu}) = \sum_{\mu=1}^n a_{\mu,\nu} v_\mu$ for $1 \le \nu \le n$. Thus we can write $T = \sum_{\mu,\nu=1}^n a_{\mu,\nu}T_{\mu,\nu}$, where $\left\{T_{\mu,\nu}\right\}_{1 \le \mu,\nu \le n}$ is again the basis of $\End V$ used in the proofs of \ref{dimend} and \ref{endiso}. Then if $\iota : V^* \otimes V \to \End V$ is the isomorphism given in the proof of \ref{endiso}, we have
+\[ \iota^{-1}(T) = \iota^{-1}\left(\sum_{\mu,\nu=1}^n a_{\mu,\nu}T_{\mu,\nu}\right) = \sum_{\mu,\nu=1}^n a_{\mu,\nu} \iota^{-1}(T_{\mu,\nu}) = \sum_{\mu,\nu=1}^n a_{\mu,\nu}(\alpha_{\mu} \otimes v_\nu), \]
+where $\left\{\alpha_1,\alpha_2,\ldots,\alpha_n\right\}$ is the basis of $V^*$ dual to the basis $\left\{v_1,v_2,\ldots,v_n\right\}$ of $V$, as defined in the proof of \ref{dimdual}. Taking $f : V^* \otimes V \to k$ as defined in \ref{trdiag}, this yields that
+\begin{align*}
+  \tr(T) &= f\left(\sum_{\mu,\nu=1}^n a_{\mu,\nu}(\alpha_{\mu} \otimes v_\nu)\right) = \sum_{\mu,\nu=1}^n a_{\mu,\nu}f(\alpha_{\mu} \otimes v_\nu) = \sum_{\mu,\nu=1}^n a_{\mu,\nu} \ev(\alpha_\mu, v_\nu) \\ &= \sum_{\mu,\nu=1}^n a_{\mu,\nu}\alpha_{\mu}(v_\nu) = \sum_{\mu=1}^n a_{\mu,\mu}. \qedhere
+\end{align*}
+   \end{proof}
+\end{pro}
+
+So indeed, we really have characterised the trace of an endomorphism without using a basis, which is pretty awesome. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exterior power}
+
+We next develop the \emph{exterior powers} of a vector space. We characterise these by a universal property similar to the one which characterises the tensor product of vector spaces.
+
+\begin{dfn}
+  For $m \in \N$, the \textit{$m$-th exterior power of $V$ over $k$}, denoted $\bigwedge^m V$, is the universal $k$-vector space equipped with an alternating $m$-linear map $\wedge : V^m \to \bigwedge^m V$ such that, for any $k$-vector space $Z$ and any alternating $m$-linear map $f: V^m \to Z$, there exists a unique linear map $\tilde f: \bigwedge^m V \to Z$ for which the diagram
+\[ \xymatrix{ V^m \ar[d]_-\wedge \ar[r]^-{f} & Z \\ \bigwedge^m V \ar[ur]_-{\tilde f} } \]
+commutes. \emph{I.e.}, $f$ factors uniquely through $\wedge$.
+\end{dfn}
+
+\begin{ntn}
+  Similar to the tensor product, we denote $\wedge(v_1,v_2,\ldots,v_m)$ by $v_1 \wedge v_2 \wedge \cdots \wedge v_m$ for $v_1,v_2,\ldots,v_m \in V$. Analagous to the statement made about ``pure tensors'' earlier, though these elements generate $\bigwedge^m V$, not every element of $\bigwedge^m V$ can be written in this form.
+\end{ntn}
+
+\subsection{Uniqueness}
+
+We used the word ``universal'' again here, which again implies that the $m$-th exterior power of $V$ is unique up to unique isomorphism. The argument to prove this is exactly the same as in the proof of \ref{tenunique}.
+
+\subsection{Existence}
+
+We again have to show that this object, which we've defined by a property is has, actually exists.
+
+\begin{ntn}
+  For $m \in \N$, denote the $m$-th tensor power of $V$, \emph{i.e.} $\bigotimes_{i=1}^m V$, by $V^{\otimes m}$.
+\end{ntn}
+
+\begin{pro}
+  For $m \in \N$, the $m$-th exterior power of $V$, $\bigwedge^m V$, exists.
+  \begin{proof}
+    Let $m \in \N$. Let $J$ be the subspace of $V^{\otimes m}$ generated by all elements of the form $v_1 \otimes v_2 \otimes \cdots \otimes v_m$ where $v_1,v_2,\ldots,v_m \in V$ and $v_i = v_j$ for some $1 \le i < j \le m$. Let $Y := \left.V^{\otimes m}\right/J$ and let $\pi : V^{\otimes p} \to Y$ the natural projection map. We claim that $Y$ equipped with the map $\varphi := \pi \circ \otimes$ satisfies the universal property for $\bigwedge^m V$. It is obvious that $\varphi$ is $m$-linear and alternating, since $\otimes$ is $m$-linear, $\pi$ is linear, and because of our very convenient definition of $J$. So we just need to show that for any $k$-vector space $Z$, any alternating $m$-linear map $f: V^m \to Z$ factors uniquely through $\varphi$. By the universal property of the tensor product, we know there exists a unique linear map $\bar f: V^{\otimes m} \to Z$ such that $\bar f \circ \otimes = f$. Then by definition of $\varphi$ it suffices to show there is a unique linear map $\tilde f : Y \to Z$ such that the diagram 
+\[ \xymatrix{ V^m \ar[d]_-\otimes \ar[r]^-f & Z \\ V^{\otimes m} \ar[ur]_-{\bar f} \ar[r]_-\pi & Y \ar[u]_-{\tilde f} }, \]
+commutes, or equivalently such that $\tilde f(\pi(x)) = \bar f(x)$ for all $x \in V^{\otimes m}$. But since $\pi$ is surjective, this uniquely defines $\tilde f$, meaning we can actually define $\tilde f$ by $\tilde f(\pi(x)) := \bar f(x)$ for all $x \in V^{\otimes m}$ as our unique map. Since $\pi,\bar f$ are linear, this map is clearly linear. We need to check, though, that the map is well defined. Suppose for some $x,y \in V^{\otimes m}$ that $\pi(x) = \pi(y)$, so $y = x + \xi$ for some $\xi \in J$. It's clear from the definition of $J$ that the preimage (under $\otimes$) of $\xi$ must vanish under any alternating map, so we must also have $\bar f(\xi) = 0$. Hence, 
+\[ \tilde f(\pi(y)) = \tilde f(\pi(x + \xi)) = \bar f(x + \xi) = \bar f(x) + \bar f(\xi) = \bar f(x) = \tilde f(\pi(x)), \]
+so $\tilde f$ is indeed well defined, finishing the proof.
+\end{proof}
+\end{pro}
+
+\begin{rem}
+  By convention we let $V^{\otimes 0} := k$, so then accordingly $\bigwedge^0 V = k$. Note also that since we can take $V^{\otimes 1} = V$, it is clear from the above construction that we can also take $\bigwedge^1 V = V$.
+\end{rem}
+
+\subsection{Properties}
+
+We'll just compute the dimension here (of course in the finite dimensional case). 
+
+\begin{pro}
+  If $\dim V = n < \infty$, then $\dim \bigwedge^m V = \binom nm$ for $m \in \N \cup \left\{0\right\}$.
+  \begin{proof}
+    First a couple of boring cases: $\dim \bigwedge^0 V = \dim k = 1 = \binom n0$, and $\dim \bigwedge^1 V = \dim V = n = \binom n1$. 
+
+Now take the interesting case: $2 \le m \le n$. Let $\left\{v_1,v_2,\ldots,v_n\right\}$ be a basis of $V$. We claim that the set $\left\{v_{i_1} \wedge v_{i_2} \wedge \cdots \wedge v_{i_m}\right\}_{1 \le i_1 < i_2 < \cdots < i_m \le n}$ is a basis of $\bigwedge^m V$. That the set generates $\bigwedge^m V$ is immediate from the fact that the set $\left\{v_{j_1} \wedge v_{j_2} \wedge \cdots \wedge v_{j_m}\right\}_{1 \le j_1, j_2, \ldots, j_m \le n}$ generates $\bigwedge^m V$, and from \ref{altskew}. Now assume we have $c_{i_1,i_2,\ldots,i_m} \in k$ for $1 \le i_1 < i_2 < \cdots < i_m \le n$ such that \[ \sum_{1 \le i_1 < i_2 < \cdots < i_m \le n} c_{i_1,i_2,\ldots,i_m}(v_{i_1} \wedge v_{i_2} \wedge \cdots \wedge v_{i_m}) = 0.\] Then for  $1 \le i_1 < i_2 < \cdots < i_m \le n$ let $f_{i_1,i_2,\ldots,i_m} : V^m \to k$ be the $m$-linear map defined by
+\[ f_{i_1,i_2,\ldots,i_m}(v_{j_1},v_{j_2},\ldots,v_{j_m}) := \begin{cases} \sgn \sigma & \text{if}\ \exists\sigma \in S_m\ \text{such that}\ \forall 1 \le t \le m, j_t = i_{\sigma(t)}, \\ 0 & \text{otherwise} \end{cases} \] 
+for all $1 \le j_1,j_2,\ldots,j_m \le n$. It's clear enough that for $1 \le i_1 < i_2 < \cdots < i_m \le n$, $f_{i_1,i_2,\ldots,i_m}$ is alternating, whence there exists a unique linear map $\tilde f_{i_1,i_2,\ldots,i_m} : \bigwedge^m V \to k$ such that $\tilde f_{i_1,i_2,\ldots,i_m} \circ \wedge = f_{i_1,i_2,\ldots,i_m}$. Then we must have
+\begin{align*}
+  0 &= \tilde f_{i_1,i_2,\ldots,i_m}\left(\sum_{1 \le j_1 < j_2 < \cdots < j_m \le n} c_{j_1,j_2,\ldots,j_m}(v_{j_1} \wedge v_{j_2} \wedge \cdots \wedge v_{j_m})\right) \\ &=  \sum_{1 \le j_1 < j_2 < \cdots < j_m \le n} c_{j_1,j_2,\ldots,j_m}\tilde f_{i_1,i_2,\ldots,i_m} (v_{j_1} \wedge v_{j_2} \wedge \cdots \wedge v_{j_m}) = c_{i_1,i_2,\ldots,i_m}
+\end{align*}
+for $1 \le i_1 < i_2 < \cdots < i_m \le n$. Hence $\big\{v_{i_1} \wedge v_{i_2} \wedge \cdots \wedge v_{i_p}\big\}_{1 \le i_1 < i_2 < \cdots < i_m \le n}$ is a linearly independent set. Thus the set, which clearly contains $\binom nm$ elements, is a basis, so $\dim \bigwedge^m V = \binom nm$
+
+Finally take another boring case: $m > n$. Take any element $\xi_1 \wedge \xi_2 \wedge \cdots \wedge \xi_m \in \bigwedge^m V$. Since $\dim V = n$ and $m > n$, $\xi_1,\xi_2,\ldots,\xi_m$ must be linearly dependent. Then without loss of generality we can write $\xi_1 = \sum_{j=2}^m a_j\xi_j$ where $a_2,a_3,\ldots,a_m \in k$. Since $\wedge$ is $m$-linear and alternating we have 
+\[ \xi_1 \wedge \xi_2 \wedge \cdots \wedge \xi_m = \sum_{j=2}^m a_j (\xi_j \wedge \xi_2 \wedge \cdots \wedge \xi_m) = 0. \]
+Since the set $\big\{\xi_1 \wedge \xi_2 \wedge \cdots \xi_m\big\}_{(\xi_1,\xi_2,\ldots,\xi_m) \in V^m}$ generates $\bigwedge^m V$, it follows that $\dim \bigwedge^m V = 0 = \binom nm$, since by convention we take $\binom nm = 0$ for $m > n$.
+  \end{proof}
+\end{pro}
+
+\subsection{Determinant}
+
+Just like we were able to characterise the trace of an endomorphism in a basis-independent way using the tensor product, we can characterise the determinant of an endomorphism is a basis-independent way using the exterior product. We should expect that this type of characterisation exists here as well since again we know the traditional definition of the matrix determinant is indeed invariant under change of basis.
+
+\begin{rem}
+Suppose $\dim V = n < \infty$. By the above dimension computation, $\dim \bigwedge^n V = \binom nn = 1$. By \ref{dimend} and \ref{dimdual}, it follows that $\dim (\End \bigwedge^n V)^* = 1$. For $T \in \End V$, let $f_T : V^n \to \bigwedge^n V$ be the map $(v_1,v_2,\ldots,v_n) \mapsto T(v_1) \wedge T(v_2) \wedge \cdots \wedge T(v_n)$. Then (for $T \in \End V$) clearly $f_T$ is $n$-linear and alternating, so there exists a unique linear map $\bigwedge^n T \in \End \bigwedge^n V$ for which the diagram
+\[ \xymatrix{ V^n \ar[r]^-{f_T} \ar[d]_-\wedge & \bigwedge^n V \\ \bigwedge^n V \ar[ur]_-{\bigwedge^n T}. } \]
+Now, each nonzero element of $\End \bigwedge^n V$ is a basis for $\End \bigwedge^n V$ since $\dim (\End \bigwedge^n V)^* = 1$. In particular, if $\id \in \End V$ is the identity map on $V$, then $\bigwedge^n \id$ is a basis for $\End\bigwedge^n V$. Thus there is a unique map $\kappa \in (\End\bigwedge^n V)^*$ for which $\kappa(\bigwedge^n \id) = 1$. This characterises the determinant.
+\end{rem}
+
+\begin{dfn}
+  The \textit{determinant} is the linear map $\det : \End V \to k$ defined as $\det(T) := \kappa(\bigwedge^n T)$ for $T \in \End V$.
+\end{dfn}
+
+\begin{rem}
+To check that this characterisation of the determinant matches up with our traditional definition of the matrix determinant, we just need to check that it satisfies the three characteristing properties of that definition: the determinant is multilinear and alternating in the columns of a matrix, and the determinant of the identity matrix is 1. The first two are easily checked by the multilinearity and alternating property of $\wedge$, and the last property is clear from our definition above. 
+\end{rem}
+
+\end{document}

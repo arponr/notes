@@ -1,0 +1,60 @@
+\subsection{Polar coordinates}
+
+We have already defined the double integral of a two function variable in a region of space, $\iint_R f(x,y)\,dA$, and seen how to compute them using iterated integrals. One example we did was the double integral of $f(x,y)=1-x^2-y^2$ in the region given by $x^2+y^2\le1$ and $x,y\ge0$. However using cartesian coordinates made this quite complicated. Using polar coordinates for the problem turns out to be much more convenient. 
+
+How do we do double integrals in polar coordinates, though? In cartesian coordinates, we cliced our regions by horizontal and vertical gridlines, or i.e. $dA$ became $dx\,dy$. When using polar coordinates, we will turn $dA$ into terms of $dr$ and $d\theta$. This means that we first fix $\theta$ and integrate over $r \in [0,1]$ (in this example). We will then iterate this integral by integrating the inner integral over $\theta \in [0,\pi/2]$. 
+
+There is a catch however, in that we no longer have $dA$ as a simple product of our two variables. In fact if we look at a picture and look at the difference in area between sectors with $r$ and $\theta$ both varying, we can see that 
+\[ \Delta A \approx \Delta r \cdot r\Delta \theta. \]
+(For the difference in area is approximately a rectangle with side lengths $\Delta r$ and $r\Delta \theta$.) And when we take the limit, we have that 
+\[ dA = r\,dr\,d\theta. \]
+
+So then the integral becomes
+\[ \int_0^{\pi/2} \int_0^1 f\,r\,dr\,d\theta. \]
+We need to rewrite the function in terms of polar coordinates however. In this case we notice that $f = 1 - (x^2+y^2) = 1-r^2$. This gives the integral
+\[ \int_0^{\pi/2} \int_0^1 (1-r^2)r\,dr\,d\theta. \]
+This evaluates to
+\[ \int_0^{\pi/2} \left( \frac{r^2}2-\frac{r^4}4\bigg|_0^1\right)\,d\theta \]
+or
+\[ \int_0^{\pi/2} \frac 14\,d\theta = \frac{\pi}8. \]
+which is the same result as with cartesian coordinates but was much simpler to calculate.
+
+\subsection{Applications}
+
+Volumes are nice but what else can the double integral be used for?
+\bit
+\item Find the area of a region $R$. While this can be done with one variable, it is often convenient to compute the area as 
+\[ \iint_R dA. \]
+This is really just volume under a function with height 1 everywhere. So this can be used to calculate the mass of a (flat) object with a given density, $\delta$ (which may vary with position or not):
+\[ \mathrm{Mass} = \iint_R \delta\, dA. \]
+\item Find the average value of $f$ in $R$:
+\[ \bar{f} = \frac 1{\mathrm{Area}(R)}\iint_R f\,dA. \]
+This is a uniform average, where all points have equal weighting. If we want a weighted average of $f$, with a density at each point $\delta$, we have:
+\[ \frac 1{\mathrm{Mass}(R)}\iint_R f\delta\,dA. \]
+\bit
+\item One particular application of this finding the centre of mass of an object (the point at which the equivalent point mass would have to be placed when considering physics). So if the object has density $\delta$, then the position of the centre of mass will be $(\bar{x},\bar{y})$, the weighted averages of the points in the region. Namely,
+\[ \bar{x} = \frac 1{\mathrm{Mass}}\iint_R x\delta\,dA \]
+and analogously for $y$.
+\eit
+\item Finding the moment of inertia (mass is how hard it is to impart translation motion on an object, while moment of inertia is how hard it is to rotate an object around a given axis). To find a formula for this is to think about kinetic energy. Say I am trying to spin a point mass of mass $m$ at distance $r$ from the axis at angular velocity $\omega$. Then the velocity is $r\omega$, so the kinetic energy is 
+\[ \frac 12 mv^2 = \frac 12 mr^2\omega^2. \]
+So in translational motion, the coefficient of the velocity term is mass. But in rotational motion, the coefficient is $mr^2$, so that is how we define the moment of inertia. This is only for a point mass. For a true object, we just sum the moments of intertia of each little piece. Namely, for a solid with density $\delta$, $\Delta m = \delta \Delta A$, so for each point, the moment of inertia is given by $r^2\delta\Delta A$. Finally, the moment of interta for the entire object will be
+\[ I_0 = \iint_R r\delta dA. \]
+Then the rotational kinetic energy of the object is $\frac 12 I_0\omega^2$.
+
+I could also rotate around an entire axis (in the plane of the region), rather than a point in the region (on an axis which is normal to the region). Say we rotate about the $x$-axis. The idea is the same: we sum the moments of inertia for each point (the mass element multiplied by the square of the distance to the axis, which is $y^2$). Then we have that
+\[ I_x = \iint_R y^2 \delta\,dA. \] 
+\bex
+Take the example of a disk of radius $a$, and we want to rotate about its centre. Say the density is uniform of unit value. Then we can calculate
+\[ I_o = \iint r^2\,dA. \]
+We should use polar coordinates, and calculate
+\[ \int_0^{2\pi} \int_0^a r^2\cdot r\,dr\,d\theta = \frac{\pi a^4}2. \]
+This is how hard it is to rotate about the centre.
+
+What if we spin it around the circumference? To make this easy, we change the coordinates so that the point on the circumference is the origin. We still want
+\[ I_o = \iint r^2\,dA. \]
+Again, we use polar coordinates, noticing that in this coordinate system, we have that $r = 2a\cos \theta$:
+\[ \int_{-\pi/2}^{\pi/2} \int_0^{2a\cos\theta} r^2\cdot r\,dr\,d\theta = \int_{-\pi/2}^{\pi/2} 4a^4\cos^4\theta\,d\theta, \]
+which is annoying to compute...but it turns out to be $\frac {3\pi a^4}2$. So it is three times harder to rotate a disk around its circumference than around its centre.
+\eex
+\eit

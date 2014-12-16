@@ -1,0 +1,47 @@
+\section{The Fundamental Theorem of Calculus}
+
+\subsection{Notes}
+\begin{theorem}[The First Fundamental Theorem of Calculus] \label{ftc1}
+Let $f$ be a function defined on $[a, b]$ and $F$ be the function defined by
+\[ F(x) = \int_a^x f. \]
+If $f$ is continuous at a point $c \in (a, b)$ then $F$ is differentiable at $c$ with
+\[ F'(c) = f(c). \]
+\begin{proof}
+Let $h \ne 0$ such that $c + h \in [a, b]$, and $M_h$ and $m_h$ be the upper- and lower-bounds, respectively, of $f$ on $[c, c+h]$. We know that 
+\[ F(c+h)-F(c) = \int_c^{c+h} f, \]
+and that
+\[ m_hh \le \int_c^{c+h} f \le M_hh. \]
+So, we have
+\[ m_h \le \frac{F(c+h)-F(c)}h \le M_h \]
+We know, since $f$ is continuous, that
+\[ \lim_{h\to0} m_h = \lim_{h\to0}M_h = f(c). \]
+It follows then that
+\[ F'(c) = f(c). \]
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[The Second Fundamental Theorem of Calculus] \label{ftc2}
+If $f$ is integrable on $[a, b]$ and we have a function $g$ such that $g' = f$, then
+\[ \int_a^b f = g(b) - g(a). \]
+\begin{proof}
+Let $\mathscr{P}$ be a partition of $[a, b]$ with intervals $[t_i, t_{i+1}]$. By the Mean Value Theorem, there exists an $x_i \in [t_i, t_{i+1}]$ such that $g'(x_i) = (g(t_{i+1})-g(t_i))/(t_{i+1}-t_i)$. We can rewrite this as
+\[ f(x_i)(t_{i+1}-t_i) = g(t_{i+1})-g(t_i). \]
+Given our usual definitions of $M_i$ and $m_i$ as the least upper and greatest lower bounds on each subinterval, it follows that
+\[ m_i(t_{i+1}-t_i) \le g(t_{i+1})-g(t_i) \le M_i(t_{i+1}-t_i) .\]
+If we then sum over all subintervals, we get that
+\[ L(f, \mathscr{P}) \le g(b) - g(a) \le U(f, \mathscr{P}). \]
+Since this is true for all $\mathscr{P}$, the theorem follows.
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+
+\begin{problem}[14-9]
+We know that both the l.h.s. and r.h.s. of the inequality begin at 0, so we can prove the inequality by showing that the same inequality holds for the derivatives of each side. (If both begin at the same value and one increases more quickly or at the same rate than the other, then that one will also take on a value greater than or equal to the other for all $x\ge0$.) So, we want that 
+\[ f^3 \le 2f\int_0^x f. \] 
+We only have $f = 0$ when $x = 0$ (since $f' > 0$), so we can simplify this to
+\[ f^2 \le 2\int_0^x f. \]
+We then apply the same logic as before, showing that this inequality holds after differentiating (since, again, both expressions evaluate to 0 when $x=0$). So, we want that 
+\[ 2ff' \le 2f \Rightarrow f' \le 1. \]
+This is given, and all steps done have been reversible, so the first inequality is proven. 
+\end{problem}

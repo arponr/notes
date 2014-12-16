@@ -1,0 +1,46 @@
+\section{The geometry of linear equations}
+
+The fundamental problem of linear algebra is to solve a system of linear equations, say $n$ linear equations with $n$ unknowns.
+
+We'll look at three representations of systems of linear equations: the row picture, the column picture and the matrix form. 
+
+\bex
+Say we have the system of equations ($n=2$),
+\bea
+2x - y = 0 \\
+-x + 2y = 3. 
+\eea
+This can be represented using matrices as well,
+\[ \mat{2&-1\\-1&2}\mat{x\\y}=\mat{0\\3}. \]
+(The general form of this type of matrix equation can be written as
+\[ \mA\vx = \vb.) \]
+
+Let's first look at the row picture of this system. We can plot each equation on the $xy$-plane, each one of course representing a line. Then we can visually see that the point $(1, 2)$ lies on both lines, and so this point solves the system.
+
+Now let's see the column picture, namely we'll look at the columns of the matrix:
+\[ x\mat{2\\-1}+y\mat{-1\\2}=\mat{0\\3}. \]
+We want to then find the right \textbf{linear combination} of those two column vectors to get the vector on the right. So what's the geometry to this equation? We draw the three vectors---$\rvec{2,-1}$, $\rvec{-1,2}$ and $\rvec{0,3}$---and then look for the right combination for the first two vectors to sum to the third. (Here we already know that $x=1,y=2$ works, and it does in this picture as well, of course.) 
+
+This idea of linear combinations is crucial. If fact, we will consider later on that the set of all linear combinations of two vectors fills the entire plane (i.e. we can get any right side).
+\eex
+
+\bex
+Let's do a $n=3$ example now:
+\bea
+2x-y = 0 \\
+-x + 2y - z =-1\\
+-3y-z+4z=4\\
+\eea
+The matrix form is of course
+\[ \mat{2&-1&0\\-1&2&-1\\0&-3&4}\mat{x\\y\\z} = \mat{0\\-1\\4}. \]
+
+To get the row picture this time, we need to draw planes in space, and look for their intersection. It's clear that the row picture is quickly getting difficult to see. (Four dimensions really would not be fun . . .) So let's quit on the row picture. 
+
+So now let's take the column picture:
+\[ x\mat{2\\-1\\0}+y\mat{-1\\2\\3}+z\mat{0\\-1\\4}=\mat{0\\-1\\4}. \]
+It's fairly easy to see that the point $(0,0,1)$ satisfies this linear combination. Now it's not always the case that a point will be the single solution, but in this case it is. A bit later we'll see a systematic way to solve these systems (it's called elimination). 
+
+Notice also in this three dimensional case, that if we consider all linear combinations of the three vectors on the left, we could fill the whole space.
+This isn't necessarily true, however, for every matrix $\mA$ however. (Take for example when all three column vectors of the matrix lie in the same plane.) 
+\eex
+

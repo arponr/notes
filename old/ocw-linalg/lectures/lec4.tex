@@ -1,0 +1,52 @@
+Now how do we get the inverse of a product $\mA\mB$, for invertible matrices $\mA$ and $\mB$. Well it's the product of the individual inverses, but we have to be careful abotu order because matrix multiplication is associative but not communitative. So then we can see that the inverse is $\mB^{-1}\mA^{-1}$, because then in
+\[ \mA\mB \mB^{-1}\mA^{-1}. \]
+Because then the centre cancels out, which leaves the outside to cancel out to give the identity finally. 
+
+\subsection{Transpose}
+
+Now, for a square, invertible matrix $\mA$, let's quickly talk about inverses of the transpose of a square, $\T\mA$: the matrix resulting in exchanging the rows and columns of $\mA$.
+
+So we start with the idea that
+\[ \mA\mA^{-1} = \mI. \]
+Then transposing both sides gives us that
+\[ \T{(\mA^{-1})}\T\mA = \mI, \]
+because the transpose of a product involves switching the order (like the inverse of a product) and the transpose of the identity clearly is just the identity again. So this tells us what we want to know, namely the inverse of the transpose is the transpose of the inverse.
+
+\section{Factorisation into $\mA=\mL\mU$}
+
+Now earlier we were talking about multiplying by a single matrix to represent elimination, and mentioned that there was a better way to find this single matrix than just multiplying explicitly all the single operation matrices. So now we'll talk about that: how to factorise a good matrix $\mA$ (one that plays nicely with elimination, requiring now row exchanges or anything) into 
+\[ \mA = \mL\mU, \]
+where clearly $\mL$ must be the inverse of the single elimination matrix we were talking about, and represents the connection between a matrix and its upper triangular form. 
+
+\bex
+Let's start by examining a $2\times 2$ example,
+\[ \mA = \mat{2&1\\8&7}. \]
+So the first (and only) operation would be applying $\mE_{21}$ to get
+\[ \mE_{21}\mA = \mat{1&0\\-4&1}\mat{2&1\\8&7} = \mat{2&1\\0&3} = \mU. \]
+Then to reduce to $\mA = \mL\mU$, we just have to take $L = \mE_{21}^{-1}$. So then it's easy to see that
+\[ \mL = \mat{1&0\\4&1}, \]
+(because that undoes what we did to the system. So we should have that
+\[ \mat{2&1\\8&7} = \mat{1&0\\4&1}\mat{2&1\\0&3}, \]
+which is true. 
+\eex
+
+Now this was just the 2 $\times$ 2 case, but we can see where this is going in general. We can also see this in the notation we've been using. Since $\mU$ represents upper triangular, then $\mL$ represents . . . lower triangular!
+
+We then have to move on to matrices bigger than 2 $\times$ 2. 
+\bex
+Consider a $3\times 3$ matrix $\mA$. Elimination will bring us to
+\[ \mE_{32}\mE_{31}\mE_{21}\mA = \mU, \]
+(assuming now row exchanges necessary). Then we have that
+\[ \mA = \mE_{21}^{-1}\mE_{31}^{-1}\mE_{32}^{-1}\mU = \mL\mU. \]
+So $\mL$ is the product of the inverses of the elimination matrices. But why are we considering the product of the inverses? Why does that turn out to be nicer in our formulation? Well it's because when we consider the elimination operations, since the first row affects the second row and the second row affects the third row, the first row also affects the third row. That means in the third row of the product, there will be some term in the first column, representing this effect. However, when we consider the inverse operations (and in the opposite order, because that's what we do in the inverse of a product) then the second row affects the third row \textit{before} the first row affects the second row. And that means there will be no carryover terms and the matrix $\mL$ will consist only of 1s, 0s and the multipliers (in their corresponding positions), which is indeed much nicer than $\mE$ which could contain some other junk that we'd have to compute more carefully.
+\eex
+
+So then its clear that this $\mA = \mL\mU$ is the most efficient way to think about elimination. Be if we think about it, the cost of elimination on $\mA$ is $O(n^3)$ whereas on $\vb$ (in the equation $\mA\vx = \vb$) it is $O(n^2)$. Thus if we have many $\vb$s that we want to calculate $\vx$ for, then it makes sense to do decompose $\mA$ once by elimination and then we only have to operate on vectors for the rest, saving computational time. 
+
+\subsection{Permutations}
+
+Now what if we add row exchanges into this picture? This is where permutations come in to play. The group of permutation matrices $\mP$ is pretty nice because there are $n!$ $n \times n$ $\mP$s, and the group is closed under mutliplcation and each $\mP$ satisfies the identity 
+\[ \mP^{-1} = \T\mP. \]
+
+
+

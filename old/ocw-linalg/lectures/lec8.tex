@@ -1,0 +1,61 @@
+\section{Solving $\mA\vx = \vb$ (row reduced form)}
+
+Now we're going to completely solve the question of solving
+\[ \mA \vx = \vb, \]
+how to tell when there is a solution, and if there what the solutions look like, etc.
+
+\bex
+We're going to do this with an example, in fact using the system of equations described by the matrix we used in the previous example:
+\bea
+x_1+2x_2+2x_3+2x_4=b_1\\
+2x_1+4x_2+6x_3+6x_4=b_2\\
+3x_1+6x_2+8x_3+10x_4=b_3\\
+\eea
+We can quite easily see that the third row is the sum of the first two, so we immediately have the condition that $b_3=b_2+b_1$. Let's see how elimination discovers this fact. 
+
+So we do elimination on the (augmented) matrix for this equation:
+\[ \mat{1&2&2&2&|&b_1\\2&4&6&8&|&b_2\\3&6&8&10&|&b_3} \rightarrow \mat{1&2&2&2&|&b_1\\0&0&2&4&|&b_2-2b_1\\0&0&2&4&|&b3-3b_1} \rightarrow \mat{1&2&2&2&|&b_1\\0&0&2&4&|&b_2-2b_1\\0&0&0&0&|&b3-b_2-b_1}. \]
+That last row in the final step tells us $b_3=b_2+b_1$, exactly as we expected, and this is our condition for solvability on $\vb$. I.e., if $\vb$ satisfies this condition, then $\vb \in C(\mA)$. We can also notice through this example that if some combination of the rows of $\mA$ give the zero row, then the same combination of the entries of $\vb$ must give 0. And both these statements are actually equivalent in terms of solvability, which isn't immediate. 
+
+Now how do we actually find the solutions? We start by finding one particular solution, $\vx_p$. We can do this by setting all free variables to zero, and then solving for the pivot variables. In this case this means we set $x_2=x_4=0$. It follows that
+\[ x_3 = \frac{b_2-2b_1}2, \]
+and
+\[ x_1 = 3b_1-b_2. \]
+Now since our solvability criterion only limits our values of $b_3$, we can choose any $b_1$ and $b_2$, say, for example, 1 and 5. So that gives us that $x_1 = -2$ and $x_3= 3/2$. So one solution would be
+\[ \vx_p = \mat{-2\\0\\\frac 32\\0}. \]
+And one can see by plugging into the original system that this solution vector does in fact work out. 
+
+Now how do we get from this one solution to all the solutions? Well what we do this find any solution from the nullspace of $\mA$, $\vx_n$ and then add this to our particular solution, and this describes the whole solution set. This is because $\mA\vx_p = \vb$ and $\mA\vx_n = 0$, so
+\[ \mA(\vx_p + \vx_n) = \vb. \]
+So if we remember from the previous section, all $\vx_n$ could be expressed as
+\[ \vx_n = c\mat{-2\\1\\0\\0} + d\mat{2\\0\\-2\\1}. \]
+Then it follows that all solutions to $\mA\vx = \vb$ (for our choice of $\mA$ and $\vb$) can be expressed as 
+\[ \mat{-2\\0\\\frac 32\\0} + c\mat{-2\\1\\0\\0} + d\mat{2\\0\\-2\\1}. \]
+This solution set would be a plane intersecting the particular solution and in the same directions as the special solutions of the null space. Notice that this cannot be a vector space because it doesn't go through the origin. 
+\eex
+
+So that's the algorithm for solving $\mA\vx = \vb$.
+\brm
+All solutions can be expressed in as a sum of the particular solution and a nullspace vector because, given any two solutions $\vx_1$ and $\vx_2$, we have that
+\[ \mA(\vx_1-\vx_2) = \mA\vx_1 - \mA\vx_2 = \vb - \vb = 0, \]
+so the difference between any two solutions is a vector in the nullspace.
+\erm
+
+\subsection{In more generality}
+
+So in general, let's thing of an $m \times n$ matrix $\mA$ of rank $r$. We know that
+\[ r \le m, \]
+since there can't be more than $m$ pivots. The same can be said about $n$:
+\[ r \le n. \]
+
+Let's examine the case of \textbf{full column rank}, meaning that $r = n$. It's clear that this implies that there are no free variables and thus the nullspace only has the zero vector, or
+\[ N(\mA) = \{\vct{0}\}. \]
+And this implies that the particular solution to $\mA\vx = \vb$ (if it exists) is unique, i.e.
+\[ \vx = \vx_p. \]
+So there are either 0 or 1 solutions. 
+
+Now let's look at \textbf{full row rank}, so $r = m$. What does this say about solvability? Well since there are pivots in every row, there are no zero rows in elimination, which means there are no requirements on $\vb$. I.e., there exists a solution for every $\vb$. Also observe that we have $n-r=n-m$ free variables. 
+
+It follows that if we have a square matrix with $m=n$ (then we have completely full rank), then there will be no free variables, and thus exactly one solution, and moreover, $\mA$ is invertible. And the reduced row echelon of these matrices will be the identiy ($\mR = \mI$) and the nullspace will only be the zero vector.  
+
+So the rank really tells us everything about what the solutions look like. If $r = m = n$ , then $\mR = \mI$ and there is one solution to $\mA\vx = \vb$. If $r = m < n$, then $\mR = \mat{\mI\ \mF}$ and there are infinite solutions. If $r = n < m$, then $\mR = \mat{\mI \\ 0}$ and there are either 0 or 1 solutions. And if $r < n; r < m$, then $\mR = \mat{\mI&\mF\\0&0}$ and there are either 0 or infinite solutions.

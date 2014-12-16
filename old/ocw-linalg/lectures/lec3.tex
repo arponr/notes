@@ -1,0 +1,60 @@
+\section{Multiplication}
+
+We've used matrix multiplication and mentioned inverses, but let's examine these concepts more carefully. 
+
+There are actually \textit{five} ways to multiply matrices. Let $\mC = \mA\mB$. We define matrix multiplication for each element in the product matrix, say specified by the $i$-th row and $j$-th column, as
+\[ \mC_{ij} = \sum_{k=1}^n \mA_{ik}\mB_{kj}, \]
+where $n$ is the number of columns of $\mA$ or the number of rows of $\mB$ (these two values must then be equal, clearly, for this product to make sense; i.e., $\mA$ must be of size $m\times n$, $mB$ must be of size $n\times p$, and then $mC$ will be of size $m\times p$, for any $m,n,p$). 
+
+Now using the definition explicitly is one way to carry out matrix multiplication, but there are other ways to do the computation, looking at whole columns or whole rows. Namely, we can base matrix multiplication off of the simpler case of multiplying a matrix by a (row or column) vector.
+
+Let's look at columns of $\mB$ next. The first column of $\mC$ will be the product of $\mA$ with the first column (vector) of $\mB$. And the same applies for the other corresponding columns of $\mB$ and $\mC$. This tells us that columns of $\mC$ are combinations of columns of $\mA$ (the combination being specified by one column of $\mB$). 
+
+We can then look at the product in terms of rows. So a row of $\mC$ is given by the product of the corresponding row in $\mA$ with all of $\mB$. I.e., rows of $C$ are combinations of rows of $\mB$ (the combination being specified by one row of $\mA$). 
+
+Then the fourth way is looking at columns of $\mA$ mutliplied by rows of $\mB$. Each of these types of products will be a matrix the same size of $\mC$. And in fact, the columns of these products will be multiples of the column factor and the rows will be multiples of the row factor. And since $\mC$ is supposed to be combinations of the columns and rows, this leads to the fact that $\mC$ is just the sum of the products of the $i$-th column of $\mA$ with the $i$-th row of $\mB$. 
+
+The final way is by block multiplication, which tells us that we can divide matrices into sections and then multiply these ``sub-matrices'' following the same rules of matrix multiplication (applied recursively) to get the final answer.
+
+\section{Inverses}
+
+Now let's consider the idea of inverses of a square matrix $\mA$. Firstly, not all matrices have inverses, so an important question about a square matrices is: is $\mA$ invertible. And then if it is invertible (a.k.a. non-singular) then there is some matrix $\mA^{-1}$ such that
+\[ \mA^{-1}\mA = \mA\mA^{-1} = \mI. \]
+This idea that the left inverse also works on the right is not easy to prove, but it is a property indeed of square matrices. (For non-square matrices, there may be a left inverse and a right inverse, but they cannot be the same because their dimensions must be different.)
+
+So how do we identify the singular case, a matrix that is not invertible. 
+\bex
+An example of a singular matrix would be
+\[ \mA = \mat{1&3\\2&6}. \]
+Why is this singular? If one already knows about determinants, then we could argue that this has a zero determinant, so is non-invertible, but we're not supposed to know this yet. So what are other reasons? Well if we multiply $\mA$ by another matrix, then the columns of the product are combinations of the columns of $\mA$, but combinations of the columns of this example clearly cannot form the identity columns because they lie on the same line. Another way to see that its non-invertible is to notice that a matrix has no inverse if we can find a (non-trivial, or non-zero) vector $\vx$ such that 
+\[ \mA\vx = 0. \]
+And in this case $\vx = \rvec{3,1}$ solves this equation. The reason that this condition implies singularity is because if it is true and there were an inverse, then we would have that $\vx = \vct{0}$, which it is not. 
+\eex
+
+Now let's see how to find the inverse of a square matrix when it does exist.
+What we can do is split the problem of finding the inverse into $n$ equations for a $n \times n$ matrix. Multiplying $\mA$ by the $i$-th column of the inverse gives the $i$-th column of the identity. So then we're back to the problem of a system of equations, except with vectors and matrices involved.
+
+To solve these types of systems we use ``Gauss-Jordan''. 
+\bex
+Take the example where we want to find which $a,b,c,d$ solve the following matrix equation,
+\[ \mat{1&3\\2&7}\mat{a&b\\c&d} = \mat{1&0\\0&1}. \]
+(Basically, what is the inverse of that first matrix?) Splitting up gives us two equations:
+\bea
+\mat{1&3\\2&7}\mat{a\\b} = \mat{1\\0} \\
+\mat{1&3\\2&7}\mat{c\\d} = \mat{0\\1}.
+\eea
+What we do to solve this system is to look at the augmented matrix
+\[ \mat{1&3&|&1&0\\2&7&|&0&1}, \]
+and then do elimination to make the left side the identity, and the right will become the inverse. So the first step takes two of the first row out of the second row:
+\[ \mat{1&3&|&1&0\\0&1&|&-2&1}. \]
+Instead of stopping at upper trinagular form, though, we continue to get the identity on the left: we take three of the second row away from the first to get:
+\[ \mat{1&0&|&1&0\\7&-3&|&-2&1}. \]
+So the thing on the right \textit{should} be the inverse. And in fact we can check that it is. 
+\eex
+
+But what's the reason that this Gauss-Jordan method works?
+Well we saw earlier that we can reprsent the whole elimination algorithm by multiplication with oen matrix $\mE$. So the Gauss-Jordan process does
+\[ \mE [\mA | \mI] = [\mI | ?]. \]
+Well the left side of the augmented matrix in this equation implies (by the idea of block multiplication) that $\mE \mA = \mI$, or that $\mE = \mA^{-1}$! And similarly, the ? must turn into $\mE \mI = \mE$, and so the right side gives us the inverse.
+
+

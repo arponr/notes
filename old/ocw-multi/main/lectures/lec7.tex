@@ -1,0 +1,71 @@
+\section{Non-independent variables}
+
+We're going to continue looking at what happens when we have non-independent variables. We're going to try to find out more about functions that depend on dependent variables (in addition to optimising with Lagrange multipliers). As a motivating example, in physics we often have functions $f(P,V,T)$ where the parameters depend on each other by the relation $PV = nRT$. Now we have to figure out what we mean by the derivatives in this case of functions. 
+
+Now le's think of a function $f(x,y,z)$ where we have a relation $g(x,y,z)=c$. Now we are trying to understand the partial derivatives. Theoretically we could solve for one variable in terms of the others and subsitute, and then we have $z=z(x,y)$, and then find $z_x,z_y$. But what if we cannot solve for one of these variables, or what if that is too complicated?
+
+\bex 
+Take the relation
+\[ g(x,y,z)= x^2 +yz +z^3 = 8 \]
+at the point (2,3,1). Now take the differential
+\[ dg = 2x\,dx + z\,dy +(y+3z^2)\,dz. \]
+Since we've set $g$ constant, $dg=0$, so we can set the above to 0. 
+So we can plug in for the point:
+\[ dg = 4\,dx + dy+6\,dz=0. \]
+Now this tells us a relationship between the changes between $dx,dy,dz$. So this tells us how changes in one variable affect changes in the other variables. For example, we can rearrange this into 
+\[ dz = -\frac 16 (4\,dx + dy). \]
+which tells us that 
+\[ \pd{z}{x} = \frac {-2}3;\ \pd{z}{y}=\frac{-1}6 \]
+since the coefficients of $dx$ and $dy$ in the total differential of $z$ give the partial derivatives. 
+\eex 
+
+Now, in general, how do we think of this? If we have $g(x,y,z)=c$, then 
+\[ dg = g_x\,dx +g_y\,dy+g_z\,dz. \]
+We can then set that equal to zero, and then solve for the total differential of one variable to get its partial derivatives with respect to the other variables. For example
+\[ dz = \frac{-g_x}{g_z}\,dx + \frac{-g_y}{g_z}\,dx, \]
+which, again, implicitly gives us the partial derivatives of $z(x,y)$. (The minus sign is surprising, is it not?)
+
+\subsection{Clarifying notation} 
+Say $f(x,y)=x+y$. Then $f_x = 1$. Now set $x=u,y=u+v$. Then $f=x+v=2u+v$. Then $f_u = 2$. But $x=u$? But $f_x \ne f_u$! That's some crazy shit. So we have to consider what our partial derivative notations mean. When we take $f_x$, we keep $y$ constant, but when we take $f_u$, we keep $v$ constant, which is not necessarily keeping $y$ constant (actually it's keeping $y-x$ constant). So it is important sometimes in notation to write which variables we are keeping constant. For example we write
+\[ \left(\pd{f}{x}\right)_y \]
+when keeping $y$ constant, and
+\[ \left(\pd{f}{u}\right)_v \]
+when keeping $v$ constant. Thus, it makes more sense to write
+\[ \left(\pd{f}{x}\right)_y \ne \left(\pd{f}{x}\right)_v = \left(\pd{f}{u}\right)_v. \]
+When we have dependent variables, it is important to consider these types of things. 
+
+\bex
+Let's look at the area of the triangle, setting the variables $a,b$ to be adjacent sides with an angle $\theta$ in between them. We then have a formula for the area:
+\[ A = \frac 12 ab\sin\theta. \]
+Now let's assume this is a right triangle, with $b$ being the hypotenuse. This gives us the constraint that 
+\[ a = b\cos \theta. \]
+So we have a function $A(a,b,\theta)$ and a constraint just above. So how do we find the rate of change of the area with the respect to $\theta$. Ty here are three ways of doing this:
+\begin{enumerate}
+\item Treat $a,b,\theta$ as independent and calculate 
+\[ \pd{A}{\theta} = \left(\pd{A}{\theta}\right)_{a,b} \]
+Essentially this means we lose the constraint that the triangle is right. This is our normal derivative with
+\[ \pd{A}{\theta} = \frac 12 ab \cos \theta. \]
+\item If we do want to keep the triangle right, then when $\theta$ changes, either $a$ must change (if $b$ remains constant) or vice-versa. If we keep $a$ constant, then $b$ will change with $b=b(a,\theta)=a/\cos\theta$. Then we compute
+\[ \left(\pd{A}{\theta}\right)_a \]
+meaning that $b$ is actually a dependent variable. One way we can do this is subsitute $b$ for $b(a,\theta)$ and then take a normal partial derivative. (However, this does not always work, because again, this can turn out to be incredibly complicated in general.) So that gives us that 
+\[ A = \frac{a^2}2 \tan \theta. \]
+Then clearly,
+\[ \left(\pd{A}{\theta}\right)_a = \frac{a^2}2 \sec ^2 \theta. \]
+But what if we can't solve for the dependent variable ($b$ in this case). The first way to get around this is to use differentials. Since $a$ is fixed, we set $da = 0$. Next, we differentiate our constraint to get that
+\[ da = \cos \theta \, db - b \sin \theta\, d\theta = 0. \]
+We can then solve for $db$:
+\[ db = b \tan \theta d\theta. \]
+Now, we can look at $dA$ by differentiating our function $A$:
+\[ dA = \frac b2 \sin \theta \, da + \frac a2 \sin \theta \, db + \frac {ab}2 \cos \theta \, d\theta. \]
+Then we can cancel the first term (since $da = 0$) and then substitute $db$ for our expression in terms of $d\theta$:
+\[ dA = \frac {ab}2 \tan \theta \sin \theta \, d\theta + \frac {ab}2 \cos \theta \, d \theta = \frac{ab}2 \sec \theta\, d \theta. \]
+So then, using our constraint, we get that 
+\[ \left(\pd{A}{\theta}\right)_a = \frac{ab}2 \sec \theta \, d \theta = \frac{a^2}2 \sec^2 \theta. \]
+The other method involves the chain rule. We can say that 
+\[ \left(\pd{A}{\theta}\right)_a = A_{\theta} \left(\pd{\theta}{\theta}\right)_a + A_a \left(\pd{a}{\theta}\right)_a + A_b \left(\pd{b}{\theta}\right)_a. \]
+The first partial is 1, the second is zero, and the second can be computed using the constraint, as we did in the first method. 
+\item Or we can keep $b$ constant, in which case $a$ varies with $a(b,\theta)=b\cos\theta$, and we compute
+\[ \left(\pd{A}{\theta}\right)_b \]
+in the same way as above. 
+\end{enumerate}
+\eex

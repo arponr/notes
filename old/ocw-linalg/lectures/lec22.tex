@@ -1,0 +1,81 @@
+\section{Diagonalisation and powers of $\mA$}
+
+After we've found the eigenvalues and eigenvectors of a matrix, what do we do with them? Well first let's look at doing things with the eigenvector matrix $\mS$ whose columns are the eigenvectors of a matrix $\mA$. We're then going to look at a magical expression:
+\[ \mS^{-1} \mA \mS. \]
+(Note that there's an inverse of $\mS$, implying that we have $n$ independent eigenvectors of an $n \times n$ matrix $\mA$.)
+
+It's clear that
+\[ \mA\mS = \mA[\vx_1 \cdots \vx_n] = [\lambda_1\vx_1 \cdots \lambda_n\vx_n]. \]
+We can then factor out the eigenvalues of that last matrix so we have the product
+\[ [\lambda_1\vx_1 \cdots \lambda_n\vx_n] = [\vx_1 \cdots \vx_n]\mat{\lambda_1&0&\cdots\\0&\ddots&0\\0&\cdots&\lambda_n} = \mS\mLa, \]
+where $\mLa$ is the diagonal eigenvalue matrix. So we have that
+\[ \mA \mS = \mS \mLa. \]
+Then if we have $n$ independent eigenvectors, $\mS$ must be invertible, so
+\[ \mS^{-1}\mA\mS = \mLa \iff \mA = \mS\mLa\mS^{-1}. \]
+And this process is called diagonalisation, a new type of factorisation.
+
+\bex
+Let's consider: what are the eigenvalues and eigenvectors of $\mA^2$. Well if
+\[ \mA \vx = \lambda \vx, \]
+then
+\[ \mA^2 \vx = \lambda \mA \vx = \lambda^2 \vx. \]
+So it's easy to see that squaring a matrix squares its eigenvalues. And the eigenvectors are the same. 
+
+We can see the same through our diagonalisation formula. Well if 
+\[\mA = \mS\mLa\mS^{-1}, \]
+then 
+\[ \mA^2 = \mS\mLa\mS^{-1}\mS\mLa\mS^{-1} = \mS\mLa^2\mS^{-1}. \]
+This says the same thing. Since $\mS$ stays the same, the eigenvectors are the same, and squaring the diagonal eigenvalue matrix just squares its entries, to the eigenvalues are squared.
+
+And of course this generalises to any power $k$ of $\mA$.
+\eex
+
+So the eigenvalues and vectors give us a great new way of understanding powers of a matrix, unlike our other factorisations (e.g. $\mL\mU$) which would do nothing. 
+
+\btm
+Given a matrix $\mA$ with independent eigenvectors, 
+\[ \lim_{k \to \infty} \mA^k = 0, \]
+if all $|\lambda_i| < 1$. 
+\etm
+
+And this follows straight from the diagonalisation formula above. But again we're depending on the fact that we have independent eigenvectors. One case in which we're sure that $\mA$ has independent eigenvectors (and is diagonalizable) is when all eigenvalues are distinct (no repeated $\lambda$s). (Note that even if some eigenvalues are repeated, we \textit{might} have independent eigenvectors, e.g. the trivial case of the identity matrix. Regardless, the typical matrix has independent eigenvectors and this is the case we'll deal with.)
+
+Now, say we're given a starting vector $vu_0$ and the recursive formula $\vu_{k+1}=\mA\vu_k$. It's easy to see then that
+\[ \vu_k = \mA^k \vu_0. \]  
+This is called a first-order difference system. That explicit formula is quite nice, but how do we practically find $\mA^k$ when we actually have to solve the system?
+
+What we do is write $\vu_0$ as a linear combination of (unit) eigenvectors:
+\[ \vu_0 = \sum_{i=1}^n c_i\vx_i. \]
+(I think) we can do this because $n$ independent vectors of $n$ components span $\RR^n$, so any vector in $\RR^n$ can be written as a linear combination of them.) It follows that
+\[ \mA\vu_0 = \sum_{i=1}^n c_i\lambda_i\vx_i. \]
+And similarly,
+\[ \mA^k \vu_0 = \sum_{i=1}^n c_i\lambda_i^k\vx_i. \]
+And we can rewrite this in matrix form as
+\[ \mA^k \vu_0 = \mLa^k\mS\vc, \]
+where $\vc$ is just the vector of $c_i$s. 
+
+\bex
+Consider the Fibonacci sequence, $f$. where $f_0=0, f_1=1$ and $f_{k+2} = f_{k+1}+f_k$. We want to answer, maybe, what is $f_100$, and how fast is $f$ growing? The answer actually lies in the eigenvalues in the matrix representation of the sequence. Let $\vu_k=\rvec{f_{k+1},f_k}$. Then
+\[ \vu_{k+1} = \mat{1&1\\1&0}\vu_k. \]
+So we've got the sequence into a form we like, with 
+\[ \mA = \mat{1&1\\1&0}. \]
+Then to find the eigenvalues we solve
+\[ \Det (\mA - \lambda \mI) = \dat{1-\lambda&1\\1&-\lambda} = \lambda^2 - \lambda - 1 = 0. \]
+The quadratic formula gives us that 
+\[ \lambda = \phi_\pm = \frac{1\pm\sqrt5}2. \]
+And so this tells us that the growth of the Fibonacci sequence is controlled by its larger eigenvalue, since we can write
+\[ f_n \approx c_1 \phi_+^n. \]
+And this is because the first eigenvalue is larger than one but the second piece is less than one, and so disappears more and more with larger $n$. 
+
+Now we find the eigenvectors, the nullspace of
+\[ \mA-\lambda\mI = \mat{1-\lambda&1\\1&-\lambda}. \]
+We can see the solutions to be $\rvec{\lambda,1}$, because the first entry in the solution vector when multiplying by this would be $\lambda^2-\lambda-1$ which we know to be 0 because that was what the determinant was. And the second entry is just $\lambda-\lambda$. So
+\[ \vx_1 = \mat{\phi_+\\1}, \]
+\[ \vx_2 = \mat{\phi_-\\1}. \]
+
+Now, we had that $\vu_0 = \rvec{1,0}$. So then we just find a linear combination of the eigenvectors and use the formula above. 
+\eex 
+
+\brm 
+With these powers of matrices, we are now looking at evolving systems, rather than a stagnant system like $\mA\vx = \vb$. 
+\erm

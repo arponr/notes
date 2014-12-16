@@ -1,0 +1,118 @@
+\section{Integrals}
+
+\subsection{Notes}
+For a development of the definition of the integral, see my paper dedicated to that subject (which acted as my IB Extended Essay). We begin in these notes with some of the properties of the integral and conditions for integrability. 
+
+\begin{theorem} \label{fintegiffuleps}
+A bounded function $f: [a, b] \to \mathbb{R}$ is integrable if and only if for every $\epsilon > 0$ there exists a partition $\mathscr{P}$ of $[a, b]$ such that 
+\[ U(f, \mathscr{P}) - L(f, \mathscr{P}) < \epsilon. \]
+\begin{proof}
+Suppose first that for every $\epsilon > 0$ there exists a partition $\mathscr{P}$ of $[a, b]$ such that 
+\[ U(f, \mathscr{P}) - L(f, \mathscr{P}) < \epsilon. \]
+It follows that for every $\epsilon > 0$,
+\[ \overline{\int_a^b} f - \underline{\int_a^b} f < \epsilon, \]
+or that
+\[ \overline{\int_a^b} f = \underline{\int_a^b} f, \]
+implying that $f$ is integrable.
+
+We can essentially reverse the argument for the converse. Suppose $f$ is integrable, and we have that
+\[ \overline{\int_a^b} f = \underline{\int_a^b} f. \]
+Since the upper and lower integrals are a least upper bounds and a greatest lower bound, respectively, we can say that there are partitions $\mathscr{P}_1$ and $\mathscr{P}_2$ of $[a, b]$ such that 
+\[ U(f, \mathscr{P}_1) - L(f, \mathscr{P}_2) < \epsilon \]
+for any $\epsilon > 0$. If we then take a common refinement $\mathscr{P}$ of $\mathscr{P}_1$ and $\mathscr{P}_2$, the condition of the theorem is satisfied.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}\label{fcontmeansfinteg}
+If a function $f: [a, b] \to \mathbb{R}$ is continuous, it is integrable.
+\begin{proof}
+Firstly, we know from earlier that $f$ is bounded on $[a, b]$ because of its continuity on the same interval. Secondly, also from earlier, we know that $f$ is uniformly continuous on $[a, b]$ because of its continuity on the same interval. I.e., for any $x, y \in [a, b]$ and $\epsilon > 0$, there exists a $\delta > 0$ such that
+\[ \rmif\ |x - y| < \delta\ \rmthen\ |f(x) - f(y)| < \epsilon. \]
+
+Now, say we take a partition $\mathscr{P}$ of $[a, b]$ with $||\mathscr{P}|| < \delta$ for $\delta > 0$ such that for any two points $x, y$ on any interval of the partition, 
+\[ |f(x) - f(y)| < \frac{\epsilon}{2(b-a)}. \]
+It follows that for every interval (since these are the sort of limiting values of $f$ on the intervals),
+\[ M_i - m_i \le \frac{\epsilon}{2(b-a)} < \frac{\epsilon}{b-a}. \]
+
+Finally, we have that
+\[ U(f, \mathscr{P}) - L(f, \mathscr{P}) = \sum (M_i - m_i)(t_i - t_{i-1}) < \frac{\epsilon}{b-a} \sum t_i - t_{i-1} = \epsilon. \]
+And by Theorem \ref{fintegiffuleps}, $f$ is integrable.
+\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{accbmeansab}
+Let $a < c < b$. Then $f$ is integrable on $[a, b]$ if and only if $f$ is integrable on $[a, c]$ and on $[c, b]$. Moreover,
+\[ \int_a^b f = \int_a^c f + \int_c^b f. \]
+\begin{proof}
+Suppose first that $f$ is integrable on $[a, b]$, or that for all $\epsilon > 0$ there exists some partition $\mathscr{P}$ such that 
+\[ U(f, \mathscr{P}) - L(f, \mathscr{P}) < \epsilon. \]
+We may assume that $\mathscr{P}$ contains $c$, since even if we find $\mathscr{P}$ such that it does not contain $c$, adding an extra point $c$ will preserve the above property. We can then create partitions $\mathscr{P}_1$ and $\mathscr{P}_2$ that contain all points of $\mathscr{P}$ in the subintervals $[a, c]$ and $[c, b]$ respectively. Clearly we have that $U(f, \mathscr{P}) = U(f, \mathscr{P}_1) + U(f, \mathscr{P}_2)$ and $L(f, \mathscr{P}) = L(f, \mathscr{P}_1) + L(f, \mathscr{P}_2)$. It follows that
+\[ [U(f, \mathscr{P}_1) + U(f, \mathscr{P}_2)] - [L(f, \mathscr{P}_1) + L(f, \mathscr{P}_2)] < \epsilon, \]
+and thus that
+\[ [U(f, \mathscr{P}_1) - L(f, \mathscr{P}_1)] + [U(f, \mathscr{P}_2) - L(f, \mathscr{P}_2)] < \epsilon, \]
+which implies that $f$ is integrable on $[a, c]$ and on $[c, b]$.
+
+Now suppose that $f$ is integrable on $[a, c]$ and on $[c, b]$, or that for any $\epsilon > 0$ there are partitions $\mathscr{P}_1$ and $\mathscr{P}_2$ such that 
+\[ U(f, \mathscr{P}_1) - L(f, \mathscr{P}_1) < \frac{\epsilon}2, \]
+\[ U(f, \mathscr{P}_2) - L(f, \mathscr{P}_2) < \frac{\epsilon}2. \]
+Now consider the common refinement $\mathscr{P}$ of the two initial partitions ($\mathscr{P}$ is clearly a partition of $[a, b]$). It follows by adding the previous two inequalities that 
+\[ U(f, \mathscr{P}) - L(f, \mathscr{P}) < \epsilon. \]
+Thus $f$ is integrable on $[a, b]$. 
+
+Additionally, since for any partitions of $[a, c]$ and $[c, b]$, $\mathscr{P}_1$ and $\mathscr{P}_2$, 
+\[ L(f, \mathscr{P}_1) \le \int_a^c f \le U(f, \mathscr{P}_1), \]
+\[ L(f, \mathscr{P}_2) \le \int_c^b f \le U(f, \mathscr{P}_2). \]
+Adding the above two gives that for any partition $\mathscr{P}$ of $[a, b]$
+\[ L(f, \mathscr{P}) \le \int_a^c f + \int_c^b f \le U(f, \mathscr{P}). \]
+This completes the proof that 
+\[ \int_a^b f = \int_a^c f + \int_c^b f. \]
+\end{proof}
+\end{theorem}
+
+I skip over a proof of the linearity of the integral here, simply because the proof seems rather tedious to write out and is not particularly enlightening. 
+
+\begin{theorem} \label{intfcont}
+Given an function $f$ integrable on $[a, b]$, the function $F$ defined by 
+\[ F(x) = \int_a^x f \]
+is continuous on $[a, b]$.
+\begin{proof}
+Firstly, we know that $F$ is defined on $[a, b]$ because of Theorem \ref{accbmeansab}.
+
+Now, fix $a < c < b$. We want to show that for any $\epsilon > 0$ there exists a $\delta > 0$ such that 
+\[ \rmif\ |h| < \delta,\ \rmthen\ |F(c+h)-F(c)| < \epsilon. \]
+The second half of the above statement can be written as 
+\[ \left|\int_c^{c+h} f\right| < \epsilon. \]
+Since $f$ is integrable, it must be bounded, so say $|f| \le M$ on the interval $[a, b]$. Then
+\[ \left|\int_c^{c+h} f\right| \le M|h|. \]
+Thus, it suffices to set $\delta = \epsilon / M$.
+\end{proof}
+\end{theorem}
+
+\subsection{Exercises}
+
+\begin{problem}[13-17]
+We know that 
+\[ \int_a^b f = \inf_{\mathscr{P}} U(f, \mathscr{P}) = \sup_{\mathscr{P}} L(f, \mathscr{P}). \]
+So if we can demonstrate that the sets of upper and lower sums for the two integral expressions are equivalent, then we have shown that the integrals are equivalent, since the integral is unique. 
+
+Consider an upper sum of the left-hand integral, 
+\[ \sum M_i(s_{i+1}-s_i). \]
+The set $\{s_i\}$ is a partition of $[ca, cb]$, so we can rewrite each point in the partition as a point in a partition of $[a, b]$ multiplied by $c$. That is, if $\{t_i\}$ is a partition of $[a, b]$, then $\{s_i\} = c\{t_i\}$. So we have now that the sum is
+\[ \sum M_ic(t_{i+1}-t_i). \]
+
+Next, we note that each $M_i$ is a least upper bound of $f(x)$ on a subinterval of $[ca, cb]$. We can equivalently say that each $M_i$ is a least upper bound of $f(cx)$ on the corresponding subinterval of $[a, b]$. This together with the above rewrite finishes the proof. 
+\end{problem}
+
+\begin{problem}[13-35]
+We want to show that for any given $\epsilon > 0$ there exists a partition $\mathscr{P}$ of $[0, 1]$ such that 
+\[ U(f, \mathscr{P}) - L(f, \mathscr{P}) < \epsilon. \]
+Define $N$ such that $1/N < \epsilon / 2$. Since $N$ is finite, we can say that there are a finite $M$ number of rational numbers (in reduced form) $p/q$ such that $q \le N$. Now, define $\mathscr{P}$ such that around each of those $M$ rational numbers is a subinterval of length $\epsilon / (2M)$. In these $M$ intervals, we have an upper-bound of 1, so these intervals contribute at most $\epsilon / 2$ to the upper sum. In any other interval, the upper bound is $1/N$ and thus has an upper bound as well of $\epsilon / 2$. Since the total length of these subintervals must be less than 1 (the total length of the interval), these subintervals contribute less than $\epsilon / 2$ to the upper sum. This gives us that $U(F, \mathscr{P}) < \epsilon$, and since the lower sum is clearly 0 (since in every subinterval there must be an irrational), $f$ must be integrable. Since we have also shown that the upper sum can be made arbitrarily small and that the lower sum is always 0, the integral must be equal to 0.
+\end{problem}
+
+\begin{problem}[13-36]
+Define the functions $f$ and $g$ such that
+\[ f(x)=\begin{cases} 0,&\rmif\ x\textrm{ is irrational,} \\ \frac 1q, &\rmif\ x = \frac pq, \end{cases} \]
+and 
+\[ g(x)=\begin{cases} 0,&\rmif\ x = 0, \\ 1, &\rmif\ x \ne 0. \end{cases} \]
+Both $f$ and $g$ are integrable, but the composition $g \circ f$---called the characteristic function for the rationals (since its image is 1 when the input is rational and 0 when not---is not integrable. This is because on any subinterval, there exists both a rational number and an irrational number, and thus the maximum on any subinterval will always be 1 and the minimum will always be 0. Thus, the difference between the upper and lower sums cannot be made arbitrarily small. 
+\end{problem}

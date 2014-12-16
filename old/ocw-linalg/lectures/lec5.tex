@@ -1,0 +1,50 @@
+
+So these permutation matrices are sometimes necessary, as we saw, if we see a zero in the pivot positiong durin elimination. So we have to somehow include this in our theory of elimination involving $\mA = \mL\mU$, because we assumed until now that there were no row exchanges necessary. 
+
+The change we need to make then, is that our factorisation becomes
+\[ \mP\mA = \mL\mU, \]
+where $\mP$ does all the row exchanges necessary, so that if $\mA$ is in fact a ``good'' matrix, then $\mP$ fixes the order of rows such that we don't run into any zeros in the pivot positions. Then this factorisation becomes the general factorisation for any invertible $\mA$ (and the case when no row exchanges are necessary is when $\mP = \mI$). 
+
+\subsection{Transposes and symmetry}
+
+Let's just look a bit more into transposes, which exchange the rows and columns of a matrix. Then the general formula for a transpose of a matrix $\mA$ is
+\[ (\T\mA)_{ij} = \mA_{ji}. \]
+
+Now, often we deal with symmetric matrices, which are a very nice type of matrix for which
+\[ \T\mA = \mA, \]
+holds. We can notice a few cases that matrices are symmetric. One important observation is that for any matrix $\mR$,
+\[ \T\mR\mR \]
+is symmetric. This is beacause
+\[ \T{(\T\mR\mR)} = \T\mR \mR, \]
+(since we have said earlier that when transposing (just like in inverses) we ``distribute'' the transpose but switch the order). 
+
+\section{Vector spaces}
+
+Now let's start on some \textit{real} linear algebra, and talk about vector spaces and their subspaces. A vector space is a space of vectors that allows the operations familiar to vectors: adding and multiplying by scalars, i.e. we should be able to take linear combinations of them, while still remaining in the space. 
+
+For example, $\RR^n$: all $n$ dimensional (column, as a convention) vectors of real components, is a vector space because any linear combination of vectors in $\RR^n$ still lies in $\RR^n$. However if we only take $n$ dimensional vectors with positive real components, we do not have a vector space because multiplying by a negative scalar takes us out of the space. 
+\brm
+This is not discussed in lecture, but the field that provides the scalars for the vector space must be a . . . field, so has to have inverses, which is why we can't only consider positive scalars in the second example.
+\erm
+
+Now often what we're going to be interested in is subspaces of $\RR^n$, when we take only part of $\RR^n$ and it stays a vector space. In the examples above when we took a subset, we messed up the vector space. But how can we take a subset and keep it a vector space? 
+\bex
+One example would be a line in $\RR^2$ going through the origin (a.k.a. the zero vector). Because any scalar multiple of a vector along that line stays along that line, and the same goes for adding any two vectors along that line (because any two vectors along the line are multiples of each other). This illustrates the idea that every subspace must contain the zero vector (because we have to be able to multiply by the 0 scalar). 
+
+What are all the subspaces that we can find in $\RR^2$?
+\bit
+\item All of $\RR^2$ counts as a subspace, actually
+\item As we have just seen, any line, $L$ going through the origin 
+\item The zero vector alone, $Z$, clearly satisfies the conditions! 
+\eit
+In $\RR^3$, we just add to this list a plane $P$ going through the origin. 
+
+We should also consider unions and intersections of these subspaces. Is something like $P \cup L$ a subspace in $\RR^3$ for example? It's pretty clear that it isn't. Because the line isn't necssarily on the plane, and thus adding something from $L$ to something from $P$ can leave the space. What about $P \cap L$, an intersection of two subspaces? In fact it is a subspace, and this holds for the intersection of any two subspaces. One can see this easily if one just considers that for any two vectors contained in both subspaces, any linear combination of them must be in both subspaces, and is thus in the intersection. 
+\eex
+
+\subsection{Column space} 
+How does this connect to matrices, however? Well, take any $m \times n$ matrix $\mA$. Then the columns of the matrix are in $\RR^m$. How do we form a subspace of $\RR^m$ using these columns? Well, we have to take all the linear combinations of the $n$ columns, and that will form a vector space, by definition. We'll call this subspace the \textbf{column space}, notated $C(\mA)$. 
+\bex
+Let $\mA$ be a $3 \times 2$ matrix. Then $C(\mA)$ is a plane which contains both column vectors (if the two columns aren't colinear). 
+\eex
+So this gives us a great idea of how to form a subspace out of a matrix. 

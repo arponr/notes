@@ -1,0 +1,65 @@
+\section{Triple integrals}
+
+We've been looking at double integrals and line integrals in the plane, and we'll now move to similar things, but in space: triple integrals, work, flux, divergence, curl, etc.---all in space.
+
+We'll start with triple integrals in space, analagous to double integrals in the lane. If we have a function $f(x,y,z)$ and some region $R$ in space, then we can take the triple integral
+\[ \iiint_R f\,dV, \]
+$v$ being the volume element. This $dV$ will become $dx\,dy\,dz$ or any permutation of that when working in Cartesian coordinates. Let's just jump into some examples.
+
+\bex
+Let's find the volume of the region between two parabaloids, one given by $z=x^2 + y^2$, the other $z = 4-x^2-y^2$. (Note, this is just the region, not the function; the function is just 1). So the integral is
+\[ \iiint_R \, dV. \]
+The first parabaloid is the upwards facing parabola spun around the $z$ axis, and the second is the one facing downwards, starting at $z=4$. It is clear that the intersection of the two will be a circle. We will integrate with respect to $z$ first, because the range of $z$ for each $x,y$ is given explicitly. So the set up starts
+\[ \int \int \int_{x^2+y^2}^{4-x^2-y^2} dz\,dy\,dx. \] 
+Next, we must decide which $x$ and $y$ values we need to consider. In fact, we must look at all $x,y$ in the region enclosed by the circle formed by the intersection of the two solids (the ``shadow'' of the solid on the $xy$-plane). What is the size of this circle, though? We can determine this by finding the intersection.  The intersection is 
+\[ x^2 + y^2 = 4 - x^2 - y^2, \]
+or $x^2 + y^2 = 2$, so the circle is of radius $\sqrt{2}$. So for a fixed value of $x$, $y$ varies from the negative value on the circle to the positive value, meaning our integral is
+\[ \int_{-\sqrt2}^{\sqrt2} \int_{-\sqrt{2-x^2}}^{\sqrt{2-x^2}} \int_{x^2+y^2}^{4-x^2-y^2} dz\,dy\,dx. \]
+
+This is ugly though, and we notice that since in the end we have a circular region, we should use polar coordinates instead of $x,y$. We can keep $z$, however. So the innermost integral is
+\[ \int_{x^2+y^2}^{4-x^2-y^2} dz\ = 4 - 2x^2 - 2y^2, \]
+and then we are left with a double integral
+\[ \int_{-\sqrt2}^{\sqrt2} \int_{-\sqrt{2-x^2}}^{\sqrt{2-x^2}} 4 - 2x^2 - 2y^2 \,dy\,dx, \]
+and at this point we can switch to polar. Or we could switch earlier:
+\[ \int_0^{2\pi} \int_0^{\sqrt2} \int_{r^2}^{4-r^2} \, dz \, d\,dr\,d\theta. \]
+This is much easier, right? We give a name to this type of coordinate system: cylindrical coordinates, $(r,\theta,z)$. 
+\eex
+
+\subsection{Applications}
+What can we do with triple integrals?
+\ben
+\item Find the mass of a solid. With density $\delta$, then
+\[ \mathrm{Mass} = \iiint_R \delta \, dV. \]
+\item Find the average value of a function $f(x,y,z)$ in $R$ is given by
+\[ \bar{f} = \frac 1 {\mathrm{Vol}\,(R)} \iint_R f \, dV, \]
+and the weighted value (with ``density'', or weighting, $\delta$),
+\[ \bar{f} = \frac 1 {\mathrm{Mass}\,(R)} \iint_R f \delta \, dV, \]
+
+Just like in two dimensions, we can use these ideas to determine
+\ben
+\item the centre of mass: $(\bar{x},\bar{y},\bar{z})$. (Often, symmetry can help us find these without doing explicit calculations.)
+\item moment of intertia: might be easier in three dimensions than in two dimensions. With respect to an axis the moment is:
+\[ \iiint_R (\mathrm{distance\ to\ axis})^2\delta \, dV. \]
+For example,
+\[ I_z = \iiint_R r^2 \delta \,dV = \iiint_R x^2 + y^2 \delta \,dV \]
+\[ I_x = \iiint_R y^2 + z^2 \delta \,dV \]
+\[ I_y = \iiint_R x^2 + z^2 \delta \,dV. \]
+And one can notice that setting $z=0$ gives us the formulae we had for the moment in two dimensions; it is clear also that the third dimensions makes these formula fit together in a much nicer, more symmetric way.
+\een
+\bex
+Find $I_z$ of a solid, uniform density ($\delta = 1$) cone between $z = ar$ and $z = b$. (The ``sides'' of the cone all have slope $a$, starting from the origin, and we stop at the plane $z = b$.) So the formula above tells us this is
+\[ I_z = \int_0^b \int_0^{2\pi} \int_0^{z/a} r^2 \, r \, dr \, d\theta \, dz. \]
+If we set up the integral the other way around ($dz$ first), then we would have
+\[ I_z = \int_0^{2\pi} \int_0^{b/a} \int_{ar}^{b} r^2 \, dz \, r \, dr \, d\theta. \]
+\eex
+\bex
+Say we want to set up a triple integral for the region where $z > 1 - y$ inside the unit ball centred at the origin. So we have the ball
+\[ x^2 + y^2 + z^2 < 1, \]
+and the plane parallel to the $x$-axis, starting at 1 and sloping downward with $y$ with slope -1. The intersection of the ball and the plane is the slanted circle, which is an ellipse when projected onto the $xy$-plane. Then the triple integral in Cartesian coordinates starts as
+\[ \int \int \int_{1-y}^{\sqrt{1-x^2-y^2}} \,dz \,dx \, dy. \]
+To find the bounds on $x$ and $y$ we see where the plane lies below the sphere:
+\[ 1 - y < \sqrt{1-x^2-y^2}, \]
+\[ 1 - 2y + y^2 < 1 - x^2 - y^2, \]
+and so on, which will then help us bound $x$ and $y$.
+\eex
+\een

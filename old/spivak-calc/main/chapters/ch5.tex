@@ -1,0 +1,210 @@
+\section{Limits}
+
+\subsection{Notes}
+\begin{definition}
+The function $f$ approaches the limit $l$ near $a$ means: for every $\epsilon > 0$ there is some $\delta > 0$ such that, for all $x$, if $0 < |x - a| < \delta$, then $|f(x) - l| < \epsilon$.
+\end{definition}
+
+\begin{example}
+For the function $f(x) = x^2$, we show that $f$ approaches $a^2$ near $a$. So we must find some $\delta$ such that when $0 < |x - a| < \delta$, $|x^2 - a^2| < \epsilon$. We begin by factoring that last expression, giving us that
+\[ |x - a||x + a| < \epsilon \]
+We notice that all we must do is somehow bound the $|x + a|$ term, and then define $\delta$ such that $|x - a| < \delta = \frac{\epsilon}{|x + a|}$. To do this, we first say that $|x - a| < 1$. It follows, since $|x| - |a| \le |x - a|$, that
+\[ |x| < 1 + |a|. \]
+Similarly, since $|x + a| \le |x| + |a|$,
+\[ |x + a| < 2|a| + 1. \]
+Thus, (taking into account also our original restriction on $|x - a|$ to be less than 1) we have that
+\[ \delta = \textrm{min}\left(1, \frac{\epsilon}{2|a| + 1}\right). \]
+\end{example}
+
+\begin{example}
+Consider a more complex function than the previous example
+\[ f(x) = \begin{cases} 0, & x \textrm{ irrational}, 0 < x < 1 \\ \frac{1}{q}, & x = \frac{p}{q} \textrm{ in lowest terms}, 0 < x < 1 \end{cases}\]
+We can show that for any $a$, $0 < a < 1$, $f$ approaches 0 at $a$. To prove this, we show that there as an adequare choice for $\delta$ for any $\epsilon > 0$, such that for any $x$, $0 < |x - a| < \delta$, we will have that $|f(x) - 0| < \epsilon$. Let us say that we have a number $n$ such that $\frac{1}{n} \le \epsilon$. It follows that the only $x$ values for which $|f(x) - 0| < \epsilon$ could be false are
+\[ \left\{\frac{1}{2}, \frac{1}{3}, \frac{2}{3}, \ldots, \frac{1}{n}, \ldots \frac{n - 1}{n}\right\} \]
+What is important is that this set is finitely large, since we have chosen a finite $n$. Thus, there is some $\frac{p}{q} \ne a$ in this set for which $|\frac{p}{q} - a|$ is minimum. If we set this minimum difference to be $\delta$, then it is ensured that $|f(x) - 0| < \epsilon$. 
+
+\begin{remark}
+This example demonstrates that $\delta$ need only be proved to exist, not expressed in terms of $\epsilon$ necessarily.
+\end{remark}
+\end{example}
+
+\begin{theorem} \label{uni}
+If a function $f$ approaches $l$ at $a$, and $f$ approaches $m$ at $a$, then $l = m$.
+\begin{proof}
+We know that for every $\epsilon > 0$, there is some $\delta$ such that if $0 < |x - a| < \delta$ then $|f(x) - l| < \epsilon$ \textit{and} $|f(x) - m| < \epsilon$. (Note that the $\delta$s for each limit definition are not necessarily the same, but we can take the minimum of the two and call it $\delta$ in both definitions.) 
+
+If $l \ne m$, or $|l - m| > 0$, we can say that $\epsilon = \frac{|l - m|}{2}$. Thus we have that $|f(x) - l| < \frac{|l - m|}{2}$ and $|f(x) - m| < \frac{|l - m|}{2}$. So,
+\[ |l - m| = |l - f(x) + f(x) - m| \le |l - f(x)| + |f(x) - m| < |l - m| \]
+This contradiction completes the proof.
+\end{proof}
+\end{theorem}
+
+Theorem \ref{uni} allows us to say that the limit of a function $f$ at $x = a$, if it exists, is unique; we represent this unique limit by 
+\[ \lim_{x \to a} f(x). \]
+
+The following lemma and theorem allow us to evaluate many more of these limits.
+
+\begin{lemma} \ \label{limlem}
+\begin{enumerate}
+\item
+If $|x - x_0| < \dfrac{\epsilon}{2}$ and $|x - y_0| < \dfrac{\epsilon}{2}$, then $|(x + y) - (x_0 + y_0)| < \epsilon$.
+\item
+If $|x - x_0| < {\rm min}\left(1, \dfrac{\epsilon}{2(|y_0| + 1)}\right)$ and $|y - y_0| < \dfrac{\epsilon}{2(|x_0| + 1)}$, then $|xy - x_0y_0| < \epsilon$.
+\item
+If $y_0 \ne 0$ and $|y - y_0| < {\rm min}\left(\dfrac{|y_0|}{2}, \dfrac{\epsilon|y_0|^2}{2}\right)$ then $y \ne 0$ and $\left|\dfrac{1}{y} - \dfrac{1}{y_0}\right| < \epsilon$.
+\end{enumerate}
+\begin{proof}
+The proofs of these three statements are found in the solutions to problems 1-20, 1-21 and 1-22, respectively.
+\end{proof}
+\begin{remark}
+The three parts of this lemma essentially say that if $x$ is close to $x_0$ and $y$ is close to $y_0$, then $x + y$ is close to $x_0 + y_0$, $xy$ is close to $x_0y_0$ and $\frac{1}{y}$ is close to $\frac{1}{y_0}$.
+\end{remark}
+\end{lemma}
+
+\begin{theorem} \label{limthm}
+If $\lim_{x \to a} f(x) = l$ and $\lim_{x \to a} g(x) = m$, then
+\begin{enumerate}
+\item
+$\lim_{x \to a} (f + g)(x) = l + m$;
+\item
+$\lim_{x \to a} (fg)(x) = lm$.
+\end{enumerate}
+Moreover, if $m \ne 0$, then
+\begin{enumerate}
+\item[3.]
+$\lim_{x \to a} \left(\dfrac{1}{g}\right) (x) = \dfrac{1}{m}$.
+\end{enumerate}
+\begin{proof}
+We know that for every $\epsilon > 0$ there exists some $\delta$ such that when $0 < |x - a| < \delta$, $|f(x) - l| < \epsilon$ and $|g(x) - m| < \epsilon$. We can just as easily say that
+\[ |f(x) - l| < \frac{\epsilon}{2} \textrm{ and } |g(x) - m| < \frac{\epsilon}{2}. \]
+It then follows from part (1) of Lemma \ref{limlem} that
+\[ |(f + g)(x) - (l + m)| < \epsilon \]
+which proves (1).
+
+Similarly, we can say that for every $\epsilon > 0$ there exists some $\delta$ such that when $0 < |x - a| < \delta$,
+\[ |f(x) - l| < \textrm{min}\left(1, \frac{\epsilon}{2(|m| + 1)}\right) \textrm{ and } |g(x) - m| < \frac{\epsilon}{2(|l| + 1}. \]
+It then follows from part (2) of Lemma \ref{limlem} that
+\[ |(fg)(x) - lm| < \epsilon \]
+which proves (2).
+
+Finally, we can say that for every $\epsilon > 0$ there exists some $\delta$ such that when $0 < |x - a| < \delta$,
+\[ |g(x) - m| < \textrm{min}\left(\frac{|m_0|}{2}, \frac{\epsilon|m_0|^2}{2}\right). \]
+It then follows from part (3) of Lemma \ref{limlem} that $g(x) \ne 0$, which allows us to consider $\left(\frac{1}{g}\right)(x)$, and that
+\[ \left|\left(\frac{1}{g}\right) (x) - \frac{1}{m}\right| < \epsilon \]
+which proves (3).
+\end{proof} 
+\end{theorem}
+
+This idea of an ordinary limit can be modified slightly in a few ways to take care of the fact that a function $f$ might not be defined for all $x$ for $0 < |x - a| < \delta$, as well as the concept of a limit at infinity.
+
+\begin{definition}
+The limit of a function $f$ from above $x = a$ is written: $\lim_{x \to a^+} f(x) = l$. Precisely, this means that for every $\epsilon > 0$, there is some $\delta$ such that if $0 < x - a < \delta$, then $|f(x) - l| < \epsilon$. (This is equivalent of our definition to an ordinary limit, with the added condition that $x > a$.)
+\end{definition}
+
+\begin{definition}
+The limit of a function $f$ from below $x = a$ is written: $\lim_{x \to a^-} f(x) = l$. Precisely, this means that for every $\epsilon > 0$, there is some $\delta$ such that if $0 < a - x < \delta$, then $|f(x) - l| < \epsilon$. (This is equivalent to our definition of an ordinary limit, with the added condition that $x < a$.)
+\end{definition}
+
+\begin{definition}
+The limit of a function $f$ at infinity is written: $\lim_{x \to \infty} f(x) = l$. Precisely, this means that for every $\epsilon > 0$, there is some $N$, such that if $x > N$, then $|f(x) - l| < \epsilon$. (Rather than being very close to a point $a$, we are considering the function at very large $x$.)
+\end{definition}
+
+\subsection{Exercises}
+\begin{problem}[5-3] \ 
+\begin{enumerate}
+\item[(i)]
+We can write $|x^4 - a^4| < \epsilon$ as $|(x^2)^2 - (a^2)^2| < \epsilon$. By part (2) of Lemma \ref{limlem}, we know this is true when
+\[ |x^2 - a^2| < \textrm{min}\left(1, \frac{\epsilon}{2(|a|^2 + 1)}\right) \]
+which, by the same token, is consequently true when
+\[ |x - a| < \textrm{min}\left(1, \frac{\textrm{min}\left(1, \frac{\epsilon}{2(|a|^2 + 1)}\right)}{2(|a| + 1)}\right). \]
+Simplifying this expression gives us $\delta$:
+\[ \delta = \textrm{min}\left(1, \frac{\epsilon}{4(|a|^2 + 1)(|a| + 1)}\right) \]
+
+\item[(ii)]
+By part (3) of Lemma \ref{limlem}, we can say that if
+\[ |x - 1| < \textrm{min}\left(\frac{1}{2}, \frac{\epsilon}{2}\right), \]
+then
+\[ \left|\frac{1}{x} - 1\right| < \epsilon. \]
+So, 
+\[ \delta = \textrm{min}\left(\frac{1}{2}, \frac{\epsilon}{2}\right). \]
+
+\item[(iii)]
+By part (1) of Lemma \ref{limlem}, we can say that if
+\[ |x^4 - 1| < \frac{\epsilon}{2} \textrm{ and } \left|\frac{1}{x} - 1\right| < \frac{\epsilon}{2}, \]
+then
+\[ \left|(x^4 + \frac{1}{x}) - 2\right| < \epsilon. \]
+By parts (i) and (ii) of this problem, this means that 
+\[ \delta = \textrm{min}\left(\textrm{min}\left(1, \frac{\epsilon}{32}\right), \textrm{min}\left(\frac{1}{2}, \frac{\epsilon}{4}\right)\right) = \textrm{min}\left(\frac{1}{2}, \frac{\epsilon}{32}\right). \]
+
+\item[(iv)]
+So, we have that
+\[ \left|\frac{x}{1 + \sin^2 x} - 0\right| < \epsilon, \]
+which leads to
+\[ |x| < \epsilon|1 + \sin^2 x|. \]
+We notice that $\delta$ is bounding $|x - 0|$, which is just $|x|$, or the l.h.s. of the previous inequality. Next, we notice that $\sin^2 x$ has a range of $[0, 1]$, so $|1 + \sin^2 x|$ ranges from 1 to 2. Thus, we must have that 
+\[ |x| < 2\epsilon = \delta. \]
+
+\item[(v)]
+We have that
+\[ |\sqrt{|x|} - 0| < \epsilon. \]
+Squaring both sides gives us that
+\[ |x| = |x - 0| < \epsilon^2 = \delta. \]
+
+\item[(vi)]
+We have that
+\[ |\sqrt{x} - 1| < \epsilon. \]
+Firstly, we know that $|\sqrt{x}| - 1 \le |\sqrt{x} - 1| < \epsilon$, so $|\sqrt{x}| < 1 + \epsilon.$ It follows that $|\sqrt{x} + 1| \le |\sqrt{x}| + 1 < \epsilon + 2$. Finally, we say that
+\[ |\sqrt{x} - 1||\sqrt{x} + 1| = |x - 1| < \epsilon|\sqrt{x} + 1| < \epsilon(\epsilon + 2) = \delta. \]
+
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[5-6] \ 
+\begin{enumerate}
+\item[(i)]
+By part (1) of Lemma \ref{limlem}, in order for $|(f(x) + g(x)) - (2 + 4)| < \epsilon$ to be true, we must have that $|f(x) - 2| < \frac{\epsilon}{2}$ and $|g(x) - 4| < \frac{\epsilon}{2}$. Plugging $\frac{\epsilon}{2}$ into the given formulae for the $\delta$s in the problem, we have that
+\[ \delta = \textrm{min}\left(\frac{\epsilon}{2} + \sin^2\frac{\epsilon^2}{36}, \frac{\epsilon^2}{4}\right). \]
+
+\item[(ii)]
+By part (2) of Lemma \ref{limlem}, in order for $|f(x)g(x) - (2)(4)| < \epsilon$ to be true, we must have that $|f(x) - 2| < \textrm{min}\left(1, \frac{\epsilon}{10}\right)$ and $|g(x) - 4| < \frac{\epsilon}{6}$. Plugging these expressions into the given formulae for the $\delta$s in the problem, we have that
+\[ \delta = \textrm{min}\left(1 + \sin^2 \frac{1}{9}, \frac{\epsilon}{10} + \sin^2 \frac{\epsilon^2}{900}, \frac{\epsilon^2}{36}\right). \]
+
+\item[(iii)]
+By part (3) of Lemma \ref{limlem}, in order for $|\frac{1}{g(x)} - \frac{1}{4}| < \epsilon$, we must have that $|g(x) - 4| < \textrm{min}(2, 8\epsilon)$. Plugging this expression into the given formula gives us that
+\[ \delta = \textrm{min}(4, 64\epsilon^2). \]
+
+\item[(iv)]
+By part (2) of Lemma \ref{limlem}, in order for $|f(x)\frac{1}{g(x)} - (2)(\frac{1}{4})| < \epsilon$ to be true, we must have that $|f(x) - 2| < \textrm{min}\left(1, \frac{2\epsilon}{5}\right)$ and $|\frac{1}{g(x)} - \frac{1}{4}| < \frac{\epsilon}{6}$. Plugging these expressions into the given formulae for the $\delta$s in the problem (and part (iii)), we have that
+\[ \delta = \textrm{min}\left(1 + \sin^2 \frac{1}{9}, \frac{2\epsilon}{5} + \sin^2 \frac{4\epsilon^2}{225}, 4, \frac{16\epsilon^2}{9}\right). \]
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[5-9]
+We can show that the two limits,
+\[ \lim_{x \to a} f(x) \textrm{ and } \lim_{h \to 0} f(a + h) \]
+are actually equal. Call the first limit value $l$ and the second $m$. Interpreted precisely, these limits mean that for every $\epsilon > 0$, there is some $\delta$ such that when $0 < |x - a| < \delta$, $|f(x) - l| < \epsilon$, and when $0 < |h| < \delta$, $|f(a + h) - m| < \epsilon$. Now, if we simply say that $x - a = h$, then the first limit reduces to: when $0 < |h| < \delta$, $|f(a + h) - l| < \epsilon$. From Theorem \ref{uni}, we can say that $l = m$, then, and thus we have showed the two limits to be equal.
+\end{problem}
+
+\begin{problem}[5-32]
+We can factor the limit so that it looks like:
+\[ \lim_{x \to \infty} \frac{a_nx^n(1 + \frac{a_{n-1}}{a_n}x^{-1} + \cdots + \frac{a_0}{a_n}x^{-n})}{b_mx^m(1 + \frac{b_{m-1}}{b_n}x^{-1} + \cdots + \frac{b_0}{b_n}x^{-m})}. \]
+Then, it is easy to see, since all but the leading terms approach 0, that this is equal to
+\[ \lim_{x \to \infty} \frac{a_n}{b_m}x^{n - m}. \]
+Thus, if $m = n$, the limit is $\frac{a_n}{b_m}$; if $m > n$, the limit is 0; and if $m < n$, the limit is unbounded and therefore does not exist.
+\end{problem}
+
+\begin{problem}[5-40] \ 
+\begin{enumerate}
+\item[(a)]
+First, note that each angle of the $n$-gon has a measure $\frac{2\pi}{n}$, since the sum of all $n$ congruent angles must be equal to $2\pi$. Then, consider that for any $n$-gon, we can draw a radius from any of the $n$ vertices to the centre of the circle, forming a radius $r$. We can then form a right triangle by drawing a perpendicular line from the centre of the circle to a side of the $n$-gon adjacent to the vertex; this altitude bisects the side, since it is part of the diameter of the circle. The angle that the radius and the altitude form must measure $\frac{\pi}{n}$, since it forms half of the arc enclosed by a side of the $n$-gon, and the arc must be of measure $\frac{2\pi}{n}$. It follows, by evaluating the sine of this angle, that the side length of the triangle being examined is $r \sin\frac{\pi}{n}$, and thus the perimeter of the $n$-gon is $2rn \sin \frac{\pi}{n}$.
+
+\item[(b)]
+We are evaluating 
+\[ \lim_{n \to \infty} 2rn \sin \frac{\pi}{n}. \]
+If we say that $m = \frac{1}{n}$, we can rewrite the limit as
+\[ \lim_{m \to 0} 2r\frac{1}{m} \sin \pi m. \]
+We know that 
+\[ \lim_{x \to 0} \frac{\sin ax}{x} = a \]
+which gives us the limit of the perimeter to be $2\pi r$, the perimeter of the circle!
+\end{enumerate}
+\end{problem}
