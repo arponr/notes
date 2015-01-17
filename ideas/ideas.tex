@@ -1,0 +1,57 @@
+\input{preamble}
+
+\newlist{idea}{enumerate}{5}
+\setlist[idea]{%
+  label*=\textbf{\arabic*.},%
+  leftmargin=*,%
+  itemsep=1ex,%
+  topsep=1ex,%
+}
+
+\begin{document}
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{flushleft}
+  Last updated: \today.
+\end{flushleft}
+
+\medskip
+
+\begin{idea}
+\item How does one actually construct equivariant elliptic cohomology?
+  \begin{idea}
+    \renewcommand{\E}{\mathbb{E}}
+  \item In Lurie's framework, equivariant versions of cohomology with
+    coefficients in an $\E_\infty$-ring $A$ arise from a (derived)
+    oriented group scheme $G$ over $A$. An elliptic cohomology theory
+    $A$ comes from an elliptic curve $G_0$ over $\pi_0(A)$, so it
+    seems like the question is: when I can I refine this to a derived
+    elliptic curve $G$ over $A$? I.e. I need to find a pullback
+    diagram: \newcommand{\Spec}{\operatorname{Spec}}
+    \[
+    \begin{tikzcd}
+      G_0 \ar[r] \ar[d] & G \ar[d] \\
+      \Spec(\pi_0(A)) \ar[r] & \Spec(A).
+    \end{tikzcd}
+    \]
+    If I replace $A$ by it's connective cover (I can do this because
+    $G$ is supposed to be flat over $A$) then I should think of the
+    homotopy groups of $A$ above degree $0$ as higher nilpotents (in
+    particular the sequence
+    \[
+    \pi_0(A) \iso \tau_{\le 0}(A) \from \tau_{\le 1}(A) \from
+    \tau_{\le 2}(A) \from \cdots
+    \]
+    is a sequence of square-zero extensions of $\E_\infty$-rings) and
+    so maybe I can approach this via some obstruction/deformation
+    theory (the cotangent complex section of \emph{Higher Algebra} is
+    probably relevant)?
+  \end{idea}
+\end{idea}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

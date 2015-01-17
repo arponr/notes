@@ -1,0 +1,166 @@
+\input{../preamble}
+\input{preamble}
+
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows,positioning}
+
+\tikzset{
+  ->-/.style={decoration={markings,
+      mark=at position .5 with {\arrow{>}}},postaction={decorate}},
+  nd/.style = {circle,fill=black,inner sep=1.5pt,font=\tiny},
+  redarr/.style={->-, red, fill=none,>=stealth},
+  bluarr/.style={->-,blue,fill=none,>=stealth}
+}
+
+\title{Cayley graphs as covering spaces}
+\author{Arpon Raksit}
+\date{December 18, 2013 (original); \today\ (last edit).}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The definition}
+
+\begin{definition}
+  Let $G$ be a group and $S \subseteq G$ a generating set. The
+  \emph{cayley graph} $\Gamma(G,S)$ is defined to have:
+  \begin{itemize}
+  \item vertex set $G$,
+  \item (directed) edge set $\{(g,gs) \mid g \in G, s \in S\}$.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  We generally think of $\Gamma(G,S)$ as a \emph{decorated graph}, in
+  the sense that we label an edge $(g,gs)$ by $s$ (or, to make things
+  more fun, decorate it with some colour assigned to $s$).
+\end{remark}
+
+\begin{examples}
+  If $G = \Z$ then the generating sets $S = \{1\}$ and $S = \{1,-1\}$
+  produce the following cayley graphs, respectively.
+  \[
+  \begin{tikzpicture}
+    \node[nd] (o)  at (0,0) [label=below:$0$] {};
+    \node[nd] (l)  [left=of o, label=below:$-1$] {};
+    \node[nd] (ll) [left=of l, label=below:$-2$] {};
+    \node[nd] (r)  [right=of o, label=below:$1$] {};
+    \node[nd] (rr) [right=of r, label=below:$2$] {};
+
+    \node (lll) [left=of ll] {$\cdots$};
+    \node (rrr) [right=of rr] {$\cdots$};
+
+    \draw[bluarr] (lll) to (ll);
+    \draw[bluarr] (ll) to (l);
+    \draw[bluarr] (l) to (o);
+    \draw[bluarr] (o) to (r);
+    \draw[bluarr] (r) to (rr);
+    \draw[bluarr] (rr) to (rrr);
+  \end{tikzpicture}
+  \]
+  \[
+  \begin{tikzpicture}
+    \node[nd] (o)  at (0,0) [label=below:$0$] {};
+    \node[nd] (l)  [left=of o, label=below:$-1$] {};
+    \node[nd] (ll) [left=of l, label=below:$-2$] {};
+    \node[nd] (r)  [right=of o, label=below:$1$] {};
+    \node[nd] (rr) [right=of r, label=below:$2$] {};
+
+    \node (lll) [left=of ll] {$\cdots$};
+    \node (rrr) [right=of rr] {$\cdots$};
+
+    \draw[bluarr] (lll) to [bend left = 15] (ll);
+    \draw[bluarr] (ll) to [bend left = 15] (l);
+    \draw[bluarr] (l) to [bend left = 15] (o);
+    \draw[bluarr] (o) to [bend left = 15] (r);
+    \draw[bluarr] (r) to [bend left = 15] (rr);
+    \draw[bluarr] (rr) to [bend left = 15] (rrr);
+
+    \draw[redarr] (rrr) to [bend left = 15] (rr);
+    \draw[redarr] (rr) to [bend left = 15] (r);
+    \draw[redarr] (r) to [bend left = 15] (o);
+    \draw[redarr] (o) to [bend left = 15] (l);
+    \draw[redarr] (l) to [bend left = 15] (ll);
+    \draw[redarr] (ll) to [bend left = 15] (lll);
+  \end{tikzpicture}
+  \]
+  These simple examples serve to illustrate (literally!) that
+  $\Gamma(G,S)$ certainly depends not only on $G$, but also on $S$.
+
+  If $G = Q_8 = \langle -1,i,j,k \mid (-1)^2 = 1,\ i^2=j^2=k^2=ijk=-1
+  \rangle$ is the quaternion group then the generating set $S =
+  \{i,j\}$ produces the following cayley graph.
+  \[
+  \begin{tikzpicture}
+    \node[nd] (otl) at (0,0) [label=left:$k$] {};
+    \node[nd] (itl) [below right=of otl, label=left:$1$] {};
+    \node[nd] (itr) [right=of itl, label=right:$i$] {};
+    \node[nd] (otr) [above right=of itr, label=right:$-j$] {};
+    \node[nd] (ibl) [below=of itl, label=left:$-i$] {};
+    \node[nd] (obl) [below left=of ibl, label=left:$j$] {};
+    \node[nd] (ibr) [right=of ibl, label=right:$\!\!-1$] {};
+    \node[nd] (obr) [below right=of ibr, label=right:$-k$] {};
+
+    \draw[bluarr] (otr) to (otl);
+    \draw[bluarr] (otl) to (obl);
+    \draw[bluarr] (obl) to (obr);
+    \draw[bluarr] (obr) to (otr);
+    \draw[bluarr] (itl) to (itr);
+    \draw[bluarr] (itr) to (ibr);
+    \draw[bluarr] (ibr) to (ibl);
+    \draw[bluarr] (ibl) to (itl);
+
+    \draw[redarr] (itl) to (obl);
+    \draw[redarr] (itr) to (otl);
+    \draw[redarr] (ibl) to (obr);
+    \draw[redarr] (ibr) to (otr);
+    \draw[redarr] (otl) to (ibl);
+    \draw[redarr] (otr) to (itl);
+    \draw[redarr] (obl) to (ibr);
+    \draw[redarr] (obr) to (itr);
+  \end{tikzpicture}
+  \]
+  This non-abelian example serves to emphasise that edges are given by
+  \emph{right} multiplication by generators.
+\end{examples}
+
+\begin{nothing}
+  Observe that rather trivially each vertex in $\Gamma(G,S)$ has
+  both in-degree and out-degree equal to $|S|$ for any $G,S$.
+\end{nothing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Coverings}
+
+Here we discuss one way in which cayley graphs appear in the theory of
+covering spaces. This is really nice in that it gives some extremely
+geometric examples in which we can think about the (beautifully)
+abstract Galois theory of coverings more concretely.
+
+\begin{nothing}
+  Let $(X,*) \coloneqq \bigvee_{i=1}^n (S^1,*)$ be the bouquet of $n
+  \in \N$ circles. Recall that van Kampen tell us that $\pi_1(X,*)
+  \simeq F_n$, where $F_n$ is the free group on $n$ generators. Thus
+  the general theory implies that giving a connected Galois covering
+  $p : E \to X$ with automorphism group $G$ is equivalent to giving a
+  surjective homomorphism $F_n \to G$.\footnote{I was a bit loose with
+    my language here. I should really say that giving such a covering
+    \emph{up to isomorphism} is equivalent to giving such a
+    homomorphism \emph{up to automorphism of $G$}. This is a
+    restatement of the bijection between isomorphism classes of
+    connected Galois covers with normal subgroups of the fundamental
+    group of the base space.} But of course, by definition of $F_n$,
+  this is furthermore equivalent to specifying $n$ generators of
+  $G$. Now cayley graphs enter our thoughts, 
+\end{nothing}
+
+\begin{proposition}
+  Let $G$ be a group and $S = \{s_1,\ldots,s_n\} \subseteq G$ a
+  generating set.
+\end{proposition}
+
+\end{document}

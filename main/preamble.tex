@@ -1,0 +1,23 @@
+\usepackage[user,xr]{zref}
+
+\makeatletter
+\zref@newprop{day}{}
+\zref@addprop{main}{day}
+
+\let\oldzlabel\zlabel
+\renewcommand{\zlabel}[1]{%
+  \zref@setcurrent{day}{\theday}%
+  \oldzlabel{#1}%
+}
+\makeatother
+\let\label\zlabel
+
+\renewcommand{\ref}[1]{\zref{#1}}
+\newcommand{\fullref}[1]{\zref[day]{#1}, \zref{#1}}
+
+\newcommand{\theday}{}
+\renewcommand{\day}[1]{%
+  \section*{#1}%
+  \renewcommand{\theday}{#1}%
+  \setcounter{equation}{0}%
+}

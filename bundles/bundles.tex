@@ -1,0 +1,908 @@
+\input{../preamble}
+\input{preamble}
+
+\newcommand{\aut}{\operatorname{aut}}
+\newcommand{\saut}{\operatorname{\underline{aut}}}
+\newcommand{\Bun}{\operatorname{Bun}}
+\renewcommand{\E}{\mathcal{E}}
+\renewcommand{\F}{\mathcal{F}}
+\renewcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\renewcommand{\X}{\mathcal{X}}
+\renewcommand{\Y}{\mathcal{Y}}
+
+%--------------------------------------------------------------------%
+
+\title{Bundles}
+\author{Arpon Raksit}
+\date{June 17, 2014}
+
+\begin{document}
+\maketitle
+
+%--------------------------------------------------------------------%
+
+\section{Bundles on a space}
+
+We begin by defining the motivating notions from topology.
+
+\begin{notation}
+  In this section, $X$ denotes a topological space.
+\end{notation}
+
+\begin{definitions}
+  \label{fibre-bundle}
+  Let $F$ be a space and $G$ a topological group.
+  \begin{itemize}
+  \item An \emph{$F$-bundle} on $X$ is a map $\pi \c E \to X$ such
+    that there is an open cover $C = \{U_i\}$ of $X$ and
+    homeomorphisms $\kappa_i \c \pi^{-1}(U_i) \to U_i \times F$ over
+    $X$ for each $i$. In particular the fibre $\pi^{-1}(x)$ is
+    homeomorphic to $F$ for every $x \in X$.
+  \item Such data $(C,\kappa)$ is called a \emph{trivialisation} of
+    the fibre bundle. The \emph{transition maps} associated to a
+    trivialisation are the maps
+    \[
+    \tau_{ij} \c U_i \cap U_j \to \aut(F),
+    \]
+    where $\aut(F)$ denotes the group of homeomorphisms of $F$ with
+    itself, such that the automorphism $\kappa_j\kappa_i^{-1}$ of
+    $(U_i \cap U_j) \times F$ is given by $(u,f) \mapsto (u,
+    \tau_{ij}(u)(f))$.
+  \item Suppose $F$ is equipped with a left $G$-action. Then an
+    \emph{$(F,G)$-bundle}, or \emph{$F$-bundle with structure group
+      $G$}, on $X$ is data $(\pi,C,\kappa)$, where $\pi \c E \to X$ is
+    an $F$-bundle on $X$ and $(C,\kappa)$ is a trivialisation of $\pi$
+    for which the transition maps $\tau_{ij}$ factor through the
+    action $G \to \aut(F)$.
+  \item A \emph{principal $G$-bundle} is a $(G,G)$-bundle, where $G$
+    is a left $G$-space via left multiplication. Equivalently we may
+    say a principal $G$-bundle is an $(F,G)$-bundle where $G$ acts
+    simply transitively on $F$.
+  \end{itemize}
+\end{definitions}
+
+\begin{remark}
+  \label{principal-right-action}
+  Note that a \emph{trivial} principal $G$-bundle, $X \times G \to X$,
+  has both left and a right $G$-actions over\footnote{Recall that a
+    left or right $G$-action \emph{over $X$} on $\pi \c E \to X$ is an
+    action on $E$ which preserves the fibres of $\pi$.} $X$, via left
+  and right multiplication on $G$.  Since these two actions commute
+  and a principal $G$-bundle $\pi \c E \to X$ locally looks like $U
+  \times G \to U$ as a left $G$-space over $X$, the right actions on
+  $U \times G$ will glue together to give a global right $G$-action on
+  $E$ over $X$. Thus any principal $G$-bundle is a right $G$-space
+  over $X$.
+\end{remark}
+
+These are the type of objects we should have in the back of our mind
+throughout. We will generalise them using the language of sheaves,
+with the following definitions as our basic tools.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Bundles on a site}
+
+\begin{notation}
+  Until further notice, $\X$ denotes a site. If $\E$ is a sheaf on
+  $\X$ and $U \in \X$, let $\E|_U$ denote the restriction of $\E$ to
+  the site $\X_{/U}$.
+\end{notation}
+
+\begin{definition}
+  A \emph{covering} $C$ of $\X$ is a choice of covering $C(U) = \{i \c
+  U_i \to U\}$ of each $U \in \X$. Note that we denote the source of a
+  morphism $i \in C(U)$ by $U_i$.
+\end{definition}
+
+\begin{definitions}
+  Let $\G$ be a sheaf of groups on $\X$.
+  \begin{itemize}
+  \item A \emph{$\G$-sheaf} on $\X$ is a sheaf of sets $\E$ on $\X$
+    together with a right action $\E \times \G \to \E$ of $\G$. A
+    \emph{morphism of $\G$-sheaves} $\E \to \E'$ on $\X$ is a morphism
+    of sheaves of sets which commutes with the $\G$-actions
+    (i.e. which is $\G$-equivariant).
+  \item A \emph{$\G$-pseudotorsor} is $\G$-sheaf $\E$ such that for
+    all $U \in \X$ open, either $\E(U)$ is empty or the action of
+    $\G(U)$ on $\E(U)$ is simply transitive. A $\G$-pseudotorsor $\E$
+    is a \emph{$\G$-torsor} if moreover there is a covering $C$ of
+    $\X$ such that for all $U \in \X$, $\E(U_i)$ is nonempty for each
+    $i \in C(U)$. A \emph{morphism of $\G$-pseudotorsors or
+      $\G$-torsors} is simply a morphism of the underlying
+    $\G$-sheaves.
+  \item There is a \emph{trivial $\G$-torsor} on $\X$ given by $\G$
+    equipped with the action given by right multiplication. A
+    $\G$-sheaf $\E$ is called \emph{trivial} if there is an
+    isomorphism of $\G$-sheaves $\E \iso \G$.
+  \item Note that if $\E$ is a $\G$-sheaf, then $\E|_U$ is a
+    $\G|_U$-sheaf on $\X_{/U}$ for any $U \in \X$. If $P$ is some
+    property which can be enjoyed by $\H$-sheaves on $\Y$ for any
+    sheaf of groups $\H$ on any site $\Y$---e.g. the properties of
+    being a pseudotorsor, torsor, or trivial---then we say a
+    $\G$-sheaf $\E$ on $\X$ \emph{locally has the property} $P$ if
+    there is a covering $C$ of $\X$ such that for all $U \in \X$, the
+    $\G|_{U_i}$ sheaf $\E|_{U_i}$ has the property $P$ for each $i \in
+    C(U)$. The same goes for morphisms of $\G$-sheaves.
+  \end{itemize}
+\end{definitions}
+
+\begin{remark}
+  Note we should really have called these \emph{right} $\G$-sheaves,
+  $\G$-pseudotorsors, and $\G$-torsors, and we can analogously define
+  \emph{left} $\G$-sheaves, $\G$-pseudotorsors, and $\G$-torsors. We
+  will need to distinguish between the two later on (as we needed to
+  distinguish between left and right $G$-spaces for bundles above),
+  but until then we agree to leave the modifier ``right'' implicit.
+\end{remark}
+
+\begin{remarks}
+  \label{torsor-equiv}
+  Observe that any morphism of $\G$-torsors on $\X$ is an isomorphism,
+  since clearly it must locally be an isomorphism. So suppose $\E$ is
+  a $\G$-pseudotorsor on $\X$ with a section $s \in \E(U)$ for some $U
+  \in \X$. Then there is a morphism of $\G|_U$-torsors $\G|_U \to
+  \E|_U$ on $\X_{/U}$ given by
+  \[
+  \G(V) \ni 1 \mapsto s|_V \in \E(V), \quad (V \to U) \in
+  \X_{/U}.
+  \]
+  As just observed this must be an isomorphism. I.e., any section
+  locally trivialises a pseudotorsor, and in particilar a pseudotorsor
+  is a torsor if and only if it is locally trivial. In fact, any
+  $\G$-sheaf is a $\G$-torsor if and only if it's locally
+  trivial. This is immediate from the preceding discussion and the
+  following lemma, that being a pseudotorsor or torsor is a local
+  condition.
+\end{remarks}
+
+\begin{lemma}
+  \label{torsor-local}
+  If a $\G$-sheaf $\E$ on $\X$ is locally a $\G$-pseudotorsor
+  (resp. $\G$-torsor), then $\E$ is a $\G$-pseudotorsor
+  (resp. $\G$-torsor).
+\end{lemma}
+
+\begin{proof}
+  It's clear that the statement for $\G$-torsors follows immediately
+  from the statement for pseudotorsors, so we need only prove the
+  latter. Let $U \in \X$ such that $\E(V)$ is nonempty. By hypothesis
+  there is a covering $\{U_i \to U\}$ of $U$ such that $\E|_{U_i}$ is
+  a $\G|_{U_i}$-pseudotorsor for all $i$. Let $s, t \in \E(U)$. We
+  need to show there is a unique $g \in \G(U)$ such that $t =
+  sg$. For all $i,j$ Write
+  \[
+  U_{ij} \ce U_i \times_U U_j, \quad
+  s_i \ce s|_{U_i}, \quad s_{ij} \ce s|_{U_{ij}}, \quad
+  t_i \ce t|_{U_i}, \quad t_{ij} \ce t|_{U_{ij}}
+  \]
+  Since $\E|_{U_i}$ is a $\G|_{U_i}$-pseudotorsor, there is a unique
+  $g_i \in \G(U_i)$ such that $t_i = s_ig_i$; then
+  \[
+  s_{ij}g_i|_{V_{ij}} = t_i|_{V_{ij}} = t_{ij} = t_j|_{V_{ij}} =
+  s_{ij}g_j|_{V_{ij}},
+  \]
+  so uniqueness also implies $g_i|_{V_{ij}} = g_j|_{V_{ij}}$. Thus the
+  $g_i$ glue to $g \in \G(U)$. The equation $t = sg$ holds when
+  restricted to each $U_i$ and thus must hold on $U$, and the
+  uniqueness of $g$ is immediate from the uniqueness of the $g_i$.
+\end{proof}
+
+Let's bring things back down to bundles on spaces for a second.
+
+\begin{definition}
+  \label{map-sheaf}
+  To any space $Y$ we can associate a sheaf of sets $\u{Y}$ on the
+  space $X$: the \emph{sheaf of continuous maps to $Y$}, given by the
+  assignment
+  \[
+  U \mapsto \hom_\Top(U,Y), \quad U \subseteq X \text{ open}.
+  \]
+\end{definition}
+
+\begin{example}
+  \label{bundle-example}
+  Let $G$ be a topological group. Then $\u{G}$ is in fact a sheaf of
+  groups. If $\pi \c E \to X$ is a right $G$-space over $X$ then the
+  sheaf $\E$ of continuous sections of $\pi$ is a $\u{G}$-sheaf in a
+  canonical manner. By \pref{principal-right-action}, any principal
+  $G$-bundle gives an example of such a $\pi \c E \to X$. In this case
+  we will moreover have that $\E$ is locally trivial, and hence a
+  $\u{G}$-torsor by \pref{torsor-equiv}.
+\end{example}
+
+We next generalise the main definitions we began with in
+\pref{fibre-bundle}.\footnote{I'm not sure if there's standard
+  terminology for some of these things so I'm just sticking with the
+  topological terminology.}
+
+\begin{definition}
+  If $\E$ is a sheaf of sets on $\X$ then we have a \emph{sheaf of
+    automorphisms} $\saut(\E)$ on $\X$ which to every $U \in \X$
+  assigns the set $\aut(\E|_U)$ of isomorphisms $\E|_U \to \E|_U$ of
+  sheaves on $\X_{/U}$.
+\end{definition}
+
+\begin{remark}
+  If $G$ is a topological group and $F$ a space then giving a left
+  $G$-action on a space $F$ is equivalent to giving a continuous map
+  $G \to \aut(F)$. Observe similarly that if $\G$ is a sheaf of groups
+  on $\X$ and $\F$ a sheaf of sets on $\X$ then giving a left
+  $\G$-action on $\F$ is equivalent to giving a morphism of sheaves
+  $\G \to \saut(\E)$.
+\end{remark}
+
+\begin{definition}
+  \label{bundle-sheaf}
+  Let $\F$ be a sheaf of sets on $\X$ and $\G$ a sheaf of groups on
+  $\X$.
+  \begin{itemize}
+  \item An \emph{$\F$-bundle} on $\X$ with is a sheaf of sets $\E$ on
+    $\X$ which is locally isomorphic to $\F$, that is, there is a
+    covering $C$ of $\X$ such that for all $U \in \X$ we have
+    isomorphisms $\kappa_i \c \E|_{U_i} \to \F|_{U_i}$ for each $i \in
+    C(U)$.
+  \item Such data $(C,\kappa)$ is called a \emph{trivialisation} of
+    the bundle. The \emph{transition morphisms} associated to a
+    trivialisation are the automorphisms $\tau_{ij} \ce
+    \kappa_j\kappa_i^{-1}$ of $\F|_{U_i \times_U V_j}$, for $V \to U$
+    any morphism in $\X$ and $i \in C(U), j \in C(V)$.
+  \item Suppose $\F$ is equipped with a left $\G$-action. Then an
+    \emph{$(\F,\G)$-bundle}, or \emph{$\F$-bundle with structure group
+      $\G$}, on $\X$ is data $(\E,C,\kappa)$, where $\E$ is an
+    $\F$-bundle on $\X$ and $(C,\kappa)$ is a trivialisation of $\E$
+    for which the transition morphisms $\tau_{ij}$ lie in the image of
+    $\G(U_i \times_U V_j) \to \saut(\F)(U_i \times_U V_j)$.
+  \item A \emph{principal $\G$-bundle} on $\X$ is a $(\G,\G)$-bundle,
+    where $\G$ is a left $\G$-sheaf via left
+    multiplication. Equivalently we may say a principal $\G$-bundle is
+    an $(\F,\G)$-bundle where $\G$ acts simply transitively on $\F$
+    (on each $U \in \X$).
+  \end{itemize}
+\end{definition}
+
+Actually we could have left that last lemma out since
+\pref{principal-equals-torsor} below tells us we've already defined
+it!
+
+\begin{lemma}
+  \label{auto-left}
+  Suppose $\X$ has a final object $U$. Let $\G$ be a sheaf of groups
+  on $\X$. Then any morphism of right $\G$-sheaves $\tau \c \G \to \G$
+  is given by left multiplication by some $g \in \G(U)$:
+  \[
+  \tau_V \c\ \G(V) \ni h \mapsto g|_V \cdot h \in \G(V), \quad V \in
+  \X.
+  \]
+\end{lemma}
+
+\begin{proof}
+  Let $1_V \in \G(V)$ denote the unit for $V \in \X$. Let $g \ce
+  \tau_U(1_U) \in \G(U)$. For any $V \in \X$ and $h \in
+  \G(V)$, since $1_U|_V = 1_V$ and $\tau$ is a morphism of right
+  $\G$-sheaves, we have
+  \[
+  \tau_V(h) = \tau_V(1_V) \cdot h = \tau_U(1_U)|_V \cdot h = g|_V
+  \cdot h. \qedhere
+  \]
+\end{proof}
+
+\begin{proposition}
+  \label{principal-equals-torsor}
+  Let $\G$ be a sheaf of groups on $\X$. A sheaf of sets $\E$ on $\X$
+  is a principal $\G$-bundle if and only if it is a right $\G$-torsor.
+\end{proposition}
+
+\begin{proof}
+  ($\Rightarrow$) Let $\E$ be a principal $\G$-bundle. Then for any $U
+  \in \X$ we are given a covering $\{U_i \to U\}$ of $U$ with
+  isomorphisms $\E|_{U_i} \iso \G|_{U_i}$. Since the transition
+  morphisms on $\G|_{U_i \times_U U_j}$ are given by left
+  multiplication, and left and right multiplication commute, the right
+  actions of $\G(U_i)$ on $\E(U_i)$ via right multiplication will glue
+  together to give a right action of $\G(U)$ on $\E(U)$. Moreover
+  since for any morphism $V \to U$ in $\X$ the transition morphisms on
+  $\G|_{U_i \times_U V_j}$ are given by left multiplication, the same
+  commuting also implies these actions will define a consistent right
+  $\G$-action on $\E$.\footnote{This is precisely analogous to
+    \pref{principal-right-action}.} Thus $\E$ is a right $\G$-sheaf,
+  and since $\E$ is by construction locally trivial it must be a
+  $\G$-torsor by \pref{torsor-equiv}.
+
+  ($\Leftarrow$) Suppose $\E$ is a right $\G$-torsor. By
+  \pref{torsor-equiv} it is locally trivial: each $U \in \X$ has a
+  covering $\{U_i \to U\}$ with isomorphisms of right $\G$-sheaves
+  $\E|_{U_i} \iso \G|_{U_i}$. So $\E$ is a bundle sheaf with fibre
+  $\G$. Then that $\E$ has structure group $\G$ is immediate from
+  \pref{auto-left}, applied to $\X_{/U_i \times_U V_j}$ with final
+  object $U_i \times_U V_j$ for all morphisms $V \to U$ in $\X$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Comparisons}
+
+Now, we stated that our definition \pref{bundle-sheaf} of bundles and
+structure groups \emph{generalises} the topological notion
+\pref{fibre-bundle} of fibre bundles and structure groups. But we've
+been proceeding on analogies alone. So though the idea has been hinted
+at in \pref{bundle-example}, we haven't actually proved in what sense
+this is a generalisation. That is our first goal in this section. To
+set up this comparison we should define some categories.
+
+\begin{definitions}
+  \label{fibre-bundle-cat}
+  Let $G$ be a topological group and $F$ a left $G$-space. We define a
+  \emph{morphism of $(F,G)$-bundles on $X$} $(\pi,C,\kappa) \to
+  (\pi',C',\kappa')$ to be a continous map $\lambda \c E \to E'$ over
+  $X$ and a common refinement $\{V_j\}$ of $C = \{U_i\}$ and $C' =
+  \{U'_{i'}\}$ such that for any $i,i',j$ such that $V_j \subseteq
+  U_i$ and $V_j \subseteq U'_{i'}$, the map
+  \[
+  \begin{tikzcd}
+    V_j \times F \ar{r}{\kappa_i^{-1}} &
+    \pi^{-1}(V_j) \ar{r}{\lambda} &
+    \pi'^{-1}(V_j) \ar{r}{\kappa'_{i'}} &
+    V_j \times F
+  \end{tikzcd}
+  \]
+  is an automorphism $\alpha_j$ of the form $(v,f) \mapsto (v,
+  g(v)f)$, where $g$ is a map $V_j \to G$.
+
+  This defines the \emph{category $\Bun_G(X;F)$ of $G$-bundles on $X$
+    with fibre $F$}.
+\end{definitions}
+  
+\begin{definitions}
+  \label{bundle-sheaf-cat}
+  Let $\G$ be a sheaf of groups on $\X$ and $\F$ a left
+  $\G$-sheaf. Recall \pref{bundle-sheaf} that a $\G$-bundle on $\X$
+  with fibre $\F$ is a bundle $\E$ on $\X$ with fibre $\F$ equipped
+  with a trivialisation $\{(U_i \to U,\kappa_i)\}$ with transition
+  morphisms in $\G$. We define a \emph{morphism of $\G$-bundles on
+    $\X$ with fibre $\F$} to be a morphism $\lambda \c \E \to \E'$ of
+  sheaves on $\X$ and for each $U \in \X$ common refinements $\{V_j
+  \to U\}$ of $\{U_i \to U\}$ and $\{U'_{i'} \to U\}$ such that for
+  any $i,i',j$ with morphisms $V_j \to U_i$ and $V_j \to U'_{i'}$, the
+  morphism
+  \[
+  \begin{tikzcd}
+    \F|_{V_j} \ar{r}{\kappa_i^{-1}} &
+    \E|_{V_j} \ar{r}{\lambda} &
+    \E'|_{V_j} \ar{r}{\kappa'_{i'}} &
+    \F|_{V_j}
+  \end{tikzcd}
+  \]
+  is an automorphism $\alpha_j$ given by the action of an element of
+  $\G(V_j)$.
+
+  This defines the \emph{category $\Bun_\G(\X;\F)$ of $\G$-bundles on
+    $\X$ with fibre $\F$}. If $\X$ is the site of open sets in $X$
+  then we write $\Bun_\G(X;\F)$ for $\Bun_\G(\X;\F)$.
+\end{definitions}
+
+\begin{remark}
+  Note that $\Bun_G(X;F)$ and $\Bun_\G(\X;\F)$ are groupoids, i.e. all
+  morphisms of $G$-bundles with fibre $F$ and morphisms of
+  $\G$-bundles with fibre $\F$ are isomorphisms. These are the notions
+  of isomorphism we will adopt for these objects.
+\end{remark}
+
+\begin{remark}
+  It follows from \pref{auto-left} that if $\lambda \c \E \to \E'$ is
+  a morphism of sheaves on $X$ with $\E,\E'$ both principal
+  $\G$-bundles (i.e. $\G$-torsors), then $\lambda$ is a morphism in
+  $\Bun_\G(X;\G)$ if and only if $\lambda$ is a morphism of right
+  $\G$-sheaves.
+
+  After proving an analogous (and also easy) lemma for principal
+  $G$-bundles, we can also see that a continuous map $\lambda \c E \to
+  E'$ over $X$ between principal $G$-bundles $E \to X$ and $E' \to X$
+  is a morphism in $\Bun_G(X;G)$ if and only if it is $G$-equivariant.
+\end{remark}
+
+We now show that the topological $\Bun_G(X;F)$ is really a special
+case of the sheaf-theoretic $\Bun_\G(X;\F)$.
+
+\begin{definition}
+  Suppose $\X$ has a final object $U$.
+  \begin{itemize}
+  \item A collection of coverings $\{V_j \to V\}$ for each $V \in \X$
+    is called \emph{consistent} if for each $V \in \X$ the covering
+    $\{V_j \to V\}$ is obtained by pulling back the given covering
+    $\{U_i \to U\}$ via the unique morphism $V \to U$.
+  \item A trivialisation $\{(V_j \to V,\kappa_j)\}$ of bundle $\E$ on
+    $\X$ with fibre $\F$ is called \emph{consistent} if the underlying
+    collection of coverings $\{V_j \to V\}$ is consistent and for each
+    $V \in \X$ the isomorpisms $\kappa_j \c \E|_{V_j} \to \F|_{V_j}$
+    are obtained by restricting the isomorphisms $\kappa_i \c
+    \E|_{U_i} \to \F|_{U_i}$.
+  \end{itemize}
+
+\end{definition}
+
+\begin{lemma}
+  \label{iso-consistent}
+  Let $\G$ be a sheaf of groups on $\X$ and $\F$ a left $\G$-sheaf. If
+  $\X$ has a final object $U$, then every object of $\Bun_\G(\X;\F)$
+  is isomorphic to an object whose trivialisation is consistent.
+\end{lemma}
+
+\begin{proof}
+  Let $\E$ be a $\G$-bundle on $\X$ with fibre $\F$ and trivialisation
+  $\{(V_j \to V,\kappa_j)\}$. There is also a consistent
+  trivialisation of $\E$ given by pulling back the covering $\{(U_i
+  \to U, \kappa_i)\}$ of $U$ to each $V \in \X$. A common refinement
+  of the two is given by $\{U_i \times_U V_j\}$, and by definition
+  \pref{bundle-sheaf} of $\E$ having structure group $\G$ the
+  automorphism
+  \[
+  \begin{tikzcd}
+    \F|_{U_i \times_U V_j} \ar{r}{\kappa_i^{-1}} &
+    \E|_{U_i \times_U V_j} \ar{r}{\id} &
+    \E'|_{U_i \times_U V_j} \ar{r}{\kappa_{j}} &
+    \F|_{U_i \times_U V_j}
+  \end{tikzcd}
+  \]
+  is given by the action of an element of $\G(U_i \times_U V_j)$. Thus
+  $\id \c \E \to \E$ gives an isomorphism in $\Bun_\G(\X;\F)$, as
+  desired.
+\end{proof}
+
+Recall \pref{map-sheaf}
+that to a space $Y$ we may associate the sheaf $\u{Y}$ on $X$ of
+continuous maps to $Y$.
+
+\begin{proposition}
+  Let $G$ be a topological group and $F$ a left $G$-space. Taking
+  sheaves of sections defines an equivalence of categories
+  \[
+  \Bun_G(X;F) \iso \Bun_{\u{G}}(X;\u{F}).
+  \]
+\end{proposition}
+
+\begin{proof}
+  Before beginning, observe that the action of $G$ on $F$ certainly
+  defines an action of $\u{G}$ on $\u{F}$, so the right-hand category
+  is indeed defined.
+
+  We first show that taking sheaves of sections in fact defines a
+  functor $\Bun_G(X;F) \to \Bun_{\u{G}}(X;\u{F})$. Let $\pi \c E \to
+  X$ be a $G$-bundle with fibre $F$ and trivialisation
+  $\{(U_i,\kappa_i)\}$. Let $\E$ denote the sheaf of sections of
+  $\pi$. A section of $U \times F \to U$ is simply a continuous map $U
+  \to F$, so composition with the homeomorphisms $\kappa_i \c
+  \pi^{-1}(U_i) \to U_i \times F$ over $U_i$ determine isomorphisms
+  $\u{\kappa}_i \c \E|_{U_i} \to \u{F}|_{U_i}$. Then the resulting
+  transition morphism $\u{t}_{ij} \ce \u{\kappa}_i\u{\kappa}_j^{-1}$
+  is composition with the transition map $\kappa_i\kappa_j^{-1}$,
+  which is of the form
+  \[
+  (U_i \cap U_j) \times F \to (U_i \cap U_j) \times F, \quad
+  (u,f) \mapsto (u, t_{ij}(u)f)
+  \]
+  for some map $t_{ij} \c U_i \cap U_j \to G$ since $\pi$ has
+  structure group $G$. Thus $\u{t}_{ij}$ is given by the action of
+  $t_{ij} \in \u{G}(U_i \cap U_j)$. So indeed $\E$ equipped with the
+  trivialisation $\{(U_i, \u{\kappa}_i)\}$---or rather the the
+  consistent trivialisation induced by it---is a $\u{G}$-bundle with
+  fibre $\u{F}$.
+
+  This defines the functor on objects. For morphisms, a map $\lambda
+  \c E \to E'$ over $X$ defines (again via composition) a morphism of
+  sheaves $\u{\lambda} \c \E \to \E'$. To show that the common
+  refinement and condition defining a morphism in $\Bun_G(X;F)$ imply
+  the condition defining a morphism in $\Bun_{\u{G}}(X;\u{F})$, we
+  just apply the argument used above to show that $\E$ has structure
+  group $\u{G}$ if $\pi$ has structure group $G$.
+
+  We now sketch why this actually gives an equivalence:
+  \begin{itemize}
+  \item \emph{Essential surjectivity}: By \pref{iso-consistent} it
+    suffices to show a $\u{G}$-bundle $\E$ with fibre $\F$ with
+    \emph{consistent} trivialisation is in the essential image. Let
+    the consistent trivialisation be induced by a covering $\{U_i\}$
+    of $X$ with transition morphisms given by the action of $t_{ij}
+    \in \u{G}(U_i \cap U_j)$. We form a $G$-bundle $\pi \c E \to X$
+    with fibre $F$ by gluing the trivial bundles $U_i \times F$ over
+    each $U_i$ along the transition maps $t_{ij}$. (This will be
+    possible because they come from transitions on $\E$ and hence
+    satisfy the cocycle condition.)  It's clear that the sheaf of
+    sections of $\pi$ will be isomorphic to $\E$.
+  \item \emph{Full-faithfulness}: Observe that giving a morphism in
+    $\Bun_G(X;F)$ is equivalent to giving the common refinement
+    $\{V_j\}$ and automorphisms $\{\alpha_j\}$ in
+    \pref{bundle-sheaf-cat} such that $\alpha_j$ and $\alpha_{j'}$
+    agree on $V_j \cap V_{j'}$, since the $\alpha_j$ determine
+    $\lambda$. And the analogous statement holds for morphisms in
+    $\Bun_\G(X;\F)$ between bundles equipped with consistent
+    trivialisations. In both categories the automorphisms $\alpha_j$
+    determine and are determined by an element of $\u{G}(V_j)$, which
+    implies full-faithfulness. \qedhere
+  \end{itemize}
+\end{proof}
+
+So any work we do in studying $\Bun_\G(\X;\F)$ for general $\X,\G,\F$
+will a fortiori give results for $\Bun_G(X;F)$ for general $X,G,F$. As
+a first example we discuss ``change of fibre'' for bundles, which will
+allow us to relate bundles with arbitrary fibre to principal
+bundles. This is also known as the ``associated bundle'' construction.
+
+\begin{definition}
+  Let $\G$ be a sheaf of groups on $\X$ and $\F$ a $\G$-sheaf. The
+  action of $\G$ on $\F$ is called \emph{faithful} if the induced
+  morphism of sheaves $\G \to \saut(\F)$ is injective.
+\end{definition}
+
+\begin{proposition}
+  Let $\G$ be a sheaf of groups on $\X$ and $\F,\F'$ be two left
+  $\G$-sheaves. If the action of $\G$ on $\F$ is faithful, then there
+  is a functor
+  \[
+  \Theta_{\F,\F'} \c \Bun_\G(\X;\F) \to \Bun_\G(\X;\F').
+  \]
+  If the action of $\G$ on $\F'$ is also faithful then
+  $\Theta_{\F,\F'}$ and $\Theta_{\F',\F}$ are quasi-inverse
+  equivalences.
+\end{proposition}
+
+\begin{proof}
+  We first define $\Theta_{\F,\F'}$ on objects. Let $(\E,C,\kappa)$ be
+  an $(\F,\G$)-bundle on $\X$, with transition morphisms
+  $\tau_{U_i,V_j} \in \G(U_i \cap U_j)$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{appendices}
+  \section{Internal groups and groupoids}
+
+  \renewcommand{\C}{\mathcal{C}}
+  \begin{notation}
+    In this section, $\C$ is any category admitting finite limits,
+    including an initial object $* \in \C$.
+  \end{notation}
+
+  \begin{definitions}
+    An \emph{internal group} in $\C$ is an object $G \in \C$ together
+    with morphisms
+    \[
+    \mu \c G \times G \to G \qquad
+    \epsilon \c * \to G \qquad
+    \iota \c G \to G
+    \]
+    which make the diagrams
+    \[
+    \begin{tikzcd}
+      G \times G \times G \ar[r, "\id \times \mu"] \ar[d, "\mu \times
+      \id"] & G \times G \ar[d, "\mu"] \\ G \times G \ar[r, "\mu"] &
+      G
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      G \ar[r, "\id \times \o\epsilon"] \ar[d, "\o\epsilon \times
+      \id"] \ar[rd, "\id"] & G \times G \ar[d, "\mu"] \\ G \times G
+      \ar[r, "\mu"] & G
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      G \ar[r, "\id \times \iota"] \ar[d, "\iota \times \id"] \ar[rd,
+      "\o\epsilon"] & G \times G \ar[d, "\mu"] \\ G \times G \ar[r,
+      "\mu"] & G
+    \end{tikzcd}
+    \]
+    commute, where $\o\epsilon$ denotes the morphism $G \to *
+    \lblto{\epsilon} G$. (Of course we often leave the data
+    $\mu,\epsilon,\iota$ implicit in our notation.) A \emph{morphism
+      of internal groups} $(G,\mu_G,\epsilon_G,\iota_G) \to
+    (H,\mu_H,\epsilon_H,\iota_H)$ in $\C$ is a morphism $\phi \c G \to
+    H$ in $\C$ making the diagram
+    \[
+    \begin{tikzcd}
+      G \times G \ar[r, "\mu_G"] \ar[d, "\phi \times \phi"] & G \ar[d,
+      "\phi"] \\ H \times H \ar[r, "\mu_H"] & H
+    \end{tikzcd}
+    \]
+    commute. This defines the \emph{category $\Grp(\C)$ of internal
+      groups in $\C$}.
+  \end{definitions}
+  
+  \renewcommand{\R}{\mathrm{R}}
+  \renewcommand{\L}{\mathrm{L}}
+  \begin{definitions}
+    Let $(G,\mu,\epsilon,\iota)$ be an internal group in $\C$. A
+    \emph{right $G$-action} on an object $E \in \C$ is a morphism
+    $\alpha \c E \times G \to G$ making the diagrams
+    \[
+    \begin{tikzcd}
+      E \times G \times G \ar[r, "\id \times \mu"] \ar[d, "\alpha
+      \times \id"] & E \times G \ar[d, "\alpha"] \\ E \times G \ar[r,
+      "\alpha"] & G
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+      E \ar[r, "\id \times \o\epsilon"] \ar[dr, "\id"] & E \times G
+      \ar[d, "\alpha"] \\ & E
+    \end{tikzcd}
+    \]
+    commute, where $\o\epsilon$ denotes the morphism $E \to *
+    \lblto{\epsilon} G$. An object of $\C$ equipped with a right
+    $G$-action is called a \emph{right $G$-object} in $\C$. A
+    \emph{morphism of right $G$-objects} $(E_1,\alpha_1) \to
+    (E_1,\alpha_2)$ in $\C$ is a morphism $\phi \c E_1 \to E_2$ in
+    $\C$ making the diagram
+    \[
+    \begin{tikzcd}
+      E_1 \times G \ar[r, "\alpha_1"] \ar[d, "\phi \times \id"] & E_1
+      \ar[d, "\phi"] \\ E_2 \times G \ar[r, "\mu_H"] & E_2
+    \end{tikzcd}
+    \]
+    commute. This defines the \emph{category $\C_G^\R$ of right
+      $G$-objects in $\C$}.
+
+    We can analogously define \emph{left $G$-actions} and the
+    \emph{category $\C_G^\L$ of left $G$-objects in $\C$}.
+  \end{definitions}
+
+  \begin{examples}
+    The following table enumerates the basic examples of internal
+    groups and actions which appear in these notes.
+
+    \begin{table}[h]
+      \begin{tabular}{|p{90pt}|p{90pt}|p{90pt}|}
+        \hline
+        $\C$ & $\Grp(\C)$ & $\C_G^\R$ / $\C_G^\L$ \\
+        \hline
+        sets & groups & right/left $G$-sets \\[5pt]
+        topological spaces & topological groups & right/left
+        $G$-spaces \\[5pt]
+        sheaves of sets on a site $\X$ & sheaves of groups on $\X$ &
+        right/left $G$-sheaves on $\X$ \\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{examples}
+
+  \renewcommand{\Y}{\mathcal{Y}}
+  \renewcommand{\Z}{\mathcal{Z}}
+  \begin{definitions}
+    An \emph{internal category} $\Y$ in $\C$ consists of objects
+    $\Y_0, \Y_1 \in \C$ together with morphisms
+    \[
+    \sigma \c \Y_1 \to \Y_0 \qquad
+    \tau \c \Y_1 \to \Y_0 \qquad
+    \epsilon \c \Y_0 \to \Y_1 \qquad
+    \kappa \c \Y_1 \times_{\Y_0} \Y_1 \to \Y_1
+    \]
+    which make the diagrams
+    \[
+    \begin{tikzcd}
+      \Y_1 \underset{\Y_0}{\times} \Y_1 \ar[r, "\kappa"] \ar[d, "p_2"]
+      & \Y_1 \ar[d, "\sigma"] \\ \Y_1 \ar[r, "\sigma"] & \Y_0
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_1 \underset{\Y_0}{\times} \Y_1 \ar[r, "\kappa"] \ar[d, "p_1"]
+      & \Y_1 \ar[d, "\tau"] \\ \Y_1 \ar[r, "\tau"] & \Y_0
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_1 \underset{\Y_0}{\times} \Y_1 \underset{\Y_0}{\times} \Y_1
+      \ar[r, "\id \times \kappa"] \ar[d, "\kappa \times \id"] & \Y_1
+      \underset{\Y_0}{\times} \Y_1 \ar[d, "\kappa"] \\ \Y_1
+      \underset{\Y_0}{\times} \Y_1 \ar[r, "\kappa"] & \Y_1
+    \end{tikzcd}
+    \]
+    \[
+    \begin{tikzcd}
+      \Y_0 \ar[r, "\epsilon"] \ar[d, "\epsilon"] \ar[rd, "\id"] & \Y_1
+      \ar[d, "\sigma"] \\ \Y_1 \ar[r, "\tau"] & \Y_0
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}[column sep = large]
+      \Y_1 \ar[r, "(\epsilon\sigma) \times \id"] \ar[d, "\id \times
+      (\epsilon\tau)"] \ar[rd, "\id"] & \Y_1 \times_{\Y_0}
+      \Y_1 \ar[d, "\kappa"] \\ \Y_1 \times_{\Y_0} \Y_1
+      \ar[r, "\kappa"] & \Y_1
+    \end{tikzcd}
+    \]
+    commute. Here $\Y_1 \times_{\Y_0} \Y_1$ and $\Y_1 \times_{\Y_0}
+    \Y_1 \times_{\Y_0} \Y_1$ denote the pullbacks
+    \[
+    \begin{tikzcd}
+      \Y_1 \times_{\Y_0} \Y_1 \ar[r, "p_2"] \ar[d, "p_1"] & \Y_1
+      \ar[d, "\tau"] \\ \Y_1 \ar[r, "\sigma"] & \Y_0
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+      \Y_1 \times_{\Y_0} \Y_1 \times_{\Y_0} \Y_1 \ar[r, "q_2"] \ar[d,
+      "q_1"] & \Y_1
+      \times_{\Y_0} \Y_1 \ar[d, "\tau p_1"] \\ \Y_1 \ar[r, "\sigma"] &
+      \Y_0
+    \end{tikzcd}
+    \]
+    respectively. We say $\Y$ is an \emph{internal groupoid} in $\C$
+    if there is also a morphism
+    \[
+    \iota \c \Y_1 \to \Y_1
+    \]
+    making the diagrams
+    \[
+    \begin{tikzcd}
+      \Y_1 \ar[r, "\iota"] \ar[rd, "\sigma"] & \Y_1
+      \ar[d, "\tau"] \\ & \Y_1
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_1 \ar[r, "\iota"] \ar[rd, "\tau"] & \Y_1
+      \ar[d, "\sigma"] \\ & \Y_1
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_1 \ar[r, "\iota \times \id"] \ar[d, "\sigma"] & \Y_1
+      \underset{\Y_0}{\times} \Y_1 \ar[d, "\kappa"] \\ \Y_0 \ar[r,
+      "\epsilon"] & \Y_1
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_1 \ar[r, "\id \times \iota"] \ar[d, "\tau"] & \Y_1
+      \underset{\Y_0}{\times} \Y_1 \ar[d, "\kappa"] \\ \Y_0 \ar[r,
+      "\epsilon"] & \Y_1
+    \end{tikzcd}
+    \]
+    commute. A \emph{functor} $\phi \c \Y \to \Y'$ of internal
+    categories in $\C$ consists of morphisms $\phi_0 \c \Y_0 \to
+    \Y'_0$ and $\phi_1 \c \Y_1 \to \Y'_1$ in $\C$ making the diagrams
+    \[
+    \begin{tikzcd}
+      \Y_1 \ar[r, "\phi_1"] \ar[d, "\sigma"] & \Y'_1 \ar[d, "\sigma'"]
+      \\ \Y_0 \ar[r, "\phi_0"] & \Y'_0
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_1 \ar[r, "\phi_1"] \ar[d, "\tau"] & \Y'_1 \ar[d, "\tau'"]
+      \\ \Y_0 \ar[r, "\phi_0"] & \Y'_0
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_0 \ar[r, "\phi_0"] \ar[d, "\epsilon"] & \Y'_0 \ar[d,
+      "\epsilon'"] \\ \Y_1 \ar[r, "\phi_1"] & \Y'_1
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+      \Y_1 \underset{\Y_0}{\times} \Y_1 \ar[r, "\phi_1 \times \phi_1"]
+      \ar[d,
+      "\kappa"] & \Y'_1 \underset{\Y'_0}{\times} \Y'_1 \ar[d, "\kappa'"] \\
+      \Y_1 \ar[r, "\phi_1"] & \Y'_1
+    \end{tikzcd}
+    \]
+    commute. The functor $\phi$ is called \emph{fully faithful} if
+    \[
+    \begin{tikzcd}
+      \Y_1 \ar[r, "\phi_1"] \ar[d, "\sigma \times \tau"] & \Y'_1
+      \ar[d, "\sigma' \times \tau'"] \\ \Y_0 \times \Y_0 \ar[r, "\phi_0
+      \times \phi_0"] & \Y'_0 \times \Y'_0
+    \end{tikzcd}
+    \]
+    is a pullback square.
+  \end{definitions}
+
+  \begin{definitions}
+    \label{anafunctor}
+    Assume $\C$ is equipped with a collection of morphisms, called
+    \emph{covers}, such that:
+    \begin{enumerate}
+    \item \label{cover-iso} any isomorphism is a cover;
+    \item \label{cover-stab} compositions and pullbacks of covers are
+      covers;
+    \item \label{cover-eff} every cover is an effective epimorphism.
+    \end{enumerate}
+    Then a functor $\phi \c \Y \to \Y'$ of internal categories in $\C$
+    is called \emph{covering} if the morphism $\phi_0 \c \Y_0 \to
+    \Y'_0$ is a cover.
+
+    An \emph{anafunctor} $\Y \to \Y'$ of internal categories in $\C$
+    is a diagram of functors
+    \[
+    \begin{tikzcd}
+      \Z \ar[r, "\phi'"] \ar[d, "\phi"] & \Y' \\ \Y &
+    \end{tikzcd}
+    \]
+    where $\phi$ is fully faithful and covering. Using assumptions
+    \pref{cover-iso} and \pref{cover-stab} we can define identity and
+    composition of anafunctors, and hence obtain:
+    \begin{itemize}
+    \item \emph{the category $\Cat(\C)$ of internal categories and
+        anafunctors in $\C$};
+    \item \emph{the category $\Gpd(\C)$ of internal groupoids and
+        anafunctors in $\C$}.
+    \end{itemize}
+
+  \end{definitions}
+
+  \begin{remark}
+    Assumption \pref{cover-eff} is used to define natural
+    transformations of anafunctors, turning $\Cat(\C)$ and $\Gpd(\C)$
+    into $2$-categories, but we do not use this in these notes.
+  \end{remark}
+
+  \begin{convention}
+    When $\C$ is a topos, we always take the collection of
+    (effective) epimorphisms as our covers in \pref{anafunctor}.
+  \end{convention}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \section{Glueing sheaves}
+
+  \begin{notation}
+    In this section, $\X$ is a site.
+  \end{notation}
+
+  \begin{lemma}
+    \label{glueing}
+    Suppose we are given:
+    \begin{itemize}
+    \item a covering $C$ of $\X$;
+    \item for each $U \in \X$, sheaves $\E_i$ on $\X_{/U_i}$ for $i
+      \in C(U)$;
+    \item for each morphism $V \to U$ in $\X$, isomorphisms
+      \[
+      \Phi_{i,j} \c \E_i|_{U_i \times_U V_j} \to \E_j|_{U_i \times_U
+        V_j} \quad \text{for } i \in C(U), j \in C(V)
+      \]
+      such that given another morphism $W \to V$, the diagram
+      \begin{equation}
+        \label{glue-cocycle}
+        \begin{tikzcd}
+          \E_i|_{U_i \times_U V_j \times_V W_k}
+          \ar[rr, "\Phi_{i,k}"] \ar[dr, "\Phi_{i,j}"'] & &
+          \E_k|_{U_i \times_U V_j \times_V W_k}. \\
+          & \E_j|_{U_i \times_U V_j \times_V W_k}
+          \ar[ur, "\Phi_{j,k}"'] &
+        \end{tikzcd}
+      \end{equation}
+      is commutative for each $k \in C(W)$.
+    \end{itemize}
+    Then there is a sheaf $\E$ on $\X$ and for each $U \in \X$,
+    isomorphisms $\Psi_i \c \E|_{U_i} \isoto \E_i$ for $i \in
+    C(U)$ such that for any morphism $V \to U$ in $\X$, the diagram
+    \[
+    \begin{tikzcd}
+      \E_i|_{U_i \times_U V_j}
+      \ar[d, "\Psi_j^{-1}"] \ar[rr, "\Phi_{i,j}"] & &
+      \E_j|_{U_i \times_U V_j} \\
+      (\E|_{U_i})|_{U_i \times_U V_j} \ar[r, "\sim"] &
+      \E|_{U_i \times_U V_j} \ar[r, "\sim"] &
+      (\E|_{V_j})|_{U_i \times_U V_j} \ar[u, "\Psi_i"]
+    \end{tikzcd}
+    \]
+    is commutative for $i \in C(U), j \in C(V)$.
+  \end{lemma}
+
+  \begin{proof}
+    For $U \in \X$ we define
+    \[
+    \E(U) \ce \l\{ (s_i) \in \prod_{i \in C(U)} \E_i(U_i) :
+    \Phi_{i,j}(s_i) = s_j \text{ for } i,j \in C(U) \r\}.
+    \]
+    For a morphism $V \to U$ we define the restriction map $\E(U) \to
+    \E(V)$ by sending $(s_i)_{i \in C(U)}$ to $(t_j)_{j \in C(V)}$,
+    where $t_j \in \E_j(V_j)$ is defined by
+    \[
+    t_j|_{U_i \cap_U V_j} = s_i|_{U_i \cap_U V_j} \quad\text{for } i
+    \in C(U);
+    \]
+    note, $t_j$ exists and is unique by the hypothesis that
+    \pref{glue-cocycle} commutes and by the sheaf condition on $\E_j$.
+  \end{proof}
+\end{appendices}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\nocite{stacks}
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}

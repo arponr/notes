@@ -1,0 +1,542 @@
+\input{../preamble}
+\input{preamble}
+
+%--------------------------------------------------------------------%
+
+\title{Bordism}
+\author{Arpon Raksit}
+\date{June 12, 2014}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%--------------------------------------------------------------------%
+
+\renewcommand{\d}{\partial}
+\newcommand{\e}{\emptyset}
+\newcommand{\Mfd}{\mathrm{Mfd}}
+\renewcommand{\C}{\mathcal{C}}
+
+%--------------------------------------------------------------------%
+
+\section{Generalities}
+
+\begin{definition}
+  A \emph{bordism category} is a category $\C$ equipped with a functor
+  $\d \c \C \to \C$ and natural transformation $\iota \c \d \to
+  \id_\C$ such that:
+  \begin{enumerate}
+  \item $\C$ has finite coproducts $M \amalg N$, including an initial
+    object $\e$;
+  \item $\C$ is essentially small, i.e., has a small subcategory
+    $\C_0$ such that every $M \in \C$ is isomorphic to some $M_0 \in
+    \C_0$;
+  \item $\d$ and $\iota$ preserve coproducts;
+  \item $\d\e \simeq \e$ and $\d\d M \simeq \e$ for all $M \in \C$.
+  \end{enumerate}
+\end{definition}
+
+\begin{example} \label{main-example}
+  Hopefully the notation is suggestive enough so that this motivating
+  example is predictable. We take $\C$ to be the category $\Mfd$ of
+  compact smooth manifolds (with boundary) and smooth maps, $\d$ to be
+  the boundary, and $\iota$ to be the inclusion of the
+  boundary. Finite coproducts in $\Mfd$ are given by disjoint union,
+  and $\e$ is the empty manifold. Note, $\Mfd$ is essentially small
+  because every object can be embedded as a subset of $\R^\infty$.
+\end{example}
+
+In the remainder of this section we state some elementary facts about
+a general bordism category $\C$. Then in the next section we will
+address this main example (although in slightly more generality, by
+letting our manifolds have extra structure and working over a base
+space). We will in particular discuss at the end why this definition
+of bordism is equivalent to the more familiar one for manifolds.
+
+\begin{definitions}
+  \begin{itemize}[leftmargin=*]
+  \item We say $M,N \in \C$ are \emph{bordant}, and write $M \equiv
+    N$, if there exist $U,V \in \C$ such that $M \amalg \d U \simeq N
+    \amalg \d V$.
+  \item The relation $\equiv$ is called \emph{bordism}.
+  \item We say $M \in \C$ is \emph{closed} if $\d M \simeq \e$ and a
+    \emph{boundary} if $M \equiv \e$.
+  \end{itemize}
+\end{definitions}
+
+\begin{proposition}
+  \label{bordism-props}
+  Let $K,L,M,N \in \C$.
+  \begin{enumerate}
+  \item Bordism is an equivalence relation, whose equivalence classes
+    form a set.
+  \item $M \equiv N \implies \d M \simeq \d N$.
+  \item $\d M \equiv \e$.
+  \item \label{bordism-sum} $K \equiv M, L \equiv N \implies K \amalg
+    L \equiv M \amalg N$.
+  \item If $M \equiv N$ then $M$ is closed (resp. a boundary) if and
+    only if $N$ is closed (resp. a boundary).
+  \item \label{closed-sum} If $M,N$ are closed (resp. boundaries) then
+    $M \amalg N$ is closed (resp. a boundary).
+  \item If $M$ is a boundary then $M$ is closed.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  Easy. (Note that we required $\C$ to be essentially small precisely
+  so that the bordism classes form a set.)
+\end{proof}
+
+\begin{definition}
+  Let $\Omega(\C)$ denote the set of bordism classes of closed objects
+  of $\C$. By \pref{bordism-sum} and \pref{closed-sum}, coproduct in
+  $\C$ induces a commutative monoid structure on $\Omega(\C)$, with
+  identity given by $\e$.
+\end{definition}
+
+%--------------------------------------------------------------------%
+
+\section{Bordism of (structured) manifolds}
+
+\begin{definition}
+  \label{path-homotopy}
+  Suppose we have a space $U$, two points $u,v \in U$, and two paths
+  $p,q \c u \doubto v$. Recall that a \emph{homotopy of paths} $h \c p
+  \to q$ is a map $h \c I \times I \to U$ such that
+  \[
+  h(0,t) = p(t) \qquad
+  h(1,t) = q(t) \qquad
+  h(t,0) = u \qquad
+  h(t,1) = v
+  \]
+  for all $t \in I$. Applying this to a mapping space $U = \map(X,Y)$
+  gives a notion of \emph{homotopy of homotopies}.
+\end{definition}
+
+\begin{definitions}
+  \label{map-f-struct}
+  Let $f \c Y \to X$ and $g \c Z \to X$ be two maps. A \emph{homotopy
+    lift} of $g$ along $f$ is a pair $(\til g, h)$ where $\til g$ is a
+  map $Z \to Y$ and $h$ is a homotopy $f\til g \to g$. In other words,
+  this is the data of a homotopy-commutative diagram
+  \[
+  \begin{tikzcd}
+    & Y \ar[d, "f"] \\ Z \ar[ur, "\til g"] \ar[r, "g"] & X.
+  \end{tikzcd}
+  \]
+  We say two homotopy lifts $(\til g_1, h_1)$ and $(\til g_2, h_2)$
+  are \emph{equivalent} if there is a homotopy $\til h \c \til g_1 \to
+  \til g_2$ such that the diagram of homotopies
+  \begin{equation}
+    \label{lift-equiv}
+    \begin{tikzcd}
+      f\til g_1 \ar[rr, "f\til h"] \ar[dr, swap, "h_1"] & & f\til g_2
+      \\ & g \ar[ur, swap, "h_2^{-1}"] &
+    \end{tikzcd}
+  \end{equation}
+  is homotopy-commutative, i.e. there is a homotopy of homotopies
+  $h_2^{-1}h_1 \to f\til h$, as defined in \pref{path-homotopy}. An
+  equivalence class of homotopy lifts of $g$ along $f$ is called an
+  \emph{$f$-structure} on $g$.
+\end{definitions}
+
+\begin{remarks}
+  Suppose in \pref{map-f-struct} that $f$ is a fibration. We may then
+  make two additional observations:
+  \begin{enumerate}
+  \item
+    \label{strict-homotopy}
+    Suppose $k \c h_2^{-1}h_1 \to f\til h$ is a homotopy
+    exhibiting the equivalence of homotopy lifts $(\til g_1, h_1)$ and
+    $(\til g_2, h_2)$. Then $k$ can be lifted to a homotopy $\til k \c
+    \til h' \to \til h$ of homotopies $\til g_1 \doubto \til g_2$,
+    with $f\til h' = h_2^{-1}h_1$. By replacing $\til h$ with $\til
+    h'$, we may always make the diagram \pref{lift-equiv} commute on
+    the nose.
+  \item
+    \label{strict-lift}
+    Suppose given a homotopy lift $(\til g_1, h_1)$ of $g$ along
+    $f$. Since $f$ is a fibration, the homotopy $h_1 \c f\til g_1 \to
+    g$ can be lifted to a homotopy $\til h \c \til g_1 \to \til
+    g_2$. If we set $h_2 \c f\til g_2 = g \to g$ to be a the constant
+    homotopy, then by definition $(\til g_1, h_1)$ and $(\til g_2,
+    h_2)$ will be equivalent. Thus, any equivalence class of homotopy
+    lifts contains an element $(\til g, h)$ where $\til g$ lifts $g$
+    strictly and $h$ is the constant homotopy.
+
+    Now suppose $(\til g_1, h_1)$ and $(\til g_2, h_2)$ are two such
+    strict lifts (and constant homotopies). By the first observation,
+    they are equivalent if and only if there is a homotopy $\til h \c
+    \til g_1 \to \til g_2$ such that $f\til h$ is a constant homotopy,
+    that is, $\til h$ is a fibrewise homotopy. So finally, when $f$ is
+    a fibration, we may redefine an $f$-structure on $g$ to be a
+    fibrewise homotopy class of strict lifts $\til g$ of $g$ along
+    $f$.
+  \end{enumerate}
+\end{remarks}
+
+\newcommand{\st}{\mathrm{st}}
+\begin{notation}
+  For $M$ a compact smooth manifold of dimension $d$:
+  \begin{itemize}
+  \item Let $\T M$ denote the tangent bundle of $M$.
+  \item Let $\tau_M \c M \to \B\O(d)$ be a fixed map classifying $\T
+    M$.
+  \item Let $\tau_M^\st$ denote the composition $M \lblto{\tau_M}
+    \B\O(d) \to \B\O$, classifying $\T M$ stably.
+  \end{itemize}
+
+\end{notation}
+
+\begin{definition}
+  \label{mfd-f-struc}
+  Let $f \c B \to \B\O$ be any map. An \emph{$f$-structure} on a
+  compact smooth manifold $M$ is an $f$-structure on its stable
+  tangent bundle $\tau^\st_M \c M \to \B\O$, as defined in
+  \pref{map-f-struct}.
+\end{definition}
+
+% \begin{definition} \label{normal-bundle} Let $i \c M \to N$ be an
+%   immersion of smooth manifolds. The \emph{normal bundle} $\nu_i$ of
+%   $i$ (or of $M$ in $N$) is the vector bundle on $M$ defined by the
+%   short exact sequence $0 \to TM \to i^*TN \to \nu_i \to 0$.
+% \end{definition}
+
+% \begin{proposition} \label{normal-composition}
+%   Let $i \c L \to M$ and $j \c M \to N$ be immersions of smooth
+%   manifolds. Let $k \ce j \circ i$. Then there is a short exact
+%   sequence $0 \to \nu_i \to \nu_k \to i^*\nu_j \to 0$ of bundles on
+%   $L$.
+% \end{proposition}
+
+% \begin{proof}
+%   Since pullback of vector bundles is exact we have
+%   \[
+%   i^*\nu_j \simeq i^*\l(\f{j^*TN}{TM}\r) \simeq \f{k^*TN}{i^*TM} \simeq
+%   \f{k^*TN/TL}{i^*TM/TL} \simeq \f{\nu_k}{\nu_i}. \qedhere
+%   \]
+% \end{proof}
+
+% \begin{definition} \label{stable-normal}
+%   Let $M$ be a compact smooth manifold. let $\xi \in [M, BO]$ be the
+%   homotopy class classifying the tangent bundle $TM \to M$
+%   (stably). The \emph{stable normal bundle} $\nu_M$ of $M$ is defined
+%   as the inverse of $\xi$ in the group $[M, BO] \simeq \til{KO}(M)$.
+
+%   Note if $i \c M \to \R^n$ is an immersion (which always exists, as
+%   remarked in \pref{main-example}) then by definition we have a short
+%   exact sequence
+%   \[
+%   0 \to TM \to i^*T\R^n \to \nu_i \to 0.
+%   \]
+%   Since $T\R^n$ is trivial it follows that $\nu_i$ is inverse to $TM$
+%   in $\til{KO}(M)$. Thus the stable classifying map $M \to BO$ of
+%   $\nu_i$ determines the homotopy class of the stable normal bundle
+%   $\nu_M$ (hence the terminology). But note that, by definition,
+%   $\nu_M$ does not depend on the choice of dimension $n$ and immersion
+%   $i$.
+% \end{definition}
+
+% \begin{definitions} \label{f-structure} Let $f \c B \to BO$ be a
+%   fibration. Let $\xi$ be a vector bundle on a compact smooth manifold
+%   $M$. Let $g \c M \to BO$ be a map classifying $\xi$. An
+%   \emph{$f$-structure} on $\xi$ is the fibrewise homotopy\footnote{A
+%     \emph{fibrewise homotopy} of lifts $\til g, \til g'$ is a homotopy
+%     $h_t \c M \to B$ such that $f \circ h_t = g$ for all $t \in
+%     [0,1]$.}  class $[\til g]$ of a lift in the diagram
+%   \begin{equation} \label{f-structure-lift}
+%     \begin{tikzcd}
+%       \ & B \ar{d}{f} \\ M \ar[dashed]{ur}{\til g} \ar{r}{g} & BO.
+%     \end{tikzcd}
+%   \end{equation}
+%   The $f$-structure only depends on the homotopy class $[g]$, or
+%   equivalently on the stable bundle determined by $\xi$. This will be
+%   explained below in \pref{f-structure-explanation} after we state some
+%   examples to keep in mind.
+
+%   An \emph{$f$-structure} on a compact smooth manifold $M$ is an
+%   $f$-structure on its stable normal bundle $\nu_M$.
+% \end{definitions}
+
+\begin{examples}
+  \label{f-examples}
+  Why should we care about lifting against maps $B \to \B\O$? Well,
+  maybe the primary class of examples will answer that. Whenever we
+  have a morphism of topological groups $\phi \c G \to \O$ we get a
+  fibration $f \ce \B\phi \c \B G \to \B\O$. In particular if we have
+  a sequence of morphisms
+  \[
+  \begin{tikzcd}
+    G(d_0) \ar[r] \ar[d] & G(d_1) \ar[r] \ar[d] & G(d_2) \ar[r] \ar[d]
+    & \cdots \ar[d] \\ \O(d_0) \ar[r] & \O(d_1) \ar[r] & \O(d_2)
+    \ar[r] & \cdots
+  \end{tikzcd}
+  \]
+  for some increasing cofinal sequence $\{d_n\} \subseteq \Z_{\ge 0}$,
+  we get a morphism
+  \[
+  \colim_n G(d_n) \ec G \to \O \ce \colim_n \O(n).
+  \]
+  
+  In this situation, we think of a map $g \c Z \to \B\O$ as
+  classifying a stable bundle on $Z$ (assuming $Z$ is, say,
+  paracompact). Then a homotopy lift of $g$ along $f = \B\phi$ is
+  precisely a reduction of structure group from $\O$ to $G$, and
+  equivalence of homotopy lifts is precisely equivalence of
+  reductions. Accordingly, in this situation we will abusively refer
+  to $f$-structures as \emph{$G$-structures}. Here are some important
+  subexamples:
+
+  \newcommand{\SO}{\mathrm{SO}}
+  \begin{enumerate}
+  \item The most basic case comes from the identity $\id \c \O \to
+    \O$, inducing $f = \id \c \B\O \to \B\O$. It follows from
+    \pref{strict-lift} that any map $Z \to \B\O$, in particular
+    $\tau^\st_M \c M \to \B\O$, has a unique $\O$-structure.
+  \item Less trivially we have the inclusion $\SO \to \O$ coming from
+    the inclusions $\SO(d) \to \O(d)$. This induces the two-to-one
+    cover $f \c \B\SO \to \B\O$ (which arises from a choice of
+    orientation on linear subspaces when we construct $\B\SO$ and
+    $\B\O$ via the grassmanians).
+
+    If $Z$ is compact, any $g \c Z \to \B\O$ factors as $Z \lblto{g_d}
+    \B\O(d) \to \B\O$ for some $d \in \Z_{\ge 0}$. Then a strict lift
+    of $g$ along $f$ is equivalent to a strict lift of $g_d$ along
+    $f_d \c \B\SO(d) \to \B\O(d)$, since $f_d \c \B\SO(d) \to \B\O(d)$
+    is just the pullback of $f$ along the inclusion $\B\O(d) \to
+    \B\O$. Similarly, a fibrewise homotopy of strict lifts of $g$ will
+    factor through some finite stage $f_{d+k} \c \B\SO(d+k) \to
+    \B\O(d+k)$. It follows that an $\SO$-structure on $g$ is
+    equivalent to an equivalence class of reductions of structure
+    group to $\SO(d)$ of the $d$-dimensional bundle $\xi$ classified
+    by $g_d$. This in turn is well known to be equivalent to orienting
+    $\xi$.
+
+    Since orienting a compact smooth manifold $M$ is equivalent to
+    orienting its tangent bundle $\T M$, applying the above discussion
+    to $\tau^\st_M$ shows that giving an $\SO$-structure on $M$ is
+    equivalent to giving an orientation on $M$.
+  \item The inclusions $\U(d) \to \O(2d)$ determine a morphism $\U \to
+    \O$ and hence a fibration $\B\U \to \B\O$. A $\U$-structure on a
+    manifold is called a \emph{stable almost-complex structure}.
+  \end{enumerate}
+\end{examples}
+
+I think it's worth discussing for a bit why \pref{f-structure} should
+be stated in the way it is. It certainly confused me for a while. We
+will explain this by considering the case $B = BSO$, and actually
+proving what we just claimed: giving an $SO$-structure on a compact
+smooth manifold $M$ is equivalent to giving an orientation on $M$.
+
+\begin{lemma} \label{normal-orientation}
+  Let $i \c M \to \R^m$ be an immersion. Then:
+  \begin{enumerate}
+  \item Orienting the normal bundle $\nu_i$ is equivalent to orienting
+    $M$.
+  \item If $j \c M \to \R^n$ is a another immersion, there is a
+    bijection
+  \end{enumerate}
+\end{lemma}
+
+\begin{remarks} \label{f-structure-explanation}
+  As claimed in \pref{f-examples}(ii), Given an immersion $i \c M \to
+  \R^n$, orienting $\nu_i$ is equivalent to orienting $TM$ (by
+  \pref{normal-bundle} of $\nu_i$ and the fact that $\R^n$ has a
+  canonical orientation) which in turn is equivalent to orienting
+  $M$. This is the essential point, but there are still some details
+  to work through since we are working with the \emph{stable} normal
+  bundle.
+
+  Recall that:
+  \begin{itemize}
+  \item we can always find such an immersion $i$;
+  \item an orientation on a $k$-dimensional vector bundle is
+    equivalent to a reduction of its structure group to $SO(k)$,
+    i.e. a lift from the classifying map to $BO(k)$ to a map to
+    $BSO(k)$.
+  \end{itemize}
+  Since $\nu_i$ determines $\nu_M$ this implies than an orientation on
+  $M$ indeed determines a lift in \pref{f-structure-lift}, and hence a
+  $BSO$-structure on $M$. For the other direction, note that since $M$
+  is compact, a lift $\til g \c M \to BSO$ factors through some
+  $BSO(k)$, and thus a lift determines (for large enough embedding
+  dimension $n$) a reduction of the structure group of $\nu_i$ to
+  $SO(k)$, and hence an orientation on $M$.
+
+  However, these correspondences aren't really well-defined, since we
+  have made choices. I won't discuss why these are independent of the
+  choice of immersion $i$
+\end{remarks}
+
+\begin{proposition} \label{trivial-normal}
+  Let $i \c M \to N$ be an immersion of compact smooth manifolds whose
+  normal bundle $\nu_i$ is trivial. Then $\nu_M = i^*\nu_N$, and for
+  any fibration $f \c B \to BO$, an $f$-structure on $N$ induces a
+  canonical $f$-structure on $M$.
+\end{proposition}
+
+\begin{proof}
+  Choose an immersion $j \c N \to \R^n$ and let $k \ce j \circ i$. By
+  \pref{normal-composition} we have an exact sequene $0 \to \nu_i \to
+  \nu_k \to i^*\nu_j \to 0$. Since $\nu_i$ is trivial, $\nu_k$ and
+  $i^*\nu_j$ are equal in $\til{KO}(M) \simeq [M,BO]$. By the discussion
+  in \pref{stable-normal} we know then that if we take a map $N \to BO$
+  classifying the stable normal bundle $\nu_N$, then its restriction
+  to $M$ will classify $\nu_M$, as desired. It follows immediately
+  that any lift defining an $f$-structure on $N$ canonically restricts
+  to a lift defining an $f$-structure on $M$.
+\end{proof}
+
+Finally we may define the bordism categories of manifolds, whose
+bordism classes we will analyse in future posts.
+
+\begin{definition}
+  Let $X$ be a space and $f \c B \to BO$ a fibration. The category
+  $\Mfd^f_X$ of \emph{compact smooth manifolds with $f$-structure
+    over $X$*} is defined as follows:
+  \begin{itemize}
+  \item objects are continuous maps $M \to X$ where $M$ is a compact
+    smooth manifold equipped with an $f$-structure (note we will often
+    abuse as usual and refer to an object of simply by the underlying
+    manifold $M$);
+  \item morphisms are commutative diagrams
+    \[
+    % \begin{xy}
+    %   \xymatrix {
+    %   M \ar[rr]^i \ar[dr] & & N \ar[dl] \\
+    %   & X &
+    % }
+    % \end{xy}
+    \]
+    where $i$ is a smooth immersion whose normal bundle $\nu_i$ is
+    trivial, such that the $f$-structure induced by $i$ on $M$ by
+    \pref{trivial-normal} agrees with its equipped $f$-structure.
+  \end{itemize}
+
+  We claim $\Mfd^f_X$ is in fact a bordism category. Generalising
+  \pref{main-example}, we still take $\d$ to be the boundary and
+  $\iota$ to be the inclusion of the boundary, noting that the
+  inclusion $\d M \to M$ always has trivial normal
+  bundle\footnote{That $\d M \to M$ has trivial normal bundle can be
+    seen by the existence of a collar: an open neighbourhood $U
+    \subseteq M$ of $\d M$ isomorphic to $\d M \times [0, 1)$ with $\d
+    M$ identified with $\d M \times \{0\}$. For $\d M \times \{0\} \to
+    \d M \times [0,1)$ certainly has trivial normal bundle, and the
+    open embedding $U \to M$ obviously has zero-dimensional normal
+    bundle, so then it's immediate from \pref{normal-composition}. See,
+    e.g., [Kosinski][kosinski] for a proof of the existence of a
+    collar.} so that $M$ induces a canonical $f$-structure on $\d M$
+  by \pref{trivial-normal}. Moreover:
+  \begin{enumerate}
+  \item Obviously the unique map from the empty manifold $\e \to X$
+    gives the initial object. We claim disjoint union still gives
+    finite coproducts. Given maps $M \to X$ and $N \to X$ there is of
+    course a canonical map $M \amalg N \to X$. Moreover $[M \amalg N,
+    B] \simeq [M, B] \times [N, B]$ so $f$-structures on $M$ and $N$
+    induce a canonical $f$-structure on $M \amalg N$. The maps $M \to
+    M \amalg N$ and $N \to M \amalg N$ are open embeddings, so are
+    clearly immersions with trivial (zero-dimensional) normal
+    bundles. It's not difficult to see then that $M \amalg N \to X$
+    really does define a coproduct in $\Mfd^f_X$.
+  \item Essential smallness follows again from the embedding theorem.
+  \item Clearly $\d$ and $\iota$ preserve coproducts.
+  \item It's also evident that $\d\e \simeq \e$ and $\d\d M \simeq \e$.
+  \end{enumerate}
+  So indeed we have a bordism category.
+\end{definition}
+
+\begin{remark}
+  One might be concerned that we haven't properly generalised
+  \pref{main-example} since we have restricted our set of
+  morphisms. But since we have the same coproduct and boundary, and we
+  only need to care about \emph{isomorphisms} to define the set of bordism
+  classes $\Omega(\Mfd^f_X)$, indeed setting $X$ to be a point and $f
+  \ce \id \c BO \to BO$ recovers the same bordism classes
+  $\Omega(\Mfd)$ of compact smooth manifolds.
+\end{remark}
+
+We finish by assuring ourselves that we aren't working with some
+ridiculous notion of bordism, as promised above. Fix a space $X$ and
+fibration $f \c B \to BO$ for the remainder.
+
+\begin{lemma} \label{cross-interval}
+  Suppose $M \in \Mfd^f_X$ is closed. Then $M \times I$ has the
+  structure (not necessarily unique) of an object of $\Mfd^f_X$ such
+  that the inclusion $i \c M \simeq M \times \{0\} \inj M \times I$
+  determines a morphism in $\Mfd^f_X$.
+\end{lemma}
+
+\begin{proof}
+  Since $M$ is closed, $M \times I$ is a compact smooth manifold and
+  composition with projection $M \times I \to M \to X$ gives us a map
+  to $X$. Now, $\nu_i$ is clearly trivial, so by \pref{trivial-normal}
+  we have $\nu_M = i^*\nu_{M \times I}$. I.e., we have a commutative
+  diagram
+  \[
+  % \begin{xy}
+  %   \xymatrix{
+  %     M \ar[r]^{\til g} \ar[d]_i \ar[dr]^g & B \ar[d]^f \\
+  %     M \times I \ar[r]^h & BO
+  %   }
+  % \end{xy}
+  \]
+  where $g$ classifies $\nu_M$, $h$ classifies $\nu_{M \times I}$, and
+  $\til g$ gives the $f$-structure on $M$. Since $f$ is a fibration
+  there exists a lift $\til h \c M \times I \to B$ in the diagram. It's
+  then clear that the $f$-structure $[\tilde h]$ on $M \times I$ is as
+  desired.
+\end{proof}
+
+\begin{definition} \label{inverse}
+  Let $M \in \Mfd^f_X$ be closed. Let $M \times I \in
+  \Mfd^f_X$ be as given by \pref{cross-interval}. Observe that
+  \[
+  \d(M \times I) = M \times \{0\} \amalg M \times \{1\} \simeq M \amalg M'
+  \]
+  where $M'$ has the same underlying manifold and map to $X$ as $M$,
+  but possibly a different $f$-structure. We call $M'$ an *inverse* of
+  $M$; this is not unique since the $f$-structure on $M \times I$ is
+  not unique, but we abusively denote any inverse by $-M$. (This
+  terminology and notation will be earned below.)
+\end{definition}
+
+\begin{remark} \label{inverse-props}
+  One may check easily that the following properties hold for $M,N \in
+  \Mfd^f_X$:
+  \begin{enumerate}
+  \item If we have an isomorpshism $M \to N$ then the canonical
+    morphisms $M \times I \to N \times I$ and $-M \to -N$ are
+    isomorphisms.
+  \item Inverse respects coproducts: $-(M \amalg N) \simeq -M \amalg
+    -N$.
+  \item Inverse is an involution: $-(-M) \simeq M$.
+  \end{enumerate}
+\end{remark}
+
+\begin{proposition}
+  Let $M,N \in \Mfd^f_X$ be closed. Then $M \equiv N$ if and
+  only if there exists $W \in \Mfd^f_X$ such that $M \amalg -N
+  \simeq \d W$ for some inverse $-N$ of $N$.
+\end{proposition}
+
+\begin{proof}
+  ($\Rightarrow$) Assume $M \amalg -N \simeq \d W$. By \pref{inverse} we
+  have $N \times I \in \Mfd^f_X$ such that $\d(N \times I) \simeq
+  -N \amalg N$. Then
+  \[
+  M \amalg \d(N \times I) \simeq M \amalg -N \amalg N \simeq \d W
+  \amalg N
+  \]
+  so $M \equiv N$.
+
+  ($\Leftarrow$) Assume $M \equiv N$, so $M \amalg \d U \simeq N
+  \amalg d V$.
+\end{proof}
+
+%--------------------------------------------------------------------%
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}

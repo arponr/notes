@@ -1,0 +1,154 @@
+\input{../../preamble}
+\input{preamble}
+
+\title{CS 229, Project Notes}
+\author{Arpon Raksit}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\part{Unified theory of sparse dimensionality reduction
+  \cite{bourgain-2013}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Background}
+
+Recall the JL lemma: for a finite set $T \subset S^{n-1} \subset \R^n$
+and $\epsilon \in (0, 1/2)$ there exists $m \lesssim
+\log(|T|)/\epsilon^2$ and a linear map $\Phi : \R^n \to \R^m$, i.e., a
+matrix $\Phi \in \R^{m \times n}$, such that $\sup_{x \in T} |\|\Phi
+x\|^2 - 1| < \epsilon$.
+
+\medskip
+In fact Gordon has shown it is possible to take $m \lesssim
+(\gamma_2(T)^2+1)/\epsilon^2$ for certain $\Phi$, where $\gamma_2$ is
+to be defined later.
+
+\medskip
+The general strategy is to define a suitable \emph{distribution} of
+$\Phi$ so that the desired inequality holds in expectation:
+\begin{equation}
+  \label{dist-JL}
+  \E_\Phi \sup_{x \in T} |\|\Phi x\|^2 - 1| < \epsilon.
+\end{equation}
+
+\medskip
+For purposes of efficiency, it is desirable to have $\Phi$ be sparse,
+in particular to have a small number $s$ of nonzero entries per column
+to support fast matrix-vector multiplication.
+
+\medskip
+The best result so far in this direction is $s \lesssim
+\log(|T|)/\epsilon$ and $m \lesssim \log(|T|)/\epsilon^2$, due to
+Kane-Nelson. The construction, called the SJLT (sparse JL transform),
+is simple: each column of $\Phi$ has $s$ nonzero entries, their
+locations chosen uniformly at random without replacement,
+independently of the other columns, and their values uniformly and
+independently chosen from $\pm 1$.
+
+\begin{question}
+  What conditions must $s$ and $m$ satisfy, in terms of the geometry
+  of $T$, for $\Phi$ the SJLT to satisfy (\ref{dist-JL})?
+\end{question}
+
+The paper gives the following answer to the question, which
+qualitatively explains known results about sparse dimensionality
+reduction. Here ``qualitatively'' means that the bounds are correct up
+to a $\log^c(n)$ factor in $m$ and $\log^c(n)/\epsilon$ factor in $s$.
+
+\begin{theorem}
+  The following conditions are sufficient:
+  \begin{align*}
+    m &\gtrsim \log^3(m)\log^6(n)/\epsilon^2 +
+    \log^3(m)\log^4(n)\gamma_2(T)^2/\epsilon^2, \\ s &\gtrsim
+    \log^6(m)\log^4(n)/\epsilon^2, \\ \epsilon &\ge
+    \log^2(m)\log^{5/2}(n) \max_{q \le \frac{m}{s} \log(s)}
+    \frac{1}{\sqrt{qs}} \left[ \E_\eta \left( \int \sup_{x \in T}
+      \left| \left\langle x, \sum_{j=1}^n \eta_j g_j(\omega) e_j
+      \right\rangle \right| \,d\omega \right)^q \right]^{1/q},
+  \end{align*}
+  where $g_j(\omega)$ are gaussian, $\eta_j$ are iid bernoulli of
+  expectation $qs/(m\log(s))$.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Setting up}
+
+\renewcommand{\A}{\mathcal{A}}
+\renewcommand{\N}{\mathcal{N}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\gmw}{\operatorname{gmw}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\trip}{\interleave}
+
+\begin{enumerate}[leftmargin=*]
+\item Fix once and for all $T \subseteq S^{n-1}$ and $\epsilon \in
+  (0,1/2)$ as in (\ref{dist-JL}).
+\item By default, $\|{-}\|$ denotes $\ell_2$ norm for vectors and
+  operator norm (with respect to $\ell_2$) for matrices.
+\item The convex hull of $A \subseteq \R^n$ is denoted $\conv(A)$.
+\item For $A \subseteq \R^n$ the norm $\|{-}\|_A$ on $\R^n$ is defined
+  by $\|x\|_A \coloneqq \sup_{a \in A} |\langle x,a \rangle|$. Note
+  that $\|{-}\|_A = \|{-}\|_{\conv(A)}$.
+\item For a norm $\|{-}\|_X$ on $\R^n$, denote the induced metric by
+  $d_X$ and diameter in this metric by $\diam_X$.
+\item For $S \subset \R^n$ and $u > 0$, denote by $\N(S, \|{-}\|_X,
+  u)$ the minimum number of $d_X$-balls of radius $u$ centred at
+  points in $S$ required to cover $S$.
+\item For $S \subset \R^n$ bounded:
+  \begin{enumerate}
+  \item Define the \emph{gaussian mean width} of $S$ by $\gmw(S)
+    \coloneqq \E_g \sup_{x \in S} \langle g,x \rangle$ with $g$ a
+    gaussian vector with identity covariance matrix.
+  \item Define the \emph{Talagrand functional} for $p \ge 1$ by
+    \[
+    \gamma_p(S, \|{-}\|_X) \coloneqq \inf_{\{S_r\}} \sup_{x \in S}
+    \sum_{r=0}^\infty 2^{r/p} d_X(x,S_r),
+    \]
+    where the infimum is over all $S_0 \subseteq S_1 \subseteq \cdots
+    \subseteq S$ with $|S_0| = 1$ and $|S_r| \le 2^{2^r}$.
+  \item Note that $\gmw(S) \sim \gamma_2(S,\|{-}\|_2)$, with constant
+    independent of $S$.
+  \end{enumerate}
+\item We set $\Phi$ to be the SJLT matrix: $\Phi_{i,j} \coloneqq
+  \frac{1}{\sqrt{s}} \delta_{i,j} \sigma_{i,j}$, with $\sigma_{i,j}
+  \in \{-1,1\}$ and $\delta_{i,j} \in \{0,1\}$ such that $\sum_{i=1}^m
+  \delta_{i,j} = s$.
+\item For $x \in T$ define the $m \times mn$ matrix $A_{\delta,x}
+  \coloneqq \frac{1}{\sqrt{s}} \sum_{i=1}^m \sum_{j=1}^n \delta_{i,j}
+  x_j e_i \otimes e_{i,j}$. So you have $m$ adjacent $m \times n$
+  matrices---in the $i$-th one, only the $i$-th row has possibly
+  nonzero entries, and those are the $\delta_{i,j}x_j$.
+  \begin{enumerate}
+  \item Then if you write $\sigma = (\sigma_{i,j})$ as a vector, you
+    have $\|\Phi x\| = \|A_{\delta,x} \sigma\|$.
+  \item Writing $\A_\delta \coloneqq \{A_{\delta,x} \mid x \in T\}$,
+    it follows that
+    \[
+    \sup_{x \in T} | \|\Phi x\|^2 - 1 | = \sup_{A \in \A_\delta} |
+    \|A\sigma\|^2 - \E\|A\sigma\|^2 |,
+    \]
+    whose expectation is bounded up to a constant by
+    \[
+    \gamma_2(\A_\delta)^2 + \gamma_2(\A_\delta) +
+    \diam_\op(\A_\delta).
+    \]
+  \item Define $\trip x \trip \coloneqq \| A_{\delta,x} \| =
+    \frac{1}{\sqrt{s}} \max_{1 \le i \le m} \left( \sum_{j=1}^n
+    \delta_{i,j} x_j^2 \right)^{1/2}$.
+  \end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}
