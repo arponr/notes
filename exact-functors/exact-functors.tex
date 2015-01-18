@@ -1,9 +1,8 @@
-\input{../preamble}
 \input{preamble}
 
 \title{Exactness of functors}
 \author{Arpon Raksit}
-\date{November 17, 2013 (original); \today\ (last edit)}
+\date{November 17, 2013}
 
 \begin{document}
 \maketitle
@@ -20,22 +19,22 @@
 
 \begin{definition}
   \label{biproduct}
-  Let $\A$ a category and $\{A_i\}_{i \in I} \subseteq \ob(\A)$. A
+  Let $\A$ a category and $\{A_i\}_{i \in I} \subseteq \obj(\A)$. A
   \emph{biproduct} of the $A_i$ is an object $\bigoplus A_i \in
-  \ob(\A)$ equipped with morphisms
+  \obj(\A)$ equipped with morphisms
   \[
   \textstyle{A_i \to \bigoplus A_i \quad\text{and}\quad \bigoplus A_i
     \to A_i \quad \text{for }i \in I,}
   \]
   making $\bigoplus A_i$ simultaneously a product $\prod A_i$ and
   coproduct $\coprod A_i$. By the usual abuse of notation, to say we
-  have such data attached to an object $B \in \ob(\A)$, we will simply
+  have such data attached to an object $B \in \obj(\A)$, we will simply
   write $B \simeq \bigoplus A_i$.
 \end{definition}
 
 \begin{lemma}
   \label{biproduct-formulae}
-  Let $\A$ an additive category and $A,B,C \in \ob(\A)$. If $C$ is a
+  Let $\A$ an additive category and $A,B,C \in \obj(\A)$. If $C$ is a
   product or coproduct of $A$ and $B$, then there exist morphisms
   \[
   i \c A \to C, \quad j \c B \to C, \quad p \c C \to A, \quad q \c C \to B
@@ -49,10 +48,10 @@
   $A$ and $B$.
 \end{lemma}
 
-\begin{proof}pp
-  Suppose we have a coproduct $A \overset{i}{\longto} C
-  \overset{j}{\longfrom} B$. The identity and zero morphisms induce $p
-  \c C \to A$ and $q \c C \to B$ with
+\begin{proof}
+  Suppose we have a coproduct $A \lblto{i} C \lblfrom{j} B$. The
+  identity and zero morphisms induce $p \c C \to A$ and $q \c C \to B$
+  with
   \[
   pi = \id_A, \quad qj = \id_B, \quad pj = 0, \quad qi = 0.
   \]
@@ -67,9 +66,9 @@
   \[
   h = (ip+jq)h = i(ph) + j(qh) = if + jg.
   \]
-  So the induced morphism $h$ is indeed unique, implying $A
-  \overset{p}{\longfrom} C \overset{q}{\longto} B$ is a product, and
-  hence $C \simeq A \oplus B$.
+  So the induced morphism $h$ is indeed unique, implying
+  $A \lblfrom{p} C \lblto{q} B$ is a product, and hence
+  $C \simeq A \oplus B$.
 
   If we start with the product instead of the coproduct, we just
   dualise the above argument (which I learned from
@@ -90,7 +89,7 @@
 \end{lemma}
 
 \begin{proof}
-  Let $A,B \in \ob(\A)$. Let $A \oplus B$ their biproduct, and the
+  Let $A,B \in \obj(\A)$. Let $A \oplus B$ their biproduct, and the
   morphisms $i$, $j$, $p$, and $q$ as in
   (\ref{biproduct-formulae}). Since $F$ is an additive functor we get
   the same identities for $F(i)$, $F(j)$, $F(p)$, and $F(q)$.  But
@@ -100,7 +99,7 @@
 
 \begin{lemma}
   \label{sum-factor}
-  Let $\A$ an additive category and $A,B \in \ob(\A)$. Let $f,g \c A
+  Let $\A$ an additive category and $A,B \in \obj(\A)$. Let $f,g \c A
   \to B$ two morphisms. Then $f + g \c A \to B$ can be factored as
   \[
   \begin{tikzcd}[column sep = large]
@@ -146,7 +145,7 @@
 \end{lemma}
 
 \begin{proof}
-  Let $A,B \in \ob(\A)$ and $f,g \c A \to B$ two morphisms. Since if
+  Let $A,B \in \obj(\A)$ and $f,g \c A \to B$ two morphisms. Since if
   $F$ preserves finite limits or colimits then $F$ preserves
   biproducts, we have the commutative diagram
   \[

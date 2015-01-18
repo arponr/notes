@@ -107,6 +107,9 @@
 \newcommand{\lblto}[1]{\mathrel{\tikz[baseline]%
     \draw[>=stealth,->,font=\scriptsize,inner sep=1.5pt]%
     (0,0.5ex)--node[above]{$\!#1$}(\arrlen,0.5ex);}}
+\newcommand{\lblfrom}[1]{\mathrel{\tikz[baseline]%
+    \draw[>=stealth,<-,font=\scriptsize,inner sep=1.5pt]%
+    (0,0.5ex)--node[above]{$\!#1$}(\arrlen,0.5ex);}}
 \renewcommand{\mapsto}{\mathrel{\tikz[baseline]%
     \draw[>=stealth,|->](0,0.5ex)--(\arrlen,0.5ex);}}
 \newcommand{\inj}{\mathrel{\tikz[baseline]%
@@ -143,7 +146,7 @@
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\op}{\mathrm{op}}
 \newcommand{\colim}{\operatorname{colim}}
-
+\newcommand{\coker}{\operatorname{coker}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -229,7 +232,7 @@
 \newtheorem{construction}[equation]{Construction}
 \newtheorem{goal}[equation]{Goal}
 
-\setlist{leftmargin=2.5em, itemsep=2pt, topsep=2pt}
+\setlist{leftmargin=3em, itemsep=2pt, topsep=2pt}
 \setlist[enumerate, 1]{%
   label=(\alph*),%
   ref=\alph*,%

@@ -1,7 +1,4 @@
-\input{../preamble}
 \input{preamble}
-
-%--------------------------------------------------------------------%
 
 \title{Bordism}
 \author{Arpon Raksit}
@@ -11,14 +8,14 @@
 \maketitle
 \thispagestyle{fancy}
 
-%--------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand{\d}{\partial}
 \newcommand{\e}{\emptyset}
 \newcommand{\Mfd}{\mathrm{Mfd}}
 \renewcommand{\C}{\mathcal{C}}
 
-%--------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Generalities}
 
@@ -90,12 +87,12 @@ of bordism is equivalent to the more familiar one for manifolds.
 
 \begin{definition}
   Let $\Omega(\C)$ denote the set of bordism classes of closed objects
-  of $\C$. By \pref{bordism-sum} and \pref{closed-sum}, coproduct in
+  of $\C$. By \eqref{bordism-sum} and \eqref{closed-sum}, coproduct in
   $\C$ induces a commutative monoid structure on $\Omega(\C)$, with
   identity given by $\e$.
 \end{definition}
 
-%--------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Bordism of (structured) manifolds}
 
@@ -136,13 +133,13 @@ of bordism is equivalent to the more familiar one for manifolds.
     \end{tikzcd}
   \end{equation}
   is homotopy-commutative, i.e. there is a homotopy of homotopies
-  $h_2^{-1}h_1 \to f\til h$, as defined in \pref{path-homotopy}. An
+  $h_2^{-1}h_1 \to f\til h$, as defined in \eqref{path-homotopy}. An
   equivalence class of homotopy lifts of $g$ along $f$ is called an
   \emph{$f$-structure} on $g$.
 \end{definitions}
 
 \begin{remarks}
-  Suppose in \pref{map-f-struct} that $f$ is a fibration. We may then
+  Suppose in \eqref{map-f-struct} that $f$ is a fibration. We may then
   make two additional observations:
   \begin{enumerate}
   \item
@@ -152,7 +149,7 @@ of bordism is equivalent to the more familiar one for manifolds.
     $(\til g_2, h_2)$. Then $k$ can be lifted to a homotopy $\til k \c
     \til h' \to \til h$ of homotopies $\til g_1 \doubto \til g_2$,
     with $f\til h' = h_2^{-1}h_1$. By replacing $\til h$ with $\til
-    h'$, we may always make the diagram \pref{lift-equiv} commute on
+    h'$, we may always make the diagram \eqref{lift-equiv} commute on
     the nose.
   \item
     \label{strict-lift}
@@ -194,7 +191,7 @@ of bordism is equivalent to the more familiar one for manifolds.
   Let $f \c B \to \B\O$ be any map. An \emph{$f$-structure} on a
   compact smooth manifold $M$ is an $f$-structure on its stable
   tangent bundle $\tau^\st_M \c M \to \B\O$, as defined in
-  \pref{map-f-struct}.
+  \eqref{map-f-struct}.
 \end{definition}
 
 % \begin{definition} \label{normal-bundle} Let $i \c M \to N$ be an
@@ -225,7 +222,7 @@ of bordism is equivalent to the more familiar one for manifolds.
 %   as the inverse of $\xi$ in the group $[M, BO] \simeq \til{KO}(M)$.
 
 %   Note if $i \c M \to \R^n$ is an immersion (which always exists, as
-%   remarked in \pref{main-example}) then by definition we have a short
+%   remarked in \eqref{main-example}) then by definition we have a short
 %   exact sequence
 %   \[
 %   0 \to TM \to i^*T\R^n \to \nu_i \to 0.
@@ -252,7 +249,7 @@ of bordism is equivalent to the more familiar one for manifolds.
 %   \end{equation}
 %   The $f$-structure only depends on the homotopy class $[g]$, or
 %   equivalently on the stable bundle determined by $\xi$. This will be
-%   explained below in \pref{f-structure-explanation} after we state some
+%   explained below in \eqref{f-structure-explanation} after we state some
 %   examples to keep in mind.
 
 %   An \emph{$f$-structure} on a compact smooth manifold $M$ is an
@@ -292,7 +289,7 @@ of bordism is equivalent to the more familiar one for manifolds.
   \begin{enumerate}
   \item The most basic case comes from the identity $\id \c \O \to
     \O$, inducing $f = \id \c \B\O \to \B\O$. It follows from
-    \pref{strict-lift} that any map $Z \to \B\O$, in particular
+    \eqref{strict-lift} that any map $Z \to \B\O$, in particular
     $\tau^\st_M \c M \to \B\O$, has a unique $\O$-structure.
   \item Less trivially we have the inclusion $\SO \to \O$ coming from
     the inclusions $\SO(d) \to \O(d)$. This induces the two-to-one
@@ -323,7 +320,7 @@ of bordism is equivalent to the more familiar one for manifolds.
   \end{enumerate}
 \end{examples}
 
-I think it's worth discussing for a bit why \pref{f-structure} should
+I think it's worth discussing for a bit why \eqref{f-structure} should
 be stated in the way it is. It certainly confused me for a while. We
 will explain this by considering the case $B = BSO$, and actually
 proving what we just claimed: giving an $SO$-structure on a compact
@@ -340,9 +337,9 @@ smooth manifold $M$ is equivalent to giving an orientation on $M$.
 \end{lemma}
 
 \begin{remarks} \label{f-structure-explanation}
-  As claimed in \pref{f-examples}(ii), Given an immersion $i \c M \to
+  As claimed in \eqref{f-examples}(ii), Given an immersion $i \c M \to
   \R^n$, orienting $\nu_i$ is equivalent to orienting $TM$ (by
-  \pref{normal-bundle} of $\nu_i$ and the fact that $\R^n$ has a
+  \eqref{normal-bundle} of $\nu_i$ and the fact that $\R^n$ has a
   canonical orientation) which in turn is equivalent to orienting
   $M$. This is the essential point, but there are still some details
   to work through since we are working with the \emph{stable} normal
@@ -357,7 +354,7 @@ smooth manifold $M$ is equivalent to giving an orientation on $M$.
     $BSO(k)$.
   \end{itemize}
   Since $\nu_i$ determines $\nu_M$ this implies than an orientation on
-  $M$ indeed determines a lift in \pref{f-structure-lift}, and hence a
+  $M$ indeed determines a lift in \eqref{f-structure-lift}, and hence a
   $BSO$-structure on $M$. For the other direction, note that since $M$
   is compact, a lift $\til g \c M \to BSO$ factors through some
   $BSO(k)$, and thus a lift determines (for large enough embedding
@@ -378,10 +375,10 @@ smooth manifold $M$ is equivalent to giving an orientation on $M$.
 
 \begin{proof}
   Choose an immersion $j \c N \to \R^n$ and let $k \ce j \circ i$. By
-  \pref{normal-composition} we have an exact sequene $0 \to \nu_i \to
+  \eqref{normal-composition} we have an exact sequene $0 \to \nu_i \to
   \nu_k \to i^*\nu_j \to 0$. Since $\nu_i$ is trivial, $\nu_k$ and
   $i^*\nu_j$ are equal in $\til{KO}(M) \simeq [M,BO]$. By the discussion
-  in \pref{stable-normal} we know then that if we take a map $N \to BO$
+  in \eqref{stable-normal} we know then that if we take a map $N \to BO$
   classifying the stable normal bundle $\nu_N$, then its restriction
   to $M$ will classify $\nu_M$, as desired. It follows immediately
   that any lift defining an $f$-structure on $N$ canonically restricts
@@ -411,11 +408,11 @@ bordism classes we will analyse in future posts.
     \]
     where $i$ is a smooth immersion whose normal bundle $\nu_i$ is
     trivial, such that the $f$-structure induced by $i$ on $M$ by
-    \pref{trivial-normal} agrees with its equipped $f$-structure.
+    \eqref{trivial-normal} agrees with its equipped $f$-structure.
   \end{itemize}
 
   We claim $\Mfd^f_X$ is in fact a bordism category. Generalising
-  \pref{main-example}, we still take $\d$ to be the boundary and
+  \eqref{main-example}, we still take $\d$ to be the boundary and
   $\iota$ to be the inclusion of the boundary, noting that the
   inclusion $\d M \to M$ always has trivial normal
   bundle\footnote{That $\d M \to M$ has trivial normal bundle can be
@@ -424,10 +421,10 @@ bordism classes we will analyse in future posts.
     M$ identified with $\d M \times \{0\}$. For $\d M \times \{0\} \to
     \d M \times [0,1)$ certainly has trivial normal bundle, and the
     open embedding $U \to M$ obviously has zero-dimensional normal
-    bundle, so then it's immediate from \pref{normal-composition}. See,
+    bundle, so then it's immediate from \eqref{normal-composition}. See,
     e.g., [Kosinski][kosinski] for a proof of the existence of a
     collar.} so that $M$ induces a canonical $f$-structure on $\d M$
-  by \pref{trivial-normal}. Moreover:
+  by \eqref{trivial-normal}. Moreover:
   \begin{enumerate}
   \item Obviously the unique map from the empty manifold $\e \to X$
     gives the initial object. We claim disjoint union still gives
@@ -448,7 +445,7 @@ bordism classes we will analyse in future posts.
 
 \begin{remark}
   One might be concerned that we haven't properly generalised
-  \pref{main-example} since we have restricted our set of
+  \eqref{main-example} since we have restricted our set of
   morphisms. But since we have the same coproduct and boundary, and we
   only need to care about \emph{isomorphisms} to define the set of bordism
   classes $\Omega(\Mfd^f_X)$, indeed setting $X$ to be a point and $f
@@ -470,7 +467,7 @@ fibration $f \c B \to BO$ for the remainder.
 \begin{proof}
   Since $M$ is closed, $M \times I$ is a compact smooth manifold and
   composition with projection $M \times I \to M \to X$ gives us a map
-  to $X$. Now, $\nu_i$ is clearly trivial, so by \pref{trivial-normal}
+  to $X$. Now, $\nu_i$ is clearly trivial, so by \eqref{trivial-normal}
   we have $\nu_M = i^*\nu_{M \times I}$. I.e., we have a commutative
   diagram
   \[
@@ -490,7 +487,7 @@ fibration $f \c B \to BO$ for the remainder.
 
 \begin{definition} \label{inverse}
   Let $M \in \Mfd^f_X$ be closed. Let $M \times I \in
-  \Mfd^f_X$ be as given by \pref{cross-interval}. Observe that
+  \Mfd^f_X$ be as given by \eqref{cross-interval}. Observe that
   \[
   \d(M \times I) = M \times \{0\} \amalg M \times \{1\} \simeq M \amalg M'
   \]
@@ -521,9 +518,9 @@ fibration $f \c B \to BO$ for the remainder.
 \end{proposition}
 
 \begin{proof}
-  ($\Rightarrow$) Assume $M \amalg -N \simeq \d W$. By \pref{inverse} we
-  have $N \times I \in \Mfd^f_X$ such that $\d(N \times I) \simeq
-  -N \amalg N$. Then
+  ($\Rightarrow$) Assume $M \amalg -N \simeq \d W$. By \eqref{inverse}
+  we have $N \times I \in \Mfd^f_X$ such that
+  $\d(N \times I) \simeq -N \amalg N$. Then
   \[
   M \amalg \d(N \times I) \simeq M \amalg -N \amalg N \simeq \d W
   \amalg N
@@ -534,7 +531,7 @@ fibration $f \c B \to BO$ for the remainder.
   \amalg d V$.
 \end{proof}
 
-%--------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{amsalpha}
 \bibliography{refs}

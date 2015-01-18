@@ -1,4 +1,14 @@
-\day{August 19, 2014}
+\input{preamble}
+
+\title{Invertible modules}
+\author{Arpon Raksit}
+\date{August 19, 2014}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{notation}
   Let $A$ be a commutative ring.
@@ -33,7 +43,7 @@
   it suffices to show there exists $f \in A - \p$ such that $M_f$ is a
   free $A_f$-module. We have an isomorphism $A_\p^n \isoto M_\p$,
   which without loss of generality is the localisation of a morphism
-  $\alpha \c A^n \to M$. It follows from \pref{trivial-point-to-open}
+  $\alpha \c A^n \to M$. It follows from \eqref{trivial-point-to-open}
   that since $\alpha_\p$ is an isomorphim, so is $\alpha_f$ for some
   $f \in A - \p$.
 \end{proof}
@@ -47,8 +57,6 @@
   \label{invertible-module-finitely-generated}
   An invertible $A$-module $M$ is finitely generated.
 \end{lemma}
-
-\newcommand{\id}{\mathrm{id}}
 
 \begin{proof}
   Assume we have an $A$-module $N$ and an isomorphism $\alpha \c A
@@ -80,7 +88,7 @@
 \begin{proof}
   First assume $M$ is invertible: there is an $A$-module $N$ such that
   $M \otimes_A N \iso A$. Fix any $\p \in \Spec(A)$. By
-  \pref{locally-free-point-to-open} it suffices to show $M_\p$ is free
+  \eqref{locally-free-point-to-open} it suffices to show $M_\p$ is free
   of rank $1$ over $A_\p$. We have
   \[
   M_\p \otimes_{A_\p} N_\p \iso (M \otimes N)_\p \iso A_\p,
@@ -110,11 +118,11 @@
 
 \newcommand{\Pic}{\operatorname{Pic}}
 \begin{definition}
-  It follows from \pref{invertible-module-finitely-generated} that the
+  It follows from \eqref{invertible-module-finitely-generated} that the
   collection $\Pic(A)$ of isomorphism classes of invertible modules
   forms a set. Under tensor product $\Pic(A)$ forms an abelian group
   called the \emph{Picard group} of $A$. Note that by the proof of
-  \pref{invertible-locally-free} the inverse in $\Pic(A)$ of (the
+  \eqref{invertible-locally-free} the inverse in $\Pic(A)$ of (the
   isomorphism class) of an invertible module $L$ is given by (the
   isomorphism class of) the dual $L^\vee$.
 \end{definition}
@@ -141,3 +149,5 @@
   \]
   the last isomorphism coming from the inductive hypothesis.
 \end{proof}
+
+\end{document}

@@ -1,9 +1,4 @@
-\input{../preamble}
 \input{preamble}
-
-\usepackage{tikz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Vector fields and the J-homomorphism}
 \author{Arpon Raksit}
@@ -12,6 +7,15 @@
 \begin{document}
 \maketitle
 \thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Th}{\operatorname{Th}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Sq}{\operatorname{Sq}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -140,11 +144,11 @@ numerology we see in the upper bound. One can see, e.g.,
   Thus we are interested in knowing the minimal dimension of a
   representation of $\Cl_l$. By the periodicity above, one can show
   without much difficulty that this dimension is precisely $2^{e_l}$,
-  where $e_l$ is as defined in \pref{radon-hurwitz}. Thus there is a
+  where $e_l$ is as defined in \eqref{radon-hurwitz}. Thus there is a
   representation of $\Cl_l$ on $\R^n$ whenever $2^{e_l} \mid n$, by
   writing $\R^n \simeq \R^{2^{e_l}} \times \cdots \times \R^{2^{e_l}}$
   and acting diagonally via the minimal representation. This gives the
-  following lower bound on our question \pref{vfield-prob}.
+  following lower bound on our question \eqref{vfield-prob}.
 \end{nothing}
 
 \begin{theorem}
@@ -154,8 +158,8 @@ numerology we see in the upper bound. One can see, e.g.,
 \end{theorem}
 
 \begin{proof}
-  Let $l \ce \rho(n)-1$. By \pref{radon-max}, $2^{e_l} \mid n$, so the
-  discussion in \pref{clifford} gives the claim.
+  Let $l \ce \rho(n)-1$. By \eqref{radon-max}, $2^{e_l} \mid n$, so the
+  discussion in \eqref{clifford} gives the claim.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,7 +194,7 @@ reduce the question to one more attackable by algebra.
 \end{lemma}
 
 \begin{proof}
-  This is immediate from the discussion in \pref{gram-schmidt}.
+  This is immediate from the discussion in \eqref{gram-schmidt}.
 \end{proof}
 
 So we've reduced our problem to the existence of some map. Already one
@@ -198,11 +202,11 @@ can imagine using algebra to get at the problem now. E.g., we can ask
 for what $k$ this map can exist in singular homology or
 cohomology. This was the strategy of Steenrod and Whitehead
 \cite{steenrod-vfields}, who achieve an upper bound $k \le 2^a$, in
-the notation of \pref{radon-hurwitz}. Of course this result doesn't
+the notation of \eqref{radon-hurwitz}. Of course this result doesn't
 tell us that $S^{15}$ is not parallelisable, and leaves a large gap
-from the lower bound \pref{vfield-lower-bound}. This gap was finally
+from the lower bound \eqref{vfield-lower-bound}. This gap was finally
 closed by Adams, who ingeniously employed K-theory instead to show the
-lower bound \pref{vfield-lower-bound} is in fact optimal.
+lower bound \eqref{vfield-lower-bound} is in fact optimal.
 
 \begin{theorem}[\cite{adams-vfields}]
   \label{vfield-upper-bound}
@@ -212,14 +216,14 @@ lower bound \pref{vfield-lower-bound} is in fact optimal.
 
 Our goal for the remainder is to explain the ideas behind a proof of
 this theorem, which of course completely answers our question
-\pref{vfield-prob}. Following \cite{miller-vfields}, the argument we
+\eqref{vfield-prob}. Following \cite{miller-vfields}, the argument we
 give is not in the original form presented in \cite{adams-vfields},
 but rather one utilising Adams's later work on bounding the image of
 the J-homomorphism \cite{adams-J-II}.
 
 However, we will only work in complex K-theory. As a result we will
 achieve a very slightly worse upper bound than promised by
-\pref{vfield-upper-bound}, but this way we get to avoid a few
+\eqref{vfield-upper-bound}, but this way we get to avoid a few
 subtleties that arise in studying real K-theory. At least to the
 author, it seems the argument in complex K-theory retains the main
 ideas and yet is much easier to absorb. At the end we will explain
@@ -358,7 +362,7 @@ We now translate our problem into a question about the J-homomorphism.
   $U$, it follows that $\deg(f_\ell)$ is constant. But above we noted
   that $f$ induces the identity over $\ell_{e_1}$, so in fact $f_\ell$
   must be a homotopy equivalence for all $\ell \in \RP^k$. We are then
-  done by \pref{dold-fibre}.
+  done by \eqref{dold-fibre}.
 \end{proof}
 
 \begin{notation}
@@ -374,8 +378,8 @@ We now translate our problem into a question about the J-homomorphism.
 \end{lemma}
 
 \begin{proof}
-  Given the hypothesis, it is immediate from \pref{section-reduction}
-  and \pref{RP-reduction} that $J_\R(n\lambda) = 0$. And by
+  Given the hypothesis, it is immediate from \eqref{section-reduction}
+  and \eqref{RP-reduction} that $J_\R(n\lambda) = 0$. And by
   definition we have $J_\C(m\nu) = J_\R(\iota(\kappa(m\lambda))) =
   J_\R(2m\lambda) = J_\R(n\lambda)$.
 \end{proof}
@@ -514,7 +518,7 @@ we will work with $\Lambda = \C$. We first address the former.
 
 \begin{remark}
   \label{RP-ringhom}
-  Given the information from \pref{RP-kthy}, the multiplicative
+  Given the information from \eqref{RP-kthy}, the multiplicative
   structure on $\til K_\C(\RP^k)$ can be clarified by observing that we
   can define an injective morphism of (non-unital) rings $\alpha \c
   \til K_\C(\RP^{k-1}) \to \Z/2^{f_k+1}$ via $\nu \mapsto -2$.
@@ -636,7 +640,7 @@ the group $J'_\Lambda(X)$.
   \begin{enumerate}
   \item Let $\V$ be some class of vector bundles $\xi \to X$ equipped
     with natural\footnote{Here ``natural'' is used in the same sense
-      as \pref{thom-K}.} Thom classes $u_\xi$ in $E$ and $t_\xi$ in
+      as \eqref{thom-K}.} Thom classes $u_\xi$ in $E$ and $t_\xi$ in
     $F$.
   \item Let $T \c E \to F$ be a natural transformation of cohomology
     theories.
@@ -654,7 +658,7 @@ the group $J'_\Lambda(X)$.
 
 \begin{example}
   \label{stiefel-whitney}
-  If we take $E = F = H^*(-;\Z/2)$ in \pref{chclass-general} then we
+  If we take $E = F = H^*(-;\Z/2)$ in \eqref{chclass-general} then we
   have natural orientations on all vector bundles. It turns out that
   if we set $T$ to be the Steenrod square $\Sq^i$ then the resulting
   characteristic class $\cl(\Sq^i,-)$ is just the Stiefel-Whitney
@@ -663,14 +667,14 @@ the group $J'_\Lambda(X)$.
 
 \begin{definition}
   Take $E = F = K_\C^*$ and $T = \psi^l$ the Adams operation for $l
-  \in \N$ in \pref{chclass-general}. The resulting classes $\rho^l \ce
+  \in \N$ in \eqref{chclass-general}. The resulting classes $\rho^l \ce
   \cl(\psi^l,-)$ are called the \emph{cannibalistic
     classes}.\footnote{Because they live in K-theory and also eat
     things in K-theory, and because Adams was awesome.}
 \end{definition}
 
 \begin{remark}
-  By \pref{thom-K} the cannibalistic classes $\rho^l$ are defined on
+  By \eqref{thom-K} the cannibalistic classes $\rho^l$ are defined on
   all complex vector bundles, and moreover satisfy the exponential
   property
   \begin{equation}
@@ -693,7 +697,7 @@ the group $J'_\Lambda(X)$.
 
 \begin{proof}
   By naturality it suffices to prove this for the universal line
-  bundle $\xi \to \CP^{\infty}$. By \pref{taut-thom}, $\Th(\xi) \simeq
+  bundle $\xi \to \CP^{\infty}$. By \eqref{taut-thom}, $\Th(\xi) \simeq
   \CP^\infty$ with Thom class $\pm(\xi - 1) \in
   \til K_\C(\CP^\infty)$. Then by definition of $\rho^l$ and $\psi^l$
   we have
@@ -705,14 +709,14 @@ the group $J'_\Lambda(X)$.
 
 \begin{remark}
   \label{cannibal-dim}
-  By the splitting principle, \pref{exponential} and
-  \pref{cannibal-line} imply that $\dim \rho^l(\xi) = l^{\dim \xi}$
+  By the splitting principle, \eqref{exponential} and
+  \eqref{cannibal-line} imply that $\dim \rho^l(\xi) = l^{\dim \xi}$
   for any bundle $\xi \to X$.
 \end{remark}
 
 \begin{nothing}
   \label{cannibal-extend}
-  Combining \pref{exponential} and \pref{cannibal-line} gives
+  Combining \eqref{exponential} and \eqref{cannibal-line} gives
   $\rho^l(\epsilon_\C^{\oplus r}) = l^r$. This tells us that, after
   inverting $l$, we can extend the definition of $\rho^l$ from bundles
   to all of $K_\C(X)$. Namely, since any element of $K_\C(X)$ can be
@@ -742,12 +746,13 @@ $J_\C(X)$.
 \end{lemma}
 
 \begin{proof}
-  The hypothesis is that there is a fibre homotopy equivalence $f \c
-  S(\xi) \to S(\eta)$ over $X$. This extends to a homotopy equivalence
-  of Thom complexes $g \c \Th(\xi) \to \Th(\eta)$. On each fibre, $g$
-  induces a map $g_p \c \Th(\xi_p) \to \Th(\eta_p)$ which is just
-  (homotopic to) the suspension of $f_p \c S(\xi_p) \to S(\eta_p)$;
-  since $f_p$ is a homotopy equivalence so is $g_p$.
+  The hypothesis is that there is a fibre homotopy equivalence
+  $f \c S(\xi) \to S(\eta)$ over $X$. This then extends to a homotopy
+  equivalence of Thom complexes $g \c \Th(\xi) \to \Th(\eta)$. On each
+  fibre, $g$ induces a map $g_p \c \Th(\xi_p) \to \Th(\eta_p)$ which
+  is just (homotopic to) the suspension of
+  $f_p \c S(\xi_p) \to S(\eta_p)$; since $f_p$ is a homotopy
+  equivalence so is $g_p$.
 
   Let $v \ce \phi_\xi^{-1}g^*\phi_\eta(1) = g^*(u_\eta)/u_\xi \in
   K_\C(X)$. Since $g_p$ is a homotopy equivalence,
@@ -758,7 +763,7 @@ $J_\C(X)$.
   K_\C(X)$, so that $\dim \epsilon v = 1$, and hence $\epsilon v = 1
   + y$ for some $y \in \til K_\C(X)$.
 
-  Let $h \c \Th(\eta) \to \Th(\xi)$ be a homotopy inverse to $g$ and
+  Let $h \c \Th(\eta) \to \Th(\xi)$ be a homotopy inverse to $g$;
   define $w \ce \phi_\eta^{-1}h^*\phi_\xi(1) \in K_\C(X)$. Since
   $\phi_\xi,\phi_\eta$ are isomorphisms of $K_\C(X)$-modules and
   pullback respects multiplication, we have
@@ -816,7 +821,7 @@ $J_\C(X)$.
 \end{lemma}
 
 \begin{proof}
-  Suppose $x \in V_\C(X)$, and let $y$ is as in \pref{jprime}. Writing
+  Suppose $x \in V_\C(X)$, and let $y$ is as in \eqref{jprime}. Writing
   $x = \xi - \eta$ for bundles $\xi$ and $\eta$, we must have
   \[
   \rho^l(x) = \frac{\psi^l(1+y)}{1+y} \in K_\C(X)_l \implies
@@ -825,7 +830,7 @@ $J_\C(X)$.
   The Adams operations preserve dimension (by the splitting principle
   and their definition), so $\dim \psi^l(1+y) = \dim {(1+y)}$. It
   follows that $\dim \rho^l(\xi) = \dim \rho^l(\eta)$, whence $\dim
-  \xi = \dim \eta$ by \pref{cannibal-dim}. Therefore $x \in
+  \xi = \dim \eta$ by \eqref{cannibal-dim}. Therefore $x \in
   \til K_\C(X)$.
 \end{proof}
 
@@ -837,7 +842,7 @@ $J_\C(X)$.
 \end{proposition}
 
 \begin{proof}
-  Immediate from \pref{jprime-condition}.
+  Immediate from \eqref{jprime-condition}.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -846,12 +851,12 @@ $J_\C(X)$.
 
 We now specialise to the case $X = \RP^k$. Computing $J_\C'(\RP^k)$
 will give us enough information about $J_\C(\RP^k)$ to finally give
-an upper bound to our question \pref{vfield-prob} on vector fields.
+an upper bound to our question \eqref{vfield-prob} on vector fields.
 
 \begin{lemma}
   \label{RP-cannibal}
   Let $\nu$ be the generator of $\til K_\C(\RP^k)$ as in
-  \pref{RP-kthy}. For $l \in \N$ odd we have
+  \eqref{RP-kthy}. For $l \in \N$ odd we have
   \[
   \rho^l(t\nu) = 1 + \frac{l^t-1}{2l^t}\nu \quad\text{for }0 \le t <
   2^{f_k}.
@@ -859,7 +864,7 @@ an upper bound to our question \pref{vfield-prob} on vector fields.
 \end{lemma}
 
 \begin{proof}
-  Let $\xi \ce \kappa(\gamma)$. By \pref{cannibal-line} and the
+  Let $\xi \ce \kappa(\gamma)$. By \eqref{cannibal-line} and the
   identity $\xi^2 = 1$ we have
   \[
   \rho^l(\xi) = 1 + \xi + \cdots + \xi^{l-1} = \frac{l+1}2 +
@@ -877,17 +882,17 @@ an upper bound to our question \pref{vfield-prob} on vector fields.
 
 \begin{proof}
   Let $x \in V_\C(\RP^k)$, and let $y \in \til K_\C(\RP^k)$ be such
-  that \pref{jprime-y} holds. By \pref{RP-kthy} we have $\psi^l(1+y) =
+  that \eqref{jprime-y} holds. By \eqref{RP-kthy} we have $\psi^l(1+y) =
   1+y$ for $l$ odd, so we in fact have $\rho^l(x) = 1$ for $l$ odd.
 
-  Next, $x \in \til K_\C(X)$ by \pref{jprime-dim}, so by \pref{RP-kthy}
+  Next, $x \in \til K_\C(X)$ by \eqref{jprime-dim}, so by \eqref{RP-kthy}
   we can write $x = t\nu$ for some $0 \le t < 2^{f_k}$. Then from
-  \pref{RP-cannibal} we know that
+  \eqref{RP-cannibal} we know that
   \[
   \rho^l(x) = \rho^l(t\nu) = 1 + \frac{l^t-1}{2l^t}\nu.
   \]
   Recall the ring morphism $\alpha \c \til K_\C(\RP^k) \to
-  \Z/2^{f_k+1}$ defined in \pref{RP-ringhom} by $\alpha(\nu) \ce
+  \Z/2^{f_k+1}$ defined in \eqref{RP-ringhom} by $\alpha(\nu) \ce
   -2$. Observe this gives a morphism of multiplicative groups $\beta
   \c 1 + \til K_\C(\RP^k) \to (\Z/2^{f_k+1})^\times$ via $\beta(1+z)
   \ce 1+\alpha(z)$.
@@ -912,19 +917,19 @@ an upper bound to our question \pref{vfield-prob} on vector fields.
 
 \begin{proof}
   If $n$ is odd this is trivial by the hairy ball theorem
-  \pref{hairy-ball}. So assume $n = 2m$, and suppose $S^{n-1}$ admits
-  a set of $k$ vector fields. Combining \pref{j-reduction},
-  \pref{jprime-bound}, and \pref{RP-jprime} gives that $2^{f_k-1} \mid
+  \eqref{hairy-ball}. So assume $n = 2m$, and suppose $S^{n-1}$ admits
+  a set of $k$ vector fields. Combining \eqref{j-reduction},
+  \eqref{jprime-bound}, and \eqref{RP-jprime} gives that $2^{f_k-1} \mid
   m \implies 2^{f_k} \mid n$. Then observe that $f_k \ge e_k - 1 \ge
-  e_{k-4}$. By \pref{radon-max} it follows that $k-4 \le \rho(n) - 1
+  e_{k-4}$. By \eqref{radon-max} it follows that $k-4 \le \rho(n) - 1
   \implies k \le \rho(n) + 3$.
 \end{proof}
 
 So ends our journey.
 
 \begin{remark}
-  Our final upper bound in \pref{complex-upper} is off by $4$ from the
-  right answer \pref{vfield-upper-bound}. If we were computer
+  Our final upper bound in \eqref{complex-upper} is off by $4$ from the
+  right answer \eqref{vfield-upper-bound}. If we were computer
   scientists, that would be good enough. As remarked above, that $4$
   goes away if one translates our work from complex K-theory into real
   K-theory. Indeed one can define $\rho^l$ using the Adams operations
@@ -932,29 +937,29 @@ So ends our journey.
   $V_\R(X)$ and $J'_\R(X)$. But there is a bit of nastiness:
   \begin{itemize}
   \item Thom classes don't exist for all real vector bundles, so the
-    analogue of \pref{thom-K} is more subtle. However, in
+    analogue of \eqref{thom-K} is more subtle. However, in
     \cite{abs-clifford} natural Thom clases are also constructed for
     certain $\Spin$ bundles, and this is where one must begin.
-  \item This means our proof of \pref{cannibal-line} won't go through
+  \item This means our proof of \eqref{cannibal-line} won't go through
     in the real case, and indeed this implies that extending $\rho^l$
     to $K_\R(X)$ is much more technical than the simple discussion of
-    \pref{cannibal-extend}.
+    \eqref{cannibal-extend}.
   \end{itemize}
   These subtleties are handled in \cite{adams-J-II}, and the reward is
   the correct bound. The argument is essentially the same: one uses
-  $J_\R(n\lambda) = 0$ from \pref{j-reduction}, and this time computes
+  $J_\R(n\lambda) = 0$ from \eqref{j-reduction}, and this time computes
   $V_\R(\RP^k) \simeq 0$, so $K_\R(\RP^k) \simeq J_\R(\RP^k) \simeq
   J_\R'(\RP^k)$. The crucial difference is that $\til K_\R(\RP^k)
   \simeq \Z/2^{e_k}$, so now we get $2^{e_k} \mid n$ rather than
   $2^{f_k} \mid n$ when proving the upper bound
-  \pref{complex-upper}. Getting precisely $e_k$ instead of the
+  \eqref{complex-upper}. Getting precisely $e_k$ instead of the
   approximation $f_k$ means that no pesky $4$ will show up.
 \end{remark}
 
 \begin{remark}
   In addition to computing $J_\R'(\RP^k)$, Adams computes $J_\R'$
   for spheres as well, by using another characteristic class coming
-  from the formalism of \pref{chclass-general}. This gives bounds on
+  from the formalism of \eqref{chclass-general}. This gives bounds on
   the image of the J-homomorphism for spheres, where the study of the
   J-homomorphism originated.
 \end{remark}

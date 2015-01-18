@@ -61,7 +61,8 @@
       \end{tabular}
     }
   \end{center}
-  \thispagestyle{empty}
+  \thispagestyle{fancy}
+  \vspace{4ex}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,7 +145,6 @@
 \newcommand{\op}{\mathrm{op}}
 \newcommand{\colim}{\operatorname{colim}}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \renewcommand{\thesection}{\Roman{section}} 
@@ -194,8 +194,8 @@
 \swapnumbers
 
 \newtheoremstyle{block}
-{1ex plus 0.2ex minus 0.1ex}% Space above
-{1ex plus 0.2ex minus 0.1ex}% Space below
+{1ex plus 0.2ex}% Space above
+{1ex plus 0.2ex}% Space below
 {}% Body font
 {}% Indent amount
 {\bfseries}% Theorem head font
@@ -229,7 +229,7 @@
 \newtheorem{construction}[equation]{Construction}
 \newtheorem{goal}[equation]{Goal}
 
-\setlist{leftmargin=2.5em, itemsep=2pt, topsep=2pt}
+\setlist{leftmargin=3em, itemsep=2pt, topsep=2pt}
 \setlist[enumerate, 1]{%
   label=(\alph*),%
   ref=\alph*,%

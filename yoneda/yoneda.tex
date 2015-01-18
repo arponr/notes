@@ -1,9 +1,8 @@
-\input{../preamble}
 \input{preamble}
 
 \title{The Yoneda lemma}
 \author{Arpon Raksit}
-\date{November 6, 2013 (original); \today\ (last edit)}
+\date{November 6, 2013}
 
 \begin{document}
 \maketitle
@@ -12,6 +11,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand{\C}{\mathcal{C}}
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\PSh}{\mathrm{PSh}}
 
 \section{Introduction}
 
@@ -27,10 +28,10 @@ the lemma here too, for completeness.
 \end{notation}
 
 \begin{definition}
-  For $X \in \ob(\C)$ we define the functor $h_X : \C^{\op} \to \Set$
+  For $X \in \obj(\C)$ we define the functor $h_X : \C^{\op} \to \Set$
   by:
   \begin{itemize}
-  \item $h_X(T) \coloneqq \hom_\C(T,X)$ for $T \in \ob(\C)$;
+  \item $h_X(T) \ce \hom_\C(T,X)$ for $T \in \obj(\C)$;
   \item $h_X(f) : h_X(T) \to h_X(S)$ sends $g \in \hom_\C(T,X) \mapsto
     g \circ f \in \hom_\C(S,X)$ for $f \in \hom_\C(S,T)$.
   \end{itemize}
@@ -42,7 +43,7 @@ the lemma here too, for completeness.
 
 \begin{lemma}[Yoneda]
   Let $F : \C^{\op} \to \Set$ any (contravariant) functor. Let $X \in
-  \ob(C)$. Then there is a natural bijection
+  \obj(C)$. Then there is a natural bijection
   \[
   \hom_{\PSh(\C)}(h_X,F) \simeq F(X)
   \]
@@ -51,7 +52,7 @@ the lemma here too, for completeness.
 
 \begin{proof}
   Let $\alpha : h_X \to F$ a natural transformation. Then for each $T
-  \in \ob(\C)$ and $f \in \hom_\C(T,X)$, by definition of $h$ we have
+  \in \obj(\C)$ and $f \in \hom_\C(T,X)$, by definition of $h$ we have
   the commutative diagram
   \[
   \begin{tikzcd}[column sep = large]
@@ -71,11 +72,11 @@ the lemma here too, for completeness.
 \begin{corollary}
   \label{yoneda-embedding}
   The functor $h : \C \to \PSh(\C)$ is fully faithful. In particular, $X
-  \simeq Y$ if and only if $h_X \simeq h_Y$ for $X,Y \in \ob(\C)$.
+  \simeq Y$ if and only if $h_X \simeq h_Y$ for $X,Y \in \obj(\C)$.
 \end{corollary}
 
 \begin{proof}
-  Setting $F \coloneqq h_Y$ in the Yoneda lemma above gives us
+  Setting $F \ce h_Y$ in the Yoneda lemma above gives us
   precisely that the map $\hom_\C(X,Y) \to \hom_{\PSh(\C)}(h_X,h_Y)$
   induced by $h$ is a bijection.
 \end{proof}
@@ -96,11 +97,11 @@ in $\C$.
 
 \begin{definition}
 The \textit{fibre product of $X$ and $Y$ over $S$} is an object $X
-\times_S Y \in \ob(\C)$ equipped with \textit{projections} $p : X
+\times_S Y \in \obj(\C)$ equipped with \textit{projections} $p : X
 \times_S Y \to X$ and $q : X \times_S Y \to Y$ satisfying:
 \begin{enumerate}
 \item $u \circ p = v \circ q$, and
-\item for any $T \in \ob(\C)$ and morphisms $a : T \to X$ and $b : T
+\item for any $T \in \obj(\C)$ and morphisms $a : T \to X$ and $b : T
   \to Y$ such that $u \circ a = v \circ b$, there exists a unique
   morphism $a \times b : T \to X \times_S Y$ such that $a = p \circ (a
   \times b)$ and $b = q \circ (a \times b)$.
@@ -147,7 +148,7 @@ is \textit{cartesian}, or a \textit{pullback diagram}.
 
 \begin{lemma}
   \label{magic}
-  An object $Z \in \ob(\C)$ equipped with $p : Z \to X$ and $q : Z \to
+  An object $Z \in \obj(\C)$ equipped with $p : Z \to X$ and $q : Z \to
   Y$ is a fibre product of $X$ and $Y$ over $S$ if and only if the
   diagram (in the category $\Set$)
   \[
@@ -156,7 +157,7 @@ is \textit{cartesian}, or a \textit{pullback diagram}.
     \\ \hom_\C(T,X) \rar{h_u} & \hom_\C(T,S).
   \end{tikzcd}
   \]
-  is commutative and cartesian, i.e., for all $T \in \ob(\C)$ we have
+  is commutative and cartesian, i.e., for all $T \in \obj(\C)$ we have
   \[
   \hom_\C(T,Z) \simeq \hom_\C(T,X) \times_{\hom_\C(T,S)}
   \hom_\C(T,Y).
