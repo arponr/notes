@@ -1,0 +1,299 @@
+\section{Abelian descent}
+\label{abdesc}
+
+In many cases of interest, a global spectrum is determined by its
+values on abelian groups. This section is devoted to understanding
+this phenomenon, which can be encoded rigorously as follows.
+
+\begin{notation}
+  \label{abdesc-alo}
+  Let $\Alo$ denote the full subcategory of $\Glo$ spanned by the
+  abelian groups.
+\end{notation}
+
+\begin{definition}
+  \label{abdesc-abelian-descent}
+  We say a global spectrum $E \in \Sp_\Glo$ satisfies \emph{abelian
+    descent} if it is the right Kan extension of its restriction to
+  $\Alo$, i.e. if the canonical map
+  \[
+  E(\lB G) \to \lim_{A \in \Alo_{/\lB G}} E(\lB A)
+  \]
+  is an equivalence for all $G \in \Glo$.
+\end{definition}
+
+\subsection{Alternate characterizations}
+\label{abdesc-alternate}
+
+In this short subsection we unpack the definition
+\cref{abdesc-abelian-descent} of abelian descent by giving a
+tautological reformulation, and then giving (again fairly
+tautological) reformulations of this reformulation. But all this
+tautology is worth something! It will allow us to give (in the next
+subsection) more concrete ways to check that a global spectrum
+satisfies abelian descent, so just stay tuned for a moment.
+
+\newcommand{\ab}{\mathrm{ab}}
+
+\begin{definition}
+  \label{abdesc-abelianization}
+  For $X \in \Top_\Glo$ we define the \emph{abelianization} $X^\ab$ of
+  $X$ to be the left Kan extension of its restriction to $\Alo$,
+  i.e.
+  \[
+  X^\ab \ce \colim_{A \in \Alo_{/X}} \lB A \in \Top_\Glo.
+  \]
+  Note that there is a canonical map $X^\ab \to X$. To save some
+  parentheses, we'll write $\lB^\ab G$ in place of $(\lB G)^\ab$ for
+  $G \in \Glo$.
+\end{definition}
+
+\begin{lemma}
+  \label{abdesc-abelian-descent-abelianization}
+  A global spectrum $E \in \Sp_\Glo$ satisfies abelian descent if and
+  only if the canonical map $E(\lB G) \to E(\lB^\ab G)$ is an
+  equivalence for all $G \in \Glo$.
+\end{lemma}
+
+\begin{proof}
+  This is immediate from the definitions
+  \cref{abdesc-abelian-descent,abdesc-abelianization}, as $E$ takes
+  colimits in $\Top_\Glo$ to limits in $\Sp$.
+\end{proof}
+
+\begin{lemma}
+  \label{abdesc-abelianization-alternate}
+  Let $\ab \c \Glo \to \Alo$ be the functor sending a group $H$ to
+  its group-theoretic abelianization\footnote{Recall the
+    abelianization of a group $H$ is the quotient by its commutator
+    subgroup $H/[H,H]$.}  $H^\ab$. For $X \in \Top_\Glo$ we have
+  $X^\ab \iso X \circ \ab$, i.e. there are functorial equivalences
+  $X^\ab(H) \iso X(H^\ab)$ for $H \in \Glo$.
+\end{lemma}
+
+\begin{proof}
+  Let $X \in \Top_\Glo$ and $H \in \Glo$. Observe that for any
+  $A \in \Alo$ the canonical map $\lB A(H^\ab) \to \lB A(H)$ is an
+  equivalence. It follows that we have an equivalence
+  \[
+  X^\ab(H) \iso
+  \colim_{A \in \Alo_{/X}} \lB A(H) \iso
+  \colim_{A \in \Alo_{/X}} \lB A(H^\ab),
+  \]
+  functorial in $H$. But now the canonical map
+  \[
+  \colim_{A \in \Alo_{/X}} \lB A(H^\ab) \to X(H^\ab)
+  \]
+  is clearly an equivalence since $H^\ab \in \Alo$.
+\end{proof}
+
+\begin{lemma}
+  \label{abdesc-abelianization-as-Gspace}
+  Let $G \in \Glo$. Let $\Gamma_G \c (\Top_\Glo)_{/\lB G} \to \Top_G$
+  be the functor described in \cref{global-homotopy}, right adjoint to
+  the embedding $\Delta_G \c \Top_G \to (\Top_\Glo)_{/\lB G}$.
+  \begin{enumerate}
+  \item \label{abdesc-abelianization-gamma} For a subgroup
+    $H \subseteq G$, the fixed-point space $\Gamma_G(\lB^\ab G)^H$ is
+    contractible if $H$ is abelian and empty if $H$ is nonabelian.
+  \item \label{abdesc-abelianization-delta} Conversely, if $X$ is a
+    $G$-space such that $X^H$ is contractible if $H$ is abelian and
+    empty if $H$ is nonabelian, then $\Delta_G(X)$ is equivalent to
+    $\lB^\ab G \to \lB G$ in $(\Top_\Glo)_{/\lB G}$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  Take a subgroup $H \subseteq G$. By definition, $\Gamma_G(\lB^\ab
+  G)^H$ is given by
+  \[
+  (\Top_\Glo)_{/\lB G}(\lB H, \lB^\ab G) \iso
+  \lB^\ab G(H) \times_{\lB G(H)} \{i_H\} \iso
+  \lB G(H^\ab) \times_{\lB G(H)} \{i_H\},
+  \]
+  where $i_H \in \lB G(H)$ corresponds to the inclusion $H \inj G$;
+  this clearly is contractible when $H$ is abelian and empty when $H$
+  is nonabelian, proving \cref{abdesc-abelianization-gamma}.
+
+  Now let $X$ be a $G$-space with this same property: $X^H$ is
+  contractible for $H$ abelian and empty for $H$ nonabelian. Recall
+  $\Delta_G(X)$ is the canonical map
+  $\delta_G(X) \to \delta_G(*) \iso \lB G$, where for a $G$-space $Y$
+  we have
+  \[
+  \delta_G(Y)(H) \iso
+  \l(\coprod_{\phi \in \Grp(H,G)} Y^{\im(\phi)}\r) \sslash G
+  \]
+  for $H \in \Glo$. Since $X^{\im(\phi)}$ is only nonempty when
+  $\im(\phi)$ is abelian, i.e. when $\phi$ factors through $H^\ab$, we
+  have
+  \[
+  \delta_G(X)(H) \iso
+  \l(\coprod_{\phi \in \Grp(H^\ab,G)} X^{\im(\phi)}\r) \sslash G.
+  \]
+  It follows from \cref{abdesc-abelianization-alternate} that
+  $\delta_G(X) \to \lB G$ factors through the map
+  $\lB^\ab G \to \lB G$: for $H \in \Glo$ the resulting map
+  $\delta_G(X) \to \lB^\ab G$ looks like
+  \[
+  \l(\coprod_{\phi \in \Grp(H^\ab,G)} X^{\im(\phi)}\r) \sslash G \iso
+  \delta_G(X)(H) \to
+  \lB^\ab G(H) \iso
+  \l(\coprod_{\phi \in \Grp(H^\ab,G)} * \r) \sslash G,
+  \]
+  induced by the unique maps $X^{\im(\phi)} \to *$. But these maps are
+  all equivalences by our contracibility hypothesis, whence
+  $\delta_G(X) \to \lB^\ab(G)$ is an equivalence (over $\lB G$), as
+  desired.
+\end{proof}
+
+\begin{remark}
+  \label{abdesc-abelianization-faithful}
+  Note that \cref{abdesc-abelianization-as-Gspace} in particular
+  implies $\Delta_G\Gamma_G(\lB^\ab G) \iso \lB^\ab G$, i.e. that
+  $\lB^\ab G \to\lB G$ is faithful. One can also show this more
+  directly. Let $H \in \Glo$ and $N \subseteq H$ a normal subgroup. We
+  want to show that the induced diagram
+  \[
+  \begin{tikzcd}
+    \lB^\ab G(H/N) \ar[r] \ar[d] &
+    \lB^\ab G(H) \ar[d] \\
+    \lB G(H/N) \ar[r] &
+    \lB G(H)
+  \end{tikzcd}
+  \]
+  is a pullback square. By \cref{abdesc-abelianization-alternate} we
+  can identify this with the diagram of 1-groupoids
+  \[
+  \begin{tikzcd}
+    \Grp((H/N)^\ab,G) \sslash G \ar[r] \ar[d] &
+    \Grp(H^\ab,G) \sslash G \ar[d] \\
+    \Grp(H/N,G) \sslash G \ar[r] &
+    \Grp(H,G) \sslash G.
+  \end{tikzcd}
+  \]
+  It is enough to that check this is a pullback square of 1-groupoids,
+  and this is straightforward given the explicit description of
+  pullback squares of 1-groupoids (see
+  e.g. \cite[\S6.3]{strickland-k(n)-duality}).
+\end{remark}
+
+\subsection{Complex-oriented descent}
+\label{abdesc-codesc}
+
+The takeaway of \cref{abdesc-alternate} is that whether or not a
+global spectrum satisfies abelian descent comes down to comparing, for
+each $G \in \Glo$, what it assigns to the trivial $G$-space and what
+it assigns to a $G$-space whose $H$-fixed point space is contractible
+for $H \subseteq G$ abelian and empty for $H \subseteq G$
+nonabelian. In this subsection we construct a more explicit model for
+the latter, and use this to describe a practical method for proving
+that various global spectra associated to complex-oriented cohomology
+theories satisfy abelian descent. This idea is originally due to
+Quillen \cite{quillen-equivariant-i}, and will be key in proving later
+on that our generalized character maps for Morava E-theory are
+isomorphisms.
+
+\begin{notation}
+  \label{abdesc-codesc-ntn}
+  For the remainder of this subsection:
+  \begin{enumerate}
+  \item Fix a group $G \in \Glo$.
+  \item Fix a faithful complex representation\footnote{Recall that
+      such a thing always exists, e.g. the regular representation
+      $\lC[G]$ always works.}  $\rho \c G \inj \Aut(V)$.
+  \item Choosing a $G$-equivariant hermitian inner
+    product\footnote{Recall that such a thing always exists, e.g. by
+      averaging any ordinary hermitian inner product over $G$.} on and
+    a basis of $V$, this determines an embedding into the unitary
+    group $i \c G \inj \rU(k)$ for $k \ce \dim(V)$.
+  \item \label{abdesc-flag-variety} Let $T \subseteq \rU(k)$ be a
+    maximal torus. Let $F \ce \rU(k)/T$, which is a $G$-space via
+    $i$. Recall that $F$ is the space of complete flags in $V$ (if you
+    imagine $T$ as the subspace of unitary diagonal matrices, then $F$
+    is evidently the space of $k$-tuples of orthogonal lines in $V$,
+    which is the same as the space of complete flags).
+  \end{enumerate}
+\end{notation}
+
+\begin{lemma}
+  \label{abdesc-contractify}
+  Let $X$ be a space, and let $EX$ be the geometric realization of the
+  simplicial space $X \doubfrom X \times X \tripfrom X \times X \times
+  X \cdots$. Then $EX$ is empty if $X$ is empty, and contractible if
+  $X$ is nonempty.
+\end{lemma}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{lemma}
+  \label{abdesc-BabG-construction}
+  With $F$ as in \cref{abdesc-codesc-ntn}\cref{abdesc-flag-variety},
+  let $EF$ be the geometric realization of the simplicial $G$-space
+  $F \doubfrom F \times F \tripfrom F \times F \times F \cdots$. Then
+  $EF$ is a model for $\lB^\ab G$, i.e. if $H \subseteq G$ is a
+  subgroup then $EF^H$ is contractible for $H$ abelian and empty for
+  $H$ nonabelian.
+\end{lemma}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{lemma}
+  \label{abdesc-flag-faithflat}
+  Let $E$ be a ring $G$-spectrum. Suppose that the canonical map
+  $E^* \to E^*(F)$ is faithfully flat. Then the canonical map
+  $E(*) \to E(EF)$ is an equivalence (of spectra).
+\end{lemma}
+
+\begin{proof}
+  Note that the hypothesis implies that $E^*(X \times F)$ is a
+  faithfully flat $E^*(X)$-module for any finite $G$-space $X$.
+\end{proof}
+
+
+\begin{lemma}
+  \label{abdesc-co-flag-faithflat}
+  Let $E$ be a complex-orientable spectrum.
+  \begin{enumerate}
+  \item \label{abdesc-co-flag-bundle} Let $\cV V \to X$ be a vector
+    bundle, and $\cF F \to X$ the associated bundle of complete flags in
+    $\cV$. Then $E^*(\cF)$ is a finite free module over $E^*(X)$.
+  \item \label{abdesc-co-flag-interest} $(E^{\Bor}_G)^*(F)$ is a
+    finite free module over $(E^\Bor_G)^*$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  Recall that $E^\Bor_G$ is defined such that
+  $(E^\Bor_G)^*(F) \iso E^*(EG \times_G F)$ and
+  $(E^\Bor_G)^* \iso E^*(BG)$. Noting that $EG \times_G F \to BG$ is
+  the bundle of complete flags in the vector bundle
+  $EG \times_G V \to BG$, we see that \cref{abdesc-co-flag-interest}
+  follows from \cref{abdesc-co-flag-bundle}.
+
+  We prove \cref{abdesc-co-flag-bundle} by induction on the rank of
+  the vector bundle $\cV \to X$. Of course the claim is trivial when
+  the rank is $0$, giving us our base case, so assume the rank is
+  $n \ge 1$. Consider the associated projective bundle $\lP\cV \to X$.
+  The pullback bundle $\cV' \ce \lP\cV \times_X \cV$ contains a
+  canonical line bundle $\cL \to \lP\cV$. Contemplating the quotient
+  bundle $\cW \ce \cV'/\cL$, we see that the space of complete flags
+  in $\cW$ can be identified with the space $\cF$ of complete flags in
+  $\cV$. Thus the map $E^*(X) \to E^*(\cF)$ factors as the composition
+  $E^*(X) \to E^*(\lP\cV) \to E^*(\cF)$. Since $\cW \to \lP\cV$ has
+  rank $n-1$, we know by induction that $E^*(\cF)$ is a finite free
+  $E^*(\lP\cV)$-module. So we just need to show that $E^*(\lP\cV)$ is
+  a finite free $E^*(X)$-module. But this follows from the
+  Leray-Hirsch theorem, since $\lP\cV \to X$ is a bundle with fiber
+  $\lP^n$ and $E$ being complex orientable implies $E^*(\lP^n)$ is a
+  finite free $E^*$-module.
+
+  \textbf{I'm skipping a couple of details: I should maybe justify
+    that $\cF$ is the space of complete flags in $\cW$; in applying
+    Leray-Hirsch I need to explain why there are classes in
+    $E^*(\lP\cV)$ which restrict to bases of $E^*(\lP^n)$.}
+\end{proof}

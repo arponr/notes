@@ -1,0 +1,50 @@
+\section{Introduction}
+\label{intro}
+
+\newcommand{\Rep}{\operatorname{Rep}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\tr}{\operatorname{tr}}
+
+We set out from someplace quite classical: the representation theory
+of finite groups, in particular the theory of characters
+therein. Let's briefly recall how this story goes. Let $G$ be a finite
+group. The goal of character theory is to understand a representation
+$\rho \c G \to \Aut(V)$ of $G$ on a complex vector space $V$ via its
+associated \emph{character}: the function
+\begin{equation}
+  \label{classical-character}
+  \chi_\rho \ce {\tr} \circ \rho \c G \to \lC,
+\end{equation}
+where $\tr$ denotes the trace map. The beauty of character theory is
+that it accomplishes this goal quite thoroughly. This fact can be
+articulated succinctly as follows.
+
+\begin{definitions}
+  \label{classical-character-dfns}
+  \begin{enumerate}[leftmargin=*]
+  \item Consider the collection of isomorphism classes of complex
+    representations of $G$, which forms a commutative semiring under
+    the operations of direct sum and tensor product; the Grothendieck
+    ring of this semiring, i.e. the commutative ring obtained by
+    formally adjoining additive inverses, is denoted $\Rep(G)$ and
+    referred to as the \emph{representation ring} of $G$.
+  \item A function on $G$ is called a \emph{class function} if it is
+    conjugation-invariant. Let $\Cl(G;\lC)$ denote the $\lC$-algebra
+    of class functions $G \to \lC$.
+  \end{enumerate}
+\end{definitions}
+
+\begin{theorem}[Classical character theory]
+  \label{classical-character-thm}
+  The assignment $\rho \mapsto \chi_\rho$ defined in
+  \cref{classical-character} determines a ring homomorphism
+  $\Rep(G) \to \Cl(G;\lC)$, which furthermore induces an isomorphism
+  \[
+  \lC \otimes_\lZ \Rep(G) \isoto \Cl(G;\lC)
+  \]
+  of $\lC$-algebras.
+\end{theorem}
+
+The goal of the this thesis is to explain a generalization of this
+classical character theory, which begins to suggest itself when we
+view \cref{classical-character-thm} as a statement in homotopy theory.

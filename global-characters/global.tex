@@ -1,0 +1,167 @@
+\section{Global equivariant homotopy theory}
+\label{global}
+
+In \cref{intro} we translated the character theory of a finite group
+$G$ into a statement in $G$-equivariant homotopy theory. If we want to
+take this perspective seriously as a strategy for giving a
+\emph{proof} of character theory---well, more interestingly, for
+giving proofs of generalizations of character theory---it will turn
+out to be crucial that we can make this statement for \emph{all}
+(finite groups) $G$, and that there is moreover some relationship
+among the statements for all these groups. This idea should be
+familiar from the classical setting of representation theory: one
+often tries to get a handle on the representations of a group $G$ by
+considering the representations induced from subgroups
+$H \subseteq G$.
+
+To systematically handle such phenomena, we want some kind of homotopy
+theory in which we can study equivariance for all (finite) groups
+simultaneously. This idea goes by the name of \emph{global equivariant
+  homotopy theory}. This section is devoted to setting up the basic
+framework of global equivariant homotopy theory.\footnote{The first
+  time my eyes saw the global perspective was when reading J. Lurie's
+  survey \cite{lurie-elliptic-survey}, but the ideas are left ever so
+  slightly implicit there and thus my brain didn't process what was
+  really happening for quite some time. What shed light on this
+  picture for me was a note of C. Rezk \cite{rezk-global-cohesion},
+  from which I have learned much of what is included in this section
+  (and the presentation here pretty clearly reflects that).}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The global indexing category}
+\label{global-indexcat}
+
+To guide our definition of global equivariant homotopy theory, we
+recall the setup of $G$-equivariant homotopy theory for a fixed group
+$G$.
+
+\begin{theorem}[Elmendorf]
+  \label{global-elmendorf}
+  Let $G$ be a compact Lie group. The following homotopy theories are
+  all equivalent:
+  \begin{enumerate}
+  \item \label{global-elmendorf-gcw} $G\dash\CW$: the category of
+    $G$-CW-complexes, with weak equivalences defined to be the
+    ($G$-equivariant) homotopy equivalences.
+  \item \label{global-elmendorf-gtop} $G\dash\Top$: the category of
+    topological spaces equipped with a $G$-action, with weak
+    equivalences defined to be the ($G$-equivariant) maps $X \to Y$
+    which induce weak equivalences (of topological spaces) on the
+    fixed-point spaces $X^H \to Y^H$, for all closed subgroups
+    $H \subseteq G$.
+  \item \label{global-elmendorf-presheaf} $\Space_{\cO(G)}$: the
+    homotopy theory of presheaves of spaces on the category of
+    $G$-orbits $\cO(G)$. Abstractly this is the $\infty$-category of
+    $\infty$-functors $\cO(G)^\op \to \Space$. Concretely this is
+    presented by the category of ordinary functors
+    $\cO(G)^\op \to \Top$, with weak equivalences defined object-wise.
+  \end{enumerate}
+  The equivalence of \cref{global-elmendorf-gtop} and
+  \cref{global-elmendorf-presheaf} is exhibited by the functor
+  $G\dash\Top \to \Space_{\cO(G)}$ sending a $G$-space $X$ to the
+  presheaf $O \mapsto \Map_{G\dash\Top}(O,X)$, or in other words
+  $G/H \mapsto X^H$.
+\end{theorem}
+
+\begin{proof}
+  Omitted. See \cite{nlab-equivhomotopy} for more, including a list of
+  references.
+\end{proof}
+
+\begin{notation}
+  \label{global-gspace}
+  When we don't want to specify any particular model, we denote the
+  equivalent homotopy theories given in \cref{global-elmendorf} by
+  $G\dash\Space$, and refer to it as the homotopy theory of
+  \emph{$G$-spaces} or \emph{$G$-equivariant homotopy theory}.
+\end{notation}
+
+As far as I understand, it is formulation
+\cref{global-elmendorf}\cref{global-elmendorf-gcw} which is the
+motivating definition of $G\dash\Space$: it turns out that
+$G$-CW-complexes up to homotopy equivalence effectively model the
+spaces of interest to us, e.g. smooth $G$-manifolds (see
+\cite{mo-equivhmptygrps} for some discussion about this, and \ref{}
+for an example of us critically using this fact). However, it the
+presheaf formulation $\Space_{\cO(G)}$ which will inspire our
+formulation of global equivariant homotopy theory. (Note that this
+presheaf formulation is convenient from a higher-categorical
+perspective, since $\Space_{\cO(G)}$ comes to us immediately as an
+$\infty$-category, in terms of the $\infty$-category of spaces.)
+
+Namely, we will define global equivariant homotopy theory also as the
+homotopy theory of presheaves of spaces on some indexing category
+$\Glo$. Before giving the definition of $\Glo$, we give some intuition
+guiding what the definition should be:
+\begin{itemize}
+\item Unstably, we want to somehow assemble the homotopy theories
+  $G\dash\Space$ for all $G$. So a natural starting point is to ask:
+  how are all these homotopy theories related? The first half of the
+  answer to this is clear: whenever we have a group homomorphism
+  $\phi \c H \to G$, we can pull back an action of $G$ on a space to
+  an action of $H$, and this gives us a restriction functor
+  $\phi^* \c G\dash\Space \to H\dash\Space$. If this were all there
+  was to the answer, then we could just define $\Glo$ to be the
+  category of relevant groups. But there is indeed a second half to
+  this answer: we should remember when two homomorphisms $\phi,\psi$
+  determine equivalent restriction functors $\phi^*,\psi^*$.
+\item Stably, intuition comes from the most basic example of global
+  equivariant cohomology theory  that we want to account for: the
+  Borel-equivariant cohomology $E^\Bor$ associated to an ordinary
+  non-equivariant cohomology theory $E$.
+\end{itemize}
+
+\begin{notation}
+  \label{global-topgpds}
+  Throughout this section it will be convenient to work with
+  \emph{topological groupoids}, i.e. groupoids internal to the
+  ordinary category of topological spaces. So let's just quickly
+  establish some notation for these things:
+  \begin{enumerate}
+  \item If $\cG$ is a topological groupoid, the usual \emph{nerve}
+    construction gives us a simplicial space $\rN\cG$, and we define
+    the \emph{classifying space} $\rB\cG$ to be the geometric
+    realization $|\rN\cG|$ of the nerve.
+  \item The most relevant class of examples for us are the
+    \emph{action groupoids}: if $X$ is a topological space with a
+    $G$-action, then there is a topological groupoid $X \sslash G$
+    whose object space is $X$ and morphism space is $X \times G$, with
+    the structure maps $X \times G \doubto X$ being the projection and
+    the action. In this case the classifying space $\rB(X \sslash G)$
+    is equivalent to the homotopy quotient
+    $X_{hG} \iso (\rE G \times X)/G$. A particularly relevant example
+    in this class comes from the trivial $G$-space $\pt$, with
+    $\rB(\pt \sslash G)$ being the classifying space
+    $\rB G \iso \rE G/G$ of the group $G$.
+  \item If $\cG,\cH$ are topological groupoids then there is a
+    topological groupoid $\Fun(\cG,\cH)$ of functors $\cG \to \cH$.
+    Set-theoretically $\Fun(\cG,\cH)$ has functors as objects and
+    natural transformations as morphisms; the topologies on these are
+    induced by the relevant mapping space topologies.
+  \end{enumerate}
+\end{notation}
+
+\begin{definition}
+  \label{global-indexcat-dfn}
+  The \emph{global indexing category} $\Glo$ is the
+  topologically-enriched category whose objects are finite\footnote{We
+    restrict ourselves to finite groups because these are the groups
+    which will be relevant to our discussion later on. In other
+    situations one might be interested in, say, all compact Lie
+    groups. The framework we set up in this section should carry over
+    without trouble in such situations.} groups $G$, with the mapping
+  space $\Map_{\Glo}(H,G)$ defined to be the classifying space
+  $\rB \Fun(\pt \sslash H, \pt \sslash G)$ defined in
+  \cref{global-topgpds}; composition is defined in the obvious manner.
+\end{definition}
+
+\subsection{The unstable side: global spaces}
+\label{global-unstable}
+
+Hi
+
+\subsection{The stable side: global spectra}
+\label{global-stable}
+
+Hello

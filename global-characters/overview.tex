@@ -1,0 +1,87 @@
+\section{Overview}
+
+\begin{notation}
+  If $E$ is a spectrum and $X$ is a spectrum or a space, then we'll
+  denote the $E$-cohomology of $X$ (as a spectrum, i.e. the function
+  spectrum) by $C^*(X;E)$.
+\end{notation}
+
+\begin{definition}
+  Given a $p$-divisible group $\lG$ over an $\rE_\infty$-ring $E$, we
+  can form a ``$\lG$-twisted'' version of $E$-cohomology on spaces $X$,
+  the spectrum of which we'll denote by $C_\lG^*(X;E)$.
+\end{definition}
+
+\begin{definition}
+  Over any $\rE_\infty$-ring $E$ there is a canonical (derived)
+  $p$-divisible group $\lG_E$ given by
+  $\lG_E[p^k] \ce C^*(B\lZ/p^k, E)$.\footnote{Check that $\lG_E$ is
+    really is a $p$-divisible group (the surjectivity/divisibility
+    criterion).}
+\end{definition}
+
+Building the generalized character maps relies on the following three
+observations\footnote{Do I need the orientability hypotheses in these
+  parts of the argument?}:
+
+\begin{theorem}
+  \label{base-change}
+  Let $\lG$ be a $p$-divisible group over an $\rE_\infty$-ring $E$. Let
+  $E'$ be an $\rE_\infty$-$E$-algebra. Let $\lG' \ce E' \otimes_E \lG$ be
+  the base change. For sufficiently finite spaces $X$ (e.g. of the
+  form $BG$), the canonical map\footnote{What is the canonical map?}
+  $E' \otimes_E C_\lG^*(X;E) \to C_{\lG'}^*(X;E')$ is an equivalence.
+\end{theorem}
+
+\begin{theorem}
+  \label{kn-local}
+  Suppose $E$ is a $K(n)$-local $\rE_\infty$-ring. For all spaces $X$
+  the canonical map\footnote{What is the canonical map?}
+  $C_{\lG_E}^*(X;E) \to C^*(X;E)$ is an equivalence.
+\end{theorem}
+
+\begin{corollary}
+  The conclusion of \eqref{kn-local} holds also for $E'$ a flat
+  extension of a $K(n)$-local $E$.
+\end{corollary}
+
+\begin{proof}
+  The ordinary side should satisfy base change too? But does the left
+  side only satisfy for sufficiently finite?
+\end{proof}
+
+\begin{theorem}
+  \label{splitting}
+  Let $\lG$ be a $p$-divisible group over an $\rE_\infty$-ring
+  $E$. Suppose there is a splitting
+  $\lG \iso \lG' \times (\lQ_p/\lZ_p)^t$. Then for sufficiently finite
+  spaces $X$ there is an equivalence
+  $C_\lG^*(X;E) \iso C_{\lG'}^*(\cL^t(X);E)$, where $\cL$ is the relevant
+  loop space functor.\footnote{What is the relevant loop space
+    functor?}
+\end{theorem}
+
+Now fix a perfect field $k$ of characteristic $p$. Then for $n \ge 0$
+we have Morava E-theories $E(n)$ and K-theories $K(n)$. We should have
+that:
+\begin{enumerate}
+\item $E(n)$ is $K(n)$-local\footnote{I know this is supposed to be
+    right for completed Johnson-Wilson theory. Is it right for more
+    general Morava E- and K-theories?};
+\item There is a flat extension $E(n,t)$ of $L_{K(t)}E(n)$ such that
+  \[
+  E(n,t) \otimes_{E(n)}\lG_{E(n)} \iso \lG_{E(n,t)} \times (\lQ_p/\lZ_p)^t.
+  \]
+  For this fact I certainly need an orientability result, proved by
+  Stapleton.
+\end{enumerate}
+These observations together with the above three theorems imply that
+for sufficiently finite spaces $X$,
+\begin{align*}
+  E(n,t) \otimes_{E(n)} C^*(X;E(n))
+  & \iso E(n,t) \otimes_{E(n)} C_{\lG_{E(n)}}^*(X;E(n)) \\
+  & \iso C_{E(n,t) \otimes_{E(n)} \lG_{E(n)}}^*(X;E(n,t)) \\
+  & \iso C_{\lG_{E(n,t)}}^*(\cL^t(X);E(n,t)), \\
+  & \iso C^*(\cL^t(X);E(n,t)),
+\end{align*}
+which is the desired transchromatic character theory.
