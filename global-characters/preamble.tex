@@ -65,12 +65,12 @@
 
 \renewcommand{\maketitle}{%
   \begin{center}
-    {\bfseries\fontsize{12}{12}\selectfont%
-      \thetitle}\\[2.5ex]
-    {\fontsize{11}{12}\selectfont%
-      \theauthor}\\[2.5ex]
+    {\bfseries\MakeUppercase{%
+      \thetitle}}\\[2.5ex]
+    {\footnotesize\MakeUppercase{%
+      \theauthor}}\\[2.5ex]
     \ifthenelse{\equal{\thedate}{}}{}{%
-      \fontsize{9}{12}\selectfont%
+      \small%
       \setlength{\tabcolsep}{0.2em}%
       \begin{tabular}{rl}
         original: & \thedate \\
@@ -180,6 +180,7 @@
 \defthm{examples}{Examples}
 \defthm{exercise}{Exercise}
 \defthm{fact}{Fact}
+\defthm{intuition}{Intuition}
 \defthm{lemma}{Lemma}
 \defthm{notation}{Notation}
 \defthm{nothing}{}
@@ -190,7 +191,10 @@
 \defthm{situtation}{Situation}
 \defthm{theorem}{Theorem}
 
-\setlist{leftmargin=2.5em, parsep=0ex, itemsep=0.5ex, topsep=0.5ex}
+\setlist{%
+  leftmargin=2.5em, parsep=0ex, listparindent=\parindent,
+  itemsep=0.5ex, topsep=0.5ex,%
+}
 
 \setlist[enumerate, 1]{%
   label=(\alph*),%
@@ -228,6 +232,7 @@
 \def\definerm#1{%
   \ea\gdef\csname r#1\endcsname{\ensuremath{\mathrm{#1}}\xspace}}
 \foreachLetter{1}{27}{\definerm}
+\foreachletter{1}{27}{\definerm}
 % Script: \sA is \mathscr{A}
 \def\definescr#1{%
   \ea\gdef\csname s#1\endcsname{\ensuremath{\mathscr{#1}}\xspace}}
@@ -305,9 +310,11 @@
     \draw[>=stealth,right hook->](0,0.5ex)--(\arrlen,0.5ex);}}
 \newcommand{\surj}{\mathrel{\tikz[baseline]%
     \draw[>=stealth,->>](0,0.5ex)--(\arrlen,0.5ex);}}
-\newcommand{\isoto}{\mathrel{\tikz[baseline]%
-    \draw[>=stealth,->,font=\scriptsize,inner sep=1pt]%
-    (0,0.5ex)--node[above]{$\!\sim$}(\arrlen,0.5ex);}}
+\newcommand{\fromto}{\mathrel{%
+  \begin{tikzpicture}[baseline]%
+    \draw[>=stealth,<-](0,0.15ex)--(\arrlen,0.15ex);%
+    \draw[>=stealth,->](0,0.85ex)--(\arrlen,0.85ex);%
+  \end{tikzpicture}}}
 \newcommand{\doubto}{\mathrel{%
   \begin{tikzpicture}[baseline]%
     \draw[>=stealth,->](0,0.15ex)--(\arrlen,0.15ex);%
@@ -318,7 +325,36 @@
       \node[inner sep=.4ex] (a) {\,$\scriptstyle #1$\,};
       \draw[>=stealth,->] (a.south west) -- (a.south east);
     \end{tikzpicture}}}
-\renewcommand{\isoto}{\lblto{\sim}}
+\newcommand{\isoto}{\lblto{\sim}}
+
+\newcommand{\simpl}[3]{
+  \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+    #1 \&
+    #2 \ar[l, shift right=0.35ex]
+       \ar[l, shift left=0.35ex] \&
+    #3 \ar[l, shift right=0.70ex]
+       \ar[l, shift left=0.70ex]
+       \ar[l] \&
+    \cdots \ar[l, shift right=0.35ex]
+           \ar[l, shift left=0.35ex]
+           \ar[l, shift right=1.05ex]
+           \ar[l, shift left=1.05ex]
+  \end{tikzcd}
+}
+\newcommand{\cosimpl}[3]{
+  \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+    #1 \ar[r, shift right=0.35ex]
+       \ar[r, shift left=0.35ex] \&
+    #2 \ar[r, shift right=0.70ex]
+       \ar[r, shift left=0.70ex]
+       \ar[r] \&
+    #3 \ar[r, shift right=0.35ex]
+       \ar[r, shift left=0.35ex]
+       \ar[r, shift right=1.05ex]
+       \ar[r, shift left=1.05ex] \&
+    \cdots
+  \end{tikzcd}
+}
 
 \newcommand{\tto}{\mathrel{\tikz[baseline]%
     \draw[>=stealth,->,double, double distance = 0.3ex](0,0.5ex)--(\arrlen,0.5ex);}}
@@ -344,10 +380,12 @@
 \newcommand{\del}{\partial}
 \newcommand{\dash}{\text{-}}
 \renewcommand{\c}{\colon}
+\newcommand{\lc}{\,:\!}
 \newcommand{\ce}{\coloneq}%{\mathrel{:=}}
 \newcommand{\ec}{\eqcolon}%{\mathrel{=:}}
 \newcommand{\iso}{\simeq}
 \newcommand{\sslash}{\mathbin{/\mkern-5mu/}}
+\newcommand{\dual}{\vee}
 
 \newcommand{\Obj}{\operatorname{Obj}}
 \newcommand{\Hom}{\operatorname{Hom}}

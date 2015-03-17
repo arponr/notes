@@ -7,20 +7,24 @@ take this perspective seriously as a strategy for giving a
 \emph{proof} of character theory---well, more interestingly, for
 giving proofs of generalizations of character theory---it will turn
 out to be crucial that we can make this statement for \emph{all}
-(finite groups) $G$, and that there is moreover some relationship
-among the statements for all these groups. This idea should be
-familiar from the classical setting of representation theory: one
-often tries to get a handle on the representations of a group $G$ by
-considering the representations induced from subgroups
-$H \subseteq G$.
+finite groups $G$, and that there is moreover some relationship among
+the statements for all these groups. This idea should be familiar from
+the classical setting of representation theory: one often tries to get
+a handle on the representations of a group $G$ by considering the
+representations induced from subgroups $H \subseteq G$.
 
 To systematically handle such phenomena, we want some kind of homotopy
-theory in which we can study equivariance for all (finite) groups
-simultaneously. This idea goes by the name of \emph{global equivariant
-  homotopy theory}. This section is devoted to setting up the basic
-framework of global equivariant homotopy theory.\footnote{The first
-  time my eyes saw the global perspective was when reading J. Lurie's
-  survey \cite{lurie-elliptic-survey}, but the ideas are left ever so
+theory in which we can study equivariance for all finite\footnote{We
+  restrict ourselves to finite groups because these are the groups
+  which will be relevant to our discussion later on. In other
+  situations one might be interested in, say, all compact Lie
+  groups. The framework we set up in this section should carry over
+  without trouble in such situations.}  groups simultaneously. This
+idea goes by the name of \emph{global equivariant homotopy
+  theory}. This section is devoted to setting up the basic framework
+of global equivariant homotopy theory.\footnote{The first time my eyes
+  saw the global perspective was when reading J. Lurie's survey
+  \cite{lurie-elliptic-survey}, but the ideas are left ever so
   slightly implicit there and thus my brain didn't process what was
   really happening for quite some time. What shed light on this
   picture for me was a note of C. Rezk \cite{rezk-global-cohesion},
@@ -33,33 +37,34 @@ framework of global equivariant homotopy theory.\footnote{The first
 \label{global-indexcat}
 
 To guide our definition of global equivariant homotopy theory, we
-recall the setup of $G$-equivariant homotopy theory for a fixed group
-$G$.
+recall the setup of (unstable) $G$-equivariant homotopy theory for a
+fixed group $G$.
 
 \begin{theorem}[Elmendorf]
   \label{global-elmendorf}
-  Let $G$ be a compact Lie group. The following homotopy theories are
-  all equivalent:
+  Let $G$ be a finite group. The following homotopy theories are all
+  equivalent:
   \begin{enumerate}
-  \item \label{global-elmendorf-gcw} $G\dash\CW$: the category of
-    $G$-CW-complexes, with weak equivalences defined to be the
-    ($G$-equivariant) homotopy equivalences.
-  \item \label{global-elmendorf-gtop} $G\dash\Top$: the category of
-    topological spaces equipped with a $G$-action, with weak
-    equivalences defined to be the ($G$-equivariant) maps $X \to Y$
-    which induce weak equivalences (of topological spaces) on the
-    fixed-point spaces $X^H \to Y^H$, for all closed subgroups
-    $H \subseteq G$.
-  \item \label{global-elmendorf-presheaf} $\Space_{\cO(G)}$: the
+  \item \label{global-elmendorf-gtop} $G\dash\Top$: the relative
+    category of topological spaces equipped with a $G$-action, with
+    weak equivalences defined to be the ($G$-equivariant) maps
+    $X \to Y$ which induce weak equivalences (of topological spaces)
+    on the fixed-point spaces $X^H \to Y^H$ for all subgroups
+    $H \subseteq G$. (In fact there is a standard model structure on
+    this relative category.)
+  \item \label{global-elmendorf-gcw} $G\dash\CW$: the relative
+    category of $G$-CW-complexes, with weak equivalences defined to be
+    the ($G$-equivariant) homotopy equivalences. (In fact this is just
+    the subcategory of fibrant-cofibrant objects in the model
+    structure on $G\dash\Top$ mentioned above.)
+  \item \label{global-elmendorf-presheaf} $\Space_{\Orb(G)}$: the
     homotopy theory of presheaves of spaces on the category of
-    $G$-orbits $\cO(G)$. Abstractly this is the $\infty$-category of
-    $\infty$-functors $\cO(G)^\op \to \Space$. Concretely this is
-    presented by the category of ordinary functors
-    $\cO(G)^\op \to \Top$, with weak equivalences defined object-wise.
+    $G$-orbits $\Orb(G)$, i.e. the $\infty$-category of functors
+    $\Orb(G)^\op \to \Space$.
   \end{enumerate}
   The equivalence of \cref{global-elmendorf-gtop} and
   \cref{global-elmendorf-presheaf} is exhibited by the functor
-  $G\dash\Top \to \Space_{\cO(G)}$ sending a $G$-space $X$ to the
+  $G\dash\Top \to \Space_{\Orb(G)}$ sending $X \in G\dash\Top$ to the
   presheaf $O \mapsto \Map_{G\dash\Top}(O,X)$, or in other words
   $G/H \mapsto X^H$.
 \end{theorem}
@@ -71,53 +76,82 @@ $G$.
 
 \begin{notation}
   \label{global-gspace}
-  When we don't want to specify any particular model, we denote the
-  equivalent homotopy theories given in \cref{global-elmendorf} by
-  $G\dash\Space$, and refer to it as the homotopy theory of
-  \emph{$G$-spaces} or \emph{$G$-equivariant homotopy theory}.
+  We'll denote the equivalent homotopy theories described in
+  \cref{global-elmendorf} by $G\dash\Space$ when we want to make a
+  statement without evoking any particular model.
 \end{notation}
 
 As far as I understand, it is formulation
-\cref{global-elmendorf}\cref{global-elmendorf-gcw} which is the
-motivating definition of $G\dash\Space$: it turns out that
+\cref{global-elmendorf}\cref{global-elmendorf-gcw} of $G\dash\Space$
+which makes it interesting and useful: it turns out that
 $G$-CW-complexes up to homotopy equivalence effectively model the
 spaces of interest to us, e.g. smooth $G$-manifolds (see
-\cite{mo-equivhmptygrps} for some discussion about this, and \ref{}
-for an example of us critically using this fact). However, it the
-presheaf formulation $\Space_{\cO(G)}$ which will inspire our
-formulation of global equivariant homotopy theory. (Note that this
-presheaf formulation is convenient from a higher-categorical
-perspective, since $\Space_{\cO(G)}$ comes to us immediately as an
-$\infty$-category, in terms of the $\infty$-category of spaces.)
+\cite{mo-equivhmptygrps} for some discussion about this, and
+\cref{abdesc-flag-faithflat} for an example of us critically using
+this fact). However, the presheaf formulation
+\cref{global-elmendorf}\cref{global-elmendorf-presheaf} is quite
+convenient from a categorical perspective: $\Space_{\Orb(G)}$ comes to
+us immediately as an $\infty$-category, in terms of the
+$\infty$-category of spaces, allowing us to speak very easily about
+limits and colimits for example. Such a framework will also be
+convenient in the global setting (evidence abounds in this section and
+the next), inspiring us to formulate global equivariant homotopy
+theory also as the homotopy theory of presheaves of spaces on some
+indexing category $\Glo$. Before giving the definition of $\Glo$, we
+give some intuition guiding what the definition should be.
 
-Namely, we will define global equivariant homotopy theory also as the
-homotopy theory of presheaves of spaces on some indexing category
-$\Glo$. Before giving the definition of $\Glo$, we give some intuition
-guiding what the definition should be:
-\begin{itemize}
-\item Unstably, we want to somehow assemble the homotopy theories
-  $G\dash\Space$ for all $G$. So a natural starting point is to ask:
-  how are all these homotopy theories related? The first half of the
-  answer to this is clear: whenever we have a group homomorphism
-  $\phi \c H \to G$, we can pull back an action of $G$ on a space to
-  an action of $H$, and this gives us a restriction functor
-  $\phi^* \c G\dash\Space \to H\dash\Space$. If this were all there
-  was to the answer, then we could just define $\Glo$ to be the
-  category of relevant groups. But there is indeed a second half to
-  this answer: we should remember when two homomorphisms $\phi,\psi$
-  determine equivalent restriction functors $\phi^*,\psi^*$.
-\item Stably, intuition comes from the most basic example of global
-  equivariant cohomology theory  that we want to account for: the
-  Borel-equivariant cohomology $E^\Bor$ associated to an ordinary
-  non-equivariant cohomology theory $E$.
-\end{itemize}
+\begin{intuition}
+  \label{global-indexint}
+  \begin{enumerate}[leftmargin=*]
+  \item \label{global-indexint-unstable} Unstably, we want to somehow
+    assemble the homotopy theories $G\dash\Space$ for all $G$. So a
+    natural starting point is to ask: how are all these homotopy
+    theories related? Of course, whenever we have a group homomorphism
+    $\phi \c H \to G$, we can pull back an action of $G$ on a space to
+    an action of $H$, giving us a restriction functor
+    $\phi^* \c G\dash\Space \to H\dash\Space$. If this were all there
+    was to the answer, then we could just define $\Glo$ to be the
+    category of groups. However there is something else to remember:
+    whenever $\psi \c H \to G$ is a $G$-conjugate $g\phi g^{-1}$ of
+    $\phi \c H \to G$, there is a natural equivalence
+    $\phi^* \isoto \psi^*$, given on a $G$-space $X$ by the action
+    $g \c \phi^*(X) \to \psi^*(X)$.
+
+    We can summarize the above discussion as follows. If we view our
+    groups $G$ as groupoids in the usual manner, then $\Space_G$ is
+    functorial not only in category of groups, but in the
+    \emph{$2$-category} of such groupoids (where the $1$-morphisms are
+    functors, corresponding to group homomorphisms, and the
+    $2$-morphisms are natural transformations, corresponding to
+    conjugation of group homomorphisms). We will spell this out in
+    detail in \cref{global-topgpds,global-indexcat-dfn} to give our
+    definition of $\Glo$.
+
+  \item \label{global-indexint-stable} Stably, intuition comes from
+    the most basic example of global equivariant cohomology theory
+    that we want to account for: the Borel equivariant cohomology
+    $E^\Bor$ associated to any non-equivariant cohomology theory
+    $E$. Recall that Borel $G$-equivariant cohomology is defined so
+    that for a $G$-space $X$,
+    \[
+    E^\Bor_G(X) \iso E(X_{\rh G}) \iso E(\rE G \times_G X).
+    \]
+    In particular, for $X = \pt$ the trivial $G$-space,
+    $E^\Bor_G(\pt) \iso E(\rB G)$. Thus we might imagine $E^\Bor$ as
+    something functorial with respect to the classifying space
+    $\rB G$.  We will show in \cref{global-bgcat} that this intuition
+    for $\Glo$ is equivalent to that given in
+    \cref{global-indexint-unstable}.
+  \end{enumerate}
+\end{intuition}
 
 \begin{notation}
   \label{global-topgpds}
-  Throughout this section it will be convenient to work with
-  \emph{topological groupoids}, i.e. groupoids internal to the
-  ordinary category of topological spaces. So let's just quickly
-  establish some notation for these things:
+  To formalize our intuition
+  \cref{global-indexint}\cref{global-indexint-unstable} it will be
+  convenient to work with \emph{topological groupoids}, i.e. groupoids
+  internal to the ordinary category of topological spaces. So let's
+  just quickly establish some notation for these things:
   \begin{enumerate}
   \item If $\cG$ is a topological groupoid, the usual \emph{nerve}
     construction gives us a simplicial space $\rN\cG$, and we define
@@ -130,7 +164,7 @@ guiding what the definition should be:
     the structure maps $X \times G \doubto X$ being the projection and
     the action. In this case the classifying space $\rB(X \sslash G)$
     is equivalent to the homotopy quotient
-    $X_{hG} \iso (\rE G \times X)/G$. A particularly relevant example
+    $X_{\rh G} \iso \rE G \times_G X$. A particularly relevant example
     in this class comes from the trivial $G$-space $\pt$, with
     $\rB(\pt \sslash G)$ being the classifying space
     $\rB G \iso \rE G/G$ of the group $G$.
@@ -145,23 +179,141 @@ guiding what the definition should be:
 \begin{definition}
   \label{global-indexcat-dfn}
   The \emph{global indexing category} $\Glo$ is the
-  topologically-enriched category whose objects are finite\footnote{We
-    restrict ourselves to finite groups because these are the groups
-    which will be relevant to our discussion later on. In other
-    situations one might be interested in, say, all compact Lie
-    groups. The framework we set up in this section should carry over
-    without trouble in such situations.} groups $G$, with the mapping
-  space $\Map_{\Glo}(H,G)$ defined to be the classifying space
-  $\rB \Fun(\pt \sslash H, \pt \sslash G)$ defined in
-  \cref{global-topgpds}; composition is defined in the obvious manner.
+  topologically-enriched category whose objects are finite groups $G$,
+  with the mapping space $\Map_{\Glo}(H,G)$ defined to be the
+  classifying space $\rB \Fun(\pt \sslash H, \pt \sslash G)$ defined
+  in \cref{global-topgpds}; composition is defined in the obvious
+  manner. (Note that this is just the realization of the $2$-category
+  described in \cref{global-indexint}\cref{global-indexint-unstable}
+  as a topologically-enriched category.)
 \end{definition}
+
+\begin{lemma}
+  \label{global-bgcat}
+  $\Glo$ is the category of $\rB G$s.
+\end{lemma}
+
+We conclude this subsection by showing how to relate the orbit
+category $\Orb(G)$ of a fixed group $G$ with the global indexing
+category $\Glo$. This will allow us in
+\cref{global-unstable,global-stable} to relate each fixed
+$G$-equivariant homotopy theory with global equivariant homotopy
+theory.
+
+\begin{construction}
+  \label{global-orbtoglo}
+  Let $G \in \Glo$. We construct a fully faithful embedding $\iota_G$
+  of $\Orb(G)$ into the overcategory $\Glo_{/G}$.
+\end{construction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{The unstable side: global spaces}
 \label{global-unstable}
 
-Hi
+Now that we've defined the global indexing category, the definition of
+``space'' in global equivariant homotopy theory is immediate.
+
+\begin{definition}
+  \label{global-space}
+  A \emph{global space} is a presheaf of spaces on $\Glo$, i.e. a
+  functor $\Glo^\op \to \Space$. We denote the $\infty$-category of
+  global spaces by $\Space_\Glo$.
+\end{definition}
+
+\begin{notation}
+  \label{global-yoneda}
+  We denote the Yoneda embedding $\Glo \to \Space_\Glo$ by $\lB$. So
+  for each finite group $G$ we have a global space $\lB G$.
+\end{notation}
+
+We claimed in \cref{global-indexint}\cref{global-indexint-unstable}
+that this definition of global equivariant homotopy theory would be a
+useful way to assemble the homotopy theories of $G$-spaces for all
+$G$. We justify this claim now, by embedding, for each $G \in \Glo$,
+the homotopy theory of $G$-spaces into the homotopy theory of global
+spaces over $\lB G$.
+
+\begin{proposition}
+  \label{global-gspace-adj}
+  Let $G \in \Glo$. There is an adjunction
+  \[
+  \Delta_G \c G\dash\Space \fromto
+  (\Space_{\Glo})_{/\lB G} \lc \Gamma_G,
+  \]
+  where $(\Space_\Glo)_{/\lB G}$ denotes the overcategory of maps of
+  global spaces $X \to \lB G$. Moreover the left adjoint $\Delta_G$ is
+  fully faithful.
+\end{proposition}
+
+\begin{proof}
+  In \cref{global-orbtoglo} we constructed a fully faithful embedding
+  $\iota_G \c \Orb(G) \inj \Glo_{/G}$. From this we obtain an
+  adjunction of presheaf categories
+  \[
+  (\iota_G)_! \c \Space_{\Orb(G)} \fromto
+  \Space_{\Glo_{/G}} \lc (\iota_G)^*,
+  \]
+  where $(\iota_G)^*$ is restriction along $\iota_G$, and its left
+  adjoint $(\iota_G)_!$ is left Kan extension along $\iota_G$ (this
+  adjunction is essentially the definition of left Kan
+  extension). Now, by a general fact about the interaction of presheaf
+  categories and overcategories, there is an equivalence
+  $\Space_{\Glo_{/G}} \iso (\Space_\Glo)_{/\lB G}$. Applying this and
+  the fact/definition \cref{global-elmendorf} that
+  $G\dash\Space \iso \Space_{\Orb(G)}$, we obtain the claimed
+  adjunction $\Delta_G \dashv \Gamma_G$. Finally, $\iota_G$ being
+  fully faithful implies immediately that left Kan extension
+  $(\iota_G)_!$ is fully faithful, and hence $\Delta_G$ is fully
+  faithful.
+\end{proof}
+
+\begin{remark}
+  \label{global-gspace-adj-unwrap}
+  It's a straightforward exercise in definition-chasing to unwrap the
+  categorical formalities used in the proof of
+  \cref{global-gspace-adj} and obtain the following more explicit
+  formulae:
+  \begin{enumerate}
+  \item \label{global-gspace-adj-unwrap-right} Viewing $\Gamma_G$ as a
+    functor $(\Space_\Glo)_{/\lB G} \to \Space_{\Orb(G)}$, it assigns
+    to a map of global spaces $X \to \lB G$ the presheaf
+    $G/H \mapsto X(H) \times_{\lB G(H)} \{i_H\}$, where
+    $i_H \c H \to G$ denotes the inclusion of a subgroup.
+  \item \label{global-gspace-adj-unwrap-left} There is a functor
+    $G\dash\Top \to \Space_\Glo$ which to $X \in G\dash\Top$ assigns
+    the presheaf $H \mapsto \rB \Fun(\pt \sslash H, X \sslash G)$,
+    where $\Fun(\pt \sslash H, X \sslash G)$ is simply the action
+    groupoid
+    \[
+    \l( \coprod_{\phi \in \Hom(H,G)} X^{\im(\phi)} \r) \sslash G,
+    \]
+    analagous to \cref{}. In particular, $\delta_G(\pt) \iso \lB G$.
+    Then, viewing $\Delta_G$ as a functor
+    $G\dash\Top \to (\Space_\Glo)_{/\lB G}$, it assigns to
+    $X \in G\dash\Top$ the map $\delta_G(X \to \pt)$, which is a map
+    $\delta_G(X) \to \delta_G(\pt) \iso \lB G$.
+  \end{enumerate}
+\end{remark}
+
+That's all we have to say about the general theory of global spaces,
+since that's all that will be relevant to our study of character
+theory. See \cite{rezk-global-cohesion} for some more interesting
+phenomena in this setting.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{The stable side: global spectra}
 \label{global-stable}
 
-Hello
+In the equivariant business, the stable homotopy theory is more
+nuanced than the unstable theory, in a way that doesn't arise in the
+usual non-equivariant theory.
+
+\begin{definition}
+  \label{global-spectrum}
+  A \emph{global space} is a presheaf of spaces on $\Glo$, i.e. a
+  functor $\Glo^\op \to \Space$. We denote the $\infty$-category of
+  global spaces by $\Space_\Glo$.
+\end{definition}
+

@@ -1,0 +1,151 @@
+\section{$p$-divisible groups}
+\label{pdiv}
+
+We saw in \cref{chrom} that there is a remarkable connection between
+stable homotopy theory and the theory of formal groups. In particular
+we saw that, at a fixed prime $p$, the stratification of formal groups
+by height is reflected in homotopy theory through these cohomology
+theories known at Morava K- and E-theory. It turns out that, to
+understand how these different heights interact in stable homotopy
+theory, it is extremely useful not just to consider the formal groups
+at hand, but to consider the $p$-power torsion of these formal groups
+as what are known as $p$-divisible groups. Indeed the main theorem in
+this thesis, i.e. the character theory presented in \cref{char}, is
+precisely an expression of this philosophy. This sections contains
+what we'll need to know there about $p$-divisible groups.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Generalities}
+\label{pdiv-gen}
+
+\begin{definition}
+  \label{pdiv-pdivgrp}
+  Let $R$ be a commutative ring. A \emph{$p$-divisible group} $\lG$ of
+  \emph{height $n$} over $R$ is a system
+  $(\lG_k, i_k)_{k \in \lZ_{\ge 0}}$, where for each
+  $k \in \lZ_{\ge 0}$:
+  \begin{itemize}
+  \item $\lG_k$ is a finite flat commutative group scheme over $R$ of
+    rank $p^{nk}$;
+  \item $i_k \c \lG_k \to \lG_{k+1}$ is a morphism of group schemes
+    over $R$ such that the sequence
+    \[
+    0 \to \lG_k \lblto{i_k} \lG_{k+1} \lblto{(p^k)} \lG_{k+1}
+    \]
+    is exact, where $(p^k)$ denotes multiplication by $p^k$;
+    i.e. $i_k$ identifies $\lG_k$ as the $p^k$-torsion in
+    $\lG_{k+1}$.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  Finite morphisms are affine by definition!
+\end{remark}
+
+\begin{example}
+  The only constant $p$-divisible group of height $n$ is
+  $(\lQ_p/\lZ_p)^n$.
+\end{example}
+
+\begin{example}
+  The $p$-torsion of an abelian scheme over $R$.
+\end{example}
+
+\subsection{Splitting the connected-\'etale sequence}
+\label{pdiv-split}
+
+In this subsection we construct the universal extension of a ring over
+which a given $p$-divisible group splits as the direct sum of its
+infinitesimal part and a constant \'etale part. We essentially follow
+Stapleton \cite[\S2.8]{stapleton-tgcm}, but we distill this part of
+the argument and work in the general situation, rather than the
+specific example which will be relevant to character theory; I think
+this generality actually clarifies the exposition slightly.
+
+\begin{notation}
+  \label{pdiv-split-ntn}
+  Throughout this subsection we let $\lG$ be a $p$-divisible group
+  over a commutative ring $A$. We let
+  \[
+  0 \to \lG^\inf \to \lG \to \lG^\et \to 0
+  \]
+  denote the standard connected-\'etale sequence of $\lG$. We let $n$
+  denote the height of $\lG$, $t$ the height of $\lG^\inf$, and
+  therefore $n-t$ the height of $\lG^\et$.
+
+  Let $\Lambda \ce (\lZ_p)^{n-t}$ so
+  $\Lambda^\dual \iso (\lQ_p/\lZ_p)^{n-t}$.
+\end{notation}
+
+To reiterate, armed now with notation, our goal is to find the
+universal extension $A_t$ of $A$ over which there is an isomorphism
+\begin{equation}
+\label{pdiv-split-ad}
+\lG^\inf_{A_t} \oplus \Lambda^\dual_{A_t} \isoto
+\lG_{A_t}
+\end{equation}
+of $p$-divisible groups over $A_t$. We'll construct $A_t$ in two
+steps, the first of which will be to find the universal extension
+$A'_t$ of $R$ over which there just is a map
+\begin{equation}
+\label{pdiv-split1-ad}
+\Lambda^\dual_{A'_t} \to \lG_{A'_t},
+\end{equation}
+i.e. compatible maps $\Lambda^\dual[p^k]_{A'_t} \to \lG[p^k]_{A'_t}$
+for all $k \in \lZ_{\ge 0}$.
+
+\begin{proposition}
+  \label{pdiv-split-step1}
+  \begin{enumerate}[leftmargin=*]
+  \item \label{pdiv-split-step1-finite} For $k \in \lZ_{\ge 0}$, the
+    functor
+    \[
+    F_k \c \Alg_A \to \Set, \quad
+    B \mapsto \Hom_B(\Lambda^\dual[p^k]_B, \lG[p^k]_B)
+    \]
+    is corepresented by the $A$-algebra
+    $R'_{t,k} \ce (\cO_{\lG[p^k]})^{\otimes(n-t)}$.
+  \item \label{pdiv-split-step1-limit} The functor
+    \[
+    F \c \Alg_A \to \Set, \quad
+    B \mapsto \Hom_B(\Lambda^\dual_B, \lG_B)
+    \]
+    is corepresented by the $A$-algebra $A_t \ce \colim_k A_{t,k}$,
+    where the morphisms $A_{t,k} \to A_{t,k+1}$ defining the colimit
+    are induced by \cref{pdiv-split-step1-finite} via natural
+    transformations $F_{k+1} \to F_k$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  We first prove \cref{pdiv-split-step1-finite}, so fix
+  $k \in \lZ_{\ge 0}$. Let $B \in \Alg_A$. Since $\Lambda^\dual[p^k]$
+  and $\lG[p^k]$ are affine, specifying a homomorphism of group
+  schemes $\Lambda^\dual[p^k]_B \to \lG[p^k]_B$ over $B$ is equivalent
+  to specifying a homomorphism of Hopf algebras
+  \[
+  B \otimes_A \cO_{\lG[p^k]} \iso
+  \cO_{\lG[p^k]_B} \to
+  \cO_{\Lambda^\dual[p^k]_B} \iso
+  \prod_{x \in \Lambda^\vee[p^k]} B
+  \]
+  under $B$. By restricting to the factors on the right-hand side
+  corresponding to our chosen $(n-t)$ generators of
+  $\Lambda^\vee[p^k]$, this is furthermore equivalent to specifying
+  $(n-t)$ homomorphisms of $B$-algebras
+  $B \otimes_A \cO_{\lG[p^k]} \to B$. Of course this is equivalent to
+  specifying $(n-t)$ homomorphisms of $A$-algebras
+  $\cO_{\lG[p^k]} \to B$, which is equivalent to specifying a single
+  homomorphism of $A$-algebras
+  $(\cO_{\lG[p^k]})^{\otimes(n-t)} \to B$. We have now described a
+  bijection $F(B) \iso \Hom_{\Alg_A}(R'_{t,k},B)$ which clearly is
+  natural in $B$, proving the claim.
+
+  We now prove \cref{pdiv-split-step1-limit}.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Chromatic examples}
+\label{pdiv-chromex}

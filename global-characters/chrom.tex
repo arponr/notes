@@ -1,0 +1,277 @@
+\section{Chromatic homotopy theory}
+\label{chrom}
+
+\newcommand{\CP}{\lC\lP}
+
+In this section we lay out some of the fundamental ideas in chromatic
+homotopy theory, enough that we can somewhat safely speak about the
+generalizations of character theory alluded to in \cref{intro}. As
+this section is intended primarily as background, it's far less formal
+than the others and quite light on proofs. The lecture notes
+\cite{hopkins-coctalos,lurie-chromatic} are nice places to read about
+these ideas in more depth and detail (and my debt to these sources in
+this exposition will be clear).
+
+\subsection{Formal group laws \& Chern classes}
+
+Our starting point is the theory of Chern classes associated to
+complex vector bundles. Actually let's just focus on (complex) line
+bundles $L \to X$, in which case all that's of interest is the first
+Chern class $c_1(L) \in \rH^2(X) \ce \rH^2(X;\lZ)$. Recall two facts
+about this situation:
+\begin{itemize}
+\item Chern classes are natural: the Chern class of the pullback of a
+  line bundle $L \to X$ in a map $f \c Y \to X$ is just the pullback
+  $f^*(c_1(L)) \in \rH^2(Y)$ of the Chern class of $L$.
+\item There is a universal line bundle: letting $\cO(1)$ denote the
+  tautological line bundle over the space $\CP^\infty \iso \rB\rU(1)$,
+  there is a natural bijection between the homotopy classes of maps
+  $f \c X \to \CP^\infty$ and isomorphism classes of line bundles on
+  $X$, given by associating such a map $f$ to the pullback
+  $f^*(\cO(1))$ of the tautological bundle. That is, the functor
+  associating to a space $X$ the set of isomorphism classes of line
+  bundles on it is representable (in the homotopy category of spaces)
+  by $\CP^\infty$, and the tautological bundle $\cO(1)$ is truly
+  tautological: it corresponds to the identity map
+  $\id \c \CP^\infty \to \CP^\infty$.
+\end{itemize}
+Of course Chern classes are also isomorphism-invariant, so it follows
+from these facts that the Chern classes of all line bundles $L$ are
+determined by a choice of Chern class
+$c_1(\cO(1)) \in \rH^2(\CP^\infty)$. Now, recall that the cohomology
+ring of $\CP^\infty$ is given by\footnote{It may be more common to
+  write $\rH^*(\CP^\infty) \iso \lZ[t]$, i.e. to use the polynomial
+  ring rather than the power series ring. This is just a convention:
+  does one want to assemble the graded pieces of $\rH^*(X)$ by taking
+  their direct product or their direct sum? In other words, does one
+  want to consider infinite or just finite sums of homogenous elements
+  in the ring $\rH^*(X)$? In just a bit we'll be considering
+  cohomology theories $E$ other than singular cohomology, in
+  particular ones in which the coefficient ring $E^* \ce E^*(\pt)$ is
+  not concentrated in degree $0$, but may in fact be nonzero in
+  infinitely many degrees. But even in this more general situation,
+  we'd like to think of $E^*$ as some sort of base ring of
+  coefficients, in which case we may have infinite sums in the ring
+  $E^*(X)$ still living in some finite graded piece. It will thus be
+  more natural to consider the power series ring $E^*[[t]]$, and so we
+  begin with this convention here.}
+\[
+\rH^*(\CP^\infty) \iso \lZ[[t]],
+\]
+where the generator lives in degree $2$, i.e.
+$t \in \rH^2(\CP^\infty)$. So of course then the interesting choice to
+make is $c_1(\cO(1)) \ce t$. But note that $t$ is really only
+well-defined up to a unit in $\lZ$, i.e. up to sign! So to be precise
+we need to fix such a generator and then declare this to be
+$c_1(\cO(1))$.
+
+Now, the set of isomorphism classes of line bundles on a space $X$ is
+often referred to as its Picard group; the name isn't so important
+right now, but it is important that it's a group! Recall that the
+operation is given by tensor product of line bundles. So it's natural
+to ask: given two line bundles $L$ and $L'$ on $X$, can we express
+$c_1(L \otimes L')$ in terms of $c_1(L)$ and $c_1(L')$? In fact one
+can do so quite easily:
+\begin{equation}
+  \label{chrom-cherntensor}
+    c_1(L \otimes L') = c_1(L) + c_1(L') \in \rH^2(X).
+\end{equation}
+
+Since there is universal line bundle $\cO(1)$, proving this boils down
+to proving it for the universal example. The universal \emph{pair} of
+line bundles is given by the bundles $\pi_1^*\cO(1),\pi_2^*\cO(1)$ on
+$\CP^\infty \times \CP^\infty$, where
+$\pi_1,\pi_2 \c \CP^\infty \times \CP^\infty \to \CP^\infty$ denote
+the projections, and the formula \cref{chrom-cherntensor} holds if and
+only if it holds for this universal example, that is if
+\[
+c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1)) =
+c_1(\pi_1^*\cO(1)) + c_1(\pi_2^*\cO(1)) \in
+\rH^2(\CP^\infty \times \CP^\infty).
+\]
+To see that this is true, we observe that the canonical map
+$\iota \c \CP^\infty \vee \CP^\infty \to \CP^\infty \times \CP^\infty$
+induces an isomorphism in $\rH^2$,
+\begin{equation}
+\label{chrom-cherntensorpf}
+\iota^* \c \rH^2(\CP^\infty \times \CP^\infty) \isoto
+\rH^2(\CP^\infty \vee \CP^\infty),
+\end{equation}
+and that the pullback bundle
+$\iota^*(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1))$ is just a copy of
+$\cO(1)$ over each summand of $\CP^\infty \vee \CP^\infty$.
+
+We can alternatively view this universal example as follows: by the
+Yoneda lemma, the tensor product operation on line bundles corresponds
+to some kind of multiplication map
+$\mu \c \CP^\infty \times \CP^\infty \to \CP^\infty$. In cohomology
+this gives a map
+\[
+\lZ[[t]] \iso
+\rH^*(\CP^\infty) \lblto{\mu^*}
+\rH^*(\CP^\infty \times \CP^\infty) \iso
+\lZ[[x,y]],
+\]
+using the Kunneth isomorphism on the right-hand side, so
+$x = \pi_1^*(t)$ and $y = \pi_2^*(t)$. By definition we'll have
+$\mu^*\cO(1) \iso \pi_1^*\cO(1) \otimes \pi_2^*\cO(1)$.  So we end up
+with
+\begin{align*}
+\mu^*(t) &=
+\mu^*(c_1(\cO(1))) =
+c_1(\mu^*\cO(1)) =
+c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1)) =
+c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1)), \\
+x + y &=
+\pi_1^*(t) +  \pi_2^*(t) =
+\pi_1^*(c_1(\cO(1))) +  \pi_2^*(c_1(\cO(1))) =
+c_1(\pi_1^*\cO(1)) + c_1(\pi_2^*\cO(1)).
+\end{align*}
+And therefore we conclude that the formula \cref{chrom-cherntensor} is
+equivalent to the formula $\mu^*(t) = x + y$.
+
+Somebody interested in stable homotopy theory might now ask: what
+precisely did we use about singular cohomology in the above? We
+observe that the essential facts were the computations of
+$\rH^*(\CP^\infty)$ and $\rH^*(\CP^\infty \times \CP^\infty)$ as power
+series rings. This motivates the following definition.\footnote{One
+  can also give alternative, somewhat more elementary (but equivalent)
+  definitions of complex-orientability than the one given here, but
+  this is the one which most easily and succinctly fits into the
+  motivation being given here.}
+
+\begin{definition}
+  \label{chrom-complor}
+  A multiplicative cohomology theory, i.e. a (homotopy) ring spectrum,
+  $E$ is said to be \emph{complex-orientable} if the Atiyah-Hirzebruch
+  spectral sequence
+  \[
+  \rH^p(\CP^\infty;E^q(\pt)) \Rightarrow E^{p+q}(\CP^\infty)
+  \]
+  degenerates at its second page. By the standard computations in
+  singular cohomology, this condition implies that there is an
+  isomorphism $E^*(\CP^\infty) \iso E^*[[t]]$, where
+  $E^* \ce E^*(\pt)$. A choice of such an isomorphism, i.e. a choice
+  of generator $t$ (which again is well-defined only up to the units
+  of $E^0$) is referred to as a \emph{complex-orientation} of $E$. We
+  say $E$ is \emph{complex-oriented} if it is equipped with a
+  complex-orientation.
+
+  In fact the degeneration of the spectral sequence for $\CP^\infty$
+  forces the analagous degeneration for
+  $\CP^\infty \times \CP^\infty$, whence a complex-orientation on $E$
+  similarly determines an isomorphism
+  $E^*(\CP^\infty \times \CP^\infty) \iso E^*[[x,y]]$.
+\end{definition}
+
+\begin{examples}
+  \label{chrom-coex}
+  We give the two most basic examples of complex-orientable cohomology
+  theories, which are essentially the two motivating examples of
+  cohomology theories in the first place:
+  \begin{enumerate}
+  \item Obviously singular cohomology $\rH$ is complex-orientable.
+  \item One can show that complex K-theory $\rK$ is complex-orientable
+    as well.
+  \end{enumerate}
+\end{examples}
+
+So we can create a theory of Chern classes with values in any
+complex-oriented cohomology theory $E$. But now there is no reason for
+formula \cref{chrom-cherntensor} to hold; its validity in singular
+cohomology relies on the fact \cref{chrom-cherntensorpf}, which relies
+on the coefficient ring $\rH^* \iso \lZ$ being concentrated in degree
+$0$, a situation we don't in general expect to be in (e.g. for complex
+K-theory, Bott periodicity tells us $\rK^* \iso \lZ[\beta,\beta^{-1}]$
+with $\beta$ in degree $-2$). However, we can still say something
+about the Chern class of a tensor product with values in $E^*$: it is
+still determined by the universal example, which is still determined
+by the map in cohomology
+\begin{equation}
+\label{chrom-cofgl}
+E^*[[t]] \iso
+E^*(\CP^\infty) \lblto{\mu^*}
+E^*(\CP^\infty \times \CP^\infty) \iso
+E^*[[x,y]],
+\end{equation}
+and again the formula for the Chern class of a tensor product will be
+given by the power series $f \ce \mu^*(t) \in E^*[[x,y]]$. The fact
+that the tensor product of line bundles is unital, commutative, and
+associative (all up to isomorphism) implies that $f$ lies in some
+special class of power series in two variables, which we should think
+of as some kind of infinitesimal version of a group operation. We give
+a name to this special class now, as it is quite important.
+
+\begin{definition}
+  \label{chrom-fgl}
+  A \emph{formal group law} over a commutative ring $R$ is a power
+  series $f \in R[[x,y]]$ satisfying:
+  \begin{enumerate}
+  \item $f(x,0) = x$ and $f(0,y) = y$;
+  \item $f(x,y) = f(y,x)$;
+  \item $f(f(x,y),z) = f(x,f(y,z))$.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  \label{chrom-grcomm}
+  Note that we'll always speak about formal group laws over
+  \emph{commutative} rings, but the coefficient ring $E^*$ of a
+  multiplicative cohomology theory is \emph{graded-commutative}. This
+  is no problem here: since $\mu^*$ respects grading and the classes
+  $t,x,y$ in \cref{chrom-cofgl} are in degree $2$, the power series $f
+  \ce \mu^*(t)$ must have coefficients in the even degrees $E^{2*}$,
+  which of course do form a commutative ring.
+\end{remark}
+
+\begin{examples}
+  \label{chrom-fglex}
+  We give the two most basic examples (over any commutative ring $R$):
+  \begin{enumerate}
+  \item First we have the \emph{additive formal group law} $f(x,y) =
+    x+y$. We saw above that this arises is stable homotopy theory via
+    singular cohomology.
+  \item Second we have the \emph{multiplicative formal group law}
+    $f(x,y) = x+y+xy = (1+x)(1+y)-1$. One should think of this really
+    as multiplication $xy$, except with the identity shifted to $0$
+    rather than $1$. One can show without much trouble that this
+    arises as the formal group law associated to complex K-theory.
+  \end{enumerate}
+\end{examples}
+
+It turns out that this assignment
+\[
+\l\{ \text{complex-oriented cohomology theories} \r\} \to
+\l\{ \text{formal group laws} \r\}
+\]
+defined by \cref{chrom-cofgl} is an absurdly interesting one to
+consider. Maybe one is already astounded by the fact that the examples
+in \cref{chrom-coex} and \cref{chrom-fglex} are entirely parallel,
+i.e. the two simplest formal group laws correspond to the two simplest
+(in some sense, maybe historical or pedagogical) cohomology theories;
+I certainly still am! This construction is some sort of approximation
+of topological objects---cohomology theories, i.e. spectra---by
+algebraic objects---formal group laws. This is precisely the sort of
+machine that algebraic topology is all about, but this is a case of
+the algebraic approximation retaining a miraculous amount of
+information about the topology. Chromatic homotopy theory essentially
+refers to the business of understanding just how good this
+approximation is, and we'll review some of the key aspects of this
+theory in the following two subsections. Just as this one is, the next
+two subsections have titles of the form ``$A$ \& $B$''; in all three
+cases $A$ is some concept in the theory of formal groups and $B$ the
+avatar of $A$ in stable homotopy theory.
+
+\subsection{The Lazard ring \& complex bordism}
+\label{chrom-lazmu}
+
+The first important observation to make about formal group laws is
+that there's a universal one.
+
+\begin{construction}
+  \label{chrom-univfgl}
+  There 
+\end{construction}
+
+\subsection{Stratifying by height \& Morava K- and E-theories}
+\label{chrom-strat}

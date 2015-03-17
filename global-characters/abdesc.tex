@@ -217,53 +217,78 @@ isomorphisms.
 \end{notation}
 
 \begin{lemma}
-  \label{abdesc-contractify}
-  Let $X$ be a space, and let $EX$ be the geometric realization of the
-  simplicial space $X \doubfrom X \times X \tripfrom X \times X \times
-  X \cdots$. Then $EX$ is empty if $X$ is empty, and contractible if
-  $X$ is nonempty.
+  \label{abdesc-flag-abstab}
+  For a subgroup $H \subseteq G$, the fixed-point space $F^H$ is
+  nonempty if and only if $H$ is abelian.
 \end{lemma}
 
 \begin{proof}
-  
+  Maximal torus blah blah
+\end{proof}
+
+\begin{notation}
+  \label{abdesc-Espace}
+  If $X$ is a space, let $\rE X$ denote the geometric realization of
+  the simplicial space
+  \[
+  \simpl{X}{X \times X}{X \times X \times X}.
+  \]
+\end{notation}
+
+\begin{lemma}
+  \label{abdesc-Espace-type}
+  Let $X$ be a space. If $X$ is empty then $\rE X$ is empty; if $X$ is
+  nonempty then $\rE X$ is contractible.
+\end{lemma}
+
+\begin{proof}
+  The claim is obvious for $X$ empty. For $X$ nonempty there is a
+  standard way to construct contracting homotopies (see
+  e.g. \cite[3.14]{dugger-primer}).
 \end{proof}
 
 \begin{lemma}
   \label{abdesc-BabG-construction}
-  With $F$ as in \cref{abdesc-codesc-ntn}\cref{abdesc-flag-variety},
-  let $EF$ be the geometric realization of the simplicial $G$-space
-  $F \doubfrom F \times F \tripfrom F \times F \times F \cdots$. Then
-  $EF$ is a model for $\lB^\ab G$, i.e. if $H \subseteq G$ is a
-  subgroup then $EF^H$ is contractible for $H$ abelian and empty for
-  $H$ nonabelian.
+  For a subgroup $H \subseteq G$, the fixed-point space $(\rE F)^H$ is
+  contractible for $H$ abelian and empty for $H$ nonabelian. In other
+  words, by \cref{abdesc-abelianization-as-Gspace}, $\rE F$ is a model
+  for $\lB^\ab G$.
 \end{lemma}
 
 \begin{proof}
-  
+  Since geometric realization of simplicial spaces commutes with
+  finite limits, in particular taking $H$-fixed-points, this is
+  immediate from \cref{abdesc-flag-abstab,abdesc-Espace-type}.
 \end{proof}
 
 \begin{lemma}
   \label{abdesc-flag-faithflat}
-  Let $E$ be a ring $G$-spectrum. Suppose that the canonical map
-  $E^* \to E^*(F)$ is faithfully flat. Then the canonical map
-  $E(*) \to E(EF)$ is an equivalence (of spectra).
+  Let $E$ be a ring $G$-spectrum. Suppose $E^* \to E^*(F)$ is
+  faithfully flat and for all (finite?) $G$-spaces $X$ the canonical
+  map $E^*(X) \otimes_{E^*} E^*(F) \to E^*(X \times F)$ is an
+  isomorphism. Then $E^* \to E^*(EF)$ is an isomorphism.
 \end{lemma}
 
 \begin{proof}
-  Note that the hypothesis implies that $E^*(X \times F)$ is a
-  faithfully flat $E^*(X)$-module for any finite $G$-space $X$.
+  As $\rE F$ is defined as a geometric realization, the function
+  spectrum $E(\rE F)$ is given by the corresponding totalization,
+  namely of the cosimplicial $G$-spectrum
+  \[
+  \cosimpl{E(F)}{E(F \times F)}{E(F \times F \times F)}.
+  \]
 \end{proof}
-
 
 \begin{lemma}
   \label{abdesc-co-flag-faithflat}
   Let $E$ be a complex-orientable spectrum.
   \begin{enumerate}
-  \item \label{abdesc-co-flag-bundle} Let $\cV V \to X$ be a vector
-    bundle, and $\cF F \to X$ the associated bundle of complete flags in
+  \item \label{abdesc-co-flag-bundle} Let $\cV \to X$ be a vector
+    bundle, and $\cF \to X$ the associated bundle of complete flags in
     $\cV$. Then $E^*(\cF)$ is a finite free module over $E^*(X)$.
   \item \label{abdesc-co-flag-interest} $(E^{\Bor}_G)^*(F)$ is a
-    finite free module over $(E^\Bor_G)^*$.
+    finite free module over $(E^\Bor_G)^*$, and for $X$ a $G$-space
+    the canonical map $E^*(X) \otimes_{E^*} E^*(F) \to E^*(X \times
+    F)$ is an isomorphism.
   \end{enumerate}
 \end{lemma}
 
@@ -279,21 +304,17 @@ isomorphisms.
   the vector bundle $\cV \to X$. Of course the claim is trivial when
   the rank is $0$, giving us our base case, so assume the rank is
   $n \ge 1$. Consider the associated projective bundle $\lP\cV \to X$.
-  The pullback bundle $\cV' \ce \lP\cV \times_X \cV$ contains a
-  canonical line bundle $\cL \to \lP\cV$. Contemplating the quotient
-  bundle $\cW \ce \cV'/\cL$, we see that the space of complete flags
-  in $\cW$ can be identified with the space $\cF$ of complete flags in
-  $\cV$. Thus the map $E^*(X) \to E^*(\cF)$ factors as the composition
-  $E^*(X) \to E^*(\lP\cV) \to E^*(\cF)$. Since $\cW \to \lP\cV$ has
-  rank $n-1$, we know by induction that $E^*(\cF)$ is a finite free
-  $E^*(\lP\cV)$-module. So we just need to show that $E^*(\lP\cV)$ is
-  a finite free $E^*(X)$-module. But this follows from the
-  Leray-Hirsch theorem, since $\lP\cV \to X$ is a bundle with fiber
-  $\lP^n$ and $E$ being complex orientable implies $E^*(\lP^n)$ is a
-  finite free $E^*$-module.
-
-  \textbf{I'm skipping a couple of details: I should maybe justify
-    that $\cF$ is the space of complete flags in $\cW$; in applying
-    Leray-Hirsch I need to explain why there are classes in
-    $E^*(\lP\cV)$ which restrict to bases of $E^*(\lP^n)$.}
+  The pullback bundle $\cV' \ce \lP\cV \times_X \cV$ over $\lP V$
+  contains a canonical line sub-bundle $\cL$. Contemplating the
+  quotient bundle $\cW \ce \cV'/\cL$, we see that the space of
+  complete flags in $\cW$ can be identified with the space $\cF$ of
+  complete flags in $\cV$. Thus the map $E^*(X) \to E^*(\cF)$ factors
+  as the composition $E^*(X) \to E^*(\lP\cV) \to E^*(\cF)$. Since
+  $\cW \to \lP\cV$ has rank $n-1$, we know by induction that
+  $E^*(\cF)$ is a finite free $E^*(\lP\cV)$-module. So we just need
+  that $E^*(\lP\cV)$ is a finite free $E^*(X)$-module. This is a
+  standard application of the Leray-Hirsch theorem, the point being
+  that $\lP V \to X$ is a bundle with fiber $\lC\lP^n$ and a complex
+  orientation of $E$ induces an isomorphism
+  $E^*(\lC\lP^n) \iso E^*[x]/(x^n)$, which of course is finite free.
 \end{proof}

@@ -48,3 +48,32 @@ articulated succinctly as follows.
 The goal of the this thesis is to explain a generalization of this
 classical character theory, which begins to suggest itself when we
 view \cref{classical-character-thm} as a statement in homotopy theory.
+
+\usetikzlibrary{positioning}
+\begin{center}
+  \begin{tikzpicture}[%
+    ->,>=stealth',shorten >=1pt,auto,node distance=4cm, thick,
+    main node/.style={%
+      rectangle,draw,font=\normalfont,minimum width=6em,
+      execute at begin node={\begin{varwidth}{6em}\centering},
+      execute at end node={\end{varwidth}}}]
+
+    \node[main node] (chrom)
+      {\cref{chrom}, Chromatic homotopy theory};
+    \node[main node] (global) [right=2cm of chrom]
+      {\cref{global}, Global equivariant homotopy theory};
+    \node[main node] (pdiv) [below=1cm of chrom]
+      {\cref{pdiv}, $p$-divisible groups};
+    \node[main node] (abdesc) [right=2cm of pdiv]
+      {\cref{abdesc}, Abelian descent};
+    \node[main node] (char) [below right=1cm and 0cm of pdiv]
+      {\cref{char}, Character theory};
+
+    \path
+      (chrom) edge (pdiv)
+              edge (abdesc)
+      (global) edge (abdesc)
+      (pdiv) edge (char)
+      (abdesc) edge (char);
+  \end{tikzpicture}
+\end{center}
