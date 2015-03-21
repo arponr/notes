@@ -38,7 +38,10 @@ of global equivariant homotopy theory.\footnote{The first time my eyes
 
 To guide our definition of global equivariant homotopy theory, we
 recall the setup of (unstable) $G$-equivariant homotopy theory for a
-fixed group $G$.
+fixed group $G$. This is summarized by the following theorem, often
+referred to as Elmendorf's theorem. We currently don't have any time
+to discuss its proof, but one can see \cite{nlab-equivhomotopy} for
+more, including a detailed list of references.
 
 \begin{theorem}[Elmendorf]
   \label{global-elmendorf}
@@ -68,11 +71,6 @@ fixed group $G$.
   presheaf $O \mapsto \Map_{G\dash\Top}(O,X)$, or in other words
   $G/H \mapsto X^H$.
 \end{theorem}
-
-\begin{proof}
-  Omitted. See \cite{nlab-equivhomotopy} for more, including a list of
-  references.
-\end{proof}
 
 \begin{notation}
   \label{global-gspace}
@@ -139,19 +137,20 @@ give some intuition guiding what the definition should be.
     In particular, for $X = \pt$ the trivial $G$-space,
     $E^\Bor_G(\pt) \iso E(\rB G)$. Thus we might imagine $E^\Bor$ as
     something functorial with respect to the classifying space
-    $\rB G$.  We will show in \cref{global-bgcat} that this intuition
-    for $\Glo$ is equivalent to that given in
-    \cref{global-indexint-unstable}.
+    $\rB G$.  We will show in \cref{global-stable} that the definition
+    motivated by \cref{global-indexint-unstable} will realize this
+    intuition as well.
   \end{enumerate}
 \end{intuition}
 
 \begin{notation}
   \label{global-topgpds}
-  To formalize our intuition
-  \cref{global-indexint}\cref{global-indexint-unstable} it will be
-  convenient to work with \emph{topological groupoids}, i.e. groupoids
-  internal to the ordinary category of topological spaces. So let's
-  just quickly establish some notation for these things:
+  At various points in our discussion of global equivariant homotopy
+  theory, it will be convenient to work with \emph{topological
+    groupoids}, i.e. groupoids internal to the ordinary category of
+  topological spaces. These of course include ordinary discrete
+  groupoids. So let's just quickly establish some notation and
+  terminology for these things:
   \begin{enumerate}
   \item If $\cG$ is a topological groupoid, the usual \emph{nerve}
     construction gives us a simplicial space $\rN\cG$, and we define
@@ -167,31 +166,37 @@ give some intuition guiding what the definition should be.
     $X_{\rh G} \iso \rE G \times_G X$. A particularly relevant example
     in this class comes from the trivial $G$-space $\pt$, with
     $\rB(\pt \sslash G)$ being the classifying space
-    $\rB G \iso \rE G/G$ of the group $G$.
+    $\rB G \iso \rE G/G$ of the group $G$. When there shouldn't be a
+    possibility of confusion, we denote the groupoid $\pt \sslash G$
+    simply by $G$.
   \item If $\cG,\cH$ are topological groupoids then there is a
     topological groupoid $\Fun(\cG,\cH)$ of functors $\cG \to \cH$.
     Set-theoretically $\Fun(\cG,\cH)$ has functors as objects and
     natural transformations as morphisms; the topologies on these are
     induced by the relevant mapping space topologies.
+  \item We say a (discrete) groupoid $\cG$ is \emph{connected} if for
+    any objects $x,y \in \cG$ there is a morphism $x \to y$ in
+    $\cG$. We say $\cG$ is \emph{finite} if for any object $x \in \cG$
+    the automorphism group $\Aut_\cG(x)$ is finite.
   \end{enumerate}
 \end{notation}
 
 \begin{definition}
   \label{global-indexcat-dfn}
-  The \emph{global indexing category} $\Glo$ is the
-  topologically-enriched category whose objects are finite groups $G$,
-  with the mapping space $\Map_{\Glo}(H,G)$ defined to be the
-  classifying space $\rB \Fun(\pt \sslash H, \pt \sslash G)$ defined
-  in \cref{global-topgpds}; composition is defined in the obvious
-  manner. (Note that this is just the realization of the $2$-category
-  described in \cref{global-indexint}\cref{global-indexint-unstable}
-  as a topologically-enriched category.)
-\end{definition}
+  The \emph{global indexing category} $\Glo$ is the $2$-category of
+  finite connected (discrete) groupoids; the $1$-morphisms are given
+  by functors of groupoids and the $2$-morphisms by natural
+  transformations.
 
-\begin{lemma}
-  \label{global-bgcat}
-  $\Glo$ is the category of $\rB G$s.
-\end{lemma}
+  Recall that whenever we choose an object of a connected groupoid
+  $\cG$ we get an isomorphism $\cG$ with the group $\Aut_\cG(x)$. So,
+  more concretely one can think of objects in $\Glo$ simply as finite
+  groups $G$, in which case $\Glo$ is precisely the $2$-category of
+  finite groups described in
+  \cref{global-indexint}\cref{global-indexint-unstable}. We defined
+  $\Glo$ with more general objects because it is convenient to not
+  have to choose basepoints.
+\end{definition}
 
 We conclude this subsection by showing how to relate the orbit
 category $\Orb(G)$ of a fixed group $G$ with the global indexing
@@ -202,8 +207,27 @@ theory.
 
 \begin{construction}
   \label{global-orbtoglo}
-  Let $G \in \Glo$. We construct a fully faithful embedding $\iota_G$
-  of $\Orb(G)$ into the overcategory $\Glo_{/G}$.
+  Let $G$ be a finite group. We construct a fully faithful embedding
+  $\Theta_G$ of $\Orb(G)$ into the overcategory $\Glo_{/G}$ as
+  follows. First define a functor $\theta_G \c \Orb(G) \to \Glo$ by
+  sending $T \in \Orb(G)$ to $\theta_G(T) \ce T \sslash G$, which is
+  connected by definition of an orbit and finite since $G$ is; this is
+  evidently functorial. (If one chooses basepoints, then $\theta_G$
+  can alternatively be thought of as sending $G/H \mapsto H$.)  Now
+  note that for $\pt \in \Orb(G)$ the trivial orbit we have
+  $\theta_G(\pt) \iso G$. Since $\pt$ is a final object in $\Orb(G)$,
+  the functor $\theta_G$ determines a functor
+  \[
+  \Orb(G) \iso
+  \Orb(G)_{/\pt} \lblto{\theta_G}
+  \Glo_{/\theta_G(\pt)} \iso
+  \Glo_{/G},
+  \]
+  which we denote $\Theta_G$. That is, $\Theta_G$ assigns to $T$ the
+  map $\theta_G(T \to \pt)$, which is a map
+  $\theta_G(T) \to \theta_G(\pt) \iso G$. Seeing that $\Theta_G$ is
+  fully faithful is a fairly simple exercise, which I'll fill in
+  later.
 \end{construction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -248,23 +272,23 @@ spaces over $\lB G$.
 
 \begin{proof}
   In \cref{global-orbtoglo} we constructed a fully faithful embedding
-  $\iota_G \c \Orb(G) \inj \Glo_{/G}$. From this we obtain an
+  $\Theta_G \c \Orb(G) \inj \Glo_{/G}$. From this we obtain an
   adjunction of presheaf categories
   \[
-  (\iota_G)_! \c \Space_{\Orb(G)} \fromto
-  \Space_{\Glo_{/G}} \lc (\iota_G)^*,
+  (\Theta_G)_! \c \Space_{\Orb(G)} \fromto
+  \Space_{\Glo_{/G}} \lc (\Theta_G)^*,
   \]
-  where $(\iota_G)^*$ is restriction along $\iota_G$, and its left
-  adjoint $(\iota_G)_!$ is left Kan extension along $\iota_G$ (this
+  where $(\Theta_G)^*$ is restriction along $\Theta_G$, and its left
+  adjoint $(\Theta_G)_!$ is left Kan extension along $\Theta_G$ (this
   adjunction is essentially the definition of left Kan
   extension). Now, by a general fact about the interaction of presheaf
   categories and overcategories, there is an equivalence
   $\Space_{\Glo_{/G}} \iso (\Space_\Glo)_{/\lB G}$. Applying this and
   the fact/definition \cref{global-elmendorf} that
   $G\dash\Space \iso \Space_{\Orb(G)}$, we obtain the claimed
-  adjunction $\Delta_G \dashv \Gamma_G$. Finally, $\iota_G$ being
+  adjunction $\Delta_G \dashv \Gamma_G$. Finally, $\Theta_G$ being
   fully faithful implies immediately that left Kan extension
-  $(\iota_G)_!$ is fully faithful, and hence $\Delta_G$ is fully
+  $(\Theta_G)_!$ is fully faithful, and hence $\Delta_G$ is fully
   faithful.
 \end{proof}
 
@@ -278,21 +302,24 @@ spaces over $\lB G$.
   \item \label{global-gspace-adj-unwrap-right} Viewing $\Gamma_G$ as a
     functor $(\Space_\Glo)_{/\lB G} \to \Space_{\Orb(G)}$, it assigns
     to a map of global spaces $X \to \lB G$ the presheaf
-    $G/H \mapsto X(H) \times_{\lB G(H)} \{i_H\}$, where
-    $i_H \c H \to G$ denotes the inclusion of a subgroup.
+    $T \mapsto X(T \sslash G) \times_{\lB G(T \sslash G)} \{\phi\}$,
+    where $\phi \c T \sslash G \to G$ is the canonical map of
+    groupoids. After choosing basepoints, the presheaf could also be
+    described as $G/H \mapsto X(H) \times_{\lB G(H)} \{\phi\}$, where
+    $\phi \c H \to G$ is the inclusion of a subgroup.
   \item \label{global-gspace-adj-unwrap-left} There is a functor
-    $G\dash\Top \to \Space_\Glo$ which to $X \in G\dash\Top$ assigns
-    the presheaf $H \mapsto \rB \Fun(\pt \sslash H, X \sslash G)$,
-    where $\Fun(\pt \sslash H, X \sslash G)$ is simply the action
+    $\delta_G \c G\dash\Top \to \Space_\Glo$ which to
+    $X \in G\dash\Top$ assigns the presheaf
+    $\cH \mapsto \rB \Fun(\cH, X \sslash G)$. In the case $\cH$ is a
+    group $H$, note that $\Fun(H, X \sslash G)$ is simply the action
     groupoid
     \[
     \l( \coprod_{\phi \in \Hom(H,G)} X^{\im(\phi)} \r) \sslash G,
     \]
-    analagous to \cref{}. In particular, $\delta_G(\pt) \iso \lB G$.
-    Then, viewing $\Delta_G$ as a functor
-    $G\dash\Top \to (\Space_\Glo)_{/\lB G}$, it assigns to
-    $X \in G\dash\Top$ the map $\delta_G(X \to \pt)$, which is a map
-    $\delta_G(X) \to \delta_G(\pt) \iso \lB G$.
+    e.g. $\delta_G(\pt) \iso \lB G$. Then, viewing
+    $\Delta_G$ as a functor $G\dash\Top \to (\Space_\Glo)_{/\lB G}$,
+    it assigns to $X \in G\dash\Top$ the map $\delta_G(X \to \pt)$,
+    which is a map $\delta_G(X) \to \delta_G(\pt) \iso \lB G$.
   \end{enumerate}
 \end{remark}
 
@@ -306,14 +333,19 @@ phenomena in this setting.
 \subsection{The stable side: global spectra}
 \label{global-stable}
 
-In the equivariant business, the stable homotopy theory is more
-nuanced than the unstable theory, in a way that doesn't arise in the
-usual non-equivariant theory.
+Unless I work something out in the next couple of days, we'll be
+taking a na\"ive approach to global spectra.
 
 \begin{definition}
   \label{global-spectrum}
-  A \emph{global space} is a presheaf of spaces on $\Glo$, i.e. a
-  functor $\Glo^\op \to \Space$. We denote the $\infty$-category of
-  global spaces by $\Space_\Glo$.
+  A \emph{global spectrum} is a presheaf of spectra on $\Glo$, i.e. a
+  functor $\Glo^\op \to \Spect$. We denote the $\infty$-category of
+  global spaces by $\Spect_\Glo$.
 \end{definition}
 
+\begin{remark}
+  Since $\Space_\Glo$ is the free cocompletion of $\Glo$, one can
+  equivalently view a global spectrum as a functor
+  $(\Space_\Glo)^\op \to \Spect$ which takes colimits of global spaces
+  to limits of spectra.
+\end{remark}

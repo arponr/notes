@@ -12,7 +12,7 @@ group. The goal of character theory is to understand a representation
 $\rho \c G \to \Aut(V)$ of $G$ on a complex vector space $V$ via its
 associated \emph{character}: the function
 \begin{equation}
-  \label{classical-character}
+  \label{intro-classical-character}
   \chi_\rho \ce {\tr} \circ \rho \c G \to \lC,
 \end{equation}
 where $\tr$ denotes the trace map. The beauty of character theory is
@@ -20,7 +20,7 @@ that it accomplishes this goal quite thoroughly. This fact can be
 articulated succinctly as follows.
 
 \begin{definitions}
-  \label{classical-character-dfns}
+  \label{intro-classical-character-dfns}
   \begin{enumerate}[leftmargin=*]
   \item Consider the collection of isomorphism classes of complex
     representations of $G$, which forms a commutative semiring under
@@ -35,9 +35,9 @@ articulated succinctly as follows.
 \end{definitions}
 
 \begin{theorem}[Classical character theory]
-  \label{classical-character-thm}
+  \label{intro-classical-thm}
   The assignment $\rho \mapsto \chi_\rho$ defined in
-  \cref{classical-character} determines a ring homomorphism
+  \cref{intro-classical-character} determines a ring homomorphism
   $\Rep(G) \to \Cl(G;\lC)$, which furthermore induces an isomorphism
   \[
   \lC \otimes_\lZ \Rep(G) \isoto \Cl(G;\lC)
@@ -45,9 +45,338 @@ articulated succinctly as follows.
   of $\lC$-algebras.
 \end{theorem}
 
+This theorem is just a restatement of the main facts one usually hears
+when learning character theory:
+\begin{itemize}
+\item characters behave well with respect to direct sums and tensor
+  products of representations (because traces do);
+\item a representation is determined up to isomorphism by its
+  character;
+\item the characters of representations span the vector space of class
+  functions.
+\end{itemize}
+
 The goal of the this thesis is to explain a generalization of this
-classical character theory, which begins to suggest itself when we
-view \cref{classical-character-thm} as a statement in homotopy theory.
+classical character theory, which suggests itself when we view
+\cref{intro-classical-thm} with the eyes of a (stable) homotopy
+theorist.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Translating}
+\label{intro-trans}
+
+We will translate \cref{intro-classical-thm} into the language of
+homotopy theory via (topological, complex) K-theory. Recall that
+K-theory is a (generalized) cohomology theory arising from the theory
+of complex vector bundles. However, for the purposes of this
+introduction, why don't we just focus on the degree $0$ term of this
+cohomology theory. For a space $X$ this is denoted
+$\rK(X) = \rK^0(X)$, and is the Grothendieck ring associated to the
+semiring of isomorphism classes of (complex) vector bundles on $X$
+(the operations in this semiring again coming from direct sum and
+tensor product). For example, over the trivial space $X = \pt$, a
+vector bundle is simply a vector space, determined up to isomorphism
+by its dimension; $\rK(\pt)$ is therefore the Grothendieck ring of
+$\lZ_{\ge 0}$, which of course is just $\lZ$.
+
+There are two natural \emph{equivariant} analogues of K-theory. That
+is, there are two candidates which might replace K-theory when we
+would like to study not just spaces but spaces equipped with a
+$G$-action for some finite group $G$. The first is a na\"ive, formal
+construction which one can make whenever one wants a $G$-equivariant
+version of a cohomology theory, known as the associated \emph{Borel
+  equivariant cohomology theory}. Given a $G$-space $X$, we may always
+replace it with a homotopy equivalent space $Y$ on which $G$ acts
+freely: there is a contractible space $\rE G$ with a free $G$ action,
+so we may take $Y \ce \rE G \times X$. When $G$ acts freely on $Y$, it
+is natural to expect that the $G$-equivariant version of a cohomology
+theory applied to $Y$ recovers the original cohomology theory's value
+on the quotient space $Y/G$. This motivates the Borel construction
+(here applied to K-theory), given by defining
+\[
+\rK^\Bor_G(X) \ce \rK((\rE G \times X)/G).
+\]
+In particular, when $X$ is the trivial $G$-space $\pt$ we have
+$\rK^\Bor_G(\pt) \iso \rK(\rB G)$, where $\rB G \iso \rE G / G$ is the
+classifying space of $G$.
+
+But for $\rK$-theory there is another, more geometric candidate for
+its equivariant analogue. Namely, there is a notion of a
+\emph{$G$-equivariant (complex) vector bundle} over a $G$-space
+$X$. So we may analagously define a $G$-equivariant cohomology theory
+which in degree $0$ is given by the Grothendieck ring $\rK_G(X)$ of
+$G$-equivariant vector bundles on $X$. Now, a $G$-equivariant vector
+bundle over the trivial $G$-space $\pt$ is simply a representation of
+$G$, so by definition we have $\rK_G(\pt) \iso \Rep(G)$. It is with
+this tautological renaming of $\Rep(G)$ that we look to begin viewing
+character theory through the lens of homotopy theory.
+
+The first non-tautological step we take is to compare these
+equivariant theories $\rK^\Bor_G$ and $\rK_G$. The theory $\rK_G$
+still has the expected property that when $G$ acts freely on $Y$ we
+have $\rK_G(Y) \iso \rK(Y/G)$. Thus for any $G$-space $X$ we have a
+natural comparison map
+\[
+\rK_G(X) \to
+\rK_G(\rE G \times X) \iso
+\rK((\rE G \times X)/G) \iso
+\rK^\Bor_G(X),
+\]
+where the first map is induced by the projection
+$\rE G \times X \to X$. Of course this map is not an isomorphism, but
+a theorem of Atiyah-Segal tells us it's not terribly far from being an
+isomorphism. This is easiest to state for $X = \pt$, in which case the
+above gives a map\footnote{This map can alternatively be described as
+  follows: a representation of $G$ is a map
+  $\pi_1(\rB G) \iso G \to \Aut(V)$, which determines a local system
+  with fiber $V$ on $\rB G$, which determines a vector bundle with
+  fiber $V$ on $\rB G$.}
+\begin{equation}
+  \label{intro-atsegmap}
+  \Rep(G) \iso \rK_G(\pt) \to \rK^\Bor_G(\pt) \iso \rK(\rB G).
+\end{equation}
+
+\begin{definition}
+  \label{intro-aug}
+  To a representation $V$ of $G$ we can associate its dimension
+  $\dim(V)$. This extends to a ring morphism
+  $\dim \c \Rep(G) \to \lZ$. We call the kernel of this morphism the
+  \emph{augmentation ideal} of $\Rep(G)$, and denote it $\Aug(G)$.
+\end{definition}
+
+\begin{theorem}[Atiyah-Segal completion]
+  \label{intro-atseg}
+  The map \cref{intro-atsegmap} exhibits the ring $\rK(\rB G)$ as the
+  completion of the ring $\Rep(G)$ at the augmentation ideal
+  $\Aug(G)$.
+\end{theorem}
+
+We now have a precise relationship between $\rK(\rB G)$ and
+$\rK_G(\pt)$, and an identification of $\rK_G(\pt)$ with
+$\Rep(G)$. Thus we might hope to rephrase the isomorphism of character
+theory \cref{intro-classical-thm} in terms of $\rK(\rB G)$. We take
+one further step in order to accomplish this.
+
+\begin{notation}
+  \label{intro-fixp}
+  For the remainder of this subsection and the next, fix a prime $p$.
+\end{notation}
+
+\begin{lemma}
+  \label{intro-ideals}
+  Suppose $G$ is a $p$-group. Then for some $n \in \lZ_{> 0}$, the
+  ideal $\Aug(G)^n$ is contained in the ideal $p \cdot \Rep(G)$.
+\end{lemma}
+
+\begin{proof}
+  The ideal $\Aug(G)$ is additively generated by elements of the form
+  $[V] - d$, where $V$ is an irreducible representation of $G$ and
+  $d \ce \dim(V)$ is the class of the $\dim(V)$-dimensional trivial
+  representation of $G$. Since $G$ has only finitely many irreducible
+  representations $V$, it suffices to show that, fixing such a $V$,
+  the element $([V] - d)^n$ is in the ideal $p \cdot \Rep(G)$ for some
+  $n \in \lZ_{> 0}$.
+
+  Now, Brauer's induction theorem tells us that $[V]-d$ is a linear
+  combination of elements of the form $\Ind_H^G([c]-1)$ where
+  $H \subseteq G$ is a subgroup, $c$ is a one-dimensional
+  representation (i.e. linear character) on $H$, and $\Ind_H^G$
+  denotes induction from $H$ to $G$. So it now suffices to show for
+  any such $H,c$ that $\Ind_H^G([c]-1)^n \in p \cdot \Rep(G)$ for some
+  $n \in \lZ_{> 0}$. We now have two cases:
+  \begin{itemize}
+  \item Suppose $H$ is a proper subgroup of $G$. The push-pull formula
+    tells us that
+    \[
+    \Ind_H^G([c]-1)^n = \Ind_H^G\l(([c]-1) \cdot
+    (\Ind_H^G([c]-1)|_H)^{n-1}\r)
+    \]
+    where $|_H$ denotes restriction from $G$ to $H$. By induction (the
+    other kind now) on the order of our group,
+    $(\Ind_H^G([c]-1)|_H)^{n-1} \in p \cdot \Rep(H)$ for some
+    $n \in \lZ_{> 0}$, implying
+    $\Ind_H^G([c]-1)^n \in p \cdot \Rep(G)$, as desired.
+  \item Else $H = G$, in which case $G$ being a $p$-group implies
+    $[c]^{p^m} = 1$ for some $m \in \lZ_{> 0}$. But then the binomial
+    theorem implies $[c-1]^{p^m} \in p \cdot \Rep(G)$, as
+    desired. \qedhere
+  \end{itemize}
+\end{proof}
+
+\begin{lemma}
+  \label{intro-completions}
+  If $G$ is a $p$-group, the Atiyah-Segal map \cref{intro-atsegmap},
+  $\Rep(G) \to \rK(\rB G)$, is an isomorphism after $p$-completion,
+  i.e. after tensoring with the $p$-adic integers $\lZ_p$.
+\end{lemma}
+
+\begin{proof}
+  This follows immediately from \cref{intro-atseg,intro-ideals}, the
+  latter implying that completing $\Rep(G)$ at $\Aug(G)$ is subsumed
+  by completing at $p$. That is, completing at $\Aug(G)$ and then
+  completing at $p$ is equivalent to just completing at $p$.
+\end{proof}
+
+This is nice. If we pick an embedding $\lZ_p \to \lC$ then we can now
+rewrite one side of character theory \cref{intro-classical-thm}
+completely in terms of ordinary K-theory when $G$ is a $p$-group:
+\[
+\lC \otimes_\lZ \Rep(G) \iso
+\lC \otimes_{\lZ_p} (\lZ_p \otimes_\lZ \Rep(G)) \iso
+\lC \otimes_{\lZ_p} \hat\rK_p(\rB G),
+\]
+where $\hat\rK_p(\rB G) \ce \lZ_p \otimes_\lZ \rK(\rB G)$ is the
+$p$-completion of the K-theory of $\rB G$.
+
+The other side of character theory can be rewritten in terms of the
+classifying space $\rB G$ as well. If
+$\Omega\rB G \ce \Map_*(\rS^1,\rB G)$ denotes the pointed loop space,
+then its connected components are given by
+\[
+\pi_0(\Omega\rB G) \iso \pi_1(\rB G) \iso G.
+\]
+So the singular cohomology with complex coefficients
+$\rH^0(\Omega\rB G;\lC)$ in degree $0$ is just the vector space of
+functions $G \to \lC$. Intuitively, changing the basepoint in $\rB G$
+corresponds to conjugation in $G$, and indeed it's not hard to show
+that if we instead take the unpointed, or \emph{free}, loop space
+$\cL \rB G \ce \Map(\rS^1,\rB G)$, then its connected components are
+given by $G$ modulo conjugation. And thus
+\[
+\rH^0(\cL\rB G;\lC) \iso \Cl(G;\lC).
+\]
+
+So finally we have completely translated character theory into the
+language of homotopy theory: for $G$ a $p$-group we have an
+isomorphism
+\begin{equation}
+  \label{intro-translated}
+  \lC \otimes_{\lZ_p} \hat\rK_p(\rB G) \iso \rH^0(\cL\rB G; \lC).
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Generalizing}
+\label{intro-general}
+
+We now seek to explain the generalization of \cref{intro-translated}
+that will be proved in this thesis. There are many new notions which
+need to be introduced to state this generalization, of which we can
+only give a vague summary here. Indeed a significant portion of this
+thesis is devoted to introducing and developing these notions, and the
+truly interested reader is kindly invited to continue reading after
+the nebulous haze of intuition which follows. Nevertheless, we will
+try to describe this generalization here, one step at a time, in
+efforts to continue our story in a coherent manner:
+
+\begin{itemize}[leftmargin=*]
+\item By replacing the free loop space functor with a sort of $p$-adic
+  loop space functor $\cL$, we may obtain the isomorphism
+  \cref{intro-translated} not only for $p$-groups, but for all finite
+  groups $G$.
+
+\item One can $p$-adically complete K-theory as a cohomology theory,
+  and thus obtain a full cohomology theory $\hat\rK_p$. One can then
+  upgrade \cref{intro-translated} into an isomorphism in all degrees
+  by replacing the right-hand side with a periodic version of singular
+  cohomology:
+  \begin{equation}
+    \label{intro-gen-alldeg}
+      \lC \otimes_{\lZ_p} \hat\rK_p^*(\rB G) \iso
+      \prod_{k \in \lZ} \rH^{2k+*}(\cL\rB G;\lC).
+  \end{equation}
+
+\item Given a cohomology theory $E$, there is a process, analogous to
+  the situation for abelian groups, of obtaining a rationalized
+  cohomology theory $\lQ \otimes E$. In the case of K-theory,
+  rationalizing leaves us simply with periodic rational singular
+  cohomology (the phrase ``Chern character'' is relevant here). In
+  more precise language, in our situation we have a natural
+  isomorphism of cohomology theories
+  \[
+  (\lQ \otimes \hat\rK_p)^*(-) \iso
+  \prod_{k \in \lZ} \rH^{2k+*}(-;\lQ_p).
+  \]
+  Therefore, we may restate \cref{intro-gen-alldeg} as
+  \begin{equation}
+    \label{intro-gen-ratl}
+    \lC \otimes_{\lZ_p} \hat\rK_p^*(\rB G) \iso
+    \lC \otimes_{\lQ_p} (\lQ \otimes \hat\rK_p)^*(\cL\rB G).
+  \end{equation}
+
+\item It is not in fact necessary to extend coefficients all the way
+  to $\lC$. One may recall that even in the statement of classical
+  character theory \cref{intro-classical-thm}, it suffices to extend
+  only to a field extension of $\lQ$ containing all of the roots of
+  unity.
+
+\item The $p$-adic completion of K-theory is the first member of a
+  naturally occurring family of cohomology theories, $E(n)$ for
+  $n \in \lZ_{> 0}$, known as the Morava E-theories. We will show that
+  character theory generalizes to these cohomology theories as
+  follows:
+  \begin{equation}
+    \label{intro-gen-ethy}
+    C^* \otimes_{E(n)^*} E(n)^*(\rB G) \iso
+    C^* \otimes_{\lQ \otimes E(n)^*}
+    (\lQ \otimes E(n))^*(\cL^n\rB G).
+  \end{equation}
+  Here (and for the remainder) $E^*$ denotes the coefficient ring
+  $E^*(\pt)$ of a cohomology theory $E$, $C^*$ denotes some (nonzero!)
+  ring extension of $\lQ \otimes E(n)^*$, and $\cL^n$ denotes the
+  $n$-fold composition of the ($p$-adic) loop space functor.
+
+\item Again in analogy to the situation for abelian groups, we should
+  think of rationalization as some kind of localization process. In
+  fact, rationalization is the zeroth member of a naturally occurring
+  family of localization processes on cohomology theories, $L_{K(t)}$
+  for $t \in \lZ_{\ge 0}$. We will prove more generally for
+  $0 \le t < n$ that
+  \begin{equation}
+    \label{intro-gen-ethy-kthy}
+    C^* \otimes_{E(n)^*} E(n)^*(\rB G) \iso
+    C^* \otimes_{L_{K(t)}E(n)^*}
+    L_{K(t)}E(n)^*(\cL^{n-t}\rB G)
+  \end{equation}
+  for some (nonzero) extension $C^*$ of $L_{K(t)}E(n)^*$ (note that
+  $L_{K(t)}E(n)^*$ is itself an extension of $E(n)^*$, just as
+  localization usually works, and just as $\lQ \otimes E(n)^*$ is an
+  extension of $E(n)^*$).
+
+\item We may view $L_{K(t)}E(n)^*(\cL^{n-t}-)$ as a cohomology theory
+  itself, and thus view \cref{intro-gen-ethy-kthy} as a relationship
+  between two cohomology theories evaluated on $\rB G$. We discussed
+  in \cref{intro-trans} that we may think of this as the associated
+  Borel-equivariant cohomology theories evaluated on the trivial
+  $G$-space. Indeed the two expressions
+  \[
+  C^* \otimes_{E(n)^*} (E(n)^\Bor_G)^*(X), \quad
+  C^* \otimes_{L_{K(t)}E(n)^*}
+  (L_{K(t)}E(n)^\Bor_G)^*(\cL^{n-t}X)
+  \]
+  determine $G$-equivariant cohomology theories on finite $G$-spaces
+  $X$, and we will generalize \cref{intro-gen-ethy-kthy} by proving
+  that these two $G$-equivariant cohomology theories are naturally
+  isomorphic.
+
+\item Finally, observe that we are making statements about
+  $G$-equivariant cohomology theories uniformly over all finite groups
+  $G$. The study of these sorts of objects which in some sense are
+  equivariant with respect to all (finite) groups simultaneously is
+  referred to as \emph{global equivariant homotopy theory}. We will
+  take this perspective very seriously, and critically use that the
+  isomorphisms for the various finite groups $G$ are related amongst
+  one other. One can summarize this by saying that above
+  generalization of character theory is in fact given by an
+  isomorphism between certain ``global equivariant cohomology
+  theories'', and this is precisely what we will prove.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Overview}
+\label{intro-overview}
 
 \usetikzlibrary{positioning}
 \begin{center}
@@ -77,3 +406,10 @@ view \cref{classical-character-thm} as a statement in homotopy theory.
       (abdesc) edge (char);
   \end{tikzpicture}
 \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Mathematical and notational conventions}
+\label{intro-conventions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

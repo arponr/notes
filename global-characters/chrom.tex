@@ -53,10 +53,10 @@ ring of $\CP^\infty$ is given by\footnote{It may be more common to
   we'd like to think of $E^*$ as some sort of base ring of
   coefficients, in which case we may have infinite sums in the ring
   $E^*(X)$ still living in some finite graded piece. It will thus be
-  more natural to consider the power series ring $E^*[[t]]$, and so we
+  more natural to consider the power series ring $E^* \ldb t \rdb$, and so we
   begin with this convention here.}
 \[
-\rH^*(\CP^\infty) \iso \lZ[[t]],
+\rH^*(\CP^\infty) \iso \lZ \ldb t \rdb,
 \]
 where the generator lives in degree $2$, i.e.
 $t \in \rH^2(\CP^\infty)$. So of course then the interesting choice to
@@ -107,10 +107,10 @@ to some kind of multiplication map
 $\mu \c \CP^\infty \times \CP^\infty \to \CP^\infty$. In cohomology
 this gives a map
 \[
-\lZ[[t]] \iso
+\lZ \ldb t \rdb \iso
 \rH^*(\CP^\infty) \lblto{\mu^*}
 \rH^*(\CP^\infty \times \CP^\infty) \iso
-\lZ[[x,y]],
+\lZ \ldb x,y \rdb,
 \]
 using the Kunneth isomorphism on the right-hand side, so
 $x = \pi_1^*(t)$ and $y = \pi_2^*(t)$. By definition we'll have
@@ -150,7 +150,7 @@ series rings. This motivates the following definition.\footnote{One
   \]
   degenerates at its second page. By the standard computations in
   singular cohomology, this condition implies that there is an
-  isomorphism $E^*(\CP^\infty) \iso E^*[[t]]$, where
+  isomorphism $E^*(\CP^\infty) \iso E^* \ldb t \rdb$, where
   $E^* \ce E^*(\pt)$. A choice of such an isomorphism, i.e. a choice
   of generator $t$ (which again is well-defined only up to the units
   of $E^0$) is referred to as a \emph{complex-orientation} of $E$. We
@@ -161,7 +161,7 @@ series rings. This motivates the following definition.\footnote{One
   forces the analagous degeneration for
   $\CP^\infty \times \CP^\infty$, whence a complex-orientation on $E$
   similarly determines an isomorphism
-  $E^*(\CP^\infty \times \CP^\infty) \iso E^*[[x,y]]$.
+  $E^*(\CP^\infty \times \CP^\infty) \iso E^* \ldb x,y \rdb$.
 \end{definition}
 
 \begin{examples}
@@ -189,13 +189,13 @@ still determined by the universal example, which is still determined
 by the map in cohomology
 \begin{equation}
 \label{chrom-cofgl}
-E^*[[t]] \iso
+E^* \ldb t \rdb \iso
 E^*(\CP^\infty) \lblto{\mu^*}
 E^*(\CP^\infty \times \CP^\infty) \iso
-E^*[[x,y]],
+E^* \ldb x,y \rdb,
 \end{equation}
 and again the formula for the Chern class of a tensor product will be
-given by the power series $f \ce \mu^*(t) \in E^*[[x,y]]$. The fact
+given by the power series $f \ce \mu^*(t) \in E^* \ldb x,y \rdb$. The fact
 that the tensor product of line bundles is unital, commutative, and
 associative (all up to isomorphism) implies that $f$ lies in some
 special class of power series in two variables, which we should think
@@ -205,7 +205,7 @@ a name to this special class now, as it is quite important.
 \begin{definition}
   \label{chrom-fgl}
   A \emph{formal group law} over a commutative ring $R$ is a power
-  series $f \in R[[x,y]]$ satisfying:
+  series $f \in R \ldb x,y \rdb$ satisfying:
   \begin{enumerate}
   \item $f(x,0) = x$ and $f(0,y) = y$;
   \item $f(x,y) = f(y,x)$;
