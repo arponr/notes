@@ -6,8 +6,8 @@
 In this section we lay out some of the fundamental ideas in chromatic
 homotopy theory, enough that we can somewhat safely speak about the
 generalizations of character theory alluded to in \cref{intro}. As
-this section is intended primarily as background, it's far less formal
-than the others and quite light on proofs. The lecture notes
+this section is intended primarily as background, it's essentially
+void of proofs. The lecture notes
 \cite{hopkins-coctalos,lurie-chromatic} are nice places to read about
 these ideas in more depth and detail (and my debt to these sources in
 this exposition will be clear).
@@ -15,19 +15,19 @@ this exposition will be clear).
 \subsection{Formal group laws \& Chern classes}
 
 Our starting point is the theory of Chern classes associated to
-complex vector bundles. Actually let's just focus on (complex) line
+complex vector bundles. Actually, let's just focus on (complex) line
 bundles $L \to X$, in which case all that's of interest is the first
 Chern class $c_1(L) \in \rH^2(X) \ce \rH^2(X;\lZ)$. Recall two facts
 about this situation:
 \begin{itemize}
-\item Chern classes are natural: the Chern class of the pullback of a
-  line bundle $L \to X$ in a map $f \c Y \to X$ is just the pullback
-  $f^*(c_1(L)) \in \rH^2(Y)$ of the Chern class of $L$.
+\item Chern classes are natural: the Chern class $c_1(f^*L)$ of the
+  pullback of a line bundle $L \to X$ in a map $f \c Y \to X$ is the
+  pullback $f^*(c_1(L)) \in \rH^2(Y)$ of the Chern class of $L$.
 \item There is a universal line bundle: letting $\cO(1)$ denote the
   tautological line bundle over the space $\CP^\infty \iso \rB\rU(1)$,
-  there is a natural bijection between the homotopy classes of maps
+  there is a natural bijection between homotopy classes of maps
   $f \c X \to \CP^\infty$ and isomorphism classes of line bundles on
-  $X$, given by associating such a map $f$ to the pullback
+  $X$, given by associating to such a map $f$ the pullback
   $f^*(\cO(1))$ of the tautological bundle. That is, the functor
   associating to a space $X$ the set of isomorphism classes of line
   bundles on it is representable (in the homotopy category of spaces)
@@ -36,8 +36,8 @@ about this situation:
   $\id \c \CP^\infty \to \CP^\infty$.
 \end{itemize}
 Of course Chern classes are also isomorphism-invariant, so it follows
-from these facts that the Chern classes of all line bundles $L$ are
-determined by a choice of Chern class
+from these facts that the Chern classes of \emph{any} line bundles $L$
+is determined by a choice of Chern class
 $c_1(\cO(1)) \in \rH^2(\CP^\infty)$. Now, recall that the cohomology
 ring of $\CP^\infty$ is given by\footnote{It may be more common to
   write $\rH^*(\CP^\infty) \iso \lZ[t]$, i.e. to use the polynomial
@@ -53,8 +53,8 @@ ring of $\CP^\infty$ is given by\footnote{It may be more common to
   we'd like to think of $E^*$ as some sort of base ring of
   coefficients, in which case we may have infinite sums in the ring
   $E^*(X)$ still living in some finite graded piece. It will thus be
-  more natural to consider the power series ring $E^* \ldb t \rdb$, and so we
-  begin with this convention here.}
+  more natural to consider the power series ring $E^* \ldb t \rdb$,
+  and so we begin with this convention here.}
 \[
 \rH^*(\CP^\infty) \iso \lZ \ldb t \rdb,
 \]
@@ -67,7 +67,7 @@ $c_1(\cO(1))$.
 
 Now, the set of isomorphism classes of line bundles on a space $X$ is
 often referred to as its Picard group; the name isn't so important
-right now, but it is important that it's a group! Recall that the
+right now, but it is important that it's a group. Recall that the
 operation is given by tensor product of line bundles. So it's natural
 to ask: given two line bundles $L$ and $L'$ on $X$, can we express
 $c_1(L \otimes L')$ in terms of $c_1(L)$ and $c_1(L')$? In fact one
@@ -82,7 +82,7 @@ to proving it for the universal example. The universal \emph{pair} of
 line bundles is given by the bundles $\pi_1^*\cO(1),\pi_2^*\cO(1)$ on
 $\CP^\infty \times \CP^\infty$, where
 $\pi_1,\pi_2 \c \CP^\infty \times \CP^\infty \to \CP^\infty$ denote
-the projections, and the formula \cref{chrom-cherntensor} holds if and
+the projections. So the formula \cref{chrom-cherntensor} holds if and
 only if it holds for this universal example, that is if
 \[
 c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1)) =
@@ -116,18 +116,20 @@ using the Kunneth isomorphism on the right-hand side, so
 $x = \pi_1^*(t)$ and $y = \pi_2^*(t)$. By definition we'll have
 $\mu^*\cO(1) \iso \pi_1^*\cO(1) \otimes \pi_2^*\cO(1)$.  So we end up
 with
-\begin{align*}
-\mu^*(t) &=
+\[
+\mu^*(t) =
 \mu^*(c_1(\cO(1))) =
 c_1(\mu^*\cO(1)) =
-c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1)) =
-c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1)), \\
+c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1))
+\]
+and
+\begin{align*}
 x + y &=
 \pi_1^*(t) +  \pi_2^*(t) =
-\pi_1^*(c_1(\cO(1))) +  \pi_2^*(c_1(\cO(1))) =
+\pi_1^*(c_1(\cO(1))) +  \pi_2^*(c_1(\cO(1))) \\ &=
 c_1(\pi_1^*\cO(1)) + c_1(\pi_2^*\cO(1)).
 \end{align*}
-And therefore we conclude that the formula \cref{chrom-cherntensor} is
+Therefore we conclude that the formula \cref{chrom-cherntensor} is
 equivalent to the formula $\mu^*(t) = x + y$.
 
 Somebody interested in stable homotopy theory might now ask: what
@@ -178,15 +180,15 @@ series rings. This motivates the following definition.\footnote{One
 
 So we can create a theory of Chern classes with values in any
 complex-oriented cohomology theory $E$. But now there is no reason for
-formula \cref{chrom-cherntensor} to hold; its validity in singular
-cohomology relies on the fact \cref{chrom-cherntensorpf}, which relies
-on the coefficient ring $\rH^* \iso \lZ$ being concentrated in degree
-$0$, a situation we don't in general expect to be in (e.g. for complex
-K-theory, Bott periodicity tells us $\rK^* \iso \lZ[\beta,\beta^{-1}]$
-with $\beta$ in degree $-2$). However, we can still say something
-about the Chern class of a tensor product with values in $E^*$: it is
-still determined by the universal example, which is still determined
-by the map in cohomology
+formula \cref{chrom-cherntensor} to hold in general. Its validity in
+singular cohomology relies on the fact \cref{chrom-cherntensorpf},
+which relies on the coefficient ring $\rH^* \iso \lZ$ being
+concentrated in degree $0$; this of course is not true in general,
+e.g. for complex K-theory, Bott periodicity tells us
+$\rK^* \iso \lZ[\beta,\beta^{-1}]$ with $\beta$ in degree
+$-2$. However, we can still say something about the Chern class of a
+tensor product with values in $E^*$: it is still determined by the
+universal example, which is still determined by the map in cohomology
 \begin{equation}
 \label{chrom-cofgl}
 E^* \ldb t \rdb \iso
@@ -195,21 +197,20 @@ E^*(\CP^\infty \times \CP^\infty) \iso
 E^* \ldb x,y \rdb,
 \end{equation}
 and again the formula for the Chern class of a tensor product will be
-given by the power series $f \ce \mu^*(t) \in E^* \ldb x,y \rdb$. The fact
-that the tensor product of line bundles is unital, commutative, and
-associative (all up to isomorphism) implies that $f$ lies in some
-special class of power series in two variables, which we should think
-of as some kind of infinitesimal version of a group operation. We give
-a name to this special class now, as it is quite important.
+given by the power series $f(x,y) \ce \mu^*(t) \in E^* \ldb x,y \rdb$.
+The fact that the tensor product of line bundles is unital,
+commutative, and associative (all up to isomorphism) implies that $f$
+is a special kind of power series in two variables, which we can think
+of as an infinitesimal version of a group operation.
 
 \begin{definition}
   \label{chrom-fgl}
   A \emph{formal group law} over a commutative ring $R$ is a power
   series $f \in R \ldb x,y \rdb$ satisfying:
   \begin{enumerate}
-  \item $f(x,0) = x$ and $f(0,y) = y$;
-  \item $f(x,y) = f(y,x)$;
-  \item $f(f(x,y),z) = f(x,f(y,z))$.
+  \item \label{chrom-fgl-u} $f(x,0) = x$ and $f(0,y) = y$;
+  \item \label{chrom-fgl-s} $f(x,y) = f(y,x)$;
+  \item \label{chrom-fgl-a} $f(f(x,y),z) = f(x,f(y,z))$.
   \end{enumerate}
 \end{definition}
 
@@ -228,10 +229,10 @@ a name to this special class now, as it is quite important.
   \label{chrom-fglex}
   We give the two most basic examples (over any commutative ring $R$):
   \begin{enumerate}
-  \item First we have the \emph{additive formal group law} $f(x,y) =
-    x+y$. We saw above that this arises is stable homotopy theory via
-    singular cohomology.
-  \item Second we have the \emph{multiplicative formal group law}
+  \item First we have the \emph{additive formal group law},
+    $f(x,y) = x+y$. We saw above that this arises in stable homotopy
+    theory via singular cohomology.
+  \item Second we have the \emph{multiplicative formal group law},
     $f(x,y) = x+y+xy = (1+x)(1+y)-1$. One should think of this really
     as multiplication $xy$, except with the identity shifted to $0$
     rather than $1$. One can show without much trouble that this
@@ -259,19 +260,439 @@ refers to the business of understanding just how good this
 approximation is, and we'll review some of the key aspects of this
 theory in the following two subsections. Just as this one is, the next
 two subsections have titles of the form ``$A$ \& $B$''; in all three
-cases $A$ is some concept in the theory of formal groups and $B$ the
-avatar of $A$ in stable homotopy theory.
+cases $A$ is some concept in the theory of formal groups and $B$ is
+the avatar of $A$ in stable homotopy theory.
 
 \subsection{The Lazard ring \& complex bordism}
 \label{chrom-lazmu}
 
-The first important observation to make about formal group laws is
-that there's a universal one.
-
-\begin{construction}
+\begin{nothing}
   \label{chrom-univfgl}
-  There 
-\end{construction}
+  The first important observation to make about formal group laws is
+  that there's a universal one. A formal group law is a power series
+  \[
+  f(x,y) = \sum_{i,j} a_{i,j} x^i y^j
+  \]
+  with coefficients in a ring $R$, satisfiying three conditions. The
+  power series is of course formally determined by the coefficients
+  $a_{i,j}$, and the conditions can be expressed purely in terms of
+  the coefficients as well:
+  \begin{enumerate}
+  \item that $f(x,0) = x$ is equivalent to $a_{i,0}$ being $1$ for
+    $i = 1$ and $0$ otherwise, and similarly for $f(0,y) = y$;
+  \item that $f(x,y) = f(y,x)$ is equivalent to $a_{i,j} = a_{j,i}$;
+  \item that $f(x,f(y,z)) = f(f(x,y),z)$ is again equivalent to
+    certain integer polynomial relations among the coefficients
+    $a_{i,j}$, but these are more complicated and omitted here.
+  \end{enumerate}
+  We conclude that there is some ideal $I \subseteq \lZ[a_{i,j}]$ such
+  that specifying a formal group law over a ring $R$ is equivalent to
+  specifying a morphism of rings $\lZ[a_{i,j}]/I \to R$. That is, the
+  formal group law $\sum_{i,j} a_{i,j} x^i y^j$ over the ring
+  $\rL \ce \lZ[a_{i,j}]/I$ is the universal example of a formal group
+  law. For example, we can rephrase the discussion of the previous
+  section by saying that a complex-orientation on a ring spectrum $E$
+  determines a morphism of rings $\rL \to E^*$. In fact, there is a
+  natural (even) grading on $\rL$ so that this is a morphism of graded
+  rings. The (graded) ring $\rL$ is known as the \emph{Lazard ring}.
+\end{nothing}
+
+\begin{nothing}
+  \label{chrom-mu}
+  It turns out that there is also a universal example of a
+  complex-oriented cohomology theory, known as \emph{complex bordism}
+  and denoted $\MU$. (As the name suggests, $\MU$ is connected to
+  (co)bordisms of manifolds, but we have no time to discuss its
+  origins or construction.) More precisely, there is a bijection
+  between complex-orientations of a ring spectrum $E$ and homotopy
+  classes of maps of ring spectra $\MU \to E$. In particular, there is
+  a \emph{canonical} complex-orientation of $\MU$, corresponding to
+  the identity map $\id \c \MU \to \MU$.
+\end{nothing}
+
+We have now given two universal examples: a complex-orientation of a
+ring spectrum $E$ canonically determines morphisms $\MU \to E$ and
+$\rL \to E^*$. It is hopefully natural to guess the following result
+then.
+
+\begin{theorem}[Quillen]
+  \label{chrom-quillen}
+  The map $L \to \MU^*$ determined by the canonical
+  complex-orientation of $\MU$ is an isomorphism. In other words, the
+  formal group law associated to $\MU$ is the universal one, and the
+  map $\rL \iso \MU^* \to E^*$ induced by a complex-orientation
+  $\MU \to E$ of a ring spectrum $E$ is precisely the map classifying
+  the formal group law on $E^*$.
+\end{theorem}
+
+\begin{remark}
+  \label{chrom-quillenhard}
+  Note that we said it was natural to guess the previous result, but
+  then labeled it a theorem and attributed it to Quillen. Indeed, the
+  result isn't formal or easy, but an incredibly deep computation, and
+  sort of miraculous!  Again, we have no time here to delve into the
+  details.
+\end{remark}
+
+One reason to get really excited about \cref{chrom-quillen} is that it
+inspires a method for inverting the process of extracting formal group
+laws from complex-oriented cohomology theories. That is, if we are
+given a formal group law over some ring $R$, classified by a map
+$\MU^* \iso \rL \to R$, we could try to define a complex-oriented
+cohomology theory $E$ with exactly this associated formal group law by
+defining
+\[
+E^*(X) \ce \MU^*(X) \otimes_\rL R
+\]
+(for finite CW complexes $X$). But of course this won't always define
+a cohomology theory. A priori, to retain the necessary exact sequences
+we would need to assume the map $\rL \to R$ is flat. However, this is
+quite a stringent condition. Another important theorem tells us that
+the Lazard ring $\rL$ is isomorphic to an infinite polynomial ring
+$\lZ[b_1,b_2,\ldots]$, and flatness over such a large ring is indeed a
+rather limiting hypothesis (maybe this is easier to understand
+geometrically: imagine trying to be flat over an infinite-dimensional
+affine space!).
+
+Luckily, it turns out that we can get away with a significantly weaker
+flatness hypothesis to obtain a cohomology theory. To state this
+correctly we should introduce formal groups, the more invariant,
+coordinate-free object underlying formal group laws.
+
+\begin{notation}
+  \label{chrom-algr}
+  If $R$ is a ring, let $\Alg_R$ denote the category of $R$-algebras.
+\end{notation}
+
+Suppose we are given a formal group law $f \in R \ldb x,y \rdb$. We
+are supposed to think of this as some kind of group operation, but
+it's a power series so it doesn't quite make sense to actually apply
+the operation to elements of $R$. However, we can apply it to
+nilpotent elements of $R$. More precisely, if
+$\Nil \c \Alg_R \to \Set$ denotes the functor sending an $R$-algebra
+to its set of nilpotent elements, then $f$ defines a lift of $\Nil$ to
+a functor to abelian groups, $\lG_f \c \Alg_R \to \Ab$. Note that
+$\Nil$ is the colimit of the functors corepresented by the
+$R$-algebras $R[t]/(t^n)$. So, algebro-geometrically $\Nil$ just
+corresponds to the formal scheme
+$\Spf(R\ldb t \rdb) \iso \colim_n \Spec(R[t]/(t^n))$, and the formal
+group law $f$ determines a group sctructure on this formal
+scheme. More generally, we make the following definition.
+
+\begin{definition}
+  \label{chrom-fg}
+  A \emph{formal group} over a ring $R$ is a functor
+  $\lG \c \Alg_R \to \Ab$ which is:
+  \begin{enumerate}
+  \item a sheaf with respect to the Zariski topology on $\Alg_R$;
+  \item Zariski-locally isomorphic to functors of the form $\lG_f$,
+    for $f$ a formal group law.
+  \end{enumerate}
+\end{definition}
+
+Perhaps this definition is a bit opaque, so let's elaborate for a
+little while. We said that formal groups are a more invariant notion
+than formal group laws, but how exactly? In other words, given two
+formal group laws $f,f'$ over a ring $R$, when are the associated
+formal groups $\lG_f, \lG_{f'}$ isomorphic? One can show that the
+formal groups are isomorphic precisely when there is a
+``change-of-variable'' relating $f$ and $f'$, i.e. an invertible power
+series $g \in R \ldb t \rdb$ such that $f(g(x),g(y)) = g(f'(x,y))$. So
+we can think alternatively think of a formal group over $R$ as the
+following data:
+\begin{itemize}
+\item an open covering of $R$, i.e. elements $r_1,\ldots,r_n \in R$
+  such that $(r_1,\ldots,r_n) = (1) = R$;
+\item formal group laws $f_i$ over each localization $R[r_i^{-1}]$;
+\item changes-of-variable $g_{i,j} \in R[(r_ir_j)^{-1}] \ldb t \rdb$
+  relating $f_i$ and $f_j$, i.e. such that
+  \[
+  g_{i,j}f_i(g_{i,j}^{-1}(x),g_{i,j}^{-1}(y)) = f_j(x,y) \in
+  R[(r_ir_j)^{-1}] \ldb x,y \rdb
+  \]
+\item which are coherent in that there are identifications
+  $g_{i,k} = g_{j,k} \circ g_{i,j}$ over
+  $R[(r_ir_jr_k)^{-1}] \ldb t \rdb$.
+\end{itemize}
+
+This is just the natural way to glue together formal group laws along
+changes-of-variable. This can also be thought of naturally in the
+language of stacks. We have seen that there is a ``moduli stack of
+formal group laws'' $\cM_\FGL$, i.e. an algebro-geometric object such
+that maps $\Spec(R) \to \cM_\FGL$ are in bijection with formal group
+laws over $R$: it is just the affine scheme $\Spec(\rL)$ associated to
+the Lazard ring. Then change-of-variable can be encoded as the action
+of a group scheme $G$ (paramterizing invertible power series
+$g(t) = b_1t + b_2t^2 + \cdots$) on the scheme $\Spec(L)$
+(paramterizing formal group laws), the action sending a formal group
+law $f(x,y)$ to the formal group law $g(f(g^{-1}(x),g^{-1}(y))$. Hence
+the ``moduli stack of formal groups'' should be defined to be the
+quotient stack $\cM_{\FG} \ce \Spec(\rL) / G$. And indeed when one
+unwraps all of the definitions, one now has a groupoid of maps
+$\Spec(R) \to \cM_\FG$, which is precisely the groupoid of formal
+groups over $R$, as defined above. In this language, the quotient map
+$\Spec(\rL) \to \cM_\FG$ corresponds to taking the formal group
+underlying a formal group law.
+
+Let us now return to the problem of defining a cohomology theory
+$E^*(X) \ce \MU^*(X) \otimes_\rL R$ given a formal group law over
+$R$. As we said above, one might expect that we need flatness of
+$\rL \to R$, i.e. of $\Spec(R) \to \Spec(\rL)$, to do so. But in fact
+one can show that it suffices that the composite
+$\Spec(R) \to \Spec(\rL) \to \cM_\FG$ be flat. This motivates the
+following definition.
+
+\begin{definition}
+  \label{chrom-landexact}
+  We say a formal group over a ring $R$ is \emph{Landweber-exact} if
+  the classifying map $\Spec(R) \to \cM_\FG$ is flat. We say a formal
+  group law over $R$ is Landweber-exact if its underlying formal group
+  is.
+\end{definition}
+
+\begin{remark}
+  \label{chrom-left}
+  The terminology of Landweber-exactness originates from a (very
+  useful) theorem of Landweber, the \emph{Landweber exact functor
+    theorem}, which gives a simple algebraic (necessary and
+  sufficient) criterion for a formal group law to be Landweber-exact.
+\end{remark}
+
+With more work, one can refine our two constructions extracting formal
+group laws from complex-oriented cohomology theories and building
+complex-oriented cohomology theories from Landweber exact formal group
+laws as follows.
+
+\begin{definition}
+  \label{chrom-evenper}
+  We say a ring spectrum $E$ is \emph{weakly even periodic} if
+  \begin{enumerate}
+  \item $E^i \iso 0$ for $i$ odd;
+  \item the multiplication map $E^2 \otimes_{E^0} E^{-2} \to E^0$ is
+    an isomorphism.
+  \end{enumerate}
+  The second condition implies that $E^2$ is an invertible
+  $E^0$-module and that $E^{2k} \iso (E^2)^{\otimes k}$ for
+  $k \in \lZ$. We say $E$ is \emph{even periodic} if it satisfies the
+  following stronger condition:
+  \begin{enumerate}
+  \item[(b$'$)] there is an invertible element $\beta \in E^{-2}$, so
+    that multiplication by $\beta$ determines an isomorphism
+    $E^k \iso E^{k-2}$ for all $k \in \lZ$.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  \label{chrom-evenperfacts}
+  Any weakly even periodic ring spectrum $E$ is complex-orientable. If
+  $E$ is even periodic, then it's easy to see that the associated
+  formal group law over $E^*$ can be viewed simply as a formal group
+  law over $E^0$. In fact, even if $E$ is just weakly even periodic,
+  there is a formal group over $E^0$, i.e. a map
+  $\Spec(E^0) \to \cM_\FG$, which when pulled back to $E^*$ is just
+  the formal group $\Spec(E^*) \to \Spec(E^0) \to \cM_\FG$ underlying
+  the formal group law over $E^*$.
+\end{remark}
+
+\begin{proposition}
+  \label{chrom-evenperfg}
+  Consider the category of Landweber-exact formal groups, i.e. the
+  category of flat maps $\lG \c \Spec(R) \to \cM_\FG$. There is a
+  functor $\lG \mapsto E_\lG$ from this category to the homotopy
+  category of weakly even periodic ring spectra. Moreover, this
+  functor is an equivalence of categories, with the inverse functor
+  sending $E$ to the formal group over $E^0$ discussed in
+  \cref{chrom-evenperfacts}.
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Stratifying by height \& Morava K- and E-theories}
 \label{chrom-strat}
+
+In this subsection, we strengthen even further the intimate
+relationship between stable homotopy theory and formal groups by
+discussing some geometric structure of the moduli stack of formal
+groups $\cM_\FG$, and how this geometric structure is reflected in
+stable homotopy theory.
+
+\begin{definitions}
+  \label{chrom-nseries}
+  Let $f$ be a formal group law over a ring $R$.
+  \begin{enumerate}[leftmargin=*]
+  \item We inductively define its \emph{$n$-series}
+    $[n] \in R \ldb t \rdb$ of $f$ by $[0]_f(t) = 0$ and
+    $[n](t) = f([n-1](t), t)$ for $n \in \lZ_{> 0}$.
+  \item One can show that for a prime $p$, if $p=0$ in $R$ then the
+    $p$-series of $f$ is either zero or has the form
+    $[p](t) = rt^{p^n} + O(t^{p^n+1})$ for some nonzero $r \in R$.
+    With a fixed prime $p$ understood, we denote the coefficient of
+    $t^{p^n}$ in $[p](t)$ by $v_n$ for $n \ge 0$. We say $f$ has
+    \emph{height $\ge n$} if $v_k = 0$ for $k < n$, and has
+    \emph{height (exactly) $n$} if furthermore $v_n$ is invertible in
+    $R$.
+  \item One can show that height of a formal group law is invariant
+    under change-of-variable, i.e. is actually a property of the
+    underlying formal group. In fact, at each prime $p$ we may define
+    a stratification of $\cM_\FG \times \Spec(\lZ_{(p)})$ by defining
+    the closed substacks $\cM_\FG^{\ge n}$ parameterizing formal
+    groups of height $\ge n$, whose locally closed strata
+    $\cM_\FG^n \ce \cM_\FG^{\ge n} - \cM_\FG^{\ge n-1}$ are precisely
+    the substacks parameterizing formal groups of height exactly $n$.
+  \end{enumerate}
+\end{definitions}
+
+\begin{examples}
+  \label{chrom-htex}
+  \begin{enumerate}[leftmargin=*]
+  \item It's easy to see that for any formal group law $f$ over a ring
+    $R$, the coefficient of $t$ in $[n](t)$ is just $n$. In
+    particular, $f$ has height $0$ if and only if $p$ is invertible in
+    $R$, and $f$ has height $\ge 1$ if and only if $p = 0$ in $R$. In
+    other words, $\cM_\FG^0 \iso \cM_\FG \times \Spec(\lQ)$ and
+    $\cM_\FG^{\ge 1} \iso \cM_\FG \times \Spec(\lF_p)$.
+  \item Consider the additive formal group law $f(x,y) = x + y$ over a
+    ring $R$ with $p=0$. Its $p$-series is evidently $0$, so we say
+    $f$ has \emph{infinite height}.
+  \item Consider the multiplicative formal group law
+    $f(x,y) = x + y + xy = (1+x)(1+y) - 1$ over a ring $R$ with
+    $p=0$. Its $p$-series is $(1+t)^p - 1 = t^p$, so $f$ has height
+    $1$.
+  \end{enumerate}
+\end{examples}
+
+Now how does the notion of height appear in stable homotopy theory? We
+can't give a complete answer to this question, which is central to
+chromatic homotopy theory, but we can say a bit.
+
+It is often fruitful to think of abelian groups as ``living over''
+(the spectrum of) the integers, and to study them by localizing or
+completing at one prime $p$ at a time. We can do the same thing for
+spectra, but now there is more structure to consider than just the
+integer primes. We have seen that the coefficient ring of the spectrum
+$\MU$ is given by the Lazard ring $\rL$. Thus, for any the spectrum
+$X$, the $\MU$-homology of $X$ is a module $\MU_*(X)$ over $\rL$,
+i.e. a quasicoherent sheaf on $\Spec(\rL)$. However, more is true: the
+action of the group scheme $G$ on $\Spec(\rL)$ described above in
+\cref{chrom-lazmu} lifts naturally to an action on the sheaf
+$\MU_*(X)$. Thus we may view $\MU_*(X)$ as a quasicoherent sheaf on
+the quotient stack $\cM_\FG \iso \Spec(\rL) / G$. I.e. we may think of
+$\MU$-homology as a functor from the stable homotopy category to the
+category of quasicoherent sheaves on $\cM_\FG$, and therefore think of
+the stable homotopy category as ``living over'' $\cM_\FG$.
+
+So we should ask: after localizing at a prime $p$, is there a way of
+further localizing or completing the stable homotopy category with
+respect to the strata of $\cM_\FG$? Indeed there is, and describing
+this allows us to introduce some central objects in stable homotopy
+theory: the Morava K-theories and E-theories.
+
+\begin{definition}
+  \label{chrom-def}
+  Let $\lG_0$ be a formal group over a field $\kappa$. A
+  \emph{deformation} of $\lG_0$ is a local artin ring $A$ with residue
+  field $\kappa$, together with a formal group $\lG$ over $A$ which
+  restricts to $\lG_0$ in the quotient map $A \to \kappa$. (Note that
+  since $\kappa, A$ are both local, the formal groups $\lG_0,\lG$ are
+  just the formal groups underlying certain formal group laws
+  $f_0,f$.)
+\end{definition}
+
+\begin{proposition}
+  \label{chrom-univdef}
+  Let $\lG_0$ be a formal group of height $n$ over a perfect field
+  $\kappa$ of characteristic $p$. Let $\rW(\kappa)$ denote the ring of
+  Witt vectors of $\kappa$. Then there is a universal deformation
+  $\lG$ of $\lG_0$ over the local artin ring
+  $A \ce \rW(\kappa) \ldb v_1, \ldots, v_{n-1} \rdb$ with residue
+  field $\kappa$. That is, for another local artin ring $A'$ with
+  residue field $\kappa$, there is a natural bijection between the set
+  of isomorphism classes of deformations of $\lG_0$ over $A'$ and the
+  set $\Hom_{/\kappa}(A,A')$ of ring maps $A \to A'$ over $\kappa$.
+\end{proposition}
+
+\begin{nothing}
+  \label{chrom-moravathy}
+  As noted in \cref{chrom-def}, in \cref{chrom-univdef} one can think
+  of the formal group $\lG_0$ simply as a formal group law $f_0$ of
+  height $n$ over $\kappa$, and the universal deformation as a formal
+  group law $f$ over
+  $A \ce \rW(\kappa) \ldb v_1, \ldots, v_{n-1} \rdb$.  Essentially by
+  construction, one can show that the universal deformation $f$ will
+  be Landweber-exact. Thus by \cref{chrom-evenperfg} we have an even
+  periodic\footnote{It is automatically even periodic, not just weakly
+    even periodic, since the base ring $A$ is local.} spectrum $E$
+  whose associated formal group law is $f$, which we call the
+  \emph{Morava E-theory} associated to $\lG_0$. We can say much more
+  though: a theorem of Goerss-Hopkins-Miller\footnote{Disclaimer: I
+    have not studied this theorem at all, yet.} tells us that there is
+  an essentially unique $\rE_\infty$-ring spectrum structure on
+  $E$. For the remainder, we will always think of Morava E-theory as
+  an $\rE_\infty$-ring spectrum.
+
+  On the other hand, the orginal formal group law $f_0$ will not be
+  Landweber exact. Nevertheless, we may associate a spectrum to it via
+  Morava E-theory. Namely, we let $v_0 \ce p \in A$, and for
+  $0 \le i < n$ define $M(i)$ to be the cofiber of the map of
+  $E$-module spectra $E \to E$ given by multiplication by
+  $v_i \in A \iso E^0$. We can then consider the tensor product
+  $K \ce \bigotimes_{i=0}^{n-1} M(i)$ of $E$-module spectra, which is
+  independent of the precise choice of generators
+  $v_1,\ldots,v_n \in A$, and has coefficient ring
+  $K^* \iso \kappa[\beta,\beta^{-1}]$, with $\beta \in K^{-2}$. (So,
+  just as $\kappa$ is the quotient of the maximal ideal
+  $(p,v_1,\ldots,v_{n-1}) \subseteq A$, we should think of $K$ as the
+  quotient of $E$ by this maximal ideal, in some sense.) We call this
+  spectrum $K$ the \emph{Morava K-theory} associated to $\lG_0$.
+\end{nothing}
+
+We now give a definition of localizing the stable homotopy category
+with respect to a spectrum; localizing with respect to Morava K-theory
+and E-theory will realize the localization/completion to the strata of
+$\cM_\FG$ we were asking for above.
+
+\begin{definition}
+  \label{chrom-localization}
+  Let $E$ be a spectrum. We say:
+  \begin{itemize}
+  \item a spectrum $X$ is \emph{$E$-acyclic} if the $E$-homology of
+    $X$ vanishes, i.e. if $E_*(X) \iso 0$ or equivalently if the smash
+    product $E \otimes X$ is $0$;
+  \item a spectrum $Y$ is \emph{$E$-local} if any map $X \to Y$ is
+    nullhomotopic when $X$ is an $E$-acyclic spectrum.
+  \end{itemize}
+  One can define an \emph{$E$-localization functor}
+  $L_E \c \Spect \to \Spect$ on the $\infty$-category of spectra with
+  the following properties:
+  \begin{itemize}
+  \item For any the spectrum $X$, the spectrum $L_E X$ is $E$-local.
+  \item There is a natural transformation from the identity functor on
+    $\Spect$ to $L_E$, i.e. for any spectrum $X$ there is a natural
+    localization map $X \to L_E X$. Moreover, this map is an
+    isomorphism in $E$-homology.
+  \end{itemize}
+\end{definition}
+
+\begin{examples}
+  Let $\lG_0$ be a formal group of height $n$ over a perfect field
+  $\kappa$ of characteristic $p$. Let $E$ and $K$ denote the
+  associated Morava E-theory and K-theory. Then the $E$-localization
+  functor $L_E$ should be thought of as restriction to the open
+  substack $\cM_\FG^{\le n}$ complementary to $\cM_\FG^{\ge n+1}$. And
+  the $K$-localization functor $L_K$ should be thought of as
+  completiong along the locally closed substack $\cM_\FG^n$. In fact,
+  one can show that the localization functor $L_K$ really only depends
+  on our chosen prime $p$ and the height $n$, and for the remainder we
+  will simply denote this functor by $L_{K(n)}$. It is also common to
+  abusively just call these spectra \emph{Morava E-theory and K-theory
+    of height $n$}, and denote them $E(n)$ and $K(n)$, without
+  specifying the field $\kappa$ or formal group $\lG_0$ (this is what
+  we did in the introduction).
+\end{examples}
+
+Here ends our discussion of the prerequisite ideas from chromatic
+homotopy theory that will be needed in what follows. We have certainly
+omitted a great deal, but hopefully the reader at this point has
+enough of a picture in mind that they can appreciate how our main
+objects of study arise.
+

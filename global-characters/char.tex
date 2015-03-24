@@ -1,8 +1,10 @@
 \section{Character theory}
 \label{char}
 
-We finally arrive at the main course of this thesis, and like at any
-sufficiently fancy restaurant, it'll be quick.
+We finally arrive at the main course of this thesis. In
+\cref{char-loops} we define our $p$-adic loop space functor, and in
+\cref{char-main}, everything comes together at once to prove our
+generalized character theory.
 
 \begin{notation}
   \label{char-fixp}
@@ -14,4 +16,255 @@ sufficiently fancy restaurant, it'll be quick.
 \subsection{Loops}
 \label{char-loops}
 
-We first must define the $p$-adic loops functor.
+\begin{notation}
+  \label{char-inthom}
+  There is an internal hom in the $\infty$-category $\Space_\Glo$,
+  which we denote $[-,-]$. It satisfies the adjunction
+  \[
+  \Map_{\Space_\Glo}(X \times Y, Z) \iso
+  \Map_{\Space_\Glo}(X, [Y,Z]),
+  \]
+  which means it can be computed via the formula
+  \[
+  [Y,Z](\lB G) \iso
+  \Map_{\Space_\Glo}(\lB G, [Y,Z]) \iso
+  \Map_{\Space_\Glo}(\lB G \times Y, Z).
+  \]
+  In particular, for $Y = \lB H$ we have
+  \begin{align}
+    \label{char-inthom-case}
+    [\lB H,Z](\lB G) &\iso
+    \Map_{\Space_\Glo}(\lB G \times \lB H, Z) \\ &\iso
+    \Map_{\Space_\Glo}(\lB (G \times H), Z) \nonumber \\ &\iso
+    Z(\lB (G \times H)) \nonumber
+  \end{align}
+\end{notation}
+
+\begin{definition}
+  \label{char-loopdfn}
+  We define the \emph{($p$-adic) loop space} functor:
+  \[
+  \cL \c \Space_\Glo \to \Space_\Glo, \quad
+  X \mapsto \colim_k {[\lB\lZ/p^k, X]}.
+  \]
+  One may want to think of this as an internal hom $[\lB\lZ_p, -]$
+  from the pro-object $\lB\lZ_p \ce \lim_k \lB\lZ/p^k$ in
+  $\Space_\Glo$.
+\end{definition}
+
+\begin{lemma}
+  \label{char-loop-colim}
+  The loop space functor $\cL$ preserves colimits.
+\end{lemma}
+
+\begin{proof}
+  Since colimits commute with other colimits, it suffices to show for
+  each $k$ that $[\lB\lZ/p^k, -]$ preserves colimits, which is easy to
+  see: by \cref{char-inthom-case},
+  \begin{align*}
+  [\lB\lZ/p^k, \colim_i X_i](\lB G) &\iso
+  \l(\colim_i X_i\r)(\lB(G \times \lZ/p^k)) \\ &\iso
+  \colim_i X_i(\lB(G \times \lZ/p^k)) \\&\iso
+  \colim_i {[\lB\lZ/p^k, X_i](\lB G)}. \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{lemma}
+  \label{char-loop-gspace}
+  Let $G$ be a finite group and let $X$ be a $G$-space, which we will
+  abusively identify with its associated global space via the functor
+  $\delta_G \c G\dash\Space \to \Space_\Glo$ defined in
+  \cref{global-gspace-adj-unwrap}. Then its loop space $\cL X$ is the
+  global space associated to the $G$-space
+  \[
+  Y \ce \coprod_{\alpha \in \Hom(\lZ_p,G)} X^{\im(\alpha)}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  It suffices to prove the claim after replacing $\cL X$ with
+  $[\lB\lZ/p^k, X]$ and $Y$ with
+  $Y_k \ce \coprod_{\alpha \in \Hom(\lZ/p^k,G)} X^{\im(\alpha)}$,
+  since $G$ being finite implies $Y \iso Y_k$ for sufficiently large
+  $k$. When we view $Y_k$ as a global space, $Y_k(\lB H)$ is the
+  classifying space of the action groupoid
+  \[
+  \l( \coprod_{\beta \in \Hom(H,G)} Y_k^{\im(\beta)} \r) \sslash G.
+  \]
+  Now, for $\alpha \in \Hom(\lZ/p^k, G)$ and $\beta \in \Hom(H,G)$,
+  $x \in X^{\im(\alpha)} \subseteq Y_k$ is fixed by $\im(\beta)$ if
+  and only if $\im(\alpha)$ and $\im(\beta)$ commute within $G$ and
+  $x$ is a fixed point of the group $\im(\alpha)\im(\beta)$ they
+  generate. So this action groupoid can be rewritten as
+  \[
+  \l(\coprod_{\gamma \in \Hom(H \times \lZ/p^k)} X^{\im(\gamma)}\r)
+  \sslash G.
+  \]
+  The classifying space of this is by definition equivalent to
+  $X(\lB(H \times \lZ/p^k))$, which by \cref{char-inthom-case} is
+  equivalent to $[\lB\lZ/p^k, X](\lB H)$. So we conclude
+  $Y_k \iso [\lB\lZ/p^k, X]$, as desired.
+\end{proof}
+
+\begin{lemma}
+  \label{char-loop-bg}
+  Let $G$ be a finite group. We have
+  \[
+  \cL \lB G \iso \coprod_{[\alpha]} \lB C(\alpha),
+  \]
+  where $[\alpha]$ runs over the conjugacy classes of homomorphisms
+  $\lZ/p^k \to G$ for some sufficiently large $k$ (the largest
+  $p$-power torsion in $G$) and $C(\alpha) \subseteq G$ denotes the
+  centralizer of $\alpha$. In particular, for $G = A$ abelian there is
+  a natural equivalence
+  \[
+  \cL \lB A \iso \coprod_{a \in A[p^\infty]} \lB A,
+  \]
+  where $A[p^\infty] \subseteq A$ is the subgroup of $p$-power
+  torsion.
+\end{lemma}
+
+\begin{proof}
+  This follows immediately from \cref{char-loop-gspace}.
+\end{proof}
+
+\begin{lemma}
+  \label{char-loop-spect}
+  Let $E$ be a global spectrum. Then:
+  \begin{enumerate}
+  \item \label{char-loop-spect-is} The composite
+    $E' \ce E \circ \cL \c \Space_\Glo^\op \to \Spect$ is also a
+    global spectrum, i.e. takes colimits of global spaces to limits of
+    spectra.
+  \item \label{char-loop-spect-abdesc} If $E$ satisfies abelian
+    descent, then so does $E'$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  Statement \cref{char-loop-spect-is} is immediate from $\cL$ being
+  colimit-preserving \cref{char-loop-colim}. For the second statement,
+  we would like to prove that $E'(\lB G) \to E'(\lB^\ab G)$ is an
+  equivalence for all $G$, assuming this holds for $E$. We first
+  observe that for $X$ a global space, there's a natural equivalence
+  of global spaces $(\cL X)^\ab \iso \cL X^\ab$:
+  \begin{align*}
+  (\cL X)^\ab(\lB H) &\iso
+  \cL X(\lB H^\ab) \\ &\iso
+  \colim_k X(\lB(H^\ab \times \lZ/p^k)) \\ &\iso
+  \colim_k X(\lB(H \times \lZ/p^k)^\ab) \\ &\iso
+  \cL X^\ab(\lB H),
+  \end{align*}
+  where we have applied
+  \cref{abdesc-abelian-descent-abelianization,char-inthom-case}.
+  Combining this with \cref{char-loop-bg}, we see that
+  \[
+  \cL(\lB^\ab G) \iso
+  (\cL \lB G)^\ab \iso
+  \l( \coprod_{[\alpha]} \lB C(\alpha) \r)^\ab,
+  \]
+  and by \cref{abdesc-abelian-descent-abelianization} the last of
+  these is equivalent to $\coprod_{[\alpha]} \lB^\ab
+  C(\alpha)$.
+  Finally, after chasing these equivalences we see that the map
+  $E'(\lB G) \to E'(\lB^\ab G)$ is the map
+  \[
+  E(\cL \lB G) \iso
+  E \l( \coprod_{[\alpha]} \lB C(\alpha) \r) \to
+  E \l( \coprod_{[\alpha]} \lB^\ab C(\alpha) \r) \iso
+  E(\cL \lB^\ab G),
+  \]
+  induced by the coproduct of the canonical maps
+  $\lB^\ab C(\alpha) \to \lB C(\alpha)$. Since $E$ takes coproducts to
+  products, it follows that if $E$ satisfies abelian descent then so
+  does $E'$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The main theorem}
+\label{char-main}
+
+We are now ready to state and prove our version of character theory.
+
+\begin{notation}
+  \label{char-finalntn}
+  Let $E$ be a Morava E-theory of height $n$, and let
+  $L_t \ce L_{K(t)}E$. Let $C_t$ be the flat $L_t$-algebra constructed
+  in \cref{pdiv-einftyct}. We will denote the associated Borel global
+  spectra also by $E$ and $L_t$.
+\end{notation}
+
+\begin{nothing}
+  \label{char-tensloop}
+  By \cref{char-loop-spect} we have a global spectrum
+  $L_t \circ \cL^{n-t}$, which by \cref{char-loop-bg} is given by the
+  formula
+  \begin{equation}
+    \label{char-loopsum}
+    \lB G \mapsto
+    L_t\l( \coprod_{[\alpha]} \rB C(\alpha) \r) \iso
+    \bigoplus_{[\alpha]} L_t(\rB C(\alpha)),
+  \end{equation}
+  where now $[\alpha]$ runs over conjugacy classes of homomorphisms
+  $(\lZ/p^k)^{n-t} \to G$ (for sufficiently large $k$). So
+  $L_t \circ \cL^{n-t}$ again takes values in $L_t$-modules, and thus
+  we may define $C_t \otimes (L_t \circ \cL^{n-t})$. And since tensor
+  product commutes with direct sum, this is equivalent to the global
+  spectrum $(C_t \otimes L_t) \circ \cL^{n-t}$.
+\end{nothing}
+
+
+\begin{theorem}
+  \label{char-char}
+  There is an equivalence of global spectra
+  \[
+  C_t \otimes E \iso C_t \otimes (L_t \circ \cL^{n-t}).
+  \]
+\end{theorem}
+
+\begin{proof}
+  By \cref{abdesc-main} the global spectra $C_t \otimes E$ and
+  $C_t \otimes L_t$ satisfy abelian descent. By \cref{char-loop-spect}
+  this implies
+  $C_t \otimes (L_t \circ \cL^{n-t}) \iso (C_t \otimes L_t) \circ
+  \cL^{n-t}$
+  also satisfies abelian descent. Thus is suffices to give the desired
+  equivalence after restricting from $\Glo$ to $\Alo$. For finite
+  abelian groups $A$, the formula \cref{char-loopsum}, coming from
+  \cref{char-loop-bg}, gives a natural equivalence
+  \[
+  (C_t \otimes (L_t \circ \cL^{n-t}))(\lB A) \iso
+  C_t \otimes_{L_t} \bigoplus_{(A[p^\infty])^{n-t}} L_t(\rB A),
+  \]
+  which is naturally equivalent to
+  $(C_t \otimes E)(\lB A) \iso C_t \otimes_A E(\rB A)$ by our analysis
+  of $p$-divisible groups \cref{pdiv-main}.
+\end{proof}
+
+\begin{remark}
+  Since $C_t$ is flat over $L_t$ and $E$ by \cref{pdiv-einfty-flat},
+  our theorem gives for each finite group $G$ an equivalence of
+  $G$-equivariant cohomology theories
+  \[
+  C_t^* \otimes_{E^*} E_G(X) \iso
+  C_t^* \otimes_{L_t^*} (L_t)_G^*(\cL^{n-t}X),
+  \]
+  for finite $G$-spaces $X$. So we indeed recover isomorphisms of the
+  form proven in \cite{hkr-char,stapleton-tgcm}. Note however that we
+  did not explicitly construct this isomorphism when $G$ is
+  nonabelian.
+\end{remark}
+
+And with that we have completed our mission! To conclude, let me just
+summarize the ideas that got us here. Complex-oriented descent allowed
+us to show that the the global spectra $C_t \otimes E$ and
+$C_t \otimes (L_t \circ \cL^{n-t})$ are determined by their values on
+abelian groups, and hence in essence by the $p$-divisible groups
+$\lG_E$ and $\lG_{L_t}$ associated to Morava E-theory and its
+localization. Then the fact that we could identify the two sides of
+character theory simply boiled down to the behavior of these
+$p$-divisible groups: when $\lG_E$ is base changed to $L_t$, it loses
+$n-t$ infinitesimal height, and gains $n-t$ \'etale height; then when
+base changed to $C_t$, this \'etale part becomes constant, which
+translates into the $(n-t)$-fold looping on the right-hand side.

@@ -5,13 +5,6 @@ In many cases of interest, a global spectrum is determined by its
 values on abelian groups. This section is devoted to understanding
 this phenomenon, which can be encoded rigorously as follows.
 
-\begin{remark}
-  In this section it will be more convenient to restrict $\Glo$ to
-  only have finite groups as objects, rather than arbitrary finite
-  connected groupoids. \textbf{(Sorry, I have to decide how to deal
-    with this.)}
-\end{remark}
-
 \begin{notation}
   \label{abdesc-alo}
   Let $\Alo$ denote the full subcategory of $\Glo$ spanned by the
@@ -24,9 +17,9 @@ this phenomenon, which can be encoded rigorously as follows.
     descent} if it is the right Kan extension of its restriction to
   $\Alo$, i.e. if the canonical map
   \[
-  E(\lB G) \to \lim_{A \in \Alo_{/\lB G}} E(\lB A)
+  E(\lB G) \to \lim_{\lB A \in \Alo_{/\lB G}} E(\lB A)
   \]
-  is an equivalence for all $G \in \Glo$.
+  is an equivalence for all finite groups $G$.
 \end{definition}
 
 \subsection{Alternate characterizations}
@@ -47,7 +40,7 @@ satisfies abelian descent, so just stay tuned for a moment.
   For $X \in \Space_\Glo$ we define the \emph{abelianization} $X^\ab$
   of $X$ by
   \[
-  X^\ab \ce \colim_{A \in \Alo_{/X}} \lB A \in \Space_\Glo.
+  X^\ab \ce \colim_{\lB A \in \Alo_{/X}} \lB A \in \Space_\Glo.
   \]
   Note that there is a canonical map $X^\ab \to X$. To save some
   parentheses, we'll write $\lB^\ab G$ in place of $(\lB G)^\ab$ for
@@ -69,34 +62,35 @@ satisfies abelian descent, so just stay tuned for a moment.
 
 \begin{lemma}
   \label{abdesc-abelianization-alternate}
-  Let $\ab \c \Glo \to \Alo$ be the functor sending a group $H$ to
+  Let $\ab \c \Glo \to \Alo$ be the functor sending a group $\lB H$ to
   its group-theoretic abelianization\footnote{Recall the
     abelianization of a group $H$ is the quotient by its commutator
-    subgroup $H/[H,H]$.}  $H^\ab$. For $X \in \Space_\Glo$ we have
+    subgroup $H/[H,H]$.}  $\lB H^\ab$. For $X \in \Space_\Glo$ we have
   $X^\ab \iso X \circ \ab$, i.e. there are functorial equivalences
-  $X^\ab(H) \iso X(H^\ab)$ for $H \in \Glo$.
+  $X^\ab(\lB H) \iso X(\lB H^\ab)$ for $H \in \Glo$.
 \end{lemma}
 
 \begin{proof}
-  Let $X \in \Space_\Glo$ and $H \in \Glo$. Observe that for any
-  $A \in \Alo$ the canonical map $\lB A(H^\ab) \to \lB A(H)$ is an
-  equivalence. It follows that we have an equivalence
+  Let $X \in \Space_\Glo$ and $\lB H \in \Glo$. Observe that for any
+  $\lB A \in \Alo$ the canonical map
+  $\lB A(\lB H^\ab) \to \lB A(\lB H)$ is an equivalence. It follows
+  that we have an equivalence
   \[
-  X^\ab(H) \iso
-  \colim_{A \in \Alo_{/X}} \lB A(H) \iso
-  \colim_{A \in \Alo_{/X}} \lB A(H^\ab),
+  X^\ab(\lB H) \iso
+  \colim_{\lB A \in \Alo_{/X}} \lB A(\lB H) \iso
+  \colim_{\lB A \in \Alo_{/X}} \lB A(\lB H^\ab),
   \]
-  functorial in $H$. But now the canonical map
+  functorial in $\lB H$. But now the canonical map
   \[
-  \colim_{A \in \Alo_{/X}} \lB A(H^\ab) \to X(H^\ab)
+  \colim_{\lB A \in \Alo_{/X}} \lB A(\lB H^\ab) \to X(\lB H^\ab)
   \]
-  is clearly an equivalence since $H^\ab \in \Alo$.
+  is clearly an equivalence since $\lB H^\ab \in \Alo$.
 \end{proof}
 
 \begin{lemma}
   \label{abdesc-abelianization-as-Gspace}
-  Let $G \in \Glo$. Let $\Delta_G \dashv \Gamma_G$ be the adjunction
-  constructed in \cref{global-gspace-adj}.
+  Let $G$ be a finite group. Let $\Delta_G \dashv \Gamma_G$ be the
+  adjunction constructed in \cref{global-gspace-adj}.
   \begin{enumerate}
   \item \label{abdesc-abelianization-gamma} For a subgroup
     $H \subseteq G$, the fixed-point space $\Gamma_G(\lB^\ab G)^H$ is
@@ -113,8 +107,8 @@ satisfies abelian descent, so just stay tuned for a moment.
   \cref{global-gspace-adj-unwrap}\cref{global-gspace-adj-unwrap-right},
   $\Gamma_G(\lB^\ab G)^H$ is given by
   \[
-  \lB^\ab G(H) \times_{\lB G(H)} \{i_H\} \iso
-  \lB G(H^\ab) \times_{\lB G(H)} \{i_H\},
+  \lB^\ab G(\lB H) \times_{\lB G(\lB H)} \{i_H\} \iso
+  \lB G(\lB H^\ab) \times_{\lB G(\lB H)} \{i_H\},
   \]
   where $i_H \in \lB G(H)$ corresponds to the inclusion $H \inj G$;
   this clearly is contractible when $H$ is abelian and empty when $H$
@@ -123,32 +117,33 @@ satisfies abelian descent, so just stay tuned for a moment.
   Now let $X$ be a $G$-space with this same property: $X^H$ is
   contractible for $H$ abelian and empty for $H$ nonabelian. Recall
   $\Delta_G(X)$ is the canonical map
-  $\delta_G(X) \to \delta_G(*) \iso \lB G$, where for a $G$-space $Y$
-  we have
+  $\delta_G(X) \to \delta_G(*) \iso \lB G$, where for a $G$-space $Y$,
+  $\delta_G(Y)(\lB H)$ is the homotopy quotient
   \[
-  \delta_G(Y)(H) \iso
-  \l(\coprod_{\phi \in \Hom(H,G)} Y^{\im(\phi)}\r) \sslash G
+  \l(\coprod_{\phi \in \Hom(H,G)} Y^{\im(\phi)}\r)_{\rh G} \iso 
+  \rB \l(\l(\coprod_{\phi \in \Hom(H,G)} Y^{\im(\phi)}\r)
+  \sslash G \r)
   \]
-  for $H \in \Glo$. Since $X^{\im(\phi)}$ is only nonempty when
+  for $\lB H \in \Glo$. Since $X^{\im(\phi)}$ is only nonempty when
   $\im(\phi)$ is abelian, i.e. when $\phi$ factors through $H^\ab$, we
   have
   \[
   \delta_G(X)(H) \iso
-  \l(\coprod_{\phi \in \Hom(H^\ab,G)} X^{\im(\phi)}\r) \sslash G.
+  \l(\coprod_{\phi \in \Hom(H^\ab,G)} X^{\im(\phi)}\r)_{\rh G}.
   \]
   It follows from \cref{abdesc-abelianization-alternate} that
   $\delta_G(X) \to \lB G$ factors through the map
-  $\lB^\ab G \to \lB G$: for $H \in \Glo$ the resulting map
+  $\lB^\ab G \to \lB G$; for $\lB H \in \Glo$ the resulting map
   $\delta_G(X) \to \lB^\ab G$ looks like
   \[
-  \l(\coprod_{\phi \in \Hom(H^\ab,G)} X^{\im(\phi)}\r) \sslash G \iso
+  \l(\coprod_{\phi \in \Hom(H^\ab,G)} X^{\im(\phi)}\r)_{\rh G} \iso
   \delta_G(X)(H) \to
   \lB^\ab G(H) \iso
-  \l(\coprod_{\phi \in \Hom(H^\ab,G)} * \r) \sslash G,
+  \l(\coprod_{\phi \in \Hom(H^\ab,G)} \pt \r)_{\rh G},
   \]
-  induced by the unique maps $X^{\im(\phi)} \to *$. But these maps are
-  all equivalences by our contracibility hypothesis, whence
-  $\delta_G(X) \to \lB^\ab(G)$ is an equivalence (over $\lB G$), as
+  induced by the unique maps $X^{\im(\phi)} \to \pt$. But these maps
+  are all equivalences by our contracibility hypothesis, whence
+  $\delta_G(X) \to \lB^\ab G$ is an equivalence (over $\lB G$), as
   desired.
 \end{proof}
 
@@ -183,27 +178,28 @@ satisfies abelian descent, so just stay tuned for a moment.
 %   e.g. \cite[\S6.3]{strickland-k(n)-duality}).
 % \end{remark}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Complex-oriented descent}
 \label{abdesc-codesc}
 
 The takeaway of \cref{abdesc-alternate} is that whether or not a
 global spectrum satisfies abelian descent comes down to comparing, for
-each $G \in \Glo$, what it assigns to the trivial $G$-space and what
-it assigns to a $G$-space whose $H$-fixed point space is contractible
-for $H \subseteq G$ abelian and empty for $H \subseteq G$
+each finite group $G$, what it assigns to the trivial $G$-space and
+what it assigns to a $G$-space whose $H$-fixed point space is
+contractible for $H \subseteq G$ abelian and empty for $H \subseteq G$
 nonabelian. In this subsection we construct a more explicit model for
 the latter, and use this to describe a practical method for proving
 that various global spectra associated to complex-oriented cohomology
 theories satisfy abelian descent. This idea is originally due to
-Quillen \cite{quillen-equivariant-i}, and will be key in proving later
-on that our generalized character maps for Morava E-theory are
-isomorphisms.
+Quillen \cite{quillen-equivariant-i}, and is key to our approach to
+character theory.
 
 \begin{notation}
   \label{abdesc-codesc-ntn}
   For the remainder of this subsection:
   \begin{enumerate}
-  \item Fix a group $G \in \Glo$.
+  \item Fix a finite group $G$.
   \item Fix a faithful complex representation\footnote{Recall that
       such a thing always exists, e.g. the regular representation
       $\lC[G]$ always works.}  $\rho \c G \inj \Aut(V)$.
@@ -228,7 +224,10 @@ isomorphisms.
 \end{lemma}
 
 \begin{proof}
-  Maximal torus blah blah
+  This is immediate from the theory of maximal tori. It's clear that
+  $F^H$ is nonempty if and only if some conjugage $uHu^{-1}$ is
+  contained in our maximal torus $T$, which is true if and only if $H$
+  is abelian.
 \end{proof}
 
 \begin{notation}
@@ -268,44 +267,79 @@ isomorphisms.
 
 \begin{lemma}
   \label{abdesc-flag-faithflat}
-  Let $E$ be a ring $G$-spectrum. Suppose $E^* \to E^*(F)$ is
-  faithfully flat and for all (finite?) $G$-spaces $X$ the canonical
-  map $E^*(X) \otimes_{E^*} E^*(F) \to E^*(X \times F)$ is an
-  isomorphism. Then $E^* \to E^*(EF)$ is an isomorphism.
+  Let $E_G$ be a ring $G$-spectrum. Suppose $E_G^* \to E_G^*(F)$ is a
+  faithfully flat map of rings, and that the canonical map
+  $E_G^*(F)^{\otimes n} \to E_G^*(F^{\times n})$ is an isomorphism for
+  all $n \ge 1$. Then the canonical map $E_G^* \to E_G^*(\rE F)$ is an
+  isomorphism.
 \end{lemma}
 
 \begin{proof}
-  As $\rE F$ is defined as a geometric realization, the function
-  spectrum $E(\rE F)$ is given by the corresponding totalization,
-  namely of the cosimplicial $G$-spectrum
+  Consider the function $G$-spectrum $E_G(\rE F)$. Since $\rE F$ is
+  defined by a geometric realization, this function spectrum is the
+  the totalization of the cosimplicial $G$-spectrum
   \[
-  \cosimpl{E(F)}{E(F \times F)}{E(F \times F \times F)}.
+  \cosimpl{E_G(F)}{E_G(F \times F)}{E_G(F \times F \times F)}.
   \]
-  The Bousfield-Kan spectral sequence arising from the coskeletal
-  filtration of this cosimplicial spectrum then tells us that 
+  Now, the cohomology ring $E_G^*(\rE F)$ is given by the homotopy
+  groups of the $G$-fixed points $E_G(\rE F)^G$ of this function
+  spectrum. Viewing $G$-spectra as presheaves of spectra on $\Orb(G)$,
+  taking $G$-fixed points amounts to evaluating on the orbit $G$, and
+  so we see that $E_G(\rE F)^G$ is the totalization of the
+  cosimplicial spectrum
+  \[
+  \cosimpl{E_G(F)^G}{E_G(F \times F)^G}{E_G(F \times F \times F)^G}.
+  \]  
+  We apply the Bousfield-Kan spectral sequence arising from this
+  cosimplicial spectrum, which will converge to the homotopy groups of
+  the totalization, i.e. $E_G^*(\rE F)$, and which has second page
+  given by the complex
+  \[
+  \cosimpl{E_G^*(F)}{E_G^*(F \times F))}{E_G^*(F \times F \times F)}.
+  \]
+  By hypothesis we have $E_G^*(F^n) \iso E_G^*(F)^{\otimes n}$, so
+  this is just the Amitsur complex of the map $E_G^* \to E_G^*(F)$.
+  But since this map is faithfully flat, the homology of this complex
+  is just $E_G^*$ concentrated in degree $0$. It follows that the
+  spectral sequence degenerates and gives the desired isomorphism
+  $E_G^* \isoto E_G^*(\rE F)$.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}[{\cite[\S2.2--2.3]{hkr-char}}]
   \label{abdesc-co-flag-faithflat}
-  Let $E$ be a complex-orientable spectrum.
+  Let $E$ be a complex-orientable ring spectrum.
   \begin{enumerate}
   \item \label{abdesc-co-flag-bundle} Let $\cV \to X$ be a vector
     bundle, and $\cF \to X$ the associated bundle of complete flags in
-    $\cV$. Then $E^*(\cF)$ is a finite free module over $E^*(X)$.
-  \item \label{abdesc-co-flag-interest} $(E^{\Bor}_G)^*(F)$ is a
-    finite free module over $(E^\Bor_G)^*$, and for $X$ a $G$-space
-    the canonical map $E^*(X) \otimes_{E^*} E^*(F) \to E^*(X \times
-    F)$ is an isomorphism.
+    $\cV$. Then $E^*(\cF)$ is a finite free module over
+    $E^*(X)$.
+  \item \label{abdesc-co-flag-pullback} Moreover, suppose we have a
+    map $Y \to X$. Let $\cV_Y$ be the pullback of $\cV$ to $Y$ and
+    $\cF_Y$ the bundle of complete flags in $\cV_Y$. Then the
+    canonical map
+    \[
+    E^*(Y) \otimes_{E^*(X)} E^*(\cF) \to E^*(\cF_Y)
+    \]
+    is an isomorphism.
+  \item \label{abdesc-co-flag-interest} Let $E_G$ be the ring
+    $G$-spectrum representing the Borel $G$-equivariant cohomology
+    associated to $E$. Then $E_G^*(F)$ is a finite free module over
+    $E_G^*$, and the canonical map
+    $E_G^*(F)^{\otimes n} \to E_G^*(F^{\times n})$ is an isomorphism
+    for all $n \ge 1$.
   \end{enumerate}
 \end{lemma}
 
-\begin{proof}
-  Recall that $E^\Bor_G$ is defined such that
-  $(E^\Bor_G)^*(F) \iso E^*(EG \times_G F)$ and
-  $(E^\Bor_G)^* \iso E^*(BG)$. Noting that $EG \times_G F \to BG$ is
-  the bundle of complete flags in the vector bundle
-  $EG \times_G V \to BG$, we see that \cref{abdesc-co-flag-interest}
-  follows from \cref{abdesc-co-flag-bundle}.
+\begin{proof}[Sketch of proof]
+  Recall that $E_G$ is defined such that
+  $E_G^*(F) \iso E^*(\rE G \times_G F)$ and $E_G^* \iso E^*(\rB G)$.
+  Noting that $\rE G \times_G F \to BG$ is the bundle of complete
+  flags in the vector bundle $EG \times_G V \to BG$, we see that the
+  first assertion of \cref{abdesc-co-flag-interest} follows from
+  \cref{abdesc-co-flag-bundle}. The second then follows from
+  \cref{abdesc-co-flag-pullback}, where we inductively pull back via
+  the map
+  $\rE G \times_G F^{\times n} \to \rE G \times_G F^{\times(n-1)}$.
 
   We prove \cref{abdesc-co-flag-bundle} by induction on the rank of
   the vector bundle $\cV \to X$. Of course the claim is trivial when
@@ -323,5 +357,39 @@ isomorphisms.
   standard application of the Leray-Hirsch theorem, the point being
   that $\lP V \to X$ is a bundle with fiber $\lC\lP^n$ and a complex
   orientation of $E$ induces an isomorphism
-  $E^*(\lC\lP^n) \iso E^*[x]/(x^n)$, which of course is finite free.
+  $E^*(\lC\lP^n) \iso E^*[x]/(x^n)$, which of course is finite
+  free. Statement \cref{abdesc-co-flag-pullback} will then follow from
+  the naturality of this argument.
+\end{proof}
+
+Our work in this section culminates in the following result.
+
+\begin{proposition}
+  \label{abdesc-main}
+  Let $E$ be a complex-orientable $\rE_\infty$-ring spectrum. Let $E
+  \to C$ be a flat map of $\rE_\infty$-rings. Then the global
+  spectrum $C \otimes E \in \Spect_\Glo$ given by the presheaf $\lB G
+  \mapsto C \otimes_E E(\rB G)$ satisfies abelian descent.
+\end{proposition}
+
+\begin{proof}
+  By \cref{abdesc-abelian-descent-abelianization} it suffices to show
+  $(C \otimes E)(\lB G) \to (C \otimes E)(\lB^\ab G)$ is an
+  equivalence for any fixed finite group $G$. By
+  \cref{abdesc-abelianization-as-Gspace,abdesc-BabG-construction} it
+  suffice to show that the map
+  $(C \otimes E)_G^* \to (C \otimes E)_G^*(\rE F)$ is an
+  isomorphism. By \cref{abdesc-flag-faithflat} it suffices to show
+  that $(C \otimes E)_G^* \to (C \otimes E)_G^*(F)$ is faithfully flat
+  and that
+  $(C \otimes E)_G^*(F)^{\otimes n} \to (C \otimes E)_G^*(F^{\times
+    n})$
+  is an isomorphism for all $n \ge 1$. Since $F$ is a compact
+  $G$-manifold, hence equivalent to a finite $G$-space, and $C$ is
+  flat over $E$, these maps are just given by
+  $C^* \otimes_{E^*} E_G^* \to C^* \otimes_{E^*} E_G^*(F)$ and
+  $C_* \otimes_{E^*} E_G^*(F)^{\otimes n} \to C^* \otimes_{E^*}
+  E_G^*(F^{\times n})$,
+  respectively. We are then done by
+  \cref{abdesc-co-flag-faithflat}\cref{abdesc-co-flag-interest}.
 \end{proof}

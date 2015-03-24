@@ -1,23 +1,51 @@
-\section{$p$-divisible groups}
+\section{\texorpdfstring{$p$}{p}-divisible groups}
 \label{pdiv}
 
-We saw in \cref{chrom} that there is a remarkable connection between
-stable homotopy theory and the theory of formal groups. In particular
-we saw that, at a fixed prime $p$, the stratification of formal groups
-by height is reflected in homotopy theory through these cohomology
-theories known at Morava K- and E-theory. It turns out that, to
+The takeway of \cref{chrom} is that there is a remarkable connection
+between stable homotopy theory and the theory of formal groups. In
+particular we saw that, at a fixed prime $p$, the stratification of
+formal groups by height is reflected in homotopy theory through
+certain spectra known at Morava K- and E-theory. It turns out that, to
 understand how these different heights interact in stable homotopy
 theory, it is extremely useful not just to consider the formal groups
 at hand, but to consider the $p$-power torsion of these formal groups
-as what are known as $p$-divisible groups. Indeed the main theorem in
-this thesis, i.e. the character theory presented in \cref{char}, is
-precisely an expression of this philosophy. This section reviews the
-bare minimum of what we'll need to know about $p$-divisible groups.
+as what are known as $p$-divisible groups. This section reviews the
+bare minimum of what we'll need to know about $p$-divisible groups,
+and then analyzes the $p$-divisible groups in chromatic homotopy
+theory that we care about.
+
+\begin{notation}
+  \label{pdiv-fixp}
+  Throughout this section we fix a prime $p$.
+\end{notation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Generalities}
 \label{pdiv-gen}
+
+\begin{notation}
+  \label{pdiv-grpschemes}
+  We recall some basic terminology and notation regarding
+  (commutative) group schemes:
+  \begin{enumerate}
+  \item A sequence $0 \to \lG' \lblto{i} \lG \lblto{j} \lG'' \to 0$ of
+    finite group schemes is called \emph{short exact} if $j$ is
+    faithfully flat and $i$ is a closed immersion which identifies
+    $\lG'$ with the (category-theoretic) kernel of $j$. If we have
+    such a sequence such that $\lG'$ and $\lG''$ are finite of ranks
+    $a$ and $b$, then $\lG$ is finite of rank $ab$.
+  \item If we have a group scheme $\lG$ over a ring $A$ and a ring
+    extension $A \to B$, we denote the base change $\lG
+    \times_{\Spec(A)} \Spec(B)$ by $\lG_B$.
+  \item Similarly, if we have an ordinary group $\lG$, we denote the
+    associated constant group over a ring $A$ by $\lG_A$.
+  \item Note that finite morphisms are by definition affine, so if
+    $\lG$ is a finite group scheme over a ring $A$, it is in fact an
+    affine group scheme. In this case we denote the corresponding ring
+    (that is, the global sections of $\lG$) by $\cO_\lG$.
+  \end{enumerate}
+\end{notation}
 
 \begin{definition}
   \label{pdiv-pdivgrp}
@@ -31,54 +59,37 @@ bare minimum of what we'll need to know about $p$-divisible groups.
       here. However, we will only deal with $p$-divisible groups for
       which these finite parts are in fact free, and we will indeed
       need to use this freeness hypothesis in \cref{pdiv-split}.}
-    commutative group scheme over $A$ of rank $p^{nk}$ (note that
-    finite morphisms are affine by definition, so $\lG_k$ is affine);
+    commutative group scheme over $A$ of rank $p^{nk}$;
   \item $i_k \c \lG_k \to \lG_{k+1}$ is a morphism of group schemes
     over $A$ such that the sequence
     \[
     0 \to \lG_k \lblto{i_k} \lG_{k+1} \lblto{(p^k)} \lG_{k+1}
     \]
-    is exact, where $(p^k)$ denotes multiplication by $p^k$.
+    is exact, where $(p^k)$ denotes multiplication by $p^k$;
+    i.e. $i_k$ identifies $\lG_k$ as the $p^k$-torsion in
+    $\lG_{k+1}$.
   \end{itemize}
-  It's easy to see that these morphisms identify $\lG_k$ as the
-  $p^k$-torsion in $\lG_{k+l}$ for all $l > 0$. Thus we will more
-  often than not think of $\lG$ not as the inductive system
+  It's easy to see that these morphisms in fact identify $\lG_k$ as
+  the $p^k$-torsion in $\lG_{k+l}$ for all $l > 0$. Thus we will
+  basically always think of $\lG$ not as the inductive system
   $(\lG_k,i_k)$, but as the colimit of this system, and denote $\lG_k$
   by $\lG[p^k]$.
 
-  For $p$-divisible groups $\lG = (\lG_k,i_k)$ and $\lG' =
-  (\lG'_k,i'_k)$ over $A$, a morphism $\phi \c \lG \to \lG'$ is a
-  sequence of morphisms $\phi_k \c \lG_k \to \lG'_k$ for $k \in
-  \lZ_{\ge 0}$ making the following diagram commute
-  \[
-  \begin{tikzcd}
-    \cdots \ar[r] &
-    \lG_k \ar[r, "i_k"] \ar[d, "\phi_k"] &
-    \lG_{k+1} \ar[r] \ar[d, "\phi_{k+1}"] &
-    \cdots \\
-    \cdots \ar[r] &
-    \lG'_k \ar[r, "i'_k"] &
-    \lG'_{k+1} \ar[r] &
-    \cdots
-  \end{tikzcd}
-  \]
+  Morphisms, short exact sequences, base changes, direct sums, etc. of
+  $p$-divisible groups are all defined in the obvious way in terms of
+  their definitions for finite group schemes. Note that because rank
+  of finite group schemes is multiplicative in short exact sequences,
+  height of $p$-divisible groups is additive in short exact sequences.
 \end{definition}
 
-\begin{notation}
-  If $A \to B$ is a morphism of rings and we have a (group) scheme
-  $\lG$ over $A$, then we will denote the base change
-  $\Spec(B) \times_{\Spec(A)} \lG$ by $\lG_B$. Similarly if we have an
-  ordinary group $\lG$, then we will denote the associated constant
-  group scheme over a ring $A$ by $\lG_A$.
-\end{notation}
-
 \begin{example}
+  \label{pdiv-constant}
   Suppose we had not a group scheme but an ordinary group $\lG$
   satisfying the axioms of a $p$-divisible group. Then $\lG[p]$ would
   a be a finite $p$-torsion group of order $p^n$, hence would
-  necessarily be isomorphic to $(\lZ/p)^n$. Then $\lG[p^2]$ would be a
-  finite $p^2$-torsion group of order $p^{2n}$ whose $p$-torsion was
-  given by $(\lZ/p)^n$, hence would necessarily be isomorphic to
+  necessarily be isomorphic to $(\lZ/p)^n$. Next, $\lG[p^2]$ would be
+  a finite $p^2$-torsion group of order $p^{2n}$, whose $p$-torsion
+  was given by $(\lZ/p)^n$, hence would necessarily be isomorphic to
   $(\lZ/p^2)^n$. And inductively we see that the only possibility is
   that $\lG \iso \colim_k (\lZ/p^k)^n \iso (\lQ_p/\lZ_p)^n$.
 
@@ -86,66 +97,111 @@ bare minimum of what we'll need to know about $p$-divisible groups.
   over a ring $A$ is isomorphic to $(\lQ_p/\lZ_p)^n_A$.
 \end{example}
 
+\begin{example}
+  \label{pdiv-formal}
+  Suppose we have a formal group law $f$ over a commutative ring $A$.
+  Let $\lG_f \ce \Spf(A \ldb t \rdb)$ denote the associated formal
+  group. We would like to say that the $p$-power torsion
+  $\lG_f[p^\infty] \ce \colim_k \lG_f[p^k]$ of $\lG_f$ is a
+  $p$-divisible group, where
+  $\lG_f[p^k] \iso \Spec(A \ldb t \rdb / ([p^k](t)))$ with
+  $[p^k](t) \in A \ldb t \rdb$ the $p^k$-series of $f$. A form of the
+  Weierstrass preparation theorem \cite[5.1--5.2]{hkr-char} tells us
+  that if $A$ is complete with respect to an ideal $I$, and the
+  $p$-series of $f$ satisfies
+  $[p](t) \equiv ut^{p^n} \mod (I, t^{p^n+1})$ for a unit
+  $u \in A^\times$ and $n \ge 1$, then the $A$-algebra
+  $A \ldb t \rdb / ([p^k](t))$ is a free $A$-module with basis
+  $\{1, t, \ldots, t^{p^{nk} -1}\}$ for all $k \ge 0$. So under these
+  hypotheses, the $p$-power torsion $\lG_f[p^\infty]$ will indeed be a
+  $p$-divisible group, of height $n$.
+\end{example}
 
+Often it is possible to decompose an arbitrary $p$-divisible group
+$\lG$ into ones which look like the two examples above. Namely, one
+often has a short exact sequence
+\begin{equation}
+  \label{pdiv-infet}
+  0 \to \lG_\inf \to \lG \to \lG_\et \to 0,
+\end{equation}
+where $\lG_\inf$ is an ``infinitesimal'' $p$-divisible group arising
+from some formal group law, and $\lG_\et$ is \'etale (hence fairly
+close to being constant). In \cref{pdiv-split} we will analyze the
+behavior of such short exact sequences, specifically how we can extend
+our base ring such that $\lG_\et$ actually becomes constant and such
+that the sequence splits. The following elementary observation will be
+useful in this analysis.
 
 \begin{proposition}
-  \label{pdiv-connet}
-  Infinitesimal-\'etale sequence.
-\end{proposition}
-
-\begin{proposition}
-  \label{pdiv-connet-split}
-  Let $\lG$ be a $p$-divisible group which has an connected-\'etale
-  sequence. Let $r$ be the height of $\lG_\et$. The following are
-  equivalent:
+  \label{pdiv-infet-split}
+  Let $\lG$ be a $p$-divisible group over a ring $A$. Suppose we have
+  a short exact sequence \cref{pdiv-infet}. Let $r$ be the height of
+  $\lG_\et$. The following are equivalent:
   \begin{enumerate}
-  \item the connected-\'etale sequence splits, i.e.
-    $\lG \iso \lG_\inf \times \lG_\et$, and the \'etale part of $\lG$
-    is constant, i.e. $\lG_\et \iso (\lQ_p/\lZ_p)^r$.
-  \item there is a map $(\lQ_p/\lZ_p)^r \to \lG$ such that the
-    composite $(\lQ_p/\lZ_p)^r \to \lG_\et$ is an isomorphism.
+  \item \label{pdiv-infet-split-yeah} the exact sequence splits and
+    the \'etale part of $\lG$ is constant, i.e.
+    $\lG \iso \lG_\inf \oplus \lG_\et$ and
+    $\lG_\et \iso (\lQ_p/\lZ_p)^r_A$;
+  \item \label{pdiv-infet-split-map} there is a map
+    $(\lQ_p/\lZ_p)^r_A \to \lG$ such that the composite
+    $(\lQ_p/\lZ_p)^r_A \to \lG_\et$ is an isomorphism.
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-  5-lemma.
+  Clearly \cref{pdiv-infet-split-yeah}
+  implies \cref{pdiv-infet-split-map}. Conversely, assuming
+  \cref{pdiv-infet-split-map}, we get a map of short exact sequences
+  \[
+  \begin{tikzcd}
+    0 \ar[r] &
+    \lG_\inf \ar[r] \ar[d] &
+    \lG_\inf \oplus (\lQ_p/\lZ_p)_A^r \ar[r] \ar[d] &
+    (\lQ_p/\lZ_p)_A^r \ar[r] \ar[d] &
+    0 \\
+    0 \ar[r] &
+    \lG_\inf \ar[r] &
+    \lG \ar[r] &
+    \lG_\et \ar[r] &
+    0.
+  \end{tikzcd}
+  \]
+  The left vertical map is just the identity, and the right vertical
+  map is by hypothesis an isomorphism. We conclude by applying the
+  $5$-lemma.
 \end{proof}
 
-\begin{proposition}
-  \label{pdiv-algcl}
-  Any $p$-divisible group $\lG$ over an algebraically closed field $K$
-  satisfies the equivalent conditions of \cref{pdiv-connet-split}.
-\end{proposition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Splitting the connected-\'etale sequence}
 \label{pdiv-split}
 
 In this subsection we construct the universal extension of a ring over
-which a given $p$-divisible group splits as the product of its
+which a given $p$-divisible group splits as the direct sum of its
 infinitesimal part and a constant \'etale part. We essentially follow
 Stapleton \cite[\S2.8]{stapleton-tgcm}, who essentially follows
 Hopkins-Kuhn-Ravenel \cite[\S\S6.1--6.2]{hkr-char}. However, rather
 than restrict to the specific example which will be relevant to
-character theory, here we distill this part of the argument which
+character theory, here we isolate this part of the argument which
 applies more generally; I think this generality actually clarifies the
 exposition slightly.
 
 \begin{notation}
   \label{pdiv-split-ntn}
   Throughout this subsection we let $\lG$ be a $p$-divisible group of
-  height $n$ over a ring $A$. Assume that we have a connected-\'etale
-  sequence
+  height $n$ over a ring $A$. Assume that we have a short exact
+  sequence of $p$-divisible groups
   \[
   0 \to \lG_\inf \to \lG \to \lG_\et \to 0
   \]
-  where $\lG_\inf$ has height $t$ and therefore $\lG_\et$ has height
+  where $\lG_\inf$ has height $t$ and $\lG_\et$ is \'etale of height
   $n-t$.
 
   Let $\Lambda \ce (\lQ_p/\lZ_p)^{n-t}$.\footnote{Warning: our
     $\Lambda$ is denoted $\Lambda^\vee$ in
     \cite{hkr-char,stapleton-tgcm}, and thus our $\Lambda^\vee$
-    (appearing in \cref{pdiv-chromex}) is their $\Lambda$.} For
-  $k \in \lZ_{\ge 0}$ we may choose generators
+    (appearing in \cref{pdiv-chromex}) is their $\Lambda$.} For all
+  $k \ge 0$ we may choose generators
   $\lambda^k_1, \ldots, \lambda^k_{n-t}$ of
   $\Lambda[p^k] \iso (\lZ/p^k)^{n-t}$ which are coherent in the sense
   that $\lambda^k_i = p\lambda^{k+1}_i$ for $1 \le i \le n-t$.
@@ -153,18 +209,18 @@ exposition slightly.
 
 \begin{lemma}
   \label{pdiv-split-hom}
-  For $k \in \lZ_{\ge 0}$, the functor $\Alg_A \to \Set$ assigning to
-  an $A$-algebra $B$ the set $\Hom_B(\Lambda[p^k]_B, \lG[p^k]_B)$ of
+  For $k \ge 0$, the functor $\Alg_A \to \Set$ assigning to an
+  $A$-algebra $B$ the set $\Hom_B(\Lambda[p^k]_B, \lG[p^k]_B)$ of
   morphisms of group schemes $\Lambda[p^k]_B \to \lG[p^k]_B$ over $B$
   is corepresented by the $A$-algebra
   \[
-  A_{t,k} \ce (\cO_{\lG[p^k]})^{\otimes(n-t)} \ce \cO_{\lG[p^k]}
+  C_k \ce (\cO_{\lG[p^k]})^{\otimes(n-t)} \ce \cO_{\lG[p^k]}
   \otimes_A \cdots \otimes_A \cO_{\lG[p^k]};
   \]
   i.e. any morphism $\Lambda[p^k]_B \to \lG[p^k]_B$ is the base change
   of a universal morphism
-  $\phi_\univ \c \Lambda[p^k]_{A_{t,k}} \to \lG[p^k]_{A_{t,k}}$ in a
-  unique map $A_{t,k} \to B$.
+  $\phi_\univ \c \Lambda[p^k]_{C_k} \to \lG[p^k]_{C_k}$ in a
+  unique map $C_k \to B$.
 
   The natural transformation
   \[
@@ -172,39 +228,41 @@ exposition slightly.
   \Hom_B(\Lambda[p^k]_B,\lG[p^k]_B)
   \]
   given by restriction corresponds via the Yoneda lemma to the
-  morphism $A_{t,k} \to A_{t,k+1}$ induced by the
-  multiplication-by-$p$ map $\lG[p^{k+1}] \to \lG[p^k]$.
+  morphism $C_k \to C_{k+1}$ induced by the multiplication-by-$p$ map
+  $\lG[p^{k+1}] \to \lG[p^k]$.
 \end{lemma}
 
 \begin{proof}
   Let $B \in \Alg_A$. Our chosen generators
   $\lambda^k_1, \ldots, \lambda^k_{n-t}$ of $\Lambda[p^k]$ determine
-  an isomorphism $\Lambda[p^k] \iso (\lZ/p^k)^{n-t}$, so specifying a
-  morphism of group schemes $\Lambda[p^k]_B \to \lG[p^k]_B$ over $B$
-  is equivalent to specifying $n-t$ morphisms of schemes
-  $\Spec(B) \to \lG[p^k]_B$ over $B$, which are equivalent to
-  morphisms $\Spec(B) \to \lG[p^k]$ over $A$. Since $\lG[p^k]$ is
-  affine, this is equivalent to specifying $n-t$ morphisms of
-  $A$-algebras $\cO_{\lG[p^k]} \to B$, which is equivalent to
-  specifying a single morphism of $A$-algebras
+  an isomorphism $\Lambda[p^k] \iso (\lZ/p^k)^{n-t}$. Therefore
+  restricting to the factors in the constant group scheme
+  \[
+  \Lambda[p^k]_B \iso \coprod_{\lambda \in \Lambda[p^k]} \Spec(B)
+  \]
+  indexed by these generators determines a bijection between morphisms
+  of group schemes $\Lambda[p^k]_B \to \lG[p^k]_B$ over $B$ and
+  $(n-t)$-tuples of morphisms of schemes $\Spec(B) \to \lG[p^k]_B$
+  over $B$. The latter are equivalent to morphisms
+  $\Spec(B) \to \lG[p^k]$ over $A$. Since $\lG[p^k]$ is affine, this
+  equivalent to specifying a morphism of $A$-algebras
   $(\cO_{\lG[p^k]})^{\otimes(n-t)} \to B$. We have now described a
   bijection
-  $\Hom_B(\Lambda[p^k]_B, \lG[p^k]_B) \iso \Hom_{\Alg_A}(A_{t,k},B)$
-  which clearly is natural in $B$, proving the claim. Note that the
+  $\Hom_B(\Lambda[p^k]_B, \lG[p^k]_B) \iso \Hom_{\Alg_A}(C_k,B)$ which
+  clearly is natural in $B$, proving the claim. Note that the
   universal morphism
-  $\phi_\univ \c \Lambda[p^k]_{A_{t,k}} \to \lG[p^k]_{A_{t,k}}$
-  corresponds to the identity $\id \c A_{t,k} \to A_{t,k}$ under this
-  bijection.
+  $\phi_\univ \c \Lambda[p^k]_{C_k} \to \lG[p^k]_{C_k}$ corresponds to
+  the identity $\id \c C_k \to C_k$ under this bijection.
 
-  The final statement about the induced map $A_{t,k} \to A_{t,k+1}$ is
+  The final statement about the induced map $C_k \to C_{k+1}$ is
   immediate from the coherence of the generators $\lambda^k_1, \ldots,
   \lambda^k_{n-t}$ fixed in \cref{pdiv-split-ntn}.
 \end{proof}
 
 \begin{lemma}
   \label{pdiv-split-iso}
-  For $k \in \lZ_{\ge 0}$, the functor $\Alg_A \to \Set$ assigning to
-  an $A$-algebra $B$ the subset
+  For $k \ge 0$, the functor $\Alg_A \to \Set$ assigning to an
+  $A$-algebra $B$ the subset
   $\Iso_B(\Lambda[p^k]_B, \lG_\et[p^k]_B) \subseteq
   \Hom_B(\Lambda[p^k]_B, \lG[p^k]_B)$
   consisting of morphisms $\Lambda[p^k]_B \to \lG[p^k]_B$ for which
@@ -213,9 +271,8 @@ exposition slightly.
   \Lambda[p^k]_B \to \lG[p^k]_B \to \lG_\et[p^k]_B
   \]
   is an isomorphism is corepresented by the localization
-  $A_{t,k}[\Delta_{t,k}^{-1}]$ for some element
-  $\Delta_{t,k} \in A_{t,k}$. More precisely we have a commutative
-  diagram of natural transformations
+  $C_k[\Delta_k^{-1}]$, for some element $\Delta_k \in C_k$. More
+  precisely, we have a commutative diagram of natural transformations
   \begin{equation}
     \label{pdiv-split-iso-dgm}
     \begin{tikzcd}
@@ -223,64 +280,74 @@ exposition slightly.
       \ar[d, "\sim"{rotate=90, yshift=-4pt, xshift=-4pt}] &
       \Hom_B(\Lambda[p^k]_B, \lG[p^k]_B)
       \ar[d, "\sim"{rotate=90, yshift=-4pt, xshift=-4pt}] \\
-      \Hom_A(A_{t,k}[\Delta^{-1}_{t,k}],B) \ar[r, hook] &
-      \Hom_A(A_{t,k},B),
+      \Hom_A(C_k[\Delta^{-1}_{t,k}],B) \ar[r, hook] &
+      \Hom_A(C_k,B),
     \end{tikzcd}
   \end{equation}
   where the bottom map is the canonical inclusion and the right map is
   the isomorphism found in \cref{pdiv-split-hom}. Finally,
-  $A_{t,k}[\Delta^{-1}_{t,k}]$ is faithfully flat over $A$.
+  $C_k[\Delta^{-1}_{t,k}]$ is faithfully flat over $A$.
 \end{lemma}
 
 \begin{proof}
   Suppose we have a morphism $\phi \c \Lambda[p^k]_B \to \lG[p^k]_B$.
   By \cref{pdiv-split-hom} this determines a unique map
-  $\alpha \c A_{t,k} \to B$ in which $\phi$ is the base change of
+  $\alpha \c C_k \to B$ in which $\phi$ is the base change of
   $\phi_\univ$. Consider the composite
   \begin{equation}
     \label{pdiv-split-iso-geo}
-    \Lambda[p^k]_{A_{t,k}} \lblto{\phi_\univ}
-    \lG[p^k]_{A_{t,k}} \to
-    \lG_\et[p^k]_{A_{t,k}},
+    \Lambda[p^k]_{C_k} \lblto{\phi_\univ}
+    \lG[p^k]_{C_k} \to
+    \lG_\et[p^k]_{C_k},
   \end{equation}
-  which corresponds to a morphism of $A_{t,k}$-algebras
+  which corresponds to a morphism of $C_k$-algebras
   \begin{equation}
     \label{pdiv-split-iso-alg}
-    \cO_{\lG_\et[p^k]_{A_{t,k}}} \to \cO_{\Lambda[p^k]_{A_{t,k}}}.
+    \cO_{\lG_\et[p^k]_{C_k}} \to \cO_{\Lambda[p^k]_{C_k}}.
   \end{equation}
   By hypothesis and definition, both algebras are finite free of the
-  same rank, so we may consider its determinant
-  $\Delta_{t,k} \in A_{t,k}$. Now, everything in sight is affine, so
-  the base change $\Lambda[p^k]_B \to \lG_\et[p^k]_B$ of
-  \cref{pdiv-split-iso-geo} in $\alpha$, which by definition of
-  $\alpha$ is the composite
+  same rank, so we may consider its determinant $\Delta_k \in C_k$.
+  Now, everything in sight is affine, so the base change
+  $\Lambda[p^k]_B \to \lG_\et[p^k]_B$ of \cref{pdiv-split-iso-geo} in
+  $\alpha$, which by definition of $\alpha$ is the composite
   \[
   \Lambda[p^k]_B \lblto{\phi} \lG[p^k]_B \to \lG_\et[p^k]_B,
   \]
   is an isomorphism if and only if the base change
   $\cO_{\lG_\et[p^k]_B} \to \cO_{\Lambda[p^k]_B}$ of
-  \cref{pdiv-split-iso-alg} in $\alpha$ is an isomorphism. But
-  of course this is true if and only if $\alpha(\Delta_{t,k})$ is a
-  unit in $B$, i.e. if $\alpha$ factors through the localization
-  $A_{t,k}[\Delta_{t,k}^{-1}]$. This proves the existence and
-  commutativity of the diagram \cref{pdiv-split-iso-dgm}.
+  \cref{pdiv-split-iso-alg} in $\alpha$ is an isomorphism. But of
+  course this is true if and only if $\alpha(\Delta_k)$ is a unit in
+  $B$, i.e. if $\alpha$ factors through the localization
+  $C_k[\Delta_k^{-1}]$. This proves the existence and commutativity of
+  the diagram \cref{pdiv-split-iso-dgm}.
 
   Finally we prove faithful flatness. Since $\cO_{\lG[p^k]}$ is finite
-  free over $A$, so is $A_{t,k}$. And localization is flat so this
-  implies $A_{t,k}[\Delta_{t,k}^{-1}]$ is flat over $A$. So to prove
-  faithful flatness we just need to show that
-  $\Spec(A_{t,k}[\Delta_{t,k}^{-1}]) \to \Spec(A)$ is surjective. Let
-  $\kp \in \Spec(A)$; let $K$ be the algebraic closure of the fraction
-  field of the domain $A/\kp$, so we have a map $\beta \c A \to K$
-  with kernel $\kp$. By \cref{pdiv-algcl} there is a map
-  $\Lambda[p^k]_K \to \lG[p^k]_K$ such that the composite
-  $\Lambda[p^k]_K \to \lG[p^k]_K \to \lG_\et[p^k]_K$ is an
-  isomorphism. So by the above, $\beta$ factors through a map
-  $\gamma \c A_{t,k}[\Delta_{t,k}^{-1}] \to K$. If we set
-  $\kq \ce \ker(\gamma) \in \Spec(A_{t,k}[\Delta_{t,k}^{-1}])$ then
-  $\kq$ restricts to $\kp$ in $\Spec(A)$. Since $\kp$ was arbitrary,
-  we have the desired surjectivity.
+  free over $A$, so is $C_k$. And localization is flat so this implies
+  $C_k[\Delta_k^{-1}]$ is flat over $A$. So to prove faithful flatness
+  we just need to show that $\Spec(C_k[\Delta_k^{-1}]) \to \Spec(A)$
+  is surjective. Let $\kp \in \Spec(A)$; let $K$ be the algebraic
+  closure of the fraction field of the domain $A/\kp$, so we have a
+  map $\beta \c A \to K$ with kernel $\kp$. Since $\lG_\et$ is
+  \'etale, it must be constant when base-changed to $K$. So by
+  \cref{pdiv-constant} there must be an isomorphism
+  $\Lambda[p^k]_K \isoto \lG_\et[p^k]_K$. Since $K$ is algebraically
+  closed, there is necessarily a map $\Lambda[p^k]_K \to \lG[p^k]_K$
+  lifting this isomorphism.\footnote{This is a fact which I read in
+    \cite[p. 32]{demazure-pdiv}, and which is proved in \cite[III,
+    3.7.6]{demazure-groupes}.} So by the above, $\beta$ must factor
+  through a map $\gamma \c C_k[\Delta_k^{-1}] \to K$. If we set
+  $\kq \ce \ker(\gamma) \in \Spec(C_k[\Delta_k^{-1}])$ then $\kq$
+  restricts to $\kp$ in $\Spec(A)$.  Since $\kp$ was arbitrary, we
+  have the desired surjectivity.
 \end{proof}
+
+\begin{remark}
+  \label{pdiv-localmaps}
+  By the commutativity of \cref{pdiv-split-iso-dgm}, the maps
+  $C_k \to C_{k+1}$ defined in \cref{pdiv-split-hom} also induce maps
+  $C_k[\Delta_k^{-1}] \to C_{k+1}[\Delta_{k+1}^{-1}]$ on the
+  localizations defined in \cref{pdiv-split-iso}.
+\end{remark}
 
 \begin{proposition}
   \label{pdiv-split-main}
@@ -294,8 +361,8 @@ exposition slightly.
   \Lambda_B \to \lG_B \to (\lG_\et)_B
   \]
   is an isomorphism is corepresented by
-  $A_t \ce \colim_k A_{t,k}[\Delta_{t,k}^{-1}]$, where
-  $A_{t,k}, \Delta_{t,k}$ as in \cref{pdiv-split-hom,pdiv-split-iso}.
+  $C \ce \colim_k C_k[\Delta_k^{-1}]$, where $C_k$ and $\Delta_k$ are
+  as in \cref{pdiv-split-hom,pdiv-split-iso}.
 \end{proposition}
 
 \begin{proof}
@@ -303,8 +370,8 @@ exposition slightly.
   \begin{align*}
     \Iso_B(\Lambda_B, (\lG_\et)_B) &\iso
     \lim_k \Iso_B(\Lambda[p^k]_B, \lG_\et[p^k]_B) \\ &\iso
-    \lim_k \Hom_A(A_{t,k}[\Delta_{t,k}^{-1}], B) \\ &\iso
-    \Hom_A(\colim_k A_{t,k}[\Delta_{t,k}^{-1}], B),
+    \lim_k \Hom_A(C_k[\Delta_k^{-1}], B) \\ &\iso
+    \Hom_A(\colim_k C_k[\Delta_k^{-1}], B),
   \end{align*}
   as desired.
 \end{proof}
@@ -313,3 +380,360 @@ exposition slightly.
 
 \subsection{Chromatic examples}
 \label{pdiv-chromex}
+
+We now discuss the $p$-divisible groups associated to Morava E-theory
+and its $K(t)$-localization. Some proofs and computations in this
+section are omitted/cited.\footnote{These omissions are unfortunate,
+  but this thesis has a due date, which is just as unfortunate.}
+
+\begin{nothing}
+  \label{pdiv-ethy}
+  Let $E$ be the Morava E-theory associated to a formal group $\lG_0$
+  of height $n$ over a perfect field $\kappa$ of characteristic
+  $p$. As discussed in \cref{chrom-moravathy}, $E$ is even periodic
+  with coefficient ring given by
+  \[
+  E^0 \iso \rW(\kappa) \ldb v_1, \ldots, v_{n-1} \rdb.
+  \]
+  As shown in \cite{rezk-hopkinsmiller}, the formal group law (over
+  $E^0$) associated to $E$ can be taken such that its $p$-series
+  satisfies the following: for $0 \le t < n$,
+  \begin{equation}
+    \label{pdiv-epseries-t}
+    [p](x) \equiv v_tx^{p^t} \mod (I_t, x^{p^t+1}),
+  \end{equation}
+  where $I_t$ denotes the ideal $(p,v_1,\ldots,v_{t-1})$. For $t =
+  n$, the assumption that $E$ is of height $n$ implies that
+  \begin{equation}
+    \label{pdiv-epseries-n}
+    [p](x) \equiv v_nx^{p^n} \mod (I_n, t^{p^n+1}),
+  \end{equation}
+  where $v_n \in E^0$ is a unit, and now $I_n$ is the maximal ideal
+  $(p,v_1,\ldots,v_{n-1})$ in the local ring $E^0$. Since $E^0$ is
+  complete with respect to $I_n$, \cref{pdiv-formal} implies that the
+  $p$-power torsion of the formal group of $E$ (the universal
+  deformation of $\lG_0$) is a $p$-divisible group of height $n$. We
+  will denote this $p$-divisible group by $\lG_E$.
+\end{nothing}
+
+\begin{nothing}
+  \label{pdiv-ktlocal}
+  Now, fix $0 \le t < n$. We consider the spectrum
+  $L_t \ce L_{K(t)}E(n)$, which has the structure of an
+  $\rE_\infty$-ring because $E$ does. One can show that $L_t$ is also
+  an even periodic spectrum whose coefficient ring is obtained from
+  $E^0$ by inverting $v_t$ and then completing with respect to the
+  ideal $I_t$; that is,
+  \[
+  L_t^0 \iso \rW(\kappa) \ldb v_1, \ldots, v_{n-1} \rdb
+  [v_t^{-1}]_{I_t},
+  \]
+  and the localization map $E \to L_t$ induces the canonical map of
+  coefficient rings $E^0 \to L_t^0$. We let $I_t$ denote the ideal
+  $(p,v_1,\ldots,v_{t-1})$ in $L_t^0$ as well (which should not be too
+  confusing). The formal group law associated to the spectrum $L_t$ is
+  obtained simply by applying the canonical map $E^0 \to L_t^0$ to the
+  coefficients of the formal group law associated to $E$. In
+  particular, the congruence \cref{pdiv-epseries-t} still holds for
+  the formal group law of $L_t$. Since $v_t$ is invertible in $L_t^0$
+  and $L_t^0$ is complete with respect to $I_t$, \cref{pdiv-formal}
+  implies that the $p$-power torsion of the formal group of $L_t$ is a
+  $p$-divisible group of height $t$. We will denote this $p$-divisible
+  group by $\lG_{L_t}$.
+\end{nothing}
+
+\begin{remark}
+  \label{pdiv-noqtor}
+  Maybe it seems abusive to denote the $p$-divisible groups above by
+  $\lG_E$ and $\lG_{L_t}$, since it looks like they denote the entire
+  formal group. One reason this isn't so bad is that \emph{all} the
+  torsion in these formal groups is necessarily $p$-power torsion. As
+  mentioned earlier, for $s > 0$ the $s$-series of a formal group law
+  is always of the form $[s](t) = st + O(t^2)$. If $s$ is coprime to
+  $p$, then it is invertible in the rings $E^0$ and $L_t^0$, so $[s]$
+  is an invertible power series, and hence the formal group can have
+  no $s$-torsion.
+\end{remark}
+
+The next result states that torsion of the formal groups associated to
+$E$ and $L_t$, i.e. the $p$-divisible groups $\lG_E$ and $\lG_{L_t}$,
+can be expressed purely in terms of cohomology.
+
+\begin{proposition}[{\cite[\S5.4]{hkr-char}}]
+  Let $F$ denote either the spectrum $E$ or $L_t$.
+  \label{pdiv-cohom}
+  \begin{enumerate}
+  \item \label{pdiv-cohom-m} Let $m > 0$. Then
+    \[
+    F^*(\rB\lZ/m) \iso F^* \ldb t \rdb / ([m](t)),
+    \]
+    where $[m]$ denotes the $m$-series of the formal group law
+    associated to $F$. In particular, for $m = p^k$ we have
+    $F^0(\rB\lZ/p^k) \iso \cO_{\lG_F[p^k]}$,
+    i.e. $\Spec(F^0(\rB\lZ/p^k)) \iso \lG_F[p^k]$.
+  \item \label{pdiv-cohom-pk} Moreover, if $m = sp^k$ with $s$ coprime
+    to $p$, then the map
+    \[
+    F^* \ldb t \rdb / ([m](t)) \iso F^*(\rB\lZ/m) \to
+    F^*(\rB\lZ/p^k) \iso F^* \ldb t \rdb / ([p^k](t))
+    \]
+    is an isomorphism.
+  \item \label{pdiv-cohom-gen} Most generally, if $A$ is a finite
+    abelian group whose subgroup of $p$-torsion is given by
+    $A[p^\infty] \iso \bigoplus_i \lZ/p^{k_i}$, then
+    \[
+    F^*(\rB A) \iso F^*(\rB A[p^\infty]) \iso
+    \bigotimes_i F^*(\rB\lZ/p^{k_i}),
+    \]
+    implying $F^0(\rB A) \iso \bigotimes_i \cO_{\lG_F[p^{k_i}]}$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Idea of proof]
+  What \cref{pdiv-cohom-m} says intuitively is that the fact that
+  $\lZ/m$ is the $m$-torsion in $\rS^1$ is still visible after
+  applying $F$-cohomology, most clearly when the cohomology rings are
+  viewed algebro-geometrically. More precisely, the exact sequence
+  $\lZ/m \to \rS^1 \to \rS^1$ gives us a fiber sequence
+  $\rB\lZ/m \to \rB\rS^1 \to \rB\rS^1$, and the above result tells us
+  that this sequence identifies $\Spec(F^*(\rB\lZ/m))$ with the
+  $m$-torsion in the formal group
+  $\Spf(F^*(\rB\rS^1)) \iso \Spf(F^*(\CP^\infty)) \iso \Spf(F^* \ldb t
+  \rdb)$ associated to $F$.
+
+  Then \cref{pdiv-cohom-pk} just follows from the fact that the formal
+  groups we are considering only have $p$-power torsion, as discussed
+  in \cref{pdiv-noqtor}. Finally, \cref{pdiv-cohom-gen} follows from a
+  Kunneth isomorphism, which exists because we know the rings
+  $\cO_{\lG_F[p^k]}$ are finite free over $F^0$.
+\end{proof}
+
+\begin{nothing}
+  \label{pdiv-eltmap}
+  The map of ring spectra $E \to L_t$ gives natural maps in cohomology
+  $E^0(\lB\lZ/p^k) \to L_t(\lB\lZ/p^k)$ for each $k$, which induce
+  maps
+  \[
+  L_t \otimes_{E^0} E^0(\lB\lZ/p^k) \to L_t(\lB\lZ/p^k).
+  \]
+  Thus, if we let $\lG \ce (\lG_E)_{L_t^0}$ be the base change of
+  $\lG_E$ along $E^0 \to L_t^0$, \cref{pdiv-cohom} implies that these
+  maps determine a map of $p$-divisible groups
+  $i \c \lG_{L_t} \to \lG$ over $L_t^0$.
+\end{nothing}
+
+\begin{proposition}[{\cite[\S2.1]{stapleton-tgcm}}]
+  \label{pdiv-eltexact}
+  The map $i \c \lG_{L_t} \to \lG$ is injective with \'etale
+  quotient. That is, we have an exact sequence
+  \[
+  0 \to \lG_{L_t} \lblto{i} \lG \to \lG_\et \to 0
+  \]
+  of $p$-divisible groups over $L_t^0$, with $\lG_\et$ \'etale of
+  height $n-t$.
+\end{proposition}
+
+\begin{nothing}
+  \label{pdiv-eltsplit}
+  We can now apply the general analysis carried out in
+  \cref{pdiv-split} to the exact sequence given by
+  \cref{pdiv-eltexact}. Let
+  $C_{t,k}^0 \ce (\cO_{\lG[p^k]})^{\otimes(n-t)}$, and
+  $\Delta_{t,k} \in C_{t,k}^0$ the determinant inverted in
+  \cref{pdiv-split-iso}. Then \cref{pdiv-split-main} tells us that
+  $\lG$ splits into a direct sum of $\lG_{L_t}$ and the constant group
+  $\Lambda \ce (\lQ_p/\lZ_p)^{n-t}$ over
+  $C_t^0 \ce \colim_k C_{t,k}^0[\Delta_{t,k}^{-1}]$. More precisely,
+  there is a canonical isomorphism of $p$-divisible groups
+  \begin{equation}
+    \label{pdiv-eltsplit-geo}
+    (\lG_{L_t})_{C_t^0} \oplus \Lambda_{C_t^0} \isoto \lG_{C_t^0}.
+  \end{equation}
+  Algebraically this is an isomorphism of Hopf algebras
+  \[
+  C_t^0 \otimes_{L_t^0} \cO_{\lG[p^k]} \isoto
+  \l(C_t^0 \otimes_{L_t^0} \cO_{\lG_{L_t}[p^k]}) \otimes_{C_t^0}
+  \cO_{\Lambda[p^k]_{C_t^0}} \r)
+  \]
+  for all $k$. Let's unwrap a few definitions:
+  \begin{itemize}
+  \item
+    $\cO_{\lG[p^k]} \iso L_t^0 \otimes_{E^0} \cO_{\lG_E[p^k]} \iso
+    L_t^0 \otimes_{E^0} E^0(\rB\lZ/p^k)$,
+    the second isomorphism coming from \cref{pdiv-cohom};
+  \item $\cO_{\lG_{L_t}[p^k]} \iso L_t^0(\rB\lZ/p^k)$, again by
+    \cref{pdiv-cohom};
+  \item $\cO_{\Lambda[p^k]_{C_t^0}} \iso \bigoplus_{\lambda \in
+      \Lambda[p^k]} C_t^0$.
+  \end{itemize}
+  So we may rewrite the above isomorphism of Hopf algebras as
+  \begin{align}
+    \label{pdiv-eltsplit-alg}
+    C_t^0 \otimes_{E^0} E^0(\rB\lZ/p^k) &\isoto
+    \l( C_t^0 \otimes_{L_t^0} L_t^0(\rB \lZ/p^k) \r) \otimes_{C_t^0}
+    \bigoplus_{\lambda \in \Lambda[p^k]} C_t^0 \\ &\iso
+    C_t^0 \otimes_{L_t^0} \bigoplus_{\lambda \in \Lambda[p^k]}
+    L_t^0(\rB\lZ/p^k).
+  \end{align}
+  Note finally that by \cref{pdiv-cohom}, there is an isomorphism
+  $C_{t,k}^0 \iso L_t^0(\rB \Lambda^\dual_k)$, where $\Lambda^\dual_k
+  \ce (\lZ/p^k)^{n-t}$. The maps $C_{t,k}^0 \to C_{t,k+1}^0$ in the
+  colimit defining $C_t$ are then just induced by the canonical maps
+  $\Lambda^\dual_{k+1} \to \Lambda^\dual_k$.
+
+  Let's now understand the above isomorphisms in terms of
+  cohomology. We have two factors:
+  \begin{itemize}
+  \item The first is given by the map
+    $(\lG_{L_t})_{C_t^0} \to \lG_{C_t^0}$ in \cref{pdiv-eltsplit-geo},
+    which algebraically is given by the map
+    $C_t^0 \otimes_{E^0} E^0(\rB\lZ/p^k) \to C_t^0 \otimes_{L_t^0}
+    L_t^0(\rB\lZ/p^k)$
+    in \cref{pdiv-eltsplit-alg}. This is just the base change of our
+    inclusion $\lG_{L_t} \inj \lG$, which by definition is
+    algebraically just induced by the canonical map
+    $E^0(\rB\lZ/p^k) \to L_t^0(\rB\lZ/p^k)$.
+  \item The second is given by the map
+    $\Lambda_{C_t^0} \to \lG_{C_t^0}$ in \cref{pdiv-eltsplit-geo},
+    which algebraically is given by the map
+    $C_t^0 \otimes_{E^0} E^0(\rB\lZ/p^k) \to \bigoplus_{\lambda \in
+      \Lambda[p^k]} C_t^0$
+    in \cref{pdiv-eltsplit-alg}. This is determined by maps
+    $\phi_\lambda \c E^0(\rB\lZ/p^k) \to C_t^0$ for each
+    $\lambda \in \Lambda[p^k]$. The definition of $\phi_\lambda$ comes
+    from the definition of $C_t^0$. We had a sequence of fixed
+    generators
+    $\lambda^k_1, \ldots, \lambda^k_{n-t} \in \Lambda[p^k]$. So first
+    suppose $\lambda = \lambda^k_i$. Then $\phi_\lambda$ is the
+    composition
+    \[
+    E^0(\rB\lZ/p^k) \to
+    L_t^0(\rB\lZ/p^k) \lblto{\psi_\lambda}
+    L_t^0(\rB\lZ/p^k)^{\otimes(n-t)} \iso C_{t,k} \to
+    C_{t,k}[\Delta_{t,k}^{-1}] \to C_t^0
+    \]
+    where $\psi_\lambda$ is the inclusion of the $i$-th factor of the
+    tensor product. More generally, if
+    $\lambda = \sum_i a_i \lambda^k_i$ then $\psi_\lambda$ will be the
+    corresponding linear combination of inclusions
+    $\sum_i a_i \psi_{\lambda^k_i}$, where now summation refers to the
+    formal group operation on
+    $L_t^0(\rB\lZ/p^k) \iso \cO_{\lG_{L_t}[p^k]}$. We can rephrase
+    this using our identification
+    \[
+    C_{t,k}^0 \iso
+    L_t^0(\rB\lZ/p^k)^{\otimes(n-t)} \iso
+    L_t^0(\rB\Lambda^\dual_k).
+    \]
+    Then $\psi_\lambda$ is simply induced by the homomorphism
+    $\Lambda^\dual_k \to \lZ/p^k$ which sends
+    $(x_1,\ldots,x_{n-t}) \mapsto \sum a_i x_i$.
+  \end{itemize}
+\end{nothing}
+
+Ok, that was was a fairly long block of algebra and
+isomorphism-chasing, but we can cleanly record (a slight
+generalization of) our conclusion as follows.
+
+\begin{proposition}
+  \label{pdiv-iso-cohom}
+  Let $A$ be a finite abelian group, and let $A[p^\infty] \subseteq A$
+  denote the subgroup of $p$-torsion. Since $A$ is finite, we can in
+  fact pick a finite $k$ for which $A[p^\infty] = A[p^k]$. Then to
+  each tuple $a = (a_1,\ldots,a_{n-t}) \in A[p^\infty]^{n-t}$ we can
+  associate the homomorphism
+  $\Lambda^\dual_k \iso (\lZ/p^k)^{n-t} \to A$ which sends
+  $(x_1,\ldots,x_{n-1}) \mapsto \sum_i a_ix_i$. This determines a map
+  \[
+  E^0(\rB A) \to
+  E^0(\rB\Lambda^\dual_k) \to
+  L_t^0(\rB\Lambda^\dual_k) \iso
+  C_{t,k}^0 \to
+  C_t^0,
+  \]
+  which is independent of our choice of $k$. These maps, along with
+  the canonical map $E^0(\rB A) \to L_t^0(\rB A)$, determine an
+  isomorphism
+  \begin{align}
+    \label{pdiv-iso-cohom-eqn}
+    C_t^0 \otimes_{E^0} E^0(\rB A) &\isoto
+    \l( C_t^0 \otimes_{L_t^0} L_t^0(\rB A) \r) \otimes_{C_t^0}
+    \bigoplus_{a \in A[p^\infty]^{n-t}} C_t^0 \\ &\iso
+    C_t^0 \otimes_{L_t^0} \bigoplus_{a \in A[p^\infty]^{n-t}}
+  L_t^0(\rB A), \nonumber
+  \end{align}
+  natural in $A$.
+\end{proposition}
+
+\begin{proof}
+  The naturality of the defined map is clear. To prove it is an
+  isomorphism we can pick an isomorphism
+  $A[p^\infty] \iso \bigoplus \lZ/p^{k_i}$, and using
+  \cref{pdiv-cohom} reduce to the case $A = \lZ/p^k$. Then the claim
+  is precisely what was shown above in \cref{pdiv-eltsplit}.
+\end{proof}
+
+We now show that we can lift this result from cohomology to an
+equivalence at the level of $\rE_\infty$-ring spectra.
+
+\begin{construction}
+  \label{pdiv-einftyct}
+  For each $k$ we may define an $\rE_\infty$-ring
+  \[
+  C_{t,k} \ce L_t(\rB\Lambda^\dual_k),
+  \]
+  the function spectrum whose homotopy groups give the cohomology ring
+  $L_t^*(\rB\Lambda^\dual_k)$. In particular, its $\pi_0$ agrees with
+  what we have already been calling $C_{t,k}^0$. It is then possible
+  to construct an $\rE_\infty$-ring $C_{t,k}[\Delta_{t,k}^{-1}]$ whose
+  $\pi_0$ is precisely $C_{t,k}^0[\Delta_{t,k}^{-1}]$. Taking the
+  colimit over the canonical maps
+  $\rB\Lambda^\dual_{k+1} \to \rB\Lambda^\dual_k$, we may define
+  \[
+  C_t \ce \colim_k C_{t,k}[\Delta_{t,k}^{-1}]
+  \]
+  to obtain an $\rE_\infty$-ring whose $\pi_0$ is precisely $C_t^0$
+  from above.
+\end{construction}
+
+\begin{lemma}
+  \label{pdiv-einfty-flat}
+  The $\rE_\infty$-ring $C_t$ is even periodic, and the
+  $\rE_\infty$-ring maps $E \to L_t \to C_t$ are flat.
+\end{lemma}
+
+\begin{proof}
+  To see that $C_t$ is even periodic it suffices to show that each
+  $C_{t,k}$ is even periodic, which is immediate from the computation
+  \cref{pdiv-cohom} of $L_t^*(\rB\Lambda^\dual_k)$. Since $E$ and
+  $L_t$ are also even periodic, it suffices to check flatness in
+  $\pi_0$. But this we know already: $L_t^0$ is obtained by from $E^0$
+  by localization and then completion (of a noetherian ring), hence
+  flat; and $C_t^0$ is flat over $L_t^0$ since each $C_{t,k}^0$ is
+  (faithfully) flat over $L_t^0$, as proved in \cref{pdiv-split-iso}.
+\end{proof}
+
+\begin{proposition}
+  \label{pdiv-main}
+  The isomorphism \cref{pdiv-iso-cohom-eqn} can be lifted from $\pi_0$
+  to an equivalence of $\rE_\infty$-rings
+  \[
+  C_t \otimes_E E(\rB A) \iso C_t \otimes_{L_t} \bigoplus_{a \in
+    A[p^\infty]} L_t(\rB A),
+  \]
+  natural in $A$.
+\end{proposition}
+
+\begin{proof}
+  First note that $\pi_0$ of the left- and right-hand sides actually
+  recover the left- and right-hand sides of \cref{pdiv-eltsplit-alg}
+  because everything in sight is flat. Now, the isomorphism
+  \cref{pdiv-iso-cohom-eqn} was determined by maps in cohomology,
+  induced by maps between classifying spaces. Since the localization
+  map $E \to L_t$ is a map of $\rE_\infty$-rings, it is evident that
+  these maps can be lifted to $\rE_\infty$-maps on the associated
+  function spaces. So we automatically get the desired map of
+  $\rE_\infty$-rings, which by construction is an isomorphism on
+  $\pi_0$. But by \cref{pdiv-cohom,pdiv-einfty-flat} both sides are
+  even periodic, so it must then be an equivalence.
+\end{proof}

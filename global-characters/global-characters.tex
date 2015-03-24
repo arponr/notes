@@ -1,4 +1,5 @@
 \input{preamble}
+\input{thesis-preamble}
 \usepackage{tikz}
 \usepackage{varwidth}
 
@@ -8,17 +9,30 @@
 
 \begin{document}
 \maketitle
+\vspace{5ex}
 
+\setcounter{tocdepth}{1}
+\tableofcontents
+\newpage
+
+\input{ack}
+\newpage
+
+\newcommand{\Ab}{\mathrm{Ab}}
 \newcommand{\Alg}{\mathrm{Alg}}
 \newcommand{\Alo}{\mathrm{Alo}}
 \newcommand{\Aug}{\operatorname{Aug}}
 \newcommand{\Bor}{\mathrm{Bor}}
 \newcommand{\CW}{\mathrm{CW}}
 \newcommand{\et}{\mathrm{\acute{e}t}}
+\newcommand{\FG}{\mathrm{FG}}
+\newcommand{\FGL}{\mathrm{FGL}}
 \newcommand{\Glo}{\mathrm{Glo}}
 \newcommand{\Grp}{\mathrm{Grp}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \renewcommand{\inf}{\mathrm{inf}}
+\newcommand{\MU}{\mathrm{MU}}
+\newcommand{\Nil}{\operatorname{Nil}}
 \newcommand{\Orb}{\mathrm{Orb}}
 \newcommand{\pt}{\mathrm{pt}}
 \newcommand{\Set}{\mathrm{Set}}
@@ -35,6 +49,7 @@
 \input{abdesc}
 \input{char}
 
+\nocite{lurie-ambi}
 \bibliographystyle{amsplain}
 \bibliography{refs}
 
