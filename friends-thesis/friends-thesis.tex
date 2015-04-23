@@ -2,7 +2,7 @@
 
 \title{Comparing shapes}
 \author{Arpon Raksit}
-\date{April 24, 2015}
+\date{April 23, 2015}
 
 \begin{document}
 \maketitle
@@ -11,36 +11,42 @@
 
 \section{Introduction}
 
-I found (and continue to find) the topic of my thesis so interesting
-because it is a story which brings together characters from several
-different areas of mathematics, e.g. algebraic topology, algebraic
-geometry, and representation theory. But if I tried to start telling
-this story, you'd immediately (and reasonably) interrupt me to ask
-something like: Who are these characters? What are their motivations?
-Why should we care about them? Answering these questions and really
-appreciating the story necessitates a substantial prologue. My goal in
-this talk is just to relate part of this prologue, by giving an
-introduction (hopefully a somewhat intuitive one) to a fundamental
-idea in algebraic topology which plays a main role in my thesis, that
-of a \emph{cohomology theory}.
+\begin{nothing}[Abstract]
+  The goal of my thesis is to rigorously explain a certain theorem in
+  algebraic topology. But there is a great deal of language and
+  background with which one must familiarize oneself in order for to
+  appreciate this theorem, and there's no way I can relay this
+  background in twenty minutes. Thus my goal today is just to give
+  some kind of intuitive, heuristic sense of what this theorem is
+  about, and in particular introduce the sort of mathematical objects
+  it concerns. So please forgive me for the utter lack of precision
+  that pervades following.
+\end{nothing}
 
+\begin{nothing}[Acknowledgements]
+  I must thank my advisor Jacob Lurie for helping me enormously in
+  writing my thesis, and in preparing this talk. And I must thank my
+  parents, who happen to be here in Cambridge this weekend, for
+  helping me in everything else, and for happily sitting through this
+  talk.
+\end{nothing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Shapes/spaces}
+\section{Spaces}
 
 \begin{nothing}[Shapes]
   Maybe you've heard this a million times but let me say it anyway:
-  topology is about studying shapes (mathematically and
-  precisely). The basic problem is that of telling when two shapes are
-  the same or distinct. Of course I haven't even said what I mean by
-  \emph{shape}, or what it means for two shapes to be \emph{the same};
-  i.e. I haven't said anything.
+  topology is the (mathematical and precise) study of shapes. The
+  basic problem is that of telling when two shapes are the same or
+  distinct. Of course I haven't even said what I mean by \emph{shape},
+  or what it means for two shapes to be \emph{the same}; i.e. I
+  haven't said anything.
   
   Probably the most intuitive/familiar way to think about a shape is
   as a subset of euclidean space $\lR^n$, e.g. a circle in $\lR^2$
   (the blackboard) or some solid object in $\lR^3$, or maybe even
-  $\lR^4$ if we think about time.
+  $\lR^4$ if we take time into consideration.
 
   Then one guess for a notion of sameness for shapes would be
   set-theoretic equality, i.e. two shapes are the same if they
@@ -75,44 +81,188 @@ of a \emph{cohomology theory}.
 
   So for the remainder of the talk we'll switch terminology from
   \emph{shapes} to \emph{spaces}, which we'll think of more abstractly
-  as sets of points with some extra structure which tells us when we
-  should think of two points as \emph{close}. (Note we shouldn't speak
-  of actual distances, since these can change when we deform the
-  space.) If we have two spaces $X$ and $Y$, there is a notion of a
-  \emph{map(ping)} from $X$ to $Y$: it is a way of assigning to each
-  point of $X$ a point of $Y$, such that points that are close in $X$
-  are taken to points which are close in $Y$.
+  as sets of \emph{points} with some extra structure which tells us
+  when we should think of two points as \emph{close}. (Note we
+  shouldn't speak of actual distances, since these can change when we
+  deform the space.) If we have two spaces $X$ and $Y$, there is a
+  notion of a \emph{map(ping)} from $X$ to $Y$: it is a way of
+  assigning to each point of $X$ a point of $Y$, such that points that
+  are close in $X$ are taken to points which are close in $Y$.
 \end{nothing}
 
 \begin{nothing}[Homotopy]
   I've been vague about what exactly a space is, but if you allow me
-  leave that there I can tell you more precisely what I mean by
-  continuous deformation and sameness of spaces.
+  to leave that there I can tell you more precisely what I mean by
+  continuous deformation. Firstly, a deformation from a point $x$ to
+  another point $x'$ inside a space $X$ is a (continuous) \emph{path}
+  between them; letting $I$ denote the interval of real numbers $t$
+  between $0$ and $1$ (which one can think of as parameterizing time),
+  such a path is just a map $I \to X$ which to $0$ assigns $x$ and to
+  $1$ assigns $x'$.
+
+  We can bootstrap from this to define a deformation between two maps
+  $f,g \c X \doubto Y$. Letting $X \times I$ denote the space of pairs
+  $(x,t)$ for $x \in X$ and $t \in I$, it's a map
+  $h \c X \times I \to Y$ which when restricted to time $t=0$ is the
+  map $f \c X \to Y$ and when restricted to time $t=1$ is the map
+  $g \c X \to Y$. In other words, it consists of deformations of (i.e.
+  paths from) the point $f(x) \in Y$ to $g(x) \in Y$ varying
+  continuously in $x \in X$. Such a map $h$ is called a
+  \emph{homotopy} from $f$ to $g$, and when such a thing exists we say
+  $f$ and $g$ are \emph{homotopic}.
+
+  Finally, we can use this to say more precisely what it means for two
+  spaces to be the same. We say spaces $X$ and $Y$ are \emph{homotopy
+    equivalent} if there are maps $f \c X \to Y$ and $g \c Y \to X$
+  such that the composites $gf \c X \to X$ and $fg \c Y \to Y$ are
+  homotopic to the respective identity maps. If we demanded them to be
+  \emph{equal} to the identity maps, we would get a stricter notion,
+  requiring a bijection on the set of points. Allowing homotopy is
+  what allows continuous deformation in our notion of sameness.
 \end{nothing}
 
-\begin{nothing}[First invariants: $\pi_0,\pi_1$]
-  Hi
-\end{nothing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{nothing}[Higher homotopy groups]
+\section{Homology theories}
+
+\begin{nothing}[Invariants]
+  So now what should our strategy be in telling whether two spaces are
+  homotopy equivalent or not? Well, let's consider how we do this
+  intuitively in easy examples:
+  \begin{itemize}
+  \item Certainly the space consisting of two discrete points should
+    be different from the space consisting of just one
+    point. Similarly the spaces consisting of two copies of a circle
+    should be different from just one circle, or just one point. We
+    say this because the former have ``two parts'' and the latter have
+    ``one part''.
+  \item Then why is one circle different from one disk or one point?
+    Because a circle has a hole in the middle, and continuous
+    deformation can't create or destroy a hole.
+  \end{itemize}
   
+  We make this kind of reasoning precise by defining \emph{invariants}
+  of spaces. An invariant is some machine $M$ which takes as input a
+  space $X$ and outputs some kind of object $M(X)$, such that if $X$
+  and $Y$ are homotopy equivalent then $M(X)$ and $M(Y)$ are ``the
+  same''. That way, if we ever feed two spaces $X$ and $Y$ in to $M$
+  and get different outputs, we know $X$ and $Y$ cannot be homotopy
+  equivalent. For instance:
+  \begin{itemize}
+  \item In the first example above we considered the ``number of
+    parts'' in the given space. More generally our space might have an
+    infinite number of parts, so we can't just assign a number, but we
+    can define a machine $\pi_0$ which to a space $X$ associates the
+    ``set of parts'' $\pi_0(X)$ comprising $X$. This is fairly easy to
+    define rigorously: we define an equivalence relation on the points
+    of $X$ by saying two points are in the same component if there is
+    a path in $X$ connecting them; then the equivalence classes are
+    the ``parts'' we are looking for.
+  \item Making the second example rigorous is a bit more involved. But
+    the basic idea is the same: we want some machine $M$ such that
+    $M(X)$ is a measure of the number of holes in a space
+    $X$. Actually defining this machine led to the discovery of an
+    invariant known as \emph{singular homology}.
+  \end{itemize}
 \end{nothing}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Cohomology theories as invariants}
-
-\begin{nothing}[Criteria for computability]
+\begin{nothing}[Homology theories]
+  Singular homology is the first example of a fundamental notion in
+  algebraic topology, that of a \emph{homology theory}. A homology
+  theory is an invariant $E$ (more precisely a collection of
+  invariants $E_n$ indexed by the integers) satisfying certain
+  axioms. One can think of these axioms essentially as criteria that
+  give a recipe for actually computing these invariants, which is of
+  course important if they are actually going to be useful in
+  distinguishing spaces of interest. Let me just give you a flavor of
+  some these criteria:
+  \begin{itemize}
+  \item Linearity: $E$ takes values in abelian groups, i.e. each set
+    $E_n(X)$ is not only a set but a set which has a commutative,
+    associative, unital law of addition. The ability to add things is
+    often very useful in mathematics.
+  \item Functoriality: in addition to assigning abelian groups $E(X)$
+    to each space $X$, $E$ also assigns to every map of spaces
+    $f \c X \to Y$ a map/homomorphism of abelian groups
+    $E(f) \c E(X) \to E(Y)$. This should behave well with respect to
+    composition of maps and identity maps:
+    \begin{itemize}
+    \item $E$ assigns to the composition of two maps $f \c X \to Y$
+      and $g \c Y \to Z$ the composite of the maps
+      $E(f) \c E(X) \to E(Y)$ and $E(g) \c E(Y) \to E(Z)$;
+    \item $E$ assigns to the identity map $X \to X$ the identity map
+      $E(X) \to E(X)$.
+    \end{itemize}
+  \item Homotopy invariance: if $f,g \c X \doubto Y$ are homotopic,
+    then $E(f)$ and $E(g)$ are the same homomorphism. It's easy to
+    check that this together with functoriality imply that a homotopy
+    equivalence $f \c X \isoto Y$ induces an isomorphism
+    $E(f) \c E(X) \isoto E(Y)$, so that $E$ is indeed an invariant.
+  \item Locality: If we can break up our space $X$ into two pieces,
+    $X = A \cup B$, then $E(X)$ is (in some sense) determined by
+    $E(A)$, $E(B)$, and $E(A \cap B)$.
+  \end{itemize}
   
+
+  There's no time to define any examples, but be assured that there
+  are plenty! In fact, there are so many that studying them is really
+  quite fun! I can attest to this: the theorem explained in my thesis
+  is essentially a comparison of homology theories. Of course,
+  comparing invariants is always useful, especially if one is much
+  easier to compute and you want to know information about the other.
 \end{nothing}
 
+\begin{nothing}[Rationalizing]
+  I'll end by trying to say something a little more precise about what
+  kind of comparison the theorem in my thesis gives. There's a sense
+  in which the study of homology theories is a ``linearization'' of
+  the study of spaces; you might get a bit of a sense of this from the
+  linearity axiom above. That is, studying homology theories is like
+  studying spaces except where we've allowed ourselves to add. This
+  makes things easier (i.e. homology theories are fairly computable),
+  but as always in mathematics, we'd really like to make things even
+  easier (i.e. obtain even more computable invariants). One natural
+  way to do this is the following: adding and subtracting lets us do
+  things like multiply by $2$ or $3$ or $-5$ or $n \in \lZ$, but we
+  can't necessarily divide by $n$. It'd be nice if we could.
+
+  This is already a process we use in studying abelian groups. If we
+  have an abelian group $A$, we can adjoin elements $a/n$ for all
+  $a \in A$ and $n \in \lZ$ in a natural way and obtain its
+  \emph{rationalization} $A_\lQ$, a $\lQ$-vector space (i.e. an
+  abelian group in which we can divide by integers). For example, when
+  we do this to $\lZ$ we obtain the rational numbers $\lQ$.
+
+  It turns out there is indeed an analogous rationalization process
+  for homology theories: from a homology theory $E$ we get a homology
+  theory $E_\lQ$ which takes values in $\lQ$-vector spaces. But the
+  relationship between $E$ and $E_\lQ$ is not so simple in general:
+  one might na\"ively guess that we could just define
+  $(E_\lQ)_n(X) \ce E_n(X)_\lQ$, but this doesn't actually define a
+  homology theory, and indeed this is not what $E_\lQ$ is. I.e., the
+  processes of rationalization and evaluating the homology theory do
+  not commute. So although the rationalized theory $E_\lQ$ is indeed
+  often easier to compute and study, it's not clear how to use this to
+  obtain information about the original theory $E$.
+
+  The theorem in my thesis describes a situation in which we can
+  actually state a precise relationship between $E$ and $E_\lQ$. It
+  roughly says, that for certain naturally arising homology theories
+  $E$, though it is not true that $E_n(X)_\lQ$ is given by
+  $(E_\lQ)_n(X)$, it is given by $(E_\lQ)_n(Y)$ for some other space
+  $Y$. In fact we can explicitly say what $Y$ is in terms of $X$; it's
+  something like the ``space of maps'' from the $k$-fold torus
+  $\rT^k \ce \rS^1 \times \cdots \times \rS^1$ into $X$, for some
+  positive integer $k$ attached to $E$. Thus the theorem gives us a
+  way of obtaining a good amount of information about the homology
+  theory $E$ from its rationalization $E_\lQ$.
+\end{nothing}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Cohomology theories as topological objects}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\bibliographystyle{amsalpha}
-\bibliography{refs}
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
 
 \end{document}

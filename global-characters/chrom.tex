@@ -1,8 +1,6 @@
 \section{Chromatic homotopy theory}
 \label{chrom}
 
-\newcommand{\CP}{\lC\lP}
-
 In this section we lay out some of the fundamental ideas in chromatic
 homotopy theory, enough that we can somewhat safely speak about the
 generalizations of character theory alluded to in \cref{intro}. As
@@ -23,47 +21,46 @@ about this situation:
 \item Chern classes are natural: the Chern class $c_1(f^*L)$ of the
   pullback of a line bundle $L \to X$ in a map $f \c Y \to X$ is the
   pullback $f^*(c_1(L)) \in \rH^2(Y)$ of the Chern class of $L$.
-\item There is a universal line bundle: letting $\cO(1)$ denote the
+\item There is a universal line bundle: letting $\lL$ denote the
   tautological line bundle over the space $\CP^\infty \iso \rB\rU(1)$,
   there is a natural bijection between homotopy classes of maps
   $f \c X \to \CP^\infty$ and isomorphism classes of line bundles on
-  $X$, given by associating to such a map $f$ the pullback
-  $f^*(\cO(1))$ of the tautological bundle. That is, the functor
-  associating to a space $X$ the set of isomorphism classes of line
-  bundles on it is representable (in the homotopy category of spaces)
-  by $\CP^\infty$, and the tautological bundle $\cO(1)$ is truly
-  tautological: it corresponds to the identity map
-  $\id \c \CP^\infty \to \CP^\infty$.
+  $X$, given by associating to such a map $f$ the pullback $f^*\lL$ of
+  the tautological bundle. That is, the functor associating to a space
+  $X$ the set of isomorphism classes of line bundles on it is
+  representable (in the homotopy category of spaces) by $\CP^\infty$,
+  and the tautological bundle $\lL$ is truly tautological: it
+  corresponds to the identity map $\id \c \CP^\infty \to \CP^\infty$.
 \end{itemize}
 Of course Chern classes are also isomorphism-invariant, so it follows
-from these facts that the Chern classes of \emph{any} line bundles $L$
-is determined by a choice of Chern class
-$c_1(\cO(1)) \in \rH^2(\CP^\infty)$. Now, recall that the cohomology
-ring of $\CP^\infty$ is given by\footnote{It may be more common to
-  write $\rH^*(\CP^\infty) \iso \lZ[t]$, i.e. to use the polynomial
-  ring rather than the power series ring. This is just a convention:
-  does one want to assemble the graded pieces of $\rH^*(X)$ by taking
-  their direct product or their direct sum? In other words, does one
-  want to consider infinite or just finite sums of homogenous elements
-  in the ring $\rH^*(X)$? In just a bit we'll be considering
-  cohomology theories $E$ other than singular cohomology, in
-  particular ones in which the coefficient ring $E^* \ce E^*(\pt)$ is
-  not concentrated in degree $0$, but may in fact be nonzero in
-  infinitely many degrees. But even in this more general situation,
-  we'd like to think of $E^*$ as some sort of base ring of
-  coefficients, in which case we may have infinite sums in the ring
-  $E^*(X)$ still living in some finite graded piece. It will thus be
-  more natural to consider the power series ring $E^* \ldb t \rdb$,
-  and so we begin with this convention here.}
+from these facts that the Chern class of any line bundle $L$ is
+determined by a choice of Chern class
+$c_1(\lL) \in \rH^2(\CP^\infty)$. Now, recall that the cohomology ring
+of $\CP^\infty$ is given by\footnote{It may be more common to write
+  $\rH^*(\CP^\infty) \iso \lZ[t]$, i.e. to use the polynomial ring
+  rather than the power series ring. This is just a convention: does
+  one want to assemble the graded pieces of $\rH^*(X)$ by taking their
+  direct product or their direct sum? In other words, does one want to
+  consider infinite or just finite sums of homogenous elements in the
+  ring $\rH^*(X)$? In just a bit we'll be considering cohomology
+  theories $E$ other than singular cohomology, in particular ones in
+  which the coefficient ring $E^* \ce E^*(\pt)$ is not concentrated in
+  degree $0$, but may in fact be nonzero in infinitely many
+  degrees. But even in this more general situation, we'd like to think
+  of $E^*$ as some sort of base ring of coefficients, in which case we
+  may have infinite sums in the ring $E^*(X)$ still living in some
+  finite graded piece. It will thus be more natural to consider the
+  power series ring $E^* \ldb t \rdb$, and so we begin with this
+  convention here.}
 \[
 \rH^*(\CP^\infty) \iso \lZ \ldb t \rdb,
 \]
 where the generator lives in degree $2$, i.e.
 $t \in \rH^2(\CP^\infty)$. So of course then the interesting choice to
-make is $c_1(\cO(1)) \ce t$. But note that $t$ is really only
+make is $c_1(\lL) \ce t$. But note that $t$ is really only
 well-defined up to a unit in $\lZ$, i.e. up to sign! So to be precise
 we need to fix such a generator and then declare this to be
-$c_1(\cO(1))$.
+$c_1(\lL)$.
 
 Now, the set of isomorphism classes of line bundles on a space $X$ is
 often referred to as its Picard group; the name isn't so important
@@ -76,17 +73,15 @@ can do so quite easily:
   \label{chrom-cherntensor}
     c_1(L \otimes L') = c_1(L) + c_1(L') \in \rH^2(X).
 \end{equation}
-
-Since there is universal line bundle $\cO(1)$, proving this boils down
-to proving it for the universal example. The universal \emph{pair} of
-line bundles is given by the bundles $\pi_1^*\cO(1),\pi_2^*\cO(1)$ on
-$\CP^\infty \times \CP^\infty$, where
-$\pi_1,\pi_2 \c \CP^\infty \times \CP^\infty \to \CP^\infty$ denote
-the projections. So the formula \cref{chrom-cherntensor} holds if and
-only if it holds for this universal example, that is if
+To prove this, note that $\lL$ being the universal line bundle implies
+that there is also a universal \emph{pair} of line bundles: the
+bundles $\pi_1^*\lL,\pi_2^*\lL$ on $\CP^\infty \times \CP^\infty$,
+where $\pi_1,\pi_2 \c \CP^\infty \times \CP^\infty \to \CP^\infty$
+denote the projections. So the formula \cref{chrom-cherntensor} holds
+if and only if it holds for this universal example, that is if
 \[
-c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1)) =
-c_1(\pi_1^*\cO(1)) + c_1(\pi_2^*\cO(1)) \in
+c_1(\pi_1^*\lL \otimes \pi_2^*\lL) =
+c_1(\pi_1^*\lL) + c_1(\pi_2^*\lL) \in
 \rH^2(\CP^\infty \times \CP^\infty).
 \]
 To see that this is true, we observe that the canonical map
@@ -98,8 +93,8 @@ induces an isomorphism in $\rH^2$,
 \rH^2(\CP^\infty \vee \CP^\infty),
 \end{equation}
 and that the pullback bundle
-$\iota^*(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1))$ is just a copy of
-$\cO(1)$ over each summand of $\CP^\infty \vee \CP^\infty$.
+$\iota^*(\pi_1^*\lL \otimes \pi_2^*\lL)$ is just a copy of
+$\lL$ over each summand of $\CP^\infty \vee \CP^\infty$.
 
 We can alternatively view this universal example as follows: by the
 Yoneda lemma, the tensor product operation on line bundles corresponds
@@ -114,20 +109,20 @@ this gives a map
 \]
 using the Kunneth isomorphism on the right-hand side, so
 $x = \pi_1^*(t)$ and $y = \pi_2^*(t)$. By definition we'll have
-$\mu^*\cO(1) \iso \pi_1^*\cO(1) \otimes \pi_2^*\cO(1)$.  So we end up
+$\mu^*\lL \iso \pi_1^*\lL \otimes \pi_2^*\lL$.  So we end up
 with
 \[
 \mu^*(t) =
-\mu^*(c_1(\cO(1))) =
-c_1(\mu^*\cO(1)) =
-c_1(\pi_1^*\cO(1) \otimes \pi_2^*\cO(1))
+\mu^*(c_1(\lL)) =
+c_1(\mu^*\lL) =
+c_1(\pi_1^*\lL \otimes \pi_2^*\lL)
 \]
 and
 \begin{align*}
 x + y &=
 \pi_1^*(t) +  \pi_2^*(t) =
-\pi_1^*(c_1(\cO(1))) +  \pi_2^*(c_1(\cO(1))) \\ &=
-c_1(\pi_1^*\cO(1)) + c_1(\pi_2^*\cO(1)).
+\pi_1^*(c_1(\lL)) +  \pi_2^*(c_1(\lL)) \\ &=
+c_1(\pi_1^*\lL) + c_1(\pi_2^*\lL).
 \end{align*}
 Therefore we conclude that the formula \cref{chrom-cherntensor} is
 equivalent to the formula $\mu^*(t) = x + y$.
@@ -183,9 +178,9 @@ complex-oriented cohomology theory $E$. But now there is no reason for
 formula \cref{chrom-cherntensor} to hold in general. Its validity in
 singular cohomology relies on the fact \cref{chrom-cherntensorpf},
 which relies on the coefficient ring $\rH^* \iso \lZ$ being
-concentrated in degree $0$; this of course is not true in general,
-e.g. for complex K-theory, Bott periodicity tells us
-$\rK^* \iso \lZ[\beta,\beta^{-1}]$ with $\beta$ in degree
+concentrated in degree $0$. This of course is not true in a general
+cohomology theory; e.g. for complex K-theory, Bott periodicity tells
+us $\rK^* \iso \lZ[\beta,\beta^{-1}]$ with $\beta$ in degree
 $-2$. However, we can still say something about the Chern class of a
 tensor product with values in $E^*$: it is still determined by the
 universal example, which is still determined by the map in cohomology
@@ -201,7 +196,8 @@ given by the power series $f(x,y) \ce \mu^*(t) \in E^* \ldb x,y \rdb$.
 The fact that the tensor product of line bundles is unital,
 commutative, and associative (all up to isomorphism) implies that $f$
 is a special kind of power series in two variables, which we can think
-of as an infinitesimal version of a group operation.
+of as an infinitesimal version of a group operation. This is formally
+defined as follows.
 
 \begin{definition}
   \label{chrom-fgl}
@@ -227,7 +223,7 @@ of as an infinitesimal version of a group operation.
 
 \begin{examples}
   \label{chrom-fglex}
-  We give the two most basic examples (over any commutative ring $R$):
+  We give the two most basic examples, over $\lZ$:
   \begin{enumerate}
   \item First we have the \emph{additive formal group law},
     $f(x,y) = x+y$. We saw above that this arises in stable homotopy
@@ -260,8 +256,8 @@ refers to the business of understanding just how good this
 approximation is, and we'll review some of the key aspects of this
 theory in the following two subsections. Just as this one is, the next
 two subsections have titles of the form ``$A$ \& $B$''; in all three
-cases $A$ is some concept in the theory of formal groups and $B$ is
-the avatar of $A$ in stable homotopy theory.
+cases $A$ is some concept in the theory of formal group laws and $B$
+is the avatar of $A$ in stable homotopy theory.
 
 \subsection{The Lazard ring \& complex bordism}
 \label{chrom-lazmu}
@@ -302,12 +298,14 @@ the avatar of $A$ in stable homotopy theory.
   It turns out that there is also a universal example of a
   complex-oriented cohomology theory, known as \emph{complex bordism}
   and denoted $\MU$. (As the name suggests, $\MU$ is connected to
-  (co)bordisms of manifolds, but we have no time to discuss its
-  origins or construction.) More precisely, there is a bijection
-  between complex-orientations of a ring spectrum $E$ and homotopy
-  classes of maps of ring spectra $\MU \to E$. In particular, there is
-  a \emph{canonical} complex-orientation of $\MU$, corresponding to
-  the identity map $\id \c \MU \to \MU$.
+  (co)bordism of manifolds, but we have no time to discuss its origins
+  or construction.) More precisely, there is a bijection between
+  complex-orientations of a ring spectrum $E$ and homotopy classes of
+  maps of ring spectra $\MU \to E$. In particular, there is a
+  \emph{canonical} complex-orientation of $\MU$, corresponding to the
+  identity map $\id \c \MU \to \MU$. Note that this implies that if we
+  have a morphism of ring spectra $E \to E'$ then $E'$ is
+  complex-orientable if $E$ is.
 \end{nothing}
 
 We have now given two universal examples: a complex-orientation of a
@@ -317,7 +315,7 @@ then.
 
 \begin{theorem}[Quillen]
   \label{chrom-quillen}
-  The map $L \to \MU^*$ determined by the canonical
+  The map $\rL \to \MU^*$ determined by the canonical
   complex-orientation of $\MU$ is an isomorphism. In other words, the
   formal group law associated to $\MU$ is the universal one, and the
   map $\rL \iso \MU^* \to E^*$ induced by a complex-orientation
@@ -367,7 +365,7 @@ coordinate-free object underlying formal group laws.
 Suppose we are given a formal group law $f \in R \ldb x,y \rdb$. We
 are supposed to think of this as some kind of group operation, but
 it's a power series so it doesn't quite make sense to actually apply
-the operation to elements of $R$. However, we can apply it to
+the operation to any two elements of $R$. However, we can apply it to
 nilpotent elements of $R$. More precisely, if
 $\Nil \c \Alg_R \to \Set$ denotes the functor sending an $R$-algebra
 to its set of nilpotent elements, then $f$ defines a lift of $\Nil$ to
