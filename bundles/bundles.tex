@@ -1,15 +1,17 @@
-\input{../preamble}
 \input{preamble}
 
 \newcommand{\aut}{\operatorname{aut}}
 \newcommand{\saut}{\operatorname{\underline{aut}}}
 \newcommand{\Bun}{\operatorname{Bun}}
-\renewcommand{\E}{\mathcal{E}}
-\renewcommand{\F}{\mathcal{F}}
-\renewcommand{\G}{\mathcal{G}}
+\newcommand{\Cat}{\operatorname{Cat}}
+\newcommand{\Gpd}{\operatorname{Gpd}}
+\newcommand{\Grp}{\operatorname{Grp}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
 \renewcommand{\H}{\mathcal{H}}
-\renewcommand{\X}{\mathcal{X}}
-\renewcommand{\Y}{\mathcal{Y}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
 
 %--------------------------------------------------------------------%
 
@@ -206,14 +208,14 @@ Let's bring things back down to bundles on spaces for a second.
   Let $G$ be a topological group. Then $\u{G}$ is in fact a sheaf of
   groups. If $\pi \c E \to X$ is a right $G$-space over $X$ then the
   sheaf $\E$ of continuous sections of $\pi$ is a $\u{G}$-sheaf in a
-  canonical manner. By \pref{principal-right-action}, any principal
+  canonical manner. By \cref{principal-right-action}, any principal
   $G$-bundle gives an example of such a $\pi \c E \to X$. In this case
   we will moreover have that $\E$ is locally trivial, and hence a
-  $\u{G}$-torsor by \pref{torsor-equiv}.
+  $\u{G}$-torsor by \cref{torsor-equiv}.
 \end{example}
 
 We next generalise the main definitions we began with in
-\pref{fibre-bundle}.\footnote{I'm not sure if there's standard
+\cref{fibre-bundle}.\footnote{I'm not sure if there's standard
   terminology for some of these things so I'm just sticking with the
   topological terminology.}
 
@@ -263,7 +265,7 @@ We next generalise the main definitions we began with in
 \end{definition}
 
 Actually we could have left that last lemma out since
-\pref{principal-equals-torsor} below tells us we've already defined
+\cref{principal-equals-torsor} below tells us we've already defined
 it!
 
 \begin{lemma}
@@ -306,16 +308,16 @@ it!
   $\G|_{U_i \times_U V_j}$ are given by left multiplication, the same
   commuting also implies these actions will define a consistent right
   $\G$-action on $\E$.\footnote{This is precisely analogous to
-    \pref{principal-right-action}.} Thus $\E$ is a right $\G$-sheaf,
+    \cref{principal-right-action}.} Thus $\E$ is a right $\G$-sheaf,
   and since $\E$ is by construction locally trivial it must be a
-  $\G$-torsor by \pref{torsor-equiv}.
+  $\G$-torsor by \cref{torsor-equiv}.
 
   ($\Leftarrow$) Suppose $\E$ is a right $\G$-torsor. By
-  \pref{torsor-equiv} it is locally trivial: each $U \in \X$ has a
+  \cref{torsor-equiv} it is locally trivial: each $U \in \X$ has a
   covering $\{U_i \to U\}$ with isomorphisms of right $\G$-sheaves
   $\E|_{U_i} \iso \G|_{U_i}$. So $\E$ is a bundle sheaf with fibre
   $\G$. Then that $\E$ has structure group $\G$ is immediate from
-  \pref{auto-left}, applied to $\X_{/U_i \times_U V_j}$ with final
+  \cref{auto-left}, applied to $\X_{/U_i \times_U V_j}$ with final
   object $U_i \times_U V_j$ for all morphisms $V \to U$ in $\X$.
 \end{proof}
 
@@ -323,11 +325,11 @@ it!
 
 \section{Comparisons}
 
-Now, we stated that our definition \pref{bundle-sheaf} of bundles and
+Now, we stated that our definition \cref{bundle-sheaf} of bundles and
 structure groups \emph{generalises} the topological notion
-\pref{fibre-bundle} of fibre bundles and structure groups. But we've
+\cref{fibre-bundle} of fibre bundles and structure groups. But we've
 been proceeding on analogies alone. So though the idea has been hinted
-at in \pref{bundle-example}, we haven't actually proved in what sense
+at in \cref{bundle-example}, we haven't actually proved in what sense
 this is a generalisation. That is our first goal in this section. To
 set up this comparison we should define some categories.
 
@@ -357,7 +359,7 @@ set up this comparison we should define some categories.
 \begin{definitions}
   \label{bundle-sheaf-cat}
   Let $\G$ be a sheaf of groups on $\X$ and $\F$ a left
-  $\G$-sheaf. Recall \pref{bundle-sheaf} that a $\G$-bundle on $\X$
+  $\G$-sheaf. Recall \cref{bundle-sheaf} that a $\G$-bundle on $\X$
   with fibre $\F$ is a bundle $\E$ on $\X$ with fibre $\F$ equipped
   with a trivialisation $\{(U_i \to U,\kappa_i)\}$ with transition
   morphisms in $\G$. We define a \emph{morphism of $\G$-bundles on
@@ -390,7 +392,7 @@ set up this comparison we should define some categories.
 \end{remark}
 
 \begin{remark}
-  It follows from \pref{auto-left} that if $\lambda \c \E \to \E'$ is
+  It follows from \cref{auto-left} that if $\lambda \c \E \to \E'$ is
   a morphism of sheaves on $X$ with $\E,\E'$ both principal
   $\G$-bundles (i.e. $\G$-torsors), then $\lambda$ is a morphism in
   $\Bun_\G(X;\G)$ if and only if $\lambda$ is a morphism of right
@@ -435,7 +437,7 @@ case of the sheaf-theoretic $\Bun_\G(X;\F)$.
   trivialisation of $\E$ given by pulling back the covering $\{(U_i
   \to U, \kappa_i)\}$ of $U$ to each $V \in \X$. A common refinement
   of the two is given by $\{U_i \times_U V_j\}$, and by definition
-  \pref{bundle-sheaf} of $\E$ having structure group $\G$ the
+  \cref{bundle-sheaf} of $\E$ having structure group $\G$ the
   automorphism
   \[
   \begin{tikzcd}
@@ -450,7 +452,7 @@ case of the sheaf-theoretic $\Bun_\G(X;\F)$.
   desired.
 \end{proof}
 
-Recall \pref{map-sheaf}
+Recall \cref{map-sheaf}
 that to a space $Y$ we may associate the sheaf $\u{Y}$ on $X$ of
 continuous maps to $Y$.
 
@@ -499,7 +501,7 @@ continuous maps to $Y$.
 
   We now sketch why this actually gives an equivalence:
   \begin{itemize}
-  \item \emph{Essential surjectivity}: By \pref{iso-consistent} it
+  \item \emph{Essential surjectivity}: By \cref{iso-consistent} it
     suffices to show a $\u{G}$-bundle $\E$ with fibre $\F$ with
     \emph{consistent} trivialisation is in the essential image. Let
     the consistent trivialisation be induced by a covering $\{U_i\}$
@@ -513,7 +515,7 @@ continuous maps to $Y$.
   \item \emph{Full-faithfulness}: Observe that giving a morphism in
     $\Bun_G(X;F)$ is equivalent to giving the common refinement
     $\{V_j\}$ and automorphisms $\{\alpha_j\}$ in
-    \pref{bundle-sheaf-cat} such that $\alpha_j$ and $\alpha_{j'}$
+    \cref{bundle-sheaf-cat} such that $\alpha_j$ and $\alpha_{j'}$
     agree on $V_j \cap V_{j'}$, since the $\alpha_j$ determine
     $\lambda$. And the analogous statement holds for morphisms in
     $\Bun_\G(X;\F)$ between bundles equipped with consistent
@@ -558,7 +560,7 @@ bundles. This is also known as the ``associated bundle'' construction.
 \begin{appendices}
   \section{Internal groups and groupoids}
 
-  \renewcommand{\C}{\mathcal{C}}
+  \newcommand{\C}{\mathcal{C}}
   \begin{notation}
     In this section, $\C$ is any category admitting finite limits,
     including an initial object $* \in \C$.
@@ -608,7 +610,7 @@ bundles. This is also known as the ``associated bundle'' construction.
       groups in $\C$}.
   \end{definitions}
   
-  \renewcommand{\R}{\mathrm{R}}
+  \newcommand{\R}{\mathrm{R}}
   \renewcommand{\L}{\mathrm{L}}
   \begin{definitions}
     Let $(G,\mu,\epsilon,\iota)$ be an internal group in $\C$. A
@@ -665,7 +667,7 @@ bundles. This is also known as the ``associated bundle'' construction.
   \end{examples}
 
   \renewcommand{\Y}{\mathcal{Y}}
-  \renewcommand{\Z}{\mathcal{Z}}
+  \newcommand{\Z}{\mathcal{Z}}
   \begin{definitions}
     An \emph{internal category} $\Y$ in $\C$ consists of objects
     $\Y_0, \Y_1 \in \C$ together with morphisms
@@ -810,7 +812,7 @@ bundles. This is also known as the ``associated bundle'' construction.
     \end{tikzcd}
     \]
     where $\phi$ is fully faithful and covering. Using assumptions
-    \pref{cover-iso} and \pref{cover-stab} we can define identity and
+    \cref{cover-iso} and \cref{cover-stab} we can define identity and
     composition of anafunctors, and hence obtain:
     \begin{itemize}
     \item \emph{the category $\Cat(\C)$ of internal categories and
@@ -822,14 +824,14 @@ bundles. This is also known as the ``associated bundle'' construction.
   \end{definitions}
 
   \begin{remark}
-    Assumption \pref{cover-eff} is used to define natural
+    Assumption \cref{cover-eff} is used to define natural
     transformations of anafunctors, turning $\Cat(\C)$ and $\Gpd(\C)$
     into $2$-categories, but we do not use this in these notes.
   \end{remark}
 
   \begin{convention}
     When $\C$ is a topos, we always take the collection of
-    (effective) epimorphisms as our covers in \pref{anafunctor}.
+    (effective) epimorphisms as our covers in \cref{anafunctor}.
   \end{convention}
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -895,7 +897,7 @@ bundles. This is also known as the ``associated bundle'' construction.
     \in C(U);
     \]
     note, $t_j$ exists and is unique by the hypothesis that
-    \pref{glue-cocycle} commutes and by the sheaf condition on $\E_j$.
+    \cref{glue-cocycle} commutes and by the sheaf condition on $\E_j$.
   \end{proof}
 \end{appendices}
 

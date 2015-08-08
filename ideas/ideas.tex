@@ -7,6 +7,7 @@
   itemsep=0.5ex,%
   topsep=0.5ex,%
 }
+\setlist[ideas,1]{label=\textbf{\thesection.\arabic*.}}
 
 \begin{document}
 \thispagestyle{fancy}
@@ -17,111 +18,108 @@
 
 \medskip
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Constructing equivariant elliptic cohomology}
+
 \begin{ideas}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\item Constructing equivariant elliptic cohomology
-
-  \begin{ideas}
-  \item If we think about it as in Jacob's survey, equivariant
-    versions of cohomology with coefficients in an $\rE_\infty$-ring
-    $A$ arise from a (derived) oriented group scheme $G$ over $A$. An
-    elliptic cohomology theory $A$ comes from an elliptic curve $G_0$
-    over $\pi_0(A)$, so it seems like the question is: when I can I
-    refine this to a derived elliptic curve $G$ over $A$? I.e. I need
-    to find a pullback diagram:
-    \[
-    \begin{tikzcd}
-      G_0 \ar[r] \ar[d] & G \ar[d] \\
-      \Spec(\pi_0(A)) \ar[r] & \Spec(A).
-    \end{tikzcd}
-    \]
-    If I replace $A$ by it's connective cover (I can do this because
-    $G$ is supposed to be flat over $A$) then I should think of the
-    homotopy groups of $A$ above degree $0$ as higher nilpotents (in
-    particular the sequence
-    \[
-    \pi_0(A) \iso \tau_{\le 0}(A) \from \tau_{\le 1}(A) \from
-    \tau_{\le 2}(A) \from \cdots
-    \]
-    is a sequence of square-zero extensions of $\rE_\infty$-rings) and
-    so maybe I can approach this via some obstruction/deformation
-    theory (the cotangent complex section of \emph{Higher Algebra} is
-    probably relevant)?
-  \end{ideas}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\item Equivariant complex-orientability
-
-  \begin{ideas}
-  \item The condition I'm most interested in is that the cohomology of
-    $\lP V$ be a finite free module for all finite-dimensional
-    representations.
-  \item What I would like is that the global spectra defined by
-    (oriented?) derived group schemes (on abelian groups, and then
-    Kan-extended to all groups) define complex-oriented $G$-spectra
-    for all $G$. Then I could deduce from complex-oriented descent
-    that flat base-changes of these global spectra also satisfy
-    abelian descent.
-  \item So I also need to sort out what the deal is with orientations
-    of derived group schemes. It's just striking me at this moment
-    that it's maybe not an accident that Jacob called these
-    orientations.
-  \end{ideas}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\item Genuine global spectra
-
-  \begin{ideas}
-  \item One issue I'd like to sort out is the following. Suppose I
-    have a (na\"ive) global spectrum $E$ which satisfies abelian
-    descent, and that the restriction of $E$ to abelian groups can be
-    extended to a genuine global spectrum. Can $E$ itself be extended
-    to a genuine global spectrum?
-
-    \begin{ideas}
-      \item The first idea I had about resolving this was to think
-        about some sort of ``additive Kan extension''. The issue at
-        hand is that genuine global spectra are \emph{additive}
-        functors on the span category, and Kan extending won't
-        preserve additivity in general. Rather, I need an additive Kan
-        extension which gives me the universal additive
-        extension. Such a thing exists of course by an adjoint functor
-        theorem, but to address the concrete question raised above, I
-        need a nice colimit-type formula for computing it, like
-        ordinary Kan extensions, so that I can employ cofinality
-        arguments. I haven't given this idea a full go yet, but note
-        that Jacob thinks it's unlikely to work out.
-
-      \item Rather Jacob thinks that things should become clearer
-        after categorifying. Something about there being universal
-        properties at the level of $2$-categories which don't exist at
-        the level of $1$-categories which will make things nice. Have
-        to talk to him about this.
-    \end{ideas}
-    
-  \item This is of interest to me because I'd like to know when global
-    spectra arising from derived groups schemes are in fact genuine
-    global spectra, and I want to think about abelian descent of
-    genuine global spectra.
-
-  \end{ideas}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\item Atiyah-Segal completion theorems
-
-  \begin{ideas}
-  \item Can one prove the Atiyah-Segal completion theorem immediately
-    from the description of K-theory in terms of the (derived)
-    multiplicative group, i.e. without reference to vector bundles at
-    all? If so, is there a general form of the completion theorem
-    for spectra arising from derived group schemes?
-  \end{ideas}
+\item If we think about it as in Jacob's survey, equivariant
+  versions of cohomology with coefficients in an $\rE_\infty$-ring
+  $A$ arise from a (derived) oriented group scheme $G$ over $A$. An
+  elliptic cohomology theory $A$ comes from an elliptic curve $G_0$
+  over $\pi_0(A)$, so it seems like the question is: when I can I
+  refine this to a derived elliptic curve $G$ over $A$? I.e. I need
+  to find a pullback diagram:
+  \[
+  \begin{tikzcd}
+    G_0 \ar[r] \ar[d] & G \ar[d] \\
+    \Spec(\pi_0(A)) \ar[r] & \Spec(A).
+  \end{tikzcd}
+  \]
+  If I replace $A$ by it's connective cover (I can do this because
+  $G$ is supposed to be flat over $A$) then I should think of the
+  homotopy groups of $A$ above degree $0$ as higher nilpotents (in
+  particular the sequence
+  \[
+  \pi_0(A) \iso \tau_{\le 0}(A) \from \tau_{\le 1}(A) \from
+  \tau_{\le 2}(A) \from \cdots
+  \]
+  is a sequence of square-zero extensions of $\rE_\infty$-rings) and
+  so maybe I can approach this via some obstruction/deformation
+  theory (the cotangent complex section of \emph{Higher Algebra} is
+  probably relevant)?
 \end{ideas}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Equivariant complex-orientability}
+
+\begin{ideas}
+\item The condition I'm most interested in is that the cohomology of
+  $\lP V$ be a finite free module for all finite-dimensional
+  representations.
+\item What I would like is that the global spectra defined by
+  (oriented?) derived group schemes (on abelian groups, and then
+  Kan-extended to all groups) define complex-oriented $G$-spectra
+  for all $G$. Then I could deduce from complex-oriented descent
+  that flat base-changes of these global spectra also satisfy
+  abelian descent.
+\item So I also need to sort out what the deal is with orientations
+  of derived group schemes. It's just striking me at this moment
+  that it's maybe not an accident that Jacob called these
+  orientations.
+\end{ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Genuine global spectra}
+
+\begin{ideas}
+\item One issue I'd like to sort out is the following. Suppose I
+  have a (na\"ive) global spectrum $E$ which satisfies abelian
+  descent, and that the restriction of $E$ to abelian groups can be
+  extended to a genuine global spectrum. Can $E$ itself be extended
+  to a genuine global spectrum?
+
+  \begin{ideas}
+  \item The first idea I had about resolving this was to think
+    about some sort of ``additive Kan extension''. The issue at
+    hand is that genuine global spectra are \emph{additive}
+    functors on the span category, and Kan extending won't
+    preserve additivity in general. Rather, I need an additive Kan
+    extension which gives me the universal additive
+    extension. Such a thing exists of course by an adjoint functor
+    theorem, but to address the concrete question raised above, I
+    need a nice colimit-type formula for computing it, like
+    ordinary Kan extensions, so that I can employ cofinality
+    arguments. I haven't given this idea a full go yet, but note
+    that Jacob thinks it's unlikely to work out.
+
+  \item Rather Jacob thinks that things should become clearer
+    after categorifying. Something about there being universal
+    properties at the level of $2$-categories which don't exist at
+    the level of $1$-categories which will make things nice. Have
+    to talk to him about this.
+  \end{ideas}
+  
+\item This is of interest to me because I'd like to know when global
+  spectra arising from derived groups schemes are in fact genuine
+  global spectra, and I want to think about abelian descent of
+  genuine global spectra.
+\end{ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Atiyah-Segal completion theorems}
+
+\begin{ideas}
+\item Can one prove the Atiyah-Segal completion theorem immediately
+  from the description of K-theory in terms of the (derived)
+  multiplicative group, i.e. without reference to vector bundles at
+  all? If so, is there a general form of the completion theorem
+  for spectra arising from derived group schemes?
+\end{ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
