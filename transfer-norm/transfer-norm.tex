@@ -1,0 +1,108 @@
+
+\input{preamble}
+
+\title{Duality, transfer, and norm}
+\author{Arpon Raksit}
+\date{2017-04-17}
+
+\numberwithin{block}{section}
+
+\begin{document}
+\maketitle
+
+\newcommand{\BG}{{\rB G}}
+\newcommand{\hG}{{\rh G}}
+\newcommand{\Loc}{\operatorname{Loc}}
+\newcommand{\Nm}{\operatorname{Nm}}
+\newcommand{\Spaces}{\mathrm{Spaces}}
+\newcommand{\Spectra}{\mathrm{Spectra}}
+\newcommand{\tG}{{\rt G}}
+
+% ---------------------------------------------------------------------
+
+In these notes we'll see how certain transfer and norm maps in stable homotopy theory arise from Spanier-Whitehead duality applied in a parametrized setting.\footnote{Thanks to Allen Yuan for explaining some of this to (and discussing all of it with) me.}
+
+% ---------------------------------------------------------------------
+
+\section{Transfers}
+
+% ---------------------------------------------------------------------
+
+\section{The norm}
+\label{norm}
+
+\begin{notation}
+  \label{norm-setup}
+  Let $\bG$ be a compact Lie group. Let $G$ denote the underlying homotopy type (\textsc{aka} fundamental $\infty$-groupoid) of $\bG$; this has the structure of a group space.
+\end{notation}
+
+\begin{nothing}
+  \label{norm-goal}
+  For $X$ a spectrum with (``doubly na\"ive'') $G$-action, there is a \emph{norm map}
+  \[
+    \Nm_X \c (\Sigma^\infty\rS^\kg \otimes X)_{\hG} \to X^\hG,
+  \]
+  where $\kg$ denotes the Lie algebra of $\bG$, and $\rS^\kg$ denotes the one-point compactification of $\kg$, viewed as a pointed space with $G$-action via the adjoint representation of $\bG$ on $\kg$. This arises, for instance, in the definition of the \emph{Tate spectrum}, which is the cofiber of this map: $X^\tG \ce \cofib(\Nm_X)$. Our goal in this section is to give a construction of this norm map.
+\end{nothing}
+
+\begin{nothing}
+  \label{norm-naive}
+  As indicated above, we will only need to work with $G$-equivariant objects of the most na\"ive nature.
+
+  \begin{subnotation}
+    \label{norm-naive-local-systems}
+    As usual, $\BG$ denotes the classifying space (\textsc{aka} delooping) of $G$. If $C$ is a category, an \emph{object in $C$ with $G$-action} is a functor $\BG \to C$, i.e. a $C$-valued local system on $\BG$; the category of these is denoted $\Loc(\BG;C)$.
+
+    The example of primary interest here is $C = \Spectra$. The smash product $\otimes$ on $\Spectra$ defines a symmetric monoidal structure also on $\Loc(\BG;\Spectra)$, formed pointwise, which we also denote $\otimes$.
+
+    We will also (perhaps implicitly) be considering the examples $C = \Spaces$ and $C = \Spaces_\pt$. The functors $\Sigma^\infty \c \Spaces_\pt \to \Spectra$ and $\Sigma^\infty_+ \c \Spaces \to \Spectra$ induce functors $\Sigma^\infty \c \Loc(\BG;\Spaces_\pt) \to \Loc(\BG;\Spectra)$ and $\Sigma^\infty_+ \c \Loc(\BG;\Spaces) \to \Loc(\BG;\Spectra)$. \footnote{Note that these notational conventions were employed already in \cref{norm-goal}, in particular in the object $\Sigma^\infty \rS^\kg \otimes X \in \Loc(\BG;\Spectra)$ appearing in the source of the norm map.}
+  \end{subnotation}
+
+  \begin{subconvention}
+    \label{norm-left}
+    In line with our definition in \cref{norm-naive-local-systems} of objects with $G$-action as functors out of $\BG$ (rather than $\BG^\op$), we will only ever consider \emph{left} group actions; this goes not only for $G$-actions but for $\bG$-actions (on manifolds) too.
+
+    We let $\bG^\rr$ denote $\bG$ as a manifold equipped with the $\bG$-action given by inverted right-multiplication; that is, the action $\bG \times \bG^\rr \to \bG^\rr$ is given by $(g,h) \mapsto hg^{-1}$. We analogously define $G^\rr$ as a space with $G$-action.
+  \end{subconvention}
+\end{nothing}
+
+\begin{nothing}
+  \label{norm-dual}
+  We begin the actual work by computing the Spanier-Whitehead dual of $\Sigma^\infty_+ G^\rr$, via Atiyah duality. This calculation is responsible for the appearance of $\rS^\kg$ in the norm map.
+
+  \begin{sublemma}
+    \label{norm-dual-tangent-bundle}
+    View $\kg$ as a representation of $\bG$ via the adjoint action. Then there is an isomorphism of $\bG$-equivariant vector bundles $\rT\bG^\rr \iso \bG^\rr \times \kg$ over $\bG^\rr$.
+
+    \begin{proof}
+      As on any Lie group, we have a trivialization of the tangent bundle
+      \[
+        \bG \times \kg \isoto \rT\bG, \quad (h,\xi) \mapsto \rd l_h(\xi),
+      \]
+      where $l_h \c \bG \to \bG$ denotes left-multiplication by $h$. We just need to check that this isomorphism is $\bG$-equivariant when we equip $\bG$ with the $\bG$-action of $\bG^\rr$ and $\kg$ with the adjoint action. That is, we need to check that the diagram
+      \[
+        \begin{tikzcd}
+          \bG \times \bG^\rr \times \kg \ar[d, "\alpha"] \ar[r, "\gamma"] &
+          \bG^\rr \times \kg \ar[d, "\delta"] \\
+          \bG \times \rT\bG^\rr \ar[r, "\beta"] &
+          \rT\bG^\rr
+        \end{tikzcd}
+      \]
+      commutes, where
+      \begin{align*}
+        \alpha(g,h,\xi) \ce (g,\rd l_h(\xi)), \qquad
+        \beta(g,v) \ce \rd r_{g^{-1}}(v), \\
+        \gamma(g,h,\xi) \ce (hg^{-1},\rd c_g(\xi)), \qquad
+        \delta(h,\xi) \ce \rd l_h(\xi),
+      \end{align*}
+      with $r_{g^{-1}} \c \bG \to \bG$ denoting right-multiplication by $g^{-1}$ (i.e. the action of $g$ on $\bG^\rr$) and $c_g \c \bG \to \bG$ denoting conjugation $k \mapsto gkg^{-1}$ (whose derivative at the identity in $\bG$ is by definition the adjoint action of $g$ on $\kg$). This follows from the equality of maps $r_{g^{-1}} \circ l_h = l_{hg^{-1}} \circ c_g$.
+    \end{proof}
+  \end{sublemma}
+\end{nothing}
+
+% ---------------------------------------------------------------------
+
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
+
+\end{document}

@@ -1,0 +1,530 @@
+
+\input{preamble}
+
+\title{Motivating infinity-categorical thinking}
+\author{Arpon Raksit}
+\date{2017-01-23}
+
+\numberwithin{block}{section}
+\addtocounter{section}{-1}
+
+\begin{document}
+\maketitle
+
+% ---------------------------------------------------------------------
+
+\newcommand{\Bun}{\operatorname{Bun}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Fib}{\operatorname{Fib}}
+\newcommand{\Loc}{\operatorname{Loc}}
+\newcommand{\Sets}{\mathrm{Sets}}
+\newcommand{\Spaces}{\mathrm{Spaces}}
+
+% ---------------------------------------------------------------------
+
+\section{Introduction}
+\label{intro}
+
+The goal for today's talk is to illustrate how the theory of $\infty$-categories can help you do homotopy theory. I hope to convey two basic points:
+\begin{enumerate}
+\item The idea that spaces (in the sense of homotopy theory) are ``the same as'' $\infty$-groupoids, i.e. particular $\infty$-categories, is a very useful one.
+\item Category theory allows you to separate out the formal from the the non-formal parts of mathematics, but ordinary category theory breaks down in homotopical situations; $\infty$-category theory gives you the toolkit to remedy this.
+\end{enumerate}
+
+I'm going to try to illustrate via situations that have come up in our lives in the recent past, both because that seems potentially effective and because that's what's at the front of my mind.
+
+\begin{convention}
+  In this talk (and probably in the following talks on the theory of quasicategories), we will only discuss higher categories in which all $k$-morphisms are invertible when $k > 1$. Thus, by $n$-category I will always mean $(n,1)$-category, including of course when $n = \infty$.
+\end{convention}
+
+\begin{remark}
+  \label{intro-disbelief}
+  Starting next week we'll start working on rigorously understanding (at least one model of) $\infty$-category theory. However, the idea for today is to suspend some disbelief, pretend we roughly know what they are, and allow ourselves to see them in (a bit of) action without getting too worried about details or rigorous definitions and proofs.
+\end{remark}
+
+%---------------------------------------------------------------------
+
+\section{The homotopy hypothesis}
+\label{gpd}
+
+The first task is to explain how to view spaces (in the sense of homotopy theory) as higher categories. So suppose given a topological space $X$. As a starting point, there is following construction we've all seen:
+
+\begin{definition}
+  \label{gpd-fundamental}
+  The \emph{fundamental groupoid} of $X$ is the category $\pi_{\le 1}(X)$ whose:
+  \begin{itemize}
+  \item objects are the points $x \in X$;
+  \item morphisms $x \to y$ are homotopy classes of paths (rel. end-points) from $x$ to $y$.
+  \end{itemize}
+  Note that $\pi_{\le 1}(X)$ is indeed a groupoid, since paths can be reversed.
+
+  \begin{subremark}
+    \label{gpd-fundamental-assoc}
+    It was crucial here that we took homotopy classes of paths and not just paths themselves, since composition of paths is only associative up to homotopy.
+  \end{subremark}
+\end{definition}
+
+Now, the fundamental groupoid $\pi_{\le 1}(X)$ deserves its notation because it contains the information of $\pi_0(X)$---as its set of isomorphism classes---and $\pi_1(X,x)$ for each $x \in X$---as the automorphism group of the object $x$.
+
+A reasonable theory of higher categories should allow us to make similar constructions that retains information about higher homotopy groups as well. An informal ``definition'' would be as follows:
+
+\begin{definition}
+  \label{gpd-higher-fundamental}
+  For $2 \le n \le \infty$, the \emph{fundamental $n$-groupoid} of $X$ is the $n$-category $\pi_{\le n}(X)$ whose:
+  \begin{itemize}
+  \item objects are the points $x \in X$;
+  \item $1$-morphisms $x \to y$ are paths from $x$ to $y$;
+  \item $k$-morphisms, for $2 \le k < n$, are inductively defined as homotopies (rel. end-points) between $(k-1)$-morphisms;
+  \item $n$-morphisms, if $n < \infty$, are homotopy classes (rel. end-points) of homotopies between $(n-1)$-morphisms.
+  \end{itemize}
+  Again, this is not just an $n$-category, but an $n$-groupoid, since paths are reversible.
+\end{definition}
+
+Now, the relationship between spaces and groupoids is even more intimate than we've discussed so far, due to another familiar construction going in the opposite direction:
+
+\begin{nothing}
+  \label{gpd-classify}
+  Given a groupoid $G$, there is a CW-complex $\rB G$, called its \emph{classifying space}, satisfying the following properties:
+  \begin{enumerate}
+  \item \label{gpd-classify-oneobj} When $G$ has one object, i.e. is the delooping of a group, $\rB G$ is the usual classifying space of this group. In general, a groupoid $G$ can be (non-canonically) identified with a disjoint union of one-object groupoids, and $\rB(-)$ will preserve disjoint unions.
+  \item \label{gpd-classify-adj} If $X$ is a CW-complex, there is a canonical bijection
+    \[
+      [\pi_{\le 1}(X), G] \iso [X, \rB G],
+    \]
+    where on the left-hand side we have homotopy classes of maps of spaces and on the right-hand side we have isomorphism classes of functors between groupoids.
+  \item \label{gpd-classify-counit} The counit map $\epsilon \c \pi_{\le 1}(\rB G) \to G$ induced by the adjunction in \cref{gpd-classify-adj} is an isomorphism for all $G$; by \cref{gpd-classify-oneobj}, this reduces to the usual fact that when $G$ has one-object, $\rB G$ is an Eilenberg-Maclane space for the assoicated group.
+  \item \label{gpd-classify-unit} It follows from \cref{gpd-classify-counit} that when $X$ is a CW-complex, the unit map $\eta \c X \to \rB\pi_{\le 1}(X)$ induces an isomorphism on fundamental groupoids. This in particular implies that $\eta$ is a homotopy equivalence when $X$ is $1$-truncated, i.e. has no homotopy groups above degree $1$.
+  \end{enumerate}
+\end{nothing}
+
+It follows from \cref{gpd-classify}\cref{gpd-classify-unit} that, from the point of view of homotopy theory, $1$-truncated spaces are really ``the same as''
+($1$-)groupoids. Of course it is also trivially true that $0$-truncated spaces are ``the same as'' $0$-groupoids, i.e. sets. The \emph{homotopy hypothesis} is an extrapolation of this principle to higher $n$:
+
+\begin{philosophy}
+  \label{gpd-hyp}
+  For $0 \le n \le \infty$, the fundamental $n$-groupoid construction induces an equivalence between the homotopy theory of $n$-truncated spaces and the homotopy theory of $n$-groupoids. In particular, the homotopy theory of all spaces is equivalent to the homotopy theory of $\infty$-groupoids!
+
+  \begin{subremark}
+    \label{gpd-hyp-disclaimer}
+    This is only a philosophy, or a hypothesis, because the statement depends on giving a definition of $n$-groupoids. In fact, many theories of higher categories, including quasicategory theory, build this hypothesis into the foundations, so that the statement becomes somewhat of a tautology.
+  \end{subremark}
+
+  \begin{subremark}
+    \label{gpd-hyp-combinatorial}
+    This philosophy also implies that spaces, when considered as purely homotopy theoretic objects, may be thought of as of an essentially combinatorial nature, consisting of a collection of points, paths, homotopies, and so on. Topological spaces are one way of presenting such objects, but can be a somewhat misleading presentation as topological spaces are really designed to encode more geometric data, like manifolds and sheaves. The presentation by simplicial sets, fundamental to quasicategory theory, is perhaps a closer approximation to this combinatorial/categorical perspective.
+  \end{subremark}
+  
+  \begin{subremark}
+    \label{gpd-hyp-cats}
+    However $\infty$-categories are defined, they should realize the intuition that they are ``categories weakly enriched over $\infty$-groupoids''. Thus the philosophy of the homotopy hypothesis tells us that $\infty$-categories can equivalently be thought of as categories weakly enriched over \emph{spaces}. I.e. an $\infty$-category has a collection of objects, and between any two objects is a \emph{space} of maps. These mapping spaces should be thought of ``combinatorially'', as in \cref{gpd-hyp-combinatorial}; i.e. they carry the information of their points (the maps), their paths (homotopies between maps), and homotopies and higher homotopies (homotopies between homotopies between maps, and so on).
+
+    In the case of the $\infty$-groupoid/space $X$, the objects are the points of $X$ and the mapping spaces are the path spaces of $X$. The other basic example is the $\infty$-category $\Spaces$, whose objects are spaces; we know of course that there is a natural notion of a space of maps between any two spaces. Note also that any $1$-category, e.g. the category $\Sets$ of sets, may be considered as an $\infty$-category, where the mapping spaces are discrete.
+  \end{subremark}
+
+  \begin{convention}
+    \label{gpd-hyp-perspective}
+    For the remainder of the talk, the word \emph{space} will refer to the abstract combinatorial notion of $\infty$-groupoid; when I want to refer to the traditional notion I will use the full phrase \emph{topological space}. The goal in the next section is to see how this categorical perspective can elucidate certain concepts in homotopy theory.
+  \end{convention}
+\end{philosophy}
+
+% ---------------------------------------------------------------------
+
+\section{Fibrations and local systems}
+\label{fib}
+
+I first want to discuss how viewing spaces as $\infty$-groupoids leads to a nice perspective on the theory of fibrations, a generalization of the classical theory of covering spaces.
+
+The basic idea is that we may now ponder \emph{functors} from a space to other $\infty$-categories. There's some terminology for this.
+
+\begin{notation}
+  \label{fib-fix}
+  In this section we will work with a fixed space $X$.
+\end{notation}
+
+\begin{definition}
+  \label{fib-local-sys}
+  Let $C$ be an $\infty$-category. A functor (of $\infty$-categories) $X \to C$ is called a \emph{$C$-valued local system on $X$}. These organize into another $\infty$-category, denoted $\Loc_X(C)$.
+
+  \begin{subremark}
+    \label{fib-local-sys-unpack}
+    Let's unpack what exactly this notion of local system consists of. A functor $L \c X \to C$ is the following data:
+    \begin{itemize}
+    \item To a point $x \in X$ we assign an object $L(x) \in C$.
+    \item To a path $p \c x \to y$ we assign an equivalence $L(p) \c L(x) \isoto L(y)$.
+    \item To a two-simplex $\sigma \c$
+      \[
+        \begin{tikzcd}
+          &
+          y \ar[dr, "q"] &
+          \\
+          x \ar[ur, "p"] \ar[rr, "r"] &
+          &
+          z
+        \end{tikzcd}
+      \]
+      we assign a homotopy of equivalences $L(\sigma) \c L(r) \iso L(q)L(p)$.
+    \item To higher simplices we assign higher coherence data.
+    \end{itemize}
+  \end{subremark}
+
+  \begin{subremark}
+    \label{fib-local-sys-discrete}
+    Suppose $C$ is a $1$-category. Then the two-simplices and higher coherences mentioned in \cref{fib-local-sys-unpack} collapse into equalities. More precisely, any functor $L \c X \to C$ factors canonically through the $1$-truncation $X \to \tau_{\le 1}(X)$ obtained by modding out homotopies of paths; of course, this truncation is just another name for the fundamental groupoid construction $\pi_{\le 1}(X)$ discussed in \cref{gpd}!
+
+    Thus, in this case a $C$-valued local system on $X$ amounts to an ordinary functor of $1$-categories $\pi_{\le 1}(X) \to C$, which is the usual notion of local system on a space.
+  \end{subremark}
+\end{definition}
+
+Now recall that the classical story of covering spaces can be written in terms of functors out of the fundamental groupoid:
+
+\begin{theorem}
+  \label{fib-covering-traditionial}
+  Let $\sX$ be a nice (but not necessarily connected) topological space\footnote{Note that I am using a weird script font here to indicate that we are talking about actual topological spaces, and not $\infty$-groupoids like our fixed non-script $X$.}. The category $\Cov_\sX$ of nice (but not necessarily connected) covering spaces of $\sX$ is equivalent to the category $\Loc_\sX(\Sets)$ of functors $\pi_{\le 1}(\sX) \to \Sets$.
+
+  \begin{subremark}
+    \label{fib-covering-traditional-explained}
+    Let's recall the construction of the functor $\Cov_\sX \to \Loc_\sX(\Sets)$. Suppose given a covering $f \c \sE \to \sX$. The associated functor $F \c \pi_{\le 1}(X) \to \Sets$ is defined as follows:
+    \begin{itemize}
+    \item given a point $x \in X$ we define $F(x) \ce \sE_x \ce f^{-1}(x)$.
+    \item given a path $p \c x \to y$ in $X$, for each point $e_x \in \sE_x$ there is a unique lift $p' \c e_x \to e_y$ in $E$ of $p$, for some $e_y \in \sE_y$ that is in fact independent of the homotopy class of $p$ (rel. end-points); the association $e_x \mapsto e_y$ defines the necessary map $F(p) \c F(x) \to F(y)$.
+    \end{itemize}
+
+    Thus this equivalence of categories makes precise the idea that covering spaces and local systems of sets are two equivalent ways to formalize the notion of a ``family of sets parametrized by $\sX$''.
+  \end{subremark}
+\end{theorem}
+
+We can use the $\infty$-categorical notion of local system defined above to recast and extend this story.
+
+\begin{definition}
+  \label{fib-over}
+  A \emph{space over $X$} (or \emph{fibration over $X$}) is simply a map of spaces $E \to X$. The $\infty$-category of spaces over $\sX$ is denoted $\Spaces_{/X}$.
+
+  Given a map $E \to X$ and a point $x \in X$, we have a notion of \emph{fiber} $E_x$, defined via the pullback diagram
+  \[
+    \begin{tikzcd}
+      E_x \ar[r] \ar[d] &
+      E \ar[d] \\
+      \{x\} \ar[r] &
+      X
+    \end{tikzcd}
+  \]
+  in the $\infty$-category $\Spaces$; note that the only notion of ``pullback'' in an $\infty$-category is that of a ``homotopy pullback'', so one should really think of $E_x$ as the ``homotopy fiber'' of $E$ over $x \in X$.
+  
+  A map of spaces $E \to X$ is called a \emph{covering space over $X$} if for each $x \in X$ the fiber $E_x$ is a discrete space. The full sub-$\infty$-category of $\Spaces_{/X}$ on the covering spaces will be denoted $\Cov_X$.
+\end{definition}
+
+\begin{theorem}
+  \label{fib-covering-categorical}
+  There is an equivalence of $\infty$-categories
+  \[
+    \Spaces_{/X} \iso \Loc_X(\Spaces).
+  \]
+  To go from left to right we associate a map $E \to X$ to the functor $x \goesto E_x$; to go from right to left we form the pullback of $\infty$-categories
+  \[
+    \begin{tikzcd}
+      E \ar[r] \ar[d] &
+      \Spaces_\pt \ar[d] \\
+      X \ar[r] &
+      \Spaces,
+    \end{tikzcd}
+  \]
+  where $\Spaces_\pt$ denotes the $\infty$-category of pointed spaces\footnote{The functor $\Spaces_\pt \to \Spaces$ is given by forgetting the basepoint. Note that the fiber of this functor over a space $F$ can canonically be identified with $F$ itself.}. This equivalence restricts to an equivalence of $1$-categories
+  \[
+    \Cov_X \iso \Loc_X(\Sets).
+  \]
+  
+  \begin{subremark}
+    \label{fib-covering-categorical-explained}
+    As in \cref{fib-covering-traditional-explained}, the second half of this theorem tells us that covering spaces and local systems of sets on $X$ are two equivalent ways to formalize the notion of a ``family of sets parametrized by $X$''. The (stronger) first half of the theorem then says more generally that spaces/fibrations over $X$ and local systems of spaces on $X$ are two equivalent ways to formalize the notion of a ``family of spaces parametrized by $X$''.
+  \end{subremark}
+\end{theorem}
+
+
+% --------------------------------------------------------------------
+
+\section{Classifying spaces}
+\label{classify}
+
+The next observation is that the classifying space construction is quite transparent from the categorical perspective.
+
+\begin{nothing}
+  \label{classify-deloop}
+  Given a discrete group $G$, we saw in \cref{gpd} that the classifying space $\rB G$ could be thought of simply as the $1$-groupoid consisting of one object with automorphism group $G$.
+
+  We can extend this perspective to an arbitrary topological group $G$ once we allow ourselves to enter the world of higher categories. Namely, we can form a completely analogous category enriched in spaces, i.e. $\infty$-category, $\rB G$, consisting of one object $\pt$ whose \emph{space} of automorphisms is the group $G$. Since all morphisms in this category $\rB G$ are invertible, it is an $\infty$-groupoid, which is precisely the classifying space of $G$.
+
+  \begin{subremark}
+    \label{classify-deloop-cat}
+    If we're really trying to be categorically or homotopically pure, we should be unsatisfied right now, as we just invoked the notion of topological group. Indeed there is an intrinsic $\infty$-categorical notion of an \emph{$\infty$-group} $G$, and we may form the classifying space $\rB G$ for these objects as well, which should be thought of in the same way as above.
+
+    The canonical example of an $\infty$-group is the loop space $\Omega_xX$ of a pointed space $(X,x)$, and indeed these notions are equivalent. Namely, we have an equivalence of $\infty$-categories
+    \[
+      \begin{tikzcd}
+        \l\{ \text{pointed connected spaces} \r\} \ar[r, "\Omega", shift left=0.5ex] &
+          \l\{ \infty\text{-groups} \r\}. \ar[l, "\rB", shift left=0.5ex]
+      \end{tikzcd}
+    \]
+
+    I want to also mention the notions of commutativity that an $\infty$-group might be equipped with. For $1 \le k \le \infty$ there is a notion of a \emph{k-abelian $\infty$-group}\footnote{This is nonstandard/made-up terminology; I'm referring to (grouplike) $\rE_k$-spaces.}, recovering the above notion of $\infty$-group when $k=1$. Again, the canonical example of a $k$-abelian $\infty$-group is a $k$-fold loop space, and all $k$-abelian $\infty$-groups may be delooped $k$ times, giving rise to an equivalence
+    \begin{equation}
+      \label{classify-deloop-cat-equiv}
+      \begin{tikzcd}
+        \l\{ \text{pointed}\ (k-1)\text{-connected spaces} \r\} \ar[r, "\Omega^k", shift left=0.5ex] &
+          \l\{ k\text{-abelian}\ \infty\text{-groups} \r\}. \ar[l, "\rB^k", shift left=0.5ex]
+      \end{tikzcd}
+    \end{equation}
+  \end{subremark}
+\end{nothing}
+
+\begin{nothing}
+  \label{classify-aut}
+  Let $G$ be a discrete group. One natural manner in which the one-object groupoid $\rB G$ arises is when we realize $G$ as an automorphism group. Namely, suppose $C$ is a $1$-category and $F \in C$ is an object such that $\Aut_F(C) \iso G$. Then we may consider the subgroupoid $D$ of $C$ consisting of all objects isomorphic to $F$ and the isomorphisms between them, and we will have an equivalence of groupoids $D \iso \rB G$.
+
+  The same reasoning goes through in $\infty$-category theory. That is, if $C$ is now an $\infty$-category and $F \in C$, then the \emph{space} of automorphisms $G \ce \Aut_C(F)$ has the structure of an $\infty$-group, and the sub-$\infty$-groupoid $D$ of $C$ consisting of objects equivalent to $F$ and equivalences between them is equivalent to the $\infty$-groupoid/space $\rB G$.
+
+  \begin{subexample}
+    \label{classify-aut-fib}
+    Let's consider the case $C = \Spaces$, so $F$ is any space, $G \ce \Aut(F)$ is the space of self-equivalences\footnote{Not self-homeomorphisms of a topological space!} of $F$, and $D \iso \rB G$ is the sub-$\infty$-groupoid of $\Spaces$ on spaces equivalent to $F$.
+
+    Now fix a space $X$. Immediately from the constructions defining the equivalence $\Spaces_{/X} \iso \Loc_X(\Spaces)$ in \cref{fib-covering-categorical} we see that it restricts to an equivalence between:
+    \begin{itemize}
+    \item the $\infty$-category whose objects are maps $E \to X$ with fibers all equivalent to $F$, i.e. ``fibrations over $X$ with fiber $F$'', and whose morphisms are maps over $X$ inducing equivalences on all fibers;
+    \item the $\infty$-groupoid/space of maps $X \to \rB \Aut(F)$.
+    \end{itemize}
+
+    We thus recover immediately from \cref{fib-covering-categorical} the homotopical analogue of the classification of fiber bundles with fixed fiber. Note how lovely it is that we can immediately switch between thinking of $D \iso \rB \Aut(F)$ as a space or as a subcategory of the $\infty$-category $\Spaces$.
+  \end{subexample}
+
+  \begin{subremark}
+    \label{classify-aut-monodromy}
+    Suppose given fibration $E \to X$ with fiber $F$. We have just observed \cref{classify-aut-fib} that this is classified by a map $X \to \rB \Aut(F)$. Let us recall one interpretation of this classifying map. For every $x \in X$ we obtain a map of $\infty$-groups
+    \[
+      \Omega_x X \to \Omega\,\rB \Aut(F) \iso \Aut(F);
+    \]
+    this is precisely the \emph{monodromy action} of loops at $x$ on the fiber $E_x \iso F$.
+  \end{subremark}
+\end{nothing}
+
+\begin{nothing}
+  \label{classify-eilmac}
+  I next want to use this categorical perspective on classifying spaces to compute some mapping spaces between Eilenberg-Maclane spaces.
+
+  \begin{subremark}
+    \label{classify-eilmac-deloop}
+    For $n \ge 0$ and $G$ a discrete group, assumed abelian when $n \ge 2$, the Eilenberg-Maclane space $\rK(G,n)$ can be expressed as $\rB^nG$, the $n$-fold iterate of the classifying space construction, i.e. the $n$-fold delooping, of $G$. Note that this is a canonically pointed space.
+
+    This can be interpreted categorically as follows: $\rK(G,n)$ is the $n$-groupoid with one object $\pt_0$, one $k$-morphism $\pt_k = \id_{\pt_{k-1}}$ for $1 \le k < n$, and $\Aut(\pt_{n-1}) \iso G$.
+  \end{subremark}
+
+  \begin{subproposition}
+    \label{classify-eilmac-map}
+    Let $n \ge 2$. Let $G,G'$ be discrete abelian groups. Then the space of \emph{unpointed} maps $\Map(\rK(G',n),\rK(G,n))$ is equivalent to $\Hom(G',G) \times \rK(G,2)$.
+
+    \begin{proof}
+      Let $\Map_\pt(\rK(G',n),\rK(G,n))$ denote the space of \emph{pointed} maps. We have a fiber sequence
+      \[
+        \Map_\pt(\rK(G',n),\rK(G,n)) \to \Map(\rK(G',n),\rK(G,n)) \to \rK(G,n)
+      \]
+      where the first map forgets the pointedness and the second map is evaluation at the basepoint of $\rK(G'n)$. By the equivalence \cref{classify-deloop-cat-equiv},
+      \[
+        \Map_\pt(\rK(G',n),\rK(G,n)) \iso \Hom(G',G),
+      \]
+      so by \cref{classify-aut-fib} this sequence is classified by a map
+      \[
+        \theta \c \rK(G,n) \to \rB\Aut(\Hom(G',G)).
+      \]
+      Now $\Hom(G',G)$ is a discrete space, implying $\Aut(\Hom(G',G))$ is as well, and hence its delooping $\rB\Aut(\Hom(G',G))$ is $1$-truncated. On the other hand $\rK(G,n)$ is $1$-connected as $n \ge 2$, so $\theta$ must be nullhomotopic. Thus the fiber sequence splits, giving the claim.
+    \end{proof}
+  \end{subproposition}
+
+  \begin{subremark}
+    \label{classify-eilmac-omit}
+    The statement and argument for the case $n=1$ (and $G,G'$ possibly nonabelian) omitted from \cref{classify-eilmac-map} is just slightly more subtle. Alternatively, one can make an explicit analysis using $1$-groupoids!
+  \end{subremark}
+\end{nothing}
+
+% --------------------------------------------------------------------
+
+\section{Postnikov towers and principal bundles}
+\label{bun}
+
+Finally, I'd like to give an interpretation of the classification of prinicipal bundles in the spirit of the classification of fibrations from \cref{fib} and of fiber bundles from \cref{classify}.
+
+\begin{nothing}
+  \label{bun-postnikov}
+  As we're doing everything homotopically, the discussion of principal bundles below will apply equally to the theory of ``prinicipal $\rK(\pi,n)$ fibrations''. The primary motivation for this notion is the theory of Postnikov towers, so let's first discuss this from the $\infty$-categorical perspective. The nice thing is that things become completely canonical.
+
+  \begin{subnotation}
+    \label{bun-postnikov-trunc}
+    Let $n \ge 0$. We will denote by $\Spaces_{\le n}$ the full sub-$\infty$-category of $\Spaces$ spanned by the $n$-truncated spaces. According to the homotopy hypothesis \cref{gpd-hyp} we may think of $\Spaces_{\le n}$ as the $\infty$-category of $n$-groupoids.
+  \end{subnotation}
+
+  \begin{subproposition}
+    \label{bun-postnikov-adjoint}
+    The inclusion $i_n \c \Spaces_{\le n} \inj \Spaces$ admits a left adjoint
+    \[
+      \tau_{\le n} \c \Spaces \to \Spaces_{\le n}.
+    \]
+
+    \begin{proof}[Idea of a proof]
+      One may show formally that $i_n$ preserves (homotopy) limits and filtered (homotopy) colimits, i.e. that $n$-truncated spaces are stable under these operations, and then this will follow from a suitable adjoint functor theorem for $\infty$-categories.
+    \end{proof}
+  \end{subproposition}
+
+  \begin{subremark}
+    \label{bun-postnikov-trunc-intuit}
+    The functor $\tau_{\le n}$ supplied by \cref{bun-postnikov-adjoint} is referred to as the \emph{$n$-truncation} functor. When $n=0$ this is the connected components functor, and when $n=1$ it is the fundamental groupoid functor, as considered  in \cref{fib-local-sys-discrete}. More generally, for any space $X$, the unit map $X \to \tau_{\le n}(X)$ induces an isomorphism on $\pi_k$ for $0 \le k \le n$, and conversely $\tau_{\le n}(X)$ is uniquely characterized by this property.
+
+    Note that from the universal property arising from the adjunction we automatically obtain the tower
+    \[
+      \begin{tikzcd}
+        & \vdots \ar[d] \\
+        & \tau_{\le 2}(X) \ar[d] \\
+        & \tau_{\le 1}(X) \ar[d] \\
+        X \ar[r] \ar[ur] \ar[uur] & \tau_{\le 0}(X),
+      \end{tikzcd}
+    \]
+    and by the usual analysis using the long exact sequence of homotopy groups we see that the fiber of the map $\tau_{\le n}(X) \to \tau_{\le n-1}(X)$ is equivalent to $\rK(\pi_n(X),n)$.
+  \end{subremark}
+\end{nothing}
+
+We now move on to the $\infty$-categorical theory of prinicipal bundles. As we will be continuing with our informal discussion, seeking only to establish intuition, let me note that more details can be found in \cite{nikolaus-bundles-general}.
+
+\begin{definition}
+  \label{bun-dfn}
+  Let $G$ be an $\infty$-group. A \emph{prinicpal $G$-bundle} over a space $X$ is a map of spaces $p \c E \to X$ together with an action of $G$ on $E$ such that $p$ exhibits $X$ as the (homotopy) quotient of this action. (We will usually abuse notation and omit explicit mention of the action.)
+
+  \begin{subnotation}
+    \label{bun-dfn-space}
+    There is a space/$\infty$-groupoid $\Bun_G(X)$ of prinicipal $G$-bundles over $X$.
+  \end{subnotation}
+
+  \begin{subremark}
+    \label{bun-dfn-free}
+    Note that in this framework we say nothing about the action of $G$ being free or locally trivial on a prinicpal bundle. In fact, a moment's reflection reveals that the usual notions of free actions and locally trivial maps in the category of topological spaces are not even available $\infty$-categorically.
+
+    Worries about freeness are swept away by the use of the homotopy/$\infty$-categorical quotient in place of the strict quotient. The correct homotopical notion of locally trivial is that there be a map of spaces $X' \to X$ which is surjective on connected components such that the pullback $p' \c E' \ce E \times_X X' \to X'$ is equivalent to the trivial bundle $G \times X' \to X'$; it turns out that the condition is \emph{always} satisfied (one can take $X'$ to be $E$ itself), and hence does not need to be explicitly assumed.
+  \end{subremark}
+
+  \begin{subexample}
+    \label{bun-dfn-classify}
+    Suppose we take $E = \pt$ with the only possible, i.e. trivial, $G$-action. Then the quotient $X = \pt \sslash G$ recovers the classifying space $\rB G$. That is, in the equivalence
+    \[
+      \begin{tikzcd}
+        \l\{ \text{pointed connected spaces} \r\} \ar[r, "\Omega", shift left=0.5ex] &
+          \l\{ \infty\text{-groups} \r\} \ar[l, "\rB", shift left=0.5ex]
+      \end{tikzcd}
+    \]
+    discussed in \cref{classify-deloop-cat}, the functor $\rB$ can be expressed as the functor $G \goesto \pt \sslash G$.
+
+    Note that the fact $\Omega \rB G \iso G$ tells us that we have a pullback square
+    \[
+      \begin{tikzcd}
+        G \ar[r] \ar[d] &
+        \pt \ar[d] \\
+        \pt \ar[r] &
+        \rB G.
+      \end{tikzcd}
+    \]
+    This gives an example of the local triviality described in \cref{bun-dfn-free}, and tells us that the fibers of the principal $G$-bundle $\pt \to \rB G$ are equivalent to $G$.
+  \end{subexample}
+\end{definition}
+
+\begin{nothing}
+  \label{bun-universal}
+  We are of course expecting the previous example \cref{bun-dfn-classify} to be the ``universal'' example of a prinicipal $G$-bundle for any $\infty$-group $G$. This is established by the following two facts; their proofs, which essentially amount to understanding how quotienting spaces by $\infty$-group-actions works, are omitted.
+  
+  \begin{sublemma}
+    \label{bun-universal-pullback}
+    Let $p \c E \to X$ be a prinicipal $G$-bundle. Let $f \c X' \to X$ be any map of spaces. Then the pullback $f' \c E' \ce E \times_X X' \to X'$ also canonically has the structure of a principal $G$-bundle.
+  \end{sublemma}
+  
+  \begin{sublemma}
+    \label{bun-universal-inverse}
+    Let $E$ be a space equipped with an action of $G$, and $p \c E \to X$ the quotient. The canonical map $E \to \pt$ is automatically $G$-equivariant, and hence determines a commutative diagram
+    \[
+      \begin{tikzcd}
+        E \ar[r] \ar[d] &
+        \pt \ar[d] \\
+        X \ar[r] &
+        \rB G;
+      \end{tikzcd}
+    \]
+    in fact this is a pullback square.
+  \end{sublemma}
+
+  \begin{subproposition}
+    \label{bun-universal-main}
+    The space $\rB G$ is the ``classifying space for principal $G$-bundles''. That is, for any space $X$, pulling back the bundle $\pt \to \rB G$ along maps $X \to \rB G$ determines an equivalence
+    \[
+      \Map(X, \rB G) \iso \Bun_G(X).
+    \]
+
+    \begin{proof}
+      This follows immediately from \cref{bun-universal-pullback} and \cref{bun-universal-inverse}.
+    \end{proof}
+  \end{subproposition}
+
+  \begin{subremark}
+    \label{bun-universal-fibration}
+    In \cref{bun-dfn-classify} we saw that the fibers of the principal $G$-bundle $\pt \to \rB G$ are equivalent to $G$. We now know by \cref{bun-universal-main} that all principal $G$-bundles are pulled back from this universal example, so we conclude that all principal $G$-bundles have fibers equivalent to $G$ (as one would hope).
+
+    Let $\Fib_G(X)$ denote the space of maps $E \to X$ with fibers all equivalent to $G$. The above observation tells us we have a map $\Bun_G(X) \to \Fib_G(X)$.
+
+    In \cref{classify-aut-fib} we observed that ``fibrations with fiber $G$'' are classified by maps $X \to \rB \Aut(G)$ (here the $\infty$-group structure on $G$ is ignored). Observe that there is a canonical map $\rB G \to \rB \Aut(G)$, determined by the map of $\infty$-groups $G \to \Aut(G)$ given by the permutation action of $G$ on itself. Unravelling what we have said, we obtain a commutative square
+    \[
+      \begin{tikzcd}
+        \Map(X,\rB G) \ar[r, "\sim"] \ar[d] &
+        \Bun_G(X) \ar[d] \\
+        \Map(X,\rB \Aut(G)) \ar[r, "\sim"] &
+        \Fib_G(X).
+      \end{tikzcd}
+    \]
+    Using \cref{classify-aut-monodromy}, we can interpret this as follows: a principal $G$-bundle is precisely a fibration $E \to X$ with fibers $G$ such that for every $x \in X$ the monodromy action of $\Omega_x X$ on the fiber $E_x \iso G$ is given by multiplication in $G$.
+  \end{subremark}
+\end{nothing}
+
+\begin{nothing}
+  \label{bun-postnikov-principal}
+  To end, we apply this general theory of principal bundles to Postnikov towers (constructed in \cref{bun-postnikov-trunc-intuit}). Let $X$ be a connected space, and consider the piece of its Postnikov tower 
+  \[
+    \rK(\pi_n(X), n) \to \tau_{\le n}(X) \to \tau_{\le n-1}(X)
+  \]
+  at stage $n \ge 2$. Noting that $\rK(\pi_n(X),n)$ is an ($\infty$-abelian) $\infty$-group, we may ask: when can we give this fiber sequence the structure of a principal $\rK(\pi_n(X), n)$-bundle?
+
+  By \cref{classify-aut-fib} and \cref{classify-eilmac-map} the fiber sequence is classified by a map
+  \begin{align*}
+    \theta \c \tau_{\le n-1}(X)
+    &\to \rB \Aut(\rK(\pi_n(X),n)) \\
+    &\iso \rB \l( \Aut(\pi_n(X)) \times \rK(\pi_n(X),n) \r) \\
+    &\iso \rB \Aut(\pi_n(X)) \times \rB\,\rK(\pi_n(X),n),
+  \end{align*}
+  i.e. by a pair of maps 
+  \[
+    \alpha \c \tau_{\le n-1}(X) \to \rB \Aut(\pi_n(X)), \quad
+    \beta \c \tau_{\le n-1}(X) \to \rB\,\rK(\pi_n(X),n).
+  \]
+  By \cref{bun-universal-fibration}, to get a principal bundle we'd like to factor the classifying map $\theta$ through the canonical map
+  \[
+    \rB\,\rK(\pi_n(X),n) \to \rB \Aut(\rK(\pi_n(X),n)),
+  \]
+  which we see in this situation amounts to giving a nullhomotopy of the map $\alpha$. As $\Aut(\pi_n(X))$ is discrete, $\rB \Aut(\pi_n(X))$ is $1$-connected, and hence $\alpha$ factors through a map
+  \[
+    \alpha' \c \tau_{\le 1}(X) \to \rB \Aut(\pi_n(X))
+  \]
+  As $X$ is assumed connected, $\alpha'$ is equivalent to a group homomorphism $\pi_1(X) \to \Aut(\pi_n(X))$, which I claim (but have not checked) is the usual action of the fundamental group of $X$ on its higher homotopy groups. Thus the desired nullhomotopy exists for all $n \ge 2$ if and only if $X$ is \emph{simple}, i.e. $\pi_1(X)$ acts trivially on the higher homotopy groups.
+
+  Retracing our steps, we see that when this action is in fact trivial, $\tau_{\le n}(X) \to \tau_{\le n-1}(X)$ is a principal $\rK(\pi_n(X),n)$-bundle classified by the map
+  \[
+    \beta \c \tau_{\le n-1}(X) \to \rB\,\rK(\pi_n(X),n).
+  \]
+  Finally, noting that $\rB\,\rK(\pi_n(X),n) \iso \rK(\pi_n(X), n-1)$, and recalling that Eilenberg-Maclane spaces represent ordinary cohomology, we see that in this situation this principal bundle is classified by an element of $\rH^{n-1}(\tau_{\le n-1}(X); \pi_n(X))$, often referred to as a \emph{$k$-invariant} of this Postnikov tower.
+\end{nothing}
+
+% --------------------------------------------------------------------
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}
+

@@ -1,0 +1,72 @@
+
+\input{preamble}
+
+\title{Cohomology and base change, derived}
+\author{Arpon Raksit}
+\date{2017-02-09}
+
+\numberwithin{block}{section}
+
+\begin{document}
+\maketitle
+
+\newcommand{\QCoh}{\mathrm{QCoh}}
+
+% ---------------------------------------------------------------------
+
+\addtocounter{section}{-1}
+\section{Introduction}
+
+The goal of this note is to present the basic facts about and surrounding ``cohomology and base change'' theorems in algebraic geometry in light of the theory of derived algebraic geometry.
+
+% ---------------------------------------------------------------------
+
+\section{The derived results}
+
+\begin{nothing}
+  \label{derived-base-change}
+  Suppose given a pullback diagram of derived schemes
+  \[
+    \begin{tikzcd}
+      Y \ar[r, "q"] \ar[d, "g", swap] &
+      X \ar[d, "f"] \\
+      T \ar[r, "p"] &
+      S.
+    \end{tikzcd}
+  \]
+  There is a canonical map
+  \[
+    \beta \c p^*f_* \to g_*q^*
+  \]
+  of functors $\QCoh(X) \to \QCoh(T)$.
+
+  \begin{subclaim}
+    \label{derived-base-change-equivalence}
+    Suppose $f$ (and therefore $g$) is quasicompact and quasiseparated. Then the map $\lambda$ defined above is an equivalence.
+  \end{subclaim}
+\end{nothing}
+
+\begin{nothing}
+  \label{derived-projection}
+  Suppose given a morphism of derived schemes $f \c Y \to X$ and quasicoherent sheaves $\sF \in \QCoh(X)$ and $\sG \in \QCoh(Y)$. Then there is a canonical map
+  \[
+    \pi \c \sF \otimes f_*\sG \to f_*(f^*\sF \otimes \sG).
+  \]
+
+  \begin{subclaim}
+    \label{derived-projection-formula}
+    Suppose $f$ is quasicompact and quasiseparated. Then the map $\pi$ defined above is an equivalence.
+  \end{subclaim}
+\end{nothing}
+
+\begin{claim}
+  \label{derived-proper-pushforward}
+  Let $f \c Y \to X$ be a morphism of derived schemes. Assume $f$ is proper and locally almost of finite presentation. Then $f_* \c \QCoh(Y) \to \QCoh(X)$ carries almost perfect objects to almost perfect objects.
+\end{claim}
+
+% ---------------------------------------------------------------------
+
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
+
+\end{document}

@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: adic-artin-comparison.aux
+The style file: amsalpha.bst
+Database file #1: refs.bib
+You've used 3 entries,
+            2624 wiz_defined-function locations,
+            571 strings with 4677 characters,
+and the built_in function-call counts, 843 in all, are:
+= -- 68
+> -- 24
+< -- 3
++ -- 6
+- -- 6
+* -- 46
+:= -- 131
+add.period$ -- 3
+call.type$ -- 3
+change.case$ -- 15
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 45
+empty$ -- 82
+format.name$ -- 12
+if$ -- 172
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 3
+newline$ -- 19
+num.names$ -- 9
+pop$ -- 35
+preamble$ -- 1
+purify$ -- 18
+quote$ -- 0
+skip$ -- 33
+stack$ -- 0
+substring$ -- 21
+swap$ -- 3
+text.length$ -- 3
+text.prefix$ -- 3
+top$ -- 0
+type$ -- 24
+warning$ -- 0
+while$ -- 6
+width$ -- 4
+write$ -- 38

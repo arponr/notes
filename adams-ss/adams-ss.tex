@@ -1,0 +1,479 @@
+
+\input{preamble}
+
+\title{The Adams spectral sequence}
+\author{Arpon Raksit}
+\date{2017-02-20}
+
+\numberwithin{block}{section}
+
+\begin{document}
+
+\maketitle
+
+\newcommand{\AbGrps}{\mathrm{AbGrps}}
+\newcommand{\CP}{\mathbf{CP}}
+\newcommand{\gr}{\mathrm{gr}}
+\newcommand{\HFp}{\rH\bF_p}
+\newcommand{\Mods}{\mathrm{Mods}}
+\newcommand{\Spectra}{\mathrm{Spectra}}
+\newcommand{\Sq}{\operatorname{Sq}}
+
+% ---------------------------------------------------------------------
+
+\section{Introduction}
+\label{intro}
+
+The guiding principle of algebraic topology is that we may use algebraic methods to learn topological information. The topological information we'll be seeking to learn here is quite general: the graded abelian group
+\[
+  [X,Y]^* \ce \bigoplus_{k \in \bZ} {[\Sigma^k X, Y]}
+\]
+of homotopy classes of maps between two spectra $X$ and $Y$; in the special case that $X$ is the sphere spectrum $\bS$, this amounts to the (stable) homotopy groups of $Y$. So, in other words, we'd like to understand the stable homotopy category.
+
+\begin{remark}
+  \label{intro-spectra-motivation}
+  There are many reasons for being interested in the stable homotopy category, but perhaps we should recall a couple of the main ones before moving on.
+  \begin{enumerate}
+  \item Presumably anyone studying algebraic topology is interested in understanding the ordinary/unstable homotopy category of spaces. One purpose of the stable homotopy category is to serve as a more accessible approximation to the unstable homotopy category. For example, the homotopy groups of the sphere spectrum $\bS$ are precisely the stable homotopy groups of spheres, i.e. $\pi_k(\bS) \iso \pi_{n+k}(\rS^n)$ in the ``stable range'' $n > k + 1$. Through these kinds of ``stable range'' phenomena, information about the stable homotopy category can shed light on ordinary homotopy theory.
+  \item Certain spectra contain interesting geometric information in their homotopy groups. For example, the homotopy groups of certain so-called Thom spectra classify manifolds (perhaps equipped with some structure, like an orientation) up to cobordism.
+  \end{enumerate}
+\end{remark}
+
+Now, the ``algebraic methods'' of algebraic topology consist of applying approachable algebraic invariants to topological objects, the most important class of such being the homology and cohomology theories.
+
+\begin{remark}
+  \label{intro-spectra-cohomology}
+  We recall that a cohomology theory $E^*$, which is usually defined as a functor on \emph{spaces}, can be formally extended to give values on all spectra. Namely, Brown representability tells us that $E^*$ is represented by a spectrum $E$; this representability may be reformulated in the language of spectra as follows: if $T$ is a pointed space, then
+  \[
+    E^n(T) \iso [\Sigma^\infty T, \Sigma^n E]
+  \]
+  (where on the left-hand side we really mean \emph{reduced} $E$-cohomology). Thus, for a general spectrum $X$ it makes sense to define
+  \[
+    E^n(X) \ce [X, \Sigma^n E].
+  \]
+  Note that this extension deserves to still be called a cohomology theory not only because it restricts to one on spaces, but because it will still satisfy the Eilenberg-Steenrod axioms (suitably formulated) on the whole stable homotopy category.
+\end{remark}
+
+So now the algebro-topological Weltanschauung leads us to the following question.
+
+\begin{question}
+  \label{intro-q}
+  Given spectra $X, Y$ and a cohomology theory $E^*$, to what extent does understanding $E^*(X)$ and $E^*(Y)$ allow us to understand $[X,Y]$?
+\end{question}
+
+Our best answer to this question is due to Adams, and takes the form of a spectral sequence---the Adams spectral sequence. The final objective of these notes is to construct this spectral sequence in the case that $E$ is ordinary mod $p$ cohomology, $\HFp$. But before we do that, we'll attempt to get an intuitive understanding of why the spectral sequence takes the form it does, and to motivate and introduce some of the notions appearing in the spectral sequence.
+
+Of course, to really understand the spectral sequence one would have to actually sit down and do some computations with it. In fact, this spectral sequence has been central to many significant calculations and theorems in modern homotopy theory, e.g. those regarding the cobordism spectra alluded to in \cref{intro-spectra-motivation}, and of course in the understanding of the stable homotopy groups of spheres. But we'll leave those stories for another time.
+
+% ---------------------------------------------------------------------
+
+\section{Hints from the Hopf fibration}
+\label{hopf}
+
+There's an obvious first step we can take towards answering \cref{intro-q}: functoriality of $E$ means that we have a map $[X,Y] \to \Hom(E^*(Y),E^*(X))$, and we may ponder how much information about $[X,Y]$ is preserved by this map.
+
+\begin{nothing}
+  \label{hopf-just-spaces}
+  The goal of this section is just to gain some intuition, so let's put ourselves in the setting of pointed spaces rather than spectra (mostly to ease notation, e.g. avoid distracting appearances of $\Sigma^\infty$). Thus, just in this section, $X$ and $Y$ will denote pointed spaces, and $[X,Y]$ the set of homotopy classes of pointed maps between them. And $E^*(-)$ denotes reduced $E$-cohomology.
+\end{nothing}
+
+\begin{nothing}
+  \label{hopf-degree}
+  Let's study a concrete case: consider spheres $X = \rS^m$ and $Y = \rS^n$, and let's take our cohomology theory $E$ to be $\rH\bZ$, ordinary integral cohomology.
+
+  In our example we have $E^*(X) = \rH^*(\rS^m;\bZ) \iso \bZ[m]$, which denotes just a copy of $\bZ$ in cohomological degree $m$, and similarly $E^*(Y) = \rH^*(\rS^n;\bZ) \iso \bZ[n]$. Thus
+  \[
+    \Hom(E^*(Y),E^*(X)) \iso \Hom(\bZ[n],\bZ[m]) \iso
+    \begin{cases}
+      \bZ & \text{if}\ m=n\\
+      0 & \text{otherwise}.
+    \end{cases}
+  \]
+
+  So in the case $m=n$ ordinary cohomology gives us a map $[\rS^n,\rS^n] \to \bZ$; this is precisely the degree map, which we know is an isomorphism (e.g. by Hurewicz). Thus our cohomology theory has done as well as it possibly could in this case.
+
+  On the other hand, when $m \ne n$ ordinary cohomology is just giving us a trivial map $[\rS^m,\rS^n] \to 0$. Of course, when $m < n$ we know that this trivial map is in fact an isomorphism (e.g. again by Hurewicz), so ordinary cohomology is doing just fine. But when $m > n$ we see that ordinary cohomology is remembering absolutely nothing about the very nontrivial higher homotopy groups of spheres, at least in this na\"ive analysis.
+\end{nothing}
+
+\begin{nothing}
+  \label{hopf-hopf}
+  To see how to possibly move forward, let's look at the first interesting map of spheres: the Hopf fibration $\eta \c \rS^3 \to \rS^2$. How do we know it's nontrivial even though it induces the zero map on cohomology? Well, we can form its cofiber $\cofib(\eta)$, i.e. the space obtained by attaching a disk $\rD^4$ to $\rS^2$ using $\eta$ as an attaching map; by definition of $\eta$ this cofiber has the homotopy type of the complex projective plane $\CP^2$. On the other hand, if we take a nullhomotopic map $\tau \c \rS^3 \to \rS^2$, then $\cofib(\tau) \iso \rS^2 \vee \rS^4$. Thus, to show $\eta$ is not nullhomotopic it suffices to show $\CP^2$ is not homotopy equivalent to $\rS^2 \vee \rS^4$.
+
+  The difference between these two spaces is something that integral cohomology can in fact detect, if we use it correctly. At the level of graded abelian groups there is no difference:
+  \[
+    \rH^*(\CP^2; \bZ) \iso \bZ[2] \oplus \bZ[4] \iso \rH^*(\rS^2 \vee \rS^4; \bZ).
+  \]
+  But cohomology carries more structure than just that of a graded abelian group; namely, there is a ring structure. And in the ring structure one finds a difference: the generator $t \in \rH^2(\CP^2;\bZ)$ squares to the generator of $\rH^4(\CP^2;\bZ)$, while the generator $u \in \rH^2(\rS^2 \vee \rS^4; \bZ)$ squares to zero.
+
+  \begin{subremark}
+    \label{hopf-hopf-square}
+    Note that we really used just a small part of the ring structure in this argument. The key point is that the generators in degree $2$ for these spaces behave differently under \emph{squaring}.
+  \end{subremark}
+\end{nothing}
+
+\begin{nothing}
+  \label{hopf-ext}
+  Let's now try to extract some kind of general philosophy from the argument in \cref{hopf-hopf}. The basic idea was that, if we get a map $f \c X \to Y$ that induces the zero map in $E$-cohomology, we might still be able to learn something about $f$ through $E$ by instead looking at $E^*(Z)$ for $Z \ce \cofib(f)$. We can write this in terms of $E^*(X)$ and $E^*(Y)$ as follows: the fact that $E^*(f) = 0$ means that the long exact sequence associated to the cofiber sequence $X \to Y \to Z$ breaks up into short exact sequences of the form
+  \[
+    0 \to E^{k-1}(X) \to E^k(Z) \to E^k(Y) \to 0;
+  \]
+  thus $E^*(Z)$ determines an element of $\Ext^1(E^*(Y), E^*(X))$. This is a natural progression after considering $\Hom(E^*(Y), E^*(X))$.
+
+  \begin{subremark}
+    \label{hopf-ext-structure}
+    In the example of the Hopf fibration, the interest was located not just in the extension $\rH^*(\CP^2;\bZ)$ as a graded abelian group, which was split, but in extra structure on this extension, namely the ring structure. Thus we should seek to form our $\Hom$ and $\Ext$ in a category remembering more structure of $E^*$ than just its underlying graded abelian group.
+  \end{subremark}
+
+  \begin{subnothing}
+    \label{hopf-ext-filtration}
+    We may also continue the above progression. There is a natural decreasing filtration $F^\bullet$ on $[X,Y]$, known as the \emph{Adams filtration}, defined as follows: obviously $F^0 = [X,Y]$ itself, and a map $f \c X \to Y$ lies in $F^s$ for $s \ge 1$ if there is a factorization
+    \begin{equation}
+      \label{hopf-ext-filtration-factorization}
+      X = T_0 \lblto{g_1} T_1 \to \cdots \lblto{g_s} T_s = Y
+    \end{equation}
+    such that each $g_i$ induces the zero map on $E^*$ cohomology. For example, $f \in F^1$ if and only if $E^*(f) = 0$.
+
+    Above we constructed maps
+    \begin{align*}
+      &e^0 \c F^0 \to \Hom(E^*(Y),E^*(X)) = \Ext^0(E^*(Y),E^*(X)), \\
+      &e^1 \c F^1 \to \Ext^1(E^*(Y),E^*(X)).
+    \end{align*}
+    It's not so hard to see now that in general there will be a map
+    \[
+      e^s \c F^s \to \Ext^s(E^*(Y),E^*(X)).
+    \]
+    Namely, if $f \c X \to Y$ has a factorization as in \cref{hopf-ext-filtration-factorization}, then our construction of $e^1$ determines elements $\xi_i \in \Ext^1(E^*(T_i),E^*(T_{i-1}))$ for $1 \le i \le s$. Splicing together extensions defines a map
+    \[
+      \prod_{i=1}^s \Ext^1(E^*(T_i),E^*(T_{i-1})) \to \Ext^s(E^*(T_s),E^*(T_0)) = \Ext^s(E^*(Y),E^*(X)),
+    \]
+    and the image of $(\xi_i)$ under this map is the desired element $e^s(f)$.
+  \end{subnothing}
+\end{nothing}
+
+\begin{nothing}
+  \label{hopf-morals}
+  To summarize, our discussion thus far highlights two points to keep in mind when trying to understand $[X,Y]$ through the lens of a cohomology theory $E$:
+  \begin{enumerate}
+  \item \label{hopf-morals-structure}
+    We should consider more structure carried by $E^*(X)$ and $E^*(Y)$ than just their underlying graded abelian groups.
+  \item \label{hopf-morals-ext}
+    With this structure in mind, we should consider not just $\Hom(E^*(Y),E^*(X))$ but $\Ext^s(E^*(Y),E^*(X))$ for all $s \ge 0$.
+  \end{enumerate}
+  We will address \cref{hopf-morals-structure} in the next section.
+\end{nothing}
+
+% ---------------------------------------------------------------------
+
+\section{Cohomology operations}
+\label{ops}
+
+\begin{nothing}
+  \label{ops-ring-problems}
+  So we'd like to decide what extra structure to keep track of on the graded abelian groups $E^*(X)$ and $E^*(Y)$. In our simple discussion of the Hopf fibration \cref{hopf-hopf} we employed the available ring structure for $E = \rH\bZ$. Perhaps this indicates that in general we should look at multiplicative cohomology theories and keep track of ring structure. There are two issues with this idea:
+  \begin{itemize}
+  \item That $E$ is a multiplicative cohomology theory means that $E^*(X)$ has a (graded) ring structure when $X$ is a \emph{space}, but there won't necessarily be a ring structure when $X$ is more generally a spectrum. This is due to the fact that a general spectrum does not admit a ``diagonal map'' as a space does.
+  \item Even if we only cared about the case where $X$ and $Y$ are spaces, the category of (graded) rings is not a convenient place to work (given that we want to deal with $\Hom$ and $\Ext$) as it's not abelian or even additive.
+  \end{itemize}
+
+  So rings are a no-go. But recall from \cref{hopf-hopf-square} that our investigation of the Hopf fibration did not use very much of the available ring structure, indeed just the squaring operation. One may have learned that the squaring operation in mod $2$ ordinary cohomology $E = \rH\bF_2$ appears in another way, namely in the Steenrod algebra $\sA_2$ of ``stable cohomology operations''.
+
+  What we will discuss next is the general formulation of this construction: we will form a certain ring $\sA_E$ of ``$E$-cohomology operations'' over which $E^*(X)$ is naturally a module. It is this module structure we will keep track of.
+\end{nothing}
+
+\begin{definition}
+  \label{ops-dfn}
+  Let $E$ be a cohomology theory, viewed as a collection of functors on the stable homotopy category $E^n \c \Spectra \to \AbGrps$. For $k \in \bZ$, a \emph{(stable) cohomology operation of degree $k$} on $E$ is a natural transformation of functors $\xi \c E^0 \to E^k$.
+
+  \begin{subnothing}
+    \label{ops-dfn-ring-structure}
+    Note that, because suspension is an equivalence on spectra, it is equivalent to give a natural transformation $E^n \to E^{n+k}$ for any $n \in \bZ$. In this way, cohomology operations $\xi \c E^0 \to E^k$ and $\xi' \c E^0 \to E^{k'}$ may be composed to obtain a cohomology operation $\xi' \circ \xi \c E^0 \to E^{k+k'}$. Also, if $k = k'$ then we may add the cohomology operations $\xi$ and $\xi'$ to obtain another cohomology operation $\xi + \xi' \c E^0 \to E^k$.
+  \end{subnothing}
+
+  \begin{subdefinition}
+    \label{ops-dfn-ring-dfn}
+    Let $\sA_E^k$ be the set of cohomology operations of degree $k$ on $E$, which forms an abelian group under addition of operations. Then define
+    \[
+      \sA_E \ce \bigoplus_{k \in \bZ} \sA_E^k,
+    \]
+    which we consider to be the set of all cohomology operations on $E$, and which forms a (noncommutative) graded ring under addition and composition of operations.
+  \end{subdefinition}
+
+  \begin{subremark}
+    \label{ops-dfn-yoneda}
+    Recall that the functors $E^n$ are representable, namely by $\Sigma^n E$ for a fixed spectrum $E$. Thus the above definitions may be reformulated using the Yoneda lemma. Namely, a cohomology operation of degree $k$ is equivalent to a homotopy class of maps of spectra $\xi \c E \to \Sigma^k E$, so that
+    \[
+      \sA_E^k \iso [E, \Sigma^k E] \iso E^k(E), \quad
+      \sA_E \iso \bigoplus_{k \in \bZ} [E, \Sigma^k E] \iso E^*(E).
+    \]
+    Thus $E$-cohomology operations are encoded in the $E$-cohomology of $E$ itself.
+  \end{subremark}
+
+  \begin{subnothing}
+    \label{ops-dfn-module}
+    By definition, a cohomology operation $\xi \c E^0 \to E^k$ determines for each spectrum $X$ an operation $\xi_X \c E^*(X) \to E^{*+k}(X)$, naturally in $X$. We may reformulate this by saying that $E^*(X)$ naturally carries the structure of a graded $\sA_E$-module. I.e. we have a canonical factorization of functors
+    \[
+      \begin{tikzcd}
+        \Spectra \ar[r, dashed] \ar[rd, "E^*", swap] &
+        \Mods_{\sA_E}^\gr \ar[d] \\
+        &
+        \AbGrps^\gr,
+      \end{tikzcd}
+    \]
+    where the ``$\gr$'' denotes ``graded'', and the vertical arrow is the forgetful functor. For the remainder we will think of $E^*$ as this upgraded functor $\Spectra \to \Mods_{\sA_E}^\gr$.
+  \end{subnothing}
+\end{definition}
+
+\begin{example}
+  \label{ops-steenrod}
+  If one wants to perform any calculations using the spectral sequence we will be constructing, one needs to have an understanding of the structure of the ring of cohomology operations $\sA_E$. We won't be doing any computations here, but let me at least mention what happens in the most classical case.
+
+  For $E = \rH\bF_2$, the ring $\sA_E$ is denoted $\sA_2$ and called the \emph{mod $2$ Steenrod algebra}. It has an explicit presentation, generated by operations $\Sq^k$ of degree $k$ for $k \ge 0$, called the \emph{Steenrod squares}, subject to a set of relations known as the \emph{Adem relations} (which I won't write down but you can easily find). One reason these deserve to be called ``squares'' is that if $X$ is a space and $c \in \rH^k(X;\bF_2)$, then $\Sq^k(c) = c^2 \in \rH^{2k}(X;\bF_2)$.
+
+  There is a similar but slightly more complicated description in the case $E = \HFp$ for $p$ an odd prime (where squares are replaced by $p$-th powers).
+\end{example}
+
+% ---------------------------------------------------------------------
+
+\section{The spectral sequence}
+\label{ss}
+
+Finally, let's construct the Adams spectral sequence.
+
+\begin{notation}
+  \label{ss-restrict}
+  We will restrict to the classical case $E = \HFp$.\footnote{For more general $E$ it is actually better to consider $E$-\emph{homology} rather than cohomology. However, one then has to grapple with comodules over coalgebras of co-operations, the strangeness of which seems worth avoiding on a first pass.} All cohomology in the remainder will be with $\bF_p$ coefficients, so we will abbreviate $\rH^*(-;\bF_p)$ to $\rH^*(-)$.
+
+  We denote $\sA_E$ by $\sA_p$, and we let $\Hom_{\sA_p}(-,-)$ denote grading-preserving homomorphisms of graded $\sA_p$-modules.
+\end{notation}
+
+\begin{nothing}
+  \label{ss-intuition}
+  Let's begin with the basic intuition. As in the motivating discussion of \cref{hopf}, but now with some specificity of what category we're working in, our starting point in this endeavor is the map
+  \[
+    [X,Y] \to \Hom_{\sA_p}(\rH^*(Y), \rH^*(X)).
+  \]
+  The idea is that, while in general we certainly should not expect this map to be an isomorphism, it \emph{is} for very special $Y$.
+
+  \begin{subdefinition}
+    \label{ss-generalized-em}
+    We say a spectrum $K$ is a \emph{generalized mod $p$ Eilenberg-Maclane spectrum} if it is of the form $\bigoplus_i \Sigma^{k_i} \HFp$ where for each $k \in \bZ$ there are only finitely many $i$ such that $k_i = k$.
+  \end{subdefinition}
+
+  \begin{subremark}
+    \label{ss-generalized-em-rep}
+    Note that this finiteness condition implies that the canonical map
+    \[
+      \bigoplus_i \Sigma^{k_i} \HFp \to \prod_i \Sigma^{k_i} \HFp
+    \]
+    is an equivalence (by looking at the induced maps on homotopy groups). Since $\Sigma^k \HFp$ represents the functor $X \mapsto \rH^k(X)$, it follows that for $K$ a generalized mod $p$ Eilenberg-Maclane spectrum as above, we have
+    \[
+      [X,K] \iso \prod_i \rH^{k_i}(X).
+    \]
+  \end{subremark}
+
+  \begin{subnothing}
+    \label{ss-generalized-em-invariant}
+    We can rephrase this all in a more coordinate-independent and enlightening manner as follows. Let $V$ be a graded $\bF_p$-vector space which is finite in each degree. Then there is a spectrum $\rK(V)$ such that
+    \[
+      [X,\rK(V)] \iso \Hom_{\bF_p}(V,\rH^*(X));
+    \]
+    namely, we may pick a basis $\{v_i\}$ for $V$ and then use \cref{ss-generalized-em-rep} to see that we may take $\rK(V)$ to be the relevant generalized mod $p$ Eilenberg-Maclane spectrum.
+  \end{subnothing}
+
+  \begin{subnothing}
+    \label{ss-generalized-em-cohom}
+    The final observation to make here is that, by \cref{ops-dfn-yoneda}, we have a canonical isomorphism
+    \[
+      \rH^*(\rK(V)) \iso \sA_p \otimes_{\bF_p} V,
+    \]
+    the free $\sA_p$-module on the graded vector space $V$. In fact, we have a commutative diagram
+    \[
+      \begin{tikzcd}
+        {[X,\rK(V)]} \ar[r] \ar[d] &
+        \Hom_{\sA_p}(\rH^*(\rK(V)),\rH^*(X)) \ar[d] \\
+        \Hom_{\bF_p}(V,\rH^*(X)) \ar[r] &
+        \Hom_{\sA_p}(\sA_p \otimes_{\bF_p} V,\rH^*(X)).
+      \end{tikzcd}
+    \]
+    We know the two vertical maps and the bottom map are isomorphisms, so the top map, which is just applying $\HFp$-cohomology, is an isomorphism as well.
+  \end{subnothing}
+
+  So we have now seen that the map
+  \[
+    [X,Y] \to \Hom_{\sA_p}(\rH^*(Y), \rH^*(X)).
+  \]
+  is an isomorphism when $Y$ is a generalized mod $p$ Eilenberg-Maclane spectrum. Motivated by this, our strategy in the construction below will be to ``resolve'' a general $Y$ by such spectra. Put another away, we will first factor out as much information of $Y$ as we can into a generalized mod $p$ Eilenberg-Maclane spectrum, see what's left over, and then repeat ad infinitum.
+\end{nothing}
+
+\begin{construction}
+  \label{ss-construction}
+  Assume that $Y$ is of finite type, i.e. has finitely many cells in each dimension, so that the graded $\bF_p$-vector space $V \ce \rH^*(Y)$ finite in each degree. Let $K \ce \rK(V)$ be the associated generalized mod $p$ Eilenberg-Maclane spectrum \cref{ss-generalized-em-invariant}. By definition of the functor it represents, we get a canonical map of spectra $j \c Y \to K$; and by \cref{ss-generalized-em-cohom} the induced map in $\HFp$-cohomology is the canonical module action map
+  \[
+    \rH^*(K) \iso \sA_p \otimes_{\bF_p} \rH^*(Y) \to  \rH^*(Y),
+  \]
+  which in particular is surjective.
+
+  Now let's set $Y^0 \ce Y$, $K^0 \ce K$, and $j^0 \ce j$. Define $Y^1$ be the (homotopy) fiber of the map $j^0$, so that we get a fiber sequence
+  \[
+    Y^1 \lblto{i^0} Y^0 \lblto{j^0} K^0 \lblto{k^0} \Sigma Y^1.
+  \]
+  As $Y$ and $K$ are both finite type, so is $Y^1$. We may thus iterate the above construction. We end up with a diagram
+  \begin{equation}
+    \label{ss-construction-resolution}
+    \begin{tikzcd}[column sep = large]
+      \cdots \ar[r, "i^2"] &
+      Y^2 \ar[r, "i^1"] \ar [d, "j^2"] &
+      Y^1 \ar[r, "i^0"] \ar[d, "j^1"] &
+      Y^0 = Y \ar[d, "j^0 = j"] \\
+      \cdots &
+      K^2 \ar[ul, dashed, "k^2"] &
+      K^1 \ar[ul, dashed, "k^1"] &
+      K^0 = K \ar[ul, dashed, "k^0"]
+    \end{tikzcd}
+  \end{equation}
+  where the spectra $K^s$ are generalized mod $p$ Eilenberg-Maclane spectra, the maps $\phi^s$ induces surjections on $\HFp$-cohomology, and the triangles indicate fiber sequences.
+
+  Finally, we map in a spectrum $X$ to obtain the diagram
+  \[
+    \begin{tikzcd}
+      \cdots \ar[r, "i^2_*"] &
+      {[X,Y^2]^*} \ar[r, "i^1_*"] \ar [d, "j^2_*"] &
+      {[X,Y^1]^*} \ar[r, "i^0_*"] \ar[d, "j^1_*"] &
+      {[X,Y^0]^*} \ar[d, "j^0_*"] \\
+      \cdots &
+      {[X,K^2]^*} \ar[ul, dashed, "k^2_*"] &
+      {[X,K^1]^*} \ar[ul, dashed, "k^1_*"] &
+      {[X,K^0]^*} \ar[ul, dashed, "k^0_*"]
+    \end{tikzcd}
+  \]
+  (recall that $[X,T]^* \ce \bigoplus_{k \in \bZ} [\Sigma^k X, T]$), where now the triangles indicate long exact sequences of abelian groups. We may alternatively repackage this into a bigraded exact couple
+  \[
+    \begin{tikzcd}
+      \bigoplus_s [X,Y^s]^* \ar[rr, "i_*"] &
+      &
+      \bigoplus_s [X,Y^s]^* \ar[ld, "j_*"] \\
+      &
+      \bigoplus_s [X,K^s]^* \ar[ul, "k_*"]
+    \end{tikzcd}
+  \]
+  which determines a spectral sequence $\{E_r^{s,t}\}$, where we choose the $t$-grading so that
+  \begin{equation}
+    \label{ss-construction-e1}
+    E_1^{s,t} = [X, K^s]^{t-s} \iso [\Sigma^t X, \Sigma^s K^s].
+  \end{equation}
+  With this convention, the differential $d_r$ has bidegree $(r,r-1)$, e.g. $d_1 \c E_1^{s,t} \to E_1^{s+1,t}$ is given by
+  \[
+    j^{s+1}_* \circ k^s_* \c [\Sigma^t X, \Sigma^s K^s] \to [\Sigma^t X, \Sigma^{s+1} K^{s+1}].
+  \]
+
+  \begin{subdefinition}
+    \label{ss-construction-name}
+    The spectral sequence constructed above is the \emph{$\HFp$-based Adams spectral sequence}.
+  \end{subdefinition}
+\end{construction}
+
+So the spectral sequence is constructed. Well, so what? It's meaningless right now: we haven't said what it converges to (though we're hoping for something close to $[X,Y]^*$) and we have no interesting interpretation of its initial pages. Our final task is to obtain meaning.
+
+\begin{nothing}
+  \label{ss-e2}
+  We first address the $E_2$ page.
+
+  \begin{subnotation}
+    \label{ss-e2-ext}
+    Suppose given two graded $\sA_p$-modules $V$ and $W$. For $t \in \bZ$, we will denote by
+    \[
+      \Hom^t_{\sA_p}(V, W)
+    \]
+    the abelian group of $\sA_p$-module homomorphisms that lower degree by $t$, i.e. those that send $V^k$ to $W^{k-t}$ for all $k \in \bZ$. (So $\Hom_{\sA_p}^0$ is another name for the undecorated $\Hom_{\sA_p}$.) We will denote the right-derived functors of this by
+    \[
+      \Ext^{s,t}_{\sA_p}(V,W), \quad s \ge 0.
+    \]
+  \end{subnotation}
+
+  \begin{subclaim}
+    \label{ss-e2-claim}
+    The $E_2$ page of the $\HFp$-based Adams spectral sequence is given by
+    \[
+      E_2^{s,t} \iso \Ext^{s,t}_{\sA_p}(\rH^*(Y), \rH^*(X)).
+    \]
+    
+    \begin{proof}
+      Since the spectra $K^s$ are generalized mod $p$ Eilenberg-Maclane spectra, we have by \cref{ss-generalized-em-cohom} that
+      \[
+        [\Sigma^t X, \Sigma^s K^s] \iso \Hom_{\sA_p}(\rH^*(\Sigma^s K^s), \rH^*(\Sigma^t X)).
+      \]
+      Noting that $\rH^*(\Sigma^t X)) \iso \rH^{*-t}(X))$, this means that we may rewrite the $E_1$ page of the spectral sequence \cref{ss-construction-e1} as
+      \[
+        E_1^{s,t} \iso \Hom^t_{\sA_p}(\rH^*(\Sigma^s K^s), \rH^*(X)),
+      \]
+      with the $d_1$ differential now being given by the map induced by
+      \[
+        (k^s)^* \circ (j^{s+1})^* \c \rH^*(\Sigma^{s+1} K^{s+1}) \to \rH^*(\Sigma^s K^s)
+      \]
+
+      Let us now examine what the diagram \cref{ss-construction-resolution} looks like when we apply cohomology. For each $s \ge 0$ the fiber sequence $Y^{s+1} \to Y^s \to K^s$ (which is also a cofiber sequence, as we're in the stable homotopy category) determines a long exact sequence in cohomology, and since $j^s$ is surjective in cohomology by construction these break into exact sequences
+      \[
+        \rH^*(\Sigma Y^{s+1}) \lblto{(k^s)^*} \rH^*(K^s) \lblto{(j^s)^*} \rH^*(Y^s) \to 0.
+      \]
+      These then splice together into an exact sequence
+      \[
+        \cdots \to \rH^*(\Sigma^2 K^2) \lblto{(k^1)^*(j^2)^*} \rH^*(\Sigma K^1) \lblto{(k^0)^*(j^1)^*} \rH^*(K^0) \lblto{(j^0)^*} \rH^*(Y^0).
+      \]
+      Now, $Y^0 = Y$, and by \cref{ss-generalized-em-cohom} each $\rH^*(\Sigma^sK^s)$ is a free $\sA_p$-module, so this is a free resolution of $\rH^*(Y)$ over $\sA_p$. Combining this with our description of $E_1$ and $d_1$ above, we deduce the claim.
+    \end{proof}
+  \end{subclaim}
+\end{nothing}
+
+\begin{nothing}
+  \label{ss-einfty}
+  We now address the $E_\infty$ page.
+
+  \begin{subremark}
+    \label{ss-einfty-p}
+    By \cref{ss-e2-claim} we see that all terms on the $E_2$ page of the $\HFp$-based Adams spectral sequence are $\bF_p$-vector spaces. It follows that for all $r \ge 2$ the $E_r$ page will consist of $\bF_p$-vector spaces. This implies that if the spectral sequence converges to something, that thing must be an iterated of extension of $\bF_p$-vector spaces.
+
+    This indicates that it was a na\"ive hope that the spectral sequence converges to $[X,Y]^*$ itself. Instead, the spectral sequence will only be able to see a ``$p$-component'' of $[X,Y]^*$.
+  \end{subremark}
+
+  \begin{subdefinition}
+    \label{ss-einfty-completion}
+    If $Y$ is a finite type spectrum then there is a spectrum $\hat{Y}_p$ called the \emph{$p$-completion} of $Y$ such that $\pi_*(\hat{Y}_p)$ is isomorphic to $p$-completion $\hat{\pi_*(Y)}_p$ of the homotopy groups of $Y$. In fact, there is a $p$-completion map $Y \to \hat{Y}_p$ which induces the $p$-completion map on homotopy groups.
+  \end{subdefinition}
+
+  \begin{subclaim}
+    \label{ss-einfty-converge}
+    Suppose $Y$ is finite type and bounded below, and that $X$ is finite. Then the $\HFp$-based Adams spectral sequence converges to $[X,\hat{Y}_p]^*$. Moreover, the implicit filtration on the target $[X,\hat{Y}_p]^*$ is precisely the Adams filtration defined in \cref{hopf-ext-filtration}.
+  \end{subclaim}
+
+  \begin{subexample}
+    \label{ss-einfty-homotopy}
+    Suppose we take $Y = X = \bS$. Then combining \cref{ss-e2-claim} and \cref{ss-einfty-converge} gives us the $\HFp$-based Adams spectral sequence for the stable homotopy groups of spheres:
+    \[
+      E^{s,t}_2 \iso \Ext^{s,t}_{\sA_p}(\bF_p, \bF_p)
+      \quad \implies \quad
+      \hat{\pi_{t-s}(\bS)}_p.
+    \]
+  \end{subexample}
+\end{nothing}
+
+\begin{nothing}
+  \label{ss-einfty-pf}
+  To understand why \cref{ss-einfty-converge} is true, it is useful to see the above construction of the Adams spectral sequence as an instance of a more general paradigm.
+
+  \begin{subdefinition}
+    \label{ss-einfty-pf-filter}
+    A \emph{filtered spectrum} $A^\bullet$ is a diagram of spectra
+    \[
+      \cdots \to A^2 \to A^1 \to A^0 \to A^{-1} \to A^{-2} \to \cdots .
+    \]
+    
+  \end{subdefinition}  
+\end{nothing}
+  
+
+% ---------------------------------------------------------------------
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}
